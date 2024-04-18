@@ -146,6 +146,7 @@
                     <a href="#templates">                       <code><w->template</w-></code></a>
                     <a href="#templates">                       <elm-><code>&lt;</code><code>&gt;</code></elm->
                     <a href="#template-parameters">             <code><w->type</w-></code></a>
+                    <a href="#template-parameters">             <code>!</code></a>
                     <a href="#abbreviated-template-syntax">     <code>?</code></a>
                 </div>
                 <div class="split-td">
@@ -154,9 +155,9 @@
                     <code><w->as</w-></code>
                     <code><w->to</w-></code>
                     <code>=</code>
-                    <code>:</code>
+                    <a href="enums"><code>:</code></a>
                     <code>...</code>
-                    <code>?...</code>
+                    <a href="#reference-parameters"><code>&</code></a>
                 </div>
             </div></td>
         </tr>
@@ -411,10 +412,17 @@
             </span>
         </li>
         <li>
-            <span><a href="#abbreviated-template-syntax"><s-sgr->?</s-sgr-></a></span>
+            <span><a href="#abbreviated-template-syntax"><code>!</code></a></span>
             <span>
-                    <a href="#abbreviated-template-syntax">Identifies the parameters whose arguments are used to deduce a type template parameter or type template parameter pack, or specifies that an identifier is a type template parameter</a><br>
-                <span class="meta-keyword-constraint">[When used after the <a href="#types">type</a> of a <a href="#symbols">symbol</a> declaration inside a struct or routine declaration]</span>.
+                Identifies the parameters whose arguments are used to deduce a type template parameter or type template parameter pack<br>
+                <span class="meta-keyword-constraint">[When used between the type and the identifier in the declaration of a routine parameter or function parameter pack]</span>.
+            </span>
+        </li>
+        <li>
+            <span><a href="#abbreviated-template-syntax"><code>?</code></a></span>
+            <span>
+                <a href="#abbreviated-template-syntax">Abbreviated template syntax</a><br>
+                <span class="meta-keyword-constraint">[When used between the type and the identifier of a <a href="#symbols">symbol</a> declaration inside a struct or routine declaration]</span>.
             </span>
         </li>
     </ul><br>
@@ -449,31 +457,31 @@
             </span>
         </li>
         <li>
-            <span><code>=</code> </span>
+            <span><code>=</code></span>
             <span>
                 Used to assign initializer values to <a href="#variables">variables</a> and default values to <a href="#routine-parameter">routine parameters</a><br> //TODO templates can prob have def values<br>
                 <span class="meta-keyword-constraint">[When used after the name of a <a href="#variables">variable</a> or <a href="#routine-parameters">routine parameter</a> declaration]</span>.
             </span>
         </li>
         <li>
-            <span><code>:</code> </span>
+            <span><code>:</code></span>
             <span>
                 Specifies the base type of an enum<br>
                 <span class="meta-keyword-constraint">[When used after the identifier of an enum declaration]</span>.
             </span>
         </li>
         <li>
-            <span><code>...</code> </span>
+            <span><code>...</code></span>
             <span>
                 Used to declare <a href="#template-parameter-packs">template parameter packs</a> and <a href="function parameter packs">function parameter packs</a><br>
-                <span class="meta-keyword-constraint">[When used after the identifier in the declaration of a template parameter pack or function parameter pack, or, if inside a struct or routine declaration, after the type or <code>?</code> meta keyword of the declaration of a routine parameter or function parameter pack]</span>.
+                <span class="meta-keyword-constraint">[When used after the identifier in the declaration of a template parameter pack or function parameter pack, or, if inside a struct or routine declaration, between the type and the identifier in the declaration of a routine parameter or function parameter pack]</span>.
             </span>
         </li>
         <li>
-            <span><code>?...</code> </span>
+            <span><code>&</code></span>
             <span>
-                Union of <code>?</code> and <code>...</code><br>
-                <span class="meta-keyword-constraint">[When used after the type in a routine parameter declaration]</span>.
+                Used todeclare a reference parameter<br>
+                <span class="meta-keyword-constraint">[When used between the type and the identifier of a reference parameter]</span>.
             </span>
         </li>
     </ul>

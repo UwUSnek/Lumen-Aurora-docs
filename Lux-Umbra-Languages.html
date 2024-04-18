@@ -597,6 +597,7 @@
                     <a href="#templates">                       <code><w->template</w-></code></a>
                     <a href="#templates">                       <elm-><code>&lt;</code><code>&gt;</code></elm->
                     <a href="#template-parameters">             <code><w->type</w-></code></a>
+                    <a href="#template-parameters">             <code>!</code></a>
                     <a href="#abbreviated-template-syntax">     <code>?</code></a>
                 </div>
                 <div class="split-td">
@@ -605,8 +606,9 @@
                     <code><w->as</w-></code>
                     <code><w->to</w-></code>
                     <code>=</code>
-                    <code>:</code>
+                    <a href="enums"><code>:</code></a>
                     <code>...</code>
+                    <a href="#reference-parameters"><code>&</code></a>
                 </div>
             </div></td>
         </tr>
@@ -827,10 +829,17 @@
             </span>
         </li>
         <li>
-            <span><a href="#abbreviated-template-syntax"><s-sgr->?</s-sgr-></a></span>
+            <span><a href="#abbreviated-template-syntax"><code>!</code></a></span>
+            <span>
+                Identifies the parameters whose arguments are used to deduce a type template parameter or type template parameter pack<br>
+                <span class="meta-keyword-constraint">[When used between the type and the identifier in the declaration of a routine parameter or function parameter pack]</span>.
+            </span>
+        </li>
+        <li>
+            <span><a href="#abbreviated-template-syntax"><code>?</code></a></span>
             <span>
                 <a href="#abbreviated-template-syntax">Abbreviated template syntax</a><br>
-                <span class="meta-keyword-constraint">[When used before the <a href="#types">type</a> of a <a href="#symbols">symbol</a> declaration inside a <a href="#templates">template</a> declaration]</span>.
+                <span class="meta-keyword-constraint">[When used between the type and the identifier of a <a href="#symbols">symbol</a> declaration inside a struct or routine declaration]</span>.
             </span>
         </li>
     </ul><br>
@@ -865,24 +874,31 @@
             </span>
         </li>
         <li>
-            <span><code>=</code> </span>
+            <span><code>=</code></span>
             <span>
                 Used to assign initializer values to <a href="#variables">variables</a> and default values to <a href="#routine-parameter">routine parameters</a><br> //TODO templates can prob have def values<br>
                 <span class="meta-keyword-constraint">[When used after the name of a <a href="#variables">variable</a> or <a href="#routine-parameters">routine parameter</a> declaration]</span>.
             </span>
         </li>
         <li>
-            <span><code>:</code> </span>
+            <span><code>:</code></span>
             <span>
                 Specifies the base type of an enum<br>
                 <span class="meta-keyword-constraint">[When used after the identifier of an enum declaration]</span>.
             </span>
         </li>
         <li>
-            <span><code>...</code> </span>
+            <span><code>...</code></span>
             <span>
                 Used to declare <a href="#template-parameter-packs">template parameter packs</a> and <a href="function parameter packs">function parameter packs</a><br>
-                <span class="meta-keyword-constraint">[When used after the identifier in the declaration of a template parameter or function parameter, or after the type of a function parameter pack declaration if the abbreviated template syntax is used]</span>.
+                <span class="meta-keyword-constraint">[When used after the identifier in the declaration of a template parameter pack or function parameter pack, or, if inside a struct or routine declaration, between the type and the identifier in the declaration of a routine parameter or function parameter pack]</span>.
+            </span>
+        </li>
+        <li>
+            <span><code>&</code></span>
+            <span>
+                Used todeclare a reference parameter<br>
+                <span class="meta-keyword-constraint">[When used between the type and the identifier of a reference parameter]</span>.
             </span>
         </li>
     </ul>
@@ -3872,7 +3888,7 @@
 </p>
 <p>
     By default, each template parameter must be specified explicitly when referencing a template symbol.<br>
-    If the declaration of a routine parameter uses a type template parameter as type, the <code>?</code> meta keyword can be placed after the type to allow it to be deduced from the passed argument.<br>
+    If the declaration of a routine parameter uses a type template parameter as type, the <code>!</code> meta keyword can be placed after the type to allow it to be deduced from the passed argument.<br>
     This also applies to function parameter packs that use a type template parameter pack as type, in which case each type of the type template parameter pack is deduced from the respective argument in the routine parameter pack.<br>
     If one or more template arguments cannot be deduced, then all the arguments must be specified explicitly.
 </p>
@@ -3886,7 +3902,7 @@
 <example->
     <label->Example 1</label->
     <div>
-        <w->template</w->&lt;<w->type</w-> <t->t</t->&gt; <t->t</t-> <f->twice</f->(<t->t</t->? <p->n</p->){
+        <w->template</w->&lt;<w->type</w-> <t->t</t->&gt; <t->t</t-> <f->twice</f->(<t->t</t->! <p->n</p->){
             <w->return</w-> n <f->*</f-> <k->2</k->;
         }
         <w->template</w->&lt;<t->int</t-> <p->n</p->&gt; <t->int</t-> <f->return_n</f->(){
@@ -3901,7 +3917,7 @@
     </div>
     <label->Example 2</label->
     <div>
-        <w->template</w->&lt;<t->int</t-> <p->n</p->, <w->type</w-> <t->t</t->&gt; <t->t</t-> <f->mult_by_n</f->(<t->t</t->? <p->arg</p->){
+        <w->template</w->&lt;<t->int</t-> <p->n</p->, <w->type</w-> <t->t</t->&gt; <t->t</t-> <f->mult_by_n</f->(<t->t</t->! <p->arg</p->){
             <w->return</w-> arg <f->*</f-> <k->n</k->;
         }
 
@@ -3932,10 +3948,10 @@
 <example->
     <label->Example</label->
     <div>
-        <w->template</w->&lt;<w->type</w-> <t->t</t->, <w->type</w-> <t->u</t->...&gt; <t->str</t-> <f->to_str</f->(<t->t</t->? <p->arg</p->, <t->u</t->? <p->args</p->...) {
+        <w->template</w->&lt;<w->type</w-> <t->t</t->, <w->type</w-> <t->u</t->...&gt; <t->str</t-> <f->to_str</f->(<t->t</t->! <p->arg</p->, <t->u</t->! <p->args</p->...) {
             <w->return</w-> <t->str</t->(arg) + <f->to_str</f->(args);
         }
-        <w->template</w->&lt;<w->type</w-> <t->t</t->&gt; <t->str</t-> <f->to_str</f->(<t->t</t->? <p->arg</p->) {
+        <w->template</w->&lt;<w->type</w-> <t->t</t->&gt; <t->str</t-> <f->to_str</f->(<t->t</t->! <p->arg</p->) {
             <w->return</w-> <t->str</t->(a);
         }
 
@@ -3949,8 +3965,73 @@
 
 <h1 id="abbreviated-template-syntax"></h1>
 <p>
-    //TODO
+    The abbreviated template syntax allows template symbols to be declared without specifying the template signature explicitly.<br>
+    In these cases, the <code>?</code> meta keyword is used to identify type template parameters, and type template parameter packs are identified through the <code>...</code> meta keyword.
 </p>
+<p>
+    The order of template parameters and template parameter packs is the same in which their first occurrence in the routine or struct declaration is found and its still possible to specify the arguments explicitly when referencing the symbol.<br>
+    Value template parameters are not allowed, as well as value template parameter packs.
+</p>
+<split-example-container->
+    <split-example-container-left->
+        <example->
+            <label->Example</label->
+            <div>
+                <t->t</t-> <f->add</f->(<t->u</t->?! <p->a</p->, <t->t</t->?! <p->b</p->) {
+                    <w->return</w-> a <f->+</f-> b;
+                }
+
+                <t->void</t-> <f->main</f->(){
+                    <f->add</f->(<k->5</k->, <k->0.5</k->)                <c->// Returns a double</c->
+                    <f->add</f->&lt;<t->ulong</t->, <t->double</t->&gt;(<k->5</k->, <k->0.5</k->) <c->// Returns a ulong, both routine arguments are implicitly converted</c->
+                }
+            </div>
+        </example->
+    </split-example-container-left->
+    <split-example-container-right->
+        <example->
+            <label->Equivalent code</label->
+            <div>
+                <w->template</w->&lt;<w->type</w-> <t->t</t->, <w->type</w-> <t->u</t->&gt; <t->t</t-> <f->add</f->(<t->u</t->! <p->a</p->, <t->t</t->! <p->b</p->) {
+                    <w->return</w-> a <f->+</f-> b;
+                }
+
+                <t->void</t-> <f->main</f->(){
+                    <f->add</f->(<k->5</k->, <k->0.5</k->)
+                    <f->add</f->&lt;<t->ulong</t->, <t->double</t->&gt;(<k->5</k->, <k->0.5</k->)
+                }
+            </div>
+        </example->
+    </split-example-container-right->
+</split-example-container->
+<split-example-container->
+    <split-example-container-left->
+        <example->
+            <label->Example</label->
+            <div>
+                <t->t</t-> <f->mul</f->(<t->t</t->?! <p->arg</p->, <t->u</t->...! <p->args</p->...) {
+                    <w->return</w-> arg <f->*</f-> <f->mul</f->&lt;<t->u</t->...&gt;(args); //TODO this is ambiguous
+                }
+                <t->t</t-> <f->mul</f->(<t->t</t->?! <p->arg</p->) {
+                    <w->return</w-> arg;
+                }
+            </div>
+        </example->
+    </split-example-container-left->
+    <split-example-container-right->
+        <example->
+            <label->Equivalent code</label->
+            <div>
+                <w->template</w->&lt;<w->type</w-> <t->t</t->, <w->type</w-> <w->u</w->&gt; <t->t</t-> <f->mul</f->(<t->t</t->! <p->arg</p->, <t->u</t->! <p->args</p->...) {
+                    <w->return</w-> arg <f->*</f-> <f->mul</f->&lt;<t->u</t->&gt;(args);
+                }
+                <w->template</w->&lt;<w->type</w-> <t->t</t->&gt; <t->t</t-> <f->mul</f->(<t->t</t->! <p->arg</p->) {
+                    <w->return</w-> arg;
+                }
+            </div>
+        </example->
+    </split-example-container-right->
+</split-example-container->
 
 
 <h1 id="multi-argument-type-deduction"></h1>
@@ -3996,7 +4077,7 @@
 <example->
     <label->Example 1</label->
     <div>
-        <t->t</t-> <f->add</f->(<t->t</t->? <p->a</p->, <t->t</t->? <p->b</p->) {
+        <t->t</t-> <f->add</f->(<t->t</t->?! <p->a</p->, <t->t</t->?! <p->b</p->) {
             <w->return</w-> a <f->+</f-> b;
         }
 
@@ -4013,7 +4094,7 @@
             <div>
                 <w->import</w-> <s->&lt;io&gt;</s->;
 
-                <t->void</t-> <f->print_selected_type</f->(<t->t</t->? ... <p->args</p->...) {
+                <t->void</t-> <f->print_selected_type</f->(<t->t</t->?! <p->args</p->...) {
                     io.<f->print</f->(<t->t</t-> <f->+</f-> <s->"\n"</s->);
                 }
 

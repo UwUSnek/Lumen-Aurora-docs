@@ -65,7 +65,7 @@
 </p>
 <p>
     By default, each template parameter must be specified explicitly when referencing a template symbol.<br>
-    If the declaration of a routine parameter uses a type template parameter as type, the <code>?</code> meta keyword can be placed after the type to allow it to be deduced from the passed argument.<br>
+    If the declaration of a routine parameter uses a type template parameter as type, the <code>!</code> meta keyword can be placed after the type to allow it to be deduced from the passed argument.<br>
     This also applies to function parameter packs that use a type template parameter pack as type, in which case each type of the type template parameter pack is deduced from the respective argument in the routine parameter pack.<br>
     If one or more template arguments cannot be deduced, then all the arguments must be specified explicitly.
 </p>
@@ -79,7 +79,7 @@
 <example->
     <label->Example 1</label->
     <div>
-        <w->template</w->&lt;<w->type</w-> <t->t</t->&gt; <t->t</t-> <f->twice</f->(<t->t</t->? <p->n</p->){
+        <w->template</w->&lt;<w->type</w-> <t->t</t->&gt; <t->t</t-> <f->twice</f->(<t->t</t->! <p->n</p->){
             <w->return</w-> n <f->*</f-> <k->2</k->;
         }
         <w->template</w->&lt;<t->int</t-> <p->n</p->&gt; <t->int</t-> <f->return_n</f->(){
@@ -94,7 +94,7 @@
     </div>
     <label->Example 2</label->
     <div>
-        <w->template</w->&lt;<t->int</t-> <p->n</p->, <w->type</w-> <t->t</t->&gt; <t->t</t-> <f->mult_by_n</f->(<t->t</t->? <p->arg</p->){
+        <w->template</w->&lt;<t->int</t-> <p->n</p->, <w->type</w-> <t->t</t->&gt; <t->t</t-> <f->mult_by_n</f->(<t->t</t->! <p->arg</p->){
             <w->return</w-> arg <f->*</f-> <k->n</k->;
         }
 
@@ -136,10 +136,10 @@
 <example->
     <label->Example</label->
     <div>
-        <w->template</w->&lt;<w->type</w-> <t->t</t->, <w->type</w-> <t->u</t->...&gt; <t->str</t-> <f->to_str</f->(<t->t</t->? <p->arg</p->, <t->u</t->? <p->args</p->...) {
+        <w->template</w->&lt;<w->type</w-> <t->t</t->, <w->type</w-> <t->u</t->...&gt; <t->str</t-> <f->to_str</f->(<t->t</t->! <p->arg</p->, <t->u</t->! <p->args</p->...) {
             <w->return</w-> <t->str</t->(arg) + <f->to_str</f->(args);
         }
-        <w->template</w->&lt;<w->type</w-> <t->t</t->&gt; <t->str</t-> <f->to_str</f->(<t->t</t->? <p->arg</p->) {
+        <w->template</w->&lt;<w->type</w-> <t->t</t->&gt; <t->str</t-> <f->to_str</f->(<t->t</t->! <p->arg</p->) {
             <w->return</w-> <t->str</t->(a);
         }
 
@@ -170,8 +170,74 @@
 <!--------------------------------------------------------------------->
 <h1 id="abbreviated-template-syntax"></h1>
 <p>
-    //TODO
+    The abbreviated template syntax allows template symbols to be declared without specifying the template signature explicitly.<br>
+    In these cases, the <code>?</code> meta keyword is used to identify type template parameters, and type template parameter packs are identified through the <code>...</code> meta keyword.
 </p>
+<p>
+    The order of template parameters and template parameter packs is the same in which their first occurrence in the routine or struct declaration is found and its still possible to specify the arguments explicitly when referencing the symbol.<br>
+    Value template parameters are not allowed, as well as value template parameter packs.
+</p>
+<split-example-container->
+    <split-example-container-left->
+        <example->
+            <label->Example</label->
+            <div>
+                <t->t</t-> <f->add</f->(<t->u</t->?! <p->a</p->, <t->t</t->?! <p->b</p->) {
+                    <w->return</w-> a <f->+</f-> b;
+                }
+
+                <t->void</t-> <f->main</f->(){
+                    <f->add</f->(<k->5</k->, <k->0.5</k->)                <c->// Returns a double</c->
+                    <f->add</f->&lt;<t->ulong</t->, <t->double</t->&gt;(<k->5</k->, <k->0.5</k->) <c->// Returns a ulong, both routine arguments are implicitly converted</c->
+                }
+            </div>
+        </example->
+    </split-example-container-left->
+    <split-example-container-right->
+        <example->
+            <label->Equivalent code</label->
+            <div>
+                <w->template</w->&lt;<w->type</w-> <t->t</t->, <w->type</w-> <t->u</t->&gt; <t->t</t-> <f->add</f->(<t->u</t->! <p->a</p->, <t->t</t->! <p->b</p->) {
+                    <w->return</w-> a <f->+</f-> b;
+                }
+
+                <t->void</t-> <f->main</f->(){
+                    <f->add</f->(<k->5</k->, <k->0.5</k->)
+                    <f->add</f->&lt;<t->ulong</t->, <t->double</t->&gt;(<k->5</k->, <k->0.5</k->)
+                }
+            </div>
+        </example->
+    </split-example-container-right->
+</split-example-container->
+<split-example-container->
+    <split-example-container-left->
+        <example->
+            <label->Example</label->
+            <div>
+                <t->t</t-> <f->mul</f->(<t->t</t->?! <p->arg</p->, <t->u</t->...! <p->args</p->...) {
+                    <w->return</w-> arg <f->*</f-> <f->mul</f->&lt;<t->u</t->...&gt;(args); //TODO this is ambiguous
+                }
+                <t->t</t-> <f->mul</f->(<t->t</t->?! <p->arg</p->) {
+                    <w->return</w-> arg;
+                }
+            </div>
+        </example->
+    </split-example-container-left->
+    <split-example-container-right->
+        <example->
+            <label->Equivalent code</label->
+            <div>
+                <w->template</w->&lt;<w->type</w-> <t->t</t->, <w->type</w-> <w->u</w->&gt; <t->t</t-> <f->mul</f->(<t->t</t->! <p->arg</p->, <t->u</t->! <p->args</p->...) {
+                    <w->return</w-> arg <f->*</f-> <f->mul</f->&lt;<t->u</t->&gt;(args);
+                }
+                <w->template</w->&lt;<w->type</w-> <t->t</t->&gt; <t->t</t-> <f->mul</f->(<t->t</t->! <p->arg</p->) {
+                    <w->return</w-> arg;
+                }
+            </div>
+        </example->
+    </split-example-container-right->
+</split-example-container->
+
 
 
 
@@ -235,7 +301,7 @@
 <example->
     <label->Example 1</label->
     <div>
-        <t->t</t-> <f->add</f->(<t->t</t->? <p->a</p->, <t->t</t->? <p->b</p->) {
+        <t->t</t-> <f->add</f->(<t->t</t->?! <p->a</p->, <t->t</t->?! <p->b</p->) {
             <w->return</w-> a <f->+</f-> b;
         }
 
@@ -252,7 +318,7 @@
             <div>
                 <w->import</w-> <s->&lt;io&gt;</s->;
 
-                <t->void</t-> <f->print_selected_type</f->(<t->t</t->? <p->args</p->...) {
+                <t->void</t-> <f->print_selected_type</f->(<t->t</t->?! <p->args</p->...) {
                     io.<f->print</f->(<t->t</t-> <f->+</f-> <s->"\n"</s->);
                 }
 
