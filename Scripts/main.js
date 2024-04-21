@@ -43,6 +43,7 @@ function init(){
     log_function(ui_smooth_links.init, "ui_smooth_links");
     log_function(ui_copy_code.init, "ui_copy_code");
     //!^ Must be executed after modifying the body as changing the innerHTML recreates all the elements and removes the event listeners
+    log_function(ui_syntax_hover.init, "ui_syntax_hover");
 
 
 
