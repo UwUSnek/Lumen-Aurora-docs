@@ -35,7 +35,7 @@ var ui_syntax_hover = {
     f_vbtm : function(e) { ui_syntax_hover.add_tooltip(
         e.target,
         "<b>Verbatim block</b><br>" +
-        "This block identifies code that must be written exactly as shown here."
+        "This block contains code that must be written exactly as shown."
     );},
     f_any : function(e) { ui_syntax_hover.add_tooltip(
         e.target,
@@ -50,22 +50,22 @@ var ui_syntax_hover = {
     f_decl : function(e) { ui_syntax_hover.add_tooltip(
         e.target,
         "<b>Declaration block</b><br>" +
-        "This block identifies a symbol declaration."
+        "This block identifies a valid symbol declaration of the specified kind."
     );},
     f_sgr : function(e) { ui_syntax_hover.add_tooltip(
         e.target,
-        "<b>//TODO block</b><br>" +
-        "//TODO."
+        "<b>Syntactic sugar block</b><br>" +
+        "This block identifies syntactic sugar, special syntax elements whose sole purpose is to simplify the syntax of existing features."
     );},
     f_expr : function(e) { ui_syntax_hover.add_tooltip(
         e.target,
         "<b>Expression block</b><br>" +
-        "This block identifies an expression. Square brackets [] indicate that the expression must be of that specific type."
+        "This block identifies an expression. Square brackets [] indicate that the expression must of a specific type."
     );},
     f_path : function(e) { ui_syntax_hover.add_tooltip(
         e.target,
         "<b>Path block</b><br>" +
-        "This block identifies a symbol path."
+        "This block identifies a path to a declared symbol."
     );},
 
 
