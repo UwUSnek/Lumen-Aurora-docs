@@ -2,23 +2,32 @@
 
 var ui_syntax_hover = {
     add_tooltip : function(e, text) {
+        // Create tooltip container
         var tooltip_c = document.createElement("div");
         tooltip_c.classList.add("syntax-hover-tooltip-container");
 
+        // Create main tooltip element
         var tooltip = document.createElement("div");
         tooltip.classList.add("syntax-hover-tooltip");
         tooltip_c.appendChild(tooltip);
 
+        // Create arrow background
         var tooltip_arrow = document.createElement("div");
         tooltip_arrow.classList.add("syntax-hover-tooltip-arrow");
         tooltip.appendChild(tooltip_arrow);
 
+        // Create arrow border
         var tooltip_arrow_b = document.createElement("div");
         tooltip_arrow_b.classList.add("syntax-hover-tooltip-arrow-border");
         tooltip.appendChild(tooltip_arrow_b);
 
-        tooltip.innerHTML += text;
+
+        // Add the specified text as HTML, append the container to the syntax block element and start the opacity transition
+        tooltip.innerHTML += '<p style="margin: 0px;">' + text + '</p>';
         e.appendChild(tooltip_c);
+        //! Forcibly flush pending style changes. This stops the opacity change from being calculated in this round and thus skipped
+        window.getComputedStyle(tooltip).opacity; 
+        tooltip.style.opacity = 1;
     },
 
 
@@ -30,13 +39,13 @@ var ui_syntax_hover = {
     );},
     f_any : function(e) { ui_syntax_hover.add_tooltip(
         e.target,
-        "<b>//TODO block</b><br>" +
-        "//TODO."
+        "<b>Name block</b><br>" +
+        "This block identifies a valid user-defined name."
     );},
     f_sub : function(e) { ui_syntax_hover.add_tooltip(
         e.target,
-        "<b>//TODO block</b><br>" +
-        "//TODO."
+        "<b>Sub-element block</b><br>" +
+        "This block identifies a sub-element whose syntax is specified somewhere else in the documentation."
     );},
     f_decl : function(e) { ui_syntax_hover.add_tooltip(
         e.target,
@@ -51,7 +60,7 @@ var ui_syntax_hover = {
     f_expr : function(e) { ui_syntax_hover.add_tooltip(
         e.target,
         "<b>Expression block</b><br>" +
-        "This block identifies an expression."
+        "This block identifies an expression. Square brackets [] indicate that the expression must be of that specific type."
     );},
     f_path : function(e) { ui_syntax_hover.add_tooltip(
         e.target,
@@ -63,21 +72,24 @@ var ui_syntax_hover = {
 
 
     on_move: function(e){
-        //var box = e.getBoundingClientRect();
-        //console.log(e.target);
-        //console.log(e.target.getElementsByClassName("syntax-hover-tooltip-container"));
         //! "this" assumes the value of the original element this event was attached to. e.target is the innermost and cannot be used in this case
         var tooltip = this.getElementsByClassName("syntax-hover-tooltip-container")[0].getElementsByClassName("syntax-hover-tooltip")[0];
         var parent_rect = this.getBoundingClientRect();
+        var halfW = tooltip.getBoundingClientRect().width / 2;
+
         tooltip.style.top  = '' + (parent_rect.top + parent_rect.height) + 'px';
-        tooltip.style.left = '' + e.pageX + 'px';
+        tooltip.style.left = '' + (e.pageX - halfW) + 'px';
     },
 
 
 
 
     on_leave : function(e){
-        e.target.getElementsByClassName("syntax-hover-tooltip-container")[0].remove();
+        var container = e.target.getElementsByClassName("syntax-hover-tooltip-container")[0];
+        var tooltip = container.getElementsByClassName("syntax-hover-tooltip")[0];
+
+        tooltip.style.opacity = 0;
+        setTimeout(function(){ container.remove(); }, parseFloat(window.getComputedStyle(document.documentElement).getPropertyValue("--syntax-hover-tooltip-opacity-duration")) * 1000);
     },
     
 
