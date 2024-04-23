@@ -34,9 +34,10 @@ body {
 body > right- {
     display: block;
     z-index: 5;
-    overflow: scroll;
+    overflow: hidden; /*! This might cause problems with the tooltips. Check this first if you notice any */
     position: fixed;
 
+    white-space: nowrap; /* Force stacking documentation and examples horizotally */
     right: 0;
     padding: 0 1px 0 1px;
     margin: 0 var(--main-padding-r) 0 var(--main-padding-r);
@@ -45,6 +46,30 @@ body > right- {
     min-height: 100vh;
     max-height: 100vh
 }
+
+/* Helper documentation and examples divs */
+body > right- > #main-right-doc,
+body > right- > #main-right-examples {
+    display: inline-flex; 
+    position: sticky;
+    top: 0;
+    min-width:  100%;  max-width:  100%;
+    min-height: 100vh; max-height: 100vh;
+
+    flex-direction: column; 
+    white-space: normal;
+    overflow: scroll; 
+}
+
+body > right- > #main-right-doc {
+    transition: margin-left 0.5s; /* Set transition for full example list tab */
+    margin-right: calc(var(--main-padding-r) + 5px); /* Push examples out of view, 5px prevents bleeding */
+}
+
+body > right- > #main-right-examples {
+    background-color: red;
+}
+
 
 
 

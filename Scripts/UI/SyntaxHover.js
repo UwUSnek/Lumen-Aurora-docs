@@ -3,21 +3,21 @@
 var ui_syntax_hover = {
     add_tooltip : function(e, text) {
         // Create tooltip container
-        var tooltip_c = document.createElement("div");
+        let tooltip_c = document.createElement("div");
         tooltip_c.classList.add("syntax-hover-tooltip-container");
 
         // Create main tooltip element
-        var tooltip = document.createElement("div");
+        let tooltip = document.createElement("div");
         tooltip.classList.add("syntax-hover-tooltip");
         tooltip_c.appendChild(tooltip);
 
         // Create arrow background
-        var tooltip_arrow = document.createElement("div");
+        let tooltip_arrow = document.createElement("div");
         tooltip_arrow.classList.add("syntax-hover-tooltip-arrow");
         tooltip.appendChild(tooltip_arrow);
 
         // Create arrow border
-        var tooltip_arrow_b = document.createElement("div");
+        let tooltip_arrow_b = document.createElement("div");
         tooltip_arrow_b.classList.add("syntax-hover-tooltip-arrow-border");
         tooltip.appendChild(tooltip_arrow_b);
 
@@ -45,38 +45,40 @@ var ui_syntax_hover = {
     f_sub : function(e) { ui_syntax_hover.add_tooltip(
         e.target,
         "<b>Sub-element block</b><br>" +
-        "This block identifies a sub-element whose syntax is specified somewhere else in the documentation."
+        "This block represents a sub-element whose syntax is specified somewhere else in the documentation."
     );},
     f_decl : function(e) { ui_syntax_hover.add_tooltip(
         e.target,
         "<b>Declaration block</b><br>" +
-        "This block identifies a valid symbol declaration of the specified kind."
+        "This block represents a valid symbol declaration of the specified kind."
     );},
     f_sgr : function(e) { ui_syntax_hover.add_tooltip(
         e.target,
         "<b>Syntactic sugar block</b><br>" +
-        "This block identifies syntactic sugar, special syntax elements whose sole purpose is to simplify the syntax of existing features."
+        "This block represents syntactic sugar, special syntax elements whose sole purpose is to simplify the syntax of existing features."
     );},
     f_expr : function(e) { ui_syntax_hover.add_tooltip(
         e.target,
         "<b>Expression block</b><br>" +
-        "This block identifies an expression. Square brackets [] indicate that the expression must of a specific type."
+        "This block represents an expression. Square brackets [] indicate that the expression must of the specified type."
     );},
     f_path : function(e) { ui_syntax_hover.add_tooltip(
         e.target,
         "<b>Path block</b><br>" +
-        "This block identifies a path to a declared symbol."
+        "This block represents a path to a declared symbol."
     );},
 
 
 
 
     on_move: function(e){
+        // Get elements and calculate the width of the tooltip / 2 to aligh it with the cursor
         //! "this" assumes the value of the original element this event was attached to. e.target is the innermost and cannot be used in this case
-        var tooltip = this.getElementsByClassName("syntax-hover-tooltip-container")[0].getElementsByClassName("syntax-hover-tooltip")[0];
-        var parent_rect = this.getBoundingClientRect();
-        var halfW = tooltip.getBoundingClientRect().width / 2;
+        let tooltip = this.getElementsByClassName("syntax-hover-tooltip-container")[0].getElementsByClassName("syntax-hover-tooltip")[0];
+        let parent_rect = this.getBoundingClientRect();
+        let halfW = tooltip.getBoundingClientRect().width / 2;
 
+        // Set the tooltip position and align it with the cursor
         tooltip.style.top  = '' + (parent_rect.top + parent_rect.height) + 'px';
         tooltip.style.left = '' + (e.pageX - halfW) + 'px';
     },
@@ -85,9 +87,11 @@ var ui_syntax_hover = {
 
 
     on_leave : function(e){
-        var container = e.target.getElementsByClassName("syntax-hover-tooltip-container")[0];
-        var tooltip = container.getElementsByClassName("syntax-hover-tooltip")[0];
+        // Get elements
+        let container = e.target.getElementsByClassName("syntax-hover-tooltip-container")[0];
+        let tooltip = container.getElementsByClassName("syntax-hover-tooltip")[0];
 
+        // Start opacity transition and delete the element after it has finished
         tooltip.style.opacity = 0;
         setTimeout(function(){ container.remove(); }, parseFloat(window.getComputedStyle(document.documentElement).getPropertyValue("--syntax-hover-tooltip-opacity-duration")) * 1000);
     },
