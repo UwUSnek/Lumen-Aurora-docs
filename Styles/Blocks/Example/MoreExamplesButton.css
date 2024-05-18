@@ -1,16 +1,28 @@
 
 
 
-.more-examples-button {
+.more-examples-button,
+.no-more-examples-button {
     display: block;
     margin-top: 10px;
     margin-left: 5px;
 
     font-weight: normal;
     font-size: small;
+}
+
+
+.more-examples-button {
     cursor: pointer;
     color: var(--fg-soft-link);
 }
 .more-examples-button:hover {
     text-decoration: underline;
 }
+
+
+.no-more-examples-button {
+    cursor: default;
+    color: inherit;
+}
+

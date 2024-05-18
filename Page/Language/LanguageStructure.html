@@ -1199,6 +1199,27 @@
         }
     </div>
 </example->
+<example- class="full-example">
+    <label->Example</label->
+    <div>
+        <c->// Absolute path: module</c->
+
+
+        <c->// Absolute path: module.s</c->
+        <w->namespace</w-> s {
+            <c->// Absolute path: module.s.fun</c->
+            <t->void</t-> <f->fun</f->(<t->uint</t-> <p->n</p->) {
+                <c->//        ^</c->
+                <c->// Absolute path: module.s.fun.n</c->
+            }
+        }
+
+        <w->namespace</w-> {
+            <c->// No absolute path, cannot be referenced from outside</c->
+            <t->uint</t-> n;
+        }
+    </div>
+</example->
 
 
 
