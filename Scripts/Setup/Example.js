@@ -19,7 +19,6 @@ var setup_example = {
 
 
     create_view_examples_button : function(){
-
         // For each example element
         let elms = document.querySelectorAll(
             "main-right-doc-scroll- :not(split-example-container-right-) > example-," +
@@ -93,6 +92,6 @@ var setup_example = {
 
     init : function(){
         setup_example.move_full_examples();
-        //setup_example.create_view_examples_button();
+        setup_example.create_view_examples_button();
     }
 }
