@@ -36,7 +36,7 @@
     <!--------------------------------------------------------------------->
     <div id="main-mask" class="main-mask"></div>
     <input type="range" min="0" max="99999999" value="0" step="0.00001" class="slider" id="main-slider">
-    <!-- !                           ^ not a random value -->
+    <!-- !                           ^ not a random high value -->
 
 
     <!--------------------------------------------------------------------->
@@ -47,108 +47,115 @@
     </left->
 
     <right- id="main-right">
-        <div id="main-right-doc" class="hide-scrollbar">
-            <!--------------------------------------------------------------------->
-            <!-- Logo                                                            -->
-            <!--------------------------------------------------------------------->
-            <logo-top-></logo-top->
-            <logo- style="background-image: url('Logos/Photon.png');"></logo->
-
-            <main-right-doc-scroll->
-                #include "./Page/Overview/main.html"
-                #include "./Page/Preprocessor/main.html"
-                #include "./Page/Language/main.html"
-
-
-
-
-
-
+        <div id="main-right-tab-container">
+            <div id="main-right-doc" class="hide-scrollbar">
                 <!--------------------------------------------------------------------->
-                <!-- Compilation                                                     -->
+                <!-- Logo                                                            -->
                 <!--------------------------------------------------------------------->
-                <h1 id="compilation"></h1>
+                <logo-top-></logo-top->
+                <logo- style="background-image: url('Logos/Photon.png');"></logo->
 
-
-
-
-                <!--------------------------------------------------------------------->
-                <!-- Modules                                                         -->
-                <!--------------------------------------------------------------------->
-                <h1 id="modules"></h1>
-
-
-                <!--------------------------------------------------------------------->
-                <!-- Compilation phases and error types                              -->
-                <!--------------------------------------------------------------------->
-                <h1 id="compilation-phases-and-error-types"></h1>
-
-
-
-
-                <!--------------------------------------------------------------------->
-                <!-- Global initialization order                                     -->
-                <!--------------------------------------------------------------------->
-                <h1 id="global-initialization-order"></h1>
-
-
-
-
-                <!--------------------------------------------------------------------->
-                <!-- Runtime performance                                             -->
-                <!--------------------------------------------------------------------->
-                <h1 id="runtime-performance"></h1>
-
-
-                <!--------------------------------------------------------------------->
-                <!-- Branching performance                                           -->
-                <!--------------------------------------------------------------------->
-                <h1 id="branching-performance"></h1>
-
-
-                <!--------------------------------------------------------------------->
-                <!-- Value precomputation                                            -->
-                <!--------------------------------------------------------------------->
-                <h1 id="value-precomputation"></h1>
+                <main-right-doc-scroll->
+                    #include "./Page/Overview/main.html"
+                    #include "./Page/Preprocessor/main.html"
+                    #include "./Page/Language/main.html"
 
 
 
 
 
 
-
-
-                #include "./Page/CoreModule/main.html"
-                #include "./Page/StandardModules/main.html"
-                #include "./Page/QuickReferenceTabs/main.html"
-
-
-
-
-                <!--
-                //TODO
-                //module.x module.y module.z
-                module.pos.x
-                module.pos.y
-                module.pos.z
-                ^ coordinates in current workspace
-
-                sequence function //TODO
-                sequence(start, end, step)
-                -->
+                    <!--------------------------------------------------------------------->
+                    <!-- Compilation                                                     -->
+                    <!--------------------------------------------------------------------->
+                    <h1 id="compilation"></h1>
 
 
 
 
+                    <!--------------------------------------------------------------------->
+                    <!-- Modules                                                         -->
+                    <!--------------------------------------------------------------------->
+                    <h1 id="modules"></h1>
 
-                #include "./Page/OmittedFeatures/main.html"
 
-            </main-right-doc-scroll->
-        </div><!--
-     --><div id="main-right-examples" class="hide-scrollbar">
-            <main-right-examples-scroll->
-                <!-- Elements are added dynamically -->
-            </main-right-examples-scroll->
+                    <!--------------------------------------------------------------------->
+                    <!-- Compilation phases and error types                              -->
+                    <!--------------------------------------------------------------------->
+                    <h1 id="compilation-phases-and-error-types"></h1>
+
+
+
+
+                    <!--------------------------------------------------------------------->
+                    <!-- Global initialization order                                     -->
+                    <!--------------------------------------------------------------------->
+                    <h1 id="global-initialization-order"></h1>
+
+
+
+
+                    <!--------------------------------------------------------------------->
+                    <!-- Runtime performance                                             -->
+                    <!--------------------------------------------------------------------->
+                    <h1 id="runtime-performance"></h1>
+
+
+                    <!--------------------------------------------------------------------->
+                    <!-- Branching performance                                           -->
+                    <!--------------------------------------------------------------------->
+                    <h1 id="branching-performance"></h1>
+
+
+                    <!--------------------------------------------------------------------->
+                    <!-- Value precomputation                                            -->
+                    <!--------------------------------------------------------------------->
+                    <h1 id="value-precomputation"></h1>
+
+
+
+
+
+
+
+
+                    #include "./Page/CoreModule/main.html"
+                    #include "./Page/StandardModules/main.html"
+                    #include "./Page/QuickReferenceTabs/main.html"
+
+
+
+
+                    <!--
+                    //TODO
+                    //module.x module.y module.z
+                    module.pos.x
+                    module.pos.y
+                    module.pos.z
+                    ^ coordinates in current workspace
+
+                    sequence function //TODO
+                    sequence(start, end, step)
+                    -->
+
+
+
+
+
+                    #include "./Page/OmittedFeatures/main.html"
+
+                </main-right-doc-scroll->
+            </div><!--
+        --><div id="main-right-examples" class="hide-scrollbar">
+                <main-right-examples-scroll->
+                    <!-- Elements are added dynamically -->
+                </main-right-examples-scroll->
+            </div><!--
+        --><div id="main-right-internal" class="hide-scrollbar">
+                <main-right-internal-scroll->
+                    <!-- Elements are added dynamically -->
+                </main-right-internal-scroll->
+            </div>
         </div>
     </right->
 
@@ -156,7 +163,7 @@
     <!-- Page format -->
     <script src="Scripts/Setup/Fix.js"></script>
     <script src="Scripts/Setup/Syntax.js"></script>
-    <script src="Scripts/Setup/Example.js"></script>
+    <script src="Scripts/Setup/DocumentationTabs.js"></script>
     <script src="Scripts/Setup/Index.js"></script>
     <script src="Scripts/Setup/CopySyntax.js"></script>
     <script src="Scripts/main.js"></script>

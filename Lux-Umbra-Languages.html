@@ -283,11 +283,12 @@
     </left->
 
     <right- id="main-right">
-        <div id="main-right-doc" class="hide-scrollbar">
-            <logo-top-></logo-top->
-            <logo- style="background-image: url('Logos/Photon.png');"></logo->
+        <div id="main-right-tab-container">
+            <div id="main-right-doc" class="hide-scrollbar">
+                <logo-top-></logo-top->
+                <logo- style="background-image: url('Logos/Photon.png');"></logo->
 
-            <main-right-doc-scroll->
+                <main-right-doc-scroll->
 
 
 <div style="margin-top: var(--main-padding-r);"></div>
@@ -362,7 +363,7 @@
 <syntax->
     <label- id="copy.syntax--preprocessor-comment">Syntax</label->
 </syntax->
-<example->
+<example- class="full-example">
     <label->Example 1</label->
     <div>
         <c->// Single line comment</c->
@@ -410,7 +411,7 @@
 <syntax->
     <label- id="copy.syntax--preprocessor-include">Syntax</label->
 </syntax->
-<example->
+<example- class="full-example">
     <label->Example</label->
     <div>
         <k->#include</k-> <s->"/home/Photon/Lux/file.lux"</s->      <c->// Ok, absolute path</c->
@@ -452,7 +453,7 @@
     <label- id="copy.syntax--preprocessor-line-continuation-token">Syntax</label->
 </syntax->
 
-<example->
+<example- class="full-example">
     <label->Example 1</label->
     <div>
         <c->// single line comment</c-><sg->&bsol;</sg->
@@ -1481,7 +1482,7 @@
     The <code>module</code> identifier is used to reference the <a href="#scopes">scope</a> of the current <a href="#modules">module</a>.<br>
     A path that starts from the module <a href="#scopes">scope</a> of the current <a href="#modules">module</a> or any of the <a href="#import-directive">imported</a> ones is called an absolute path.
 </p>
-<example->
+<example- class="full-example">
     <label->Example</label->
     <div>
         <c->// Absolute path: module</c->
@@ -1534,7 +1535,7 @@
     This can be avoided by starting the <a href="#name-resolution">path</a> from a parent <a href="#scopes">scope</a> so that the <a href="#identifiers">identifier</a> is not ambiguous.<br>
     Any <a href="#identifiers">identifier</a> can be shadowed, including <a href="#primitive-types">primitive types</a>, the <a href="#name-resolution"><code>module</code></a> <a href="#identifiers">identifier</a> and <a href="#declarations">symbols</a> from the <a href="#core-module">core module</a>.
 </p>
-<example->
+<example- class="full-example">
     <label->Example</label->
     <div>
         <w->namespace</w-> s {
@@ -1555,7 +1556,7 @@
 <p>
     The first declaration in a scope is the only one that actually shadows eventual identifiers in parent scopes. Subsequent declarations that use the same identifier will refer to the symbol declared in the same scope.<br>
 </p>
-<example->
+<example- class="full-example">
     <label->Example</label->
     <div>
         <c->// Ok, declares a struct with name "t"</c->
@@ -1593,7 +1594,7 @@
     Other symbols.<br>
     Multiple declarations of other symbols generate a semantic error. //TODO LINK
 </p>
-<example->
+<example- class="full-example">
     <label->Example</label->
     <div>
         <w->namespace</w-> a {     <c->// Ok, merges with the second declaration</c->
@@ -1709,7 +1710,7 @@
     by containing runtime <a href="#routine-calls">routine calls</a> that are empty or have the aforementioned properties,
     are not considered suitable for compile time <a href="#routine-calls">calls</a>, even though it would be possible to determine their <a href="#return-statement">return value</a> and operations on reference <a href="#routine-parameters">parameters</a> during the <a href="#compilation">compilation</a> process.
 </p>
-<example->
+<example- class="full-example">
     <label->Example</label->
     <div>
         <w->from</w-> <s->&lt;random&gt;</s-> <w->include</w-> rand;
@@ -1795,7 +1796,7 @@
 
 <split-example-container->
     <split-example-container-left->
-        <example->
+        <example- class="full-example">
             <label->Example</label->
             <div>
                 <c->// [module "main.ubr"]</c->
@@ -1811,7 +1812,7 @@
         </example->
     </split-example-container-left->
     <split-example-container-right->
-        <example->
+        <example- class="full-example">
             <label->Equivalent code</label->
             <div>
                 <c->// From the root scope's perspective,</c->
@@ -1860,7 +1861,7 @@
     <label- id="copy.syntax--misc-export-directive">Export syntax</label->
 </syntax->
 
-<example->
+<example- class="full-example">
     <label->Example</label->
     <div>
         <t->float</t-> pi = <k->3.14</k->;   <c->// Automatically exported as it is required by the "getTau" function, but not accessible</c->
@@ -1878,7 +1879,7 @@
     While the Export directive doesn't preserve the parent <a href="#namespaces">namespaces</a> of a <a href="#name-resolution">symbol</a> nor can it add new ones, it can be used in conjunction with <a href="#symbol-aliases">Symbol aliases</a>
     and <a href="#namespaces">Namespaces</a> to create a clean interface while preserving the internal structure of the <a href="#modules">module</a>.
 </p>
-<example->
+<example- class="full-example">
     <label->Example</label->
     <div>
         <w->from</w-> <s->&lt;math&gt;</s-> <w->import</w-> <f->pow</f->;
@@ -1992,7 +1993,7 @@
     All signed integral types use the Two's Complement to represent negative numbers.<br>
     Positive numbers and <code><k->0</k-></code> use the corresponding binary value in both signed and unsigned integral types.
 </p>
-<example->
+<example- class="full-example">
         <div style="border-top-left-radius: var(--code-decoration-r);">
                                             <c->  1              31</c->
                                             <c->sign           value</c->
@@ -2027,7 +2028,7 @@
     Positive and negative inf, nan and signed <code><k->0</k-></code> are all supported.<br>
     <code><k->+0</k-></code> and <code><k->-0</k-></code> are equal.
 </p>
-<example->
+<example- class="full-example">
         <div style="border-top-left-radius: var(--code-decoration-r);">
                                             <c-> 1      8          23</c->
                                             <c->sign exponent   mantissa</c->
@@ -2064,7 +2065,7 @@
     The <b>Boolean type</b> is used to <b>represent boolean values</b>.<br>
     <code><k->true</k-></code> and <code><k->false</k-></code> are the only values that can be stored in a <code><t->bool</t-></code>.
 </p>
-<example->
+<example- class="full-example">
         <div style="border-top-left-radius: var(--code-decoration-r);">
                             <c->32</c->
                           <c->value</c->
@@ -2106,7 +2107,7 @@
 </p>
 
 
-<example->
+<example- class="full-example">
     <label->Example</label->
     <div>
         <w->enum</w-> <t->e</t-> : <t->int</t-> {
@@ -2132,7 +2133,7 @@
     <li>Struct methods declared in the base struct are not inherited.</li>
     <li>Creating or destroying enum values doesn't call constructors or destructors declared in the base struct.</li>
 </ul></ul>
-<example->
+<example- class="full-example">
     <label->Example</label->
     <div>
         <w->struct</w-> <t->s</t-> {
@@ -2171,7 +2172,7 @@
 </p>
 <split-example-container->
     <split-example-container-left->
-        <example->
+        <example- class="full-example">
             <label->Example</label->
             <div>
                 <w->import</w-> <s->&lt;io&gt;</s->;
@@ -2196,7 +2197,7 @@
         </example->
     </split-example-container-left->
     <split-example-container-right->
-        <example->
+        <example- class="full-example">
             <label->Output</label->
             <div>
                 OwO
@@ -2223,7 +2224,7 @@
     <label- id="copy.syntax--declaration-specialization-constraint">Specialization constraint</label->
     <label- id="copy.syntax--declaration-struct-member">Member declaration syntax</label->
 </syntax->
-<example->
+<example- class="full-example">
     <label->Example</label->
     <div>
         <w->struct</w-> <t->idk</t-> {
@@ -2252,7 +2253,7 @@
 </p>
 <split-example-container->
     <split-example-container-left->
-        <example->
+        <example- class="full-example">
             <label->Example</label->
             <div>
                 <c->// 2D uint vector</c->
@@ -2275,7 +2276,7 @@
         </example->
     </split-example-container-left->
     <split-example-container-right->
-        <example->
+        <example- class="full-example">
             <label->Output</label->
             <div>
                 x: 15
@@ -2303,7 +2304,7 @@
     This constructor is not present in structs declared using the <code><w->nodefault</w-></code> meta keyword.<br>
     Constructors are allowed to take no arguments.
 </p>
-<example->
+<example- class="full-example">
     <label->Example</label->
     <div>
         <w->struct</w-> <t->uint2</t-> {
@@ -2350,7 +2351,7 @@
 </p>
 <split-example-container->
     <split-example-container-left->
-        <example->
+        <example- class="full-example">
             <label->Example</label->
             <div>
                 <w->import</w-> <s->&lt;io&gt;</s->;
@@ -2378,7 +2379,7 @@
         </example->
     </split-example-container-left->
     <split-example-container-right->
-        <example->
+        <example- class="full-example">
             <label->Output</label->
             <div>
                 Destroyed instance n.0
@@ -2402,7 +2403,7 @@
 </p>
 <split-example-container->
     <split-example-container-left->
-        <example->
+        <example- class="full-example">
             <label->Example</label->
             <div>
                 <w->template</w->&lt;<w->type</w-> <t->t</t->&gt; <w->struct</w-> <t->s</t-> <w->when</w->(<t->t</t->::id <f->!=</f-> <t->void</t->::id) {
@@ -2425,7 +2426,7 @@
         </example->
     </split-example-container-left->
     <split-example-container-right->
-        <example->
+        <example- class="full-example">
             <label->Output</label->
             <div>
                 Not void
@@ -2446,7 +2447,7 @@
     The <code><t->void</t-></code> type is used to declare routines that don't return any value.<br>
     It has no other purpose but it can be passed to type template parameters to generate different declarations.
 </p>
-<example->
+<example- class="full-example">
     <label->Example 1</label->
     <div>
         <f->uint</f-> counter = <k->0</k->;
@@ -2459,7 +2460,7 @@
 </example->
 <split-example-container->
     <split-example-container-left->
-        <example->
+        <example- class="full-example">
             <label->Example 2</label->
             <div>
                 <w->import</w-> <s->&lt;io&gt;</s->;
@@ -2475,7 +2476,7 @@
         </example->
     </split-example-container-left->
     <split-example-container-right->
-        <example->
+        <example- class="full-example">
             <label->Output</label->
             <div>
                 void
@@ -2505,7 +2506,7 @@
 //TODO add memory allocation examples
 <split-example-container->
     <split-example-container-left->
-        <example->
+        <example- class="full-example">
             <label->Example 1</label->
             <div>
                 <w->import</w-> <s->&lt;io&gt;</s->;
@@ -2521,7 +2522,7 @@
         </example->
     </split-example-container-left->
     <split-example-container-right->
-        <example->
+        <example- class="full-example">
             <label->Output</label->
             <div>
                 6<cursor-></cursor->
@@ -2531,7 +2532,7 @@
 </split-example-container->
 <split-example-container->
     <split-example-container-left->
-        <example->
+        <example- class="full-example">
             <label->Example 2 - Nested pointer types</label->
             <div>
                 <w->import</w-> <s->&lt;io&gt;</s->;
@@ -2549,7 +2550,7 @@
         </example->
     </split-example-container-left->
     <split-example-container-right->
-        <example->
+        <example- class="full-example">
             <label->Output</label->
             <div>
                 6<cursor-></cursor->
@@ -2577,7 +2578,7 @@
 </p>
 <split-example-container->
     <split-example-container-left->
-        <example->
+        <example- class="full-example">
             <label->Example 1 - Callback</label->
             <div>
                 <w->import</w-> <s->&lt;io&gt;</s->;
@@ -2600,7 +2601,7 @@
         </example->
     </split-example-container-left->
     <split-example-container-right->
-        <example->
+        <example- class="full-example">
             <label->Output</label->
             <div>
                 Variable "a" created
@@ -2611,7 +2612,7 @@
 </split-example-container->
 <split-example-container->
     <split-example-container-left->
-        <example->
+        <example- class="full-example">
             <label->Example 2 - Higher level function</label->
             <div>
                 <w->import</w-> <s->&lt;io&gt;</s->;
@@ -2631,7 +2632,7 @@
         </example->
     </split-example-container-left->
     <split-example-container-right->
-        <example->
+        <example- class="full-example">
             <label->Output</label->
             <div>
                 Before map: [1, 2]
@@ -2652,7 +2653,7 @@
     <b><code><w->const</w-></code></b> can also be used before the name of a <b>variable</b> or <b>routine parameter</b> to <b>prevent them from being modified</b> after their declaration, although this doesn't turn the type of the symbol into a const type.<br>
     The address of <code><w->const</w-></code> variables or <code><w->const</w-></code> routine parameters is always returned as a <code><t->const</t-></code> pointer.
 </p>
-<example->
+<example- class="full-example">
     <label->Example 1 - Const pointer</label->
     <div>
         <t->void</t-> <f->main</f->(){
@@ -2683,7 +2684,7 @@
     <code><t->auto</t-></code> is not allowed in <a href="#structs">struct</a> member declarations or <a href="#routine-parameters">routine parameters</a>.<br>
     The <a href="#types">types</a> of the <a href="#expressions">expressions</a> returned from an <code><t->auto</t-></code> <a href="#routines">routine</a> must match.
 </p>
-<example->
+<example- class="full-example">
     <label->Example 1</label->
     <div>
         <t->auto</t-> <f->func</f->(){
@@ -2706,7 +2707,7 @@
     The <a href="#expressions">expression</a> is exclusively used to determine the type and never evaluated.<br>
     Circular dependencies generate a semantic error. //TODO LINK
 </p>
-<example->
+<example- class="full-example">
     <label->Example 1</label->
     <div>
         <t->auto</t-> <f->f</f->(){}                  <c->// f has type void</c->
@@ -2717,7 +2718,7 @@
         }
     </div>
 </example->
-<example->
+<example- class="full-example">
     <label->Example 2</label->
     <div>
         <c->//typeof(b) a(){};</c->  <ce->//Error, circular dependency with b</ce->
@@ -3128,7 +3129,7 @@
     and those whose base <a href="#types">type</a> is a <a href="#primitive-types">primitive type</a> are implicitly convertible to any <a href="#primitive-types">primitive type</a>,
     following all the <a href="#impliti-conversions">implicit conversion rules</a> their base <a href="#types">type</a> is subject to.
 </p>
-<example->
+<example- class="full-example">
     <label->Example</label->
     <div>
         <w->enum</w-> <t->e</t-> : <t->int</t-> {
@@ -3155,7 +3156,7 @@
 <p>
     All pointer types are implicitly convertible to <code><t->ulong</t-></code> values.
 </p>
-<example->
+<example- class="full-example">
     <label->Example</label->
     <div>
         <t->void</t-> <f->main</f->(){
@@ -3176,7 +3177,7 @@
     This also applies to const pointer types used as part of function types, with the added constraint that
     all of the pointer types used in the source function type must be implicitly convertible to their respective pointer types in the target function type.
 </p>
-<example->
+<example- class="full-example">
     <label->Example 1</label->
     <div>
         <t->void</t-> <f->main</f->(){
@@ -3265,7 +3266,7 @@
         <td class="center" colspan="4"><code>true|false</code></td>
     </tr>
 </table></div>
-<example->
+<example- class="full-example">
     <label->Example</label->
     <div>
         <t->int</t-> n = <k->4</k->;             <c->// Ok</c->
@@ -3282,7 +3283,7 @@
     The <code>_</code> character can be used anywhere after the base prefix of numerical literals to separate digits and improve readability.<br>
     Decimal literals without base prefix cannot start with <code>_</code>.
 </p>
-<example->
+<example- class="full-example">
     <label->Example</label->
     <div>
         <t->int</t-> n = <k->395_935</k->;             <c->// Ok</c->
@@ -3314,7 +3315,7 @@
 </syntax->
 
 
-<example->
+<example- class="full-example">
     <label->Example</label->
     <div>
         <t->void</t-> <f->empty_function_1</f->() { <w->return</w->; }    <c->// Ok</c->
@@ -3368,7 +3369,7 @@
     <label- id="copy.syntax--declaration-variable">Declaration syntax</label->
 </syntax->
 
-<example->
+<example- class="full-example">
     <label->Example</label->
     <div>
         <t->uint</t-> var = <k->0</k->;              <c->// Ok, var has value 0</c->
@@ -3395,7 +3396,7 @@
 </p>
 <p>They act as normal variables for anything else.</p>
 
-<example->
+<example- class="full-example">
     <label->Example 1</label->
     <div>
         <t->uint3</t-> <f->fun1</f->(<t->bool</t-> <p->arg</p->) {
@@ -3414,7 +3415,7 @@
         <c->//uint var = $9;        </c-><ce->// Error, temporary variables cannot be used outside of functions</ce->
     </div>
 </example->
-<example->
+<example- class="full-example">
     <label->Example 2</label->
     <div>
         <t->void</t-> <f->fun3</f->(<t->bool</t-> <p->arg</p->, <t->uint2</t-> &<p->ref</p->) {
@@ -3468,7 +3469,7 @@
 <syntax->
     <label- id="copy.syntax--declaration-routine-parameter">Declaration syntax</label->
 </syntax->
-<example->
+<example- class="full-example">
     <label->Example</label->
     <div>
         <t->int</t-> <f->add</f->(<t->uint</t-> <p->a</p->, <t->uint</t-> <p->b</p->) {
@@ -3500,7 +3501,7 @@
     <label- id="copy.syntax--declaration-routine-body">Routine body</label->
     <label- id="copy.syntax--declaration-specialization-constraint">Specialization constraint</label->
 </syntax->
-<example->
+<example- class="full-example">
     <label->Example - Add function</label->
     <div>
         <t->int</t-> <f->add</f->(<t->int</t-> <p->a</p->, <t->int</t-> <p->b</p->){
@@ -3536,7 +3537,7 @@
     A function can have multiple parameters <b>with</b> a default value, but they must all be declared <b>after</b> the <b>last</b> parameter that <b>doesn't have one</b>.<br>
     Parameters of <a href="#operators">operators</a> cannot have default value.
 </p>
-<example->
+<example- class="full-example">
     <label->Example</label->
     <div>
         <w->import</w-> <s->&lt;math&gt;</s->;
@@ -3571,7 +3572,7 @@
 <syntax->
     <label- id="copy.syntax--declaration-function-parameter-pack">Declaration syntax</label->
 </syntax->
-<example->
+<example- class="full-example">
     <label->Example 1</label->
     <div>
         <w->struct</w-> <t->NoArg</t-> { };
@@ -3598,7 +3599,7 @@
     Parameter packs can be used in conjunction with the <a href="#abbreviated-template-syntax">abbreviated template syntax</a>.<br>
     This is explained in <a href="#abbreviated-template-syntax">Abbreviated template syntax</a>.
 </p>
-<example->
+<example- class="full-example">
     <label->Example 2 - Summation function</label->
     <div>
         <t->auto</t-> <f->sum</f->(?<t->t</t-> <p->a</p->, ?<t->u</t->... <p->vals</p->...) {
@@ -3637,7 +3638,7 @@
     <label- id="copy.syntax--declaration-routine-body">Routine body</label->
     <label- id="copy.syntax--declaration-specialization-constraint">Specialization constraint</label->
 </syntax->
-<example->
+<example- class="full-example">
     <label->Example 1 - Promotion operator</label->
     <div>
         <t->int</t-> <f->+</f-> (<t->int</t-> <p->n</p->) <w->priority</w->(<k->3</k->) {
@@ -3649,7 +3650,7 @@
         }
     </div>
 </example->
-<example->
+<example- class="full-example">
     <label->Example 2 - Python-like ternary operator</label->
     <div>
         <t->int</t-> (<t->int</t-> <p->a</p->) <f->if_</f-> (<t->bool</t-> <p->condition</p->) <f->else_</f-> (<t->int</t-> <p->b</p->) <w->priority</w->(<k->15</k->) {
@@ -3680,7 +3681,7 @@
     Associativity defines the order in which operators with the same priority and associativity are evaluated.<br>
     Right-associative operators are evaluated starting from the right, whilst left-associative operators are evaluated starting from the left.<br>
 </p>
-<example->
+<example- class="full-example">
     <label->Example 1 - Priority</label->
     <div>
         <t->int</t-> (<t->int</t-> <p->a</p->) <f->o</f-> (<t->int</t-> <p->b</p->) <w->priority</w->(<k->4</k-> <w->l</w->) {
@@ -3701,7 +3702,7 @@
         }
     </div>
 </example->
-<example->
+<example- class="full-example">
     <label->Example 2 - Associativity</label->
     <div>
         <t->int</t-> (<t->int</t-> <p->a</p->) <f->o</f-> (<t->int</t-> <p->b</p->) <w->priority</w->(<k->4</k-> <w->l</w->) {
@@ -3729,7 +3730,7 @@
     Reference parameters can only be of <a href="#pointer-types">pointer type</a> and the passed arguments must be <a href="#left-and-right-values">l-values</a>.<br>
     Inside the <a href="#routines">routine</a>, reference parameters act exactly as normal parameters.
 </p>
-<example->
+<example- class="full-example">
     <label->Example</label->
     <div>
         <t->void</t-> <f->halve</f->(<t->float</t->@ &<p->n</p->) <w->priority</w->(<k->1</k-> <w->l</w->) {
@@ -3772,7 +3773,7 @@
 <br>
 <split-example-container->
     <split-example-container-left->
-        <example->
+        <example- class="full-example">
             <label->Example 1</label->
             <div>
                 <w->import</w-> <s->&lt;io&gt;</s->;
@@ -3802,7 +3803,7 @@
         </example->
     </split-example-container-left->
     <split-example-container-right->
-        <example->
+        <example- class="full-example">
             <label->Output</label->
             <div>
                 abcc<cursor-></cursor->
@@ -3835,7 +3836,7 @@
 </ol>
 <split-example-container->
     <split-example-container-left->
-        <example->
+        <example- class="full-example">
             <label->Example 2</label->
             <div>
                 <w->import</w-> <s->&lt;io&gt;</s->;
@@ -3860,7 +3861,7 @@
         </example->
     </split-example-container-left->
     <split-example-container-right->
-        <example->
+        <example- class="full-example">
             <label->Output</label->
             <div>
                 The first argument is not a double
@@ -3898,7 +3899,7 @@
     <label- id="copy.syntax--declaration-template-operator">Template operator declaration</label->
     <label- id="copy.syntax--declaration-template-signature">Template signature</label->
 </syntax->
-<example->
+<example- class="full-example">
     <label->Example</label->
     <div>
         <w->template</w->&lt;<w->type</w-> <t->t</t->&gt; <t->t</t-> <f->add</f->(<t->t</t-> <p->a</p->, <t->t</t-> <p->b</p->){
@@ -3926,7 +3927,7 @@
 <syntax->
     <label- id="copy.syntax--declaration-template-parameter">Template parameter declaration</label->
 </syntax->
-<example->
+<example- class="full-example">
     <label->Example 1</label->
     <div>
         <w->template</w->&lt;<w->type</w-> <t->t</t->&gt; <t->t</t-> <f->twice</f->(<t->t</t->! <p->n</p->){
@@ -3972,7 +3973,7 @@
 <syntax->
     <label- id="copy.syntax--declaration-template-parameter-pack">Template parameter pack declaration</label->
 </syntax->
-<example->
+<example- class="full-example">
     <label->Example</label->
     <div>
         <w->template</w->&lt;<w->type</w-> <t->t</t->, <w->type</w-> <t->u</t->...&gt; <t->str</t-> <f->to_str</f->(<t->t</t->! <p->arg</p->, <t->u</t->! <p->args</p->...) {
@@ -4001,7 +4002,7 @@
 </p>
 <split-example-container->
     <split-example-container-left->
-        <example->
+        <example- class="full-example">
             <label->Example</label->
             <div>
                 <t->t</t-> <f->add</f->(<t->u</t->?! <p->a</p->, <t->t</t->?! <p->b</p->) {
@@ -4016,7 +4017,7 @@
         </example->
     </split-example-container-left->
     <split-example-container-right->
-        <example->
+        <example- class="full-example">
             <label->Equivalent code</label->
             <div>
                 <w->template</w->&lt;<w->type</w-> <t->t</t->, <w->type</w-> <t->u</t->&gt; <t->t</t-> <f->add</f->(<t->u</t->! <p->a</p->, <t->t</t->! <p->b</p->) {
@@ -4033,7 +4034,7 @@
 </split-example-container->
 <split-example-container->
     <split-example-container-left->
-        <example->
+        <example- class="full-example">
             <label->Example</label->
             <div>
                 <t->t</t-> <f->mul</f->(<t->t</t->?! <p->arg</p->, <t->u</t->...! <p->args</p->...) {
@@ -4046,7 +4047,7 @@
         </example->
     </split-example-container-left->
     <split-example-container-right->
-        <example->
+        <example- class="full-example">
             <label->Equivalent code</label->
             <div>
                 <w->template</w->&lt;<w->type</w-> <t->t</t->, <w->type</w-> <w->u</w->&gt; <t->t</t-> <f->mul</f->(<t->t</t->! <p->arg</p->, <t->u</t->! <p->args</p->...) {
@@ -4101,7 +4102,7 @@
         <td class="center">7</td>
     </tr>
 </table></div>
-<example->
+<example- class="full-example">
     <label->Example 1</label->
     <div>
         <t->t</t-> <f->add</f->(<t->t</t->?! <p->a</p->, <t->t</t->?! <p->b</p->) {
@@ -4116,7 +4117,7 @@
 </example->
 <split-example-container->
     <split-example-container-left->
-        <example->
+        <example- class="full-example">
             <label->Example 2</label->
             <div>
                 <w->import</w-> <s->&lt;io&gt;</s->;
@@ -4134,7 +4135,7 @@
         </example->
     </split-example-container-left->
     <split-example-container-right->
-        <example->
+        <example- class="full-example">
             <label->Output</label->
             <div>
                 float
@@ -4250,7 +4251,7 @@
     <label- id="copy.syntax--declaration-namespace">Declaration syntax</label->
 </syntax->
 
-<example->
+<example- class="full-example">
     <label->Example</label->
     <div>
         <w->namespace</w-> a {
@@ -4283,7 +4284,7 @@
     <label- id="copy.syntax--declaration-symbol-alias">Syntax</label->
 </syntax->
 
-<example->
+<example- class="full-example">
     <label->Example 1</label->
     <div>
         <w->namespace</w-> n {
@@ -4314,13 +4315,13 @@
 
 
 <h1 id="syntactic-sugar"></h1>
-                <h1 id="compilation"></h1>
-                <h1 id="modules"></h1>
-                <h1 id="compilation-phases-and-error-types"></h1>
-                <h1 id="global-initialization-order"></h1>
-                <h1 id="runtime-performance"></h1>
-                <h1 id="branching-performance"></h1>
-                <h1 id="value-precomputation"></h1>
+                    <h1 id="compilation"></h1>
+                    <h1 id="modules"></h1>
+                    <h1 id="compilation-phases-and-error-types"></h1>
+                    <h1 id="global-initialization-order"></h1>
+                    <h1 id="runtime-performance"></h1>
+                    <h1 id="branching-performance"></h1>
+                    <h1 id="value-precomputation"></h1>
 
 
 <h1 id="core-module"></h1>
@@ -7613,15 +7614,19 @@
 
 <h1 id="omitted-features"></h1>
 
-            </main-right-doc-scroll->
-        </div><div id="main-right-examples" class="hide-scrollbar">
-            <main-right-examples-scroll->
-            </main-right-examples-scroll->
+                </main-right-doc-scroll->
+            </div><div id="main-right-examples" class="hide-scrollbar">
+                <main-right-examples-scroll->
+                </main-right-examples-scroll->
+            </div><div id="main-right-internal" class="hide-scrollbar">
+                <main-right-internal-scroll->
+                </main-right-internal-scroll->
+            </div>
         </div>
     </right->
     <script src="Scripts/Setup/Fix.js"></script>
     <script src="Scripts/Setup/Syntax.js"></script>
-    <script src="Scripts/Setup/Example.js"></script>
+    <script src="Scripts/Setup/DocumentationTabs.js"></script>
     <script src="Scripts/Setup/Index.js"></script>
     <script src="Scripts/Setup/CopySyntax.js"></script>
     <script src="Scripts/main.js"></script>

@@ -44,7 +44,7 @@ function init(){
     log_function(ui_copy_code.init, "ui_copy_code");
     //!^ Must be executed after modifying the body as changing the innerHTML recreates all the elements and removes the event listeners
     log_function(ui_syntax_hover.init, "ui_syntax_hover");
-    log_function(setup_example.init, "setup_example");
+    log_function(setup_tabs.init, "setup_tabs"); 
 
 
 

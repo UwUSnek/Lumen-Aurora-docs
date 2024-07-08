@@ -42,7 +42,7 @@
 
 <split-example-container->
     <split-example-container-left->
-        <example->
+        <example- class="full-example">
             <label->Example</label->
             <div>
                 <c->// [module "main.ubr"]</c->
@@ -58,7 +58,7 @@
         </example->
     </split-example-container-left->
     <split-example-container-right->
-        <example->
+        <example- class="full-example">
             <label->Equivalent code</label->
             <div>
                 <c->// From the root scope's perspective,</c->
@@ -122,7 +122,7 @@
     <label- id="copy.syntax--misc-export-directive">Export syntax</label->
 </syntax->
 
-<example->
+<example- class="full-example">
     <label->Example</label->
     <div>
         <t->float</t-> pi = <k->3.14</k->;   <c->// Automatically exported as it is required by the "getTau" function, but not accessible</c->
@@ -140,7 +140,7 @@
     While the Export directive doesn't preserve the parent <a href="#namespaces">namespaces</a> of a <a href="#name-resolution">symbol</a> nor can it add new ones, it can be used in conjunction with <a href="#symbol-aliases">Symbol aliases</a>
     and <a href="#namespaces">Namespaces</a> to create a clean interface while preserving the internal structure of the <a href="#modules">module</a>.
 </p>
-<example->
+<example- class="full-example">
     <label->Example</label->
     <div>
         <w->from</w-> <s->&lt;math&gt;</s-> <w->import</w-> <f->pow</f->;
