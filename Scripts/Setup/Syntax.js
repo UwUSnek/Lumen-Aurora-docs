@@ -217,9 +217,9 @@ var setup_syntax = {
 
 
     init : function() {
-        log_function(setup_syntax.even_widths,   "    even_widths"  );
-        log_function(setup_syntax.format_arrows, "    format_arrows");
-        log_function(setup_syntax.indent_code,   "    indent_code"  );
-        log_function(setup_syntax.even_heights,  "    even_heights" );
+        exec_and_log(setup_syntax.even_widths,   "    even_widths"  );
+        exec_and_log(setup_syntax.format_arrows, "    format_arrows");
+        exec_and_log(setup_syntax.indent_code,   "    indent_code"  );
+        exec_and_log(setup_syntax.even_heights,  "    even_heights" );
     }
 }

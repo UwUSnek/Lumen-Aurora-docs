@@ -2,9 +2,13 @@
 const example_list = new Map();
 const internal_list = new Map();
 
+let tab_doc      = document.getElementById("main-right-doc");
+let tab_examples = document.getElementById("main-right-examples");
+let tab_internal = document.getElementById("main-right-internal");
+
+
 
 var setup_tabs = {
-
     get_local_root : function(elm){
         if(elm.parentNode.tagName === "MAIN-RIGHT-DOC-SCROLL-") return elm;
         else return setup_tabs.get_local_root(elm.parentNode);
@@ -19,29 +23,43 @@ var setup_tabs = {
 
 
 
+
+
+    create_button : function(text, move_num){
+        // Create the button element
+        let b = document.createElement("div");
+        b.classList = "tab-button";
+        b.innerHTML = text
+
+        // Add click listener
+        b.addEventListener("click", function() {
+            tab_doc.style.marginLeft = `calc(0px - 100% * ${ move_num } - var(--main-padding-r) * ${ move_num })`;
+            console.log(left);
+            console.log(tab_doc);
+            console.log(document.getElementById("main-right-doc"));
+            //let target_container = document.querySelector("#main-right-examples > main-right-examples-scroll-");
+            //for(let j = 0; j < examples.length; ++j) {
+            //    target_container.appendChild(examples[j]);
+            //}
+        });
+
+        // Reutrn the button
+        return b;
+    },
+
+
     create_tab_buttons : function(){
         // Create button container
         let container = document.createElement("div");
         container.classList = "tab-buttons-container"
 
-        // Create documentation tab button
-        let button0 = document.createElement("div");
-        button0.classList = "tab-button";
-        container.appendChild(button0);
+        container.appendChild(setup_tabs.create_button("Documentation", 0));
+        container.appendChild(setup_tabs.create_button("Examples", 1));
+        container.appendChild(setup_tabs.create_button("Internal functioning", 2));
 
-        // Create examples tab button
-        let button1 = document.createElement("div");
-        button1.classList = "tab-button";
-        container.appendChild(button1);
-
-        // Create internal functioning tab button
-        let button2 = document.createElement("div");
-        button2.classList = "tab-button";
-        container.appendChild(button2);
-
-
-        // Add container to document
         right.insertBefore(container, right.children[0]);
+
+
 
         /*
         // For each example element
