@@ -94,43 +94,10 @@ var setup_index = {
 
 
 
-    on_scroll_changed : function(h, i) {
-        // Reset the old element and highlight the new one
-        let old = window.sessionStorage.getItem('index.active_id');
-        let new_ = `index--${ h[Math.max(i - 1, 0)].id }`;
-        if(setup_index.is_id_defined(old)) {
-            document.getElementById(old).parentElement.style.removeProperty("border-color");
-        }
-        window.sessionStorage.setItem('index.active_id', new_)
-        document.getElementById(new_).parentElement.style.borderColor = 'var(--bg-index-active)';
-    },
-
-
-
-
-    check_scroll : function(right){
-        let h = document.querySelectorAll('h1');
-        for(var i = 0; i < h.length; i++) {
-
-            // Check if element is in view
-            let view = right.getBoundingClientRect();
-            if(h[i].getBoundingClientRect().top >= view.top + parseInt(getComputedStyle(document.body).getPropertyValue('--sep-4'))) {
-                setup_index.on_scroll_changed(h, i);
-                return;
-            }
-        }
-    },
-
-
-
 
     init : function(){
         setup_index.format_elm(document.querySelector('index-'), 0, '');
         setup_index.on_location_changed();
-
-
-        // Setup scroll listener
-        right.addEventListener('scroll', function(){ setup_index.check_scroll(right); });
 
 
         // Setup location change listener

@@ -86,17 +86,15 @@ body > right- > #main-right-tab-container > #main-right-internal {
 /*!TODO left margin doesn't have correct background color, maybe use a helper div */
 
 body > right- > #main-right-tab-container > #main-right-doc {
-    transition: margin-left 0.5s; /* Set transition for full example list tab */
+    transition: margin-left 0.3s; /* Set transition for full example list tab */
     margin-right: var(--main-padding-r); /* Push examples out of view */
 }
 
 body > right- > #main-right-tab-container > #main-right-examples {
-    background-color: red;
     margin-left: calc(0 - var(--main-padding-r)); /* (aesthetic mirrored padding) */
     margin-right: var(--main-padding-r); /* Push internal functioning out of view */
 }
 body > right- > #main-right-tab-container > #main-right-internal {
-    background-color: blue;
     margin-left: calc(0 - var(--main-padding-r)); /* (aesthetic mirrored padding) */
 }
 
