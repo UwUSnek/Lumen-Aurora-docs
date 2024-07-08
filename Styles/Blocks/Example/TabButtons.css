@@ -13,7 +13,7 @@
     width: auto;
     height: fit-content;
 
-    background-color: green;
+    border-bottom: 1px solid var(--bd-block);
 }
 
 
@@ -28,4 +28,7 @@
     padding: var(--tab-button-padding) 0 var(--tab-button-padding) 0;
 
     text-align: center;
+    cursor: pointer;
+    transition: background-color 0.1s;
+    user-select: none;
 }

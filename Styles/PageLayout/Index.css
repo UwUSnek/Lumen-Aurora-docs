@@ -1,6 +1,6 @@
 :root {
-    --bg-index-hover:   hsl(222, 21%, 12%);
-    --bg-index-active:  hsl(223, 23%, 16%);
+    --bg-index-hover:   hsl(222, 21%, 18%);
+    --bg-index-active:  hsl(223, 23%, 30%);
 }
 
 
@@ -32,7 +32,7 @@ body > left- > index- indexd-, body > left- > index- indexh- {
     overflow: hidden;
     cursor: pointer;
 
-    border-radius: 10px;
+    border-radius: 0 6px 6px 0;
     border: 2px solid transparent;
     /**/width: 100%;
     /* max-width Set from JS */

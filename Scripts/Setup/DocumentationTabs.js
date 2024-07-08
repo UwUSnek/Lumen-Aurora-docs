@@ -1,10 +1,14 @@
 
 const example_list = new Map();
 const internal_list = new Map();
+let active_tab;
 
 let tab_doc      = document.getElementById("main-right-doc");
 let tab_examples = document.getElementById("main-right-examples");
 let tab_internal = document.getElementById("main-right-internal");
+let tab_button_doc;
+let tab_button_examples;
+let tab_button_internal;
 
 
 
@@ -25,39 +29,60 @@ var setup_tabs = {
 
 
 
-    create_button : function(text, move_num){
+    create_button : function(text, tab_num){
         // Create the button element
         let b = document.createElement("div");
         b.classList = "tab-button";
         b.innerHTML = text
+        b.style.setProperty("--tab-num", `${ tab_num }`);
+
 
         // Add click listener
         b.addEventListener("click", function() {
-            tab_doc.style.marginLeft = `calc(0px - 100% * ${ move_num } - var(--main-padding-r) * ${ move_num })`;
-            console.log(left);
-            console.log(tab_doc);
-            console.log(document.getElementById("main-right-doc"));
+            active_tab = tab_num;
+            tab_doc.style.marginLeft = `calc(0px - 100% * ${ tab_num } - var(--main-padding-r) * ${ tab_num })`;
             //let target_container = document.querySelector("#main-right-examples > main-right-examples-scroll-");
             //for(let j = 0; j < examples.length; ++j) {
             //    target_container.appendChild(examples[j]);
             //}
+
+            tab_button_doc.style.removeProperty("background-color");
+            tab_button_examples.style.removeProperty("background-color");
+            tab_button_internal.style.removeProperty("background-color");
+            b.style.backgroundColor = "var(--bg-index-active)";
         });
+        b.addEventListener("mouseenter", function(){
+            if(parseInt(b.style.getPropertyValue("--tab-num"), 10) != active_tab) {
+                b.style.backgroundColor = "var(--bg-index-hover)";
+            }
+        });
+        b.addEventListener("mouseleave", function(){
+            if(parseInt(b.style.getPropertyValue("--tab-num"), 10) != active_tab) {
+                b.style.removeProperty("background-color");
+            }
+        });
+
 
         // Reutrn the button
         return b;
     },
 
 
+//TODO remove scroll fix after making paragraphs dynamic
+
     create_tab_buttons : function(){
         // Create button container
         let container = document.createElement("div");
         container.classList = "tab-buttons-container"
 
-        container.appendChild(setup_tabs.create_button("Documentation", 0));
-        container.appendChild(setup_tabs.create_button("Examples", 1));
-        container.appendChild(setup_tabs.create_button("Internal functioning", 2));
+        // Create the actual buttons
+        container.appendChild(tab_button_doc      = setup_tabs.create_button("Documentation",        0));
+        container.appendChild(tab_button_examples = setup_tabs.create_button("Examples",             1));
+        container.appendChild(tab_button_internal = setup_tabs.create_button("Internal functioning", 2));
 
+        // Spawn the container and set the default tab to documentation
         right.insertBefore(container, right.children[0]);
+        tab_button_doc.dispatchEvent(new Event("click"))
 
 
 
