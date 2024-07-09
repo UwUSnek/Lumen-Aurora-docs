@@ -95,6 +95,10 @@ var setup_index = {
         let dc =      doc_list.get(header_number); if(typeof dc != 'undefined' && dc != null) for(let i = 0; i < dc.length; ++i) tab_doc     .appendChild(dc[i]);
         let ec =  example_list.get(header_number); if(typeof ec != 'undefined' && ec != null) for(let i = 0; i < ec.length; ++i) tab_examples.appendChild(ec[i]);
         let ic = internal_list.get(header_number); if(typeof ic != 'undefined' && ic != null) for(let i = 0; i < ic.length; ++i) tab_internal.appendChild(ic[i]);
+
+
+        // Format syntax blocks and examples
+        format_syntax.start();
     },
 
 

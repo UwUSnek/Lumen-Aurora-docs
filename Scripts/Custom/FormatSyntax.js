@@ -1,6 +1,6 @@
 
 
-var setup_syntax = {
+var format_syntax = {
     min_w : parseFloat(window.getComputedStyle(document.documentElement).getPropertyValue('--syntax-arrow-w')),
 
 
@@ -8,7 +8,7 @@ var setup_syntax = {
     // Align the colums to the maximum width of their cells
     even_widths : function(){
         let min_w = parseFloat(window.getComputedStyle(document.documentElement).getPropertyValue('--syntax-arrow-w'));
-        let tables = document.querySelectorAll('syntax- > table');
+        let tables = document.querySelectorAll('#main-right-doc syntax- > table');
         for(let j = 0; j < tables.length; ++j){
             let trs = tables[j].querySelectorAll('tr');
 
@@ -20,7 +20,7 @@ var setup_syntax = {
                 let tds = trs[k].querySelectorAll('td');
                 for(let l = 0; l < tds.length; ++l){
                     if(Object.is(max[l], undefined)) {
-                        max[l] = setup_syntax.min_w;
+                        max[l] = format_syntax.min_w;
                     }
                     if(max[l] < tds[l].offsetWidth) max[l] = tds[l].offsetWidth;
                 }
@@ -42,8 +42,8 @@ var setup_syntax = {
                     // Stretch arrows to fit long td bois
                     else {
                         tds[l].style.width = `${ min_w }px`;
-                        let ratio = max[l] / setup_syntax.min_w;
-                        tds[l].style.transform   = `scaleX(${ ratio + 2 * (1 / setup_syntax.min_w) })`; // Add an extra pixel on each side to connect the arrows seamlessly
+                        let ratio = max[l] / format_syntax.min_w;
+                        tds[l].style.transform   = `scaleX(${ ratio + 2 * (1 / format_syntax.min_w) })`; // Add an extra pixel on each side to connect the arrows seamlessly
                         tds[l].style.marginLeft  = `${ (ratio - 1) / 2 * min_w }px`;
                         tds[l].style.marginRight = `${ (ratio - 1) / 2 * min_w }px`;
                     }
@@ -63,7 +63,7 @@ var setup_syntax = {
 
 
     format_arrows : function(){
-        c = right.querySelectorAll("syntax- > table td");
+        c = right.querySelectorAll("#main-right-doc syntax- > table td");
 
 
         // Fix inverted arrows
@@ -181,7 +181,7 @@ var setup_syntax = {
         for(let i = 0; i < c.length; i++){
             let divs = c[i].querySelectorAll('div');
             for(let j = 0; j < divs.length; ++j){
-                divs[j].innerHTML = setup_syntax.format(divs[j].innerHTML) + '<br>';
+                divs[j].innerHTML = format_syntax.format(divs[j].innerHTML) + '<br>';
                 // Add trailing newline to fix CSS's bugged max-height  ^
             }
         }
@@ -216,10 +216,14 @@ var setup_syntax = {
 
 
 
-    init : function() {
-        exec_and_log(setup_syntax.even_widths,   "    even_widths"  );
-        exec_and_log(setup_syntax.format_arrows, "    format_arrows");
-        exec_and_log(setup_syntax.indent_code,   "    indent_code"  );
-        exec_and_log(setup_syntax.even_heights,  "    even_heights" );
+    start : function() {
+        //exec_and_log(setup_syntax.even_widths,   "    even_widths"  );
+        //exec_and_log(setup_syntax.format_arrows, "    format_arrows");
+        //exec_and_log(setup_syntax.indent_code,   "    indent_code"  );
+        //exec_and_log(setup_syntax.even_heights,  "    even_heights" );
+        format_syntax.even_widths();
+        format_syntax.format_arrows();
+        //setup_syntax.indent_code();   //! //TODO MOVE TO FormatExample.js
+        //setup_syntax.even_heights();  //! //TODO MOVE TO FormatExample.js
     }
 }

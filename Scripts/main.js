@@ -35,7 +35,7 @@ function init(){
     exec_and_log(setup_index.init, "setup_index");
 
     exec_and_log(setup_fix.init, "setup_fix");
-    exec_and_log(setup_syntax.init, "setup_syntax");
+    //exec_and_log(setup_syntax.init, "setup_syntax");
     exec_and_log(setup_copy_syntax.init, "setup_copy_syntax");
 
     exec_and_log(summary_list.init, "summary_list");
