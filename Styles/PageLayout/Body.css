@@ -83,7 +83,7 @@ body > right- > #main-right-tab-container > #main-right-internal {
 }
 
 
-/*!TODO left margin doesn't have correct background color, maybe use a helper div */
+
 
 body > right- > #main-right-tab-container > #main-right-doc {
     transition: margin-left 0.3s; /* Set transition for full example list tab */
@@ -99,10 +99,10 @@ body > right- > #main-right-tab-container > #main-right-internal {
 }
 
 
+
+
 /* *Hopefully* improve loading time by using "none" as display */
-/*body > right- > #main-right-doc .full-example, //TODO REMOVE*/
-body > right- > #main-right-tab-container > #main-right-doc .moveto-examples,
-body > right- > #main-right-tab-container > #main-right-doc .moveto-internal {
+body > right- > #main-right-tab-container > #main-right-staging {
     display: none;
 }
 

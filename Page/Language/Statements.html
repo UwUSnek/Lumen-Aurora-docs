@@ -4,18 +4,20 @@
 <!-- Statements                                                      -->
 <!--------------------------------------------------------------------->
 <h1 id="statements"></h1>
-<p>
-    <b>Statements</b> are the <b>instructions</b> that are <b>executed during runtime</b>.<br>
-    They determine the behaviour of the shader, its execution time and <a href="#compiler-optimizations">compiler optimizations</a>.<br>
-    The <code>;</code> <a href="#syntactic-elements">token</a> defines the end of a statement.
-</p>
-<p>
-    A statement can be an expression or a flow control <a href="#keywords">keyword</a>.<br>
-    Any sequence of <a href="#semantic-elements">semantic elements</a> entirely composed of <a href="#left-and-right-values">values</a> and <a href="#function-calls">function calls</a> is considered an expression.
-</p>
-<p>
-    Statements can only be used within <a href="#functions">functions</a> and <a href="#unnamed-scopes">unnames scopes</a>.
-</p>
+<moveto-doc->
+    <p>
+        <b>Statements</b> are the <b>instructions</b> that are <b>executed during runtime</b>.<br>
+        They determine the behaviour of the shader, its execution time and <a href="#compiler-optimizations">compiler optimizations</a>.<br>
+        The <code>;</code> <a href="#syntactic-elements">token</a> defines the end of a statement.
+    </p>
+    <p>
+        A statement can be an expression or a flow control <a href="#keywords">keyword</a>.<br>
+        Any sequence of <a href="#semantic-elements">semantic elements</a> entirely composed of <a href="#left-and-right-values">values</a> and <a href="#function-calls">function calls</a> is considered an expression.
+    </p>
+    <p>
+        Statements can only be used within <a href="#functions">functions</a> and <a href="#unnamed-scopes">unnames scopes</a>.
+    </p>
+</moveto-doc->
 
 
 
@@ -62,9 +64,11 @@
 <!-- Continue and break statements                                   -->
 <!--------------------------------------------------------------------->
 <h1 id="continue-and-break-statements"></h1>
-<p>
-    //TODO break 2; continue 40;
-</p>
+<moveto-doc->
+    <p>
+        //TODO break 2; continue 40;
+    </p>
+</moveto-doc->
 
 
 <!--------------------------------------------------------------------->
@@ -91,23 +95,25 @@
 <!-- Return statement                                                -->
 <!--------------------------------------------------------------------->
 <h1 id="return-statement"></h1>
-<p>
-    The <b><code><w->return</w-></code></b> statement skips all remaining statements in the function and <b>returns</b> the <b>code execution</b> to the <b>caller function</b>.<br>
-    Multiple return statements are allowed, but their value must be implicitly convertible to the type of the function.
-</p>
-<p>
-    All execution paths of non-<code><t->void</t-></code> functions must return a value.<br>
-    The return value can then be used by the caller function or be ignored.<br>
-    Calls to <code><t->void</t-></code> functions cannot be used in expressions.
-</p>
-<p>
-    There is no default return value.
-</p>
-<syntax->
-    <label- id="copy.syntax--statement-return">Syntax</label->
-</syntax-><p>
-    //TODO EXAMPLE
-</p>
+<moveto-doc->
+    <p>
+        The <b><code><w->return</w-></code></b> statement skips all remaining statements in the function and <b>returns</b> the <b>code execution</b> to the <b>caller function</b>.<br>
+        Multiple return statements are allowed, but their value must be implicitly convertible to the type of the function.
+    </p>
+    <p>
+        All execution paths of non-<code><t->void</t-></code> functions must return a value.<br>
+        The return value can then be used by the caller function or be ignored.<br>
+        Calls to <code><t->void</t-></code> functions cannot be used in expressions.
+    </p>
+    <p>
+        There is no default return value.
+    </p>
+    <syntax->
+        <label- id="copy.syntax--statement-return">Syntax</label->
+    </syntax-><p>
+        //TODO EXAMPLE
+    </p>
+</moveto-doc->
 
 
 <!--------------------------------------------------------------------->
