@@ -1,4 +1,5 @@
 
+const doc_list = new Map();
 const example_list = new Map();
 const internal_list = new Map();
 let active_tab;
@@ -13,7 +14,6 @@ let tab_button_internal;
 
 
 var setup_tabs = {
-
     create_button : function(text, tab_num){
         // Create the button element
         let b = document.createElement("div");
@@ -24,13 +24,11 @@ var setup_tabs = {
 
         // Add click listener
         b.addEventListener("click", function() {
+            // Update active tab
             active_tab = tab_num;
             tab_doc.style.marginLeft = `calc(0px - 100% * ${ tab_num } - var(--main-padding-r) * ${ tab_num })`;
-            //let target_container = document.querySelector("#main-right-examples > main-right-examples-scroll-");
-            //for(let j = 0; j < examples.length; ++j) {
-            //    target_container.appendChild(examples[j]);
-            //}
 
+            // Update button colors
             tab_button_doc.style.removeProperty("background-color");
             tab_button_examples.style.removeProperty("background-color");
             tab_button_internal.style.removeProperty("background-color");
@@ -68,54 +66,6 @@ var setup_tabs = {
         // Spawn the container and set the default tab to documentation
         right.insertBefore(container, right.children[0]);
         tab_button_doc.dispatchEvent(new Event("click"))
-
-
-
-        /*
-        // For each example element
-        let elms = document.querySelectorAll(
-            "#main-right-staging :not(split-example-container-right-) > example-," +
-            "#main-right-staging                                      > example-"
-        ); 
-        for(let i = 0; i < elms.length; ++i) {
-            let button = document.createElement("span");
--
-            // Find additional examples
-            let local_root = setup_tabs.get_local_root(elms[i]);
-            let parent_header = setup_tabs.get_parent_header(local_root);
-            console.log(parent_header);
-            console.log(parent_header.innerHTML);
-            let header_number = (parent_header.innerHTML).match(/([0-9]+\.)+/g)[0];
-            let examples = example_list.get(header_number);
-
-
-            // If the section has additional examples, create the link and make it load the examples
-            if(examples != null && examples.length > 0) {
-                button.classList = "more-examples-button";
-                button.innerHTML = "See more examples →";
-                button.href = "tmp";
-
-                // Add click listener
-                button.addEventListener("click", function() {
-                    document.getElementById("main-right-staging").style.marginLeft = "calc(0px - 100% - var(--main-padding-r))";
-                    let target_container = document.querySelector("#main-right-examples > main-right-examples-scroll-");
-                    for(let j = 0; j < examples.length; ++j) {
-                        target_container.appendChild(examples[j]);
-                    }
-                });
-            }
-
-            // If not, create a non-clickable text that says there are no more examples
-            else {
-                button.classList = "no-more-examples-button";
-                button.innerHTML = "There are no additional examples.";
-            }
-
-
-            // Append button to the example element
-            elms[i].appendChild(button);
-        }
-        */
     },
 
 
@@ -156,7 +106,7 @@ var setup_tabs = {
             }
 
             // Save each of its children in the hash map and remove them from the page, then remove the container
-            let c = elms[i].children;
+            let c = [...elms[i].children];  //! Convert HTMLCollection to Array to make it not change dynamically
             for(let j = 0; j < c.length; ++j){
                 output_list.get(header_number).push(c[j]);
                 c[j].remove();
@@ -169,7 +119,7 @@ var setup_tabs = {
 
 
     init : function(){
-        setup_tabs.move_elements("moveto-doc-", example_list);
+        setup_tabs.move_elements("moveto-doc-", doc_list);
         setup_tabs.move_elements("moveto-example-", example_list);
         setup_tabs.move_elements("moveto-internal-", internal_list);
         setup_tabs.create_tab_buttons();

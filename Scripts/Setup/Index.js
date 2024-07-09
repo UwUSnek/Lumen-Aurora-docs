@@ -73,15 +73,30 @@ var setup_index = {
         let old = window.sessionStorage.getItem('index.selected_id');
         let new_ = `index--${ location.hash.slice(1) }`;
         if(new_ == 'index--' || document.getElementById(new_) == null) new_ = 'index--overview'
+        let new_elm = document.getElementById(new_);
 
 
+        // Update index elements colors
         if(setup_index.is_id_defined(old)) {
             document.getElementById(old).parentElement.style.removeProperty("background-color");
         }
         window.sessionStorage.setItem('index.selected_id', new_);
+        new_elm.parentElement.style.backgroundColor = 'var(--bg-index-active)';
 
-        document.getElementById(new_).parentElement.style.backgroundColor = 'var(--bg-index-active)';
+
+        // Remove old contents
+        tab_doc.replaceChildren();
+        tab_examples.replaceChildren();
+        tab_internal.replaceChildren();
+
+
+        // Retrieve the header number and spawn new paragraph contents
+        let header_number = (new_elm.innerHTML.match(/([0-9]+\.)+/g)[0]);
+        let dc =      doc_list.get(header_number); if(typeof dc != 'undefined' && dc != null) for(let i = 0; i < dc.length; ++i) tab_doc     .appendChild(dc[i]);
+        let ec =  example_list.get(header_number); if(typeof ec != 'undefined' && ec != null) for(let i = 0; i < ec.length; ++i) tab_examples.appendChild(ec[i]);
+        let ic = internal_list.get(header_number); if(typeof ic != 'undefined' && ic != null) for(let i = 0; i < ic.length; ++i) tab_internal.appendChild(ic[i]);
     },
+
 
 
 
