@@ -84,17 +84,11 @@ var setup_index = {
         new_elm.parentElement.style.backgroundColor = 'var(--bg-index-active)';
 
 
-        // Remove old contents
-        tab_doc.replaceChildren();
-        tab_examples.replaceChildren();
-        tab_internal.replaceChildren();
-
-
-        // Retrieve the header number and spawn new paragraph contents
+        // Retrieve the header number and spawn new paragraph contents, replacing the old ones
         let header_number = (new_elm.innerHTML.match(/([0-9]+\.)+/g)[0]);
-        let dc =      doc_list.get(header_number); if(typeof dc != 'undefined' && dc != null) for(let i = 0; i < dc.length; ++i) tab_doc     .appendChild(dc[i]);
-        let ec =  example_list.get(header_number); if(typeof ec != 'undefined' && ec != null) for(let i = 0; i < ec.length; ++i) tab_examples.appendChild(ec[i]);
-        let ic = internal_list.get(header_number); if(typeof ic != 'undefined' && ic != null) for(let i = 0; i < ic.length; ++i) tab_internal.appendChild(ic[i]);
+        let dc =      doc_list.get(header_number); tab_doc.     replaceChildren(...(dc != null ? dc : new Array()));
+        let ec =  example_list.get(header_number); tab_examples.replaceChildren(...(ec != null ? ec : new Array()));
+        let ic = internal_list.get(header_number); tab_internal.replaceChildren(...(ic != null ? ic : new Array()));
 
 
         // Format syntax blocks and examples

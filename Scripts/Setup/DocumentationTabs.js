@@ -105,10 +105,12 @@ var setup_tabs = {
                 output_list.set(header_number, new Array());
             }
 
-            // Save each of its children in the hash map and remove them from the page, then remove the container
+            // Save each of its children and the title in the hash map and remove them from the page, then remove the container.
+            let output_array = output_list.get(header_number);  // Redundant variable to improve performance and readability
             let c = [...elms[i].children];  //! Convert HTMLCollection to Array to make it not change dynamically
+            output_array.push(parent_header);
             for(let j = 0; j < c.length; ++j){
-                output_list.get(header_number).push(c[j]);
+                output_array.push(c[j]);
                 c[j].remove();
             }
             elms[i].remove();
@@ -122,6 +124,8 @@ var setup_tabs = {
         setup_tabs.move_elements("moveto-doc-", doc_list);
         setup_tabs.move_elements("moveto-example-", example_list);
         setup_tabs.move_elements("moveto-internal-", internal_list);
+        document.getElementById("main-right-staging").replaceChildren(); //! Empty the staging tab to improve performance and tidiness
+
         setup_tabs.create_tab_buttons();
     }
 }
