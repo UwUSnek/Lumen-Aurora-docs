@@ -66,9 +66,6 @@ var setup_tabs = {
         // Spawn the container and set the default tab to documentation
         right.insertBefore(container, right.children[0]);
         tab_button_doc.dispatchEvent(new Event("click"))
-
-        // Force spawn the content (Normally this requires a click from the user)
-        setup_index.refresh_tab_content();
     },
 
 
@@ -124,11 +121,16 @@ var setup_tabs = {
 
 
     init : function(){
+        // Move elements in the correct tab (without spawning them)
         setup_tabs.move_elements("moveto-doc-", doc_list);
         setup_tabs.move_elements("moveto-example-", example_list);
         setup_tabs.move_elements("moveto-internal-", internal_list);
         document.getElementById("main-right-staging").replaceChildren(); //! Empty the staging tab to improve performance and tidiness
 
+        // Create buttons for the user
         setup_tabs.create_tab_buttons();
+
+        // Force spawn the content (Normally this requires a click from the user)
+        setup_index.on_location_changed();
     }
 }

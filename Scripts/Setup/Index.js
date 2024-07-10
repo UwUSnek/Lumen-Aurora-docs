@@ -127,7 +127,6 @@ var setup_index = {
     init : function(){
         setup_index.format_elm(document.querySelector('index-'), 0, '');
 
-
         // Setup location change listener
         window.addEventListener('hashchange', function(e){ setup_index.on_location_changed(); });
     }
