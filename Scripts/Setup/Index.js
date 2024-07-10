@@ -1,5 +1,5 @@
-index_indent = '3ch';
-
+let index_indent = '3ch';
+let index_active_id = 'index--overview';
 
 
 function capitalize(string) {
@@ -68,31 +68,47 @@ var setup_index = {
 
 
 
-    on_location_changed : function() {
-        // Reset the old element and highlight the new one
-        let old = window.sessionStorage.getItem('index.selected_id');
-        let new_ = `index--${ location.hash.slice(1) }`;
-        if(new_ == 'index--' || document.getElementById(new_) == null) new_ = 'index--overview'
-        let new_elm = document.getElementById(new_);
 
 
-        // Update index elements colors
-        if(setup_index.is_id_defined(old)) {
-            document.getElementById(old).parentElement.style.removeProperty("background-color");
+
+
+    // Resets the old element and highlights the new one
+    update_index_colors : function(index_old_id) {
+        if(setup_index.is_id_defined(index_old_id)) {
+            document.getElementById(index_old_id).parentElement.style.removeProperty("background-color");
         }
-        window.sessionStorage.setItem('index.selected_id', new_);
-        new_elm.parentElement.style.backgroundColor = 'var(--bg-index-active)';
+        document.getElementById(index_active_id).parentElement.style.backgroundColor = 'var(--bg-index-active)';
+    },
 
+
+
+
+    // Loads the contents in their respective tab
+    refresh_tab_content : function() {
 
         // Retrieve the header number and spawn new paragraph contents, replacing the old ones
-        let header_number = (new_elm.innerHTML.match(/([0-9]+\.)+/g)[0]);
+        let header_number = (document.getElementById(index_active_id).innerHTML.match(/([0-9]+\.)+/g)[0]);
         let dc =      doc_list.get(header_number); tab_doc.     replaceChildren(...(dc != null ? dc : new Array()));
         let ec =  example_list.get(header_number); tab_examples.replaceChildren(...(ec != null ? ec : new Array()));
         let ic = internal_list.get(header_number); tab_internal.replaceChildren(...(ic != null ? ic : new Array()));
 
-
-        // Format syntax blocks and examples
+        // Copy and format syntax blocks and examples
+        copy_syntax.start();
         format_syntax.start();
+    },
+
+
+
+
+    // Callback that updates the session storage, the index UI and the tab contents
+    on_location_changed : function() {
+        let old = window.sessionStorage.getItem('index.selected_id');
+        index_active_id = `index--${ location.hash.slice(1) }`;
+        if(index_active_id == 'index--' || document.getElementById(index_active_id) == null) index_active_id = 'index--overview'
+        window.sessionStorage.setItem('index.selected_id', index_active_id);
+
+        setup_index.update_index_colors(old);
+        setup_index.refresh_tab_content();
     },
 
 
@@ -110,7 +126,6 @@ var setup_index = {
 
     init : function(){
         setup_index.format_elm(document.querySelector('index-'), 0, '');
-        setup_index.on_location_changed();
 
 
         // Setup location change listener

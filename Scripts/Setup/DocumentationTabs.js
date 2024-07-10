@@ -66,6 +66,9 @@ var setup_tabs = {
         // Spawn the container and set the default tab to documentation
         right.insertBefore(container, right.children[0]);
         tab_button_doc.dispatchEvent(new Event("click"))
+
+        // Force spawn the content (Normally this requires a click from the user)
+        setup_index.refresh_tab_content();
     },
 
 
@@ -89,9 +92,9 @@ var setup_tabs = {
 
 
 
-    move_elements : function(tag_name, output_list) {
+    move_elements : function(tag_name, output_map) {
         // For each "moveto" tag
-        let elms = document.getElementsByTagName(tag_name)
+        let elms = [...(document.getElementsByTagName(tag_name))];  //! Convert HTMLCollection to Array to make it not change dynamically
         for(let i = 0; i < elms.length; ++i) {
 
             // Get it's header number
@@ -101,13 +104,13 @@ var setup_tabs = {
             let header_number = (parent_header.innerHTML).match(/([0-9]+\.)+/g)[0];
 
             // Create header element in the map if it doesnt exist yet
-            if(!output_list.has(header_number)) {
-                output_list.set(header_number, new Array());
+            if(!output_map.has(header_number)) {
+                output_map.set(header_number, new Array());
             }
 
             // Save each of its children and the title in the hash map and remove them from the page, then remove the container.
-            let output_array = output_list.get(header_number);  // Redundant variable to improve performance and readability
-            let c = [...elms[i].children];  //! Convert HTMLCollection to Array to make it not change dynamically
+            let output_array = output_map.get(header_number);  // Redundant variable to improve performance and readability
+            let c = [...(elms[i].children)];  //! Convert HTMLCollection to Array to make it not change dynamically
             output_array.push(parent_header);
             for(let j = 0; j < c.length; ++j){
                 output_array.push(c[j]);
