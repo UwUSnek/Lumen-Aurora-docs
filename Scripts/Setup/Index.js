@@ -100,6 +100,24 @@ var setup_index = {
 
 
 
+
+
+
+
+    // Scrolls the active index element into view
+    // smooth = true|false
+    move_to_view : function(smooth){
+        let hash = location.hash.slice(1);
+        let id = hash;
+        if(hash.length == 0 || hash == null || document.getElementById(id) == null) id = "overview";
+
+        let i = document.getElementById("index--" + id).parentElement; if(!i) return;
+        i.scrollIntoView({ block: "nearest", behavior: (smooth && !window.chrome) ? "smooth" : "auto" });
+    },
+
+
+
+
     // Callback that updates the session storage, the index UI and the tab contents
     on_location_changed : function() {
         let old = window.sessionStorage.getItem('index.selected_id');
@@ -108,6 +126,7 @@ var setup_index = {
         window.sessionStorage.setItem('index.selected_id', index_active_id);
 
         setup_index.update_index_colors(old);
+        setup_index.move_to_view(true);
         setup_index.refresh_tab_content();
     },
 
@@ -118,8 +137,10 @@ var setup_index = {
     go_to_index : function(link){
         history.pushState(null, '', link);
         setup_index.on_location_changed();
-        move_to_view(true);
     },
+
+
+
 
 
 

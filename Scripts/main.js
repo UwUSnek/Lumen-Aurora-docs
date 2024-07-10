@@ -5,18 +5,6 @@ let right = document.querySelector("body > right-");
 
 
 
-// Scrolls to the element with id the current url hash
-// smooth = true|false
-function move_to_view(smooth){
-    let hash = location.hash.slice(1);
-    let id = hash;
-    if(hash.length == 0 || hash == null || document.getElementById(id) == null) id = "overview";
-
-    let e = document.getElementById(id);                           if(!e) return;
-    let i = document.getElementById("index--" + id).parentElement; if(!i) return;
-    e.scrollIntoView({ block: "start",   behavior: (smooth && !window.chrome) ? "smooth" : "auto" });
-    i.scrollIntoView({ block: "nearest", behavior: (smooth && !window.chrome) ? "smooth" : "auto" });
-}
 
 
 
@@ -48,7 +36,6 @@ function init(){
 
     // The id="main-mask" div is used to hide the page before js is done moving stuff around as anything else just doesn't work
     // This line removes it from the body so that the user can see the page and think it loaded flawlessly
-    setTimeout(function(){ move_to_view(true); }, 1000);
     let e = document.getElementById('main-mask');
     e.style.pointerEvents = 'none';
     e.style.opacity = '0%';

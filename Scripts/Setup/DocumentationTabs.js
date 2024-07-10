@@ -51,7 +51,6 @@ var setup_tabs = {
     },
 
 
-//TODO remove scroll fix after making paragraphs dynamic
 
     create_tab_buttons : function(){
         // Create button container
