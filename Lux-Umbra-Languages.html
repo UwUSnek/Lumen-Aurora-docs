@@ -30,7 +30,7 @@
 <body onresize="ui_slider._onresize()">
     <div id="main-mask" class="main-mask"></div>
     <input type="range" min="0" max="99999999" value="0" step="0.00001" class="slider" id="main-slider">
-    <left- class="hide-scrollbar" id="main-left">
+    <left- class="hide-scrollbar">
 <index- class="hide-scrollbar"><indexh-></indexh->
     <index-><indexh->overview</indexh->
         <indexd->typographical-conventions</indexd->
@@ -283,17 +283,17 @@
 </index->
     </left->
 
-    <right- id="main-right">
+    <right->
         <div id="main-right-tab-container">
             <div id="main-right-staging">
-                <moveto-doc->
-                    <logo-top-></logo-top->
-                    <logo- style="background-image: url('Logos/Photon.png');"></logo->
-                </moveto-doc->
 
 
 <h1 id="overview"></h1>
 <moveto-doc->
+    <logo-top-></logo-top->
+    <logo- style="background-image: url('Logos/Photon.png');"></logo->
+
+
     <p>
         Umbra and Lux are <b>high level procedural compiled languages</b> with the aim of abstracting GPU rendering while preserving the runtime performance of low level languages.
         This is achieved through a built-in rendering support and a powerful optimizer.<br>
@@ -307,11 +307,6 @@
         <div style="display: inline-block; min-width: 10ch"><umbra-logo-></umbra-logo-> Umbra</div>- Programming language.<br>
         <div style="display: inline-block; min-width: 10ch"><lux-logo-></lux-logo-> Lux</div>- Shading language. Subset of Umbra.
     </p>
-    <p>
-        Umbra and Lux are part of the <b>Photon SDK</b>.<br>
-        Details on the internal structure of the compiler are available <a href="./Internal.html">Here</a>.
-    </p>
-    <p><a href="#quick-reference-tabs">Quick reference tabs</a></p>
 </moveto-doc->
 
 
@@ -7953,6 +7948,7 @@
 
 
 <h1 id="omitted-features"></h1>
+<moveto-doc-></moveto-doc->
             </div>
             <div id="main-right-doc" class="hide-scrollbar">
                 <main-right-doc-scroll->
@@ -7979,15 +7975,12 @@
     <script src="Scripts/UI/SyntaxHover.js"></script>
     <script src="Scripts/Custom/SummaryList.js"></script>
     <script src="Scripts/Custom/FormatSyntax.js"></script>
-    <script src="Scripts/Readability.js"></script>
 
 
     <script>
         document.addEventListener('DOMContentLoaded', init);
-        window.addEventListener('popstate', function(){ move_to_view(true); });
         window.addEventListener('beforeunload', unload);
         //
-        //TODO implement counter to manage more dynamic css loadings
     </script>
 </body>
 </html>

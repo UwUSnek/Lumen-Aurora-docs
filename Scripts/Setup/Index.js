@@ -107,12 +107,13 @@ var setup_index = {
     // Scrolls the active index element into view
     // smooth = true|false
     move_to_view : function(smooth){
-        let hash = location.hash.slice(1);
-        let id = hash;
-        if(hash.length == 0 || hash == null || document.getElementById(id) == null) id = "overview";
-
-        let i = document.getElementById("index--" + id).parentElement; if(!i) return;
-        i.scrollIntoView({ block: "nearest", behavior: (smooth && !window.chrome) ? "smooth" : "auto" });
+        let i = document.getElementById(index_active_id).parentElement; 
+        if(i != null) {
+            i.scrollIntoView({ 
+                block: "nearest", 
+                behavior: (smooth && !window.chrome) ? "smooth" : "auto" 
+            });
+        }
     },
 
 

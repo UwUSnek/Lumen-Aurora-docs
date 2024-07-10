@@ -42,22 +42,13 @@
     <!--------------------------------------------------------------------->
     <!-- Index                                                           -->
     <!--------------------------------------------------------------------->
-    <left- class="hide-scrollbar" id="main-left">
+    <left- class="hide-scrollbar">
         #include "./Page/Index.html"
     </left->
 
-    <right- id="main-right">
+    <right->
         <div id="main-right-tab-container">
             <div id="main-right-staging">
-                <!--TODO FIX LOGO. move it somewhere else-->
-                <moveto-doc->
-                    <!--------------------------------------------------------------------->
-                    <!-- Logo                                                            -->
-                    <!--------------------------------------------------------------------->
-                    <logo-top-></logo-top->
-                    <logo- style="background-image: url('Logos/Photon.png');"></logo->
-                </moveto-doc->
-
                 #include "./Page/Overview/main.html"
                 #include "./Page/Preprocessor/main.html"
                 #include "./Page/Language/main.html"
@@ -140,16 +131,11 @@
     <script src="Scripts/Custom/SummaryList.js"></script>
     <script src="Scripts/Custom/FormatSyntax.js"></script>
 
-    <!-- Other -->
-    <script src="Scripts/Readability.js"></script>
-
 
     <script>
         document.addEventListener('DOMContentLoaded', init);
-        window.addEventListener('popstate', function(){ move_to_view(true); });
         window.addEventListener('beforeunload', unload);
         //<!--! view() called after readability css load -->
-        //TODO implement counter to manage more dynamic css loadings
     </script>
 </body>
 </html>

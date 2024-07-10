@@ -117,21 +117,25 @@ var ui_slider = {
 
     // Updates the logo- and logo-top- width
     update_logo_width : function(value){
-        document.querySelector("logo-top-").style.width = "calc(" +
-            "100% - " + value + "px - var(--slider-w) - " + window.getComputedStyle(document.documentElement).getPropertyValue("--slider-w") +
-        ")";
-        let logos = document.querySelectorAll("logo-");
-        for(let i = 0; i < logos.length; ++i){
-            logos[i].style.backgroundPositionX = "calc(" +
-                "calc(" +
-                    "calc(100vw - var(--main-padding-r)) / 2 + " +
-                    "calc(" + value + "px + var(--main-padding-r) + var(--main-padding-l)) / 2" +
-                ") - " +
-                "calc(" +
-                    ui_slider.getBackgroundSize(logos[i]).width + "px / " +
-                    "2" +
-                ")" +
+        let logo_top = document.querySelector("logo-top-");
+        
+        if(logo_top != null) {
+            logo_top.style.width = "calc(" +
+                "100% - " + value + "px - var(--slider-w) - " + window.getComputedStyle(document.documentElement).getPropertyValue("--slider-w") +
             ")";
+            let logos = document.querySelectorAll("logo-");
+            for(let i = 0; i < logos.length; ++i){
+                logos[i].style.backgroundPositionX = "calc(" +
+                    "calc(" +
+                        "calc(100vw - var(--main-padding-r)) / 2 + " +
+                        "calc(" + value + "px + var(--main-padding-r) + var(--main-padding-l)) / 2" +
+                    ") - " +
+                    "calc(" +
+                        ui_slider.getBackgroundSize(logos[i]).width + "px / " +
+                        "2" +
+                    ")" +
+                ")";
+            }
         }
     },
 
@@ -140,11 +144,11 @@ var ui_slider = {
 
     // Updates the width of the left and right main containers
     update_main_width : function(move = true){
-        document.getElementById("main-left").style.width  = "calc(" +
+        left.style.width = "calc(" +
             slider.value +  "px - " +
             "var(--main-padding-l)" +
         ")";
-        document.getElementById("main-right").style.width = "calc(" +
+        right.style.width = "calc(" +
             "100% - " +
             slider.value +  "px - " +
             "var(--main-padding-l) - " +
@@ -152,7 +156,6 @@ var ui_slider = {
         ")";
         ui_slider.update_logo_width(slider.value);
         window.localStorage.setItem("slider-value", slider.value);
-        if(move) move_to_view(true); // Fix random scrolling caused by children resizing
     },
 
     // Update on browser zoom and window resize

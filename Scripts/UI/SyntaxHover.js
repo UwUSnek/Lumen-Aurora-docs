@@ -72,6 +72,7 @@ var ui_syntax_hover = {
 
 
     on_move: function(e){
+        console.log("detected");
         // Get elements and calculate the width of the tooltip / 2 to aligh it with the cursor
         //! "this" assumes the value of the original element this event was attached to. e.target is the innermost and cannot be used in this case
         let tooltip = this.getElementsByClassName("syntax-hover-tooltip-container")[0].getElementsByClassName("syntax-hover-tooltip")[0];
@@ -87,6 +88,7 @@ var ui_syntax_hover = {
 
 
     on_leave : function(e){
+        console.log("detected");
         // Get elements
         let container = e.target.getElementsByClassName("syntax-hover-tooltip-container")[0];
         let tooltip = container.getElementsByClassName("syntax-hover-tooltip")[0];
