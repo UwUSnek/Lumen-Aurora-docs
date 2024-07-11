@@ -5,7 +5,7 @@ let syntax_sources = Array();
 var copy_syntax = {
     copy : function() {
         // For each label
-        let l0 = document.querySelectorAll('#main-right-doc label-');
+        let l0 = tab_doc.querySelectorAll('label-');
         for(let i = 0; i < l0.length; ++i) {
             let id = l0[i].id.split('.', 2)[1];
 

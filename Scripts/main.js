@@ -29,7 +29,6 @@ function init(){
     exec_and_log(ui_smooth_links.init, "ui_smooth_links");
     exec_and_log(ui_copy_code.init, "ui_copy_code");
     //!^ Must be executed after modifying the body as changing the innerHTML recreates all the elements and removes the event listeners
-    exec_and_log(ui_syntax_hover.init, "ui_syntax_hover");
     exec_and_log(setup_tabs.init, "setup_tabs"); 
 
 

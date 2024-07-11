@@ -72,7 +72,6 @@ var ui_syntax_hover = {
 
 
     on_move: function(e){
-        console.log("detected");
         // Get elements and calculate the width of the tooltip / 2 to aligh it with the cursor
         //! "this" assumes the value of the original element this event was attached to. e.target is the innermost and cannot be used in this case
         let tooltip = this.getElementsByClassName("syntax-hover-tooltip-container")[0].getElementsByClassName("syntax-hover-tooltip")[0];
@@ -88,7 +87,6 @@ var ui_syntax_hover = {
 
 
     on_leave : function(e){
-        console.log("detected");
         // Get elements
         let container = e.target.getElementsByClassName("syntax-hover-tooltip-container")[0];
         let tooltip = container.getElementsByClassName("syntax-hover-tooltip")[0];
@@ -102,54 +100,63 @@ var ui_syntax_hover = {
 
 
 
-    init : function(){
+    start : function(){
+        let e;
+        
         // Verbatim. Literally what the element contains
-        { let e = document.getElementsByTagName("S-VBTM-"); for(let i = 0; i < e.length; ++i) {
+        e = tab_doc.querySelectorAll("S-VBTM-");
+        for(let i = 0; i < e.length; ++i) {
             e[i].addEventListener("mouseenter", ui_syntax_hover.f_vbtm);
             e[i].addEventListener("mouseleave", ui_syntax_hover.on_leave);
             e[i].addEventListener("mousemove",  ui_syntax_hover.on_move);
-        }} 
+        }
 
         // User defined sequence of characters
-        { let e = document.getElementsByTagName("S-ANY-");  for(let i = 0; i < e.length; ++i) {
+        e = tab_doc.querySelectorAll("S-ANY-"); 
+        for(let i = 0; i < e.length; ++i) {
             e[i].addEventListener("mouseenter", ui_syntax_hover.f_any);
             e[i].addEventListener("mouseleave", ui_syntax_hover.on_leave);
             e[i].addEventListener("mousemove",  ui_syntax_hover.on_move);
-        }} 
+        }
 
         // Sub element
-        { let e = document.getElementsByTagName("S-SUB-");  for(let i = 0; i < e.length; ++i) {
+        e = tab_doc.querySelectorAll("S-SUB-"); 
+        for(let i = 0; i < e.length; ++i) {
             e[i].addEventListener("mouseenter", ui_syntax_hover.f_sub);
             e[i].addEventListener("mouseleave", ui_syntax_hover.on_leave);
             e[i].addEventListener("mousemove",  ui_syntax_hover.on_move);
-        }} 
+        }
 
         // Declaration
-        { let e = document.getElementsByTagName("S-DECL-"); for(let i = 0; i < e.length; ++i) {
+        e = tab_doc.querySelectorAll("S-DECL-");
+        for(let i = 0; i < e.length; ++i) {
             e[i].addEventListener("mouseenter", ui_syntax_hover.f_decl);
             e[i].addEventListener("mouseleave", ui_syntax_hover.on_leave);
             e[i].addEventListener("mousemove",  ui_syntax_hover.on_move);
-        }} 
+        }
         
         // Syntactic sugar
-        { let e = document.getElementsByTagName("S-SGR-");  for(let i = 0; i < e.length; ++i) {
+        e = tab_doc.querySelectorAll("S-SGR-"); 
+        for(let i = 0; i < e.length; ++i) {
             e[i].addEventListener("mouseenter", ui_syntax_hover.f_sgr);
             e[i].addEventListener("mouseleave", ui_syntax_hover.on_leave);
             e[i].addEventListener("mousemove",  ui_syntax_hover.on_move);
-        }} 
+        }
 
         // Expression
-        { let e = document.getElementsByTagName("S-EXPR-"); for(let i = 0; i < e.length; ++i) {
+        e = tab_doc.querySelectorAll("S-EXPR-");
+        for(let i = 0; i < e.length; ++i) {
             e[i].addEventListener("mouseenter", ui_syntax_hover.f_expr);
             e[i].addEventListener("mouseleave", ui_syntax_hover.on_leave);
             e[i].addEventListener("mousemove",  ui_syntax_hover.on_move);
-        }} 
+        }
 
         // Symbol path
-        { let e = document.getElementsByTagName("S-PATH-"); for(let i = 0; i < e.length; ++i) {
+        e = tab_doc.querySelectorAll("S-PATH-");
+        for(let i = 0; i < e.length; ++i) {
             e[i].addEventListener("mouseenter", ui_syntax_hover.f_path);
             e[i].addEventListener("mouseleave", ui_syntax_hover.on_leave);
             e[i].addEventListener("mousemove",  ui_syntax_hover.on_move);
-        }} 
+        }
     }
 }

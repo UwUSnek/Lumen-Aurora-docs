@@ -8,7 +8,7 @@ var format_syntax = {
     // Align the colums to the maximum width of their cells
     even_widths : function(){
         let min_w = parseFloat(window.getComputedStyle(document.documentElement).getPropertyValue('--syntax-arrow-w'));
-        let tables = document.querySelectorAll('#main-right-doc syntax- > table');
+        let tables = tab_doc.querySelectorAll('syntax- > table');
         for(let j = 0; j < tables.length; ++j){
             let trs = tables[j].querySelectorAll('tr');
 
@@ -63,7 +63,7 @@ var format_syntax = {
 
 
     format_arrows : function(){
-        c = right.querySelectorAll("#main-right-doc syntax- > table td");
+        c = tab_doc.querySelectorAll("syntax- > table td");
 
 
         // Fix inverted arrows

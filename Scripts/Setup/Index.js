@@ -95,6 +95,9 @@ var setup_index = {
         // Copy and format syntax blocks and examples
         copy_syntax.start();
         format_syntax.start();
+
+        // Add syntax cursor tooltips  //! Event listeners cannot be added before spawning the actual elements
+        ui_syntax_hover.start();
     },
 
 
