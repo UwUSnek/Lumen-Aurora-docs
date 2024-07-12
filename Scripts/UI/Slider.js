@@ -127,13 +127,15 @@ var ui_slider = {
             for(let i = 0; i < logos.length; ++i){
 
                 // Align the center of the background image with the center of the HTML element
-                logos[i].style.backgroundPositionX = "calc(" +
-                    `calc(calc(100vw - var(--main-padding-r)) / 2 + calc(${ slider.value }px + var(--main-padding-r) + var(--main-padding-l)) / 2) - ` +
-                    `calc(${ ui_slider.getBackgroundSize(logos[i]).width }px / 2)` +
-                ")";
+                logos[i].style.backgroundPositionX = `calc(calc(100vw - ${ main_padding_r_px }px + ${ 
+                    parseInt(slider.value) + 
+                    main_padding_r_px + 
+                    main_padding_l_px - 
+                    ui_slider.getBackgroundSize(logos[i]).width 
+                }px) / 2)`;
 
                 // Make its height identical to its (dynamic) width  //! Only setting the height property with min-height at 0 doesn't work
-                let height = `min(60vh, calc(${ document.body.clientWidth - slider.value }px - var(--main-padding-l) - var(--main-padding-r) * 2))`;
+                let height = `min(60vh, ${ document.body.clientWidth - parseInt(slider.value) - main_padding_r_px - main_padding_l_px * 2 }px)`;
                 logos[i].style.minHeight = height;
                 logos[i].style.maxHeight = height;
             }
@@ -145,8 +147,8 @@ var ui_slider = {
 
     // Updates the width of the left and right main containers
     update_main_width : function(){
-        left.style.width  =        `calc(${ slider.value }px - var(--main-padding-l))`;
-        right.style.width = `calc(100% - ${ slider.value }px - var(--main-padding-l) - var(--main-padding-r) * 2)`;
+        left.style.width  =             `${ parseInt(slider.value) - main_padding_l_px }px`;
+        right.style.width = `calc(100% - ${ parseInt(slider.value) + main_padding_l_px + main_padding_r_px * 2 }px)`;
         
         ui_slider.update_logos();
         window.localStorage.setItem("slider-value", slider.value);
@@ -172,7 +174,7 @@ var ui_slider = {
             ui_slider.init_slider_first_time();
         }
         slider.addEventListener("mouseup", ui_slider.update_main_width);
-        slider.value = window.localStorage.getItem("slider-value");
+        slider.value = window.localStorage.getItem("slider-value"); //! //FIXME this doesn't work or gets overwritten by the user idk
     },
 
 

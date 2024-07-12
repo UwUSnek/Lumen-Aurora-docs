@@ -4,10 +4,19 @@ let left = document.querySelector("body > left-");
 let right = document.querySelector("body > right-");
 
 
-getComputedStyle
-let page_style = document.getComputedStyle(document.body);
-let main_padding_l = page_style.getPropertyValue("--main-padding-l");
-let main_padding_r = page_style.getPropertyValue("--main-padding-r");
+// Main padding is expressed in vw
+let page_style = getComputedStyle(document.body);
+let main_padding_l_vw = parseInt(page_style.getPropertyValue("--main-padding-l").slice(0, -2));
+let main_padding_r_vw = parseInt(page_style.getPropertyValue("--main-padding-r").slice(0, -2));
+let main_padding_l_px;
+let main_padding_r_px;
+
+function update_vw_values(){
+    let page_width = document.documentElement.clientWidth;
+    main_padding_l_px = main_padding_l_vw * page_width / 100;
+    main_padding_r_px = main_padding_r_vw * page_width / 100;
+}
+
 
 
 
@@ -22,6 +31,9 @@ function exec_and_log(f, name){
 
 
 function init(){
+    update_vw_values();
+
+
     exec_and_log(ui_slider.init, "ui_slider");
     exec_and_log(setup_index.init, "setup_index");
     exec_and_log(copy_syntax.init, "copy_syntax init");
