@@ -23,7 +23,6 @@ var ui_slider = {
 
     // Stolen function
     getBackgroundSize : function(elem) {
-        // Ui_slider.
         //       * Gets elem computed styles:
         //             - CSS background-size
         //             - element's width and height
@@ -131,13 +130,15 @@ var ui_slider = {
                     parseInt(slider.value) + 
                     main_padding_r_px + 
                     main_padding_l_px - 
-                    ui_slider.getBackgroundSize(logos[i]).width 
+                    ui_slider.getBackgroundSize(logos[i]).width //! //TODO change size depending on viewport width
                 }px) / 2)`;
 
                 // Make its height identical to its (dynamic) width  //! Only setting the height property with min-height at 0 doesn't work
                 let height = `min(60vh, ${ document.body.clientWidth - parseInt(slider.value) - main_padding_r_px - main_padding_l_px * 2 }px)`;
                 logos[i].style.minHeight = height;
                 logos[i].style.maxHeight = height;
+                console.log("OVERVIEW HERE");
+                console.log(logos[i].style.minHeight);
             }
         }
     },
