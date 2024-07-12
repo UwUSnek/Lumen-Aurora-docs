@@ -15,14 +15,14 @@ logo- {
     z-index: -4;
     background-color: black;
     background-repeat: no-repeat;
-
     background-attachment: fixed;
     background-position: center;
     background-size:50%;
-    min-width:  100vw;
-    max-width:  100vw;
-    min-height: 100vh;
-    max-height: 100vh;
+
+    min-width:  100%;
+    max-width:  100%;
+    /* Min height is set from JS */
+    /* Max height is set from JS */
 }
 
 lux-logo-, umbra-logo- {
@@ -46,23 +46,6 @@ umbra-logo- { background-image: var(--logo-link-umbra); }
 
 
 
-
-
-
-/* Smaller language logo fix */
-body > right- > logo-top- {
-    background-color: var(--bg);
-    display: block;
-    position: fixed;
-    z-index: -3;
-
-    top:   0;
-    right: 0;
-    /* width: Set from JS */
-    max-width: 100vw;
-    min-height: var(--main-padding-r);
-    max-height: var(--main-padding-r);
-}
 
 
 /* Smaller language logo */

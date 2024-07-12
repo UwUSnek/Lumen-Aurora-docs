@@ -1,13 +1,12 @@
 
 
 var format_syntax = {
-    min_w : parseFloat(window.getComputedStyle(document.documentElement).getPropertyValue('--syntax-arrow-w')),
+    min_w : parseFloat(page_style.getPropertyValue('--syntax-arrow-w')),
 
 
 
     // Align the colums to the maximum width of their cells
     even_widths : function(){
-        let min_w = parseFloat(window.getComputedStyle(document.documentElement).getPropertyValue('--syntax-arrow-w'));
         let tables = tab_doc.querySelectorAll('syntax- > table');
         for(let j = 0; j < tables.length; ++j){
             let trs = tables[j].querySelectorAll('tr');

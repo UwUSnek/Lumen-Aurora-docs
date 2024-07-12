@@ -4,7 +4,10 @@ let left = document.querySelector("body > left-");
 let right = document.querySelector("body > right-");
 
 
-
+getComputedStyle
+let page_style = document.getComputedStyle(document.body);
+let main_padding_l = page_style.getPropertyValue("--main-padding-l");
+let main_padding_r = page_style.getPropertyValue("--main-padding-r");
 
 
 

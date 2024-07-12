@@ -1,7 +1,7 @@
-//-----------------------------------------------------------------------------------------------------------//
-//   Cursed hack to use an invisible slider to resize the main containers and have it float between them     //
-//   so that it looks like the user is resizing the containers through an actual full height resize handle   //
-//-----------------------------------------------------------------------------------------------------------//
+//!-----------------------------------------------------------------------------------------------------------//
+//!   Cursed hack to use an invisible slider to resize the main containers and have it float between them     //
+//!   so that it looks like the user is resizing the containers through an actual full height resize handle   //
+//!-----------------------------------------------------------------------------------------------------------//
 
 
 
@@ -11,6 +11,7 @@
 let slider;
 
 
+//! //TODO rewrite whatever this is
 var ui_slider = {
     // Updates the maximum and minimum values of the slider. Used in browser zoom and window resize
     update_range : function(){
@@ -115,26 +116,26 @@ var ui_slider = {
 
 
 
-    // Updates the logo- and logo-top- width
-    update_logo_width : function(value){
-        let logo_top = document.querySelector("logo-top-");
+    // Updates the logo- X-position and height
+    update_logos : function(){
         
-        if(logo_top != null) {
-            logo_top.style.width = "calc(" +
-                "100% - " + value + "px - var(--slider-w) - " + window.getComputedStyle(document.documentElement).getPropertyValue("--slider-w") +
-            ")";
-            let logos = document.querySelectorAll("logo-");
+        // If one of more logo elements are present in the current documentation tab
+        let logos = tab_doc.querySelectorAll("logo-");
+        if(logos != null && logos.length > 0) {
+
+            // For each logo element
             for(let i = 0; i < logos.length; ++i){
+
+                // Align the center of the background image with the center of the HTML element
                 logos[i].style.backgroundPositionX = "calc(" +
-                    "calc(" +
-                        "calc(100vw - var(--main-padding-r)) / 2 + " +
-                        "calc(" + value + "px + var(--main-padding-r) + var(--main-padding-l)) / 2" +
-                    ") - " +
-                    "calc(" +
-                        ui_slider.getBackgroundSize(logos[i]).width + "px / " +
-                        "2" +
-                    ")" +
+                    `calc(calc(100vw - var(--main-padding-r)) / 2 + calc(${ slider.value }px + var(--main-padding-r) + var(--main-padding-l)) / 2) - ` +
+                    `calc(${ ui_slider.getBackgroundSize(logos[i]).width }px / 2)` +
                 ")";
+
+                // Make its height identical to its (dynamic) width  //! Only setting the height property with min-height at 0 doesn't work
+                let height = `min(60vh, calc(${ document.body.clientWidth - slider.value }px - var(--main-padding-l) - var(--main-padding-r) * 2))`;
+                logos[i].style.minHeight = height;
+                logos[i].style.maxHeight = height;
             }
         }
     },
@@ -143,20 +144,14 @@ var ui_slider = {
 
 
     // Updates the width of the left and right main containers
-    update_main_width : function(move = true){
-        left.style.width = "calc(" +
-            slider.value +  "px - " +
-            "var(--main-padding-l)" +
-        ")";
-        right.style.width = "calc(" +
-            "100% - " +
-            slider.value +  "px - " +
-            "var(--main-padding-l) - " +
-            "var(--main-padding-r) * 2" +
-        ")";
-        ui_slider.update_logo_width(slider.value);
+    update_main_width : function(){
+        left.style.width  =        `calc(${ slider.value }px - var(--main-padding-l))`;
+        right.style.width = `calc(100% - ${ slider.value }px - var(--main-padding-l) - var(--main-padding-r) * 2)`;
+        
+        ui_slider.update_logos();
         window.localStorage.setItem("slider-value", slider.value);
     },
+
 
     // Update on browser zoom and window resize
     _onresize : function() {
@@ -222,6 +217,6 @@ var ui_slider = {
         // Run initializer functions
         ui_slider.init_slider();
         ui_slider.update_range();
-        ui_slider.update_main_width(false);
+        ui_slider.update_main_width();
     }
 }

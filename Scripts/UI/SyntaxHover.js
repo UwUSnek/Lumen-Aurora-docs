@@ -1,4 +1,8 @@
 
+// Tooltip opacity transition duration in milliseconds
+let tooltip_opacity_duration = parseFloat(page_style.getPropertyValue("--syntax-hover-tooltip-opacity-duration")) * 1000;
+
+
 
 var ui_syntax_hover = {
     add_tooltip : function(e, text) {
@@ -93,7 +97,7 @@ var ui_syntax_hover = {
 
         // Start opacity transition and delete the element after it has finished
         tooltip.style.opacity = 0;
-        setTimeout(function(){ container.remove(); }, parseFloat(window.getComputedStyle(document.documentElement).getPropertyValue("--syntax-hover-tooltip-opacity-duration")) * 1000);
+        setTimeout(function(){ container.remove(); }, tooltip_opacity_duration);
     },
     
 
