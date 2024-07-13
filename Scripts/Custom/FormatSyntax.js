@@ -1,7 +1,7 @@
 
 
 var format_syntax = {
-    min_w : parseFloat(page_style.getPropertyValue('--syntax-arrow-w')),
+    min_w : parseFloat(page_style.getPropertyValue('--syntax-arrow-w').slice(0, -2)),
 
 
 
@@ -40,11 +40,11 @@ var format_syntax = {
 
                     // Stretch arrows to fit long td bois
                     else {
-                        tds[l].style.width = `${ min_w }px`;
+                        tds[l].style.width = `${ format_syntax.min_w }px`;
                         let ratio = max[l] / format_syntax.min_w;
                         tds[l].style.transform   = `scaleX(${ ratio + 2 * (1 / format_syntax.min_w) })`; // Add an extra pixel on each side to connect the arrows seamlessly
-                        tds[l].style.marginLeft  = `${ (ratio - 1) / 2 * min_w }px`;
-                        tds[l].style.marginRight = `${ (ratio - 1) / 2 * min_w }px`;
+                        tds[l].style.marginLeft  = `${ (ratio - 1) / 2 * format_syntax.min_w }px`;
+                        tds[l].style.marginRight = `${ (ratio - 1) / 2 * format_syntax.min_w }px`;
                     }
                 }
             }
