@@ -30,6 +30,28 @@ body {
 
 
 
+/*Index container */
+body > left- {
+    display: block;
+    background-color: var(--bg);
+    overflow: scroll;
+    position: fixed;
+    z-index: 5;
+
+    margin: 0 0 0 var(--main-padding-l);
+    border-right: 1px solid var(--fg-separator);
+    /* width: Set from JS */
+    max-width: 100%;
+    min-height: 100%;
+    max-height: 100%;
+
+    transition: width 0.3s;
+}
+
+
+
+
+
 /* Page container */
 body > right- {
     display: block;
@@ -44,57 +66,68 @@ body > right- {
     /* width: Set from JS */
     max-width: 100vw;
     min-height: 100vh;
-    max-height: 100vh
+    max-height: 100vh;
+
+    transition: width 0.3s;
 }
 
+
+body > right- > #main-right-tab-container {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+
+    min-width:  100%;
+    max-width:  100%;
+    min-height: calc(100vh - var(--tab-buttons-container-height) - var(--tab-button-padding) * 2);
+    max-height: calc(100vh - var(--tab-buttons-container-height) - var(--tab-button-padding) * 2);
+
+    overflow: visible;
+    white-space: nowrap;
+}
+
+
+
+
 /* Helper documentation and examples divs */
-body > right- > #main-right-doc,
-body > right- > #main-right-examples {
+body > right- > #main-right-tab-container > #main-right-doc,
+body > right- > #main-right-tab-container > #main-right-examples,
+body > right- > #main-right-tab-container > #main-right-internal {
     display: inline-flex; 
-    position: sticky;
-    top: 0;
-    min-width:  100%;  max-width:  100%;
-    min-height: 100vh; max-height: 100vh;
+    position: relative;
+
+    min-width:  100%;  
+    max-width:  100%;
+    min-height: 100%;
+    max-height: 100%;
 
     flex-direction: column; 
     white-space: normal;
     overflow: scroll; 
 }
 
-body > right- > #main-right-doc {
-    transition: margin-left 0.5s; /* Set transition for full example list tab */
+
+
+
+body > right- > #main-right-tab-container > #main-right-doc {
+    transition: margin-left 0.3s; /* Set transition for full example list tab */
     margin-right: var(--main-padding-r); /* Push examples out of view */
 }
 
-body > right- > #main-right-examples {
-    background-color: red;
-    margin-left: calc(0 - var(--main-padding-r)); /* Push examples out of view (aesthetic mirrored padding) */
-    /*!TODO left margin doesn't have correct background color, maybe use a helper div */
+body > right- > #main-right-tab-container > #main-right-examples {
+    margin-left: calc(0 - var(--main-padding-r)); /* (aesthetic mirrored padding) */
+    margin-right: var(--main-padding-r); /* Push internal functioning out of view */
 }
+body > right- > #main-right-tab-container > #main-right-internal {
+    margin-left: calc(0 - var(--main-padding-r)); /* (aesthetic mirrored padding) */
+}
+
+
+
 
 /* *Hopefully* improve loading time by using "none" as display */
-body > right- > #main-right-doc .full-example {
+body > right- > #main-right-tab-container > #main-right-staging {
     display: none;
 }
-
-
-
-
-/*Index constainer */
-body > left- {
-    display: block;
-    background-color: var(--bg);
-    overflow: scroll;
-    position: fixed;
-    z-index: 5;
-
-    margin: 0 0 0 var(--main-padding-l);
-    border-right: 1px solid var(--fg-separator);
-    /* width: Set from JS */
-    max-width: 100%;
-    min-height: 100%;
-    max-height: 100%;
-}
-
 
 

@@ -1,4 +1,8 @@
 
+// Tooltip opacity transition duration in milliseconds
+let tooltip_opacity_duration = parseFloat(page_style.getPropertyValue("--syntax-hover-tooltip-opacity-duration")) * 1000;
+
+
 
 var ui_syntax_hover = {
     add_tooltip : function(e, text) {
@@ -93,61 +97,70 @@ var ui_syntax_hover = {
 
         // Start opacity transition and delete the element after it has finished
         tooltip.style.opacity = 0;
-        setTimeout(function(){ container.remove(); }, parseFloat(window.getComputedStyle(document.documentElement).getPropertyValue("--syntax-hover-tooltip-opacity-duration")) * 1000);
+        setTimeout(function(){ container.remove(); }, tooltip_opacity_duration);
     },
     
 
 
 
 
-    init : function(){
+    start : function(){
+        let e;
+        
         // Verbatim. Literally what the element contains
-        { let e = document.getElementsByTagName("S-VBTM-"); for(let i = 0; i < e.length; ++i) {
+        e = tab_doc.querySelectorAll("S-VBTM-");
+        for(let i = 0; i < e.length; ++i) {
             e[i].addEventListener("mouseenter", ui_syntax_hover.f_vbtm);
             e[i].addEventListener("mouseleave", ui_syntax_hover.on_leave);
             e[i].addEventListener("mousemove",  ui_syntax_hover.on_move);
-        }} 
+        }
 
         // User defined sequence of characters
-        { let e = document.getElementsByTagName("S-ANY-");  for(let i = 0; i < e.length; ++i) {
+        e = tab_doc.querySelectorAll("S-ANY-"); 
+        for(let i = 0; i < e.length; ++i) {
             e[i].addEventListener("mouseenter", ui_syntax_hover.f_any);
             e[i].addEventListener("mouseleave", ui_syntax_hover.on_leave);
             e[i].addEventListener("mousemove",  ui_syntax_hover.on_move);
-        }} 
+        }
 
         // Sub element
-        { let e = document.getElementsByTagName("S-SUB-");  for(let i = 0; i < e.length; ++i) {
+        e = tab_doc.querySelectorAll("S-SUB-"); 
+        for(let i = 0; i < e.length; ++i) {
             e[i].addEventListener("mouseenter", ui_syntax_hover.f_sub);
             e[i].addEventListener("mouseleave", ui_syntax_hover.on_leave);
             e[i].addEventListener("mousemove",  ui_syntax_hover.on_move);
-        }} 
+        }
 
         // Declaration
-        { let e = document.getElementsByTagName("S-DECL-"); for(let i = 0; i < e.length; ++i) {
+        e = tab_doc.querySelectorAll("S-DECL-");
+        for(let i = 0; i < e.length; ++i) {
             e[i].addEventListener("mouseenter", ui_syntax_hover.f_decl);
             e[i].addEventListener("mouseleave", ui_syntax_hover.on_leave);
             e[i].addEventListener("mousemove",  ui_syntax_hover.on_move);
-        }} 
+        }
         
         // Syntactic sugar
-        { let e = document.getElementsByTagName("S-SGR-");  for(let i = 0; i < e.length; ++i) {
+        e = tab_doc.querySelectorAll("S-SGR-"); 
+        for(let i = 0; i < e.length; ++i) {
             e[i].addEventListener("mouseenter", ui_syntax_hover.f_sgr);
             e[i].addEventListener("mouseleave", ui_syntax_hover.on_leave);
             e[i].addEventListener("mousemove",  ui_syntax_hover.on_move);
-        }} 
+        }
 
         // Expression
-        { let e = document.getElementsByTagName("S-EXPR-"); for(let i = 0; i < e.length; ++i) {
+        e = tab_doc.querySelectorAll("S-EXPR-");
+        for(let i = 0; i < e.length; ++i) {
             e[i].addEventListener("mouseenter", ui_syntax_hover.f_expr);
             e[i].addEventListener("mouseleave", ui_syntax_hover.on_leave);
             e[i].addEventListener("mousemove",  ui_syntax_hover.on_move);
-        }} 
+        }
 
         // Symbol path
-        { let e = document.getElementsByTagName("S-PATH-"); for(let i = 0; i < e.length; ++i) {
+        e = tab_doc.querySelectorAll("S-PATH-");
+        for(let i = 0; i < e.length; ++i) {
             e[i].addEventListener("mouseenter", ui_syntax_hover.f_path);
             e[i].addEventListener("mouseleave", ui_syntax_hover.on_leave);
             e[i].addEventListener("mousemove",  ui_syntax_hover.on_move);
-        }} 
+        }
     }
 }

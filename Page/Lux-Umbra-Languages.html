@@ -30,92 +30,44 @@
 
 
 
-<body onresize="ui_slider._onresize()">
+<body onresize="update_vw_values(); ui_slider._onresize();">
     <!--------------------------------------------------------------------->
     <!-- Fix                                                             -->
     <!--------------------------------------------------------------------->
     <div id="main-mask" class="main-mask"></div>
     <input type="range" min="0" max="99999999" value="0" step="0.00001" class="slider" id="main-slider">
-    <!-- !                           ^ not a random value -->
+    <!-- !                           ^ not a random high value -->
 
 
     <!--------------------------------------------------------------------->
     <!-- Index                                                           -->
     <!--------------------------------------------------------------------->
-    <left- class="hide-scrollbar" id="main-left">
+    <left- class="hide-scrollbar">
         #include "./Page/Index.html"
     </left->
 
-    <right- id="main-right">
-        <div id="main-right-doc" class="hide-scrollbar">
-            <!--------------------------------------------------------------------->
-            <!-- Logo                                                            -->
-            <!--------------------------------------------------------------------->
-            <logo-top-></logo-top->
-            <logo- style="background-image: url('Logos/Photon.png');"></logo->
-
-            <main-right-doc-scroll->
+    <right->
+        <div id="main-right-tab-container">
+            <div id="main-right-staging">
                 #include "./Page/Overview/main.html"
                 #include "./Page/Preprocessor/main.html"
                 #include "./Page/Language/main.html"
 
 
-
-
-
-
-                <!--------------------------------------------------------------------->
-                <!-- Compilation                                                     -->
-                <!--------------------------------------------------------------------->
-                <h1 id="compilation"></h1>
-
-
-
-
-                <!--------------------------------------------------------------------->
-                <!-- Modules                                                         -->
-                <!--------------------------------------------------------------------->
-                <h1 id="modules"></h1>
-
-
-                <!--------------------------------------------------------------------->
-                <!-- Compilation phases and error types                              -->
-                <!--------------------------------------------------------------------->
-                <h1 id="compilation-phases-and-error-types"></h1>
-
-
-
-
-                <!--------------------------------------------------------------------->
-                <!-- Global initialization order                                     -->
-                <!--------------------------------------------------------------------->
-                <h1 id="global-initialization-order"></h1>
-
-
-
-
-                <!--------------------------------------------------------------------->
-                <!-- Runtime performance                                             -->
-                <!--------------------------------------------------------------------->
-                <h1 id="runtime-performance"></h1>
-
-
-                <!--------------------------------------------------------------------->
-                <!-- Branching performance                                           -->
-                <!--------------------------------------------------------------------->
-                <h1 id="branching-performance"></h1>
-
-
-                <!--------------------------------------------------------------------->
-                <!-- Value precomputation                                            -->
-                <!--------------------------------------------------------------------->
-                <h1 id="value-precomputation"></h1>
-
-
-
-
-
-
+                <h1 id="compilation"></h1>                        <!--TODO add this file-->
+                <moveto-doc-></moveto-doc->
+                <h1 id="modules"></h1>                            <!--TODO add this file-->
+                <moveto-doc-></moveto-doc->
+                <h1 id="compilation-phases-and-error-types"></h1> <!--TODO add this file-->
+                <moveto-doc-></moveto-doc->
+                <h1 id="global-initialization-order"></h1>        <!--TODO add this file-->
+                <moveto-doc-></moveto-doc->
+                <h1 id="runtime-performance"></h1>                <!--TODO add this file-->
+                <moveto-doc-></moveto-doc->
+                <h1 id="branching-performance"></h1>              <!--TODO add this file-->
+                <moveto-doc-></moveto-doc->
+                <h1 id="value-precomputation"></h1>               <!--TODO add this file-->
+                <moveto-doc-></moveto-doc->
 
 
                 #include "./Page/CoreModule/main.html"
@@ -142,24 +94,33 @@
 
 
                 #include "./Page/OmittedFeatures/main.html"
-
-            </main-right-doc-scroll->
-        </div><!--
-     --><div id="main-right-examples" class="hide-scrollbar">
-            <main-right-examples-scroll->
-                <!-- Elements are added dynamically -->
-            </main-right-examples-scroll->
+            </div>
+            <div id="main-right-doc" class="hide-scrollbar">
+                <main-right-doc-scroll->
+                    <!-- Elements are added dynamically -->
+                </main-right-doc-scroll->
+            </div>
+            <div id="main-right-examples" class="hide-scrollbar">
+                <main-right-examples-scroll->
+                    <!-- Elements are added dynamically -->
+                </main-right-examples-scroll->
+            </div>
+            <div id="main-right-internal" class="hide-scrollbar">
+                <main-right-internal-scroll->
+                    <!-- Elements are added dynamically -->
+                </main-right-internal-scroll->
+            </div>
         </div>
     </right->
 
 
     <!-- Page format -->
     <script src="Scripts/Setup/Fix.js"></script>
-    <script src="Scripts/Setup/Syntax.js"></script>
-    <script src="Scripts/Setup/Example.js"></script>
+    <script src="Scripts/Setup/DocumentationTabs.js"></script>
     <script src="Scripts/Setup/Index.js"></script>
-    <script src="Scripts/Setup/CopySyntax.js"></script>
+    <script src="Scripts/Custom/CopySyntax.js"></script>
     <script src="Scripts/main.js"></script>
+
 
     <!-- Functionalities -->
     <script src="Scripts/UI/Slider.js"></script>
@@ -167,19 +128,21 @@
     <script src="Scripts/UI/CopyCode.js"></script>
     <script src="Scripts/UI/SyntaxHover.js"></script>
 
+
     <!-- Custom -->
     <script src="Scripts/Custom/SummaryList.js"></script>
+    <script src="Scripts/Custom/FormatBlocks.js"></script>
+    <script src="Scripts/Custom/FormatExamples.js"></script>
+    <script src="Scripts/Custom/FormatSyntax.js"></script>
 
-    <!-- Other -->
-    <script src="Scripts/Readability.js"></script>
+    <script src="Scripts/Custom/ExampleNumber.js"></script>
 
+
+    
 
     <script>
         document.addEventListener('DOMContentLoaded', init);
-        window.addEventListener('popstate', function(){ move_to_view(true); });
         window.addEventListener('beforeunload', unload);
-        //<!--! view() called after readability css load -->
-        //TODO implement counter to manage more dynamic css loadings
     </script>
 </body>
 </html>
