@@ -1,5 +1,5 @@
 :root {
-    --slider-w: 2vw;
+    --slider-w: 40px; /*! MUST BE IN PX */
 }
 
 

@@ -8,14 +8,15 @@
 
 
 // Save slider element
-let slider;
+let slider = document.getElementById("main-slider");
+let slider_width_px = parseInt(page_style.getPropertyValue("--slider-w").slice(0, -2));
 
 
 var ui_slider = {
     // Updates the maximum and minimum values of the slider. Used in browser zoom and window resize
     update_range : function(){
-        slider.min = document.getElementById("CALC-SLIDER-MIN").offsetWidth;
-        slider.max = document.getElementById("CALC-VW"        ).offsetWidth - document.getElementById("CALC-SLIDER-MAX").offsetWidth;
+        slider.min = main_padding_l_px;
+        slider.max = document.documentElement.clientWidth - main_padding_r_px * 2 - slider_width_px;
     },
 
 
@@ -48,8 +49,10 @@ var ui_slider = {
 
     // Updates the width of the left and right main containers
     update_main_width : function(){
-        left.style.width  =             `${ parseInt(slider.value) - main_padding_l_px }px`;
-        right.style.width = `calc(100% - ${ parseInt(slider.value) + main_padding_l_px + main_padding_r_px * 2 }px)`;
+        console.log("value: " + parseInt(slider.value));
+        left.style.width  =             `${ Math.max(0, parseInt(slider.value) - main_padding_l_px) }px`;
+        right.style.width = `calc(100% - ${ Math.max(0, parseInt(slider.value) + main_padding_l_px + main_padding_r_px * 2) }px)`;
+        //! ^ HTML Slider's minimum value doesn't actually work. The Math.max calls are used to prevent elements' widths from going negative
         
         window.localStorage.setItem("slider-value", slider.value);
     },
@@ -65,8 +68,8 @@ var ui_slider = {
 
     init_slider_first_time : function(){
         window.localStorage.setItem("slider-set", "set");
-        let min = document.getElementById("CALC-SLIDER-MIN").offsetWidth;
-        let max = document.getElementById("CALC-VW"        ).offsetWidth - document.getElementById("CALC-SLIDER-MAX").offsetWidth;
+        let min = main_padding_l_px;
+        let max = document.documentElement.clientWidth - main_padding_r_px * 2 - slider_width_px;
         window.localStorage.setItem("slider-value", (min + max) / 2);
     },
     // Set slider value after page refresh and initialize it if needed
@@ -74,8 +77,7 @@ var ui_slider = {
         if(window.localStorage.getItem("slider-set") != "set") {
             ui_slider.init_slider_first_time();
         }
-        slider.addEventListener("mouseup", ui_slider.update_main_width);
-        slider.addEventListener("mouseup", ui_slider.update_logos);
+        slider.addEventListener("mouseup", function(){ ui_slider.update_main_width(); ui_slider.update_logos() });
         slider.value = window.localStorage.getItem("slider-value");
     },
 
@@ -85,40 +87,7 @@ var ui_slider = {
 
 
 
-    //TODO maybe fix this mess of an hacked contraption thing
     init : function() {
-        // Save slider element in global variable
-        slider = document.getElementById("main-slider");
-
-
-        // Calculate the minimum value of the slider
-        let min = document.createElement('div');
-        min.style.position = "fixed";
-        min.id = "CALC-SLIDER-MIN";
-        min.style.minWidth = "calc(var(--main-padding-l))";
-        min.style.maxWidth = "calc(var(--main-padding-l))";
-        document.body.appendChild(min);
-
-
-        // Calculate the maximum value of the slider (starts from the right)
-        let max = document.createElement('div');
-        max.style.position = "fixed";
-        max.id = "CALC-SLIDER-MAX";
-        max.style.minWidth = "calc(var(--main-padding-r) * 2 + var(--slider-w))";
-        max.style.maxWidth = "calc(var(--main-padding-r) * 2 + var(--slider-w))";
-        document.body.appendChild(max);
-
-
-        // Calculate the workspace width in pixels
-        let vw = document.createElement('div');
-        vw.style.position = "fixed";
-        vw.style.minWidth = "100vw";
-        vw.style.maxWidth = "100vw";
-        vw.id = "CALC-VW";
-        document.body.appendChild(vw);
-
-
-        // Run initializer functions
         ui_slider.init_slider();
         ui_slider.update_range();
         ui_slider.update_main_width();
