@@ -9,8 +9,7 @@ var format_syntax = {
     even_widths : function(){
         let tables = tab_doc.querySelectorAll('syntax- > table');
         for(let j = 0; j < tables.length; ++j) if(!tables[j].hasAttribute("format_syntax-widths")) {
-            tables[j].setAttribute("format_blocks-widths", "1"); //! Mark as fixed for future iterations
-            
+            tables[j].setAttribute("format_syntax-widths", "1"); //! Mark as fixed for future iterations
             let trs = tables[j].querySelectorAll('tr');
 
 
