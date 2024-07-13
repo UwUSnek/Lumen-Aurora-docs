@@ -4,7 +4,7 @@ var ui_smooth_links = {
         for(let i = 0; i < links.length; ++i){
             links[i].addEventListener("click", function(event){
                 event.preventDefault();
-                setup_index.go_to_index(links[i].href);
+                setup_index.go_to_index(event.target.href);
             });
         }
     }

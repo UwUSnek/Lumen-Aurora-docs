@@ -6,15 +6,19 @@
     <p>
         <b>Comments</b> are <b>portions of code</b> that are <b>intentionally ignored</b>.<br>
         They can be used to provide informations or temporarily exclude lines of code.<br>
-        Comments are allowed to contain any sequence of unicode characters of any length.<br>
+        Comments are allowed to contain any sequence of Unicode characters of any length.
     </p>
     <p>
-        Single line comments start with <code>//</code> and end at the next newline character (\n).<br>
+        There are two types of comments: single line and multiline.<br>
+        Single line comments start with <code>//</code> and end at the next <code><nl-></nl-></code> character (\n).<br>
         Multiline comments start with <code>/*</code> and end with <code>*/</code>.<br>
+        Not closing a comment is allowed. This will cause it to include everything from its starting character sequence to the end of the file.
     </p>
     <p>
-        Comments cannot be nested.
-        Not closing a comment is allowed.
+        Comments cannot be nested.<br>
+        Because they are not code, they also cannot be referenced in any way.<br>
+        Thought <a href="#macros">Preprocessor macros</a> can process and copy comments, this has no effect whatsoever
+        and is only useful if the preprocessed code needs to be read by external tools.
     </p>
 
     <syntax->

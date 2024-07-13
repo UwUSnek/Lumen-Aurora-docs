@@ -1,6 +1,10 @@
 let index_indent = '3ch';
 let index_active_id = 'index--overview';
 
+let tab_spacer_doc      = document.createElement("virtual-spacer-");
+let tab_spacer_examples = document.createElement("virtual-spacer-");
+let tab_spacer_internal = document.createElement("virtual-spacer-");
+
 
 function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -86,11 +90,11 @@ var setup_index = {
     // Loads the contents in their respective tab
     refresh_tab_content : function() {
 
-        // Retrieve the header number and spawn new paragraph contents, replacing the old ones
+        // Retrieve the header number and spawn new paragraph contents, replacing the old ones //! (And also add the virtual spacer element back)
         let header_number = (document.getElementById(index_active_id).innerHTML.match(/([0-9]+\.)+/g)[0]);
-        let dc =      doc_list.get(header_number); tab_doc.     replaceChildren(...(dc != null ? dc : new Array()));
-        let ec =  example_list.get(header_number); tab_examples.replaceChildren(...(ec != null ? ec : new Array()));
-        let ic = internal_list.get(header_number); tab_internal.replaceChildren(...(ic != null ? ic : new Array()));
+        let dc =      doc_list.get(header_number); tab_doc.     replaceChildren(...(dc != null ? dc : new Array()), tab_spacer_doc);
+        let ec =  example_list.get(header_number); tab_examples.replaceChildren(...(ec != null ? ec : new Array()), tab_spacer_examples);
+        let ic = internal_list.get(header_number); tab_internal.replaceChildren(...(ic != null ? ic : new Array()), tab_spacer_internal);
 
         // Format blocks
         format_blocks.start();

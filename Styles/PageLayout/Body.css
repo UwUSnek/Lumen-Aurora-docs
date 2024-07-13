@@ -96,7 +96,7 @@ body > right- > #main-right-tab-container > #main-right-internal {
     display: inline-flex; 
     position: relative;
 
-    min-width:  100%;  
+    min-width:  100%;
     max-width:  100%;
     min-height: 100%;
     max-height: 100%;
@@ -104,6 +104,14 @@ body > right- > #main-right-tab-container > #main-right-internal {
     flex-direction: column; 
     white-space: normal;
     overflow: scroll; 
+}
+
+body > right- > #main-right-tab-container > #main-right-doc > virtual-spacer- {
+    background-color: transparent;
+    display: block;
+    position: relative;
+    min-height: 40vh;
+    max-height: 40vh;
 }
 
 

@@ -33,7 +33,6 @@
     <left- class="hide-scrollbar">
 <index- class="hide-scrollbar"><indexh-></indexh->
     <index-><indexh->overview</indexh->
-        <indexd->typographical-conventions</indexd->
     </index->
 
 
@@ -294,6 +293,7 @@
 
 
     <p>
+        //TODO
         Umbra and Lux are <b>high level procedural compiled languages</b> with the aim of abstracting GPU rendering while preserving the runtime performance of low level languages.
         This is achieved through a built-in rendering support and a powerful optimizer.<br>
     </p>
@@ -313,26 +313,6 @@
     <logo- style="background-image: url('Logos/Lux.png');"></logo->
     <logo- style="background-image: url('Logos/Umbra.png');"></logo->
     <p style="min-height: 100vh;"></p> 
-</moveto-doc->
-
-
-<h1 id="typographical-conventions"></h1>
-<moveto-doc->
-    //TODO REMOVE THIS STUFF
-    // This is not needed. hover tooltips exist.
-    // Explain actual conventions instead
-    <p>
-        //TODO move the "alphanumeric or symbolic" stuff here
-    </p>
-    <p>
-        <s-vbtm- class="syntax-glossary">x             </s-vbtm-> The literal character "x"<br>
-        <s-any-  class="syntax-glossary">x             </s-any->  x is an user-defined sequence of characters<br>
-        <s-sub-  class="syntax-glossary">x             </s-sub->  x is a semantic sub-element<br>
-        <s-decl- class="syntax-glossary">x             </s-decl-> x is a declaration<br>
-        <s-expr- class="syntax-glossary"><t->[t]</t-> x</s-expr-> x is an expression of type t<br>
-        <s-path- class="syntax-glossary">x             </s-path-> x is a symbol path<br>
-        <s-sgr-  class="syntax-glossary">x             </s-sgr->  x is syntactic sugar
-    </p>
 </moveto-doc->
 
 
@@ -356,15 +336,19 @@
     <p>
         <b>Comments</b> are <b>portions of code</b> that are <b>intentionally ignored</b>.<br>
         They can be used to provide informations or temporarily exclude lines of code.<br>
-        Comments are allowed to contain any sequence of unicode characters of any length.<br>
+        Comments are allowed to contain any sequence of Unicode characters of any length.
     </p>
     <p>
-        Single line comments start with <code>//</code> and end at the next newline character (\n).<br>
+        There are two types of comments: single line and multiline.<br>
+        Single line comments start with <code>//</code> and end at the next <code><nl-></nl-></code> character (\n).<br>
         Multiline comments start with <code>/*</code> and end with <code>*/</code>.<br>
+        Not closing a comment is allowed. This will cause it to include everything from its starting character sequence to the end of the file.
     </p>
     <p>
-        Comments cannot be nested.
-        Not closing a comment is allowed.
+        Comments cannot be nested.<br>
+        Because they are not code, they also cannot be referenced in any way.<br>
+        Thought <a href="#macros">Preprocessor macros</a> can process and copy comments, this has no effect whatsoever
+        and is only useful if the preprocessed code needs to be read by external tools.
     </p>
 
     <syntax->
@@ -5595,29 +5579,29 @@
         <table>
             <tr>
                 <td data-arrows="br ar"></td>
-                <td><code>//</code></td>
-                <td data-arrows="lb"></td>
-                <td></td>
-                <td data-arrows="br ar"></td>
-                <td><code><nl-></nl-></code></td>
+                <td><s-vbtm->//</s-vbtm-></td>
+                <td data-arrows="lr ar"></td>
+                <td><elm->comment string</elm-></td>
+                <td data-arrows="lr ar lb"></td>
+                <td><s-vbtm-><nl-></nl-></s-vbtm-></td>
                 <td data-arrows="lb"></td>
             </tr>
             <tr>
                 <td data-arrows="lt lb"></td>
                 <td></td>
-                <td data-arrows="tr-high ar-high br-low ar-low"></td>
-                <td><elm->comment string</elm-></td>
-                <td data-arrows="lt-high lb-low"></td>
+                <td></td>
                 <td></td>
                 <td data-arrows="tr br ar"></td>
+                <td><s-vbtm-><eof-></eof-></s-vbtm-></td>
+                <td data-arrows="tr br lr ar"></td>
             </tr>
             <tr>
                 <td data-arrows="tr ar"></td>
-                <td><code>/*</code></td>
-                <td data-arrows="lt"></td>
-                <td></td>
-                <td data-arrows="tr ar"></td>
-                <td><code>*/</code></td>
+                <td><s-vbtm->/*</s-vbtm-></td>
+                <td data-arrows="lr ar"></td>
+                <td><elm->comment string</elm-></td>
+                <td data-arrows="lr ar lt"></td>
+                <td><s-vbtm->*/</s-vbtm-></td>
                 <td data-arrows="lt"></td>
             </tr>
         </table>
@@ -5638,15 +5622,15 @@
         <table>
             <tr>
                 <td data-arrows="lr ar"></td>
-                <td><code>#include</code></td>
+                <td><s-vbtm->#include</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
-                <td><code><space-></space-></code></td>
+                <td><s-vbtm-><space-></space-></s-vbtm-></td>
                 <td data-arrows="lr ar lb"></td>
-                <td><code>"</code></td>
+                <td><s-vbtm->"</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
                 <td class="center"><elm->path/to/file</elm-></td>
                 <td data-arrows="lr ar"></td>
-                <td><code>"</code></td>
+                <td><s-vbtm->"</s-vbtm-></td>
                 <td data-arrows="lr br ar"></td>
             </tr>
             <tr>
@@ -5655,11 +5639,11 @@
                 <td></td>
                 <td></td>
                 <td data-arrows="tr ar"></td>
-                <td><code>&lt;</code></td>
+                <td><s-vbtm->&lt;</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
                 <td class="center"><elm->module name</elm-></td>
                 <td data-arrows="lr ar"></td>
-                <td><code>&gt;</code></td>
+                <td><s-vbtm->&gt;</s-vbtm-></td>
                 <td data-arrows="lt"></td>
             </tr>
         </table>
@@ -5679,9 +5663,9 @@
         <table>
             <tr>
                 <td data-arrows="lr ar"></td>
-                <td><code>&bsol;</code></td>
+                <td><s-vbtm->&bsol;</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
-                <td><code><nl-></nl-></code></td>
+                <td><s-vbtm-><nl-></nl-></s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
             </tr>
         </table>
