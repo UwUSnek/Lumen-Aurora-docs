@@ -12,4 +12,17 @@ p-  { display: inline-block; color: #2fc5d0; }                      /* Argument 
 w-  { display: inline-block; color: #cc94d1; }                      /* Keyword            */
 sr- { display: inline-block; color: #c44e4e; }                      /* String regex token */
 sg- { display: inline-block; color: #c9ca76; }                      /* String regex group */
-s-  { display: inline-block; color: #db966e; }                      /* String
+s-  { display: inline-block; color: #db966e; }                      /* String             */
+sc- { display: inline-block; color: #ffffff11; }                    /* Space character    */
+
+
+
+ce- {
+    padding: 0 4px 1px 4px;
+    margin: -1px -5px -2px -5px;
+
+    border: 1px solid #d13030aa;
+    border-width: 0 1px 0 1px;
+    border-radius: 6px;
+    background-color: #d1303011;
+}

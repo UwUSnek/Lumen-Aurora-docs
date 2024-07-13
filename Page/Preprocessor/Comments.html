@@ -40,7 +40,13 @@
         <label->Example 2</label->
         <div>
             <c->/* Multi line /* Another comment */ comment */</c->
-                                            <ce->// ^ Error, unexpected token "comment"</ce->
+                                                <ce->^ Error, unexpected token "comment"</ce->
+        </div>
+        <label->Example 3</label->
+        <div>
+            <c->/* Multi line /* Another comment */ comment */</c->
+                                                <ce->^ Error, unexpected token "comment"</ce->
+                                                <ce->^ Error, unexpected token "comment"</ce->
         </div>
     </example->
 </moveto-examples->
