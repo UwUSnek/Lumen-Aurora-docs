@@ -106,13 +106,25 @@ body > right- > #main-right-tab-container > #main-right-internal {
     overflow: scroll; 
 }
 
-body > right- > #main-right-tab-container > #main-right-doc > virtual-spacer- {
+body > right- > #main-right-tab-container virtual-spacer- {
     background-color: transparent;
     display: block;
     position: relative;
     min-height: 40vh;
     max-height: 40vh;
 }
+
+body > right- > #main-right-tab-container tab-placeholder-::after {
+    display: block;
+    position: relative;
+
+    content: "This tab is empty.";
+    margin-top: var(--def-margin);
+}
+
+
+
+
 
 
 

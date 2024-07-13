@@ -101,7 +101,7 @@ var setup_tabs = {
 
             // Create content list in the map if it doesnt exist yet (and add the header element as first element)
             if(!output_map.has(header_number)) {
-                output_map.set(header_number, [parent_header]);
+                output_map.set(header_number, [parent_header.cloneNode(true)]);
             }
 
             // Save each of its children in the hash map and remove them from the page, then remove the container.
