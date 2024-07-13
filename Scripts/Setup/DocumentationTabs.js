@@ -130,5 +130,6 @@ var setup_tabs = {
 
         // Force spawn the content (Normally this requires a click from the user)
         setup_index.on_location_changed();
+        ui_slider.update_logos(); //! Update any logo element that's currently loaded
     }
 }
