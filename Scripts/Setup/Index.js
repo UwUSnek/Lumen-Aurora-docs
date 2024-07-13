@@ -92,9 +92,17 @@ var setup_index = {
         let ec =  example_list.get(header_number); tab_examples.replaceChildren(...(ec != null ? ec : new Array()));
         let ic = internal_list.get(header_number); tab_internal.replaceChildren(...(ic != null ? ic : new Array()));
 
-        // Copy and format syntax blocks and examples
+        // Format blocks
+        format_blocks.start();
+
+        // Format examples
+        format_examples.start();
+        example_number.start();
+
+        // Copy and format syntax blocks
         copy_syntax.start();
         format_syntax.start();
+
 
         // Add syntax cursor tooltips  //! Event listeners cannot be added before spawning the actual elements
         ui_syntax_hover.start();

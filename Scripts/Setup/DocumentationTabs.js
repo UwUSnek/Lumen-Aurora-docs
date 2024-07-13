@@ -121,7 +121,7 @@ var setup_tabs = {
     init : function(){
         // Move elements in the correct tab (without spawning them)
         setup_tabs.move_elements("moveto-doc-", doc_list);
-        setup_tabs.move_elements("moveto-example-", example_list);
+        setup_tabs.move_elements("moveto-examples-", example_list);
         setup_tabs.move_elements("moveto-internal-", internal_list);
         document.getElementById("main-right-staging").replaceChildren(); //! Empty the staging tab to improve performance and tidiness
 

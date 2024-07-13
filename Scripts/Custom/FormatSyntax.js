@@ -8,7 +8,9 @@ var format_syntax = {
     // Align the colums to the maximum width of their cells
     even_widths : function(){
         let tables = tab_doc.querySelectorAll('syntax- > table');
-        for(let j = 0; j < tables.length; ++j){
+        for(let j = 0; j < tables.length; ++j) if(!tables[j].hasAttribute("format_syntax-widths")) {
+            tables[j].setAttribute("format_blocks-widths", "1"); //! Mark as fixed for future iterations
+            
             let trs = tables[j].querySelectorAll('tr');
 
 
@@ -66,7 +68,9 @@ var format_syntax = {
 
 
         // Fix inverted arrows
-        for(let i = 0; i < c.length; ++i){
+        for(let i = 0; i < c.length; ++i) if(!c[i].hasAttribute("format_syntax-arrows_0")) {
+            c[i].setAttribute("format_syntax-arrows_0", "1"); //! Mark as fixed for future iterations
+
             if(c[i].dataset.arrows && c[i].dataset.arrows.length) c[i].dataset.arrows = c[i].dataset.arrows
                 .replaceAll(/\bbt\b/g, "tb")
                 .replaceAll(/\brl\b/g, "lr")
@@ -79,7 +83,9 @@ var format_syntax = {
 
 
         // Add automatic connectors
-        for(let i = 0; i < c.length; ++i){
+        for(let i = 0; i < c.length; ++i) if(!c[i].hasAttribute("format_syntax-arrows_1")) {
+            c[i].setAttribute("format_syntax-arrows_1", "1"); //! Mark as fixed for future iterations
+
             if(c[i].dataset.arrows && c[i].dataset.arrows.length){
 
                 // Vertical connectors
@@ -131,7 +137,9 @@ var format_syntax = {
 
 
         // Set backgrounds
-        for(let i = 0; i < c.length; ++i){
+        for(let i = 0; i < c.length; ++i) if(!c[i].hasAttribute("format_syntax-arrows_2")) {
+            c[i].setAttribute("format_syntax-arrows_2", "1"); //! Mark as fixed for future iterations
+
             if(c[i].dataset.arrows && c[i].dataset.arrows.length){
                 let bg = "";
                 let arrows = c[i].dataset.arrows.split(/[\s]+/);
@@ -147,82 +155,8 @@ var format_syntax = {
 
 
 
-
-
-    // Remove HTML indentation from pre blocks and add the line number
-    format : function(s){
-        // Find shortest indentation
-        let min;
-        s = s.split('\n');
-        for(let i = 0; i < s.length; i++){
-            let line = s[i];
-            let spaces = line.search(/\S/);
-            if((min > spaces || min == undefined) && spaces >= 0){
-                min = spaces;
-            }
-        }
-        // Remove indentation
-        for(let i = 0; i < s.length; i++){
-            let line = s[i];
-            s[i] = (i == 0 || i == s.length - 1) ? '' : '<span class="hidden">' +(('0' + i).slice(-2)) + '&nbsp;&nbsp;</span>';
-            s[i] += line.substring(min, line.length);
-        }
-
-        // Join and return all lines
-        return s.join('<br>');
-    },
-
-
-
-    // Fix code indentation because apparently HTML5+CSS3 can't do that
-    indent_code : function() {
-        let c = document.querySelectorAll('example-');
-        for(let i = 0; i < c.length; i++){
-            let divs = c[i].querySelectorAll('div');
-            for(let j = 0; j < divs.length; ++j){
-                divs[j].innerHTML = format_syntax.format(divs[j].innerHTML) + '<br>';
-                // Add trailing newline to fix CSS's bugged max-height  ^
-            }
-        }
-    },
-
-
-
-
-
-    // Even out the height of right and left example tags
-    even_heights : function() {
-        let c = document.querySelectorAll('split-example-container-');
-
-        for(let i = 0; i < c.length; i++){
-            // Find left and right containers
-            let lc = c[i].querySelector('split-example-container-left-');
-            let rc = c[i].querySelector('split-example-container-right-');
-
-            // Get contained divs
-            let l = lc.querySelector('DIV');
-            let r = rc.querySelector('DIV');
-
-            // Fix heights
-            if(r.offsetHeight < l.offsetHeight) r.style.minHeight = r.style.maxHeight = `${ l.offsetHeight }px`
-            if(l.offsetHeight < r.offsetHeight) l.style.minHeight = l.style.maxHeight = `${ r.offsetHeight }px`
-        }
-    },
-
-
-
-
-
-
-
     start : function() {
-        //exec_and_log(setup_syntax.even_widths,   "    even_widths"  );
-        //exec_and_log(setup_syntax.format_arrows, "    format_arrows");
-        //exec_and_log(setup_syntax.indent_code,   "    indent_code"  );
-        //exec_and_log(setup_syntax.even_heights,  "    even_heights" );
         format_syntax.even_widths();
         format_syntax.format_arrows();
-        //setup_syntax.indent_code();   //! //TODO MOVE TO FormatExample.js
-        //setup_syntax.even_heights();  //! //TODO MOVE TO FormatExample.js
     }
 }
