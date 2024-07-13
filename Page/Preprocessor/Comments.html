@@ -27,26 +27,29 @@
 </moveto-doc->
 <moveto-examples->
     <example->
-        <label->Example 1</label->
+        <label->Example 1 - Basics</label->
         <div>
             <c->// Single line comment</c->
 
-            <c->/* Multi</c->
-            <c->line</c->
-            <c->comment */</c->
-
-            <c->/* Another multiline comment</c->
+            <c->        /* Multi /</c->
+            <c->       line     /</c->
+            <c->      comment */</c->
         </div>
         <label->Example 2</label->
         <div>
-            <c->/* Multi line /* Another comment */ comment */</c->
-                                                <ce->^ Error, unexpected token "comment"</ce->
+            <c->/* Multi line /* u.u */ comment */</c->
+                                    <ce->^ Error, unexpected token "comment"</ce->
+
+            <c->/* Non-closed comment</c->
+            <c->void main {</c->
+                <c->return 0;</c->
+            <c->}</c->
         </div>
-        <label->Example 3</label->
+        <label->Example 3 - Whitespace</label->
         <div>
-            <c->/* Multi line /* Another comment */ comment */</c->
-                                                <ce->^ Error, unexpected token "comment"</ce->
-                                                <ce->^ Error, unexpected token "comment"</ce->
+            <t->int</t-><c->/*comments_count_as_whitespace*/</c-><f->main</f->(){
+                <w->return</w-><c->/*they_can_separate_tokens*/</c-><k->0</k->;
+            }
         </div>
     </example->
 </moveto-examples->
