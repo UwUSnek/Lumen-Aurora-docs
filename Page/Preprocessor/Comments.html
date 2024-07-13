@@ -2,37 +2,41 @@
 <!-- Comments                                                        -->
 <!--------------------------------------------------------------------->
 <h1 id="comments"></h1>
-<p>
-    <b>Comments</b> are <b>portions of code</b> that are <b>intentionally ignored</b>.<br>
-    They can be used to provide informations or temporarily exclude lines of code.<br>
-    Comments are allowed to contain any sequence of unicode characters of any length.<br>
-</p>
-<p>
-    Single line comments start with <code>//</code> and end at the next newline character (\n).<br>
-    Multiline comments start with <code>/*</code> and end with <code>*/</code>.<br>
-</p>
-<p>
-    Comments cannot be nested.
-    Not closing a comment is allowed.
-</p>
+<moveto-doc->
+    <p>
+        <b>Comments</b> are <b>portions of code</b> that are <b>intentionally ignored</b>.<br>
+        They can be used to provide informations or temporarily exclude lines of code.<br>
+        Comments are allowed to contain any sequence of unicode characters of any length.<br>
+    </p>
+    <p>
+        Single line comments start with <code>//</code> and end at the next newline character (\n).<br>
+        Multiline comments start with <code>/*</code> and end with <code>*/</code>.<br>
+    </p>
+    <p>
+        Comments cannot be nested.
+        Not closing a comment is allowed.
+    </p>
 
-<syntax->
-    <label- id="copy.syntax--preprocessor-comment">Syntax</label->
-</syntax->
-<example- class="full-example">
-    <label->Example 1</label->
-    <div>
-        <c->// Single line comment</c->
+    <syntax->
+        <label- id="copy.syntax--preprocessor-comment">Syntax</label->
+    </syntax->
+</moveto-doc->
+<moveto-exmaples->
+    <example->
+        <label->Example 1</label->
+        <div>
+            <c->// Single line comment</c->
 
-        <c->/* Multi</c->
-        <c->line</c->
-        <c->comment */</c->
+            <c->/* Multi</c->
+            <c->line</c->
+            <c->comment */</c->
 
-        <c->/* Another multiline comment</c->
-    </div>
-    <label->Example 2</label->
-    <div>
-        <c->/* Multi line /* Another comment */ comment */</c->
-                                         <ce->// ^ Error, unexpected token "comment"</ce->
-    </div>
-</example->
+            <c->/* Another multiline comment</c->
+        </div>
+        <label->Example 2</label->
+        <div>
+            <c->/* Multi line /* Another comment */ comment */</c->
+                                            <ce->// ^ Error, unexpected token "comment"</ce->
+        </div>
+    </example->
+</moveto-exmaples->

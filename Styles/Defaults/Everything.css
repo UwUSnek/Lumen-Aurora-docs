@@ -16,8 +16,6 @@
 
     /* Color */
     --bg:               hsl(240, 5%, 8%);
-    --bg-readability-on:hsl(240, 8%, 18%);
-    --bg-readability-hover:hsl(240, 2%, 24%);
     --bg-pre:           hsl(210, 9%, 9%);
 
     --fg-separator:     hsl(213, 12%, 18%);

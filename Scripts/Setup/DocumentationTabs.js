@@ -1,4 +1,5 @@
 
+const doc_list = new Map();
 const example_list = new Map();
 const internal_list = new Map();
 let active_tab;
@@ -13,22 +14,6 @@ let tab_button_internal;
 
 
 var setup_tabs = {
-    get_local_root : function(elm){
-        if(elm.parentNode.tagName === "MAIN-RIGHT-DOC-SCROLL-") return elm;
-        else return setup_tabs.get_local_root(elm.parentNode);
-    },
-
-
-    get_parent_header : function(elm){
-        if(elm.tagName == "H1") return elm;
-        else return setup_tabs.get_parent_header(elm.previousSibling);
-    },
-
-
-
-
-
-
     create_button : function(text, tab_num){
         // Create the button element
         let b = document.createElement("div");
@@ -39,13 +24,11 @@ var setup_tabs = {
 
         // Add click listener
         b.addEventListener("click", function() {
+            // Update active tab
             active_tab = tab_num;
             tab_doc.style.marginLeft = `calc(0px - 100% * ${ tab_num } - var(--main-padding-r) * ${ tab_num })`;
-            //let target_container = document.querySelector("#main-right-examples > main-right-examples-scroll-");
-            //for(let j = 0; j < examples.length; ++j) {
-            //    target_container.appendChild(examples[j]);
-            //}
 
+            // Update button colors
             tab_button_doc.style.removeProperty("background-color");
             tab_button_examples.style.removeProperty("background-color");
             tab_button_internal.style.removeProperty("background-color");
@@ -68,7 +51,6 @@ var setup_tabs = {
     },
 
 
-//TODO remove scroll fix after making paragraphs dynamic
 
     create_tab_buttons : function(){
         // Create button container
@@ -83,75 +65,52 @@ var setup_tabs = {
         // Spawn the container and set the default tab to documentation
         right.insertBefore(container, right.children[0]);
         tab_button_doc.dispatchEvent(new Event("click"))
-
-
-
-        /*
-        // For each example element
-        let elms = document.querySelectorAll(
-            "main-right-doc-scroll- :not(split-example-container-right-) > example-," +
-            "main-right-doc-scroll-                                      > example-"
-        ); 
-        for(let i = 0; i < elms.length; ++i) {
-            let button = document.createElement("span");
-
-            // Find additional examples
-            let local_root = setup_tabs.get_local_root(elms[i]);
-            let parent_header = setup_tabs.get_parent_header(local_root);
-            console.log(parent_header);
-            console.log(parent_header.innerHTML);
-            let header_number = (parent_header.innerHTML).match(/([0-9]+\.)+/g)[0];
-            let examples = example_list.get(header_number);
-
-
-            // If the section has additional examples, create the link and make it load the examples
-            if(examples != null && examples.length > 0) {
-                button.classList = "more-examples-button";
-                button.innerHTML = "See more examples →";
-                button.href = "tmp";
-
-                // Add click listener
-                button.addEventListener("click", function() {
-                    document.getElementById("main-right-doc").style.marginLeft = "calc(0px - 100% - var(--main-padding-r))";
-                    let target_container = document.querySelector("#main-right-examples > main-right-examples-scroll-");
-                    for(let j = 0; j < examples.length; ++j) {
-                        target_container.appendChild(examples[j]);
-                    }
-                });
-            }
-
-            // If not, create a non-clickable text that says there are no more examples
-            else {
-                button.classList = "no-more-examples-button";
-                button.innerHTML = "There are no additional examples.";
-            }
-
-
-            // Append button to the example element
-            elms[i].appendChild(button);
-        }
-        */
     },
 
 
 
 
 
-    move_elements : function(class_name, output_list) {
-        // For each extra example
-        let elms = document.getElementsByClassName(class_name)
+
+    get_local_root : function(elm){
+        if(elm.parentNode.id === "main-right-staging") return elm;
+        else return setup_tabs.get_local_root(elm.parentNode);
+    },
+
+
+    get_parent_header : function(elm){
+        if(typeof elm != 'undefined' && elm != null) {
+            if(elm.tagName == "H1") return elm;
+            else return setup_tabs.get_parent_header(elm.previousSibling);
+        }
+        else return null;
+    },
+
+
+
+    move_elements : function(tag_name, output_map) {
+        // For each "moveto" tag
+        let elms = [...(document.getElementsByTagName(tag_name))];  //! Convert HTMLCollection to Array to make it not change dynamically
         for(let i = 0; i < elms.length; ++i) {
 
             // Get it's header number
             let local_root = setup_tabs.get_local_root(elms[i]);
             let parent_header = setup_tabs.get_parent_header(local_root);
+            if(parent_header == null) continue;
             let header_number = (parent_header.innerHTML).match(/([0-9]+\.)+/g)[0];
 
-            // Save it in the example hash map and remove it from the page
-            if(!output_list.has(header_number)) {
-                output_list.set(header_number, new Array());
+            // Create content list in the map if it doesnt exist yet (and add the header element as first element)
+            if(!output_map.has(header_number)) {
+                output_map.set(header_number, [parent_header]);
             }
-            output_list.get(header_number).push(elms[i]);
+
+            // Save each of its children in the hash map and remove them from the page, then remove the container.
+            let output_array = output_map.get(header_number);  // Redundant variable to improve performance and readability
+            let c = [...(elms[i].children)];  //! Convert HTMLCollection to Array to make it not change dynamically
+            for(let j = 0; j < c.length; ++j){
+                output_array.push(c[j]);
+                c[j].remove();
+            }
             elms[i].remove();
         }
     },
@@ -160,8 +119,17 @@ var setup_tabs = {
 
 
     init : function(){
-        setup_tabs.move_elements("moveto-example", example_list);
-        setup_tabs.move_elements("moveto-internal", internal_list);
+        // Move elements in the correct tab (without spawning them)
+        setup_tabs.move_elements("moveto-doc-", doc_list);
+        setup_tabs.move_elements("moveto-examples-", example_list);
+        setup_tabs.move_elements("moveto-internal-", internal_list);
+        document.getElementById("main-right-staging").replaceChildren(); //! Empty the staging tab to improve performance and tidiness
+
+        // Create buttons for the user
         setup_tabs.create_tab_buttons();
+
+        // Force spawn the content (Normally this requires a click from the user)
+        setup_index.on_location_changed();
+        ui_slider.update_logos(); //! Update any logo element that's currently loaded
     }
 }

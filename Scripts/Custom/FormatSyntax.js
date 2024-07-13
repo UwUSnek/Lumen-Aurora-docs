@@ -1,15 +1,16 @@
 
 
-var setup_syntax = {
-    min_w : parseFloat(window.getComputedStyle(document.documentElement).getPropertyValue('--syntax-arrow-w')),
+var format_syntax = {
+    min_w : parseFloat(page_style.getPropertyValue('--syntax-arrow-w').slice(0, -2)),
 
 
 
     // Align the colums to the maximum width of their cells
     even_widths : function(){
-        let min_w = parseFloat(window.getComputedStyle(document.documentElement).getPropertyValue('--syntax-arrow-w'));
-        let tables = document.querySelectorAll('syntax- > table');
-        for(let j = 0; j < tables.length; ++j){
+        let tables = tab_doc.querySelectorAll('syntax- > table');
+        for(let j = 0; j < tables.length; ++j) if(!tables[j].hasAttribute("format_syntax-widths")) {
+            tables[j].setAttribute("format_blocks-widths", "1"); //! Mark as fixed for future iterations
+            
             let trs = tables[j].querySelectorAll('tr');
 
 
@@ -20,7 +21,7 @@ var setup_syntax = {
                 let tds = trs[k].querySelectorAll('td');
                 for(let l = 0; l < tds.length; ++l){
                     if(Object.is(max[l], undefined)) {
-                        max[l] = setup_syntax.min_w;
+                        max[l] = format_syntax.min_w;
                     }
                     if(max[l] < tds[l].offsetWidth) max[l] = tds[l].offsetWidth;
                 }
@@ -41,11 +42,11 @@ var setup_syntax = {
 
                     // Stretch arrows to fit long td bois
                     else {
-                        tds[l].style.width = `${ min_w }px`;
-                        let ratio = max[l] / setup_syntax.min_w;
-                        tds[l].style.transform   = `scaleX(${ ratio + 2 * (1 / setup_syntax.min_w) })`; // Add an extra pixel on each side to connect the arrows seamlessly
-                        tds[l].style.marginLeft  = `${ (ratio - 1) / 2 * min_w }px`;
-                        tds[l].style.marginRight = `${ (ratio - 1) / 2 * min_w }px`;
+                        tds[l].style.width = `${ format_syntax.min_w }px`;
+                        let ratio = max[l] / format_syntax.min_w;
+                        tds[l].style.transform   = `scaleX(${ ratio + 2 * (1 / format_syntax.min_w) })`; // Add an extra pixel on each side to connect the arrows seamlessly
+                        tds[l].style.marginLeft  = `${ (ratio - 1) / 2 * format_syntax.min_w }px`;
+                        tds[l].style.marginRight = `${ (ratio - 1) / 2 * format_syntax.min_w }px`;
                     }
                 }
             }
@@ -63,11 +64,13 @@ var setup_syntax = {
 
 
     format_arrows : function(){
-        c = right.querySelectorAll("syntax- > table td");
+        c = tab_doc.querySelectorAll("syntax- > table td");
 
 
         // Fix inverted arrows
-        for(let i = 0; i < c.length; ++i){
+        for(let i = 0; i < c.length; ++i) if(!c[i].hasAttribute("format_syntax-arrows_0")) {
+            c[i].setAttribute("format_syntax-arrows_0", "1"); //! Mark as fixed for future iterations
+
             if(c[i].dataset.arrows && c[i].dataset.arrows.length) c[i].dataset.arrows = c[i].dataset.arrows
                 .replaceAll(/\bbt\b/g, "tb")
                 .replaceAll(/\brl\b/g, "lr")
@@ -80,7 +83,9 @@ var setup_syntax = {
 
 
         // Add automatic connectors
-        for(let i = 0; i < c.length; ++i){
+        for(let i = 0; i < c.length; ++i) if(!c[i].hasAttribute("format_syntax-arrows_1")) {
+            c[i].setAttribute("format_syntax-arrows_1", "1"); //! Mark as fixed for future iterations
+
             if(c[i].dataset.arrows && c[i].dataset.arrows.length){
 
                 // Vertical connectors
@@ -132,7 +137,9 @@ var setup_syntax = {
 
 
         // Set backgrounds
-        for(let i = 0; i < c.length; ++i){
+        for(let i = 0; i < c.length; ++i) if(!c[i].hasAttribute("format_syntax-arrows_2")) {
+            c[i].setAttribute("format_syntax-arrows_2", "1"); //! Mark as fixed for future iterations
+
             if(c[i].dataset.arrows && c[i].dataset.arrows.length){
                 let bg = "";
                 let arrows = c[i].dataset.arrows.split(/[\s]+/);
@@ -148,78 +155,8 @@ var setup_syntax = {
 
 
 
-
-
-    // Remove HTML indentation from pre blocks and add the line number
-    format : function(s){
-        // Find shortest indentation
-        let min;
-        s = s.split('\n');
-        for(let i = 0; i < s.length; i++){
-            let line = s[i];
-            let spaces = line.search(/\S/);
-            if((min > spaces || min == undefined) && spaces >= 0){
-                min = spaces;
-            }
-        }
-        // Remove indentation
-        for(let i = 0; i < s.length; i++){
-            let line = s[i];
-            s[i] = (i == 0 || i == s.length - 1) ? '' : '<span class="hidden">' +(('0' + i).slice(-2)) + '&nbsp;&nbsp;</span>';
-            s[i] += line.substring(min, line.length);
-        }
-
-        // Join and return all lines
-        return s.join('<br>');
-    },
-
-
-
-    // Fix code indentation because apparently HTML5+CSS3 can't do that
-    indent_code : function() {
-        let c = document.querySelectorAll('example-');
-        for(let i = 0; i < c.length; i++){
-            let divs = c[i].querySelectorAll('div');
-            for(let j = 0; j < divs.length; ++j){
-                divs[j].innerHTML = setup_syntax.format(divs[j].innerHTML) + '<br>';
-                // Add trailing newline to fix CSS's bugged max-height  ^
-            }
-        }
-    },
-
-
-
-
-
-    // Even out the height of right and left example tags
-    even_heights : function() {
-        let c = document.querySelectorAll('split-example-container-');
-
-        for(let i = 0; i < c.length; i++){
-            // Find left and right containers
-            let lc = c[i].querySelector('split-example-container-left-');
-            let rc = c[i].querySelector('split-example-container-right-');
-
-            // Get contained divs
-            let l = lc.querySelector('DIV');
-            let r = rc.querySelector('DIV');
-
-            // Fix heights
-            if(r.offsetHeight < l.offsetHeight) r.style.minHeight = r.style.maxHeight = `${ l.offsetHeight }px`
-            if(l.offsetHeight < r.offsetHeight) l.style.minHeight = l.style.maxHeight = `${ r.offsetHeight }px`
-        }
-    },
-
-
-
-
-
-
-
-    init : function() {
-        exec_and_log(setup_syntax.even_widths,   "    even_widths"  );
-        exec_and_log(setup_syntax.format_arrows, "    format_arrows");
-        exec_and_log(setup_syntax.indent_code,   "    indent_code"  );
-        exec_and_log(setup_syntax.even_heights,  "    even_heights" );
+    start : function() {
+        format_syntax.even_widths();
+        format_syntax.format_arrows();
     }
 }
