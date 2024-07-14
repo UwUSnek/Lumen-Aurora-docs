@@ -28,7 +28,7 @@ var format_examples = {
 
     // Fix code indentation because apparently HTML5+CSS3 can't do that
     indent_code : function() {
-        let c = tab_examples.querySelectorAll('example-');
+        let c = right.querySelectorAll('#main-right-tab-container example-');
         for(let i = 0; i < c.length; i++) if(!c[i].hasAttribute("format_blocks-is_fixed")) {
             c[i].setAttribute("format_blocks-is_fixed", "1"); //! Mark as fixed for future iterations
 
