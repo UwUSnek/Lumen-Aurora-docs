@@ -1,7 +1,7 @@
 :root {
     --logo-size:        50vw;
-    --logo-link-lux:    url("../../Logos/Lumina.png");
-    --logo-link-umbra:  url("../../Logos/Aurora.png");
+    --logo-link-lumina: url("../../Logos/Aurora.png");
+    --logo-link-aurora: url("../../Logos/Lumina.png");
 }
 
 
@@ -25,7 +25,7 @@ logo- {
     /* Max height is set from JS */
 }
 
-lux-logo-, umbra-logo- {
+lumina-logo-, aurora-logo- {
     display: inline-block;
     background-color: transparent;
     background-size: contain;
@@ -38,8 +38,8 @@ lux-logo-, umbra-logo- {
     border-radius: calc(var(--line-h) / 2);
     vertical-align: bottom;
 }
-lux-logo-   { background-image: var(--logo-link-lux);   }
-umbra-logo- { background-image: var(--logo-link-umbra); }
+aurora-logo- { background-image: var(--logo-link-lumina); }
+lumina-logo- { background-image: var(--logo-link-aurora);   }
 
 
 

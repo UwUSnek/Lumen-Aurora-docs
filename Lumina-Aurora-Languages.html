@@ -3,11 +3,11 @@
 
 <html>
 <head>
-    <title>Umbra | Lux</title>
+    <title>Lumina | Aurora</title>
     <meta charset="UTF-8">
     <meta name="author" content="Snek" />
-    <meta name="description" content="Umbra and Lux languages specification"/>
-    <link rel="icon" href="Logos/Lux.png" type="image/png">
+    <meta name="description" content="Lumina and Aurora languages specification"/>
+    <link rel="icon" href="Logos/Lumina.png" type="image/png">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width, user-scalable=no"/>
     <link rel="stylesheet" type="text/css" href="Styles/main.css" media="screen">
 </head>
@@ -294,7 +294,7 @@
 
     <p>
         //TODO
-        Umbra and Lux are <b>high level procedural compiled languages</b> with the aim of abstracting GPU rendering while preserving the runtime performance of low level languages.
+        Lumina and Aurora are <b>high level procedural compiled languages</b> with the aim of abstracting GPU rendering while preserving the runtime performance of low level languages.
         This is achieved through a built-in rendering support and a powerful optimizer.<br>
     </p>
     <p>
@@ -303,8 +303,8 @@
         A reference counter manages the lifespan of variables and memory blocks.
     </p>
     <p>
-        <div style="display: inline-block; min-width: 10ch"><umbra-logo-></umbra-logo-> Umbra</div>- Programming language.<br>
-        <div style="display: inline-block; min-width: 10ch"><lux-logo-></lux-logo-> Lux</div>- Shading language. Subset of Umbra.
+        <div style="display: inline-block; min-width: 10ch"><lumina-logo-></lumina-logo-> Lumina - Programming language. File extension: <code>.lum</code></div><br>
+        <div style="display: inline-block; min-width: 10ch"><aurora-logo-></aurora-logo-> Aurora - Shading language. File extension: <code>.aur</code></div>
     </p>
 </moveto-doc->
 
@@ -420,8 +420,8 @@
     <example->
         <label->Example</label->
         <div>
-            <k->#include</k-> <s->"/home/Snek/Lux/file.lux"</s->        <c->// Absolute path</c->
-            <k->#include</k-> <s->"./file.lux"</s->                     <c->// Relative path</c->
+            <k->#include</k-> <s->"/home/Snek/Lumina/file.lum"</s->        <c->// Absolute path</c->
+            <k->#include</k-> <s->"./file.lum"</s->                     <c->// Relative path</c->
             <k->#include</k-> <s->":</s-><sr->&bsol;</sr-><s->&bsol; why is this a file name</s-><sr->&bsol;</sr-><s->?"</s->  <c->// Relative path</c->
             <k->#include</k-> <s->&lt;math&gt;</s->                           <c->// Includes the standard module "math"</c->
 
@@ -431,8 +431,8 @@
         </div>
         <label->Example</label->
         <div>
-            <k->#include</k-> <s->"*.lux"</s->                        <c->// Includes any file with lux extension in the current directory</c->
-            <k->#include</k-> <s->"/home/Snek/Documents/**.lux"</s->  <c->// Includes any file with lux extension in the Documents directory, recursively</c->
+            <k->#include</k-> <s->"*.lum"</s->                        <c->// Includes any file with lum extension in the current directory</c->
+            <k->#include</k-> <s->"/home/Snek/Documents/**.lum"</s->  <c->// Includes any file with lum extension in the Documents directory, recursively</c->
             <k->#include</k-> <s->"generated/*"</s->                  <c->// Includes any file in the directory ./generated, but not the ones in sub-directories</c->
             <k->#include</k-> <s->"generated/**"</s->                 <c->// Includes any file in the directory ./generated, recursively</c->
 
@@ -1169,7 +1169,7 @@
         <ul class="summary-list">
             <li>
                 <span><elm-><a href="#construct-directive"><code><w->construct</w-></code></a> directive</elm-></span>
-                <span>Generates code in the corresponding language by compiling and running Umbra code before the compilation phase. //TODO other languages</span>
+                <span>Generates code in the corresponding language by compiling and running Lumina code before the compilation phase. //TODO other languages</span>
             </li>
         </ul>
     </ul>
@@ -1317,11 +1317,11 @@
             </li>
             <li>
                 <span><elm-><a href="#inline-glsl">Inline GLSL</a></elm-></span>
-                <span><lux-logo-></lux-logo-> Allows GLSL 4.60 code to be used from within Lux.</span>
+                <span><lumina-logo-></lumina-logo-> Allows GLSL 4.60 code to be used from within Lumina.</span>
             </li>
             <li>
                 <span><elm-><a href="#inline-cpp">Inline C++</a></elm-></span>
-                <span><umbra-logo-></umbra-logo-> Allows C++20 code to be used from within Umbra.</span>
+                <span><aurora-logo-></aurora-logo-> Allows C++20 code to be used from within Aurora.</span>
             </li>
         </ul>
     </ul>
@@ -2045,7 +2045,7 @@
 
 <h1 id="primitive-types"></h1>
 <moveto-doc->
-    <p>Lux and Umbra feature <b>7 primitive types</b>, which can be used to define more complex types such as <a href="#structs">structs</a>, <a href="#arrays">arrays</a> and <a href="#tuples">tuples</a>.</p>
+    <p>Lumina and Aurora feature <b>7 primitive types</b>, which can be used to define more complex types such as <a href="#structs">structs</a>, <a href="#arrays">arrays</a> and <a href="#tuples">tuples</a>.</p>
     <p>
         These types are always defined and they act as if they were declared in the <a href="#core-module">core module</a>.<br>
         Primitive types are <b>not <a href="#keywords">keywords</a></b> and can be <a href="#name-shadowing">shadowed</a> like any other <a href="#semantic-elements">symbol</a>.
@@ -2915,8 +2915,8 @@
 <moveto-doc->
     <p>
         <a href="#primitive-types">Primitive types</a> are all implicitly convertible to each other.<br>
-        In Lux, some conversions have <a href="#undefined-values">undefined result</a>.<br>
-        In Umbra, the same conversions cause <a href="#undefined-behaviour">undefined behaviour</a>.<br>
+        In Lumina, some conversions have <a href="#undefined-values">undefined result</a>.<br>
+        In Aurora, the same conversions cause <a href="#undefined-behaviour">undefined behaviour</a>.<br>
         The result of the conversions follow these rules:
         //TODO use fedisableexcept(FE_ALL_EXCEPT);
         //TODO it only works on  floating points. integers throw exceptions anyway
