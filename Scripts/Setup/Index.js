@@ -100,6 +100,9 @@ var setup_index = {
         let ec =  example_list.get(header_number); tab_examples.replaceChildren(...(ec != null ? ec : [tab_placeholder_examples]), tab_spacer_examples);
         let ic = internal_list.get(header_number); tab_internal.replaceChildren(...(ic != null ? ic : [tab_placeholder_internal]), tab_spacer_internal);
 
+        // Update tab names
+        create_tab_names.start();
+
         // Resize logos (if they exist)
         ui_slider.update_logos();
 
@@ -108,7 +111,6 @@ var setup_index = {
 
         // Format examples
         format_examples.start();
-        example_number.start();
 
         // Copy and format syntax blocks
         copy_syntax.start();

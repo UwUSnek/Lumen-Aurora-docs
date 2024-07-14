@@ -14,11 +14,10 @@ let tab_button_internal;
 
 
 var setup_tabs = {
-    create_button : function(text, tab_num){
+    create_button : function(tab_num){
         // Create the button element
         let b = document.createElement("div");
         b.classList = "tab-button";
-        b.innerHTML = text
         b.style.setProperty("--tab-num", `${ tab_num }`);
 
 
@@ -58,9 +57,9 @@ var setup_tabs = {
         container.classList = "tab-buttons-container"
 
         // Create the actual buttons
-        container.appendChild(tab_button_doc      = setup_tabs.create_button("Documentation",        0));
-        container.appendChild(tab_button_examples = setup_tabs.create_button("Examples",             1));
-        container.appendChild(tab_button_internal = setup_tabs.create_button("Internal functioning", 2));
+        container.appendChild(tab_button_doc      = setup_tabs.create_button(0));
+        container.appendChild(tab_button_examples = setup_tabs.create_button(1));
+        container.appendChild(tab_button_internal = setup_tabs.create_button(2));
 
         // Spawn the container and set the default tab to documentation
         right.insertBefore(container, right.children[0]);

@@ -390,14 +390,14 @@
 <moveto-doc->
     <p>
         The <b>include statement</b> is used to <b>paste code</b> from other files.<br>
-        Any existent file can be included, regardless of its content or extension.<br>
+        Any existing file with read permissions can be included, regardless of its contents or extension.<br>
         The path of the included file must be enclosed in <code>"</code> <code>"</code> characters.<br>
         <a href="#standard-modules">Standard modules</a> are included using the <code>&lt;</code> <code>&gt;</code> characters.<br>
         The <a href="#core-module">core module</a> cannot be included.
     </p>
     <p>
         Absolute and relative paths are both supported.<br>
-        Relative paths are relative to the file the include statement is used in and any specified include path.<br>
+        Relative paths are relative to the file the include statement is used in.<br>
         <code>~</code> is not recognized as the home directory but as the literal character <code>~</code>.<br>
         <code>/</code> identifies the root directory.<br>
         <code>.</code> identifies the current directory, while <code>..</code> identifies the parent directory.
@@ -420,19 +420,48 @@
     <example->
         <label->Example</label->
         <div>
-            <k->#include</k-> <s->"/home/Photon/Lux/file.lux"</s->      <c->// Ok, absolute path</c->
-            <k->#include</k-> <s->"./file.lux"</s->                     <c->// Ok, relative path</c->
-            <k->#include</k-> <s->":</s-><sr->&bsol;</sr-><s->&bsol; why is this a file name</s-><sr->&bsol;</sr-><s->?"</s->  <c->// Ok, relative path</c->
-            <k->#include</k-> <s->"*.lux"</s->                          <c->// Ok, includes any file with lux extension in any include path</c->
-            <k->#include</k-> <s->"**/*.lux"</s->                       <c->// Ok, includes any file with lux extension in any include path, recursively</c->
-            <k->#include</k-> <s->&lt;math&gt;</s->                           <c->// Ok, includes the standard module "math"</c->
+            <k->#include</k-> <s->"/home/Snek/Lux/file.lux"</s->        <c->// Absolute path</c->
+            <k->#include</k-> <s->"./file.lux"</s->                     <c->// Relative path</c->
+            <k->#include</k-> <s->":</s-><sr->&bsol;</sr-><s->&bsol; why is this a file name</s-><sr->&bsol;</sr-><s->?"</s->  <c->// Relative path</c->
+            <k->#include</k-> <s->&lt;math&gt;</s->                           <c->// Includes the standard module "math"</c->
 
-            <c->//#include ./file.ilsh</c->                    <ce->// Error, "" or &lt;&gt; are required</ce->
-            <c->//#include "./non_existent_file"</c->          <ce->// Error, non-glob patterns must correspond to an existing file</ce->
-            <c->//#include ""</c->                             <ce->// Error, file name not specified</ce->
+            <c->#include ./file.ilsh</c->                       <ce->Error, "" or &lt;&gt; are required</ce->
+            <c->#include "./nonexistent_file"</c->              <ce->Error, non-glob patterns must correspond to an existing file</ce->
+            <c->#include ""</c->                                <ce->Error, file name not specified</ce->
+        </div>
+        <label->Example</label->
+        <div>
+            <k->#include</k-> <s->"*.lux"</s->                        <c->// Includes any file with lux extension in the current directory</c->
+            <k->#include</k-> <s->"/home/Snek/Documents/**.lux"</s->  <c->// Includes any file with lux extension in the Documents directory, recursively</c->
+            <k->#include</k-> <s->"generated/*"</s->                  <c->// Includes any file in the directory ./generated, but not the ones in sub-directories</c->
+            <k->#include</k-> <s->"generated/**"</s->                 <c->// Includes any file in the directory ./generated, recursively</c->
+
+            <k->#include</k-> <s->"?????"</s->                        <c->// Includes any file in the current directory whose name is 5 characters long (including the extention and the . character)</c->
+            <k->#include</k-> <s->"**"</s->                           <c->// Tries to include every file (The compiler will stop you)</c->
         </div>
     </example->
 </moveto-examples->
+<moveto-internal->
+    <p>
+        Include statements are the very first preprocessor directives to be processed. This makes it impossible to include files through <a href="#macros">macros</a>.<br>
+        Include operations are performed by replacing the include statement in the destination file (not including the line's <code><nl-></nl-></code> character) with the contents of the source file.<br>
+        Every byte of the file is copied withouth any modification.<br>
+        Everything else in the destination file is kept unchanged.
+    </p>
+    <p>
+        In the case of glob patterns, all the source files are copied in the same way, one after the other, without adding any separator between them.<br>
+        The order in which they are copied reflects their absolute file path:<br>
+        &nbsp;&nbsp;Each directory level is ordered alphabetically, starting from the root directory.<br>
+        &nbsp;&nbsp;If two or more matches are in the same directory, they are ordered based on the next level. This goes on until all the files are ordered.<br>
+        If the glob pattern has no matches, the include statement is simply removed (but not the <code><nl-></nl-></code> character at the end of it's line).
+    </p>
+    <p>
+        The glob patterns <code>*</code> and <code>**</code> stop before the very first occurrence of the pattern that follows them.<br>
+        When not followed by other glob patterns, they stop before the very last occurrent of the character or wildcard that follows them.<br>
+        They are evaluated from left to right.<br>
+        E.g. <code>"./*.*"</code> will match all of these: <code>./file.txt</code>, <code>./.txt</code>, <code>./file.</code>, <code>./file.txt.tmp</code>
+    </p>
+</moveto-internal->
 
 
 
@@ -454,7 +483,7 @@
 <moveto-doc->
     <p>
         The <b>line continuation token</b> can be used to <b>merge multiple lines</b> and allow single line <a href="#comments">comments</a>, preprocessor directives and multi character <a href="#syntactic-elements">tokens</a> to be written across multiple lines.<br>
-        It consists of a <code>&bsol;</code> immediatly followed by a newline character.
+        It consists of a <code>&bsol;</code> immediatly followed by a <code><nl-></nl-></code> character.
     </p>
     <p>
         Line continuation tokens can be used inside <a href="#comments">comments</a> or preprocessor directives but cannot be nested.<br>
@@ -5673,9 +5702,16 @@
             <tr>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->&bsol;</s-vbtm-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr lb ar"></td>
                 <td><s-vbtm-><nl-></nl-></s-vbtm-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr br ar"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td data-arrows="tr ar"></td>
+                <td><s-vbtm-><eof-></eof-></s-vbtm-></td>
+                <td data-arrows="lt"></td>
             </tr>
         </table>
     </syntax->
@@ -7971,7 +8007,7 @@
     <script src="Scripts/Custom/FormatExamples.js"></script>
     <script src="Scripts/Custom/FormatSyntax.js"></script>
 
-    <script src="Scripts/Custom/ExampleNumber.js"></script>
+    <script src="Scripts/Custom/CreateTabNames.js"></script>
 
 
     
