@@ -3,6 +3,12 @@
 <!--------------------------------------------------------------------->
 <h1 id="include-statement"></h1>
 <moveto-doc->
+    <ce-full-size->
+        NOTICE:<br>
+        Althought the language provides include statements, we recommend not to use them.<br>
+        The <a href="#import-directive">Import directive</a> does a much better job at importing other modules, looks cleaner and can be debugged easily.<br>
+        Include statements should only be used if you know what you are doing and you are certain that import directives won't be enough.
+    </ce-full-size->
     <p>
         The <b>include statement</b> is used to <b>paste code</b> from other files.<br>
         Any existing file with read permissions can be included, regardless of its contents or extension.<br>
