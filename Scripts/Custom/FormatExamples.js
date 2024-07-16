@@ -13,11 +13,12 @@ var format_examples = {
                 min = spaces;
             }
         }
-        // Remove indentation and replace spaces and newlines with visible characters
+        // Remove indentation and replace spaces with visible characters
+        //! Use Regex Lookahead to not replace spaces that come right before error blocks. This prevents them from overlapping with the error's border
         for(let i = 0; i < s.length; i++){
             let line = s[i];
             s[i] = (i == 0 || i == s.length - 1) ? '' : '<span class="hidden">' +(('0' + i).slice(-2)) + '&nbsp;&nbsp;</span>';
-            s[i] += line.substring(min, line.length).replaceAll(/ /g, "·").replaceAll(/(·+)/g, "<sc->$1<\/sc->");
+            s[i] += line.substring(min, line.length).replaceAll(/ (?!<ce->)/g, "·").replaceAll(/(·+)/g, "<sc->$1<\/sc->");
         }
 
         // Join and return all lines

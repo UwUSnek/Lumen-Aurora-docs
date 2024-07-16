@@ -131,11 +131,11 @@ var setup_index = {
     // Scrolls the active index element into view
     // smooth = true|false
     move_to_view : function(smooth){
-        let i = document.getElementById(index_active_id).parentElement; 
+        let i = document.getElementById(index_active_id).parentElement;
         if(i != null) {
-            i.scrollIntoView({ 
-                block: "nearest", 
-                behavior: (smooth && !window.chrome) ? "smooth" : "auto" 
+            i.scrollIntoView({
+                block: "nearest",
+                behavior: (smooth && !window.chrome) ? "smooth" : "auto"
             });
         }
     },

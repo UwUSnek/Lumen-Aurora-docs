@@ -446,7 +446,7 @@
             <k->#include</k-> <s->"generated/**"</s->                 <c->// Includes any file in the directory ./generated, recursively</c->
 
             <k->#include</k-> <s->"?????"</s->                        <c->// Includes any file in the current directory whose name is 5 characters long (including the extention and the . character)</c->
-            <k->#include</k-> <s->"**"</s->                           <c->// Tries to include every file (The compiler will stop you)</c->
+            <k->#include</k-> <s->"**"</s->                           <c->// Tries to include every file on your computer (The compiler will stop you)</c->
         </div>
         <label->Example</label->
         <div>
@@ -459,7 +459,7 @@
 <moveto-internal->
     <p>
         Include statements are processed before <a href="#preprocessor-macros">macros</a>, meaning that those created using them will not work. This is by design.<br>
-        Include operations are performed by replacing the include statement in the destination file 
+        Include operations are performed by replacing the include statement in the destination file
         (from <code>#</code> to the closing <code>"</code> or <code>></code>) with the contents of the source file.<br>
         Every byte of the file is copied withouth any modification.<br>
         Everything else in the destination file is kept unchanged.

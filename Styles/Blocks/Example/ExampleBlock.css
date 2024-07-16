@@ -2,17 +2,17 @@
 
 
 
-c-  { display: inline-block; color: #6d757e; font-weight: 300; }    /* Comment            */
-cw- { display: inline-block; color: #ddcf06; font-weight: 300; }    /* Warning comment    */ /*! TODO MAKE THESE LIKE THE ERRORS*/
-k-  { display: inline-block; color: #85b4e0; }                      /* Constant           */
-t-  { display: inline-block; color: #3884dc; }                      /* Type               */
-f-  { display: inline-block; color: #e6e6b3; }                      /* Function           */
-p-  { display: inline-block; color: #2fc5d0; }                      /* Argument           */
-w-  { display: inline-block; color: #cc94d1; }                      /* Keyword            */
-sr- { display: inline-block; color: #c44e4e; }                      /* String regex token */
-sg- { display: inline-block; color: #c9ca76; }                      /* String regex group */
-s-  { display: inline-block; color: #db966e; }                      /* String             */
-sc- { display: inline-block; color: #ffffff11; }                    /* Space character    */
+c-  { display: inline-block; color: #6d757e;   font-weight: 300;                  }    /* Comment            */
+cw- { display: inline-block; color: #ddcf06;   font-weight: 300;                  }    /* Warning comment    */ /*! TODO MAKE THESE LIKE THE ERRORS*/
+k-  { display: inline-block; color: #85b4e0;   font-weight: var(--font-size-code) }    /* Constant           */
+t-  { display: inline-block; color: #3884dc;   font-weight: var(--font-size-code) }    /* Type               */
+f-  { display: inline-block; color: #e6e6b3;   font-weight: var(--font-size-code) }    /* Function           */
+p-  { display: inline-block; color: #2fc5d0;   font-weight: var(--font-size-code) }    /* Argument           */
+w-  { display: inline-block; color: #cc94d1;   font-weight: var(--font-size-code) }    /* Keyword            */
+sr- { display: inline-block; color: #c44e4e;   font-weight: var(--font-size-code) }    /* String regex token */
+sg- { display: inline-block; color: #c9ca76;   font-weight: var(--font-size-code) }    /* String regex group */
+s-  { display: inline-block; color: #db966e;   font-weight: var(--font-size-code) }    /* String             */
+sc- { display: inline-block; color: #aaaaff33; font-weight: var(--font-size-code) }    /* Space character    */
 
 
 
@@ -22,8 +22,9 @@ ce- {
     display: inline-block;
     padding: 0 4px 1px 4px;
     margin: -1px -5px -2px -5px;
-    
-    color: #d14141; 
+
+    color: #d14141;
+    font-weight: var(--font-size-code)
 }
 
 
@@ -46,5 +47,4 @@ ce-, ce-full-size- {
     border-width: 0 1px 0 1px;
     border-radius: 6px;
     background-color: #d1303011;
-    font-weight: 300;
 }
