@@ -15,8 +15,8 @@
 
 
     /* Color */
-    --bg:               hsl(240, 5%, 8%);
-    --bg-pre:           hsl(210, 9%, 9%);
+    --bg:               hsl(240, 5%, 9%);
+    --bg-pre:           hsl(210, 2%, 7%);
 
     --fg-separator:     hsl(213, 12%, 18%);
     --fg-text:          hsl(240, 2%, 88%);
