@@ -1,0 +1,14 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "Build HTML",
+            "command": "./Tools/Build_HTML.sh",
+            "args": [ "" ],
+            "problemMatcher": [ ],
+            "options": { "cwd": "${workspaceFolder}" },
+            "group": "build"
+        }
+    ]
+}
