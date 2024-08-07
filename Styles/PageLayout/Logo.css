@@ -1,7 +1,7 @@
 :root {
     --logo-size:        50vw;
-    --logo-link-lumina: url("../../Logos/Aurora.png");
-    --logo-link-aurora: url("../../Logos/Lumina.png");
+    --logo-link-Lumen: url("../../Logos/Aurora.png");
+    --logo-link-aurora: url("../../Logos/Lumen.png");
 }
 
 
@@ -25,7 +25,7 @@ logo- {
     /* Max height is set from JS */
 }
 
-lumina-logo-, aurora-logo- {
+Lumen-logo-, aurora-logo- {
     display: inline-block;
     background-color: transparent;
     background-size: contain;
@@ -38,8 +38,8 @@ lumina-logo-, aurora-logo- {
     border-radius: calc(var(--line-h) / 2);
     vertical-align: bottom;
 }
-aurora-logo- { background-image: var(--logo-link-lumina); }
-lumina-logo- { background-image: var(--logo-link-aurora);   }
+aurora-logo- { background-image: var(--logo-link-Lumen); }
+Lumen-logo- { background-image: var(--logo-link-aurora);   }
 
 
 

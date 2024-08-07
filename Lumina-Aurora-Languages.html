@@ -3,11 +3,11 @@
 
 <html>
 <head>
-    <title>Lumina | Aurora</title>
+    <title>Lumen | Aurora</title>
     <meta charset="UTF-8">
     <meta name="author" content="Snek" />
-    <meta name="description" content="Lumina and Aurora languages specification"/>
-    <link rel="icon" href="Logos/Lumina.png" type="image/png">
+    <meta name="description" content="Lumen and Aurora languages specification"/>
+    <link rel="icon" href="Logos/Lumen.png" type="image/png">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width, user-scalable=no"/>
     <link rel="stylesheet" type="text/css" href="Styles/main.css" media="screen">
 </head>
@@ -223,10 +223,10 @@
     <index-><indexh->core-module</indexh->
         <index-><indexh->core.operators</indexh->
             <indexd->common-operators</indexd->
-            <indexd->arithmetic-operators</indexd-> 
-            <indexd->logical-operators</indexd-> 
-            <indexd->bitwise-operators</indexd-> 
-            <indexd->relational-operators</indexd-> 
+            <indexd->arithmetic-operators</indexd->
+            <indexd->logical-operators</indexd->
+            <indexd->bitwise-operators</indexd->
+            <indexd->relational-operators</indexd->
 
             <indexd->assignment-operators</indexd->
             <indexd->special-operators</indexd->
@@ -294,7 +294,7 @@
 
     <p>
         //TODO
-        Lumina and Aurora are <b>high level procedural compiled languages</b> with the aim of abstracting GPU rendering while preserving the runtime performance of low level languages.
+        Lumen and Aurora are <b>high level procedural compiled languages</b> with the aim of abstracting GPU rendering while preserving the runtime performance of low level languages.
         This is achieved through a built-in rendering support and a powerful optimizer.<br>
     </p>
     <p>
@@ -303,16 +303,16 @@
         A reference counter manages the lifespan of variables and memory blocks.
     </p>
     <p>
-        <div style="display: inline-block; min-width: 10ch"><lumina-logo-></lumina-logo-> Lumina - Programming language. File extension: <code>.lum</code></div><br>
+        <div style="display: inline-block; min-width: 10ch"><Lumen-logo-></Lumen-logo-> Lumen - Programming language. File extension: <code>.lum</code></div><br>
         <div style="display: inline-block; min-width: 10ch"><aurora-logo-></aurora-logo-> Aurora - Shading language. File extension: <code>.aur</code></div>
     </p>
 </moveto-doc->
 
 
 <moveto-doc->
-    <logo- style="background-image: url('Logos/Lumina.png');"></logo->
+    <logo- style="background-image: url('Logos/Lumen.png');"></logo->
     <logo- style="background-image: url('Logos/Aurora.png');"></logo->
-    <p style="min-height: 100vh;"></p> 
+    <p style="min-height: 100vh;"></p>
 </moveto-doc->
 
 
@@ -429,7 +429,7 @@
     <example->
         <label->Example</label->
         <div>
-            <k->#include</k-> <s->"/home/Snek/Lumina/file.lum"</s->     <c->// Absolute path</c->
+            <k->#include</k-> <s->"/home/Snek/Lumen/file.lum"</s->     <c->// Absolute path</c->
             <k->#include</k-> <s->"./file.lum"</s->                     <c->// Relative path</c->
             <k->#include</k-> <s->":</s-><sr->&bsol;</sr-><s->&bsol; why is this a file name</s-><sr->&bsol;</sr-><s->?"</s->  <c->// Relative path</c->
             <k->#include</k-> <s->&lt;math&gt;</s->                           <c->// Includes the standard module "math"</c->
@@ -506,7 +506,7 @@
 <h1 id="line-continuation-token"></h1>
 <moveto-doc->
     <p>
-        The <b>line continuation token</b> can be used to <b>merge multiple lines</b> and allow single line <a href="#comments">comments</a>, 
+        The <b>line continuation token</b> can be used to <b>merge multiple lines</b> and allow single line <a href="#comments">comments</a>,
         preprocessor directives and multi character <a href="#syntactic-elements">tokens</a> to be written across multiple lines.<br>
         It consists of a <code>&bsol;</code> immediatly followed by a <code><nl-></nl-></code> character.
     </p>
@@ -1232,7 +1232,7 @@
         <ul class="summary-list">
             <li>
                 <span><elm-><a href="#construct-directive"><code><w->construct</w-></code></a> directive</elm-></span>
-                <span>Generates code in the corresponding language by compiling and running Lumina code before the compilation phase. //TODO other languages</span>
+                <span>Generates code in the corresponding language by compiling and running Lumen code before the compilation phase. //TODO other languages</span>
             </li>
         </ul>
     </ul>
@@ -1380,7 +1380,7 @@
             </li>
             <li>
                 <span><elm-><a href="#inline-glsl">Inline GLSL</a></elm-></span>
-                <span><lumina-logo-></lumina-logo-> Allows GLSL 4.60 code to be used from within Lumina.</span>
+                <span><Lumen-logo-></Lumen-logo-> Allows GLSL 4.60 code to be used from within Lumen.</span>
             </li>
             <li>
                 <span><elm-><a href="#inline-cpp">Inline C++</a></elm-></span>
@@ -2108,7 +2108,7 @@
 
 <h1 id="primitive-types"></h1>
 <moveto-doc->
-    <p>Lumina and Aurora feature <b>7 primitive types</b>, which can be used to define more complex types such as <a href="#structs">structs</a>, <a href="#arrays">arrays</a> and <a href="#tuples">tuples</a>.</p>
+    <p>Lumen and Aurora feature <b>7 primitive types</b>, which can be used to define more complex types such as <a href="#structs">structs</a>, <a href="#arrays">arrays</a> and <a href="#tuples">tuples</a>.</p>
     <p>
         These types are always defined and they act as if they were declared in the <a href="#core-module">core module</a>.<br>
         Primitive types are <b>not <a href="#keywords">keywords</a></b> and can be <a href="#name-shadowing">shadowed</a> like any other <a href="#semantic-elements">symbol</a>.
@@ -2978,7 +2978,7 @@
 <moveto-doc->
     <p>
         <a href="#primitive-types">Primitive types</a> are all implicitly convertible to each other.<br>
-        In Lumina, some conversions have <a href="#undefined-values">undefined result</a>.<br>
+        In Lumen, some conversions have <a href="#undefined-values">undefined result</a>.<br>
         In Aurora, the same conversions cause <a href="#undefined-behaviour">undefined behaviour</a>.<br>
         The result of the conversions follow these rules:
         //TODO use fedisableexcept(FE_ALL_EXCEPT);
@@ -4686,19 +4686,19 @@
 
 
 
-                <h1 id="compilation"></h1>                        
+                <h1 id="compilation"></h1>
                 <moveto-doc-></moveto-doc->
-                <h1 id="modules"></h1>                            
+                <h1 id="modules"></h1>
                 <moveto-doc-></moveto-doc->
-                <h1 id="compilation-phases-and-error-types"></h1> 
+                <h1 id="compilation-phases-and-error-types"></h1>
                 <moveto-doc-></moveto-doc->
-                <h1 id="global-initialization-order"></h1>        
+                <h1 id="global-initialization-order"></h1>
                 <moveto-doc-></moveto-doc->
-                <h1 id="runtime-performance"></h1>                
+                <h1 id="runtime-performance"></h1>
                 <moveto-doc-></moveto-doc->
-                <h1 id="branching-performance"></h1>              
+                <h1 id="branching-performance"></h1>
                 <moveto-doc-></moveto-doc->
-                <h1 id="value-precomputation"></h1>               
+                <h1 id="value-precomputation"></h1>
                 <moveto-doc-></moveto-doc->
 
 
@@ -5231,7 +5231,7 @@
             <example- style="margin: 0;">
                 <label->Existence</label->
                 <div>
-                    <t->bool</t-> (<t->baseof</t->(<t->t</t->) <p->a</p->) <f->=:</f-> (?<t->t</t-> <p->b</p->) { 
+                    <t->bool</t-> (<t->baseof</t->(<t->t</t->) <p->a</p->) <f->=:</f-> (?<t->t</t-> <p->b</p->) {
                         <w->for</w->(<t->uint</t-> i = <k->0</k->; i &lt; b.<f->len</f->(); ++i) {
                             <w->if</w->(a == b[i]) <w->return</w-> <k->true</k->;
                         }
@@ -5244,7 +5244,7 @@
             <example- style="margin: 0;">
                 <label->Inexistence</label->
                 <div>
-                    <t->bool</t-> (<t->baseof</t->(<t->t</t->) <p->a</p->) <f->!:</f-> (?<t->t</t-> <p->b</p->) { 
+                    <t->bool</t-> (<t->baseof</t->(<t->t</t->) <p->a</p->) <f->!:</f-> (?<t->t</t-> <p->b</p->) {
                         <w->for</w->(<t->uint</t-> i = <k->0</k->; i &lt; b.<f->len</f->(); ++i) {
                             <w->if</w->(a == b[i]) <w->return</w-> <k->false</k->;
                         }
@@ -8073,7 +8073,7 @@
     <script src="Scripts/Custom/CreateTabNames.js"></script>
 
 
-    
+
 
     <script>
         document.addEventListener('DOMContentLoaded', init);
