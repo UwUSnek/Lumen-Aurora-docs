@@ -1,8 +1,8 @@
 :root {
     /* Font */
     --code-decoration-r:  9px;
-    --char-spacing:      -0.06ch;
-    --word-spacing:       0.5ch;
+    --char-spacing:       0.02ch;
+    --word-spacing:       0.6ch;
     --line-h:             3ch;
     --wide-line-h:        3.5ch;
 
@@ -15,8 +15,8 @@
 
 
     /* Color */
-    --bg:               hsl(240, 5%, 9%);
-    --bg-pre:           hsl(210, 2%, 7%);
+    --bg:               #171717;
+    --bg-pre:           #101010;
 
     --fg-separator:     hsl(213, 12%, 18%);
     --fg-text:          hsl(240, 2%, 88%);

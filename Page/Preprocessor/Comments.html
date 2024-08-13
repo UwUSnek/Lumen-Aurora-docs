@@ -16,9 +16,8 @@
     </p>
     <p>
         Comments cannot be nested.<br>
-        Because they are not code, they also cannot be referenced in any way.<br>
-        Thought <a href="#macros">Preprocessor macros</a> can process and copy comments, this has no effect whatsoever
-        and is only useful if the preprocessed code needs to be read by external tools.
+        Because they are removed before most preprocessor directives are parsed, they also cannot be included through <a href="#include-statement">Include statements</a>
+        or processed using <a href="#macros">Preprocessor macros</a>.
     </p>
 
     <syntax->

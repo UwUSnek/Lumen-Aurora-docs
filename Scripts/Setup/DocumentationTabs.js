@@ -12,7 +12,7 @@ let tab_button_examples;
 let tab_button_internal;
 
 
-
+//FIXME add quick fade-out/fade-in to tab transitions
 var setup_tabs = {
     create_button : function(tab_num){
         // Create the button element

@@ -5,8 +5,8 @@
 <h1 id="preprocessor"></h1>
 <moveto-doc->
     <p>
-        The <b>preprocessing</b> phase <b>precedes</b> the code <b>compilation</b>.<br> //TODO
-        It removes <a href="#comments">comments</a> and evaluates preprocessor directives and <a href="#line-continuation-token">line continuation tokens</a>.
+        The <b>preprocessing</b> phase <b>precedes</b> the code <b>compilation</b>.<br>
+        It parses out <a href="#line-continuation-token">Line continuation tokens</a> and <a href="#comments">Comments</a> and processes preprocessor directives.
     </p>
     <p>
         <b>Preprocessor directives</b> are special instructions that allow the <b>code</b> to be <b>programmatically modified</b>.<br>
@@ -14,12 +14,16 @@
         Each directive spans over a single line of code.<br>
         Preprocessor directives are always case sensitive.
     </p>
+    <p>
+        <!-- FIXME WRITE PREPROCESSOR ORDER -->
+        <!-- FIXME ACTS AS IF EACH PASS IS DONE AFTER THE OTHER, but it's actually done in one pass, maybe put this in the internal functioning -->
+    </p>
 </moveto-doc->
 
 
 
+#include "./Page/Preprocessor/LineContinuationToken.html"
 #include "./Page/Preprocessor/Comments.html"
 #include "./Page/Preprocessor/IncludeStatement.html"
 #include "./Page/Preprocessor/Macros.html"
 #include "./Page/Preprocessor/Conditionals.html"
-#include "./Page/Preprocessor/LineContinuationToken.html"
