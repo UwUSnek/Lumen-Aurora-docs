@@ -320,7 +320,7 @@
 <moveto-doc->
     <p>
         The <b>preprocessing</b> phase <b>precedes</b> the code <b>compilation</b>.<br>
-        It parses out <a href="#line-continuation-token">Line continuation tokens</a> and <a href="#comments">Comments</a> and processes preprocessor directives.
+        It parses out <a href="#line-continuation-token">line continuation tokens</a> and <a href="#comments">comments</a> and processes preprocessor directives.
     </p>
     <p>
         <b>Preprocessor directives</b> are special instructions that allow the <b>code</b> of a module to be <b>programmatically modified</b>.<br>
@@ -332,10 +332,10 @@
 <moveto-internal->
     <p>
         Preprocessor operations are performed in a specific order:<br>
-        &nbsp;&nbsp;- <a href="#comments">Comments</a> and <a href="#line-continuation-token">Line continuation tokens</a> are removed.<br>
-        &nbsp;&nbsp;- <a href="#preprocessor-macro">Macro</a> definitions are evaluated and saved for later.<br>
-        &nbsp;&nbsp;- <a href="include-statement">Include statements</a> are processed, merging all the files into one.<br>
-        &nbsp;&nbsp;- <a href="#preprocessor-macro">Macro</a> calls are replaced with the code they generated.<br>
+        &nbsp;&nbsp;- <a href="#comments">Comments</a> and <a href="#line-continuation-token">line continuation tokens</a> are removed.<br>
+        &nbsp;&nbsp;- <a href="#preprocessor-macro">macro</a> definitions are evaluated and saved for later.<br>
+        &nbsp;&nbsp;- <a href="include-statement">include statements</a> are processed, merging all the files into one.<br>
+        &nbsp;&nbsp;- <a href="#preprocessor-macro">macro</a> calls are replaced with the code they generated.<br>
     </p>
 </moveto-internal->
 
@@ -427,7 +427,7 @@
 </moveto-examples->
 <moveto-internal->
     <p>
-        Line continuation tokens are simply removed.<br>
+        Line continuation tokens are <b>not</b> considered whitespace and are simply removed during the preprocessing phase.<br>
         The merged lines are not trimmed nor modified in any way.
     </p>
 </moveto-internal->
@@ -449,8 +449,8 @@
     </p>
     <p>
         Comments cannot be nested.<br>
-        Because they are removed before most preprocessor directives are parsed, they also cannot be included through <a href="#include-statement">Include statements</a>
-        or processed using <a href="#macros">Preprocessor macros</a>.
+        Because they are removed before most preprocessor directives are parsed, they also cannot be included through <a href="#include-statement">include statements</a>
+        or processed using <a href="#macros">preprocessor macros</a>.
     </p>
 
     <syntax->
@@ -489,18 +489,19 @@
 
 
 <h1 id="include-statement"></h1>
+
 <moveto-doc->
     <ce-full-size->
         NOTICE:<br>
         Althought the language provides include statements, we recommend not to use them.<br>
-        The <a href="#import-directive">Import directive</a> does a much better job at importing other modules, looks cleaner and can be debugged easily.<br>
+        The <a href="#import-directive">import directive</a> does a much better job at importing other modules, looks cleaner and can be debugged easily.<br>
         Include statements should only be used if you know what you are doing and you are certain that import directives won't be enough.
     </ce-full-size->
     <p>
         The <b>include statement</b> is used to <b>paste code</b> from other files.<br>
         Any existing file with read permissions can be included, regardless of its contents or extension.<br>
         The path of the included file must be enclosed in <code>"</code> <code>"</code> characters.<br>
-        <a href="#standard-modules">Standard modules</a> are included using the <code>&lt;</code> <code>&gt;</code> characters.<br>
+        <a href="#standard-modules">standard modules</a> are included using the <code>&lt;</code> <code>&gt;</code> characters.<br>
         The <a href="#core-module">core module</a> cannot be included.
     </p>
     <syntax->
@@ -591,7 +592,22 @@
 
 <h1 id="macros"></h1>
 <moveto-doc->
-    //TODO
+    <p>
+        //TODO
+        import <io>
+
+
+        #define add(first, second)             ($first + $second)
+
+        #define add_3(first, second, third)             #add(#add($first, $second) $third)
+
+
+        void main(){
+            io.print(#add_3(5, 12, 0.5));
+        }
+
+        //output is 17.5
+    </p>
 </moveto-doc->
 
 

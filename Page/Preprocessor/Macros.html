@@ -3,5 +3,22 @@
 <!--------------------------------------------------------------------->
 <h1 id="macros"></h1>
 <moveto-doc->
-    //TODO
+    <p>
+        //TODO
+        import <io>
+
+
+        #define add(first, second) \
+            ($first + $second)
+
+        #define add_3(first, second, third) \
+            #add(#add($first, $second) $third)
+
+
+        void main(){
+            io.print(#add_3(5, 12, 0.5));
+        }
+
+        //output is 17.5
+    </p>
 </moveto-doc->

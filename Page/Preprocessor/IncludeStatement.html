@@ -2,18 +2,19 @@
 <!-- Include statement                                               -->
 <!--------------------------------------------------------------------->
 <h1 id="include-statement"></h1>
+<!-- TODO maybe remove the ; character at the end of include statements. they are kinda useless and other preprocessor stuff doesn't have it -->
 <moveto-doc->
     <ce-full-size->
         NOTICE:<br>
         Althought the language provides include statements, we recommend not to use them.<br>
-        The <a href="#import-directive">Import directive</a> does a much better job at importing other modules, looks cleaner and can be debugged easily.<br>
+        The <a href="#import-directive">import directive</a> does a much better job at importing other modules, looks cleaner and can be debugged easily.<br>
         Include statements should only be used if you know what you are doing and you are certain that import directives won't be enough.
     </ce-full-size->
     <p>
         The <b>include statement</b> is used to <b>paste code</b> from other files.<br>
         Any existing file with read permissions can be included, regardless of its contents or extension.<br>
         The path of the included file must be enclosed in <code>"</code> <code>"</code> characters.<br>
-        <a href="#standard-modules">Standard modules</a> are included using the <code>&lt;</code> <code>&gt;</code> characters.<br>
+        <a href="#standard-modules">standard modules</a> are included using the <code>&lt;</code> <code>&gt;</code> characters.<br>
         The <a href="#core-module">core module</a> cannot be included.
     </p>
     <syntax->
