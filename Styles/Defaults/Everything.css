@@ -16,7 +16,7 @@
 
     /* Color */
     --bg:               #171717;
-    --bg-pre:           #101010;
+    --bg-pre:           #0f0f0f;
 
     --fg-separator:     hsl(213, 12%, 18%);
     --fg-text:          hsl(240, 2%, 88%);
