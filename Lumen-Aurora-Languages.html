@@ -319,23 +319,24 @@
 <h1 id="preprocessor"></h1>
 <moveto-doc->
     <p>
-        The <b>preprocessing</b> phase <b>precedes</b> the code <b>compilation</b>.<br>
-        It parses out <a href="#line-continuation-token">line continuation tokens</a> and <a href="#comments">comments</a> and processes preprocessor directives.
+        The <b>preprocessing</b> phase <b>precedes</b> the <b>compilation</b> of the source code.<br>
+        It parses out <a href="#line-continuation-token">line continuation tokens</a> and <a href="#comments">comments</a> and executes preprocessor directives.
     </p>
     <p>
         <b>Preprocessor directives</b> are special instructions that allow the <b>code</b> of a module to be <b>programmatically modified</b>.<br>
         All the preprocessor directives are identified by the <code>#</code> character followed by their name and definition.<br>
-        Each directive spans over a single line of code.<br>
-        Preprocessor directives are always case sensitive.
+        Each directive spans over a single line of code, except for <a href="#macros">preprocessor macro</a> calls, which end after their parameter list.<br>
+        The name of preprocessor directives is always case sensitive.
     </p>
 </moveto-doc->
 <moveto-internal->
     <p>
         Preprocessor operations are performed in a specific order:<br>
-        &nbsp;&nbsp;- <a href="#comments">Comments</a> and <a href="#line-continuation-token">line continuation tokens</a> are removed.<br>
-        &nbsp;&nbsp;- <a href="#preprocessor-macro">macro</a> definitions are evaluated and saved for later.<br>
-        &nbsp;&nbsp;- <a href="include-statement">include statements</a> are processed, merging all the files into one.<br>
-        &nbsp;&nbsp;- <a href="#preprocessor-macro">macro</a> calls are replaced with the code they generated.<br>
+        &nbsp;&nbsp;- <a href="#line-continuation-token">Line continuation tokens</a> are removed.<br>
+        &nbsp;&nbsp;- <a href="#preprocessor-macro">Macro</a> definitions are evaluated, saved for the replacement phase and removed from the code.<br>
+        &nbsp;&nbsp;- <a href="#comments">Comments</a> are removed.<br>
+        &nbsp;&nbsp;- <a href="include-statement">Include statements</a> are processed, merging all the files into one.<br>
+        &nbsp;&nbsp;- <a href="#preprocessor-macro">Macro</a> calls are replaced with their definition, substituting each parameter with the provided argument.<br>
     </p>
 </moveto-internal->
 
@@ -607,6 +608,14 @@
         }
 
         //output is 17.5
+
+
+        //TODO \$ is a special token that's only recognized within macro definitions and outside of string literals.
+        //FIXME macro definitions are found and evaluated after LCTs but before comments, includes and everything else
+
+
+
+        #
     </p>
 </moveto-doc->
 
@@ -1065,7 +1074,7 @@
         <b>Identifiers</b> are used to <b>name and reference <a href="#semantic-elements">symbols</a></b>.<br>
         An identifier can be
         alphanumeric (<code><sg->[</sg-><s->a</s-><sr->-</sr-><s->zA</s-><sr->-</sr-><s->Z_</s-><sg->][</sg-><s->a</s-><sr->-</sr-><s->zA</s-><sr->-</sr-><s->Z_0</s-><sr->-</sr-><s->9</s-><sg->]</sg-><sr->*</sr-></code>)
-        or symbolic (<code><sg->[</sg-><s->!$%&*+</s-><sr->\</sr-><s->-/:&lt;=&gt;?@^`|~;</s-><sr->\</sr-><s->[</s-><sr->\</sr-><s->]</s-><sr->\</sr-><s->.</s-><sg->]</sg-><sr->+</sr-></code>).
+        or symbolic (<code><sg->[</sg-><s->!$%&*+</s-><sr->\</sr-><s->-/:&lt;=&gt;?@^`|~;</s-><sr->\</sr-><s->[</s-><sr->\</sr-><s->].</s-><sg->]</sg-><sr->+</sr-></code>).
     </p>
     <p>
         Identifiers can be shadowed. This is explained in <a href="#name-shadowing">Name shadowing</a>.
