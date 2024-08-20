@@ -22,7 +22,8 @@
         //output is 17.5
 
 
-        //TODO \$ is a special token that's only recognized within macro definitions and outside of string literals.
+        //TODO \$ is a special token used to escape a $ in macro definitions. it's only recognized within macro definitions. This is also needed inside of string literals.
+        //TODO \, is a special token used to escape a , in macro arguments.   it's only recognized within macro calls.       This is also needed inside of string literals.
         //FIXME macro definitions are found and evaluated after LCTs but before comments, includes and everything else
         //FIXME replacement is done right after the includes.
 

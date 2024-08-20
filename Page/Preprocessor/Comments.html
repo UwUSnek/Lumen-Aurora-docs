@@ -10,13 +10,13 @@
     </p>
     <p>
         There are two types of comments: single line and multiline.<br>
-        Single line comments start with <code>//</code> and end at the next <code><nl-></nl-></code> character (\n).<br>
+        Single line comments start with <code>//</code> and end at the character that comes before the next <code><nl-></nl-></code> character (\n).<br>
         Multiline comments start with <code>/*</code> and end with <code>*/</code>.<br>
         Not closing a comment is allowed. This will cause it to include everything from its starting character sequence to the end of the file.
     </p>
     <p>
         Comments cannot be nested.<br>
-        Because they are removed before most preprocessor directives are parsed, they also cannot be included through <a href="#include-statement">include statements</a>
+        Because they are removed before preprocessor directives are parsed, they also cannot be included through <a href="#include-statement">include statements</a>
         or processed using <a href="#macros">preprocessor macros</a>.
     </p>
 
@@ -46,9 +46,18 @@
         </div>
         <label->Example 3 - Whitespace</label->
         <div>
-            <t->int</t-><c->/*comments_count_as_whitespace*/</c-><f->main</f->(){
-                <w->return</w-><c->/*they_can_separate_tokens*/</c-><k->0</k->;
+            <w->#import</w-> <s->&lt;io&gt;</s->
+
+            // comment
+            <t->i<c->/*comments_are_not_whitespace*/</c->nt</t-> <f->main</f->(){
+                io.<f->pr<c->/*they_cannot_separate_tokens*/</c->int</f->(<f->":3"</f->);
             }
         </div>
     </example->
 </moveto-examples->
+<moveto-internal->
+    <p>
+        Because the <code><nl-></nl-></code> character at the end of single-line comments is not considered part of the comment, it doesn't get removed by the preprocessor.<br>
+        This means that single-line comments always separate tokens, making them unable to be used within <a href="#macros">macro</a> definitions.
+    </p>
+</moveto-internal->
