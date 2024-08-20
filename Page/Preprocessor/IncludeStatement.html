@@ -66,15 +66,17 @@
         </div>
         <label->Example</label->
         <div>
-            <c->/* Comments */</c-> <k->#include</k-><c->/* on the same line */</c-><s->"./generated.lum"</s-> <c->// are allowed</c->
+            <t->int</t-> <f->main</f->(){ <k->#include</k-><s->"./generated/mainBody.txt"</s-> }
+            <c->// Writing code on the same line, either before the # character or after the path, is allowed.</c->
         </div>
     </example->
 </moveto-examples->
 <moveto-internal->
     <p>
-        Include statements cannot be used to create other preprocessor directives. This is by design.<br>
+        Include statements can be used to create other preprocessor directives, but not other include statements. This is by design.<br>
         Include operations are performed by replacing the include statement in the destination file
-        (from the <code>#</code> character to the closing <code>"</code> or <code>></code>) with the contents of the source file.
+        (from the <code>#</code> character to the closing <code>"</code> or <code>&gt;</code>) with the contents of the source file.<br>
+        Every byte of the source file is copied without trimming or modifying any of it.
     </p>
     <p>
         In the case of glob patterns, all the source files are copied in the same way, one after the other, without adding any separator between them.<br>

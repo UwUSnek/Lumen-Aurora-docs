@@ -325,7 +325,6 @@
     <p>
         <b>Preprocessor directives</b> are special instructions that allow the <b>code</b> of a module to be <b>programmatically modified</b>.<br>
         All the preprocessor directives are identified by the <code>#</code> character followed by their name and definition.<br>
-        Each directive spans over a single line of code, except for <a href="#macros">preprocessor macro</a> calls, which end after their parameter list.<br>
         The name of preprocessor directives is always case sensitive.
     </p>
 </moveto-doc->
@@ -481,17 +480,22 @@
         <div>
             <w->#import</w-> <s->&lt;io&gt;</s->
 
-            // comment
+            <c->// comment</c->
             <t->i<c->/*comments_are_not_whitespace*/</c->nt</t-> <f->main</f->(){
-                io.<f->pr<c->/*they_cannot_separate_tokens*/</c->int</f->(<f->":3"</f->);
+                io.<f->pr<c->/*they_cannot_separate_tokens*/</c->int</f->(<s->":3"</s->);
             }
         </div>
     </example->
 </moveto-examples->
 <moveto-internal->
     <p>
-        Because the <code><nl-></nl-></code> character at the end of single-line comments is not considered part of the comment, it doesn't get removed by the preprocessor.<br>
-        This means that single-line comments always separate tokens, making them unable to be used within <a href="#macros">macro</a> definitions.
+        Comments are <b>not</b> considered whitespace.<br>
+        Syntactically, they act in the same way as <a href="#line-continuation-token">line continuation tokens</a>,
+        as they are removed in the same step before any additional operation is performed.
+    </p>
+    <p>
+        Because the <code><nl-></nl-></code> character at the end of single-line comments is not considered part of the comment, it is not removed by the preprocessor.<br>
+        This means that single-line comments always separate tokens, rendering them unusable within <a href="#macros">macro</a> definitions.
     </p>
 </moveto-internal->
 
@@ -562,15 +566,17 @@
         </div>
         <label->Example</label->
         <div>
-            <c->/* Comments */</c-> <k->#include</k-><c->/* on the same line */</c-><s->"./generated.lum"</s-> <c->// are allowed</c->
+            <t->int</t-> <f->main</f->(){ <k->#include</k-><s->"./generated/mainBody.txt"</s-> }
+            <c->// Writing code on the same line, either before the # character or after the path, is allowed.</c->
         </div>
     </example->
 </moveto-examples->
 <moveto-internal->
     <p>
-        Include statements cannot be used to create other preprocessor directives. This is by design.<br>
+        Include statements can be used to create other preprocessor directives, but not other include statements. This is by design.<br>
         Include operations are performed by replacing the include statement in the destination file
-        (from the <code>#</code> character to the closing <code>"</code> or <code>></code>) with the contents of the source file.
+        (from the <code>#</code> character to the closing <code>"</code> or <code>&gt;</code>) with the contents of the source file.<br>
+        Every byte of the source file is copied without trimming or modifying any of it.
     </p>
     <p>
         In the case of glob patterns, all the source files are copied in the same way, one after the other, without adding any separator between them.<br>
@@ -5762,8 +5768,6 @@
             <tr>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->#include</s-vbtm-></td>
-                <td data-arrows="lr ar"></td>
-                <td><s-vbtm-><space-></space-></s-vbtm-></td>
                 <td data-arrows="lr ar lb"></td>
                 <td><s-vbtm->"</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
@@ -5773,8 +5777,6 @@
                 <td data-arrows="lr br ar"></td>
             </tr>
             <tr>
-                <td></td>
-                <td></td>
                 <td></td>
                 <td></td>
                 <td data-arrows="tr ar"></td>

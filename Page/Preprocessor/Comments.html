@@ -48,16 +48,21 @@
         <div>
             <w->#import</w-> <s->&lt;io&gt;</s->
 
-            // comment
+            <c->// comment</c->
             <t->i<c->/*comments_are_not_whitespace*/</c->nt</t-> <f->main</f->(){
-                io.<f->pr<c->/*they_cannot_separate_tokens*/</c->int</f->(<f->":3"</f->);
+                io.<f->pr<c->/*they_cannot_separate_tokens*/</c->int</f->(<s->":3"</s->);
             }
         </div>
     </example->
 </moveto-examples->
 <moveto-internal->
     <p>
-        Because the <code><nl-></nl-></code> character at the end of single-line comments is not considered part of the comment, it doesn't get removed by the preprocessor.<br>
-        This means that single-line comments always separate tokens, making them unable to be used within <a href="#macros">macro</a> definitions.
+        Comments are <b>not</b> considered whitespace.<br>
+        Syntactically, they act in the same way as <a href="#line-continuation-token">line continuation tokens</a>,
+        as they are removed in the same step before any additional operation is performed.
+    </p>
+    <p>
+        Because the <code><nl-></nl-></code> character at the end of single-line comments is not considered part of the comment, it is not removed by the preprocessor.<br>
+        This means that single-line comments always separate tokens, rendering them unusable within <a href="#macros">macro</a> definitions.
     </p>
 </moveto-internal->
