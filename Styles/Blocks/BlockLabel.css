@@ -1,6 +1,6 @@
 :root {
     --syntax-label-h:           3ch;
-    --syntax-label-padding:     2ch;
+    --syntax-label-padding:     1.1ch;
     --syntax-label-padding-top: 0.5ch;
     --syntax-label-active:      hsl(0, 0%, 65%);
 }

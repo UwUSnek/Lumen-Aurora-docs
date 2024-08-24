@@ -331,10 +331,12 @@
 <moveto-internal->
     <p>
         Preprocessor operations are performed in a specific order:<br>
-        &nbsp;&nbsp;- <a href="#comments">Comments</a> and <a href="#line-continuation-token">line continuation tokens</a> are removed.<br>
-        &nbsp;&nbsp;- <a href="include-statement">Include statements</a> are processed, merging all the files into one.<br>
+        &nbsp;&nbsp;- <a href="#line-continuation-token">line continuation tokens</a> are removed.<br>
+        &nbsp;&nbsp;- String and char literals are parsed.<br>
+        &nbsp;&nbsp;- <a href="#comments">Comments</a> are removed.<br>
+        &nbsp;&nbsp;- <a href="include-statement">Include statements</a> are processed recursively, merging all the files into one.<br>
         &nbsp;&nbsp;- <a href="#preprocessor-macro">Macro</a> definitions are evaluated and removed from the code.<br>
-        &nbsp;&nbsp;- <a href="#preprocessor-macro">Macro</a> calls are replaced with their definition, substituting each parameter with the provided argument.<br>
+        &nbsp;&nbsp;- <a href="#preprocessor-macro">Macro</a> calls are replaced with their definition, substituting each parameter with the provided argument, recursively.<br>
     </p>
 </moveto-internal->
 
