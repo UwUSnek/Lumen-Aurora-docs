@@ -16,13 +16,13 @@
 </moveto-doc->
 <moveto-internal->
     <p>
-        Preprocessor operations are performed in a specific order:<br>
-        &nbsp;&nbsp;- <a href="#line-continuation-token">line continuation tokens</a> are removed.<br>
-        &nbsp;&nbsp;- String and char literals are parsed.<br>
-        &nbsp;&nbsp;- <a href="#comments">Comments</a> are removed.<br>
-        &nbsp;&nbsp;- <a href="include-statement">Include statements</a> are processed recursively, merging all the files into one.<br>
-        &nbsp;&nbsp;- <a href="#preprocessor-macro">Macro</a> definitions are evaluated and removed from the code.<br>
-        &nbsp;&nbsp;- <a href="#preprocessor-macro">Macro</a> calls are replaced with their definition, substituting each parameter with the provided argument, recursively.<br>
+        Preprocessor operations are performed in the following order:<br>
+        &nbsp;&nbsp;1. Line stitching: <a href="#line-continuation-token">Line continuation tokens</a> are removed.<br>
+        &nbsp;&nbsp;2. Literals: String and character literals are parsed, and escape sequences within them are replaced with their UTF-8 representation.<br>
+        &nbsp;&nbsp;3. Comment Removal: <a href="#comments">Comments</a> are removed from the code.<br>
+        &nbsp;&nbsp;4. File stitching: <a href="include-statement">Include statements</a> are processed recursively, merging all referenced files into one.<br>
+        &nbsp;&nbsp;5. Macro Definitions: <a href="#preprocessor-macro">Macro</a> definitions are evaluated and then removed from the code.<br>
+        &nbsp;&nbsp;6. Macro Calls: <a href="#preprocessor-macro">Macro</a> calls are replaced with their corresponding definitions, substituting each parameter with the provided argument, recursively.
     </p>
 </moveto-internal->
 
