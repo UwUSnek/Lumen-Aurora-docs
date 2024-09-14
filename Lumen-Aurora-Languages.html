@@ -618,6 +618,9 @@
         Variable-length wildcards that are not last, instead, stop before the very first occurrence of the character or wildcard that follows them.<br>
         They are evaluated from left to right.<br>
     </p>
+    <p>
+        Symlinks in the included path are always resolved.
+    </p>
     <example->
         <div style="border-top-left-radius: var(--code-decoration-r);">
             <k->#include</k-> <s->"./*.*"</s-> <c->/*   This Glob pattern will match all of these:</c->
@@ -1115,7 +1118,7 @@
         <b>Identifiers</b> are used to <b>name and reference <a href="#semantic-elements">symbols</a></b>.<br>
         An identifier can be
         alphanumeric (<code><sg->[</sg-><s->a</s-><sr->-</sr-><s->zA</s-><sr->-</sr-><s->Z_</s-><sg->][</sg-><s->a</s-><sr->-</sr-><s->zA</s-><sr->-</sr-><s->Z_0</s-><sr->-</sr-><s->9</s-><sg->]</sg-><sr->*</sr-></code>)
-        or symbolic (<code><sg->[</sg-><s->!$%&*+</s-><sr->\</sr-><s->-/:&lt;=&gt;?@^`|~;</s-><sr->\</sr-><s->[</s-><sr->\</sr-><s->].</s-><sg->]</sg-><sr->+</sr-></code>).
+        or symbolic (<code><sg->[</sg-><s->!$%&*+</s-><sr->\</sr-><s->-/:&lt;=&gt;?@^`|~</s-><sr->\</sr-><s->[</s-><sr->\</sr-><s->].</s-><sg->]</sg-><sr->+</sr-></code>).
     </p>
     <p>
         Identifiers can be shadowed. This is explained in <a href="#name-shadowing">Name shadowing</a>.

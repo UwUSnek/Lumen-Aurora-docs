@@ -90,6 +90,9 @@
         Variable-length wildcards that are not last, instead, stop before the very first occurrence of the character or wildcard that follows them.<br>
         They are evaluated from left to right.<br>
     </p>
+    <p>
+        Symlinks in the included path are always resolved.
+    </p>
     <example->
         <div style="border-top-left-radius: var(--code-decoration-r);">
             <k->#include</k-> <s->"./*.*"</s-> <c->/*   This Glob pattern will match all of these:</c->
