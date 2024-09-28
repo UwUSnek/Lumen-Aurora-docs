@@ -93,7 +93,7 @@ body > right- > #main-right-tab-container {
 body > right- > #main-right-tab-container > #main-right-doc,
 body > right- > #main-right-tab-container > #main-right-examples,
 body > right- > #main-right-tab-container > #main-right-internal {
-    display: inline-flex;
+    display: inline-block;
     position: relative;
 
     min-width:  100%;
