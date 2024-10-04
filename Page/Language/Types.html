@@ -946,6 +946,11 @@
         <b><code><w->const</w-></code></b> can also be used before the name of a <b>variable</b> or <b>routine parameter</b> to <b>prevent them from being modified</b> after their declaration, although this doesn't turn the type of the symbol into a const type.<br>
         The address of <code><w->const</w-></code> variables or <code><w->const</w-></code> routine parameters is always returned as a <code><t->const</t-></code> pointer.
     </p>
+    <p>
+        //TODO explain that programmers are expected to not change critical values without knowing what they are doing (there are no const types).
+
+        //TODO Maybe move the const qualifier under "misc" as it's not part of the types nor does it affect them in any way
+    </p>
 </moveto-doc->
 <moveto-examples->
     <example->
