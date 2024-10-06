@@ -2456,6 +2456,7 @@
             <example->
                 <label->Output</label->
                 <div>
+                    <console-prefix-></console-prefix->
                     OwO
                     TwT<cursor-></cursor->
                 </div>
@@ -2543,6 +2544,7 @@
             <example->
                 <label->Output</label->
                 <div>
+                    <console-prefix-></console-prefix->
                     x: 15
                     y: 9<cursor-></cursor->
                 </div>
@@ -2654,6 +2656,7 @@
             <example->
                 <label->Output</label->
                 <div>
+                    <console-prefix-></console-prefix->
                     Destroyed instance n.0
                     Destroyed instance n.1
                     <cursor-></cursor->
@@ -2705,6 +2708,7 @@
             <example->
                 <label->Output</label->
                 <div>
+                    <console-prefix-></console-prefix->
                     Not void
                     Void
                     <cursor-></cursor->
@@ -2761,6 +2765,7 @@
             <example->
                 <label->Output</label->
                 <div>
+                    <console-prefix-></console-prefix->
                     void
                     not void
                     <cursor-></cursor->
@@ -2811,6 +2816,7 @@
             <example->
                 <label->Output</label->
                 <div>
+                    <console-prefix-></console-prefix->
                     6<cursor-></cursor->
                 </div>
             </example->
@@ -2839,6 +2845,7 @@
             <example->
                 <label->Output</label->
                 <div>
+                    <console-prefix-></console-prefix->
                     6<cursor-></cursor->
                 </div>
             </example->
@@ -2894,6 +2901,7 @@
             <example->
                 <label->Output</label->
                 <div>
+                    <console-prefix-></console-prefix->
                     Variable "a" created
                     OwO<cursor-></cursor->
                 </div>
@@ -2925,6 +2933,7 @@
             <example->
                 <label->Output</label->
                 <div>
+                    <console-prefix-></console-prefix->
                     Before map: [1, 2]
                     After  map: [5, 10]<cursor-></cursor->
                 </div>
@@ -2944,6 +2953,11 @@
     <p>
         <b><code><w->const</w-></code></b> can also be used before the name of a <b>variable</b> or <b>routine parameter</b> to <b>prevent them from being modified</b> after their declaration, although this doesn't turn the type of the symbol into a const type.<br>
         The address of <code><w->const</w-></code> variables or <code><w->const</w-></code> routine parameters is always returned as a <code><t->const</t-></code> pointer.
+    </p>
+    <p>
+        //TODO explain that programmers are expected to not change critical values without knowing what they are doing (there are no const types).
+
+        //TODO Maybe move the const qualifier under "misc" as it's not part of the types nor does it affect them in any way
     </p>
 </moveto-doc->
 <moveto-examples->
@@ -3491,6 +3505,13 @@
         This also applies to const pointer types used as part of function types, with the added constraint that
         all of the pointer types used in the source function type must be implicitly convertible to their respective pointer types in the target function type.
     </p>
+    <p>
+        //FIXME REMOVE THIS. CONST IS NOT PART OF THE TYPE ANYMORE
+        //FIXME REMOVE THIS. CONST IS NOT PART OF THE TYPE ANYMORE
+        //FIXME REMOVE THIS. CONST IS NOT PART OF THE TYPE ANYMORE
+        //FIXME REMOVE THIS. CONST IS NOT PART OF THE TYPE ANYMORE
+        //FIXME REMOVE THIS. CONST IS NOT PART OF THE TYPE ANYMORE
+    </p>
 </moveto-doc->
 <moveto-examples->
     <example->
@@ -3514,6 +3535,16 @@
         </div>
     </example->
 </moveto-examples->
+
+
+
+
+
+
+//TODO improve index style
+//TODO improve index style
+//TODO improve index style
+//TODO improve index style
 
 
 <h1 id="expressions"></h1>
@@ -4168,6 +4199,7 @@
             <example->
                 <label->Output</label->
                 <div>
+                    <console-prefix-></console-prefix->
                     abcc<cursor-></cursor->
                 </div>
             </example->
@@ -4230,6 +4262,7 @@
             <example->
                 <label->Output</label->
                 <div>
+                    <console-prefix-></console-prefix->
                     The first argument is not a double
                     The first argument is a double
                     More than one argument provided
@@ -4526,6 +4559,7 @@
             <example->
                 <label->Output</label->
                 <div>
+                    <console-prefix-></console-prefix->
                     float
                     ulong
                     int

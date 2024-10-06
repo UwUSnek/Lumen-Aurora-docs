@@ -1,0 +1,10 @@
+console-prefix- {
+    display: inline;
+}
+console-prefix-::before {
+    color: hsl(276, 54%, 71%);
+    content: "[snek@localhost ~]$";
+}
+console-prefix-::after {
+    content: " ./example";
+}

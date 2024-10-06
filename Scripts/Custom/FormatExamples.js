@@ -44,6 +44,7 @@ var format_examples = {
 
 
 
+
     start : function() {
         format_examples.indent_code();
     }
