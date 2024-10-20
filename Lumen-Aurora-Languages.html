@@ -33,6 +33,8 @@
     <left- class="hide-scrollbar">
 <index- class="hide-scrollbar"><indexh-></indexh->
     <index-><indexh->overview</indexh->
+        <indexd->lumen</indexd->
+        <indexd->aurora</indexd->
     </index->
 
 
@@ -289,18 +291,11 @@
 
 <h1 id="overview"></h1>
 <moveto-doc->
-    <logo- style="background-image: url('Logos/Photon.png');"></logo->
-
-
     <p>
-        //TODO
-        Lumen and Aurora are <b>high level procedural compiled languages</b> with the aim of abstracting GPU rendering while preserving the runtime performance of low level languages.
-        This is achieved through a built-in rendering support and a powerful optimizer.<br>
-    </p>
-    <p>
-        The languages are organized in modules and share the same compiler.<br>
-        A static type system is used to improve readability and minimize runtime errors.<br>
-        A reference counter manages the lifespan of variables and memory blocks.
+        Lumen and Aurora are compiled programming languages designed to work together seamlessly,
+        offering an integrated solution for both traditional CPU programming and GPU computing.<br>
+
+        This combination allows for flexibility and performance, without sacrificing code clarity or maintainability.
     </p>
     <p>
         <div style="display: inline-block; min-width: 10ch"><Lumen-logo-></Lumen-logo-> Lumen - Programming language. File extension: <code>.lum</code></div><br>
@@ -309,10 +304,52 @@
 </moveto-doc->
 
 
-<moveto-doc->
+<moveto-doc-> //FIXME put this somewhere or delete it if not needed
     <logo- style="background-image: url('Logos/Lumen.png');"></logo->
     <logo- style="background-image: url('Logos/Aurora.png');"></logo->
     <p style="min-height: 100vh;"></p> 
+</moveto-doc->
+
+
+<h1 id="lumen"></h1>
+<moveto-doc->
+    <p>
+        Lumen is a general-purpose high-level language with a C++-like syntax.<br>
+        Its purpose is to provide the speed and power of low-level languages, without sacrificing readability and maintainability.<br>
+        The language achieves this by offering features such as modules, reflection, a powerful optimizer and native support for both Windows and Linux.
+    </p>
+    <p>
+        Lumen's optimizer focuses entirely on maximizing performance.<br>
+        Before any optimization happens, the code is thoroughly parsed and simplified, so the optimizer can work without compromises.<br>
+        This ensures that the performance is on par with C, while keeping the program's behaviour exactly as intended.<br>
+        Advanced features like templates and reflection come with no performance penalty, letting developers focus on writing clean, effective code.
+    </p>
+    <p>
+        Another key feature is its ability to improve the debugging experience.<br>
+        Lumen includes built-in checks for common issues like overflows and race conditions, and allows developers to add custom ones.<br>
+        They are easily toggleable and are meant to be used during development.<br>
+        This ensures that developers can catch problems before they escalate, making the code more robust without affecting performance when deploying the final product.
+    </p>
+    <p>
+        Unlike most modern languages, Lumen is not Object-Oriented.<br>
+        Instead, features usually associated with OOP are implemented using templates and reflection.<br>
+        These provide better runtime performance while maintaining flexibility.
+    </p>
+</moveto-doc->
+
+
+<h1 id="aurora"></h1>
+<moveto-doc->
+    <p>
+        Aurora is a specialized subset of Lumen focused on managing GPU tasks and shaders.<br>
+        When developing applications for graphics or parallel computing, many languages require developers to manage complex GPU tasks manually.<br>
+        Aurora streamlines this process, providing a simplified interface while still allowing developers the flexibility
+        to fine-tune any aspect of the GPU operations when necessary.
+    </p>
+    <p>
+        Aurora seamlessly integrates with Lumen.<br>
+        This enables developers to work in a unified environment without the need for external tools.
+    </p>
 </moveto-doc->
 
 
