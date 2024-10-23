@@ -292,10 +292,12 @@
 <h1 id="overview"></h1>
 <moveto-doc->
     <p>
-        Lumen and Aurora are compiled programming languages designed to work together seamlessly,
-        offering an integrated solution for both traditional CPU programming and GPU computing.<br>
-
-        This combination allows for flexibility and performance, without sacrificing code clarity or maintainability.
+        Lumen and Aurora are high-level programming languages designed to work together seamlessly,
+        offering an integrated solution for both general-purpose programming and GPU computing.<br>
+    </p>
+    <p>
+        Both languages are compiled and share a static type system,
+        offering a balance between flexibility and performance without compromising code clarity or maintainability.
     </p>
     <p>
         <div style="display: inline-block; min-width: 10ch"><Lumen-logo-></Lumen-logo-> Lumen - Programming language. File extension: <code>.lum</code></div><br>
@@ -335,6 +337,7 @@
         Instead, features usually associated with OOP are implemented using templates and reflection.<br>
         These provide better runtime performance while maintaining flexibility.
     </p>
+    //TODO add example in the documentation tab
 </moveto-doc->
 
 
@@ -342,7 +345,7 @@
 <moveto-doc->
     <p>
         Aurora is a specialized subset of Lumen focused on managing GPU tasks and shaders.<br>
-        When developing applications for graphics or parallel computing, many languages require developers to manage complex GPU tasks manually.<br>
+        When developing applications for graphics or parallel computing, many languages require developers to manage complex GPU tasks manually.
         Aurora streamlines this process, providing a simplified interface while still allowing developers the flexibility
         to fine-tune any aspect of the GPU operations when necessary.
     </p>
@@ -350,6 +353,7 @@
         Aurora seamlessly integrates with Lumen.<br>
         This enables developers to work in a unified environment without the need for external tools.
     </p>
+    //TODO add example in the documentation tab
 </moveto-doc->
 
 
@@ -2040,7 +2044,6 @@
     <p>
         The <b>Import directive</b> allows the <a href="#modules">module</a> to <b>access</b> and <b>rename <a href="#name-resolution">symbols</a></b> declared in <b>other modules</b>.<br>
         Only <a href="#name-resolution">symbols</a> exported using the <a href="#export-directive">Export directive</a> and their children can be imported.<br>
-        The <code>*</code> character can be used to import all the <a href="#name-resolution">symbols</a> inside the <a href="#modules">module</a>. <code>*</code> doesn't allow renaming.<br>
     </p>
     <p>
         When an Import directive is used, it creates a new namespace inside the <a href="#root-scope">root scope</a> (.) containing the imported <a href="#name-resolution">symbols</a>, renamed as specified in the directive.<br>
@@ -2050,15 +2053,8 @@
         <label- id="copy.syntax--misc-import-directive">Import syntax</label->
     </syntax->
     <p>
-        When the <code><w->import</w-></code> <a href="#keywords">keyword</a> is used, the container <a href="#namespaces">namespace</a> is preserved.<br>
-        The new <a href="#namespaces">namespace</a> is created using the export <a href="#identifiers">identifier</a> of the <a href="#modules">module</a> you are importing from, or, if not specified, the name of the file without its extensions.<br>
-        The container <a href="#namespaces">namespace</a> can also be renamed.<br>
-        <a href="#namespaces">Namespaces</a> created through the <code><w->import</w-></code> <a href="#keywords">keyword</a> always generate a <a href="#symbol-aliases">Symbol alias</a> for consistency reasons.<br>
-        Using <a href="#symbol-aliases">Symbol aliases</a> allows import directives to follow the same <a href="#name-shadowing">Name shadowing</a> rules that apply to <a href="#declarations">Symbol declarations</a>.
-    </p>
-    <p>
-        When the <code><w->include</w-></code> <a href="#keywords">keyword</a> is used, the container <a href="#namespaces">namespace</a> is not preserved and the <a href="#name-resolution">symbols</a> are placed directly inside the <a href="#modules">module</a> <a href="#namespaces">namespace</a>.<br>
-        The <code><w->include</w-></code> <a href="#keywords">keyword</a> doesn't generate any <a href="#symbol-aliases">Symbol alias</a>.
+        The new <a href="#namespaces">namespace</a> is created using the name of its file without extensions, or, if specified, the identifier used in the include directive.<br>
+        An explicit identifier is always required for modules whose file's name is not a valid identifier.
     </p>
 </moveto-doc->
 <moveto-examples->
@@ -2070,11 +2066,11 @@
                     <c->// [module "main.ubr"]</c->
 
                     <t->int</t-> io;
-                    <w->from</w-> <s->&lt;math&gt;</s-> <w->include</w-> <f->sum</f->;
-                    <w->from </w-><s->&lt;io&gt;</s-> <w->import</w-> <f->print</f-> <w->as</w-> <f->write</f->;
+                    <w->from</w-> <s->"&lt;math&gt;"</s-> <w->include</w-> <f->sum</f->; //FIXME fix bad syntax "<name>". should be <name> but that's not a string literal
+                    <w->from </w-><s->"&lt;io&gt;"</s-> <w->include</w-> <f->print</f-> <w->as</w-> <f->write</f->;
 
                     <t->void</t-> <f->main</f->(){
-                        io.<f->write</f->(<f->sum</f->((<k->8</k->, <k->9</k->, <k->10</k->)));
+                        io.<f->write</f->(<f->math.sum</f->(<k->8</k->, <k->9</k->, <k->10</k->));
                     }
                 </div>
             </example->
@@ -2087,20 +2083,21 @@
                     <c->// this is what the program looks like</c->
 
                     <w->namespace</w-> root {
-                        <w->namespace</w-> module { <c->// Merges with the current module</c->
+                        <w->namespace</w-> math {
                             <c->// sum function...</c->
                         }
 
                         <w->namespace</w-> io {
-                            <c->// write function (print) ...</c->
+                            <c->// print function ...</c->
+                            <w->alias</w-> print <w->as</w-> write;
                         }
 
                         <w->namespace</w-> module {
                             <w->int</w-> io;
-                            <w->alias</w-> .io <w->as</w-> io;
+                            <w->alias</w-> .io <w->as</w-> io; //TODO check if . for the root module is correct
 
                             <t->void</t-> <f->main</f->(){
-                                io.<f->write</f->(<f->sum</f->((<k->8</k->, <k->9</k->, <k->10</k->)));
+                                io.<f->write</f->(<f->math.sum</f->(<k->8</k->, <k->9</k->, <k->10</k->));
                             }
                         }
                     }
@@ -5991,24 +5988,18 @@
         <label- class="s-decl" id="syntax--misc-import-directive"><a href="#import-directive">Import directive</a></label->
         <table class="s-decl">
             <tr>
-                <td></td>
-                <td></td>
                 <td data-arrows="br ar"></td>
-                <td><s-vbtm->&lt;</s-vbtm-></td>
-                <td data-arrows="lr ar"></td>
-                <td><s-any->module name</s-any-></td>
-                <td data-arrows="lr ar"></td>
-                <td><s-vbtm->&gt;</s-vbtm-></td>
+                <td><s-vbtm->import</s-vbtm-></td>
                 <td data-arrows="lb"></td>
+                <td></td>
                 <td data-arrows="br"></td>
                 <td data-arrows="lr"></td>
                 <td data-arrows="lr"></td>
                 <td data-arrows="lr"></td>
-                <td data-arrows="lr ar lb"></td>
-                <td><s-vbtm->include</s-vbtm-></td>
-                <td data-arrows="lb"></td>
-                <td data-arrows="br ar"></td>
-                <td><s-vbtm->*</s-vbtm-></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lr"></td>
                 <td data-arrows="br lr"></td>
                 <td data-arrows="lr"></td>
                 <td data-arrows="lr"></td>
@@ -6018,23 +6009,17 @@
                 <td data-arrows="lr ar"></td>
             </tr>
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar lt"></td>
                 <td><s-vbtm->from</s-vbtm-></td>
-                <td data-arrows="lr ar lt"></td>
-                <td><s-vbtm->"</s-vbtm-></td>
-                <td data-arrows="lr ar"></td>
-                <td><s-any->path/to/module</s-any-></td>
-                <td data-arrows="lr ar"></td>
-                <td><s-vbtm->"</s-vbtm-></td>
-                <td data-arrows="lr tr"></td>
-                <td data-arrows="lr ar lt"></td>
+                <td data-arrows="lr-low ar-low tr-high ar-high"></td>
+                <td><s-expr-><t->[str]</t->&nbsp;module path</s-any-></td>
+                <td data-arrows="lr-low ar-low lb-low lt-high"></td>
                 <td><s-vbtm->as</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-any->name</s-any-></td>
-                <td data-arrows="tr lr ar"></td>
+                <td data-arrows="br lr ar"></td>
                 <td><s-vbtm->import</s-vbtm-></td>
-                <td data-arrows="lr tr"></td>
-                <td data-arrows="lr br ar lt"></td>
+                <td data-arrows="lr br ar"></td>
                 <td><s-path->symbol</s-path-></td>
                 <td data-arrows="lr ar lt"></td>
                 <td><s-vbtm->as</s-vbtm-></td>
@@ -6049,17 +6034,11 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td data-arrows="tr"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lt"></td>
                 <td></td>
                 <td data-arrows="rt"></td>
                 <td data-arrows="rl"></td>
