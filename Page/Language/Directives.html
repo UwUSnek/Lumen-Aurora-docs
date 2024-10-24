@@ -42,11 +42,11 @@
                     <c->// [module "main.ubr"]</c->
 
                     <t->int</t-> io;
-                    <w->from</w-> <s->"&lt;math&gt;"</s-> <w->include</w-> <f->sum</f->; //FIXME fix bad syntax "<name>". should be <name> but that's not a string literal
-                    <w->from </w-><s->"&lt;io&gt;"</s-> <w->include</w-> <f->print</f-> <w->as</w-> <f->write</f->;
+                    <w->from</w-> <s->"&lt;math&gt;"</s-> <w->import</w-> <f->sum</f->; //FIXME fix bad syntax "<name>". should be <name> but that's not a string literal
+                    <w->from </w-><s->"&lt;io&gt;"</s-> <w->import</w-> <f->print</f-> <w->as</w-> <f->write</f->;
 
                     <t->void</t-> <f->main</f->(){
-                        io.<f->write</f->(<f->math.sum</f->(<k->8</k->, <k->9</k->, <k->10</k->));
+                        io.<f->write</f->(math.<f->sum</f->(<k->8</k->, <k->9</k->, <k->10</k->));
                     }
                 </div>
             </example->
@@ -73,7 +73,7 @@
                             <w->alias</w-> .io <w->as</w-> io; //TODO check if . for the root module is correct
 
                             <t->void</t-> <f->main</f->(){
-                                io.<f->write</f->(<f->math.sum</f->(<k->8</k->, <k->9</k->, <k->10</k->));
+                                io.<f->write</f->(math.<f->sum</f->(<k->8</k->, <k->9</k->, <k->10</k->));
                             }
                         }
                     }

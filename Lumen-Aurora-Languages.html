@@ -2066,11 +2066,11 @@
                     <c->// [module "main.ubr"]</c->
 
                     <t->int</t-> io;
-                    <w->from</w-> <s->"&lt;math&gt;"</s-> <w->include</w-> <f->sum</f->; //FIXME fix bad syntax "<name>". should be <name> but that's not a string literal
-                    <w->from </w-><s->"&lt;io&gt;"</s-> <w->include</w-> <f->print</f-> <w->as</w-> <f->write</f->;
+                    <w->from</w-> <s->"&lt;math&gt;"</s-> <w->import</w-> <f->sum</f->; //FIXME fix bad syntax "<name>". should be <name> but that's not a string literal
+                    <w->from </w-><s->"&lt;io&gt;"</s-> <w->import</w-> <f->print</f-> <w->as</w-> <f->write</f->;
 
                     <t->void</t-> <f->main</f->(){
-                        io.<f->write</f->(<f->math.sum</f->(<k->8</k->, <k->9</k->, <k->10</k->));
+                        io.<f->write</f->(math.<f->sum</f->(<k->8</k->, <k->9</k->, <k->10</k->));
                     }
                 </div>
             </example->
@@ -2097,7 +2097,7 @@
                             <w->alias</w-> .io <w->as</w-> io; //TODO check if . for the root module is correct
 
                             <t->void</t-> <f->main</f->(){
-                                io.<f->write</f->(<f->math.sum</f->(<k->8</k->, <k->9</k->, <k->10</k->));
+                                io.<f->write</f->(math.<f->sum</f->(<k->8</k->, <k->9</k->, <k->10</k->));
                             }
                         }
                     }
@@ -2118,7 +2118,7 @@
     </p>
     <p>
         Exporting a <a href="#namespaces">namespace</a> will also export any exportable symbol it contains.<br>
-        Any additional <a href="#name-resolution">symbol</a> upon which an exported <a href="#name-resolution">symbol</a> depends on is automatically exported
+        Any additional <a href="#name-resolution">symbol</a> upon which an exported <a href="#name-resolution">symbol</a> depends is automatically exported
         but hidden from the other <a href="#modules">modules</a>.
     </p>
     <p>
@@ -6017,19 +6017,20 @@
                 <td><s-vbtm->import</s-vbtm-></td>
                 <td data-arrows="lb"></td>
                 <td></td>
-                <td data-arrows="br"></td>
-                <td data-arrows="lr"></td>
-                <td data-arrows="lr"></td>
-                <td data-arrows="lr"></td>
-                <td data-arrows="lr"></td>
-                <td data-arrows="lr"></td>
-                <td data-arrows="lr"></td>
-                <td data-arrows="lr"></td>
-                <td data-arrows="br lr"></td>
-                <td data-arrows="lr"></td>
-                <td data-arrows="lr"></td>
-                <td data-arrows="lr"></td>
-                <td data-arrows="lr br ar"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td data-arrows="br-high"></td>
+                <td data-arrows="lr-high"></td>
+                <td data-arrows="lr-high"></td>
+                <td data-arrows="lr-high"></td>
+                <td data-arrows="lr-high br-low"></td>
+                <td data-arrows="lr-high lr-low"></td>
+                <td data-arrows="lr-high lr-low"></td>
+                <td data-arrows="lr-high lr-low"></td>
+                <td data-arrows="lr-high lb-low"></td>
+                <td data-arrows="lr-high br-low ar-low ar-high"></td>
                 <td><s-vbtm->;</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
             </tr>
@@ -6038,11 +6039,11 @@
                 <td><s-vbtm->from</s-vbtm-></td>
                 <td data-arrows="lr-low ar-low tr-high ar-high"></td>
                 <td><s-expr-><t->[str]</t->&nbsp;module path</s-any-></td>
-                <td data-arrows="lr-low ar-low lb-low lt-high"></td>
+                <td data-arrows="lr-low ar-low lb-low lr-high ar-high"></td>
                 <td><s-vbtm->as</s-vbtm-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr-low ar-low lr-high ar-high"></td>
                 <td><s-any->name</s-any-></td>
-                <td data-arrows="br lr ar"></td>
+                <td data-arrows="br-low lr-low ar-low lt-high"></td>
                 <td><s-vbtm->import</s-vbtm-></td>
                 <td data-arrows="lr br ar"></td>
                 <td><s-path->symbol</s-path-></td>
@@ -6050,6 +6051,7 @@
                 <td><s-vbtm->as</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-any->name</s-any-></td>
+                <td data-arrows="lr tr"></td>
                 <td data-arrows="lr ar lt"></td>
                 <td><s-vbtm->,</s-vbtm-></td>
                 <td data-arrows="lb"></td>
@@ -6066,6 +6068,7 @@
                 <td data-arrows="lt"></td>
                 <td></td>
                 <td data-arrows="rt"></td>
+                <td data-arrows="rl"></td>
                 <td data-arrows="rl"></td>
                 <td data-arrows="rl"></td>
                 <td data-arrows="rl"></td>
