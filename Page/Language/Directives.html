@@ -107,11 +107,12 @@
     </p>
     <p>
         Exporting a <a href="#namespaces">namespace</a> will also export any exportable symbol it contains.<br>
-        Any additional <a href="#name-resolution">symbol</a> upon which an exported <a href="#name-resolution">symbol</a> depends on is automatically exported
+        Any additional <a href="#name-resolution">symbol</a> upon which an exported <a href="#name-resolution">symbol</a> depends is automatically exported
         but hidden from the other <a href="#modules">modules</a>.
     </p>
     <p>
-        The <code>*</code> character can be used to export all the <a href="#name-resolution">symbols</a> inside the <a href="#modules">module</a>. <code>*</code> doesn't allow renaming.
+        Not specifying any symbol will export all the <a href="#name-resolution">symbols</a> inside the <a href="#modules">module</a>.<br>
+        This doesn't allow renaming.
     </p>
     <syntax->
         <label- id="copy.syntax--misc-export-directive">Export syntax</label->
@@ -127,7 +128,7 @@
                 <w->return</w-> <k->pi</k-><f->*</f-><k->2</k->;
             }
 
-            <w->export</w-> <f->getTau</f->;
+            <w->export</w-> <f->getTau</f-> <w->as</w-> tau;
         </div>
     </example->
     <br><br>

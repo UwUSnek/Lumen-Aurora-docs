@@ -2122,7 +2122,8 @@
         but hidden from the other <a href="#modules">modules</a>.
     </p>
     <p>
-        The <code>*</code> character can be used to export all the <a href="#name-resolution">symbols</a> inside the <a href="#modules">module</a>. <code>*</code> doesn't allow renaming.
+        Not specifying any symbol will export all the <a href="#name-resolution">symbols</a> inside the <a href="#modules">module</a>.<br>
+        This doesn't allow renaming.
     </p>
     <syntax->
         <label- id="copy.syntax--misc-export-directive">Export syntax</label->
@@ -2138,7 +2139,7 @@
                 <w->return</w-> <k->pi</k-><f->*</f-><k->2</k->;
             }
 
-            <w->export</w-> <f->getTau</f->;
+            <w->export</w-> <f->getTau</f-> <w->as</w-> tau;
         </div>
     </example->
     <br><br>
@@ -6098,8 +6099,8 @@
             <tr>
                 <td></td>
                 <td></td>
-                <td data-arrows="br ar"></td>
-                <td><s-vbtm->*</s-vbtm-></td>
+                <td data-arrows="br-high"></td>
+                <td data-arrows="lr-high"></td>
                 <td data-arrows="br-low lr-high"></td>
                 <td data-arrows="lr-low lr-high"></td>
                 <td data-arrows="lr-low lr-high"></td>
