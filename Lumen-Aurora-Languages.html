@@ -2111,18 +2111,18 @@
 <h1 id="export-directive"></h1>
 <moveto-doc->
     <p>
-        The <b>Export directive</b> allows the module to <b>state and rename</b> the <b><a href="#name-resolution">symbols</a> other <a href="#modules">modules</a></b> are allowed to <b>use</b> when importing from the current <a href="#modules">module</a>.<br>
-        Only <a href="#namespaces">namespaces</a>, <a href="#enums">enums</a>, <a href="#structs">structs</a>, <a href="#routines">routines</a>, <a href="#variables">variables</a> and <a href="#templates">templates</a>
-        declared in the <a href="#modules">module</a> <a href="#scopes">scope</a> or whose parent <a href="#scopes">scopes</a> are only <a href="#namespaces">namespaces</a> can be exported.<br>
-        Any additional <a href="#name-resolution">symbol</a> upon which an exported <a href="#name-resolution">symbol</a> depends is automatically exported but hidden from the other <a href="#modules">modules</a>.
+        The <b>Export directive</b> allows the module to <b>state and rename</b> the <b><a href="#name-resolution">symbols</a>
+        other <a href="#modules">modules</a></b> are allowed to <b>use</b> when importing from the current <a href="#modules">module</a>.<br>
+        Only <a href="#namespaces">namespaces</a>, <a href="#enums">enums</a>, <a href="#structs">structs</a>, <a href="#routines">routines</a>,
+        global <a href="#variables">variables</a> and <a href="#templates">templates</a> can be exported.
+    </p>
+    <p>
+        Exporting a <a href="#namespaces">namespace</a> will also export any exportable symbol it contains.<br>
+        Any additional <a href="#name-resolution">symbol</a> upon which an exported <a href="#name-resolution">symbol</a> depends on is automatically exported
+        but hidden from the other <a href="#modules">modules</a>.
     </p>
     <p>
         The <code>*</code> character can be used to export all the <a href="#name-resolution">symbols</a> inside the <a href="#modules">module</a>. <code>*</code> doesn't allow renaming.
-    </p>
-    <p>
-        It is possible to define an export <a href="#identifiers">identifier</a> which will be used by the other <a href="#modules">modules</a> to name the <a href="#namespaces">namespace</a> containing the imported <a href="#name-resolution">symbols</a>.<br>
-        If an export <a href="#identifiers">identifier</a> is not specified, the name of the file without its extensions is used.<br>
-        If the file has a name that is not a valid <a href="#identifiers">identifier</a>, a custom export <a href="#identifiers">identifier</a> must be specified.
     </p>
     <syntax->
         <label- id="copy.syntax--misc-export-directive">Export syntax</label->
@@ -2138,40 +2138,64 @@
                 <w->return</w-> <k->pi</k-><f->*</f-><k->2</k->;
             }
 
-            <w->export</w-> <w->as</w-> notPi;
             <w->export</w-> <f->getTau</f->;
         </div>
     </example->
-
+    <br><br>
     <p>
-        While the Export directive doesn't preserve the parent <a href="#namespaces">namespaces</a> of a <a href="#name-resolution">symbol</a> nor can it add new ones, it can be used in conjunction with <a href="#symbol-aliases">Symbol aliases</a>
-        and <a href="#namespaces">Namespaces</a> to create a clean interface while preserving the internal structure of the <a href="#modules">module</a>.
+        The Export directive doesn't preserve the parent <a href="#namespaces">namespaces</a> of a <a href="#name-resolution">symbol</a> nor can it add new ones.<br>
+        This is usually not a problem, but it's possible to use <a href="#namespaces">Namespaces</a> in conjunction with <a href="#symbol-aliases">Symbol aliases</a>
+        to create a clean interface while preserving the internal structure of the <a href="#modules">module</a>.
     </p>
-    <example->
-        <label->Example</label->
-        <div>
-            <w->from</w-> <s->&lt;math&gt;</s-> <w->import</w-> <f->pow</f->;
+    <split-example-container->
+        <split-example-container-left->
+            <example->
+                <label->utils.lum</label->
+                <div>
+                    <w->from</w-> <s->&lt;math&gt;</s-> <w->import</w-> <f->pow</f->;
 
-            <t->float</t-> pi = <k->3.14</k->
+                    <c->// Use any namespaces you want to write and organize the module</c->
+                    <t->float</t-> pi = <k->3.14</k->
 
-            <t->float</t-> <f->cube_v</f->(<t->float</t-> <p->side</p->) { <w->return</w-> math.<p->pow</p->(side, <k->3</k->) }
-            <t->float</t-> <f->cube_s</f->(<t->float</t-> <p->side</p->) { <w->return</w-> math.<p->pow</p->(side, <k->2</k->) <f->*</f-> <k->6</k->; }
+                    <w->namespace</w-> cube {
+                        <t->float</t-> <f->cube_v</f->(<t->float</t-> <p->side</p->) { <w->return</w-> math.<f->pow</f->(side, <k->3</k->) }
+                        <t->float</t-> <f->cube_s</f->(<t->float</t-> <p->side</p->) { <w->return</w-> math.<f->pow</f->(side, <k->2</k->) <f->*</f-> <k->6</k->; }
+                    }
 
-            <t->float</t-> <f->sphere_v</f->(<t->float</t-> <p->r</p->) { <w->return</w-> <k->pi</k-><f->/</f-><k->3</k-><f->*</f-><k->4</k-><f->*</f->math.<f->pow</f->(r, <k->3</k->); }
-            <t->float</t-> <f->sphere_s</f->(<t->float</t-> <p->r</p->) { <w->return</w-> <k->pi</k-><f->*</f-><k->4</k-><f->*</f->math.<f->pow</f->(r, <k->2</k->); }
+                    <w->namespace</w-> sphere {
+                        <t->float</t-> <f->sphere_v</f->(<t->float</t-> <p->r</p->) { <w->return</w-> <k->pi</k-> <f->/</f-> <k->3</k-> <f->*</f-> <k->4</k-> <f->*</f-> math.<f->pow</f->(r, <k->3</k->); }
+                        <t->float</t-> <f->sphere_s</f->(<t->float</t-> <p->r</p->) { <w->return</w-> <k->pi</k-> <f->*</f-> <k->4</k-> <f->*</f-> math.<f->pow</f->(r, <k->2</k->); }
+                    }
 
 
-            <w->namespace</w-> volume {
-                <w->alias</w-> <f->cube_v</f-> <w->as</w-> <f->cube</f->;
-                <w->alias</w-> <f->sphere_v</f-> <w->as</w-> <f->sphere</f->;
-            }
-            <w->namespace</w-> surface {
-                <w->alias</w-> <f->cube_s</f-> <w->as</w-> <f->cube</f->;
-                <w->alias</w-> <f->sphere_s</f-> <w->as</w-> <f->sphere</f->;
-            }
-            <w->export</w-> volume, surface;
-        </div>
-    </example->
+                    <c->// Create new namespaces for the export directive</c->
+                    <w->namespace</w-> volume {
+                        <w->alias</w-> <f->cube_v</f-> <w->as</w-> <f->cube</f->;
+                        <w->alias</w-> <f->sphere_v</f-> <w->as</w-> <f->sphere</f->;
+                    }
+                    <w->namespace</w-> surface {
+                        <w->alias</w-> <f->cube_s</f-> <w->as</w-> <f->cube</f->;
+                        <w->alias</w-> <f->sphere_s</f-> <w->as</w-> <f->sphere</f->;
+                    }
+                    <w->export</w-> volume, surface;
+                </div>
+            </example->
+        </split-example-container-left->
+        <split-example-container-right->
+            <example->
+                <label->main.lum</label->
+                <div>
+                    <w->import</w-> <s->&lt;io&gt;</s->;
+                    <w->import</w-> <s->"utils"</s->;
+
+                    <t->void</t-> <f->main</f->(){
+                        io.<f->print</f->(utils.volume.<f->cube</f->(<k->3</k->));
+                        <c->// Prints 27</c->
+                    }
+                </div>
+            </example->
+        </split-example-container-right->
+    </split-example-container->
 </moveto-examples->
 
 
@@ -6074,38 +6098,27 @@
             <tr>
                 <td></td>
                 <td></td>
-                <td data-arrows="br"></td>
-                <td data-arrows="lr"></td>
-                <td data-arrows="lr ar"></td>
-                <td><s-vbtm->as</s-vbtm-></td>
-                <td data-arrows="lr ar"></td>
-                <td><s-any->name</s-any-></td>
-                <td data-arrows="lb"></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td data-arrows="lr ar"></td>
-                <td><s-vbtm->export</s-vbtm-></td>
-                <td data-arrows="lr lt lb"></td>
+                <td data-arrows="br ar"></td>
                 <td><s-vbtm->*</s-vbtm-></td>
-                <td data-arrows="br lr"></td>
-                <td data-arrows="lr"></td>
-                <td data-arrows="lr"></td>
-                <td data-arrows="lr"></td>
-                <td data-arrows="br tr ar lr"></td>
+                <td data-arrows="br-low lr-high"></td>
+                <td data-arrows="lr-low lr-high"></td>
+                <td data-arrows="lr-low lr-high"></td>
+                <td data-arrows="lr-low lr-high"></td>
+                <td data-arrows="lb-low lr-high"></td>
+                <td data-arrows="br-low ar-low lr-high ar-high"></td>
                 <td><s-vbtm->;</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
             </tr>
             <tr>
-                <td></td>
-                <td></td>
-                <td data-arrows="tr br ar"></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-vbtm->export</s-vbtm-></td>
+                <td data-arrows="lr ar br lt"></td>
                 <td><s-path->symbol</s-path-></td>
                 <td data-arrows="lr ar lt"></td>
                 <td><s-vbtm->as</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-any->name</s-any-></td>
+                <td data-arrows="lr tr"></td>
                 <td data-arrows="lr ar lt"></td>
                 <td><s-vbtm->,</s-vbtm-></td>
                 <td data-arrows="lb"></td>
@@ -6114,6 +6127,7 @@
                 <td></td>
                 <td></td>
                 <td data-arrows="rt"></td>
+                <td data-arrows="rl"></td>
                 <td data-arrows="rl"></td>
                 <td data-arrows="rl"></td>
                 <td data-arrows="rl"></td>
