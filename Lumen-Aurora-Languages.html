@@ -686,21 +686,51 @@
 
         #define add_3(first, second, third)             #add(#add($first, $second) $third)
 
+        #define merge(a, b)             #a#b
+
 
         void main(){
-            io.print(#add_3(5, 12, 0.5));
+            io.#merge("pr", "int")(#add_3(5, 12, 0.5));
         }
 
         //output is 17.5
 
 
         //TODO \$ is a special token used to escape a $ in macro definitions. it's only recognized within macro definitions. This is also needed inside of string literals.
-        //TODO \, is a special token used to escape a , in macro arguments.   it's only recognized within macro calls.       This is also needed inside of string literals.
-        //FIXME macro definitions are found and evaluated after LCTs but before comments, includes and everything else
-        //FIXME replacement is done right after the includes.
+            //TODO no \ means "this is a parameter"
+
+        //TODO macro parameter names must be valid identifiers.
+            //TODO any non-escaped $ followed by a valid identifier is recognized as a macro parameter
+
+        //TODO Normally, only identifiers and literals can be passed as arguments. Not even keywords are allowed.
+            //TODO ` can be used to incldue "anything between them"
+            //TODO \` can be used to escape ` delimiters inside of ``
+
+        #define doNothing(argument) $argument
+
+        void main(){
+            #doNothing(#add(15, 5));    // Bad. can't pass # or ( as parameter
+            #doNothing(`#add(15, 5)`);  // Ok. Expands to #add(15, 5), which exands to (15 + 5)
+
+            #doNothing(`for(int i = 0; i < #add(\`1+1\`, 2);++i)io.print("hi")`);
+            // Ok. Expands to for(int i = 0; i < #add(`1+1`, 2);++i)io.print("hi")
+            // Which expands to for(int i = 0; i < 1+1 + 2;++i)io.print("hi")
+            // Which prints "hi" 3 times
+        }
 
 
-        #
+        //TODO extension should draw a └─────┘ under macro arguments to make them more easy to read
+
+
+
+
+        //TODO add to documentation:
+
+        //TODO The result of macro expansion is parsed again in order to expand any resulting macro invocation.
+        //TODO This allows macros to invoke other macros and even compose invocations from parameters or other invocations
+
+        //TODO Tokenization happens after macro expansion.
+        //TODO This means that macros can merge tokens and paste any character
     </p>
 </moveto-doc->
 
@@ -1014,7 +1044,7 @@
                 <span>Concatenates 2 or more symbol names to form a <a href="#language-structure.paths">symbol path</a>.
             </li>
             <li>
-                <span><a href="#reflection"><code>::</code></a></span>
+                <span><a href="#reflection"><code>:</code></a></span>
                 <span>Concatenates 2 or more symbol names to form a <a href="#reflection">Reflection path</a>.</span>
             </li>
         </ul>
@@ -1149,7 +1179,7 @@
         <b>Identifiers</b> are used to <b>name and reference <a href="#semantic-elements">symbols</a></b>.<br>
         An identifier can be
         alphanumeric (<code><sg->[</sg-><s->a</s-><sr->-</sr-><s->zA</s-><sr->-</sr-><s->Z_</s-><sg->][</sg-><s->a</s-><sr->-</sr-><s->zA</s-><sr->-</sr-><s->Z_0</s-><sr->-</sr-><s->9</s-><sg->]</sg-><sr->*</sr-></code>)
-        or symbolic (<code><sg->[</sg-><s->!$%&*+</s-><sr->\</sr-><s->-/:&lt;=&gt;?@^`|~</s-><sr->\</sr-><s->[</s-><sr->\</sr-><s->].</s-><sg->]</sg-><sr->+</sr-></code>).
+        or symbolic (<code><sg->[</sg-><s->!%&*+</s-><sr->\</sr-><s->-/&lt;=&gt;?^`|~</s-><sr->\</sr-><s->[</s-><sr->\</sr-><s->]</s-><sg->]</sg-></code>).
     </p>
     <p>
         Identifiers can be shadowed. This is explained in <a href="#name-shadowing">Name shadowing</a>.
