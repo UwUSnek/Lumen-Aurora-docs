@@ -8,12 +8,18 @@
         They can be used to provide informations or temporarily exclude lines of code.<br>
         Comments are allowed to contain any sequence of Unicode characters of any length.
     </p>
-    <p>
-        There are two types of comments: single line and multiline.<br>
-        Single line comments start with <code>//</code> and end at the character that comes before the next <code><nl-></nl-></code> character (\n).<br>
-        Multiline comments start with <code>/*</code> and end with <code>*/</code>.<br>
+    <ul>
+        There are two types of comments:
+        <ul>
+            <li>
+                Single line comments start with <code>//</code> and end at the character that comes before the next <code><nl-></nl-></code> character (\n).
+            </li>
+            <li>
+                Multiline comments start with <code>/*</code> and end with <code>*/</code>.
+            </li>
+        </ul>
         Not closing a comment is allowed. This will cause it to include everything from its starting character sequence to the end of the file.
-    </p>
+    </ul>
     <p>
         Comments cannot be nested.<br>
         Because they are removed before preprocessor directives are parsed, they also cannot be included through <a href="#include-statement">include statements</a>
@@ -58,7 +64,7 @@
 <moveto-internal->
     <p>
         Comments are <b>not</b> considered whitespace.<br>
-        Syntactically, they act in the same way as <a href="#line-continuation-token">line continuation tokens</a>,
+        Syntactically, they act in the same way as <a href="#line-splicing">line continuation tokens</a>,
         as they are removed in the same step before any additional operation is performed.
     </p>
     <p>

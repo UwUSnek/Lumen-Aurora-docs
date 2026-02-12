@@ -6,7 +6,7 @@
 <moveto-doc->
     <p>
         The <b>preprocessing</b> phase <b>precedes</b> the <b>compilation</b> of the source code.<br>
-        It parses out <a href="#line-continuation-token">line continuation tokens</a> and <a href="#comments">comments</a> and executes preprocessor directives.
+        It splices lines, removes <a href="#comments">comments</a> and executes preprocessor directives.
     </p>
     <p>
         <b>Preprocessor directives</b> are special instructions that allow the <b>code</b> of a module to be <b>programmatically modified</b>.<br>
@@ -17,7 +17,7 @@
 <moveto-internal->
     <p>
         Preprocessor operations are performed in the following order:<br>
-        &nbsp;&nbsp;1. Line stitching: <a href="#line-continuation-token">Line continuation tokens</a> are removed.<br>
+        &nbsp;&nbsp;1. Line splicing: <a href="#line-splicing">Line continuation tokens</a> and <a href="#line-splicing">Line junction tokens</a> are removed.<br>
         <!-- &nbsp;&nbsp;2. Literals: String and char literals are parsed, and escape sequences within them are replaced with their UTF-8 representation.<br> -->
         &nbsp;&nbsp;3. Comment Removal: <a href="#comments">Comments</a> are removed from the code.<br>
         &nbsp;&nbsp;4. File stitching: <a href="include-statement">Include statements</a> are processed recursively, merging all referenced files into one.<br>
@@ -55,7 +55,7 @@
 </moveto-internal->
 
 
-#include "./Page/Preprocessor/LineContinuationToken.html"
+#include "./Page/Preprocessor/LineSplicing.html"
 #include "./Page/Preprocessor/Comments.html"
 #include "./Page/Preprocessor/IncludeStatement.html"
 #include "./Page/Preprocessor/Macros.html"

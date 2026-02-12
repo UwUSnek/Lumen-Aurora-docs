@@ -44,7 +44,7 @@
 
 
     <index-><indexh->preprocessor</indexh->
-        <indexd->line-continuation-token</indexd->
+        <indexd->line-splicing</indexd->
         <indexd->comments</indexd->
         <indexd->include-statement</indexd->
         <indexd->macros</indexd->
@@ -361,7 +361,7 @@
 <moveto-doc->
     <p>
         The <b>preprocessing</b> phase <b>precedes</b> the <b>compilation</b> of the source code.<br>
-        It parses out <a href="#line-continuation-token">line continuation tokens</a> and <a href="#comments">comments</a> and executes preprocessor directives.
+        It splices lines, removes <a href="#comments">comments</a> and executes preprocessor directives.
     </p>
     <p>
         <b>Preprocessor directives</b> are special instructions that allow the <b>code</b> of a module to be <b>programmatically modified</b>.<br>
@@ -372,7 +372,7 @@
 <moveto-internal->
     <p>
         Preprocessor operations are performed in the following order:<br>
-        &nbsp;&nbsp;1. Line stitching: <a href="#line-continuation-token">Line continuation tokens</a> are removed.<br>
+        &nbsp;&nbsp;1. Line splicing: <a href="#line-splicing">Line continuation tokens</a> and <a href="#line-splicing">Line junction tokens</a> are removed.<br>
         &nbsp;&nbsp;3. Comment Removal: <a href="#comments">Comments</a> are removed from the code.<br>
         &nbsp;&nbsp;4. File stitching: <a href="include-statement">Include statements</a> are processed recursively, merging all referenced files into one.<br>
         &nbsp;&nbsp;5. Macro Definitions: <a href="#preprocessor-macro">Macro</a> definitions are evaluated and then removed from the code.<br>
@@ -408,21 +408,36 @@
 </moveto-internal->
 
 
-<h1 id="line-continuation-token"></h1>
+<h1 id="line-splicing"></h1>
 <moveto-doc->
     <p>
-        The <b>line continuation token</b> can be used to <b>merge multiple lines</b> and allow single line <a href="#comments">comments</a>,
-        preprocessor directives and multi character <a href="#syntactic-elements">tokens</a> to be written across multiple lines.<br>
-        It consists of a <code>&bsol;</code> immediatly followed by a <code><nl-></nl-></code> character.
+        <b>Line splicing</b> can be used to <b>merge multiple lines</b> and allow <a hreaf="#macros">macros</a>, <a href="#comments">comments</a>,
+        preprocessor directives and <a href="#syntactic-elements">tokens</a> to be written across multiple lines.<br>
     </p>
+    <ul>
+        The preprocessor provides 2 types of line splicing tokens:
+        <ul>
+            <li>
+                Line continuation token: It consists of a <code>&bsol;</code> immediately followed by a <code><nl-></nl-></code> character.<br>
+                This type of line splicing doesn't trim any whitespace. All adjacent tabs and spaces are preserved.
+                Only the token itself (which includes the <code><nl-></nl-></code> character) is removed.
+            </li>
+            <li>
+                Line junction token: It consists of two <code>&bsol;</code> characters immediately followed by a <code><nl-></nl-></code> character.<br>
+                This type of line splicing trims any <code><whitespace-></whitespace-></code> before the token and at the start of the next line.
+                This effectively allows the Line junction token to remove indentation and/or be freely aligned vertically.
+            </li>
+        </ul>
+    </ul>
     <p>
-        Line continuation tokens are the very first thing that's processed by the preprocessor.
+        Line splicing tokens are the very first thing that's processed by the preprocessor.
         This makes it possible to use them inside <a href="#comments">comments</a> or preprocessor directives, thought they cannot be nested.<br>
-        Using a line continuation token as the last character of a file is allowed and has no effect.
+        Using a line splicing token at the end of a file is allowed and has no effect.
     </p>
 
     <syntax->
-        <label- id="copy.syntax--preprocessor-line-continuation-token">Syntax</label->
+        <label- id="copy.syntax--preprocessor-line-continuation-token">Line continuation token</label->
+        <label- id="copy.syntax--preprocessor-line-junction-token">Line junction token</label->
     </syntax->
 </moveto-doc->
 <moveto-examples->
@@ -435,37 +450,38 @@
                     <c->on two lines</c->
 
 
-                    <k->#include</k-> <s->&lt;ma</s-><sg->&bsol;</sg->
-                    <s->th</s-><sg->&bsol;</sg->
-                    <s->&gt;</s->
+                    <k->#include</k-><sg->&bsol;</sg->
+                        <s->&lt;ma</s-><sg->&bsol;&bsol;</sg->
+                        <s->th</s-><sg->&bsol;&bsol;</sg->
+                               <s->&gt;</s->
 
 
                     <t->vo</t-><sg->&bsol;</sg->
                     <t->id</t-> <f->fun</f-><sg->&bsol;</sg->
                     <f->ction</f->() {
-                    <t->uint</t-> va<sg->&bsol;</sg->
-                    r = <k->0</k->, b = <k->0</k->;
-                    v<sg->&bsol;</sg->
-                    ar +<sg->&bsol;</sg->
-                    <sg->&bsol;</sg->
-                    = <k->b</k->;
+                        <t->uint</t-> va<sg->&bsol;&bsol;</sg->
+                        r = <k->0</k->, b = <k->0</k->;
+                        v    <sg->&bsol;&bsol;</sg->
+                        ar + <sg->&bsol;&bsol;</sg->
+                             <sg->&bsol;&bsol;</sg->
+                        = <k->b</k->;
                     }
                 </div>
             </example->
         </split-example-container-left->
         <split-example-container-right->
             <example->
-                <label->Code after merging lines</label->
+                <label->Code after line splicing</label->
                 <div>
                     <c->// single line comment on two lines</c->
 
 
-                    <k->#include</k-> <s->&lt;math&gt;</s->
+                    <k->#include</k->    <s->&lt;math&gt;</s->
 
 
                     <t->void</t-> <f->function</f->() {
-                      <t->uint</t-> var <f->=</f-> <k->0</k->, b <f->=</f-> <k->0</k->;
-                      var <f->+=</f-> <k->b</k->;
+                        <t->uint</t-> var <f->=</f-> <k->0</k->, b <f->=</f-> <k->0</k->;
+                        var <f->+=</f-> <k->b</k->;
                     }
                 </div>
             </example->
@@ -476,7 +492,7 @@
             <example->
                 <label->Example 2</label->
                 <div>
-                    <t->void</t-> ma&bsol;<sg->&bsol;</sg->   <ce->Error, unexpected token "\"</ce->
+                    <t->void</t-> ma&bsol;<sg->&bsol;&bsol;</sg->   <ce->Error, unexpected token "\"</ce->
 
                     <c->in(){}</c->      <ce->Error,  unexpected token "in"</ce->
                 </div>
@@ -484,7 +500,7 @@
         </split-example-container-left->
         <split-example-container-right->
             <example->
-                <label->Code after merging lines</label->
+                <label->Code after line splicing</label->
                 <div>
                     <t->void</t-> <f->ma</f->&bsol;  <c->// &lt; This doesn't count as a line continuation token:</c->
                     <c->in(){}    //   the replacement step has already been performed</c->
@@ -494,9 +510,13 @@
     </split-example-container->
 </moveto-examples->
 <moveto-internal->
+    <ul>
+        Line splicing tokens are <b>not</b> considered whitespace and are simply removed during the preprocessing phase.<br>
+        This means that they can be used inside of any literal, including Strings and Character literals.
+    </ul>
     <p>
-        Line continuation tokens are <b>not</b> considered whitespace and are simply removed during the preprocessing phase.<br>
-        The merged lines are not trimmed nor modified in any way.
+        Because of how the parser is implemented, any whitespace near a Line junction token is considered to be part of it,
+        even though the token's syntax doesn't enforce the presence of whitespace characters.
     </p>
 </moveto-internal->
 
@@ -509,12 +529,18 @@
         They can be used to provide informations or temporarily exclude lines of code.<br>
         Comments are allowed to contain any sequence of Unicode characters of any length.
     </p>
-    <p>
-        There are two types of comments: single line and multiline.<br>
-        Single line comments start with <code>//</code> and end at the character that comes before the next <code><nl-></nl-></code> character (\n).<br>
-        Multiline comments start with <code>/*</code> and end with <code>*/</code>.<br>
+    <ul>
+        There are two types of comments:
+        <ul>
+            <li>
+                Single line comments start with <code>//</code> and end at the character that comes before the next <code><nl-></nl-></code> character (\n).
+            </li>
+            <li>
+                Multiline comments start with <code>/*</code> and end with <code>*/</code>.
+            </li>
+        </ul>
         Not closing a comment is allowed. This will cause it to include everything from its starting character sequence to the end of the file.
-    </p>
+    </ul>
     <p>
         Comments cannot be nested.<br>
         Because they are removed before preprocessor directives are parsed, they also cannot be included through <a href="#include-statement">include statements</a>
@@ -559,7 +585,7 @@
 <moveto-internal->
     <p>
         Comments are <b>not</b> considered whitespace.<br>
-        Syntactically, they act in the same way as <a href="#line-continuation-token">line continuation tokens</a>,
+        Syntactically, they act in the same way as <a href="#line-splicing">line continuation tokens</a>,
         as they are removed in the same step before any additional operation is performed.
     </p>
     <p>
@@ -5946,6 +5972,25 @@
             <tr>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->&bsol;</s-vbtm-></td>
+                <td data-arrows="lr lb ar"></td>
+                <td><s-vbtm-><nl-></nl-></s-vbtm-></td>
+                <td data-arrows="lr br ar"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td data-arrows="tr ar"></td>
+                <td><s-vbtm-><eof-></eof-></s-vbtm-></td>
+                <td data-arrows="lt"></td>
+            </tr>
+        </table>
+    </syntax->
+    <syntax->
+        <label- id="syntax--preprocessor-line-junction-token">Line junction token</label->
+        <table>
+            <tr>
+                <td data-arrows="lr ar"></td>
+                <td><s-vbtm->&bsol;&bsol;</s-vbtm-></td>
                 <td data-arrows="lr lb ar"></td>
                 <td><s-vbtm-><nl-></nl-></s-vbtm-></td>
                 <td data-arrows="lr br ar"></td>
