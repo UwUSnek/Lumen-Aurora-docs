@@ -1,7 +1,7 @@
 :root {
     --logo-size:        50vw;
-    --logo-link-Lumen: url("../../Logos/Aurora.png");
-    --logo-link-aurora: url("../../Logos/Lumen.png");
+    --logo-link-Lumen: url("../../Logos/Aurora-cropped.png");
+    --logo-link-aurora: url("../../Logos/Lumen-cropped.png");
 }
 
 
@@ -17,7 +17,7 @@ logo- {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
-    background-size:50vw;
+    background-size:25vw;
 
     min-width:  100%;
     max-width:  100%;
