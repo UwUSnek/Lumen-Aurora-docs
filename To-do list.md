@@ -6,3 +6,5 @@
 - benchmark the compiled code and compare it to other languages
   - show benchmark results in the documentation
   - also show how the code gets optimized & benchmark both the optimized version and unoptimized one (--o-none)
+
+- add a "since version x.y.z" to each feature or something like that
