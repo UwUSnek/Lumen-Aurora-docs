@@ -14,7 +14,7 @@
 <moveto-doc->
     <p>
         Inline values are <a href="#right-and-left-values">r-values</a> that are explicitly created and used within a single <a href="#runtime-statements">runtime statement</a>.<br>
-        They can be <a href="#literals">Literals</a> or <a href="#try-expression"><code><w->try</w-></code> expressions</a>.
+        They can be Literals or <a href="#try-expression"><code><w->try</w-></code> expressions</a>.
     </p>
 </moveto-doc->
 
@@ -38,7 +38,8 @@
         Unary <a href="#common-operators"><code>+</code></a> and <a href="#common-operators"><code>-</code></a> operators are not part of the literal.
     </p>
     <p>
-        Literals are not sequences of <a href="#syntaxtic-elements">syntactic elements</a> like other <a href="#semantic-elements">semantic elements</a>, but a category of <a href="#syntaxtic-elements">syntactic element</a>.<br>
+        Literals are not sequences of <a href="#syntaxtic-elements">syntactic elements</a> like other <a href="#semantic-elements">semantic elements</a>,
+        but a category of <a href="#syntaxtic-elements">syntactic element</a>.<br>
         Regex syntax is used to describe their pattern:
     </p>
     <div class="table-container"><table>
@@ -51,30 +52,36 @@
         </tr>
         <tr>
             <th><t->ulong</t-></th>
-            <td class="center"><code><s->0x<sg->[</sg->0<sr->-</sr->9a<sr->-</sr->fA<sr->-</sr->F_<sg->]</sg-><sr->+</sr-></s-></code></td>
-            <td class="center"><code><s-><sg->([</sg->0<sr->-</sr->9<sg->][</sg->0<sr->-</sr->9_<sg->]</sg-><sr->*</sr-><sg->)</sg-><sr->|</sr-><sg->(</sg->0d<sg->[</sg->0<sr->-</sr->9_<sg->]</sg-><sr->+</sr-><sg->)</sg-></s-></code></td>
-            <td class="center"><code><s->0o<sg->[</sg->0<sr->-</sr->7_<sg->]</sg-><sr->+</sr-></s-></code></td>
-            <td class="center"><code><s->0b<sg->[</sg->01_<sg->]</sg-><sr->+</sr-></s-></code></td>
+            <td class="center"><code><s->0x<sg->[</sg->0<sr->-</sr->9A<sr->-</sr->F<sg->]</sg-><sr->+</sr-></s-></code></td>
+            <td class="center"><code><s-><sg->(</sg->0d<sg->)</sg-><sr->?</sr-><sg->[</sg->0<sr->-</sr->9<sg->]</sg-><sr->+</sr-></s-></code></td>
+            <td class="center"><code><s->0o<sg->[</sg->0<sr->-</sr->7<sg->]</sg-><sr->+</sr-></s-></code></td>
+            <td class="center"><code><s->0b<sg->[</sg->01<sg->]</sg-><sr->+</sr-></s-></code></td>
         </tr>
         <tr>
-            <th rowspan="2"><t->double</t-></th>
-            <td class="center"><code><s->0x<sg->[</sg->0<sr->-</sr->9a<sr->-</sr->fA<sr->-</sr->F_<sg->]</sg-><sr->+</sr-><sr->\</sr->.[</sg->0<sr->-</sr->9a<sr->-</sr->fA<sr->-</sr->F_<sg->]</sg-><sr->+</sr-></s-></code></td>
-            <td class="center"><code><s-><sg->([</sg->0<sr->-</sr->9<sg->][</sg->0<sr->-</sr->9_<sg->]</sg-><sr->*</sr-><sg->)</sg-><sr->|</sr-><sg->(</sg->0d<sg->[</sg->0<sr->-</sr->9_<sg->]</sg-><sr->+</sr-><sg->)<sr->\</sr->.[</sg->0<sr->-</sr->9_<sg->]</sg-><sr->+</sr-></s-></code></td>
-            <td class="center"><code><s->0o<sg->[</sg->0<sr->-</sr->7_<sg->]</sg-><sr->+</sr-><sr->\</sr->.<sg->[</sg->0<sr->-</sr->7_<sg->]</sg-><sr->+</sr-></s-></code></td>
-            <td class="center"><code><s->0b<sg->[</sg->01_<sg->]</sg-><sr->+</sr-><sr->\</sr->.<sg->[</sg->01_<sg->]</sg-><sr->+</sr-></s-></code></td>
-        </tr>
-        <tr>
-            <fake-td></fake-td>
-            <td class="center" colspan="4"><code><s->inf</s-><sr->|</sr-><s->nan</s-></code></td>
-            <fake-td></fake-td>
-            <fake-td></fake-td>
-            <fake-td></fake-td>
+            <th><t->double</t-></th>
+            <td class="center"><code><s->0x<sg->[</sg->0<sr->-</sr->9A<sr->-</sr->F<sg->]</sg-><sr->+</sr-><sr->\</sr->.[</sg->0<sr->-</sr->9A<sr->-</sr->F<sg->]</sg-><sr->+</sr-></s-></code></td>
+            <td class="center"><code><s-><sg->(</sg->0d<sg->)</sg-><sr->?</sr-><sg->[</sg->0<sr->-</sr->9<sg->]</sg-><sr->+</sr-><sr->\</sr->.[</sg->0<sr->-</sr->9<sg->]</sg-><sr->+</sr-></s-></code></td>
+            <td class="center"><code><s->0o<sg->[</sg->0<sr->-</sr->7<sg->]</sg-><sr->+</sr-><sr->\</sr->.<sg->[</sg->0<sr->-</sr->7<sg->]</sg-><sr->+</sr-></s-></code></td>
+            <td class="center"><code><s->0b<sg->[</sg->01<sg->]</sg-><sr->+</sr-><sr->\</sr->.<sg->[</sg->01<sg->]</sg-><sr->+</sr-></s-></code></td>
         </tr>
         <tr>
             <th><t->bool</t-></th>
             <td class="center" colspan="4"><code><s->true</s-><sr->|</sr-><s->false</s-></code></td>
         </tr>
+        <tr>
+            <th><t->string</t-></th>
+            <td class="center" colspan="4"><code><s->"<sg->(</sg-><sr->.*</sr-><sg->)</sg->"</s-></code>
+            <code>Unless " is escaped. See <a href="text-escapes">Escapes</a></code> <code>No length limit</code></td>
+        </tr>
+            <th><t->char</t-></th>
+            <td class="center" colspan="4"><code><s->'<sg->(</sg-><sr->.+</sr-><sg->)</sg->'</s-></code>
+            <code>Unless ' is escaped. See <a href="text-escapes">Escapes</a></code> <code>1 byte max</code></td>
+        </tr>
     </table></div>
+    <p>
+        <code>inf</code> and <code>nan</code> values are not literals.
+        They are part of the <a href="#reflection">reflection</a> data of floating-point types and can be retrieved through proper <a href="#reflection">Reflection paths</a>.
+    </p>
 </moveto-doc->
 <moveto-examples->
     <example->
@@ -83,8 +90,6 @@
             <t->int</t-> n = <k->4</k->;             <c->// Ok</c->
             <t->bool</t-> b =<k-> true</k->;         <c->// Ok</c->
             <t->float</t-> f1 = <k->0x0d.aAb4</k->;  <c->// Ok</c->
-            <t->float</t-> f2 = <k->inf</k->;        <c->// Ok</c->
-            <t->float</t-> f3 = <k->nan</k->;        <c->// Ok</c->
             <c->float f4 = AAAB4;      </c-><ce->// Error, undeclared identifier "AAAB4"</ce->
             <c->float f4 = 0o97;       </c-><ce->// Error, invalid octal literal</ce->
             <c->float f4 = 0xAEGF;     </c-><ce->// Error, invalid hexadecimal literal</ce->
