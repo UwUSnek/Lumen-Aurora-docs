@@ -25,7 +25,7 @@ cat ./Page/Lumen-Aurora-Languages.html \
 
 
 
-# This looks unhinged, but it removes the need for complex build systems an dependencies.
+# This looks unhinged, but it removes the need for complex build systems and dependencies.
 # GCC and Perl ship with most Unix systems and basically never change.
 # Not having to keep track of additional tools is worth having a slightly cursed build script.
 
