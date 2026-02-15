@@ -40,11 +40,10 @@ function init(){
 
     exec_and_log(setup_fix.init, "setup_fix");
 
-    exec_and_log(summary_list.init, "summary_list");
     exec_and_log(ui_smooth_links.init, "ui_smooth_links");
     exec_and_log(ui_copy_code.init, "ui_copy_code");
     //!^ Must be executed after modifying the body as changing the innerHTML recreates all the elements and removes the event listeners
-    exec_and_log(setup_tabs.init, "setup_tabs"); 
+    exec_and_log(setup_tabs.init, "setup_tabs");
 
 
 

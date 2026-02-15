@@ -109,6 +109,9 @@ var setup_index = {
         // Format blocks
         format_blocks.start();
 
+        // Format summary lists
+        format_summary_lists.start();
+
         // Format examples
         format_examples.start();
 
