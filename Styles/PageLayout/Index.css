@@ -54,6 +54,8 @@ body > left- > index- indexd- {
 /* Index links */
 body > left- > index- indexd- > *, body > left- > index- indexh- > * {
     display: inline-block;
+    padding: 0;
+    transform-origin: -1em;
 
     min-width: 100%;
     max-width: 100%;
@@ -61,25 +63,31 @@ body > left- > index- indexd- > *, body > left- > index- indexh- > * {
     max-height: 100%;
 }
 body > left- > index- indexh- > * {
-    padding: 0 1ch 0 1ch;
     line-height: 2em;
 }
 body > left- > index- indexd- > * {
     opacity: 75%;
-    padding: 0;
     line-height: 1.5em;
+    transform: translateY(-0.2em);
 }
 
 
 
 
 /* Animations */
-body > left- > index- indexd-:hover, body > left- > index- indexh-:hover {
+body > left- > index- indexd-:hover,
+body > left- > index- indexh-:hover {
     background-color: var(--bg-index-hover);
 }
-body > left- > index- indexd-:hover > *, body > left- > index- indexh-:hover > * {
-    transform: matrix(1.025, 0, 0.0, 1.05, 0, 0);
+body > left- > index- indexd-:hover > *,
+body > left- > index- indexh-:hover > * {
     transition: transform 0.2s cubic-bezier(.17,.84,.44,1);
+}
+body > left- > index- indexh-:hover > * {
+    transform: matrix(1.025, 0, 0.0, 1, 0, 0);
+}
+body > left- > index- indexd-:hover > * {
+    transform: matrix(1.025, 0, 0.0, 1, 0, 0) translateY(-0.2em);
 }
 body > left- > index- > indexh-:first-child:hover, body > left- > index- > indexh-:last-child:hover {
     max-width: 0;
@@ -98,6 +106,7 @@ body > left- > index- indexh- > span::before {
     content: '▾  ';
     opacity: 25%;
     font-size: 1.1em;
+    transform: translateY(-0.1em);
     display: inline-block;
     transform-origin: 0.25em;
     transition: transform 0.2s ease-in-out;
@@ -106,7 +115,7 @@ body > left- > index- indexh- > span::before {
 body > left- > index- indexd- > span::before {
     content: '• ';
     opacity: 25%;
-    transform: translateY(0.2em);
+    transform: translateY(0.1em);
     font-size: 1.5em;
     display: inline-block;
 }
