@@ -8,3 +8,5 @@
   - also show how the code gets optimized & benchmark both the optimized version and unoptimized one (--o-none)
 
 - add a "since version x.y.z" to each feature or something like that
+
+- remove " and ' from keywords. they aren't keywords, they are literal definitions that use reserved tokens

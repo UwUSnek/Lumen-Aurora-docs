@@ -102,7 +102,7 @@
             <tr>
                 <th class="nowrap medium"><a href="#keywords">Keyword</a></th>
                 <td><div class="split-td-outer">
-                    <div class="split-td">
+                    <div class="split-td" style="line-height: 3ch;">
                         <a href="#namespaces">                   <code><w->namespace</w-></code></a>
                         <a href="#enums">                        <code><w->enum</w-></code></a>
                         <a href="#structs">                      <code><w->struct</w-></code></a>
@@ -117,7 +117,7 @@
                         <a href="#pointer-types">                <code>@</code></a>
                         <a href="#pointer-types">                <code>$</code></a>
                     </div>
-                    <div class="split-td">
+                    <div class="split-td" style="line-height: 3ch;">
                         <a href="#if-statement">                 <code><w->if</w-></code></a>
                         <a href="#match-statement">              <code><w->match</w-></code></a>
                         <a href="#for-loops">                    <code><w->for</w-></code></a>
@@ -131,14 +131,13 @@
                         <a href="#return-statement">             <code><w->return</w-></code></a>
                         <a href="#defer-statement">              <code><w->defer</w-></code></a>
                     </div>
-                    <div class="split-td">
+                    <div class="split-td" style="line-height: 3ch;">
                         <elm->                                   <code>(</code><code>)</code></elm->
                         <a href="#scopes-and-symbols">           <elm-><code>{</code><code>}</code></elm-></a>
-                        <a href="#literals">              <elm-><code>"</code><code>"</code></elm-></a>
                         <a href="#statements">                   <code>,</code></a>
                         <a href="#statements">                   <code> ;</code></a>
                         <a href="#scopes-and-symbols">           <code>.</code></a>
-                        <a href="#reflection">                   <code>::</code></a>
+                        <a href="#reflection">                   <code>:</code></a>
                     </div>
                 </div></td>
             </tr>
@@ -171,7 +170,6 @@
                         Any sequence of characters with pattern
                         <code><sg->[</sg-><s->0</s-><sr->-</sr-><s->9</s-><sg->][</sg-><s->a</s-><sr->-</sr-><s->zA</s-><sr->-</sr-><s->Z</s-><s->_</s-><sg->]</sg-><sr->*</sr-><sg->(</sg-><sr->\</sr-><s->.</s-><sg->[</sg-><s->a</s-><sr->-</sr-><s->zA</s-><sr->-</sr-><s->Z</s-><s->_</s-><sg->]</sg-><sr->*</sr-><sg->)</sg-><sr->?</sr-></code>
                         or delimited by two <code>"</code> or <code>'</code> characters.
-                        //FIXME remove " and ' from keywords. they aren't keywords, they are literal definitions that use reserved tokens
                     </div>
                 </div></td>
             </tr>
