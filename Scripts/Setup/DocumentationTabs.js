@@ -90,13 +90,13 @@ var setup_tabs = {
     move_elements : function(tag_name, output_map) {
         // For each "moveto" tag
         let elms = [...(document.getElementsByTagName(tag_name))];  //! Convert HTMLCollection to Array to make it not change dynamically
-        for(let i = 0; i < elms.length; ++i) {
+        for(let elm of elms) {
 
-            // Get it's header number
-            let local_root = setup_tabs.get_local_root(elms[i]);
+            // Get its header number
+            let local_root = setup_tabs.get_local_root(elm);
             let parent_header = setup_tabs.get_parent_header(local_root);
             if(parent_header == null) continue;
-            let header_number = (parent_header.innerHTML).match(/([0-9]+\.)+/g)[0];
+            let header_number = (parent_header.innerHTML).match(/(\d+\.)+/g)[0];
 
             // Create content list in the map if it doesnt exist yet (and add the header element as first element)
             if(!output_map.has(header_number)) {
@@ -105,12 +105,12 @@ var setup_tabs = {
 
             // Save each of its children in the hash map and remove them from the page, then remove the container.
             let output_array = output_map.get(header_number);  // Redundant variable to improve performance and readability
-            let c = [...(elms[i].children)];  //! Convert HTMLCollection to Array to make it not change dynamically
-            for(let j = 0; j < c.length; ++j){
-                output_array.push(c[j]);
-                c[j].remove();
+            let children = [...(elm.children)];  //! Convert HTMLCollection to Array to make it not change dynamically
+            for(let c of children){
+                output_array.push(c);
+                c.remove();
             }
-            elms[i].remove();
+            elm.remove();
         }
     },
 

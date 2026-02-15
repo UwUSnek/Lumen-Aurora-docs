@@ -24,6 +24,8 @@ var setup_index = {
         let separators = 0;
         for(let i = 0; i < children.length; i++){
             let c = children[i];
+
+
             if(c.tagName == 'INDEX-SEPARATOR-') {
                 separators += 1;
                 continue;
@@ -33,10 +35,10 @@ var setup_index = {
             // Collapse feature
             if(c.tagName == 'INDEXH-') {
                 c.addEventListener('click', function() {
-                    c.classList.toggle('collapsed');
-                    for(let cc of c.children) {
-                        cc.classList.toggle('list-hidden');
-                    }
+                    c.parentElement.classList.toggle('collapsed');
+                    // for(let cc of c.children) {
+                    //     cc.classList.toggle('list-hidden');
+                    // }
                 });
             }
 
@@ -73,6 +75,12 @@ var setup_index = {
             }
             else if(c.tagName == 'INDEX-') {
                 setup_index.format_elm(c, depth + 1, last + (i - separators) + '.');
+            }
+
+            // Elements container - set fixed height and process children
+            else if(c.tagName == "INDEX-ELMS-") {
+                c.style.maxHeight = c.getBoundingClientRect().height + 'px';
+                setup_index.format_elm(c, depth, last);
             }
         }
     },
@@ -112,7 +120,7 @@ var setup_index = {
     refresh_tab_content : function() {
 
         // Retrieve the header number and spawn new paragraph contents, replacing the old ones //! (And also add the virtual spacer element back)
-        let header_number = (document.getElementById(index_active_id).innerHTML.match(/([0-9]+\.)+/g)[0]);
+        let header_number = (document.getElementById(index_active_id).innerHTML.match(/([\d]+\.)+/g)[0]);
         let dc =      doc_list.get(header_number); tab_doc.     replaceChildren(...(dc != null ? dc : [tab_placeholder_doc]),      tab_spacer_doc);
         let ec =  example_list.get(header_number); tab_examples.replaceChildren(...(ec != null ? ec : [tab_placeholder_examples]), tab_spacer_examples);
         let ic = internal_list.get(header_number); tab_internal.replaceChildren(...(ic != null ? ic : [tab_placeholder_internal]), tab_spacer_internal);

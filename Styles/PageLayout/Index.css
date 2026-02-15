@@ -10,7 +10,6 @@
 /* Page index */
 body > left- > index- {
     display: block;
-
     min-width: calc(100% - var(--main-padding-l));
     max-width: calc(100% - var(--main-padding-l));
 
@@ -23,7 +22,8 @@ body > left- > index- {
 
 
 /* Index elements */
-body > left- > index- indexd-, body > left- > index- indexh- {
+body > left- > index- indexd-,
+body > left- > index- indexh- {
     display: block;
     background-color: var(--bg);
     white-space: nowrap;
@@ -33,7 +33,8 @@ body > left- > index- indexd-, body > left- > index- indexh- {
     cursor: pointer;
 
     border-radius: 0 6px 6px 0;
-    border: 2px solid transparent;
+    padding: 2px 0 2px 0;
+    /* border: 2px 0 2px 0 solid transparent; */
     /**/width: 100%;
     /* max-width Set from JS */
 }
@@ -47,12 +48,24 @@ body > left- > index- indexd- {
     max-height: 1.5em;
     line-height: 1.5em;
 }
+body > left- > index- index-elms- {
+    margin: 0;
+    padding: 0;
+    display: block;
+
+    /*! Max height needs to be a fixed value in order to be animated */
+    /* max-heght Set from JS */
+    transition: max-height 0.25s ease-in-out;
+    /* overflow: visible; */
+    overflow: hidden;
+}
 
 
 
 
 /* Index links */
-body > left- > index- indexd- > *, body > left- > index- indexh- > * {
+body > left- > index- indexd- > *,
+body > left- > index- indexh- > * {
     display: inline-block;
     padding: 0;
     transform-origin: -1em;
@@ -74,7 +87,7 @@ body > left- > index- indexd- > * {
 
 
 
-/* Animations */
+/* Hover animations */
 body > left- > index- indexd-:hover,
 body > left- > index- indexh-:hover {
     background-color: var(--bg-index-hover);
@@ -89,19 +102,11 @@ body > left- > index- indexh-:hover > * {
 body > left- > index- indexd-:hover > * {
     transform: matrix(1.025, 0, 0.0, 1, 0, 0) translateY(-0.2em);
 }
-body > left- > index- > indexh-:first-child:hover, body > left- > index- > indexh-:last-child:hover {
-    max-width: 0;
-}
 
 
 
 
 /* Collapsed elements */
-body > left- > index- indexh-.list-hidden,
-body > left- > index- indexd-.list-hidden {
-    max-height: 0;
-}
-
 body > left- > index- indexh- > span::before {
     content: '▾  ';
     opacity: 25%;
@@ -109,7 +114,7 @@ body > left- > index- indexh- > span::before {
     transform: translateY(-0.1em);
     display: inline-block;
     transform-origin: 0.25em;
-    transition: transform 0.2s ease-in-out;
+    transition: transform 0.25s ease-in-out;
 }
 
 body > left- > index- indexd- > span::before {
@@ -120,6 +125,10 @@ body > left- > index- indexd- > span::before {
     display: inline-block;
 }
 
-body > left- > index- indexh-.collapsed > span::before {
+body > left- > index- index-.collapsed indexh- > span::before {
     transform: rotate(-90deg);
+}
+
+body > left- > index- index-.collapsed index-elms- {
+    max-height: 0 !important;
 }
