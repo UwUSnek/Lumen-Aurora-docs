@@ -19,6 +19,7 @@ function capitalize(string) {
 var setup_index = {
     // Indent and enumerate index elements
     format_elm : function(elm, depth, last){
+
         let children = elm.children;
         let separators = 0;
         for(let i = 0; i < children.length; i++){
@@ -26,6 +27,23 @@ var setup_index = {
             if(c.tagName == 'INDEX-SEPARATOR-') {
                 separators += 1;
                 continue;
+            }
+
+
+            // Collapse feature
+            if(c.tagName == 'INDEXH-') {
+                c.addEventListener('click', function() {
+                    c.classList.toggle('collapsed');
+                    for(let cc of c.children) {
+                        cc.classList.toggle('list-hidden');
+                    }
+                });
+            }
+
+
+            // Layout / formatting
+            if(c.tagName == 'INDEXD-') {
+                c.classList.add('small');
             }
             if(c.tagName == 'INDEXD-' || c.tagName == 'INDEXH-') {
                 let id = c.innerHTML;
@@ -42,7 +60,6 @@ var setup_index = {
                 c.style.paddingLeft = `calc(` +   `${ index_indent } * ${ (depth - (c.tagName == 'INDEXH-')) })`;
                 c.style.maxWidth    = `calc(100% - ${ index_indent } * ${ (depth - (c.tagName == 'INDEXH-')) })`;
                 c.addEventListener('click', function(){ setup_index.go_to_index(`#${ id }`); });
-
 
                 //Fix heading
                 let depth2 = (c.tagName == 'INDEXH-' ? depth : depth + 1);
