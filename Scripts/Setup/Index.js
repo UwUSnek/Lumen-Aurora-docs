@@ -26,19 +26,29 @@ var setup_index = {
             let c = children[i];
 
 
+            // Separator
             if(c.tagName == 'INDEX-SEPARATOR-') {
                 separators += 1;
                 continue;
             }
 
 
-            // Collapse feature
+            // Click events
             if(c.tagName == 'INDEXH-') {
-                c.addEventListener('click', function() {
-                    c.parentElement.classList.toggle('collapsed');
-                    // for(let cc of c.children) {
-                    //     cc.classList.toggle('list-hidden');
-                    // }
+                let id = c.innerHTML;
+                c.addEventListener('click', function(e) {
+                    if(e.offsetX < 10) {
+                        c.parentElement.classList.toggle('collapsed');
+                    }
+                    else {
+                        setup_index.go_to_index(`#${ id }`);
+                    }
+                });
+            }
+            if(c.tagName == 'INDEXD-') {
+                let id = c.innerHTML;
+                c.addEventListener('click', function(){
+                    setup_index.go_to_index(`#${ id }`);
                 });
             }
 
@@ -61,7 +71,6 @@ var setup_index = {
                 c.innerHTML = `<span id="index--${ id }">${ num } ${ name }</span>`;
                 c.style.paddingLeft = `calc(` +   `${ index_indent } * ${ (depth - (c.tagName == 'INDEXH-')) })`;
                 c.style.maxWidth    = `calc(100% - ${ index_indent } * ${ (depth - (c.tagName == 'INDEXH-')) })`;
-                c.addEventListener('click', function(){ setup_index.go_to_index(`#${ id }`); });
 
                 //Fix heading
                 let depth2 = (c.tagName == 'INDEXH-' ? depth : depth + 1);
