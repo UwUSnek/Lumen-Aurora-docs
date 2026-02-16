@@ -220,7 +220,7 @@ var setup_index = {
 
 
     init : function(){
-        setup_index.format_elm(document.querySelector('index-'), 0, '');
+        setup_index.format_elm(document.querySelector('index-'), -0.5, '');
 
         // Setup location change listener
         globalThis.addEventListener('hashchange', function(e){ setup_index.on_location_changed(); });

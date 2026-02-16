@@ -1,5 +1,5 @@
 :root {
-    --main-padding-l: 2vw;
+    --main-padding-l: 0vw;
     --main-padding-r: 4vw;
 }
 
@@ -7,8 +7,7 @@
 
 /* Page layout */
 body {
-    /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; */
-    font-family: sans-serif;;
+    font-family: sans-serif;
     background-color: var(--bg);
     color: var(--fg-text);
     position: fixed;
