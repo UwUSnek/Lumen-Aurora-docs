@@ -31,7 +31,7 @@
     <p>Lumen and Aurora feature <b>7 primitive types</b>, which can be used to define more complex types such as <a href="#structs">structs</a>, <a href="#arrays">arrays</a> and <a href="#tuples">tuples</a>.</p>
     <p>
         These types are always defined and they act as if they were declared in the <a href="#core-module">core module</a>.<br>
-        Primitive types are <b>not <a href="#keywords">keywords</a></b> and can be <a href="#name-shadowing">shadowed</a> like any other <a href="#semantic-elements">symbol</a>.
+        Primitive types are <b>not <a href="#keywords">keywords</a></b> and can be <a href="#name-shadowing">shadowed</a> like any other <a href="#name-resolution">symbol</a>.
     </p>
     <p>The primitive types are:</p>
     <div class="table-container"><table>
@@ -1003,8 +1003,8 @@
 <h1 id="auto-specifier"></h1>
 <moveto-doc->
     <p>
-        The <b><code><t->auto</t-></code></b> specifier can be <b>used as</b> a <b><a href="#types">type</a></b> when declaring a <a href="#semantic-elements">symbol</a>.<br>
-        The actual <a href="#types">type</a> of the <a href="#semantic-elements">symbol</a> is determined by the initializer value if a <a href="#variables">variable</a>, or by the <a href="#return-statement">return value</a> if a <a href="#routines">routine</a>.<br>
+        The <b><code><t->auto</t-></code></b> specifier can be <b>used as</b> a <b><a href="#types">type</a></b> when declaring a <a href="#name-resolution">symbol</a>.<br>
+        The actual <a href="#types">type</a> of the <a href="#name-resolution">symbol</a> is determined by the initializer value if a <a href="#variables">variable</a>, or by the <a href="#return-statement">return value</a> if a <a href="#routines">routine</a>.<br>
     </p>
     <p>
         <code><t->auto</t-></code> is not allowed in <a href="#structs">struct</a> member declarations or <a href="#routine-parameters">routine parameters</a>.<br>
