@@ -16,80 +16,92 @@ function capitalize(string) {
 
 
 
+
+
 var setup_index = {
-    // Indent and enumerate index elements
-    format_elm : function(elm, depth, last){
 
-        let children = elm.children;
-        let separators = 0;
-        for(let i = 0; i < children.length; i++){
-            let c = children[i];
+    format_elm_self : function(elm, depth, number_str) {
 
-
-            // Separator
-            if(c.tagName == 'INDEX-SEPARATOR-') {
-                separators += 1;
-                continue;
-            }
-
-
-            // Click events
-            if(c.tagName == 'INDEXH-') {
-                let id = c.innerHTML;
-                c.addEventListener('click', function(e) {
-                    if(e.offsetX < 10) {
-                        c.parentElement.classList.toggle('collapsed');
-                    }
-                    else {
-                        setup_index.go_to_index(`#${ id }`);
-                    }
-                });
-            }
-            if(c.tagName == 'INDEXD-') {
-                let id = c.innerHTML;
-                c.addEventListener('click', function(){
-                    setup_index.go_to_index(`#${ id }`);
-                });
-            }
-
-
-            // Layout / formatting
-            if(c.tagName == 'INDEXD-') {
-                c.classList.add('small');
-            }
-            if(c.tagName == 'INDEXD-' || c.tagName == 'INDEXH-') {
-                let id = c.innerHTML;
-                if(id.length == 0) {
-                    c.style.minHeight = '2em';
-                    continue;
+        // Click events
+        if(elm.tagName == 'INDEXH-') {
+            let id = elm.innerHTML;
+            elm.addEventListener('click', function(e) {
+                if(e.offsetX < 10) {
+                    elm.parentElement.classList.toggle('collapsed');
                 }
-                let name = capitalize(id.split('.').pop()).replaceAll('-', ' ');
-                let num = (c.tagName == 'INDEXH-' ? last : (last + (i - separators) + '.'));
+                else {
+                    setup_index.go_to_index(`#${ id }`);
+                }
+            });
+        }
+        if(elm.tagName == 'INDEXD-') {
+            let id = elm.innerHTML;
+            elm.addEventListener('click', function(){
+                setup_index.go_to_index(`#${ id }`);
+            });
+        }
 
 
-                // Fix index
-                c.innerHTML = `<span id="index--${ id }">${ num } ${ name }</span>`;
-                c.style.paddingLeft = `calc(` +   `${ index_indent } * ${ (depth - (c.tagName == 'INDEXH-')) })`;
-                c.style.maxWidth    = `calc(100% - ${ index_indent } * ${ (depth - (c.tagName == 'INDEXH-')) })`;
-
-                //Fix heading
-                let depth2 = (c.tagName == 'INDEXH-' ? depth : depth + 1);
-                let heading = document.getElementById(id);
-                if(heading == null) console.error(`heading for ID ${ id } not found`);
-
-                heading.insertAdjacentHTML('beforebegin', `<sep-${ depth2 }-></sep-${ depth2 }->`);
-                heading.innerHTML = `${ num } ${ name }`;
-                if(depth == 0) heading.insertAdjacentHTML('afterend', '<sep-3-></sep-3->');
-                heading.classList.add('h' + depth2);
+        // Layout / formatting
+        if(elm.tagName == 'INDEXD-') {
+            elm.classList.add('small');
+        }
+        if(elm.tagName == 'INDEXD-' || elm.tagName == 'INDEXH-') {
+            let id = elm.innerHTML;
+            if(id.length == 0) {
+                elm.style.minHeight = '2em';
+                return;
             }
-            else if(c.tagName == 'INDEX-') {
-                setup_index.format_elm(c, depth + 1, last + (i - separators) + '.');
-            }
 
-            // Elements container - set fixed height and process children
-            else if(c.tagName == "INDEX-ELMS-") {
-                c.style.maxHeight = c.getBoundingClientRect().height + 'px';
-                setup_index.format_elm(c, depth, last);
+
+            // Fix index element
+            let name = capitalize(id.split('.').pop()).replaceAll('-', ' ');
+            elm.innerHTML = `<span id="index--${ id }">${ number_str } ${ name }</span>`;
+            elm.style.paddingLeft = `calc(` +   `${ index_indent } * ${ depth })`;
+            elm.style.maxWidth    = `calc(100% - ${ index_indent } * ${ depth })`;
+
+            //Fix referenced heading
+            let heading = document.getElementById(id);
+            if(heading == null) console.error(`heading for ID ${ id } not found`);
+            heading.innerHTML = `${ number_str } ${ name }`;
+            heading.classList.add('h' + (depth + 1));
+        }
+
+
+        // Elements container - set fixed height
+        else if(elm.tagName == "INDEX-ELMS-") {
+            elm.style.maxHeight = elm.getBoundingClientRect().height + 'px';
+        }
+    },
+
+
+
+
+    // Indent and enumerate index elements
+    format_elm : function(elm, depth, number_str) {
+        this.format_elm_self(elm, depth, number_str);
+
+
+        // index-elms- container (calculate new depth and pass computed number string)
+        if(elm.tagName == 'INDEX-ELMS-') {
+            let children = elm.children;
+            let separators = 0;
+            for(let i = 0; i < children.length; i++){
+                let c = children[i];
+                if(c.tagName == 'INDEX-SEPARATOR-'){
+                    separators++;
+                }
+                else {
+                    let c_number_str = number_str + (i - separators + 1) + '.';
+                    this.format_elm(c, depth + 1, c_number_str);
+                }
+            }
+        }
+
+        // Other elements (simply forward the parameters)
+        else {
+            for(let c of elm.children) {
+                this.format_elm(c, depth, number_str);
             }
         }
     },
@@ -172,7 +184,7 @@ var setup_index = {
         if(i != null) {
             i.scrollIntoView({
                 block: "nearest",
-                behavior: (smooth && !window.chrome) ? "smooth" : "auto"
+                behavior: (smooth && !globalThis.chrome) ? "smooth" : "auto"
             });
         }
     },
@@ -182,10 +194,10 @@ var setup_index = {
 
     // Callback that updates the session storage, the index UI and the tab contents
     on_location_changed : function() {
-        let old = window.sessionStorage.getItem('index.selected_id');
+        let old = globalThis.sessionStorage.getItem('index.selected_id');
         index_active_id = `index--${ location.hash.slice(1) }`;
         if(index_active_id == 'index--' || document.getElementById(index_active_id) == null) index_active_id = 'index--overview'
-        window.sessionStorage.setItem('index.selected_id', index_active_id);
+        globalThis.sessionStorage.setItem('index.selected_id', index_active_id);
 
         setup_index.update_index_colors(old);
         setup_index.move_to_view(true);
@@ -211,6 +223,6 @@ var setup_index = {
         setup_index.format_elm(document.querySelector('index-'), 0, '');
 
         // Setup location change listener
-        window.addEventListener('hashchange', function(e){ setup_index.on_location_changed(); });
+        globalThis.addEventListener('hashchange', function(e){ setup_index.on_location_changed(); });
     }
 }

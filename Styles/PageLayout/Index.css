@@ -124,7 +124,7 @@ body > left- > index- indexd- > span::before {
     display: inline-block;
 }
 
-body > left- > index- index-.collapsed indexh- > span::before {
+body > left- > index- index-.collapsed > indexh- > span::before {
     transform: rotate(-90deg);
 }
 
