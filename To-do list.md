@@ -15,3 +15,5 @@
 - remove "types" too, no idea what it was meant for but its probably useless
 
 - Improve page sliding animation
+
+- Automate regex highlighting

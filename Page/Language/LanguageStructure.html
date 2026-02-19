@@ -113,10 +113,9 @@
                         <a href="#symbol-aliases">               <code><w->alias</w-></code></a>
                         <a href="#import-directive">             <code><w->from</w-></code></a>
                         <a href="#import-directive">             <code><w->import</w-></code></a>
-                        <a href="#import-directive">             <code><w->include</w-></code></a>
                         <a href="#export-directive">             <code><w->export</w-></code></a>
+                        <a href="#pointer-types">                <code><w->addr</w-></code></a>
                         <a href="#pointer-types">                <code>@</code></a>
-                        <a href="#pointer-types">                <code>$</code></a>
                     </div>
                     <div class="split-td" style="line-height: 3ch;">
                         <a href="#if-statement">                 <code><w->if</w-></code></a>
@@ -161,6 +160,7 @@
                         <a href="enums"><code>:</code></a>
                         <code>...</code>
                         <a href="#reference-parameters"><code>&</code></a>
+                        <a href="#pointer-types"><code>*</code></a>
                     </div>
                 </div></td>
             </tr>
@@ -181,7 +181,7 @@
                         Any sequence of characters with pattern
                         <code><sg->[</sg-><s->a</s-><sr->-</sr-><s->zA</s-><sr->-</sr-><s->Z_</s-><sg->][</sg-><s->a</s-><sr->-</sr-><s->zA</s-><sr->-</sr-><s->Z_0</s-><sr->-</sr-><s->9</s-><sg->]</sg-><sr->*</sr-></code>
                         or
-                        <code><sg->[</sg-><s->!$%&*+</s-><sr->\</sr-><s->-/:&lt;=&gt;?@^`|~;</s-><sr->\</sr-><s->[</s-><sr->\</sr-><s->]</s-><sr->\</sr-><s->.</s-><sg->]</sg-><sr->+</sr-></code>
+                        <code><sg->[</sg-><s->!$%&*+-/&lt;=&gt;</s-><s->?</s-><sr->\</sr-><s->[</s-><sr->\</sr-><s->]</s-><s->^`|~</s-><sg->]</sg-><sr->+</sr-></code>
                         //FIXME some of this stuff is incorrect
                         that isn't a <a href="#keywords">keyword</a> or a <a href="#literals">literal</a>.
                     </div>
@@ -217,7 +217,30 @@
         Their usage is detailedly explained in their respective sections.
     </p>
     <ul>
-        <li>Semantic keywords</li>
+        <li>Misc keywords</li>
+        <ul class="summary-list">
+            <li>
+                <span><a href="#import-directive"><code><w->from</w-></code></a></span>
+                <span>Introduces an <a href="#import-directive">import directive</a>.</span>
+            </li>
+            <li>
+                <span><a href="#import-directive"><code><w->import</w-></code></a></span>
+                <span>Imports symbols from a <a href="#modules">module</a> while preserving the container <a href="#namespaces">namespace</a>.</span>
+            </li>
+            <li>
+                <span><a href="#export-directive"><code><w->export</w-></code></a></span>
+                <span>Defines which symbols can be exported from the current <a href="#modules">module</a>.</span>
+            </li>
+            <li>
+                <span><a href="#pointer-types"><code><w->addr</w-></code></a></span>
+                <span>Retrieves the address of an <a href="#right-and-left-values">l-value</a>.</span>
+            </li>
+            <li>
+                <span><a href="#pointer-types"><code>@</code></a></span>
+                <span>Dereferences a <a href="#pointer-types">pointer</a> in order to acces its value.</span>
+            </li>
+        </ul><br>
+        <li>Declaration keywords</li>
         <ul class="summary-list">
             <li>
                 <span><a href="#namespaces"><code><w->namespace</w-></code></a></span>
@@ -232,6 +255,10 @@
                 <span>Used to declare a <a href="#structs">struct</a>.</span>
             </li>
             <li>
+                <span><a href="#symbol-aliases"><code><w->alias</w-></code></a></span>
+                <span>Creates an alternative <a href="#name-resolution">path</a> for a <a href="#name-resolution">symbol</a>.</span>
+            </li>
+            <li>
                 <span><a href="#const-qualifier"><code><t->const</t-></code></a></span>
                 <span>Specifies that a pointer type is const. Also used to declare const variables and routine parameters.</span>
             </li>
@@ -242,34 +269,6 @@
             <li>
                 <span><a href="#typeof-specifier"><code><t->typeof</t-></code></a></span>
                 <span>Retrieves the <a href="#types">type</a> of an <a href="#expressions">expression</a>.</span>
-            </li>
-            <li>
-                <span><a href="#symbol-aliases"><code><w->alias</w-></code></a></span>
-                <span>Creates an alternative <a href="#name-resolution">path</a> for a <a href="#name-resolution">symbol</a>.</span>
-            </li>
-            <li>
-                <span><a href="#import-directive"><code><w->from</w-></code></a></span>
-                <span>Introduces an <a href="#import-directive">import directive</a>.</span>
-            </li>
-            <li>
-                <span><a href="#import-directive"><code><w->import</w-></code></a></span>
-                <span>Imports symbols from a <a href="#modules">module</a> while preserving the container <a href="#namespaces">namespace</a>.</span>
-            </li>
-            <li>
-                <span><a href="#import-directive"><code><w->include</w-></code></a></span>
-                <span>Imports symbols from a <a href="#modules">module</a> without preserving the container <a href="#namespaces">namespace</a>.</span>
-            </li>
-            <li>
-                <span><a href="#export-directive"><code><w->export</w-></code></a></span>
-                <span>Defines which symbols can be exported from the current <a href="#modules">module</a>.</span>
-            </li>
-            <li>
-                <span><a href="#pointer-types"><code>@</code></a></span>
-                <span>Identifies the <a href="pointer-types">pointer version</a> of a type. Also used to dereference <a href="#pointer-types">pointer</a> values.</span>
-            </li>
-            <li>
-                <span><a href="#pointer-types"><code>$</code></a></span>
-                <span>Retrieves the address of an <a href="#left-and-right-values">l-value</a> as a <a href="#pointer-types">pointer</a> <a href="#left-and-right-values">r-value</a>. Also used to access <a href="#temporary-variables">temporary variables</a>.</span>
             </li>
         </ul><br>
         <li>Flow control keywords</li>
@@ -332,10 +331,6 @@
             <li>
                 <span><a href="#scopes"><elm-><code>{</code><code>}</code></elm-></a></span>
                 <span>Declares a new <a href="#scopes">scope</a>. Used to declare most <a href="#syntactic-elements">syntactic elements</a>.</span>
-            </li>
-            <li>
-                <span><elm-><code>"</code><code>"</code></elm-></span>
-                <span>Delimits a <a href="#literals">string literal</a>. Also used in <a href="#import-directive">import directives</a>.</span>
             </li>
         </ul><br>
         <li>Separators</li>
@@ -485,6 +480,13 @@
                     <span class="meta-keyword-constraint">[When used between the type and the identifier of a reference parameter]</span>.
                 </span>
             </li>
+            <li>
+                <span><a href="#pointer-types"><code>*</code></a></span>
+                <span>
+                    Identifies the <a href="pointer-types">pointer version</a> of a type.<br>
+                    <span class="meta-keyword-constraint">[When used at the end of a type path]</span>.
+                </span>
+            </li>
         </ul>
     </ul>
 </moveto-doc->
@@ -534,7 +536,7 @@
         <b>Identifiers</b> are used to <b>name and reference <a href="#name-resolution">symbols</a></b>.<br>
         An identifier can be
         alphanumeric (<code><sg->[</sg-><s->a</s-><sr->-</sr-><s->zA</s-><sr->-</sr-><s->Z_</s-><sg->][</sg-><s->a</s-><sr->-</sr-><s->zA</s-><sr->-</sr-><s->Z_0</s-><sr->-</sr-><s->9</s-><sg->]</sg-><sr->*</sr-></code>)
-        or symbolic (<code><sg->[</sg-><s->!%&*+</s-><sr->\</sr-><s->-/&lt;=&gt;?^`|~</s-><sr->\</sr-><s->[</s-><sr->\</sr-><s->]</s-><sg->]</sg-></code>).
+        or symbolic (<code><sg->[</sg-><s->!$%&*+-/&lt;=&gt;</s-><s->?</s-><sr->\</sr-><s->[</s-><sr->\</sr-><s->]</s-><s->^`|~</s-><sg->]</sg-><sr->+</sr-></code>).
     </p>
     <p>
         Identifiers can be shadowed. This is explained in <a href="#name-shadowing">Name shadowing</a>.

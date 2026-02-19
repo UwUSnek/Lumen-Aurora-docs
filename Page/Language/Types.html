@@ -760,12 +760,13 @@
 <moveto-doc->
     <p>
         Pointer types are implicit types that can store a memory address of a specific type. Their size is always 8 byes.<br>
-        They are referenced through the symbol path of the pointed type, also known as base type, followed by the <code>@</code> keyword.<br>
-        The <code><t->const</t-></code> meta keyword can be placed between the base type and the <code>@</code> keyword to reference the corresponding const pointer. Const pointers are detailedly explained in <a href="#const-qualifier">Const qualifier</a>.
+        They are referenced through the symbol path of the pointed type, also known as base type, followed by the <code>*</code> keyword.<br>
+        The <code><t->const</t-></code> meta keyword can be placed between the base type and the <code>*</code> meta keyword to reference the corresponding const pointer.
+        Const pointers are detailedly explained in <a href="#const-qualifier">Const qualifier</a>.
     </p>
     <p>
-        The <code>@</code> keyword is also used to access the value pointed by a pointer expression.<br>
-        The address of any l-value can be retrieved through the <code>$</code> keyword.
+        The <code>@</code> keyword is used to access the value pointed by a pointer expression.<br>
+        The address of any l-value can be retrieved through the <code><w->addr</w-></code> keyword.
     </p>
     <p>
         Pointer types don't have to be declared. Each existing type but <code><t->void</t-></code> has its own corresponding pointer type and <code><t->const</t-></code> pointer type ready to use, including the pointer types themselves.
@@ -784,10 +785,10 @@
 
                     <t->void</t-> <f->main</f->(){
                         <t->int</t-> n = <k->5</k->;
-                        <t->int@</t-> p = $<k->n</k->;
+                        <t->int*</t-> p = <w->addr</w-> <k->n</k->;
 
                         @p = <k->6</k->;
-                        io.<f->print</f->(<t->str</t->(<k->n</k->));
+                        io.<f->print</f->(<k->n</k->);
                     }
                 </div>
             </example->
@@ -811,12 +812,12 @@
 
                     <t->void</t-> <f->main</f->(){
                         <t->int</t-> a = <k->5</k->;
-                        <t->int@</t-> p;
-                        <t->int@@</t-> p2 = $p;
-                        @p2 = $<k->n</k->;
+                        <t->int*</t-> p;
+                        <t->int**</t-> p2 = <w->addr</w-> p;
+                        p = <w->addr</w-> <k->a</k->;
 
-                        @@p2 = <k->6</k->;
-                        io.<f->print</f->(<t->str</t->(<k->a</k->));
+                        @@p2 = <k->8</k->;
+                        io.<f->print</f->(<k->a</k->);
                     }
                 </div>
             </example->
@@ -826,7 +827,7 @@
                 <label->Output</label->
                 <div>
                     <console-prefix-></console-prefix->
-                    6<cursor-></cursor->
+                    8<cursor-></cursor->
                 </div>
             </example->
         </split-example-container-right->
@@ -912,7 +913,7 @@
                         <t->arr</t->&lt;<f->int</f->&gt; a = { <k->1</k->, <k->2</k-> };
                         io.<f->print</f->(<s->"Before map: "</s-> <f->+</f-> <t->str</t->(<k->a</k->) <f->+</f-> <s->"\n"</s->);
 
-                        <f->map</f->($<k->a</k->, <t->void</t->(<t->int@</t-> <p->n</p->){ @n <f->*=</f-> <k->5</k->; });
+                        <f->map</f->(<w->addr</w-> <k->a</k->, <t->void</t->(<t->int*</t-> <p->n</p->){ @n <f->*=</f-> <k->5</k->; });
                         io.<f->print</f->(<s->"After  map: "</s-> <f->+</f-> <t->str</t->(<k->a</k->));
                     }
                 </div>
@@ -947,7 +948,7 @@
 <h1 id="const-qualifier"></h1>
 <moveto-doc->
     <p>
-        When used between the base type and the <code>@</code> keyword of a pointer type, the <b><code><t->const</t-></code> qualifier</b> indicates that the type is a <b>const pointer</b>.<br>
+        When used between the base type and the <code>*</code> meta keyword of a pointer type, the <b><code><t->const</t-></code> qualifier</b> indicates that the type is a <b>const pointer</b>.<br>
         Data accessed by dereferencing a <code><t->const</t-></code> pointer value cannot be modified.<br>
         Non-<code><t->const</t-></code> pointers are implicitly convertible to their respective <code><t->const</t-></code> pointer type. This is explained in <a href="implicit-conversions">Implicit coversions</a>.
     </p>
@@ -967,7 +968,7 @@
         <div>
             <t->void</t-> <f->main</f->(){
                 <t->int</t-> var = <k->8</k->;
-                <t->int const@</t-> ptr = @<k->var</k->;
+                <t->int const*</t-> ptr = <w->addr</w-> <k->var</k->;
 
                 <k->var</k-> <f->=</f-> <k->9</k->;     <c->// Ok</c->
                 <c->//@ptr = 9;</c->  <ce->// Error, cannot modify data pointed by const pointers</ce->

@@ -861,10 +861,9 @@
                         <a href="#symbol-aliases">               <code><w->alias</w-></code></a>
                         <a href="#import-directive">             <code><w->from</w-></code></a>
                         <a href="#import-directive">             <code><w->import</w-></code></a>
-                        <a href="#import-directive">             <code><w->include</w-></code></a>
                         <a href="#export-directive">             <code><w->export</w-></code></a>
+                        <a href="#pointer-types">                <code><w->addr</w-></code></a>
                         <a href="#pointer-types">                <code>@</code></a>
-                        <a href="#pointer-types">                <code>$</code></a>
                     </div>
                     <div class="split-td" style="line-height: 3ch;">
                         <a href="#if-statement">                 <code><w->if</w-></code></a>
@@ -909,6 +908,7 @@
                         <a href="enums"><code>:</code></a>
                         <code>...</code>
                         <a href="#reference-parameters"><code>&</code></a>
+                        <a href="#pointer-types"><code>*</code></a>
                     </div>
                 </div></td>
             </tr>
@@ -929,7 +929,7 @@
                         Any sequence of characters with pattern
                         <code><sg->[</sg-><s->a</s-><sr->-</sr-><s->zA</s-><sr->-</sr-><s->Z_</s-><sg->][</sg-><s->a</s-><sr->-</sr-><s->zA</s-><sr->-</sr-><s->Z_0</s-><sr->-</sr-><s->9</s-><sg->]</sg-><sr->*</sr-></code>
                         or
-                        <code><sg->[</sg-><s->!$%&*+</s-><sr->\</sr-><s->-/:&lt;=&gt;?@^`|~;</s-><sr->\</sr-><s->[</s-><sr->\</sr-><s->]</s-><sr->\</sr-><s->.</s-><sg->]</sg-><sr->+</sr-></code>
+                        <code><sg->[</sg-><s->!$%&*+-/&lt;=&gt;</s-><s->?</s-><sr->\</sr-><s->[</s-><sr->\</sr-><s->]</s-><s->^`|~</s-><sg->]</sg-><sr->+</sr-></code>
                         //FIXME some of this stuff is incorrect
                         that isn't a <a href="#keywords">keyword</a> or a <a href="#literals">literal</a>.
                     </div>
@@ -948,7 +948,30 @@
         Their usage is detailedly explained in their respective sections.
     </p>
     <ul>
-        <li>Semantic keywords</li>
+        <li>Misc keywords</li>
+        <ul class="summary-list">
+            <li>
+                <span><a href="#import-directive"><code><w->from</w-></code></a></span>
+                <span>Introduces an <a href="#import-directive">import directive</a>.</span>
+            </li>
+            <li>
+                <span><a href="#import-directive"><code><w->import</w-></code></a></span>
+                <span>Imports symbols from a <a href="#modules">module</a> while preserving the container <a href="#namespaces">namespace</a>.</span>
+            </li>
+            <li>
+                <span><a href="#export-directive"><code><w->export</w-></code></a></span>
+                <span>Defines which symbols can be exported from the current <a href="#modules">module</a>.</span>
+            </li>
+            <li>
+                <span><a href="#pointer-types"><code><w->addr</w-></code></a></span>
+                <span>Retrieves the address of an <a href="#right-and-left-values">l-value</a>.</span>
+            </li>
+            <li>
+                <span><a href="#pointer-types"><code>@</code></a></span>
+                <span>Dereferences a <a href="#pointer-types">pointer</a> in order to acces its value.</span>
+            </li>
+        </ul><br>
+        <li>Declaration keywords</li>
         <ul class="summary-list">
             <li>
                 <span><a href="#namespaces"><code><w->namespace</w-></code></a></span>
@@ -963,6 +986,10 @@
                 <span>Used to declare a <a href="#structs">struct</a>.</span>
             </li>
             <li>
+                <span><a href="#symbol-aliases"><code><w->alias</w-></code></a></span>
+                <span>Creates an alternative <a href="#name-resolution">path</a> for a <a href="#name-resolution">symbol</a>.</span>
+            </li>
+            <li>
                 <span><a href="#const-qualifier"><code><t->const</t-></code></a></span>
                 <span>Specifies that a pointer type is const. Also used to declare const variables and routine parameters.</span>
             </li>
@@ -973,34 +1000,6 @@
             <li>
                 <span><a href="#typeof-specifier"><code><t->typeof</t-></code></a></span>
                 <span>Retrieves the <a href="#types">type</a> of an <a href="#expressions">expression</a>.</span>
-            </li>
-            <li>
-                <span><a href="#symbol-aliases"><code><w->alias</w-></code></a></span>
-                <span>Creates an alternative <a href="#name-resolution">path</a> for a <a href="#name-resolution">symbol</a>.</span>
-            </li>
-            <li>
-                <span><a href="#import-directive"><code><w->from</w-></code></a></span>
-                <span>Introduces an <a href="#import-directive">import directive</a>.</span>
-            </li>
-            <li>
-                <span><a href="#import-directive"><code><w->import</w-></code></a></span>
-                <span>Imports symbols from a <a href="#modules">module</a> while preserving the container <a href="#namespaces">namespace</a>.</span>
-            </li>
-            <li>
-                <span><a href="#import-directive"><code><w->include</w-></code></a></span>
-                <span>Imports symbols from a <a href="#modules">module</a> without preserving the container <a href="#namespaces">namespace</a>.</span>
-            </li>
-            <li>
-                <span><a href="#export-directive"><code><w->export</w-></code></a></span>
-                <span>Defines which symbols can be exported from the current <a href="#modules">module</a>.</span>
-            </li>
-            <li>
-                <span><a href="#pointer-types"><code>@</code></a></span>
-                <span>Identifies the <a href="pointer-types">pointer version</a> of a type. Also used to dereference <a href="#pointer-types">pointer</a> values.</span>
-            </li>
-            <li>
-                <span><a href="#pointer-types"><code>$</code></a></span>
-                <span>Retrieves the address of an <a href="#left-and-right-values">l-value</a> as a <a href="#pointer-types">pointer</a> <a href="#left-and-right-values">r-value</a>. Also used to access <a href="#temporary-variables">temporary variables</a>.</span>
             </li>
         </ul><br>
         <li>Flow control keywords</li>
@@ -1063,10 +1062,6 @@
             <li>
                 <span><a href="#scopes"><elm-><code>{</code><code>}</code></elm-></a></span>
                 <span>Declares a new <a href="#scopes">scope</a>. Used to declare most <a href="#syntactic-elements">syntactic elements</a>.</span>
-            </li>
-            <li>
-                <span><elm-><code>"</code><code>"</code></elm-></span>
-                <span>Delimits a <a href="#literals">string literal</a>. Also used in <a href="#import-directive">import directives</a>.</span>
             </li>
         </ul><br>
         <li>Separators</li>
@@ -1199,6 +1194,13 @@
                     <span class="meta-keyword-constraint">[When used between the type and the identifier of a reference parameter]</span>.
                 </span>
             </li>
+            <li>
+                <span><a href="#pointer-types"><code>*</code></a></span>
+                <span>
+                    Identifies the <a href="pointer-types">pointer version</a> of a type.<br>
+                    <span class="meta-keyword-constraint">[When used at the end of a type path]</span>.
+                </span>
+            </li>
         </ul>
     </ul>
 </moveto-doc->
@@ -1219,7 +1221,7 @@
         <b>Identifiers</b> are used to <b>name and reference <a href="#name-resolution">symbols</a></b>.<br>
         An identifier can be
         alphanumeric (<code><sg->[</sg-><s->a</s-><sr->-</sr-><s->zA</s-><sr->-</sr-><s->Z_</s-><sg->][</sg-><s->a</s-><sr->-</sr-><s->zA</s-><sr->-</sr-><s->Z_0</s-><sr->-</sr-><s->9</s-><sg->]</sg-><sr->*</sr-></code>)
-        or symbolic (<code><sg->[</sg-><s->!%&*+</s-><sr->\</sr-><s->-/&lt;=&gt;?^`|~</s-><sr->\</sr-><s->[</s-><sr->\</sr-><s->]</s-><sg->]</sg-></code>).
+        or symbolic (<code><sg->[</sg-><s->!$%&*+-/&lt;=&gt;</s-><s->?</s-><sr->\</sr-><s->[</s-><sr->\</sr-><s->]</s-><s->^`|~</s-><sg->]</sg-><sr->+</sr-></code>).
     </p>
     <p>
         Identifiers can be shadowed. This is explained in <a href="#name-shadowing">Name shadowing</a>.
@@ -2909,12 +2911,13 @@
 <moveto-doc->
     <p>
         Pointer types are implicit types that can store a memory address of a specific type. Their size is always 8 byes.<br>
-        They are referenced through the symbol path of the pointed type, also known as base type, followed by the <code>@</code> keyword.<br>
-        The <code><t->const</t-></code> meta keyword can be placed between the base type and the <code>@</code> keyword to reference the corresponding const pointer. Const pointers are detailedly explained in <a href="#const-qualifier">Const qualifier</a>.
+        They are referenced through the symbol path of the pointed type, also known as base type, followed by the <code>*</code> keyword.<br>
+        The <code><t->const</t-></code> meta keyword can be placed between the base type and the <code>*</code> meta keyword to reference the corresponding const pointer.
+        Const pointers are detailedly explained in <a href="#const-qualifier">Const qualifier</a>.
     </p>
     <p>
-        The <code>@</code> keyword is also used to access the value pointed by a pointer expression.<br>
-        The address of any l-value can be retrieved through the <code>$</code> keyword.
+        The <code>@</code> keyword is used to access the value pointed by a pointer expression.<br>
+        The address of any l-value can be retrieved through the <code><w->addr</w-></code> keyword.
     </p>
     <p>
         Pointer types don't have to be declared. Each existing type but <code><t->void</t-></code> has its own corresponding pointer type and <code><t->const</t-></code> pointer type ready to use, including the pointer types themselves.
@@ -2933,10 +2936,10 @@
 
                     <t->void</t-> <f->main</f->(){
                         <t->int</t-> n = <k->5</k->;
-                        <t->int@</t-> p = $<k->n</k->;
+                        <t->int*</t-> p = <w->addr</w-> <k->n</k->;
 
                         @p = <k->6</k->;
-                        io.<f->print</f->(<t->str</t->(<k->n</k->));
+                        io.<f->print</f->(<k->n</k->);
                     }
                 </div>
             </example->
@@ -2960,12 +2963,12 @@
 
                     <t->void</t-> <f->main</f->(){
                         <t->int</t-> a = <k->5</k->;
-                        <t->int@</t-> p;
-                        <t->int@@</t-> p2 = $p;
-                        @p2 = $<k->n</k->;
+                        <t->int*</t-> p;
+                        <t->int**</t-> p2 = <w->addr</w-> p;
+                        p = <w->addr</w-> <k->a</k->;
 
-                        @@p2 = <k->6</k->;
-                        io.<f->print</f->(<t->str</t->(<k->a</k->));
+                        @@p2 = <k->8</k->;
+                        io.<f->print</f->(<k->a</k->);
                     }
                 </div>
             </example->
@@ -2975,7 +2978,7 @@
                 <label->Output</label->
                 <div>
                     <console-prefix-></console-prefix->
-                    6<cursor-></cursor->
+                    8<cursor-></cursor->
                 </div>
             </example->
         </split-example-container-right->
@@ -3052,7 +3055,7 @@
                         <t->arr</t->&lt;<f->int</f->&gt; a = { <k->1</k->, <k->2</k-> };
                         io.<f->print</f->(<s->"Before map: "</s-> <f->+</f-> <t->str</t->(<k->a</k->) <f->+</f-> <s->"\n"</s->);
 
-                        <f->map</f->($<k->a</k->, <t->void</t->(<t->int@</t-> <p->n</p->){ @n <f->*=</f-> <k->5</k->; });
+                        <f->map</f->(<w->addr</w-> <k->a</k->, <t->void</t->(<t->int*</t-> <p->n</p->){ @n <f->*=</f-> <k->5</k->; });
                         io.<f->print</f->(<s->"After  map: "</s-> <f->+</f-> <t->str</t->(<k->a</k->));
                     }
                 </div>
@@ -3075,7 +3078,7 @@
 <h1 id="const-qualifier"></h1>
 <moveto-doc->
     <p>
-        When used between the base type and the <code>@</code> keyword of a pointer type, the <b><code><t->const</t-></code> qualifier</b> indicates that the type is a <b>const pointer</b>.<br>
+        When used between the base type and the <code>*</code> meta keyword of a pointer type, the <b><code><t->const</t-></code> qualifier</b> indicates that the type is a <b>const pointer</b>.<br>
         Data accessed by dereferencing a <code><t->const</t-></code> pointer value cannot be modified.<br>
         Non-<code><t->const</t-></code> pointers are implicitly convertible to their respective <code><t->const</t-></code> pointer type. This is explained in <a href="implicit-conversions">Implicit coversions</a>.
     </p>
@@ -3095,7 +3098,7 @@
         <div>
             <t->void</t-> <f->main</f->(){
                 <t->int</t-> var = <k->8</k->;
-                <t->int const@</t-> ptr = @<k->var</k->;
+                <t->int const*</t-> ptr = <w->addr</w-> <k->var</k->;
 
                 <k->var</k-> <f->=</f-> <k->9</k->;     <c->// Ok</c->
                 <c->//@ptr = 9;</c->  <ce->// Error, cannot modify data pointed by const pointers</ce->
