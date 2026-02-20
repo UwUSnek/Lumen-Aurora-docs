@@ -26,7 +26,7 @@
 
 
         void main(){
-            io.#merge("pr", "int")(#add_3(5, 12, 0.5));
+            io.#merge(pr,int)(#add_3(5, 12, 0.5));
         }
 
         //output is 17.5
@@ -36,6 +36,7 @@
             //TODO no \ means "this is a parameter"
 
         //TODO macro parameter names must be valid identifiers.
+            //TODO they don't conflict with token-level identifiers. a macro and a function can be called the same
             //TODO any non-escaped $ followed by a valid identifier is recognized as a macro parameter
 
         //TODO Normally, only identifiers and literals can be passed as arguments. Not even keywords are allowed.
@@ -51,7 +52,7 @@
             #doNothing(`for(int i = 0; i < #add(\`1+1\`, 2);++i)io.print("hi")`);
             // Ok. Expands to for(int i = 0; i < #add(`1+1`, 2);++i)io.print("hi")
             // Which expands to for(int i = 0; i < 1+1 + 2;++i)io.print("hi")
-            // Which prints "hi" 3 times
+            // Which prints "hi" 4 times
         }
 
 
