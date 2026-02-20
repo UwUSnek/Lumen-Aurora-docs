@@ -1,0 +1,443 @@
+
+<!--------------------------------------------------------------------->
+<!-- Syntactic elements                                               -->
+<!--------------------------------------------------------------------->
+<h1 id="syntactic-elements"></h1>
+<moveto-doc->
+    <p>
+        <b>Syntactic elements</b> are <b>sequences</b> of one or more <a href="#tokens"><b>tokens</b></a> or other syntactic elements that follow specific patterns.<br>
+        They define the contents and interface of the <a href="#modules">module</a>.
+    </p>
+    <p>
+        Syntactic elements are divided in 6 categories:
+    </p>
+
+
+    <div class="table-container"><table>
+        <tr>
+            <th>Category</th>
+            <th>Syntactic element</th>
+        </tr>
+        <tr>
+            <th class="nowrap medium"><a href="#language-structure.directives">Directive</a></th>
+            <td><div class="split-td-outer">
+                <div class="split-td">
+                    <even-elm-><a href="#import-directive">Import </a> directive</even-elm->
+                    <even-elm-><a href="#export-directive"><code><w->export</w-></code></a> directive</even-elm->
+                    <even-elm-><a href="#construct-directive"><code><w->construct</w-></code></a> directive</even-elm->
+                </div>
+            </div></td>
+        </tr>
+        <tr>
+            <th class="nowrap medium"><a href="#name-resolution">Declaration</a></th>
+            <td><div class="split-td-outer">
+                <div class="split-td">
+                    <even-elm-><a href="#enums"><code><w->enum</w-></code></a> declaration</even-elm->
+                    <even-elm-><a href="#enums"><code><w->enum</w-></code></a> element declaration</even-elm->
+                    <even-elm-><a href="#structs"><code><w->struct</w-></code></a> declaration</even-elm->
+                    <even-elm-><a href="#structs"><code><w->struct</w-></code></a> member declaration</even-elm->
+                </div>
+                <div class="split-td">
+                    <even-elm-><a href="#functions">Function</a> declaration</even-elm->
+                    <even-elm-><a href="#operators">Operator</a> declaration</even-elm->
+                    <even-elm-><a href="#routine-parameters">Routine parameter</a></even-elm->
+                </div>
+                <div class="split-td">
+                    <even-elm-><a href="#namespaces"><code><w->namespace</w-></code></a> declaration</even-elm->
+                    <even-elm-><a href="#templates"><code><w->template</w-></code></a> declaration</even-elm->
+                    <even-elm-><a href="#symbol-aliases"><code><w->alias</w-></code></a> declaration</even-elm->
+                    <even-elm-><a href="#variables">Variable</a> declaration</even-elm->
+                </div>
+            </div></td>
+        </tr>
+        <tr>
+            <th class="nowrap medium"><a href="#language-structure.statements">Statement</a></th>
+            <td><div class="split-td-outer">
+                <div class="split-td">
+                    <even-elm-><a href="#if-statement"><code><w->if</w-></code></a> statement</even-elm->
+                    <even-elm-><a href="#match-statement"><code><w->match</w-></code></a> statement</even-elm->
+                </div>
+                <div class="split-td">
+                    <even-elm-><a href="#while-loops"><code><w->while</w-></code></a> loop</even-elm->
+                    <even-elm-><a href="#for-loops"><code><w->for</w-></code></a> loop</even-elm->
+                    <even-elm-><a href="#once-statement"><code><w->once</w-></code></a> statement</even-elm->
+                    <even-elm-><a href="#then-statement"><code><w->then</w-></code></a> statement</even-elm->
+                    <even-elm-><a href="#break-statement"><code><w->break</w-></code></a> statement</even-elm->
+                    <even-elm-><a href="#continue-statement"><code><w->continue</w-></code></a> statement</even-elm->
+                </div>
+                <div class="split-td">
+                    <even-elm-><a href="#return-statement"><code><w->return</w-></code></a> statement</even-elm->
+                    <even-elm-><a href="#defer-statement"><code><w->defer</w-></code></a> statement</even-elm->
+                </div>
+                <div class="split-td">
+                    <even-elm-><a href="#else-statement"><code><w->else</w-></code></a> statement</even-elm->
+                    <even-elm-><a href="#expressions">Expression statement</a></even-elm->
+                    <even-elm-><a href="#unnamed-scopes">Unnamed scope</a></even-elm->
+                    <even-elm-><a href="#empty-statement">Empty statement</a></even-elm->
+                    <even-elm-><a href="#inline-glsl">Inline GLSL</a></even-elm->
+                    <even-elm-><a href="#inline-cpp">Inline C++</a></even-elm->
+                </div>
+            </div></td>
+        </tr>
+        <tr>
+            <th class="nowrap medium"><a href="#language-structure.expressions">Expression</a></th>
+            <td><div class="split-td-outer">
+                <div class="split-td">
+                    <even-elm-><a href="#literals">Literal</a></even-elm->
+                    <even-elm-><a href="#try-expression"><code><w->try</w-></code> expression</a></even-elm->
+                </div>
+                <div class="split-td">
+                    <even-elm-><a href="#variables">Variable</a></even-elm->
+                    <even-elm-><a href="#temporary-variables">Temporary variable</a></even-elm->
+                    <even-elm-><a href="#routine-parameters">Routine parameter</a></even-elm->
+                </div>
+                <div class="split-td">
+                    <even-elm-><a href="#function-calls">Function call</a></even-elm->
+                    <even-elm-><a href="#operator-calls">Operator call</a></even-elm->
+                </div>
+            </div></td>
+        </tr>
+        <tr>
+            <th class="nowrap medium"><a href="#language-structure.paths">Paths</a></th>
+            <td><div class="split-td-outer">
+                <div>
+                    <even-elm-><a href="#symbol-paths">Symbol path</a></even-elm->
+                    <even-elm-><a href="#symbol-reflection-paths">Symbol reflection path</a></even-elm->
+                </div>
+            </div></td>
+        </tr>
+    </table></div>
+
+
+
+    <p>
+        <a href="#structs">structs</a>, <a href="#routines">routines</a>, <a href="#templates">templates</a> and the <a href="#while-loops"><code><w->while</w-></code> loop</a>
+        are divided in sub-elements in order to provide a clear and concise syntax.<br>
+    </p>
+    <ul>
+        <li>Declaration sub-elements</li>
+        <ul class="summary-list">
+            <li>
+                <span><a href="#structs">Struct</a> signature</span>
+                <span>Defines the name of a <a href="#structs">struct</a>.</span>
+            </li>
+            <li>
+                <span><a href="#structs">Struct</a> body</span>
+                <span>Contains the <a href="#structs">struct</a> members and other allowed declarations.</span>
+            </li>
+            <li>
+                <span><a href="#functions">Function</a> signature</span>
+                <span>Defines the name, <a href="#return-statement">return type</a> and <a href="#routine-parameters">parameters</a> of a <a href="#functions">function</a></span>
+            </li>
+            <li>
+                <span><a href="#operators">Operator</a> signature</span>
+                <span>Defines the names, <a href="#return-statement">return type</a>, <a href="#routine-parameters">parameters</a>, <a href="#declarations.operator-precedence">priority</a> and <a href="#declarations.operator-precedence">associativity</a> of an <a href="#operators">operator</a></span>
+            </li>
+            <li>
+                <span><a href="#routines">Routine</a> body</span>
+                <span>Contains the <a href="#statements">statements</a> and other allowed declarations of a <a href="#routines">routine</a></span>
+            </li>
+            <li>
+                <span><a href="#templates">Template</a> signature</span>
+                <span>Defines the name and parameters of a <a href="#templates">template</a></span>
+            </li>
+            <li>
+                <span><a href="#specialization-constraints">Specialization constraint</a></span>
+                <span>Defines the <a href="#specialization-constraints">constraint</a> that determines when the subsequent element body is suitable for specialization</span>
+            </li>
+        </ul><br>
+        <li>Other sub-elements</li>
+        <ul class="summary-list">
+            <li>
+                <span><a href="#while-loops">While</a> signature</span>
+                <span>Defines the <a href="boolean-type">condition</a> of a <a href="while-loops">while loop</a></span>
+            </li>
+            <li>
+                <span>Specialization constraint</span>
+                <span>Specifies a constraint whose result determines when a struct or routine declaration can be used.</span>
+            </li>
+        </ul>
+    </ul>
+</moveto-doc->
+
+
+
+
+
+
+
+<!--------------------------------------------------------------------->
+<!-- Directives                                                      -->
+<!--------------------------------------------------------------------->
+<h1 id="language-structure.directives"></h1>
+<moveto-doc->
+    <p>
+        <b>Directives</b> are instructions that <b>modify</b> the <a href="#modules">module</a> on a <b>semantic</b> level.<br>
+        They are used to define which <a href="#name-resolution">symbols</a> are <a href="#import-directive">imported</a> and/or <a href="#export-directive">exported</a> and to programmatically generate code.
+    </p>
+    <ul>
+        <li>Module interface</li>
+        <ul class="summary-list">
+            <li>
+                <span><elm-><a href="#import-directive">Improt</a> directive</elm-></span>
+                <span><a href="#import-directive">Imports</a> <a href="#name-resolution">symbols</a> from a <a href="#modules">module</a>.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#export-directive"><code><w->export</w-></code></a> directive</elm-></span>
+                <span>Defines the <a href="#name-resolution">symbols</a> the <a href="#modules">module</a> provides when <a href="#import-directive">imported</a>.</span>
+            </li>
+        </ul>
+        <li>Code generation</li>
+        <ul class="summary-list">
+            <li>
+                <span><elm-><a href="#construct-directive"><code><w->construct</w-></code></a> directive</elm-></span>
+                <span>Generates code in the corresponding language by compiling and running Lumen code before the compilation phase. //TODO other languages</span>
+            </li>
+        </ul>
+    </ul>
+</moveto-doc->
+
+
+
+
+
+<!--------------------------------------------------------------------->
+<!-- Declarations                                                    -->
+<!--------------------------------------------------------------------->
+<h1 id="language-structure.declarations"></h1>
+<moveto-doc->
+    <p>
+        <b>Declarations</b> define user-defined elements, such as <a href="#structs">structs</a>, <a href="#enums">enums</a>, <a href="#routines">routines</a>, <a href="#namespaces">namespaces</a>, <a href="#templates">templates</a>, <a href="#symbol-aliases">symbol aliases and <a href="#variables">variables</a>.</a><br>
+        Anything defined through a declaration is called a <b>Symbol</b>. Symbols can be referenced through their <a href="#name-resolution">path</a>. This is explained in <a href="#name-resolution">Name resolution</a>.<br>
+        There are a total of 11 user-defined elements. They are available in both languages.
+    </p>
+    <ul>
+        <li>Types</li>
+        <ul class="summary-list">
+            <li>
+                <span><elm-><a href="#enums"><code><w->enum</w-></code></a> declaration</elm-></span>
+                <span>Declares an <a href="#enums">enum</a>, a type used to group <a href="#compile-time-expressions">compile time expressions</a> of the same <a href="#types">type</a>.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#enums"><code><w->enum</w-></code></a> element declaration</elm-></span>
+                <span>Defines one or more <a href="#enums">enum</a> elements and their values.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#structs"><code><w->struct</w-></code></a> declaration</elm-></span>
+                <span>Declares a <a href="#structs">struct</a>, a type used to group <a href="#variables">variables</a> of different <a href="#types">types</a>.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#structs"><code><w->struct</w-></code></a> member declaration</elm-></span>
+                <span>Defines one ore more <a href="#structs">struct</a> members.</span>
+            </li>
+        </ul><br>
+        <li>Routines</li>
+        <ul class="summary-list">
+            <li>
+                <span><elm-><a href="#functions">Function</a> declaration</elm-></span>
+                <span>Declares a <a href="#functions">function</a>, a prefix <a href="#routines">routine</a> that requires parentheses to be <a href="#function-calls">called</a>.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#operators">Operator</a> declaration</elm-></span>
+                <span>Declares an <a href="#operators">operator</a>, a <a href="#routines">routine</a> that doesn't require parentheses to be <a href="#operator-calls">called</a> and can use multiple symbolic or alphanumeric <a href="#identifiers">identifiers</a>.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#routine-parameters">Routine parameter</a></elm-></span>
+                <span>Defines an input values for a <a href="routines">routine</a>.</span>
+            </li>
+        </ul><br>
+        <li>Misc</li>
+        <ul class="summary-list">
+            <li>
+                <span><elm-><a href="#namespaces"><code><w->namespace</w-></code></a> declaration</elm-></span>
+                <span>Declares a named <a href="#scopes">scope</a>.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#templates"><code><w->template</w-></code></a> declaration</elm-></span>
+                <span>Generates <a href="#structs">struct</a>, <a href="#functions">function</a> or <a href="#operators">operator</a> declarations based on the explicit <a href="#templates">template</a> arguments or the <a href="#types">types</a> used in the <a href="#routine-calls">routine calls</a>.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#symbol-aliases"><code><w->alias</w-></code></a> declaration</elm-></span>
+                <span>Declares an alternative <a href="#symbol-paths">path</a> for a <a href="#name-resolution">symbol</a>.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#variables">Variable</a> declaration</elm-></span>
+                <span>Declares one or more named memory locations that can store <a href="#values">values</a>.</span>
+            </li>
+        </ul>
+    </ul>
+</moveto-doc->
+
+
+
+
+<!--------------------------------------------------------------------->
+<!-- Statements                                                      -->
+<!--------------------------------------------------------------------->
+<h1 id="language-structure.statements"></h1>
+<moveto-doc->
+    <p>
+        <b>Statements</b> perform actions during runtime. They define the behaviour of each <a href="#routines">routine</a>, their return value and runtime performance.<br>
+        Statements are hard coded into the languages and cannot be modified. There are a total of 16 statements, 2 of which can only be used in their respective language.
+    </p>
+    <ul>
+        <li>Selection</li>
+        <ul class="summary-list">
+            <li>
+                <span><elm-><a href="#if-statement"><code><w->if</w-></code></a> statement</elm-></span>
+                <span>Executes a <a href="#statements">statement</a> if its condition evaluates to <a href="#boolean-type"><code><k->true</k-></code></a>.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#match-statement"><code><w->match</w-></code></a> statement</elm-></span>
+                <span>Executes <a href="#statements">statements</a> based on the value of an <a href="#expressions">expression</a>.</span>
+            </li>
+        </ul><br>
+        <li>Iteration</li>
+        <ul class="summary-list">
+            <li>
+                <span><elm-><a href="#for-loops"><code><w->for</w-></code></a> loop</elm-></span>
+                <span>Executes a <a href="#statements">statement</a> a fixed amount of times.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#while-loops"><code><w->while</w-></code></a> loop</elm-></span>
+                <span>Executes a <a href="#statements">statement</a> until its condition evaluates to <a href="#boolean-type"><code><k->false</k-></code></a>.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#continue-statement"><code><w->continue</w-></code></a> statement</elm-></span>
+                <span>Skips an arbitrary number of iterations of the innermost enclosing <a href="#iteration">loop</a>.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#break-statement"><code><w->break</w-></code></a> statement</elm-></span>
+                <span>Skips all the remaining iterations of an arbitrary number of enclosing <a href="#iteration">loops</a>, starting from the innermost.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#once-statement"><code><w->once</w-></code></a> statement</elm-></span>
+                <span>Executes a <a href="#statements">statement</a> during the first iteration of the innermost enclosing <a href="#iteration">loop</a>.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#then-statement"><code><w->then</w-></code></a> statement</elm-></span>
+                <span>Executes a <a href="#statements">statement</a> if the immediatly preceding <a href="#iteration">loop</a> didn't stop through a <a href="#break-statement"><code><w->break</w-></code> statement</a> and completed at least one iteration.</span>
+            </li>
+        </ul><br>
+        <li>Non-local</li>
+        <ul class="summary-list">
+            <li>
+                <span><elm-><a href="#return-statement"><code><w->return</w-></code></a> statement</elm-></span>
+                <span>Returns the flow control to the caller <a href="#routines">routine</a>.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#defer-statement"><code><w->defer</w-></code></a> statement</elm-></span>
+                <span>Evaluates all the <a href="#routine-calls">arguments</a> of a <a href="#routine-calls">routine call</a> but delays its execution until the first <a href="#return-statement"><code><w->return</w-></code> statement</a> is encountered and all the <a href="#routine-calls">routine calls</a> of subsequent <a href="defer-statement"><code><w->defer</w-></code> statements</a> are executed.</span>
+            </li>
+        </ul><br>
+        <li>Misc</li>
+        <ul class="summary-list">
+            <li>
+                <span><elm-><a href="#else-statement"><code><w->else</w-></code></a> statement</elm-></span>
+                <span>Executes a <a href="#statements">statement</a> if the <a href="#bool-type">condition</a> of the immediatly preceding <a href="#iteration">loop</a> or <a href="#if-statement"><code><w->if</w-></code> statement</a> evaluated to <code><t->false</t-></code> before the first iteration.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#expressions">Expression statement</a></elm-></span>
+                <span>Evaluates an <a href="#expresisons">expression</a>.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#unnamed-scopes">Unnamed scope</a></elm-></span>
+                <span>Groups multiple <a href="#statements">statements</a> in one.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#empty-statement">Empty statement</a></elm-></span>
+                <span>Does nothing.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#inline-glsl">Inline GLSL</a></elm-></span>
+                <span><Lumen-logo-></Lumen-logo-> Allows GLSL 4.60 code to be used from within Lumen.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#inline-cpp">Inline C++</a></elm-></span>
+                <span><aurora-logo-></aurora-logo-> Allows C++20 code to be used from within Aurora.</span>
+            </li>
+        </ul>
+    </ul>
+</moveto-doc->
+
+
+
+
+<!--------------------------------------------------------------------->
+<!-- Expressions                                                     -->
+<!--------------------------------------------------------------------->
+<h1 id="language-structure.expressions"></h1>
+<moveto-doc->
+    <p>
+        <b>Expressions</b> generate values. They are mostly used to declare <a href="#name-resolution">symbols</a> and call <a href="#routines">routines</a>.
+    </p>
+    <ul>
+        <li>Inline values</li>
+        <ul class="summary-list">
+            <li>
+                <span><elm-><a href="#literals">Literal</a></elm-></span>
+                <span>Generates a value of a <a href="#primitive-types">primitive type</a> by interpreting the token in the specified numerical base.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#try-expression"><code><w->try</w-></code> expression</a></elm-></span>
+                <span>Compiles a portion of code. Evaluates to <a href="#boolean-type"><code><k->true</k-></code></a> if the code doesn't generate <a href="#compilation">syntactic</a> or <a href="#compilation">semantic errors</a>.</span>
+            </li>
+        </ul><br>
+        <li>Stored values</li>
+        <ul class="summary-list">
+            <li>
+                <span><elm-><a href="#variables">Variable</a></elm-></span>
+                <span>Accesses the value stored in a previously declared <a href="#variables">variable</a>.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#temporary-variables">Temporary variable</a></elm-></span>
+                <span>Accesses the value stored in a <a href="#temporary-variables">temporary variable</a>.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#routine-parameters">Routine parameter</a></elm-></span>
+                <span>Accesses the value that was passed to a <a href="#variables">routine parameter</a>.</span>
+            </li>
+        </ul><br>
+        <li>Routine calls</li>
+        <ul class="summary-list">
+            <li>
+                <span><elm-><a href="#function-calls">Function call</a></elm-></span>
+                <span>Generates a value by calling a <a href="#functions">function</a> or <a href="#templates">function template</a>.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#operator-calls">Operator call</a></elm-></span>
+                <span>Generates a value by calling an <a href="#operators">operator</a> or <a href="#templates">operator template</a>.</span>
+            </li>
+        </ul>
+    </ul>
+</moveto-doc->
+
+
+
+
+
+
+<!-- TODO RENAME SYMBOL PATHS as they aren't just for symbols -->
+<!--------------------------------------------------------------------->
+<!-- Paths                                                           -->
+<!--------------------------------------------------------------------->
+<h1 id="language-structure.paths"></h1>
+<moveto-doc->
+    <p>
+        Paths are used to reference things declared in in the code, either explicitly or implicitly, in order to retrieve or pass informations about them.<br>
+        Any accessible module, namespace, symbol alias, primitive type, enum, struct, special type, routine, variable and temporary variable is considered a symbol.<br>
+        Paths are a foundamental part of most <a href="#name-resolution">semantic elements</a>.
+    </p>
+    <p>
+        Type paths are a subset of Symbol paths that point to symbols suitable to be used as types, such as primitive types, enums, structs and special types.
+    </p>
+    <p>
+        Reflection paths are a subset of Symbol paths that can access compile time informations about the referenced symbol. These are detailedly explained in <a href="#reflection">Reflection</a>.
+    </p>
+    <syntax->
+        <label- id="copy.syntax--path-standard">Standard path</label->
+        <label- id="copy.syntax--path-type">Type path</label->
+        <label- id="copy.syntax--path-reflection">Reflection path</label->
+        <label- id="copy.syntax--path-name">Symbol name</label->
+    </syntax->
+</moveto-doc->
