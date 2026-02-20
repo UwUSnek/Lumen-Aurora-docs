@@ -618,7 +618,7 @@
 <moveto-doc->
     <ce-full-size->
         NOTICE:<br>
-        Althought the language provides include statements, we recommend not to use them.<br>
+        The language provides include statements, but they should be avoided whenever possible.<br>
         The <a href="#import-directive">import directive</a> does a much better job at importing other modules, looks cleaner and can be debugged easily.<br>
         Include statements should only be used if you know what you are doing and you are certain that import directives won't be enough.
     </ce-full-size->
@@ -719,6 +719,13 @@
 
 <h1 id="macros"></h1>
 <moveto-doc->
+    <ce-full-size->
+        NOTICE:<br>
+        The language provides preprocessor macros, but they should be avoided whenever possible.<br>
+        They are hard to read and can generate confusing error messages.<br>
+        More often than not, proper language features such as routines, templates, and specialization work better and look cleaner.<br>
+        Macros should only be used for cases in which all alternatives fail or are too verbose for the intended purpose.
+    </ce-full-size->
     <p>
         //TODO
         import <io>
