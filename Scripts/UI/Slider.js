@@ -37,7 +37,7 @@ var ui_slider = {
                 element.style.backgroundPositionX = `calc(${ (page_width + Number.parseInt(slider.value) + main_padding_l_px) / 2 }px - ${ getComputedStyle(element).backgroundSize } / 2)`;
 
                 // Make its height identical to its (dynamic) width  //! Only setting the height property with min-height at 0 doesn't work
-                let height = `min(20vh, ${ page_width - Number.parseInt(slider.value) - main_padding_r_px - main_padding_l_px * 2 }px)`;
+                let height = `min(25vh, ${ page_width - Number.parseInt(slider.value) - main_padding_r_px - main_padding_l_px * 2 }px)`;
                 element.style.minHeight = height;
                 element.style.maxHeight = height;
             }

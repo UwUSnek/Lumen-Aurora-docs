@@ -12,6 +12,7 @@ body > left- > index- {
     display: block;
     min-width: calc(100% - var(--main-padding-l));
     max-width: calc(100% - var(--main-padding-l));
+    margin-top: 1em;
 
     -webkit-user-select: none;
     -moz-user-select: none;
