@@ -423,13 +423,13 @@
     <example->
         <label->Example</label->
         <div>
-            <t->void</t-> <f->halve</f->(<t->float</t->@ &<p->n</p->) <w->priority</w->(<k->1</k-> <w->l</w->) {
-                @n <f->/=</f-> <k->2</k->;
+            <t->void</t-> <f->halve</f->(<t->float</t->* &<p->n</p->) <w->priority</w->(<k->1</k-> <w->l</w->) {
+                @n <f->/=</f-> <k->2.0</k->;
             }
 
             <t->void</t-> <f->main</f->(){
                 <t->float</t-> n = <k->8</k->;    <c->// n has value 8</c->
-                <f->halve</f-> <k->n</k->;         <c->// n has value 4</c->
+                <f->halve</f-> <k->n</k->;        <c->// n has value 4</c->
                 <c->//halve 8;</c->       <ce->// Error, 8 is not an l-value</ce->
             }
         </div>

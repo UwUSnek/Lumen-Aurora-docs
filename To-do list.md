@@ -47,3 +47,5 @@
 
 
 - Automatically optimize string concatenation and other similar operations to use a buffer instead of reallocating every time the final output grows
+
+- Move operators' reference parameters to syntactic sugar
