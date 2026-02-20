@@ -53,34 +53,38 @@
         </tr>
         <tr>
             <th><t->ulong</t-></th>
-            <td class="center"><code><s->0x<sg->[</sg->0<sr->-</sr->9A<sr->-</sr->F<sg->]</sg-><sr->+</sr-></s-></code></td>
-            <td class="center"><code><s-><sg->(</sg->0d<sg->)</sg-><sr->?</sr-><sg->[</sg->0<sr->-</sr->9<sg->]</sg-><sr->+</sr-></s-></code></td>
-            <td class="center"><code><s->0o<sg->[</sg->0<sr->-</sr->7<sg->]</sg-><sr->+</sr-></s-></code></td>
-            <td class="center"><code><s->0b<sg->[</sg->01<sg->]</sg-><sr->+</sr-></s-></code></td>
+            <td class="center"><code><regex->0x[\dA-F_]+</regex-></code></td>
+            <td class="center"><code><regex->(0d)?[\d_]+</regex-></code></td>
+            <td class="center"><code><regex->0o[0-7_]+</regex-></code></td>
+            <td class="center"><code><regex->0b[01_]+</regex-></code></td>
         </tr>
         <tr>
             <th rowspan="2"><t->double</t-></th>
-            <td class="center"><code><s->0x<sg->[</sg->0<sr->-</sr->9A<sr->-</sr->F<sg->]</sg-><sr->+</sr-><sr->\</sr->.[</sg->0<sr->-</sr->9A<sr->-</sr->F<sg->]</sg-><sr->+</sr-></s-></code></td>
-            <td class="center"><code><s-><sg->(</sg->0d<sg->)</sg-><sr->?</sr-><sg->[</sg->0<sr->-</sr->9<sg->]</sg-><sr->+</sr-><sr->\</sr->.[</sg->0<sr->-</sr->9<sg->]</sg-><sr->+</sr-></s-></code></td>
-            <td class="center"><code><s->0o<sg->[</sg->0<sr->-</sr->7<sg->]</sg-><sr->+</sr-><sr->\</sr->.<sg->[</sg->0<sr->-</sr->7<sg->]</sg-><sr->+</sr-></s-></code></td>
-            <td class="center"><code><s->0b<sg->[</sg->01<sg->]</sg-><sr->+</sr-><sr->\</sr->.<sg->[</sg->01<sg->]</sg-><sr->+</sr-></s-></code></td>
+            <td class="center"><code><regex->0x[\dA-F_]*\.[\dA-F_]+</regex-></code></td>
+            <td class="center"><code><regex->(0d[\d_]*)|([\d_]+)\.[\d_]+</regex-></code></td>
+            <td class="center"><code><regex->0o[0-7_]*\.[0-7_]+</regex-></code></td>
+            <td class="center"><code><regex->0b[01_]*\.[01_]+</regex-></code></td>
         </tr>
         <tr>
             <fake-td-></fake-td->
-            <td class="center" colspan="4"><code><s->inf</s-><sr->|</sr-><s->nan</s-></code></td>
+            <td class="center" colspan="4"><code><regex->inf|nan</regex-></code></td>
         </tr>
         <tr>
             <th><t->bool</t-></th>
-            <td class="center" colspan="4"><code><s->true</s-><sr->|</sr-><s->false</s-></code></td>
+            <td class="center" colspan="4"><code><regex->true|false</regex-></code></td>
         </tr>
         <tr>
             <th><t->string</t-></th>
-            <td class="center" colspan="4"><code><s->"<sg->(</sg-><sr->.*</sr-><sg->)</sg->"</s-></code>
-            <code>Unless " is escaped. See <a href="text-escapes">Escapes</a></code> <code>No length limit</code></td>
+            <td class="center" colspan="4">
+                <code><regex->[rf]?"</regex-><c- class="x-small">anything but unescaped double-quotes</c-><s->"</s-></code>
+                 <code><c- class="x-small">No length limit</c-></code>
+            </td>
         </tr>
             <th><t->char</t-></th>
-            <td class="center" colspan="4"><code><s->'<sg->(</sg-><sr->.+</sr-><sg->)</sg->'</s-></code>
-            <code>Unless ' is escaped. See <a href="text-escapes">Escapes</a></code> <code>1 byte max</code></td>
+            <td class="center" colspan="4">
+                <code><s->'</s-><c- class="x-small">anything but unescaped quotes</c-><s->'</s-></code>
+                 <code><c- class="x-small">1 byte max</c-></code>
+            </td>
         </tr>
     </table></div>
     <p>

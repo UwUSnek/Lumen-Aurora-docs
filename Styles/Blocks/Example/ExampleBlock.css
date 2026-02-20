@@ -9,8 +9,6 @@ t-  { display: inline-block; color: #3884dc;   font-weight: var(--font-size-code
 f-  { display: inline-block; color: #e6e6b3;   font-weight: var(--font-size-code) }    /* Function           */
 p-  { display: inline-block; color: #2fc5d0;   font-weight: var(--font-size-code) }    /* Argument           */
 w-  { display: inline-block; color: #cc94d1;   font-weight: var(--font-size-code) }    /* Keyword            */
-sr- { display: inline-block; color: #c44e4e;   font-weight: var(--font-size-code) }    /* String regex token */
-sg- { display: inline-block; color: #c9ca76;   font-weight: var(--font-size-code) }    /* String regex group */
 s-  { display: inline-block; color: #db966e;   font-weight: var(--font-size-code) }    /* String             */
 sc- { display: inline-block; color: #aaaaff33; font-weight: var(--font-size-code) }    /* Space character    */
 

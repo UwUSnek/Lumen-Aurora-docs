@@ -167,10 +167,12 @@
             <tr>
                 <th class="nowrap medium"><a href="#literals">Literal</a></th>
                 <td><div class="split-td-outer">
-                    <div clas="split-td">
-                        Any sequence of characters with pattern
-                        <code><sg->[</sg-><s->0</s-><sr->-</sr-><s->9</s-><sg->][</sg-><s->a</s-><sr->-</sr-><s->zA</s-><sr->-</sr-><s->Z</s-><s->_</s-><sg->]</sg-><sr->*</sr-><sg->(</sg-><sr->\</sr-><s->.</s-><sg->[</sg-><s->a</s-><sr->-</sr-><s->zA</s-><sr->-</sr-><s->Z</s-><s->_</s-><sg->]</sg-><sr->*</sr-><sg->)</sg-><sr->?</sr-></code>
-                        or delimited by two <code>"</code> or <code>'</code> characters.
+                    <div clas="split-td" style="line-height: 3ch;">
+                        <ul><ul>Any sequence of characters with pattern:
+                            <li><code><regex->(0[dbxo])?[0-9a-zA-Z_]+(\.[0-9a-zA-Z_]*)?</regex-></code></li>
+                            <li><code><regex->[rf]?"</regex-><c- class="x-small">anything but unescaped double-quotes</c-><s->"</s-></code></li>
+                            <li><code><s->'</s-><c- class="x-small">anything but unescaped quotes</c-><s->'</s-></code></li>
+                        </ul></ul>
                     </div>
                 </div></td>
             </tr>
@@ -179,10 +181,8 @@
                 <td><div class="split-td-outer">
                     <div clas="split-td">
                         Any sequence of characters with pattern
-                        <code><sg->[</sg-><s->a</s-><sr->-</sr-><s->zA</s-><sr->-</sr-><s->Z_</s-><sg->][</sg-><s->a</s-><sr->-</sr-><s->zA</s-><sr->-</sr-><s->Z_0</s-><sr->-</sr-><s->9</s-><sg->]</sg-><sr->*</sr-></code>
-                        or
-                        <code><sg->[</sg-><s->!$%&*+-/&lt;=&gt;</s-><s->?</s-><sr->\</sr-><s->[</s-><sr->\</sr-><s->]</s-><s->^`|~</s-><sg->]</sg-><sr->+</sr-></code>
-                        //FIXME some of this stuff is incorrect
+                        <code><regex->[a-zA-Z][a-zA-Z0-9]*</regex-></code> or
+                        <code><regex->[!$%&*+\-/&lt;=&gt;?\[\]^`|~]+</regex-></code>
                         that isn't a <a href="#keywords">keyword</a> or a <a href="#literals">literal</a>.
                     </div>
                 </div></td>
@@ -535,8 +535,8 @@
     <p>
         <b>Identifiers</b> are used to <b>name and reference <a href="#name-resolution">symbols</a></b>.<br>
         An identifier can be
-        alphanumeric (<code><sg->[</sg-><s->a</s-><sr->-</sr-><s->zA</s-><sr->-</sr-><s->Z_</s-><sg->][</sg-><s->a</s-><sr->-</sr-><s->zA</s-><sr->-</sr-><s->Z_0</s-><sr->-</sr-><s->9</s-><sg->]</sg-><sr->*</sr-></code>)
-        or symbolic (<code><sg->[</sg-><s->!$%&*+-/&lt;=&gt;</s-><s->?</s-><sr->\</sr-><s->[</s-><sr->\</sr-><s->]</s-><s->^`|~</s-><sg->]</sg-><sr->+</sr-></code>).
+        alphanumeric (<code><regex->[a-zA-Z][a-zA-Z0-9]*</regex-></code>)
+        or symbolic (<code><regex->[!$%&*+\-/&lt;=&gt;?\[\]^`|~]+</regex-></code>).
     </p>
     <p>
         Identifiers can be shadowed. This is explained in <a href="#name-shadowing">Name shadowing</a>.

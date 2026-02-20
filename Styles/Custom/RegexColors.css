@@ -1,0 +1,4 @@
+
+regex-token- { display: inline-block; color: #c44e4e;   font-weight: var(--font-size-code) }    /* Regex token */
+regex-group- { display: inline-block; color: #c9ca76;   font-weight: var(--font-size-code) }    /* Regex group */
+regex-char-  { display: inline-block; color: #db966e;   font-weight: var(--font-size-code) }    /* Regex normal character */
