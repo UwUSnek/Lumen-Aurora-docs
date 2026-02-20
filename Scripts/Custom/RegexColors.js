@@ -1,6 +1,6 @@
 
 
-let regex_colors = {
+const regex_colors = {
 
 
 

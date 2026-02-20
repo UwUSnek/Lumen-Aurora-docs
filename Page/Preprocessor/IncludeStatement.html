@@ -2,7 +2,6 @@
 <!-- Include statement                                               -->
 <!--------------------------------------------------------------------->
 <h1 id="include-statement"></h1>
-<!-- TODO maybe remove the ; character at the end of include statements. they are kinda useless and other preprocessor stuff doesn't have it -->
 <moveto-doc->
     <ce-full-size->
         NOTICE:<br>
@@ -45,7 +44,7 @@
     <example->
         <label->Example</label->
         <div>
-            <k->#include</k-> <s->"/home/Snek/Lumen/file.lmn"</s->     <c->// Absolute path</c->
+            <k->#include</k-> <s->"/home/Snek/Lumen/file.lmn"</s->      <c->// Absolute path</c->
             <k->#include</k-> <s->"./file.lmn"</s->                     <c->// Relative path</c->
             <k->#include</k-> <s->":</s-><sr->&bsol;</sr-><s->&bsol; why is this a file name</s-><sr->&bsol;</sr-><s->?"</s->  <c->// Relative path</c->
             <k->#include</k-> <s->&lt;math&gt;</s->                           <c->// Includes the standard module "math"</c->

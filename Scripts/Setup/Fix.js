@@ -1,18 +1,16 @@
 
-var setup_fix = {
+const setup_fix = {
     fix_split_td_height : function(){
-        let c = document.querySelectorAll('.split-td-outer');
-        for(let i = 0; i < c.length; ++i) {
+        for(const splitTdOuter of document.querySelectorAll('.split-td-outer')) {
             let e = document.createElement('div');
             e.classList = 'split-td-outer2';
 
-            let outerHTML = c[i].outerHTML;
-            c[i].replaceWith(e);
+            let outerHTML = splitTdOuter.outerHTML;
+            splitTdOuter.replaceWith(e);
             e.innerHTML = outerHTML;
         }
-        c = document.querySelectorAll('.split-td');
-        for(let i = 0; i < c.length; ++i) {
-            c[i].innerHTML = `<div><div>${ c[i].innerHTML }</div></div>`;
+        for(const splitTd of document.querySelectorAll('.split-td')) {
+            splitTd.innerHTML = `<div><div>${ splitTd.innerHTML }</div></div>`;
         }
     },
 

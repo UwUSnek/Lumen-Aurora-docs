@@ -9,10 +9,10 @@
 
 // Save slider element
 let slider = document.getElementById("main-slider");
-let slider_width_px = parseInt(page_style.getPropertyValue("--slider-w").slice(0, -2));
+let slider_width_px = Number.parseInt(page_style.getPropertyValue("--slider-w").slice(0, -2));
 
 
-var ui_slider = {
+const ui_slider = {
     // Updates the maximum and minimum values of the slider. Used in browser zoom and window resize
     update_range : function(){
         slider.min = main_padding_l_px;

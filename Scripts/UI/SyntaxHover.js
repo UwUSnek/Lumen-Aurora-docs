@@ -1,10 +1,10 @@
 
 // Tooltip opacity transition duration in milliseconds
-let tooltip_opacity_duration = parseFloat(page_style.getPropertyValue("--syntax-hover-tooltip-opacity-duration")) * 1000;
+let tooltip_opacity_duration = Number.parseFloat(page_style.getPropertyValue("--syntax-hover-tooltip-opacity-duration")) * 1000;
 
 
 
-var ui_syntax_hover = {
+const ui_syntax_hover = {
     add_tooltip : function(e, text) {
         // Create tooltip container
         let tooltip_c = document.createElement("div");
@@ -30,7 +30,7 @@ var ui_syntax_hover = {
         tooltip.innerHTML += '<p style="margin: 0px;">' + text + '</p>';
         e.appendChild(tooltip_c);
         //! Forcibly flush pending style changes. This stops the opacity change from being calculated in this round and thus skipped
-        window.getComputedStyle(tooltip).opacity; 
+        globalThis.getComputedStyle(tooltip).opacity;
         tooltip.style.opacity = 1;
     },
 
@@ -99,72 +99,59 @@ var ui_syntax_hover = {
         tooltip.style.opacity = 0;
         setTimeout(function(){ container.remove(); }, tooltip_opacity_duration);
     },
-    
 
 
 
-    //! //TODO FIX TOOLTIPS GETTING STUCK IN TOP-RIGHT CORNER
-    //! //TODO FIX TOOLTIPS GETTING STUCK IN TOP-RIGHT CORNER
-    //! //TODO FIX TOOLTIPS GETTING STUCK IN TOP-RIGHT CORNER
-    //! //TODO FIX TOOLTIPS GETTING STUCK IN TOP-RIGHT CORNER
-    //! //TODO FIX TOOLTIPS GETTING STUCK IN TOP-RIGHT CORNER
+
     start : function(){
-        let e;
-        
+
         // Verbatim. Literally what the element contains
-        e = tab_doc.querySelectorAll("S-VBTM-");
-        for(let i = 0; i < e.length; ++i) {
-            e[i].addEventListener("mouseenter", ui_syntax_hover.f_vbtm);
-            e[i].addEventListener("mouseleave", ui_syntax_hover.on_leave);
-            e[i].addEventListener("mousemove",  ui_syntax_hover.on_move);
+        for(const e of tab_doc.querySelectorAll("S-VBTM-")) {
+            e.addEventListener("mouseenter", ui_syntax_hover.f_vbtm);
+            e.addEventListener("mouseleave", ui_syntax_hover.on_leave);
+            e.addEventListener("mousemove",  ui_syntax_hover.on_move);
         }
 
         // User defined sequence of characters
-        e = tab_doc.querySelectorAll("S-ANY-"); 
-        for(let i = 0; i < e.length; ++i) {
-            e[i].addEventListener("mouseenter", ui_syntax_hover.f_any);
-            e[i].addEventListener("mouseleave", ui_syntax_hover.on_leave);
-            e[i].addEventListener("mousemove",  ui_syntax_hover.on_move);
+        for(const e of tab_doc.querySelectorAll("S-ANY-")) {
+            e.addEventListener("mouseenter", ui_syntax_hover.f_any);
+            e.addEventListener("mouseleave", ui_syntax_hover.on_leave);
+            e.addEventListener("mousemove",  ui_syntax_hover.on_move);
         }
 
         // Sub element
-        e = tab_doc.querySelectorAll("S-SUB-"); 
-        for(let i = 0; i < e.length; ++i) {
-            e[i].addEventListener("mouseenter", ui_syntax_hover.f_sub);
-            e[i].addEventListener("mouseleave", ui_syntax_hover.on_leave);
-            e[i].addEventListener("mousemove",  ui_syntax_hover.on_move);
+        for(const e of tab_doc.querySelectorAll("S-SUB-")) {
+            e.addEventListener("mouseenter", ui_syntax_hover.f_sub);
+            e.addEventListener("mouseleave", ui_syntax_hover.on_leave);
+            e.addEventListener("mousemove",  ui_syntax_hover.on_move);
         }
 
         // Declaration
-        e = tab_doc.querySelectorAll("S-DECL-");
-        for(let i = 0; i < e.length; ++i) {
-            e[i].addEventListener("mouseenter", ui_syntax_hover.f_decl);
-            e[i].addEventListener("mouseleave", ui_syntax_hover.on_leave);
-            e[i].addEventListener("mousemove",  ui_syntax_hover.on_move);
+        for(const e of tab_doc.querySelectorAll("S-DECL-")) {
+            e.addEventListener("mouseenter", ui_syntax_hover.f_decl);
+            e.addEventListener("mouseleave", ui_syntax_hover.on_leave);
+            e.addEventListener("mousemove",  ui_syntax_hover.on_move);
         }
-        
+
         // Syntactic sugar
-        e = tab_doc.querySelectorAll("S-SGR-"); 
-        for(let i = 0; i < e.length; ++i) {
-            e[i].addEventListener("mouseenter", ui_syntax_hover.f_sgr);
-            e[i].addEventListener("mouseleave", ui_syntax_hover.on_leave);
-            e[i].addEventListener("mousemove",  ui_syntax_hover.on_move);
+        for(const e of tab_doc.querySelectorAll("S-SGR-")) {
+            e.addEventListener("mouseenter", ui_syntax_hover.f_sgr);
+            e.addEventListener("mouseleave", ui_syntax_hover.on_leave);
+            e.addEventListener("mousemove",  ui_syntax_hover.on_move);
         }
 
         // Expression
-        e = tab_doc.querySelectorAll("S-EXPR-");
-        for(let i = 0; i < e.length; ++i) {
-            e[i].addEventListener("mouseenter", ui_syntax_hover.f_expr);
-            e[i].addEventListener("mouseleave", ui_syntax_hover.on_leave);
-            e[i].addEventListener("mousemove",  ui_syntax_hover.on_move);
+        for(const e of tab_doc.querySelectorAll("S-EXPR-")) {
+            e.addEventListener("mouseenter", ui_syntax_hover.f_expr);
+            e.addEventListener("mouseleave", ui_syntax_hover.on_leave);
+            e.addEventListener("mousemove",  ui_syntax_hover.on_move);
         }
 
         // Symbol path
-        e = tab_doc.querySelectorAll("S-PATH-");
-        for(let i = 0; i < e.length; ++i) {
-            e[i].addEventListener("mouseenter", ui_syntax_hover.f_path);
-            e[i].addEventListener("mouseleave", ui_syntax_hover.on_leave);
-            e[i].addEventListener("mousemove",  ui_syntax_hover.on_move);
+        for(const e of tab_doc.querySelectorAll("S-PATH-")) {
+            e.addEventListener("mouseenter", ui_syntax_hover.f_path);
+            e.addEventListener("mouseleave", ui_syntax_hover.on_leave);
+            e.addEventListener("mousemove",  ui_syntax_hover.on_move);
         }
     }
 }

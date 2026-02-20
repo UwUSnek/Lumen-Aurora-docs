@@ -12,9 +12,12 @@ let tab_button_examples;
 let tab_button_internal;
 
 
+
+
 //FIXME add quick fade-out/fade-in to tab transitions
-var setup_tabs = {
+const setup_tabs = {
     create_button : function(tab_num){
+
         // Create the button element
         let b = document.createElement("div");
         b.classList = "tab-button";
@@ -34,12 +37,12 @@ var setup_tabs = {
             b.style.backgroundColor = "var(--bg-index-active)";
         });
         b.addEventListener("mouseenter", function(){
-            if(parseInt(b.style.getPropertyValue("--tab-num"), 10) != active_tab) {
+            if(Number.parseInt(b.style.getPropertyValue("--tab-num"), 10) != active_tab) {
                 b.style.backgroundColor = "var(--bg-index-hover)";
             }
         });
         b.addEventListener("mouseleave", function(){
-            if(parseInt(b.style.getPropertyValue("--tab-num"), 10) != active_tab) {
+            if(Number.parseInt(b.style.getPropertyValue("--tab-num"), 10) != active_tab) {
                 b.style.removeProperty("background-color");
             }
         });
@@ -52,14 +55,15 @@ var setup_tabs = {
 
 
     create_tab_buttons : function(){
+
         // Create button container
         let container = document.createElement("div");
         container.classList = "tab-buttons-container"
 
         // Create the actual buttons
-        container.appendChild(tab_button_doc      = setup_tabs.create_button(0));
-        container.appendChild(tab_button_examples = setup_tabs.create_button(1));
-        container.appendChild(tab_button_internal = setup_tabs.create_button(2));
+        tab_button_doc      = setup_tabs.create_button(0); container.appendChild(tab_button_doc     );
+        tab_button_examples = setup_tabs.create_button(1); container.appendChild(tab_button_examples);
+        tab_button_internal = setup_tabs.create_button(2); container.appendChild(tab_button_internal);
 
         // Spawn the container and set the default tab to documentation
         right.insertBefore(container, right.children[0]);
@@ -78,7 +82,7 @@ var setup_tabs = {
 
 
     get_parent_header : function(elm){
-        if(typeof elm != 'undefined' && elm != null) {
+        if(elm !== undefined && elm != null) {
             if(elm.tagName == "H1") return elm;
             else return setup_tabs.get_parent_header(elm.previousSibling);
         }
@@ -88,6 +92,7 @@ var setup_tabs = {
 
 
     move_elements : function(tag_name, output_map) {
+
         // For each "moveto" tag
         let elms = [...(document.getElementsByTagName(tag_name))];  //! Convert HTMLCollection to Array to make it not change dynamically
         for(let elm of elms) {
@@ -120,6 +125,7 @@ var setup_tabs = {
 
 
     init : function(){
+
         // Move elements in the correct tab (without spawning them)
         setup_tabs.move_elements("moveto-doc-", doc_list);
         setup_tabs.move_elements("moveto-examples-", example_list);

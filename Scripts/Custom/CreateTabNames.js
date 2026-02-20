@@ -1,5 +1,5 @@
 
-var create_tab_names = {
+const create_tab_names = {
     start : function() {
         tab_button_doc.innerHTML = `Documentation`;
         tab_button_examples.innerHTML = `Examples [${ tab_examples.querySelectorAll("example- label-").length - tab_examples.querySelectorAll("split-example-container-").length }]`;

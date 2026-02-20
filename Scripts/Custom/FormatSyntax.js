@@ -1,6 +1,6 @@
 
 
-var format_syntax = {
+const format_syntax = {
     min_w : parseFloat(page_style.getPropertyValue('--syntax-arrow-w').slice(0, -2)),
 
 

@@ -1,5 +1,5 @@
 
-var format_summary_lists = {
+const format_summary_lists = {
     start : function(){
         for(const summaryList of document.querySelectorAll('.summary-list:not([summary-list-formatted])')) {
             summaryList.setAttribute('summary-list-formatted', '');

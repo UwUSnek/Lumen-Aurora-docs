@@ -18,7 +18,7 @@ function capitalize(string) {
 
 
 
-var setup_index = {
+const setup_index = {
 
     format_elm_self : function(elm, depth, number_str) {
 
@@ -116,7 +116,7 @@ var setup_index = {
 
 
     is_id_defined : function(id) {
-        return !(Object.is(id, undefined) || id == null || !id.length || document.getElementById(id) == null);
+        return !(Object.is(id, undefined) || !id?.length || document.getElementById(id) == null);
     },
 
 

@@ -1,6 +1,6 @@
 
 
-var ui_copy_code = {
+const ui_copy_code = {
     decodeHTML : function(html) {
         let txt = document.createElement("textarea");
         txt.innerHTML = html;
@@ -28,9 +28,8 @@ var ui_copy_code = {
 
 
     init : function() {
-        let children = document.querySelectorAll("example- > label-");
-        for(let i = 0; i < children.length; i++){
-            children[i].addEventListener('click', function(){ ui_copy_code.copy_code(children[i]); });
+        for(const label of document.querySelectorAll("example- > label-")){
+            label.addEventListener('click', function(){ ui_copy_code.copy_code(label); });
         }
     }
 }
