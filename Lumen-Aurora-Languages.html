@@ -145,8 +145,8 @@
         </index-elms-></index->
         <index-><indexh->routines</indexh-><index-elms->
             <index-><indexh->parameters</indexh-><index-elms->
-                <indexd->routine-parameters</indexd->
-                <indexd->default-values</indexd->
+                <indexd->basic-parameters</indexd->
+                <indexd->optional-parameters</indexd->
                 <indexd->parameter-packs</indexd->
                 <indexd->reference-parameters</indexd->
             </index-elms-></index->
@@ -466,24 +466,24 @@
             <example->
                 <label->Example 1</label->
                 <div>
-                    <c->// single line comment </c-><sg->&bsol;</sg->
+                    <c->// single line comment </c-><regex-token->&bsol;</regex-token->
                     <c->on two lines</c->
 
 
-                    <k->#include</k-><sg->&bsol;</sg->
-                        <s->&lt;ma</s-><sg->&bsol;&bsol;</sg->
-                        <s->th</s-><sg->&bsol;&bsol;</sg->
+                    <k->#include</k-><regex-token->&bsol;</regex-token->
+                        <s->&lt;ma</s-><regex-token->&bsol;&bsol;</regex-token->
+                        <s->th</s-><regex-token->&bsol;&bsol;</regex-token->
                                <s->&gt;</s->
 
 
-                    <t->vo</t-><sg->&bsol;</sg->
-                    <t->id</t-> <f->fun</f-><sg->&bsol;</sg->
+                    <t->vo</t-><regex-token->&bsol;</regex-token->
+                    <t->id</t-> <f->fun</f-><regex-token->&bsol;</regex-token->
                     <f->ction</f->() {
-                        <t->uint</t-> va<sg->&bsol;&bsol;</sg->
+                        <t->uint</t-> va<regex-token->&bsol;&bsol;</regex-token->
                         r = <k->0</k->, b = <k->0</k->;
-                        v    <sg->&bsol;&bsol;</sg->
-                        ar + <sg->&bsol;&bsol;</sg->
-                             <sg->&bsol;&bsol;</sg->
+                        v    <regex-token->&bsol;&bsol;</regex-token->
+                        ar + <regex-token->&bsol;&bsol;</regex-token->
+                             <regex-token->&bsol;&bsol;</regex-token->
                         = <k->b</k->;
                     }
                 </div>
@@ -512,7 +512,7 @@
             <example->
                 <label->Example 2</label->
                 <div>
-                    <t->void</t-> ma&bsol;<sg->&bsol;&bsol;</sg->   <ce->Error, unexpected token "\"</ce->
+                    <t->void</t-> ma&bsol;<regex-token->&bsol;&bsol;</regex-token->   <ce->Error, unexpected token "\"</ce->
 
                     <c->in(){}</c->      <ce->Error,  unexpected token "in"</ce->
                 </div>
@@ -2090,7 +2090,7 @@
             <t->bool</t-> <f->f</f->(<t->ulong</t-> <p->n</p->) {
                 <t->ulong</t-> a = <k->True</k->;
 
-                <c->// return q::elms[n];</c->          <ce->// Error, "n" is not a compile time expression</ce->
+                <c->// return q:elms[n];</c->           <ce->// Error, "n" is not a compile time expression</ce->
                 <c->// return q[add_1(n)];</c->   <ce->// Error, the routine call is not compile time</ce->
                 <c->// return q[rand(2)];</c->    <ce->// Error, the routine "random.rand" is not suitable for compile time calls</ce->
                 <w->return</w-> q<f->[</f->n<f->]</f->;             <c->// Ok</c->
@@ -2365,19 +2365,19 @@
     </p>
     <example->
             <div style="border-top-left-radius: var(--code-decoration-r);">
-                                                <c->  1              31</c->
-                                                <c->sign           value</c->
+                                              <c->  1                31</c->
+                                               <c->sign            value</c->
                                                 <c->│┌───────────────┴─────────────┐</c->  <t->int</t->
-                                                <sr->┕</sr-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->
-                                                                <c->32</c->
-                                                                <c->value</c->
+                                                <regex-group->┕</regex-group-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->
+                                                                 <c->32</c->
+                                                               <c->value</c->
                                                 <c->┌────────────────┴─────────────┐</c->  <t->uint</t->
                                                 <s->┕┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->
                 <c->  1                              63</c->
                 <c->sign                           value</c->
                 <c->│┌───────────────────────────────┴─────────────────────────────┐</c->  <t->long</t->
-                <sr->┕</sr-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->
-                                                <c->64</c->
+                <regex-group->┕</regex-group-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->
+                                                 <c->64</c->
                                                 <c->value</c->
                 <c->┌────────────────────────────────┴─────────────────────────────┐</c->  <t->ulong</t->
                 <s->┕┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->
@@ -2402,10 +2402,10 @@
     </p>
     <example->
             <div style="border-top-left-radius: var(--code-decoration-r);">
-                                                <c-> 1      8          23</c->
-                                                <c->sign exponent   mantissa</c->
+                                                <c-> 1     8            23</c->
+                                               <c->sign exponent    mantissa</c->
                                                 <c->│┌───┴──┐┌──────────┴──────────┐</c->  <t->float</t->
-                                                <sr->┕</sr-><sg->┷┷┷┷┷┷┷┷</sg-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->
+                                                <regex-group->┕</regex-group-><regex-token->┷┷┷┷┷┷┷┷</regex-token-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->
                                                 <c->00000000000000000000000000000000</c->  <k->+0.0</k->
                                                 <c->10000000000000000000000000000000</c->  <k->-0.0</k->
                                                 <c->01111111100000000000000000000000</c->  <k->+inf</k->
@@ -2414,15 +2414,15 @@
                                                 <c->111111111&lt;─────── not 0 ───────&gt;</c->  <k->nan</k->
 
                 <c-> 1      11                           52</c->
-                <c->sign  exponent                    mantissa</c->
+                <c->sign exponent                     mantissa</c->
                 <c->│┌────┴────┐┌─────────────────────────┴────────────────────────┐</c->  <t->double</t->
-                <sr->┕</sr-><sg->┷┷┷┷┷┷┷┷┷┷┷</sg-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->
+                <regex-group->┕</regex-group-><regex-token->┷┷┷┷┷┷┷┷┷┷┷</regex-token-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->
                 <c->0000000000000000000000000000000000000000000000000000000000000000</c->  <k->+0.0</k->
                 <c->1000000000000000000000000000000000000000000000000000000000000000</c->  <k->-0.0</k->
-                <c->0111111110000000000000000000000000000000000000000000000000000000</c->  <k->+inf</k->
-                <c->1111111110000000000000000000000000000000000000000000000000000000</c->  <k->-inf</k->
-                <c->011111111&lt;─────────────────────── not 0 ───────────────────────&gt;</c->  <k->nan</k->
-                <c->111111111&lt;─────────────────────── not 0 ───────────────────────&gt;</c->  <k->nan</k->
+                <c->0111111111110000000000000000000000000000000000000000000000000000</c->  <k->+inf</k->
+                <c->1111111111110000000000000000000000000000000000000000000000000000</c->  <k->-inf</k->
+                <c->011111111111&lt;────────────────────── not 0 ─────────────────────&gt;</c->  <k->nan</k->
+                <c->111111111111&lt;────────────────────── not 0 ─────────────────────&gt;</c->  <k->nan</k->
             </div>
     </example->
     <p>
@@ -2442,7 +2442,7 @@
     <example->
             <div style="border-top-left-radius: var(--code-decoration-r);">
                                 <c->32</c->
-                            <c->value</c->
+                              <c->value</c->
                 <c->┌───────────────┴──────────────┐</c->  <t->bool</t->
                 <s->┕┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->
                 <c->00000000000000000000000000000001</c->  <k->true</k->
@@ -2813,13 +2813,13 @@
             <example->
                 <label->Example</label->
                 <div>
-                    <w->template</w->&lt;<w->type</w-> <t->t</t->&gt; <w->struct</w-> <t->s</t-> <w->when</w->(<t->t</t->::id <f->!=</f-> <t->void</t->::id) {
+                    <w->template</w->&lt;<w->type</w-> <t->t</t->&gt; <w->struct</w-> <t->s</t-> <w->when</w->(<t->t</t->:id <f->!=</f-> <t->void</t->:id) {
                         <t->t</t-> n;
                         <w->constructor</w->() {
                             io.<f->print</f->(<s->"Not void\n"</s->);
                         }
                     }
-                    <w->template</w->&lt;<w->type</w-> <t->t</t->&gt; <w->struct</w-> <t->s</t-> <w->when</w->(<t->t</t->::id <f->==</f-> <t->void</t->::id) {
+                    <w->template</w->&lt;<w->type</w-> <t->t</t->&gt; <w->struct</w-> <t->s</t-> <w->when</w->(<t->t</t->:id <f->==</f-> <t->void</t->:id) {
                         <w->constructor</w->() {
                             io.<f->print</f->(<s->"Void\n"</s->);
                         }
@@ -2879,8 +2879,8 @@
                 <div>
                     <w->import</w-> <s->&lt;io&gt;</s->;
                     <w->template</w->&lt;<w->type</w-> <t->t</t->&gt; <t->void</t-> <f->print_template_info</f->()
-                    <w->when</w->(<t->t</t->::<k->id</k-> <f->!=</f-> <t->void</t->::<k->id</k->) { io.<f->print</f->(<s->"not void"</s->); }
-                    <w->when</w->(<t->t</t->::<k->id</k-> <f->==</f-> <t->void</t->::<k->id</k->) { io.<f->print</f->(<s->"void"</s->); }
+                    <w->when</w->(<t->t</t->:<k->id</k-> <f->!=</f-> <t->void</t->:<k->id</k->) { io.<f->print</f->(<s->"not void"</s->); }
+                    <w->when</w->(<t->t</t->:<k->id</k-> <f->==</f-> <t->void</t->:<k->id</k->) { io.<f->print</f->(<s->"void"</s->); }
 
                     <t->void</t-> <f->main</f->(){
                         <f->print_template_info</f->&lt;<t->void</t->&gt;();
@@ -3207,10 +3207,10 @@
 
             <tr class="even">
                 <th rowspan="13"><t->uint</t-><br><br><t->int</t-><br><br><t->ulong</t-><br><br><t->long</t-></th>
-                <th><range-val->== <k->-9223372036854775808</k-><br><range-var->long::min</range-var-></range-val-></th>
-                <td class="center wrap conv-cell-m" rowspan="5">Overflows to (-n - <k->1</k->) % (uint::<k->max</k-> - <k->1</k->)</td>
+                <th><range-val->== <k->-9223372036854775808</k-><br><range-var->long:min</range-var-></range-val-></th>
+                <td class="center wrap conv-cell-m" rowspan="5">Overflows to (-n - <k->1</k->) % (uint:<k->max</k-> - <k->1</k->)</td>
                 <td class="center wrap conv-cell-n" rowspan="3">Undefined</td>
-                <td class="center wrap conv-cell-m" rowspan="5">Overflows to (-n - <k->1</k->) % (ulong::<k->max</k-> - <k->1</k->)</td>
+                <td class="center wrap conv-cell-m" rowspan="5">Overflows to (-n - <k->1</k->) % (ulong:<k->max</k-> - <k->1</k->)</td>
                 <td class="center wrap conv-cell-y" rowspan="11">Correct result</td>
                 <td class="center wrap conv-cell-m" rowspan="4">Conversions are not symmetric</td>
                 <td class="center wrap conv-cell-m" rowspan="2">Conversions are not symmetric</td>
@@ -3218,7 +3218,7 @@
             </tr>
             <tr class="even">
                 <fake-td></fake-td>
-                <th><range-val->&lt; <k->-9007199254740992</k-><br><range-var->double::min_precise_int</range-var-></range-val-></th>
+                <th><range-val->&lt; <k->-9007199254740992</k-><br><range-var->double:min_precise_int</range-var-></range-val-></th>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
@@ -3229,7 +3229,7 @@
             </tr>
             <tr class="even">
                 <fake-td></fake-td>
-                <th><range-val->&lt; <k->-2147483648</k-><br><range-var->int::min</range-var-></range-val-></th>
+                <th><range-val->&lt; <k->-2147483648</k-><br><range-var->int:min</range-var-></range-val-></th>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
@@ -3240,7 +3240,7 @@
             </tr>
             <tr class="even">
                 <fake-td></fake-td>
-                <th><range-val->&lt; <k->-16777216</k-><br><range-var->float::min_precise_int</range-var-></range-val-></th>
+                <th><range-val->&lt; <k->-16777216</k-><br><range-var->float:min_precise_int</range-var-></range-val-></th>
                 <fake-td></fake-td>
                 <td class="center wrap conv-cell-y" rowspan="5">Correct result</td>
                 <fake-td></fake-td>
@@ -3284,7 +3284,7 @@
             </tr>
             <tr class="even">
                 <fake-td></fake-td>
-                <th><range-val->&gt; <k->+16777216</k-><br><range-var->float::max_precise_int</range-var-></range-val-></th>
+                <th><range-val->&gt; <k->+16777216</k-><br><range-var->float:max_precise_int</range-var-></range-val-></th>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
@@ -3295,7 +3295,7 @@
             </tr>
             <tr class="even">
                 <fake-td></fake-td>
-                <th><range-val->&gt; <k->+2147483647</k-><br><range-var->int::max</range-var-></range-val-></th>
+                <th><range-val->&gt; <k->+2147483647</k-><br><range-var->int:max</range-var-></range-val-></th>
                 <fake-td></fake-td>
                 <td class="center wrap conv-cell-n" rowspan="5">Undefined</td>
                 <fake-td></fake-td>
@@ -3306,8 +3306,8 @@
             </tr>
             <tr class="even">
                 <fake-td></fake-td>
-                <th><range-val->&gt; <k->+4294967295</k-><br><range-var->uint::max</range-var-></range-val-></th>
-                <td class="center wrap conv-cell-m" rowspan="4">Overflows to n % (uint::<k->max</k-> + <k->1</k->)</td>
+                <th><range-val->&gt; <k->+4294967295</k-><br><range-var->uint:max</range-var-></range-val-></th>
+                <td class="center wrap conv-cell-m" rowspan="4">Overflows to n % (uint:<k->max</k-> + <k->1</k->)</td>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
@@ -3317,7 +3317,7 @@
             </tr>
             <tr class="even">
                 <fake-td></fake-td>
-                <th><range-val->&gt; <k->+9007199254740992</k-><br><range-var->double::max_precise_int</range-var-></range-val-></th>
+                <th><range-val->&gt; <k->+9007199254740992</k-><br><range-var->double:max_precise_int</range-var-></range-val-></th>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
@@ -3328,7 +3328,7 @@
             </tr>
             <tr class="even">
                 <fake-td></fake-td>
-                <th><range-val->&gt; <k->+9223372036854775807</k-><br><range-var->long::max</range-var-></range-val-></th>
+                <th><range-val->&gt; <k->+9223372036854775807</k-><br><range-var->long:max</range-var-></range-val-></th>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
@@ -3339,7 +3339,7 @@
             </tr>
             <tr class="even">
                 <fake-td></fake-td>
-                <th><range-val->== <k->+18446744073709551615</k-><br><range-var->ulong::max</range-var-></range-val-></th>
+                <th><range-val->== <k->+18446744073709551615</k-><br><range-var->ulong:max</range-var-></range-val-></th>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
@@ -3361,7 +3361,7 @@
 
             <tr class="even">
                 <th rowspan="16"><t->float</t-><br><br><t->double</t-></th>
-                <th><range-val->== <k->-inf</k-><br><range-var->-double::inf</range-var-><br><range-var->-float::inf</range-var-></range-val-></th>
+                <th><range-val->== <k->-inf</k-><br><range-var->-double:inf</range-var-><br><range-var->-float:inf</range-var-></range-val-></th>
                 <td class="center wrap conv-cell-n" rowspan="6">Undefined</td>
                 <td class="center wrap conv-cell-n" rowspan="5">Undefined</td>
                 <td class="center wrap conv-cell-n" rowspan="6">Undefined</td>
@@ -3372,7 +3372,7 @@
             </tr>
             <tr class="even">
                 <fake-td></fake-td>
-                <th><range-val->== <k->-1.7976931348623157081e+308</k-><br><range-var->double::min</range-var-></range-val-></th>
+                <th><range-val->== <k->-1.7976931348623157081e+308</k-><br><range-var->double:min</range-var-></range-val-></th>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
@@ -3383,7 +3383,7 @@
             </tr>
             <tr class="even">
                 <fake-td></fake-td>
-                <th><range-val->&lt; <k->-3.4028234663852885981e+38</k-><br><range-var->float::min</range-var-></range-val-></th>
+                <th><range-val->&lt; <k->-3.4028234663852885981e+38</k-><br><range-var->float:min</range-var-></range-val-></th>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
@@ -3394,7 +3394,7 @@
             </tr>
             <tr class="even">
                 <fake-td></fake-td>
-                <th><range-val->&lt; <k->-9223372036854775808.0</k-><br><range-var->long::min</range-var-></range-val-></th>
+                <th><range-val->&lt; <k->-9223372036854775808.0</k-><br><range-var->long:min</range-var-></range-val-></th>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
@@ -3405,7 +3405,7 @@
             </tr>
             <tr class="even">
                 <fake-td></fake-td>
-                <th><range-val->&lt; <k->-2147483648.0</k-><br><range-var->int::min</range-var-></range-val-></th>
+                <th><range-val->&lt; <k->-2147483648.0</k-><br><range-var->int:min</range-var-></range-val-></th>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
@@ -3449,7 +3449,7 @@
             </tr>
             <tr class="even">
                 <fake-td></fake-td>
-                <th><range-val->&gt; <k->+2147483647.0</k-><br><range-var->int::max</range-var-></range-val-></th>
+                <th><range-val->&gt; <k->+2147483647.0</k-><br><range-var->int:max</range-var-></range-val-></th>
                 <td class="center wrap conv-cell-n" rowspan="8">Undefined</td>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
@@ -3460,7 +3460,7 @@
             </tr>
             <tr class="even">
                 <fake-td></fake-td>
-                <th><range-val->&gt; <k->+4294967297.0</k-><br><range-var->uint::max</range-var-></range-val-></th>
+                <th><range-val->&gt; <k->+4294967297.0</k-><br><range-var->uint:max</range-var-></range-val-></th>
                 <td class="center wrap conv-cell-n" rowspan="7">Undefined</td>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
@@ -3471,7 +3471,7 @@
             </tr>
             <tr class="even">
                 <fake-td></fake-td>
-                <th><range-val->&gt; <k->+9223372036854775807.0</k-><br><range-var->long::max</range-var-></range-val-></th>
+                <th><range-val->&gt; <k->+9223372036854775807.0</k-><br><range-var->long:max</range-var-></range-val-></th>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
@@ -3482,7 +3482,7 @@
             </tr>
             <tr class="even">
                 <fake-td></fake-td>
-                <th><range-val->&gt; <k->+18446744073709551615.0</k-><br><range-var->ulong::max</range-var-></range-val-></th>
+                <th><range-val->&gt; <k->+18446744073709551615.0</k-><br><range-var->ulong:max</range-var-></range-val-></th>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
                 <td class="center wrap conv-cell-n" rowspan="5">Undefined</td>
@@ -3493,7 +3493,7 @@
             </tr>
             <tr class="even">
                 <fake-td></fake-td>
-                <th><range-val->&gt; <k->+3.4028234663852885981e+38</k-><br><range-var->float::max</range-var-></range-val-></th>
+                <th><range-val->&gt; <k->+3.4028234663852885981e+38</k-><br><range-var->float:max</range-var-></range-val-></th>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
@@ -3504,7 +3504,7 @@
             </tr>
             <tr class="even">
                 <fake-td></fake-td>
-                <th><range-val->== <k->+1.7976931348623157081e+308</k-><br><range-var->double::max</range-var-></range-val-></th>
+                <th><range-val->== <k->+1.7976931348623157081e+308</k-><br><range-var->double:max</range-var-></range-val-></th>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
@@ -3515,7 +3515,7 @@
             </tr>
             <tr class="even">
                 <fake-td></fake-td>
-                <th><range-val->== <k->+inf</k-><br><range-var->double::inf</range-var-><br><range-var->float::inf</range-var-></range-val-></th>
+                <th><range-val->== <k->+inf</k-><br><range-var->double:inf</range-var-><br><range-var->float:inf</range-var-></range-val-></th>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
@@ -3526,7 +3526,7 @@
             </tr>
             <tr class="even">
                 <fake-td></fake-td>
-                <th><range-val-><f->isnan</f->(n)<br><br><range-var->double::nan</range-var-><br><range-var->float::nan</range-var-></range-val-></th>
+                <th><range-val-><f->isnan</f->(n)<br><br><range-var->double:nan</range-var-><br><range-var->float:nan</range-var-></range-val-></th>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
@@ -3589,7 +3589,7 @@
             }
 
             <w->enum</w-> <t->e2</t-> : <t->e</t-> {
-                <k->a</k-> = e:<k->b</k->, <k->b</k-> = e:<k->a</k->;
+                <k->a</k-> = e.<k->b</k->, <k->b</k-> = e.<k->a</k->;
             }
 
             <t->void</t-> <f->main</f->(){
@@ -3965,15 +3965,15 @@
 <moveto-doc-></moveto-doc->
 
 
-<h1 id="routine-parameters"></h1>
+<h1 id="basic-parameters"></h1>
 <moveto-doc->
     <p>
-        Routine parameters are named memory locations used to pass arguments to <a href="#routine-calls">routine calls</a>.<br>
-        They work in the same way as <a href="#variables">variables</a>, but the initializer value is defined by the caller routine or copied from the <a href="#default-values">default value</a>.<br>
-        As with <a href="#variables">variables</a>, routine parameters are first allocated and then initialized by calling the <code>=</code> operator, one parameter at a time, following the order in which they were declared.
+        Basic parameters are named memory locations used to pass arguments to <a href="#routine-calls">routine calls</a>.<br>
+        They work in the same way as <a href="#variables">variables</a>, but the initializer value is defined by the caller routine.<br>
+        Just like <a href="#variables">variables</a>, basic parameters are first allocated and then initialized by calling the <code>=</code> operator, one parameter at a time, following the order in which they were declared.
     </p>
     <syntax->
-        <label- id="copy.syntax--declaration-routine-parameter">Declaration syntax</label->
+        <label- id="copy.syntax--declaration-basic-parameter">Declaration syntax</label->
     </syntax->
 </moveto-doc->
 <moveto-examples->
@@ -3993,17 +3993,20 @@
 </moveto-examples->
 
 
-<h1 id="default-values"></h1>
+<h1 id="optional-parameters"></h1>
 <moveto-doc->
     <p>
-        <b>Default values</b> are used to <b>initialize</b> a routine parameter <b>when no argument is provided</b>.<br>
-        They are defined in the same way as <a href="#variables">variable initializer values</a>.
+        <b>Optional parameters</b> are parameters that can specify a default value when no argument is provided by the caller.<br>
+        Optional parameters are only available for functions and template functions.<br>
+        A function can have multiple optional parameters, but they must all be declared after the last mandatory parameter.
     </p>
     <p>
-        A function can have multiple parameters <b>with</b> a default value, but they must all be declared <b>after</b> the <b>last</b> parameter that <b>doesn't have one</b>.<br>
-        <a href="#reference-parameters">Reference parameters</a> and parameters of <a href="#operators">operators</a> cannot have default value.<br>
-        <a href="#parameter-packs">Parameter packs</a> also cannot have default value.
+        <a href="#reference-parameters">Reference parameters</a> cannot be optional.<br>
+        <a href="#parameter-packs">Parameter packs</a> also cannot be optional.
     </p>
+    <syntax->
+        <label- id="copy.syntax--declaration-optional-parameter">Declaration syntax</label->
+    </syntax->
 </moveto-doc->
 <moveto-examples->
     <example->
@@ -4033,13 +4036,13 @@
     </p>
     <p>
         Parameter packs take zero or more arguments and can only be used as arguments of routine parameters.<br>
-        The taken arguments are the ones that remain after all the routine parameters have been assigned their argument. Parameters with default values take priority over the arguments.<br>
+        The taken arguments are the ones that remain after all the routine parameters have been assigned their argument. <a href="#optional-parameters">Optional parameters</a> take priority over the arguments.<br>
         Arguments and parameter pack elements are all initialized in the same order in which they were declared.
     </p>
     <p>
         Each <a href="#funcitons">function</a> can only use a single parameter pack.<br>
         <a href="#operators">Operators</a> cannot use parameter packs.<br>
-        Parameter packs cannot have <a href="#default-values">default value</a>.
+        Parameter packs cannot be <a href="#optional-parameters">optional</a>.
     </p>
     <syntax->
         <label- id="copy.syntax--declaration-function-parameter-pack">Declaration syntax</label->
@@ -4104,7 +4107,7 @@
         Inside the <a href="#routines">routine</a>, reference parameters act exactly as normal parameters.
     </p>
     <p>
-        Reference parameters cannot have <a href="#default-values">default value</a>.
+        Reference parameters cannot be <a href="#default-values">optional</a>.
     </p>
     <syntax->
         <label- id="copy.syntax--declaration-reference-parameter">Declaration syntax</label->
@@ -4436,7 +4439,7 @@
 <moveto-doc->
     <p>
         Templates allow structs and routines to generate different declarations based on the explicit template arguments or the passed routine argunents.<br>
-        They are compatible with specialization constraints, function parameter packs, default values and reference parameters.
+        They are compatible with specialization constraints, function parameter packs, optional parameters and reference parameters.
     </p>
     <p>
         Generated declarations are called template instances, and the act of generating them is called template instantiation.<br>
@@ -6163,11 +6166,11 @@
                 <td data-arrows="lr ar lt"></td>
                 <td><s-vbtm->from</s-vbtm-></td>
                 <td data-arrows="lr-low ar-low tr-high ar-high"></td>
-                <td><s-expr-><t->[str]</t->&nbsp;module path</s-any-></td>
+                <td><s-expr-><t->[str]</t->&nbsp;module path</s-id-></td>
                 <td data-arrows="lr-low ar-low lb-low lr-high ar-high"></td>
                 <td><s-vbtm->as</s-vbtm-></td>
                 <td data-arrows="lr-low ar-low lr-high ar-high"></td>
-                <td><s-any->name</s-any-></td>
+                <td><s-id->name</s-id-></td>
                 <td data-arrows="br-low lr-low ar-low lt-high"></td>
                 <td><s-vbtm->import</s-vbtm-></td>
                 <td data-arrows="lr br ar"></td>
@@ -6175,7 +6178,7 @@
                 <td data-arrows="lr ar lt"></td>
                 <td><s-vbtm->as</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
-                <td><s-any->name</s-any-></td>
+                <td><s-id->name</s-id-></td>
                 <td data-arrows="lr tr"></td>
                 <td data-arrows="lr ar lt"></td>
                 <td><s-vbtm->,</s-vbtm-></td>
@@ -6246,7 +6249,7 @@
                 <td data-arrows="lr ar lt"></td>
                 <td><s-vbtm->as</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
-                <td><s-any->name</s-any-></td>
+                <td><s-id->name</s-id-></td>
                 <td data-arrows="lr tr"></td>
                 <td data-arrows="lr ar lt"></td>
                 <td><s-vbtm->,</s-vbtm-></td>
@@ -6317,7 +6320,7 @@
             </tr>
             <tr>
                 <td data-arrows="lr br ar"></td>
-                <td><s-sub->synbol name</s-sub-></td>
+                <td><s-sub->symbol name</s-sub-></td>
                 <td data-arrows="lr ar lt"></td>
                 <td><s-vbtm->.</s-vbtm-></td>
                 <td data-arrows="lb lt"></td>
@@ -6371,7 +6374,7 @@
                 <td data-arrows="lr ar lt"></td>
                 <td><s-vbtm->const</s-vbtm-></td>
                 <td data-arrows="lr tr ar"></td>
-                <td><s-vbtm->@</s-vbtm-></td>
+                <td><s-vbtm->*</s-vbtm-></td>
                 <td data-arrows="lt"></td>
             </tr>
             <tr>
@@ -6424,7 +6427,7 @@
                 <td data-arrows="lr ar"></td>
                 <td><s-path->path to target symbol</s-path-></td>
                 <td data-arrows="lr ar"></td>
-                <td><s-vbtm->::</s-sbtm-></td>
+                <td><s-vbtm->:</s-sbtm-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-path->path to element</s-path-></td>
                 <td data-arrows="lr ar"></td>
@@ -6459,7 +6462,7 @@
             </tr>
             <tr>
                 <td data-arrows="lr ar"></td>
-                <td><s-any->symbol identifier<span class="hidden">&nbsp;*</span></s-any-></td>
+                <td><s-id->symbol identifier<span class="hidden">&nbsp;*</span></s-id-></td>
                 <td data-arrows="lr ar lt"></td>
                 <td><s-vbtm->&lt;</s-vbtm-></td>
                 <td data-arrows="lr br"></td>
@@ -6544,7 +6547,7 @@
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->namespace</s-vbtm-></td>
                 <td data-arrows="lr ar lt"></td>
-                <td><s-any->name</s-any-></td>
+                <td><s-id->name</s-id-></td>
                 <td data-arrows="lr ar tr"></td>
                 <td><s-vbtm->{</s-vbtm-></td>
                 <td data-arrows="lr br ar lt"></td>
@@ -6594,7 +6597,7 @@
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->enum</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
-                <td><s-any->name</s-any-></td>
+                <td><s-id->name</s-id-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->:</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
@@ -6658,7 +6661,7 @@
             </tr>
             <tr>
                 <td data-arrows="lr ar"></td>
-                <td><s-any->name</s-any-></td>
+                <td><s-id->name</s-id-></td>
                 <td data-arrows="lr ar lt"></td>
                 <td><s-vbtm->=</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
@@ -6731,7 +6734,7 @@
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->struct</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
-                <td><s-any->name</s-any-></td>
+                <td><s-id->name</s-id-></td>
                 <td data-arrows="lr ar"></td>
             </tr>
         </table>
@@ -6780,7 +6783,7 @@
                 <td data-arrows="lr ar"></td>
                 <td><s-path->type</s-path-></td>
                 <td data-arrows="lr br ar"></td>
-                <td><s-any->name</s-any-></td>
+                <td><s-id->name</s-id-></td>
                 <td data-arrows="lr ar lt"></td>
                 <td><s-vbtm->,</s-vbtm-></td>
                 <td data-arrows="lb"></td>
@@ -6906,14 +6909,14 @@
                 <td data-arrows="lr ar"></td>
                 <td><s-path->return type</s-path-></td>
                 <td data-arrows="lr ar"></td>
-                <td><s-any->name</s-any-></td>
+                <td><s-id->name</s-id-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->(</s-vbtm-></td>
-                <td data-arrows="lt lr br"></td>
-                <td data-arrows="lr ar lb"></td>
-                <td><s-decl->routine parameter</s-decl-></td>
-                <td data-arrows="lr br"></td>
-                <td data-arrows="lr tr ar lb"></td>
+                <td data-arrows="lt lb"></td>
+                <td data-arrows="br ar"></td>
+                <td><s-decl->basic parameter</s-decl-></td>
+                <td data-arrows="lb"></td>
+                <td data-arrows="tr br ar"></td>
                 <td><s-vbtm->)</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
             </tr>
@@ -6924,13 +6927,28 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td data-arrows="bt"></td>
-                <td data-arrows="tr ar"></td>
-                <td><s-decl->function parameter pack<span class="hidden">&nbsp;***</span></s-decl-></td>
-                <td data-arrows="lt"></td>
-                <td data-arrows="tr ar"></td>
+                <td data-arrows="tr br"></td>
+                <td data-arrows="lr lt lb ar"></td>
+                <td><s-decl->optional parameter<span class="hidden">&nbsp;***</span></s-decl-></td>
+                <td data-arrows="lr tr br"></td>
+                <td data-arrows="lr lt ar"></td>
                 <td><s-vbtm->,</s-vbtm-></td>
                 <td data-arrows="lb"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td data-arrows="bt"></td>
+                <td data-arrows="tr ar"></td>
+                <td><s-decl->parameter pack<span class="hidden">&nbsp;***</span></s-decl-></td>
+                <td data-arrows="lt"></td>
+                <td></td>
+                <td></td>
+                <td data-arrows="tb"></td>
             </tr>
             <tr>
                 <td></td>
@@ -6956,7 +6974,7 @@
                 <td data-arrows="br"></td>
                 <td data-arrows="lr"></td>
                 <td data-arrows="lr ar"></td>
-                <td><s-any->name<span class="hidden">&nbsp;**</span></s-any-></td>
+                <td><s-id->name<span class="hidden">&nbsp;**</span></s-id-></td>
                 <td data-arrows="lr"></td>
                 <td data-arrows="lr"></td>
                 <td data-arrows="lb"></td>
@@ -6994,7 +7012,7 @@
                 <td data-arrows="tr ar"></td>
                 <td><s-vbtm->(</s-vbtm-></td>
                 <td data-arrows="lr ar lb"></td>
-                <td><s-decl->routine parameter<span class="hidden">&nbsp;**</span></s-decl-></td>
+                <td><s-decl->basic parameter<span class="hidden">&nbsp;**</span></s-decl-></td>
                 <td data-arrows="lr ar br"></td>
                 <td><s-vbtm->)</s-vbtm-></td>
                 <td data-arrows="tl"></td>
@@ -7069,34 +7087,33 @@
 
             *** No more than once.
         </syntax-note->
-        <label- class="s-decl" id="syntax--declaration-routine-parameter"><a href="#routine-parameters">Routine parameter</a></label->
+        <label- class="s-decl" id="syntax--declaration-basic-parameter"><a href="#basic-parameters">Basic parameter</a></label->
         <table class="s-decl">
             <tr>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td data-arrows="br"></td>
-                <td data-arrows="lr"></td>
-                <td data-arrows="lr"></td>
-                <td data-arrows="lr"></td>
-                <td data-arrows="lb"></td>
             </tr>
             <tr>
                 <td data-arrows="lr ar"></td>
                 <td><s-path->type</s-path-></td>
                 <td data-arrows="lr ar"></td>
-                <td><s-any->name</s-any-></td>
-                <td data-arrows="lr ar lt"></td>
+                <td><s-id->name</s-id-></td>
+            </tr>
+        </table>
+        <label- class="s-decl" id="syntax--declaration-optional-parameter"><a href="#optional-parameters">Optional parameter</a></label->
+        <table class="s-decl">
+            <tr>
+                <td data-arrows="lr ar"></td>
+                <td><s-decl->basic parameter</s-decl-></td>
+                <td data-arrows="lr ar"></td>
                 <td><s-vbtm->=</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-expr-><t->[type]</t->&nbsp;value</s-expr-></td>
-                <td data-arrows="lr tr ar"></td>
+                <td data-arrows="lr ar"></td>
             </tr>
         </table>
-        <syntax-note->
-            * Only if type is a <a href="#pointer-types">pointer type</a>.
-        </syntax-note->
         <label- class="s-decl" id="syntax--declaration-function-parameter-pack"><a href="#function-parameter-packs">Function parameter pack</a></label->
         <table class="s-decl">
             <tr>
@@ -7112,7 +7129,7 @@
                 <td data-arrows="lr ar lt"></td>
                 <td><s-path->type</s-path-></td>
                 <td data-arrows="lr ar tr"></td>
-                <td><s-any->name</s-any-></td>
+                <td><s-id->name</s-id-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->...</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
@@ -7122,7 +7139,7 @@
         <table class="s-decl">
             <tr>
                 <td data-arrows="lr ar"></td>
-                <td><s-decl->routine parameter</s-decl-></td>
+                <td><s-decl->basic parameter</s-decl-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->&</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
@@ -7195,7 +7212,7 @@
                 <td data-arrows="lr ar"></td>
                 <td><s-path->type</s-path-></td>
                 <td data-arrows="lr br ar"></td>
-                <td><s-any->name</s-any-></td>
+                <td><s-id->name</s-id-></td>
                 <td data-arrows="lr ar lt"></td>
                 <td><s-vbtm->=</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
@@ -7244,7 +7261,7 @@
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->as</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
-                <td><s-any->name</s-any-></td>
+                <td><s-id->name</s-id-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->;</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
@@ -7399,7 +7416,7 @@
                 <td data-arrows="lr ar lt"></td>
                 <td><s-path->type<span class="hidden">&nbsp;*</span></s-path-></td>
                 <td data-arrows="lr tr ar"></td>
-                <td><s-any->name</s-any-></td>
+                <td><s-id->name</s-id-></td>
                 <td data-arrows="lr ar"></td>
             </tr>
         </table>
@@ -7418,7 +7435,7 @@
                 <td data-arrows="lr ar lt"></td>
                 <td><s-path->type<span class="hidden">&nbsp;*</span></s-path-></td>
                 <td data-arrows="lr tr ar"></td>
-                <td><s-any->name</s-any-></td>
+                <td><s-id->name</s-id-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->...</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
@@ -7619,7 +7636,7 @@
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->(</s-vbtm-></td>
                 <td data-arrows="lr ar lt lb"></td>
-                <td><s-any->name</s-any-></td>
+                <td><s-id->name</s-id-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->in</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
@@ -7648,7 +7665,7 @@
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->as</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
-                <td><s-any->name</s-any-></td>
+                <td><s-id->name</s-id-></td>
                 <td data-arrows="lt"></td>
                 <td></td>
                 <td></td>
@@ -8074,7 +8091,7 @@
         <table class="s-expr">
             <tr>
                 <td data-arrows="lr ar"></td>
-                <td><s-any->literal token</s-any-></td>
+                <td><s-id->literal token</s-id-></td>
                 <td data-arrows="lr ar"></td>
             </tr>
         </table>

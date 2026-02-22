@@ -30,7 +30,6 @@ const ui_syntax_hover = {
         tooltip.innerHTML += '<p style="margin: 0px;">' + text + '</p>';
         e.appendChild(tooltip_c);
         //! Forcibly flush pending style changes. This stops the opacity change from being calculated in this round and thus skipped
-        globalThis.getComputedStyle(tooltip).opacity;
         tooltip.style.opacity = 1;
     },
 
@@ -38,37 +37,37 @@ const ui_syntax_hover = {
 
     f_vbtm : function(e) { ui_syntax_hover.add_tooltip(
         e.target,
-        "<b>Verbatim block</b><br>" +
+        "<b style=\"font-size:16px;\">Verbatim block</b><br><br>" +
         "This block contains code that must be written exactly as shown."
     );},
-    f_any : function(e) { ui_syntax_hover.add_tooltip(
+    f_id : function(e) { ui_syntax_hover.add_tooltip(
         e.target,
-        "<b>Name block</b><br>" +
-        "This block identifies a valid user-defined name."
+        "<b style=\"font-size:16px;\">Identifier block</b><br><br>" +
+        "This block identifies a valid user-defined identifier."
     );},
     f_sub : function(e) { ui_syntax_hover.add_tooltip(
         e.target,
-        "<b>Sub-element block</b><br>" +
+        "<b style=\"font-size:16px;\">Sub-element block</b><br><br>" +
         "This block represents a sub-element whose syntax is specified somewhere else in the documentation."
     );},
     f_decl : function(e) { ui_syntax_hover.add_tooltip(
         e.target,
-        "<b>Declaration block</b><br>" +
+        "<b style=\"font-size:16px;\">Declaration block</b><br><br>" +
         "This block represents a valid symbol declaration of the specified kind."
     );},
     f_sgr : function(e) { ui_syntax_hover.add_tooltip(
         e.target,
-        "<b>Syntactic sugar block</b><br>" +
+        "<b style=\"font-size:16px;\">Syntactic sugar block</b><br><br>" +
         "This block represents syntactic sugar, special syntax elements whose sole purpose is to simplify the syntax of existing features."
     );},
     f_expr : function(e) { ui_syntax_hover.add_tooltip(
         e.target,
-        "<b>Expression block</b><br>" +
-        "This block represents an expression. Square brackets [] indicate that the expression must of the specified type."
+        "<b style=\"font-size:16px;\">Expression block</b><br><br>" +
+        "This block represents an expression. Square brackets [] indicate that the expression must be of the specified type."
     );},
     f_path : function(e) { ui_syntax_hover.add_tooltip(
         e.target,
-        "<b>Path block</b><br>" +
+        "<b style=\"font-size:16px;\">Path block</b><br><br>" +
         "This block represents a path to a declared symbol."
     );},
 
@@ -113,8 +112,8 @@ const ui_syntax_hover = {
         }
 
         // User defined sequence of characters
-        for(const e of tab_doc.querySelectorAll("S-ANY-")) {
-            e.addEventListener("mouseenter", ui_syntax_hover.f_any);
+        for(const e of tab_doc.querySelectorAll("s-id-")) {
+            e.addEventListener("mouseenter", ui_syntax_hover.f_id);
             e.addEventListener("mouseleave", ui_syntax_hover.on_leave);
             e.addEventListener("mousemove",  ui_syntax_hover.on_move);
         }

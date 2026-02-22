@@ -10,7 +10,7 @@ const ui_copy_code = {
 
     copy_code : function(label) {
         // Convert <br> to newlines and decode the lines one by one
-        let output_text = label.nextElementSibling.innerHTML.replaceAll(/<br>/g, '\n').split('\n');
+        let output_text = label.nextElementSibling.innerHTML.replaceAll('<br>', '\n').split('\n');
         for(let i = 0; i < output_text.length; i++) {
             output_text[i] = ui_copy_code.decodeHTML(
                 output_text[i]                                         // Base line output
@@ -21,7 +21,7 @@ const ui_copy_code = {
         }
 
         // Join the lines, replace visible spaces with actual spaces and remove all leading and trailing newlines
-        navigator.clipboard.writeText(output_text.join('\n').replaceAll(/·/g, " ").trim());
+        navigator.clipboard.writeText(output_text.join('\n').replaceAll('·', " ").trim());
     },
 
 

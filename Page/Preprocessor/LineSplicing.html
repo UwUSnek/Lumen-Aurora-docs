@@ -44,24 +44,24 @@
             <example->
                 <label->Example 1</label->
                 <div>
-                    <c->// single line comment </c-><sg->&bsol;</sg->
+                    <c->// single line comment </c-><regex-token->&bsol;</regex-token->
                     <c->on two lines</c->
 
 
-                    <k->#include</k-><sg->&bsol;</sg->
-                        <s->&lt;ma</s-><sg->&bsol;&bsol;</sg->
-                        <s->th</s-><sg->&bsol;&bsol;</sg->
+                    <k->#include</k-><regex-token->&bsol;</regex-token->
+                        <s->&lt;ma</s-><regex-token->&bsol;&bsol;</regex-token->
+                        <s->th</s-><regex-token->&bsol;&bsol;</regex-token->
                                <s->&gt;</s->
 
 
-                    <t->vo</t-><sg->&bsol;</sg->
-                    <t->id</t-> <f->fun</f-><sg->&bsol;</sg->
+                    <t->vo</t-><regex-token->&bsol;</regex-token->
+                    <t->id</t-> <f->fun</f-><regex-token->&bsol;</regex-token->
                     <f->ction</f->() {
-                        <t->uint</t-> va<sg->&bsol;&bsol;</sg->
+                        <t->uint</t-> va<regex-token->&bsol;&bsol;</regex-token->
                         r = <k->0</k->, b = <k->0</k->;
-                        v    <sg->&bsol;&bsol;</sg->
-                        ar + <sg->&bsol;&bsol;</sg->
-                             <sg->&bsol;&bsol;</sg->
+                        v    <regex-token->&bsol;&bsol;</regex-token->
+                        ar + <regex-token->&bsol;&bsol;</regex-token->
+                             <regex-token->&bsol;&bsol;</regex-token->
                         = <k->b</k->;
                     }
                 </div>
@@ -90,7 +90,7 @@
             <example->
                 <label->Example 2</label->
                 <div>
-                    <t->void</t-> ma&bsol;<sg->&bsol;&bsol;</sg->   <ce->Error, unexpected token "\"</ce->
+                    <t->void</t-> ma&bsol;<regex-token->&bsol;&bsol;</regex-token->   <ce->Error, unexpected token "\"</ce->
 
                     <c->in(){}</c->      <ce->Error,  unexpected token "in"</ce->
                 </div>

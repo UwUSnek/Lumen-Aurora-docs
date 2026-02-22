@@ -348,11 +348,11 @@
                 <td data-arrows="lr ar lt"></td>
                 <td><s-vbtm->from</s-vbtm-></td>
                 <td data-arrows="lr-low ar-low tr-high ar-high"></td>
-                <td><s-expr-><t->[str]</t->&nbsp;module path</s-any-></td>
+                <td><s-expr-><t->[str]</t->&nbsp;module path</s-id-></td>
                 <td data-arrows="lr-low ar-low lb-low lr-high ar-high"></td>
                 <td><s-vbtm->as</s-vbtm-></td>
                 <td data-arrows="lr-low ar-low lr-high ar-high"></td>
-                <td><s-any->name</s-any-></td>
+                <td><s-id->name</s-id-></td>
                 <td data-arrows="br-low lr-low ar-low lt-high"></td>
                 <td><s-vbtm->import</s-vbtm-></td>
                 <td data-arrows="lr br ar"></td>
@@ -360,7 +360,7 @@
                 <td data-arrows="lr ar lt"></td>
                 <td><s-vbtm->as</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
-                <td><s-any->name</s-any-></td>
+                <td><s-id->name</s-id-></td>
                 <td data-arrows="lr tr"></td>
                 <td data-arrows="lr ar lt"></td>
                 <td><s-vbtm->,</s-vbtm-></td>
@@ -431,7 +431,7 @@
                 <td data-arrows="lr ar lt"></td>
                 <td><s-vbtm->as</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
-                <td><s-any->name</s-any-></td>
+                <td><s-id->name</s-id-></td>
                 <td data-arrows="lr tr"></td>
                 <td data-arrows="lr ar lt"></td>
                 <td><s-vbtm->,</s-vbtm-></td>
@@ -592,7 +592,7 @@
             </tr>
             <tr>
                 <td data-arrows="lr br ar"></td>
-                <td><s-sub->synbol name</s-sub-></td>
+                <td><s-sub->symbol name</s-sub-></td>
                 <td data-arrows="lr ar lt"></td>
                 <td><s-vbtm->.</s-vbtm-></td>
                 <td data-arrows="lb lt"></td>
@@ -646,7 +646,7 @@
                 <td data-arrows="lr ar lt"></td>
                 <td><s-vbtm->const</s-vbtm-></td>
                 <td data-arrows="lr tr ar"></td>
-                <td><s-vbtm->@</s-vbtm-></td>
+                <td><s-vbtm->*</s-vbtm-></td>
                 <td data-arrows="lt"></td>
             </tr>
             <tr>
@@ -699,7 +699,7 @@
                 <td data-arrows="lr ar"></td>
                 <td><s-path->path to target symbol</s-path-></td>
                 <td data-arrows="lr ar"></td>
-                <td><s-vbtm->::</s-sbtm-></td>
+                <td><s-vbtm->:</s-sbtm-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-path->path to element</s-path-></td>
                 <td data-arrows="lr ar"></td>
@@ -734,7 +734,7 @@
             </tr>
             <tr>
                 <td data-arrows="lr ar"></td>
-                <td><s-any->symbol identifier<span class="hidden">&nbsp;*</span></s-any-></td>
+                <td><s-id->symbol identifier<span class="hidden">&nbsp;*</span></s-id-></td>
                 <td data-arrows="lr ar lt"></td>
                 <td><s-vbtm->&lt;</s-vbtm-></td>
                 <td data-arrows="lr br"></td>
@@ -897,7 +897,7 @@
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->namespace</s-vbtm-></td>
                 <td data-arrows="lr ar lt"></td>
-                <td><s-any->name</s-any-></td>
+                <td><s-id->name</s-id-></td>
                 <td data-arrows="lr ar tr"></td>
                 <td><s-vbtm->{</s-vbtm-></td>
                 <td data-arrows="lr br ar lt"></td>
@@ -947,7 +947,7 @@
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->enum</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
-                <td><s-any->name</s-any-></td>
+                <td><s-id->name</s-id-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->:</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
@@ -1011,7 +1011,7 @@
             </tr>
             <tr>
                 <td data-arrows="lr ar"></td>
-                <td><s-any->name</s-any-></td>
+                <td><s-id->name</s-id-></td>
                 <td data-arrows="lr ar lt"></td>
                 <td><s-vbtm->=</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
@@ -1084,7 +1084,7 @@
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->struct</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
-                <td><s-any->name</s-any-></td>
+                <td><s-id->name</s-id-></td>
                 <td data-arrows="lr ar"></td>
             </tr>
         </table>
@@ -1133,7 +1133,7 @@
                 <td data-arrows="lr ar"></td>
                 <td><s-path->type</s-path-></td>
                 <td data-arrows="lr br ar"></td>
-                <td><s-any->name</s-any-></td>
+                <td><s-id->name</s-id-></td>
                 <td data-arrows="lr ar lt"></td>
                 <td><s-vbtm->,</s-vbtm-></td>
                 <td data-arrows="lb"></td>
@@ -1259,14 +1259,14 @@
                 <td data-arrows="lr ar"></td>
                 <td><s-path->return type</s-path-></td>
                 <td data-arrows="lr ar"></td>
-                <td><s-any->name</s-any-></td>
+                <td><s-id->name</s-id-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->(</s-vbtm-></td>
-                <td data-arrows="lt lr br"></td>
-                <td data-arrows="lr ar lb"></td>
-                <td><s-decl->routine parameter</s-decl-></td>
-                <td data-arrows="lr br"></td>
-                <td data-arrows="lr tr ar lb"></td>
+                <td data-arrows="lt lb"></td>
+                <td data-arrows="br ar"></td>
+                <td><s-decl->basic parameter</s-decl-></td>
+                <td data-arrows="lb"></td>
+                <td data-arrows="tr br ar"></td>
                 <td><s-vbtm->)</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
             </tr>
@@ -1277,13 +1277,28 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td data-arrows="bt"></td>
-                <td data-arrows="tr ar"></td>
-                <td><s-decl->function parameter pack<span class="hidden">&nbsp;***</span></s-decl-></td>
-                <td data-arrows="lt"></td>
-                <td data-arrows="tr ar"></td>
+                <td data-arrows="tr br"></td>
+                <td data-arrows="lr lt lb ar"></td>
+                <td><s-decl->optional parameter<span class="hidden">&nbsp;***</span></s-decl-></td>
+                <td data-arrows="lr tr br"></td>
+                <td data-arrows="lr lt ar"></td>
                 <td><s-vbtm->,</s-vbtm-></td>
                 <td data-arrows="lb"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td data-arrows="bt"></td>
+                <td data-arrows="tr ar"></td>
+                <td><s-decl->parameter pack<span class="hidden">&nbsp;***</span></s-decl-></td>
+                <td data-arrows="lt"></td>
+                <td></td>
+                <td></td>
+                <td data-arrows="tb"></td>
             </tr>
             <tr>
                 <td></td>
@@ -1309,7 +1324,7 @@
                 <td data-arrows="br"></td>
                 <td data-arrows="lr"></td>
                 <td data-arrows="lr ar"></td>
-                <td><s-any->name<span class="hidden">&nbsp;**</span></s-any-></td>
+                <td><s-id->name<span class="hidden">&nbsp;**</span></s-id-></td>
                 <td data-arrows="lr"></td>
                 <td data-arrows="lr"></td>
                 <td data-arrows="lb"></td>
@@ -1347,7 +1362,7 @@
                 <td data-arrows="tr ar"></td>
                 <td><s-vbtm->(</s-vbtm-></td>
                 <td data-arrows="lr ar lb"></td>
-                <td><s-decl->routine parameter<span class="hidden">&nbsp;**</span></s-decl-></td>
+                <td><s-decl->basic parameter<span class="hidden">&nbsp;**</span></s-decl-></td>
                 <td data-arrows="lr ar br"></td>
                 <td><s-vbtm->)</s-vbtm-></td>
                 <td data-arrows="tl"></td>
@@ -1422,34 +1437,33 @@
 
             *** No more than once.
         </syntax-note->
-        <label- class="s-decl" id="syntax--declaration-routine-parameter"><a href="#routine-parameters">Routine parameter</a></label->
+        <label- class="s-decl" id="syntax--declaration-basic-parameter"><a href="#basic-parameters">Basic parameter</a></label->
         <table class="s-decl">
             <tr>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td data-arrows="br"></td>
-                <td data-arrows="lr"></td>
-                <td data-arrows="lr"></td>
-                <td data-arrows="lr"></td>
-                <td data-arrows="lb"></td>
             </tr>
             <tr>
                 <td data-arrows="lr ar"></td>
                 <td><s-path->type</s-path-></td>
                 <td data-arrows="lr ar"></td>
-                <td><s-any->name</s-any-></td>
-                <td data-arrows="lr ar lt"></td>
+                <td><s-id->name</s-id-></td>
+            </tr>
+        </table>
+        <label- class="s-decl" id="syntax--declaration-optional-parameter"><a href="#optional-parameters">Optional parameter</a></label->
+        <table class="s-decl">
+            <tr>
+                <td data-arrows="lr ar"></td>
+                <td><s-decl->basic parameter</s-decl-></td>
+                <td data-arrows="lr ar"></td>
                 <td><s-vbtm->=</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-expr-><t->[type]</t->&nbsp;value</s-expr-></td>
-                <td data-arrows="lr tr ar"></td>
+                <td data-arrows="lr ar"></td>
             </tr>
         </table>
-        <syntax-note->
-            * Only if type is a <a href="#pointer-types">pointer type</a>.
-        </syntax-note->
         <label- class="s-decl" id="syntax--declaration-function-parameter-pack"><a href="#function-parameter-packs">Function parameter pack</a></label->
         <table class="s-decl">
             <tr>
@@ -1465,7 +1479,7 @@
                 <td data-arrows="lr ar lt"></td>
                 <td><s-path->type</s-path-></td>
                 <td data-arrows="lr ar tr"></td>
-                <td><s-any->name</s-any-></td>
+                <td><s-id->name</s-id-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->...</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
@@ -1475,7 +1489,7 @@
         <table class="s-decl">
             <tr>
                 <td data-arrows="lr ar"></td>
-                <td><s-decl->routine parameter</s-decl-></td>
+                <td><s-decl->basic parameter</s-decl-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->&</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
@@ -1548,7 +1562,7 @@
                 <td data-arrows="lr ar"></td>
                 <td><s-path->type</s-path-></td>
                 <td data-arrows="lr br ar"></td>
-                <td><s-any->name</s-any-></td>
+                <td><s-id->name</s-id-></td>
                 <td data-arrows="lr ar lt"></td>
                 <td><s-vbtm->=</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
@@ -1597,7 +1611,7 @@
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->as</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
-                <td><s-any->name</s-any-></td>
+                <td><s-id->name</s-id-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->;</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
@@ -1752,7 +1766,7 @@
                 <td data-arrows="lr ar lt"></td>
                 <td><s-path->type<span class="hidden">&nbsp;*</span></s-path-></td>
                 <td data-arrows="lr tr ar"></td>
-                <td><s-any->name</s-any-></td>
+                <td><s-id->name</s-id-></td>
                 <td data-arrows="lr ar"></td>
             </tr>
         </table>
@@ -1771,7 +1785,7 @@
                 <td data-arrows="lr ar lt"></td>
                 <td><s-path->type<span class="hidden">&nbsp;*</span></s-path-></td>
                 <td data-arrows="lr tr ar"></td>
-                <td><s-any->name</s-any-></td>
+                <td><s-id->name</s-id-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->...</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
@@ -2077,7 +2091,7 @@
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->(</s-vbtm-></td>
                 <td data-arrows="lr ar lt lb"></td>
-                <td><s-any->name</s-any-></td>
+                <td><s-id->name</s-id-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->in</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
@@ -2106,7 +2120,7 @@
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->as</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
-                <td><s-any->name</s-any-></td>
+                <td><s-id->name</s-id-></td>
                 <td data-arrows="lt"></td>
                 <td></td>
                 <td></td>
@@ -2633,7 +2647,7 @@
         <table class="s-expr">
             <tr>
                 <td data-arrows="lr ar"></td>
-                <td><s-any->literal token</s-any-></td>
+                <td><s-id->literal token</s-id-></td>
                 <td data-arrows="lr ar"></td>
             </tr>
         </table>

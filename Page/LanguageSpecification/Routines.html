@@ -49,17 +49,17 @@
 <moveto-doc-></moveto-doc->
 
 <!--------------------------------------------------------------------->
-<!-- Routine parameters                                              -->
+<!-- Basic parameters                                                -->
 <!--------------------------------------------------------------------->
-<h1 id="routine-parameters"></h1>
+<h1 id="basic-parameters"></h1>
 <moveto-doc->
     <p>
-        Routine parameters are named memory locations used to pass arguments to <a href="#routine-calls">routine calls</a>.<br>
-        They work in the same way as <a href="#variables">variables</a>, but the initializer value is defined by the caller routine or copied from the <a href="#default-values">default value</a>.<br>
-        As with <a href="#variables">variables</a>, routine parameters are first allocated and then initialized by calling the <code>=</code> operator, one parameter at a time, following the order in which they were declared.
+        Basic parameters are named memory locations used to pass arguments to <a href="#routine-calls">routine calls</a>.<br>
+        They work in the same way as <a href="#variables">variables</a>, but the initializer value is defined by the caller routine.<br>
+        Just like <a href="#variables">variables</a>, basic parameters are first allocated and then initialized by calling the <code>=</code> operator, one parameter at a time, following the order in which they were declared.
     </p>
     <syntax->
-        <label- id="copy.syntax--declaration-routine-parameter">Declaration syntax</label->
+        <label- id="copy.syntax--declaration-basic-parameter">Declaration syntax</label->
     </syntax->
 </moveto-doc->
 <moveto-examples->
@@ -85,19 +85,22 @@
 
 
 <!--------------------------------------------------------------------->
-<!-- Default values                                                  -->
+<!-- Optional parameters                                             -->
 <!--------------------------------------------------------------------->
-<h1 id="default-values"></h1>
+<h1 id="optional-parameters"></h1>
 <moveto-doc->
     <p>
-        <b>Default values</b> are used to <b>initialize</b> a routine parameter <b>when no argument is provided</b>.<br>
-        They are defined in the same way as <a href="#variables">variable initializer values</a>.
+        <b>Optional parameters</b> are parameters that can specify a default value when no argument is provided by the caller.<br>
+        Optional parameters are only available for functions and template functions.<br>
+        A function can have multiple optional parameters, but they must all be declared after the last mandatory parameter.
     </p>
     <p>
-        A function can have multiple parameters <b>with</b> a default value, but they must all be declared <b>after</b> the <b>last</b> parameter that <b>doesn't have one</b>.<br>
-        <a href="#reference-parameters">Reference parameters</a> and parameters of <a href="#operators">operators</a> cannot have default value.<br>
-        <a href="#parameter-packs">Parameter packs</a> also cannot have default value.
+        <a href="#reference-parameters">Reference parameters</a> cannot be optional.<br>
+        <a href="#parameter-packs">Parameter packs</a> also cannot be optional.
     </p>
+    <syntax->
+        <label- id="copy.syntax--declaration-optional-parameter">Declaration syntax</label->
+    </syntax->
 </moveto-doc->
 <moveto-examples->
     <example->
@@ -136,13 +139,13 @@
     </p>
     <p>
         Parameter packs take zero or more arguments and can only be used as arguments of routine parameters.<br>
-        The taken arguments are the ones that remain after all the routine parameters have been assigned their argument. Parameters with default values take priority over the arguments.<br>
+        The taken arguments are the ones that remain after all the routine parameters have been assigned their argument. <a href="#optional-parameters">Optional parameters</a> take priority over the arguments.<br>
         Arguments and parameter pack elements are all initialized in the same order in which they were declared.
     </p>
     <p>
         Each <a href="#funcitons">function</a> can only use a single parameter pack.<br>
         <a href="#operators">Operators</a> cannot use parameter packs.<br>
-        Parameter packs cannot have <a href="#default-values">default value</a>.
+        Parameter packs cannot be <a href="#optional-parameters">optional</a>.
     </p>
     <syntax->
         <label- id="copy.syntax--declaration-function-parameter-pack">Declaration syntax</label->
@@ -216,7 +219,7 @@
         Inside the <a href="#routines">routine</a>, reference parameters act exactly as normal parameters.
     </p>
     <p>
-        Reference parameters cannot have <a href="#default-values">default value</a>.
+        Reference parameters cannot be <a href="#default-values">optional</a>.
     </p>
     <syntax->
         <label- id="copy.syntax--declaration-reference-parameter">Declaration syntax</label->

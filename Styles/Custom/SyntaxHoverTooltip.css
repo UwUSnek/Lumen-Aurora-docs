@@ -1,6 +1,6 @@
 :root {
     --syntax-hover-tooltip-arrow-h : 10px;
-    --syntax-hover-tooltip-padding-top : 1ch;
+    --syntax-hover-tooltip-padding-top : 2ch;
     --syntax-hover-tooltip-opacity-duration : 0.1s;
 }
 
@@ -32,7 +32,7 @@
     transition: opacity var(--syntax-hover-tooltip-opacity-duration);
 
     background-color: var(--bg-vbtm);
-    border: 1px solid var(--bd-elm);
+    border: 4px solid var(--bd-elm);
     border-radius: var(--code-decoration-r);
     font-weight: normal;
     font-style: normal;
@@ -53,7 +53,7 @@
     pointer-events: none;
     width:  0; max-width:  0;
     height: 0; max-height: 0;
-    margin-top:  calc(0px + 1px - var(--syntax-hover-tooltip-arrow-h) - var(--syntax-hover-tooltip-padding-top));
+    margin-top:  calc(0px + 2px - var(--syntax-hover-tooltip-arrow-h) - var(--syntax-hover-tooltip-padding-top));
     margin-left: calc(50% - var(--syntax-hover-tooltip-arrow-h) / 2 - var(--syntax-table-padding) / 2);
     z-index: 102;
 
@@ -64,7 +64,7 @@
 
 
 .syntax-hover-tooltip-arrow-border {
-    margin-top:  calc(0px - 1px - var(--syntax-hover-tooltip-arrow-h));
+    margin-top:  calc(0px - 6px - var(--syntax-hover-tooltip-arrow-h));
     z-index: 101;
     margin-bottom: var(--syntax-hover-tooltip-padding-top);
     border-bottom-color: var(--bd-elm);

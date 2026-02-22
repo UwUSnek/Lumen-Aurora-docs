@@ -1,12 +1,12 @@
 :root {
-    --bd-any:        hsl(212, 14%, 20%);
+    --bd-id:         hsl(212, 14%, 20%);
     --bd-sub:        hsl(210, 31%, 54%);
     --bd-decl:       hsl(281, 31%, 54%);
     --bd-expr:       #85b4e0;
     --bd-path:       #3884dc;
 
     --bg-vbtm:       hsl(210, 8%, 13%);
-    --bg-syntax-elm: hsl(216, 12%, 8%);;
+    --bg-syntax-elm: hsl(216, 12%, 8%);
     --bg-sgr:        hsla(60, 90%, 44%, 5%);
 
     --fg-sgr:        hsla(102, 5%, 95%, 75%);
@@ -16,7 +16,7 @@
 
 
 s-vbtm-, /* Verbatim. Literally what the element contains */
-s-any-,  /* User defined sequence of characters           */
+s-id-,   /* User defined identifier                       */
 s-sub-,  /* Sub element                                   */
 s-decl-, /* Declaration                                   */
 s-sgr-,  /* Syntactic sugar                               */
@@ -24,7 +24,6 @@ s-expr-, /* Expression                                    */
 s-path-  /* Symbol path                                   */
 {
     display: inline-block;
-    font-family: monospace, monospace;
     border: 1px solid;
     border-radius: var(--code-decoration-r);
     padding: 0 12px 0 12px;
@@ -32,6 +31,7 @@ s-path-  /* Symbol path                                   */
     background-color: var(--bg-syntax-elm);
     font-size: var(--font-size-code);
     white-space: nowrap;
+    transition: background-color ease-in-out 0.2s;
 }
 syntax- table tr > td > * {
     display: inline-block;
@@ -73,18 +73,18 @@ syntax- table tr > td > * > div {
 
 
 
-s-any-  { font-style: italic; border-color: var(--bd-any );                       }
-s-sub-  { font-style: italic; border-color: var(--bd-sub ); border-style: dashed; }
-s-decl- { font-style: italic; border-color: var(--bd-decl);                       }
-s-expr- { font-style: italic; border-color: var(--bd-expr);                       }
-s-path- { font-style: italic; border-color: var(--bd-path);                       }
+s-id-   { font-style: italic; border-color: var(--bd-id  );                        }
+s-sub-  { font-style: italic; border-color: var(--bd-sub ); border-style: dashed;  }
+s-decl- { font-style: italic; border-color: var(--bd-decl);                        }
+s-expr- { font-style: italic; border-color: var(--bd-expr);                        }
+s-path- { font-style: italic; border-color: var(--bd-path);                        }
 
 s-vbtm- {
     border-width: 0;
     background-color: var(--bg-vbtm);
 }
 s-sgr- {
-    border-color:     transparent;
+    border-width: 0;
     color:            var(--fg-sgr);
     background-color: var(--bg-sgr);
 }
@@ -96,6 +96,12 @@ s-sgr- {
 
 
 
+s-id-  :hover { background-color: color-mix(in srgb, var(--bg-syntax-elm), white 10%); }
+s-sub- :hover { background-color: color-mix(in srgb, var(--bd-sub ),       black 75%); }
+s-decl-:hover { background-color: color-mix(in srgb, var(--bd-decl),       black 75%); }
+s-expr-:hover { background-color: color-mix(in srgb, var(--bd-expr),       black 75%); }
+s-path-:hover { background-color: color-mix(in srgb, var(--bd-path),       black 75%); }
+s-vbtm-:hover { background-color: color-mix(in srgb, var(--bg-vbtm),       white 10%); }
 
 
 

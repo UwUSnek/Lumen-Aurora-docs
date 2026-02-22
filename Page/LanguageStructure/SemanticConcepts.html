@@ -551,7 +551,7 @@
             <t->bool</t-> <f->f</f->(<t->ulong</t-> <p->n</p->) {
                 <t->ulong</t-> a = <k->True</k->;
 
-                <c->// return q::elms[n];</c->          <ce->// Error, "n" is not a compile time expression</ce->
+                <c->// return q:elms[n];</c->           <ce->// Error, "n" is not a compile time expression</ce->
                 <c->// return q[add_1(n)];</c->   <ce->// Error, the routine call is not compile time</ce->
                 <c->// return q[rand(2)];</c->    <ce->// Error, the routine "random.rand" is not suitable for compile time calls</ce->
                 <w->return</w-> q<f->[</f->n<f->]</f->;             <c->// Ok</c->
