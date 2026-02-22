@@ -95,19 +95,19 @@
     </p>
     <example->
             <div style="border-top-left-radius: var(--code-decoration-r);">
-                                                <c->  1              31</c->
-                                                <c->sign           value</c->
+                                              <c->  1                31</c->
+                                               <c->sign            value</c->
                                                 <c->│┌───────────────┴─────────────┐</c->  <t->int</t->
-                                                <sr->┕</sr-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->
-                                                                <c->32</c->
-                                                                <c->value</c->
+                                                <regex-group->┕</regex-group-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->
+                                                                 <c->32</c->
+                                                               <c->value</c->
                                                 <c->┌────────────────┴─────────────┐</c->  <t->uint</t->
                                                 <s->┕┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->
                 <c->  1                              63</c->
                 <c->sign                           value</c->
                 <c->│┌───────────────────────────────┴─────────────────────────────┐</c->  <t->long</t->
-                <sr->┕</sr-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->
-                                                <c->64</c->
+                <regex-group->┕</regex-group-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->
+                                                 <c->64</c->
                                                 <c->value</c->
                 <c->┌────────────────────────────────┴─────────────────────────────┐</c->  <t->ulong</t->
                 <s->┕┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->
@@ -135,10 +135,10 @@
     </p>
     <example->
             <div style="border-top-left-radius: var(--code-decoration-r);">
-                                                <c-> 1      8          23</c->
-                                                <c->sign exponent   mantissa</c->
+                                                <c-> 1     8            23</c->
+                                               <c->sign exponent    mantissa</c->
                                                 <c->│┌───┴──┐┌──────────┴──────────┐</c->  <t->float</t->
-                                                <sr->┕</sr-><sg->┷┷┷┷┷┷┷┷</sg-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->
+                                                <regex-group->┕</regex-group-><regex-token->┷┷┷┷┷┷┷┷</regex-token-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->
                                                 <c->00000000000000000000000000000000</c->  <k->+0.0</k->
                                                 <c->10000000000000000000000000000000</c->  <k->-0.0</k->
                                                 <c->01111111100000000000000000000000</c->  <k->+inf</k->
@@ -147,15 +147,15 @@
                                                 <c->111111111&lt;─────── not 0 ───────&gt;</c->  <k->nan</k->
 
                 <c-> 1      11                           52</c->
-                <c->sign  exponent                    mantissa</c->
+                <c->sign exponent                     mantissa</c->
                 <c->│┌────┴────┐┌─────────────────────────┴────────────────────────┐</c->  <t->double</t->
-                <sr->┕</sr-><sg->┷┷┷┷┷┷┷┷┷┷┷</sg-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->
+                <regex-group->┕</regex-group-><regex-token->┷┷┷┷┷┷┷┷┷┷┷</regex-token-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->
                 <c->0000000000000000000000000000000000000000000000000000000000000000</c->  <k->+0.0</k->
                 <c->1000000000000000000000000000000000000000000000000000000000000000</c->  <k->-0.0</k->
-                <c->0111111110000000000000000000000000000000000000000000000000000000</c->  <k->+inf</k->
-                <c->1111111110000000000000000000000000000000000000000000000000000000</c->  <k->-inf</k->
-                <c->011111111&lt;─────────────────────── not 0 ───────────────────────&gt;</c->  <k->nan</k->
-                <c->111111111&lt;─────────────────────── not 0 ───────────────────────&gt;</c->  <k->nan</k->
+                <c->0111111111110000000000000000000000000000000000000000000000000000</c->  <k->+inf</k->
+                <c->1111111111110000000000000000000000000000000000000000000000000000</c->  <k->-inf</k->
+                <c->011111111111&lt;────────────────────── not 0 ─────────────────────&gt;</c->  <k->nan</k->
+                <c->111111111111&lt;────────────────────── not 0 ─────────────────────&gt;</c->  <k->nan</k->
             </div>
     </example->
     <p>
@@ -178,7 +178,7 @@
     <example->
             <div style="border-top-left-radius: var(--code-decoration-r);">
                                 <c->32</c->
-                            <c->value</c->
+                              <c->value</c->
                 <c->┌───────────────┴──────────────┐</c->  <t->bool</t->
                 <s->┕┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->
                 <c->00000000000000000000000000000001</c->  <k->true</k->
@@ -634,13 +634,13 @@
             <example->
                 <label->Example</label->
                 <div>
-                    <w->template</w->&lt;<w->type</w-> <t->t</t->&gt; <w->struct</w-> <t->s</t-> <w->when</w->(<t->t</t->::id <f->!=</f-> <t->void</t->::id) {
+                    <w->template</w->&lt;<w->type</w-> <t->t</t->&gt; <w->struct</w-> <t->s</t-> <w->when</w->(<t->t</t->:id <f->!=</f-> <t->void</t->:id) {
                         <t->t</t-> n;
                         <w->constructor</w->() {
                             io.<f->print</f->(<s->"Not void\n"</s->);
                         }
                     }
-                    <w->template</w->&lt;<w->type</w-> <t->t</t->&gt; <w->struct</w-> <t->s</t-> <w->when</w->(<t->t</t->::id <f->==</f-> <t->void</t->::id) {
+                    <w->template</w->&lt;<w->type</w-> <t->t</t->&gt; <w->struct</w-> <t->s</t-> <w->when</w->(<t->t</t->:id <f->==</f-> <t->void</t->:id) {
                         <w->constructor</w->() {
                             io.<f->print</f->(<s->"Void\n"</s->);
                         }
@@ -723,8 +723,8 @@
                 <div>
                     <w->import</w-> <s->&lt;io&gt;</s->;
                     <w->template</w->&lt;<w->type</w-> <t->t</t->&gt; <t->void</t-> <f->print_template_info</f->()
-                    <w->when</w->(<t->t</t->::<k->id</k-> <f->!=</f-> <t->void</t->::<k->id</k->) { io.<f->print</f->(<s->"not void"</s->); }
-                    <w->when</w->(<t->t</t->::<k->id</k-> <f->==</f-> <t->void</t->::<k->id</k->) { io.<f->print</f->(<s->"void"</s->); }
+                    <w->when</w->(<t->t</t->:<k->id</k-> <f->!=</f-> <t->void</t->:<k->id</k->) { io.<f->print</f->(<s->"not void"</s->); }
+                    <w->when</w->(<t->t</t->:<k->id</k-> <f->==</f-> <t->void</t->:<k->id</k->) { io.<f->print</f->(<s->"void"</s->); }
 
                     <t->void</t-> <f->main</f->(){
                         <f->print_template_info</f->&lt;<t->void</t->&gt;();
@@ -1150,10 +1150,10 @@
 
             <tr class="even">
                 <th rowspan="13"><t->uint</t-><br><br><t->int</t-><br><br><t->ulong</t-><br><br><t->long</t-></th>
-                <th><range-val->== <k->-9223372036854775808</k-><br><range-var->long::min</range-var-></range-val-></th>
-                <td class="center wrap conv-cell-m" rowspan="5">Overflows to (-n - <k->1</k->) % (uint::<k->max</k-> - <k->1</k->)</td>
+                <th><range-val->== <k->-9223372036854775808</k-><br><range-var->long:min</range-var-></range-val-></th>
+                <td class="center wrap conv-cell-m" rowspan="5">Overflows to (-n - <k->1</k->) % (uint:<k->max</k-> - <k->1</k->)</td>
                 <td class="center wrap conv-cell-n" rowspan="3">Undefined</td>
-                <td class="center wrap conv-cell-m" rowspan="5">Overflows to (-n - <k->1</k->) % (ulong::<k->max</k-> - <k->1</k->)</td>
+                <td class="center wrap conv-cell-m" rowspan="5">Overflows to (-n - <k->1</k->) % (ulong:<k->max</k-> - <k->1</k->)</td>
                 <td class="center wrap conv-cell-y" rowspan="11">Correct result</td>
                 <td class="center wrap conv-cell-m" rowspan="4">Conversions are not symmetric</td>
                 <td class="center wrap conv-cell-m" rowspan="2">Conversions are not symmetric</td>
@@ -1161,7 +1161,7 @@
             </tr>
             <tr class="even">
                 <fake-td></fake-td>
-                <th><range-val->&lt; <k->-9007199254740992</k-><br><range-var->double::min_precise_int</range-var-></range-val-></th>
+                <th><range-val->&lt; <k->-9007199254740992</k-><br><range-var->double:min_precise_int</range-var-></range-val-></th>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
@@ -1172,7 +1172,7 @@
             </tr>
             <tr class="even">
                 <fake-td></fake-td>
-                <th><range-val->&lt; <k->-2147483648</k-><br><range-var->int::min</range-var-></range-val-></th>
+                <th><range-val->&lt; <k->-2147483648</k-><br><range-var->int:min</range-var-></range-val-></th>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
@@ -1183,7 +1183,7 @@
             </tr>
             <tr class="even">
                 <fake-td></fake-td>
-                <th><range-val->&lt; <k->-16777216</k-><br><range-var->float::min_precise_int</range-var-></range-val-></th>
+                <th><range-val->&lt; <k->-16777216</k-><br><range-var->float:min_precise_int</range-var-></range-val-></th>
                 <fake-td></fake-td>
                 <td class="center wrap conv-cell-y" rowspan="5">Correct result</td>
                 <fake-td></fake-td>
@@ -1227,7 +1227,7 @@
             </tr>
             <tr class="even">
                 <fake-td></fake-td>
-                <th><range-val->&gt; <k->+16777216</k-><br><range-var->float::max_precise_int</range-var-></range-val-></th>
+                <th><range-val->&gt; <k->+16777216</k-><br><range-var->float:max_precise_int</range-var-></range-val-></th>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
@@ -1238,7 +1238,7 @@
             </tr>
             <tr class="even">
                 <fake-td></fake-td>
-                <th><range-val->&gt; <k->+2147483647</k-><br><range-var->int::max</range-var-></range-val-></th>
+                <th><range-val->&gt; <k->+2147483647</k-><br><range-var->int:max</range-var-></range-val-></th>
                 <fake-td></fake-td>
                 <td class="center wrap conv-cell-n" rowspan="5">Undefined</td>
                 <fake-td></fake-td>
@@ -1249,8 +1249,8 @@
             </tr>
             <tr class="even">
                 <fake-td></fake-td>
-                <th><range-val->&gt; <k->+4294967295</k-><br><range-var->uint::max</range-var-></range-val-></th>
-                <td class="center wrap conv-cell-m" rowspan="4">Overflows to n % (uint::<k->max</k-> + <k->1</k->)</td>
+                <th><range-val->&gt; <k->+4294967295</k-><br><range-var->uint:max</range-var-></range-val-></th>
+                <td class="center wrap conv-cell-m" rowspan="4">Overflows to n % (uint:<k->max</k-> + <k->1</k->)</td>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
@@ -1260,7 +1260,7 @@
             </tr>
             <tr class="even">
                 <fake-td></fake-td>
-                <th><range-val->&gt; <k->+9007199254740992</k-><br><range-var->double::max_precise_int</range-var-></range-val-></th>
+                <th><range-val->&gt; <k->+9007199254740992</k-><br><range-var->double:max_precise_int</range-var-></range-val-></th>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
@@ -1271,7 +1271,7 @@
             </tr>
             <tr class="even">
                 <fake-td></fake-td>
-                <th><range-val->&gt; <k->+9223372036854775807</k-><br><range-var->long::max</range-var-></range-val-></th>
+                <th><range-val->&gt; <k->+9223372036854775807</k-><br><range-var->long:max</range-var-></range-val-></th>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
@@ -1282,7 +1282,7 @@
             </tr>
             <tr class="even">
                 <fake-td></fake-td>
-                <th><range-val->== <k->+18446744073709551615</k-><br><range-var->ulong::max</range-var-></range-val-></th>
+                <th><range-val->== <k->+18446744073709551615</k-><br><range-var->ulong:max</range-var-></range-val-></th>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
@@ -1307,7 +1307,7 @@
 
             <tr class="even">
                 <th rowspan="16"><t->float</t-><br><br><t->double</t-></th>
-                <th><range-val->== <k->-inf</k-><br><range-var->-double::inf</range-var-><br><range-var->-float::inf</range-var-></range-val-></th>
+                <th><range-val->== <k->-inf</k-><br><range-var->-double:inf</range-var-><br><range-var->-float:inf</range-var-></range-val-></th>
                 <td class="center wrap conv-cell-n" rowspan="6">Undefined</td>
                 <td class="center wrap conv-cell-n" rowspan="5">Undefined</td>
                 <td class="center wrap conv-cell-n" rowspan="6">Undefined</td>
@@ -1318,7 +1318,7 @@
             </tr>
             <tr class="even">
                 <fake-td></fake-td>
-                <th><range-val->== <k->-1.7976931348623157081e+308</k-><br><range-var->double::min</range-var-></range-val-></th>
+                <th><range-val->== <k->-1.7976931348623157081e+308</k-><br><range-var->double:min</range-var-></range-val-></th>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
@@ -1329,7 +1329,7 @@
             </tr>
             <tr class="even">
                 <fake-td></fake-td>
-                <th><range-val->&lt; <k->-3.4028234663852885981e+38</k-><br><range-var->float::min</range-var-></range-val-></th>
+                <th><range-val->&lt; <k->-3.4028234663852885981e+38</k-><br><range-var->float:min</range-var-></range-val-></th>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
@@ -1340,7 +1340,7 @@
             </tr>
             <tr class="even">
                 <fake-td></fake-td>
-                <th><range-val->&lt; <k->-9223372036854775808.0</k-><br><range-var->long::min</range-var-></range-val-></th>
+                <th><range-val->&lt; <k->-9223372036854775808.0</k-><br><range-var->long:min</range-var-></range-val-></th>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
@@ -1351,7 +1351,7 @@
             </tr>
             <tr class="even">
                 <fake-td></fake-td>
-                <th><range-val->&lt; <k->-2147483648.0</k-><br><range-var->int::min</range-var-></range-val-></th>
+                <th><range-val->&lt; <k->-2147483648.0</k-><br><range-var->int:min</range-var-></range-val-></th>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
@@ -1395,7 +1395,7 @@
             </tr>
             <tr class="even">
                 <fake-td></fake-td>
-                <th><range-val->&gt; <k->+2147483647.0</k-><br><range-var->int::max</range-var-></range-val-></th>
+                <th><range-val->&gt; <k->+2147483647.0</k-><br><range-var->int:max</range-var-></range-val-></th>
                 <td class="center wrap conv-cell-n" rowspan="8">Undefined</td>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
@@ -1406,7 +1406,7 @@
             </tr>
             <tr class="even">
                 <fake-td></fake-td>
-                <th><range-val->&gt; <k->+4294967297.0</k-><br><range-var->uint::max</range-var-></range-val-></th>
+                <th><range-val->&gt; <k->+4294967297.0</k-><br><range-var->uint:max</range-var-></range-val-></th>
                 <td class="center wrap conv-cell-n" rowspan="7">Undefined</td>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
@@ -1417,7 +1417,7 @@
             </tr>
             <tr class="even">
                 <fake-td></fake-td>
-                <th><range-val->&gt; <k->+9223372036854775807.0</k-><br><range-var->long::max</range-var-></range-val-></th>
+                <th><range-val->&gt; <k->+9223372036854775807.0</k-><br><range-var->long:max</range-var-></range-val-></th>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
@@ -1428,7 +1428,7 @@
             </tr>
             <tr class="even">
                 <fake-td></fake-td>
-                <th><range-val->&gt; <k->+18446744073709551615.0</k-><br><range-var->ulong::max</range-var-></range-val-></th>
+                <th><range-val->&gt; <k->+18446744073709551615.0</k-><br><range-var->ulong:max</range-var-></range-val-></th>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
                 <td class="center wrap conv-cell-n" rowspan="5">Undefined</td>
@@ -1439,7 +1439,7 @@
             </tr>
             <tr class="even">
                 <fake-td></fake-td>
-                <th><range-val->&gt; <k->+3.4028234663852885981e+38</k-><br><range-var->float::max</range-var-></range-val-></th>
+                <th><range-val->&gt; <k->+3.4028234663852885981e+38</k-><br><range-var->float:max</range-var-></range-val-></th>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
@@ -1450,7 +1450,7 @@
             </tr>
             <tr class="even">
                 <fake-td></fake-td>
-                <th><range-val->== <k->+1.7976931348623157081e+308</k-><br><range-var->double::max</range-var-></range-val-></th>
+                <th><range-val->== <k->+1.7976931348623157081e+308</k-><br><range-var->double:max</range-var-></range-val-></th>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
@@ -1461,7 +1461,7 @@
             </tr>
             <tr class="even">
                 <fake-td></fake-td>
-                <th><range-val->== <k->+inf</k-><br><range-var->double::inf</range-var-><br><range-var->float::inf</range-var-></range-val-></th>
+                <th><range-val->== <k->+inf</k-><br><range-var->double:inf</range-var-><br><range-var->float:inf</range-var-></range-val-></th>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
@@ -1472,7 +1472,7 @@
             </tr>
             <tr class="even">
                 <fake-td></fake-td>
-                <th><range-val-><f->isnan</f->(n)<br><br><range-var->double::nan</range-var-><br><range-var->float::nan</range-var-></range-val-></th>
+                <th><range-val-><f->isnan</f->(n)<br><br><range-var->double:nan</range-var-><br><range-var->float:nan</range-var-></range-val-></th>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
                 <fake-td></fake-td>
@@ -1544,7 +1544,7 @@
             }
 
             <w->enum</w-> <t->e2</t-> : <t->e</t-> {
-                <k->a</k-> = e:<k->b</k->, <k->b</k-> = e:<k->a</k->;
+                <k->a</k-> = e.<k->b</k->, <k->b</k-> = e.<k->a</k->;
             }
 
             <t->void</t-> <f->main</f->(){
