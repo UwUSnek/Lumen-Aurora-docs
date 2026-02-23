@@ -117,7 +117,7 @@
         //TODO GL_EXT_shader_explicit_arithmetic_types_int64
     </p>
 </moveto-doc->
-
+//TODO move internal info to internal functioning
 
 <!--------------------------------------------------------------------->
 <!-- Floating point types                                            -->
@@ -207,6 +207,30 @@
 <!-- Enums                                                           -->
 <!--------------------------------------------------------------------->
 <h1 id="enums"></h1>
+<moveto-doc->
+    <p>
+        //TODO
+    </p>
+</moveto-doc->
+<moveto-examples->
+    <example->
+        <label->Example</label->
+        <div>
+            //TODO
+        </div>
+    </example->
+</moveto-examples->
+
+
+
+
+
+
+
+<!--------------------------------------------------------------------->
+<!-- Enum declarations                                               -->
+<!--------------------------------------------------------------------->
+<h1 id="enum-declarations"></h1>
 <moveto-doc->
     <p>
         <b>Enums</b> are used to create <b>new types</b> whose allowed values are a <b>subset</b> of the possible values of their <b>base <a href="#types">type</a></b> and can only be used throught their names.<br>
@@ -370,6 +394,30 @@
 <h1 id="structs"></h1>
 <moveto-doc->
     <p>
+        //TODO
+    </p>
+</moveto-doc->
+<moveto-examples->
+    <example->
+        <label->Example</label->
+        <div>
+            //TODO
+        </div>
+    </example->
+</moveto-examples->
+
+
+
+
+
+
+
+<!--------------------------------------------------------------------->
+<!-- Struct declarations                                             -->
+<!--------------------------------------------------------------------->
+<h1 id="struct-declarations"></h1>
+<moveto-doc->
+    <p>
         <b>Structs</b> are used to <b>create</b> new <b>types</b> composed by 0 or more separate members that can have differing type.<br>
         The members are declared in the same way as <a href="#variables">variables</a> but cannot have initializer values.
     </p>
@@ -401,67 +449,6 @@
             }
         </div>
     </example->
-</moveto-examples->
-
-
-
-
-
-
-
-
-
-<!--------------------------------------------------------------------->
-<!-- Struct methods                                                  -->
-<!--------------------------------------------------------------------->
-<h1 id="struct-methods"></h1>
-<moveto-doc->
-    <p>
-        <b>Structs</b> can contain <b>functions</b>. These functions are called <b>methods</b>.<br>
-        They are part of the struct scope and are called in the same way as standard functions.
-    </p>
-    <p>
-        Struct methods can access the members of the value they are called on, and the special identifier <code>this</code> can be used to reference the value itself.<br>
-        If the value they are called on is a constant, <code>this</code> and all the members are also constants. Attempting to change their value generates a semantic error.<br>
-        Template methods are allowed.
-    </p>
-</moveto-doc->
-<moveto-examples->
-    <split-example-container->
-        <split-example-container-left->
-            <example->
-                <label->Example</label->
-                <div>
-                    <c->// 2D uint vector</c->
-                    <w->struct</w-> <t->uint2</t-> {
-                        <t->uint</t-> x, y;
-
-                        <t->void</t-> <f->print</f->(){
-                            io.<f->print</f->(<s->"x:"</s-> <f->+</f-> <t->str</t->(x));
-                            io.<f->print</f->(<s->"\ny: "</s-> <f->+</f-> <t->str</t->(this.y));
-                            <c->// Notice that this. is not required when accessing members</c->
-                        }
-
-                    }
-
-                    <t->void</t-> <f->main</f->(){
-                        <t->uint2</t-> v = { <k->15</k->, <k->9</k-> };
-                        <k->v</k->.<f->print</f->();
-                    }
-                </div>
-            </example->
-        </split-example-container-left->
-        <split-example-container-right->
-            <example->
-                <label->Output</label->
-                <div>
-                    <console-prefix-></console-prefix->
-                    x: 15
-                    y: 9<cursor-></cursor->
-                </div>
-            </example->
-        </split-example-container-right->
-    </split-example-container->
 </moveto-examples->
 
 

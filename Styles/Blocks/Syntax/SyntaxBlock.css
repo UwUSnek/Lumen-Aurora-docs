@@ -91,6 +91,11 @@ syntax- > label-.s-path {
     border-left-color: var(--bd-path);
 }
 
+syntax- > table.s-type,
+syntax- > label-.s-type {
+    border-left-color: var(--bd-type);
+}
+
 syntax- > table.s-expr,
 syntax- > label-.s-expr {
     border-left-color: var(--bd-expr);

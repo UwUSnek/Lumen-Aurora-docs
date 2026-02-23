@@ -3,7 +3,8 @@
     --bd-sub:        hsl(210, 31%, 54%);
     --bd-decl:       hsl(281, 31%, 54%);
     --bd-expr:       #85b4e0;
-    --bd-path:       #3884dc;
+    --bd-path:       #526ff1;
+    --bd-type:       #4dca68;
 
     --bg-vbtm:       hsl(210, 8%, 13%);
     --bg-syntax-elm: hsl(216, 12%, 8%);
@@ -21,10 +22,11 @@ s-sub-,  /* Sub element                                   */
 s-decl-, /* Declaration                                   */
 s-sgr-,  /* Syntactic sugar                               */
 s-expr-, /* Expression                                    */
-s-path-  /* Symbol path                                   */
+s-path-, /* Symbol path                                   */
+s-type-  /* Type path                                     */
 {
     display: inline-block;
-    border: 1px solid;
+    border: 1.2px solid;
     border-radius: var(--code-decoration-r);
     padding: 0 12px 0 12px;
     margin: 4px 2px 4px 2px;
@@ -78,6 +80,7 @@ s-sub-  { font-style: italic; border-color: var(--bd-sub ); border-style: dashed
 s-decl- { font-style: italic; border-color: var(--bd-decl);                        }
 s-expr- { font-style: italic; border-color: var(--bd-expr);                        }
 s-path- { font-style: italic; border-color: var(--bd-path);                        }
+s-type- { font-style: italic; border-color: var(--bd-type);                        }
 
 s-vbtm- {
     border-width: 0;
@@ -101,6 +104,7 @@ s-sub- :hover { background-color: color-mix(in srgb, var(--bd-sub ),       black
 s-decl-:hover { background-color: color-mix(in srgb, var(--bd-decl),       black 75%); }
 s-expr-:hover { background-color: color-mix(in srgb, var(--bd-expr),       black 75%); }
 s-path-:hover { background-color: color-mix(in srgb, var(--bd-path),       black 75%); }
+s-type-:hover { background-color: color-mix(in srgb, var(--bd-type),       black 75%); }
 s-vbtm-:hover { background-color: color-mix(in srgb, var(--bg-vbtm),       white 10%); }
 
 

@@ -70,6 +70,12 @@ const ui_syntax_hover = {
         "<b style=\"font-size:16px;\">Path block</b><br><br>" +
         "This block represents a path to a declared symbol."
     );},
+    f_type : function(e) { ui_syntax_hover.add_tooltip(
+        e.target,
+        "<b style=\"font-size:16px;\">Type block</b><br><br>" +
+        "This block represents a path to a declared or implicit type.<br><br>" +
+        "Types are a subset of symbol paths that can be used to declare variables, routines and other typed symbols."
+    );},
 
 
 
@@ -149,6 +155,13 @@ const ui_syntax_hover = {
         // Symbol path
         for(const e of tab_doc.querySelectorAll("S-PATH-")) {
             e.addEventListener("mouseenter", ui_syntax_hover.f_path);
+            e.addEventListener("mouseleave", ui_syntax_hover.on_leave);
+            e.addEventListener("mousemove",  ui_syntax_hover.on_move);
+        }
+
+        // Type name
+        for(const e of tab_doc.querySelectorAll("S-TYPE-")) {
+            e.addEventListener("mouseenter", ui_syntax_hover.f_type);
             e.addEventListener("mouseleave", ui_syntax_hover.on_leave);
             e.addEventListener("mousemove",  ui_syntax_hover.on_move);
         }
