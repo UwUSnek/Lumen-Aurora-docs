@@ -229,7 +229,7 @@
     <example->
         <label->Example</label->
         <div>
-            <t->void</t-> <f->halve</f->(<t->float</t->* &<p->n</p->) <w->priority</w->(<k->1</k-> <w->l</w->) {
+            <t->void</t-> <f->halve</f->(<t->float</t->* &<p->n</p->) : <k->1</k-> <w->l</w-> { //FIXME outdated r and l
                 @n <f->/=</f-> <k->2.0</k->;
             }
 
@@ -364,7 +364,7 @@
     <example->
         <label->Example 1 - Promotion operator</label->
         <div>
-            <t->int</t-> <f->+</f-> (<t->int</t-> <p->n</p->) <w->priority</w->(<k->3</k->) {
+            <t->int</t-> <f->+</f-> (<t->int</t-> <p->n</p->) : <k->3</k-> {
                 <w->return</w-> n;
             }
 
@@ -376,7 +376,7 @@
     <example->
         <label->Example 2 - Python-like ternary operator</label->
         <div>
-            <t->int</t-> (<t->int</t-> <p->a</p->) <f->if_</f-> (<t->bool</t-> <p->condition</p->) <f->else_</f-> (<t->int</t-> <p->b</p->) <w->priority</w->(<k->15</k->) {
+            <t->int</t-> (<t->int</t-> <p->a</p->) <f->if_</f-> (<t->bool</t-> <p->condition</p->) <f->else_</f-> (<t->int</t-> <p->b</p->) : <k->15</k-> {
                 <w->if</w->(condition) <w->return</w-> a;
                 <w->else</w-> <w->return</w-> b;
             }
@@ -425,15 +425,15 @@
     <example->
         <label->Example 1 - Priority</label->
         <div>
-            <t->int</t-> (<t->int</t-> <p->a</p->) <f->o</f-> (<t->int</t-> <p->b</p->) <w->priority</w->(<k->4</k-> <w->l</w->) {
+            <t->int</t-> (<t->int</t-> <p->a</p->) <f->o</f-> (<t->int</t-> <p->b</p->) : <k->4</k-> <w->l</w-> { //FIXME outdated r and l
                 <w->return</w-> a <f->+</f-> b <f->*</f-> b;
             }
 
-            <t->int</t-> (<t->int</t-> <p->a</p->) <f->p</f-> (<t->int</t-> <p->b</p->) <w->priority</w->(<k->4</k-> <w->r</w->) {
+            <t->int</t-> (<t->int</t-> <p->a</p->) <f->p</f-> (<t->int</t-> <p->b</p->) : <k->4</k-> <w->r</w-> { //FIXME outdated r and l
                 <w->return</w-> a <f->*</f-> 2 <f->+</f-> b;
             }
 
-            <t->int</t-> (<t->int</t-> <p->a</p->) <f->q</f-> (<t->int</t-> <p->b</p->) <w->priority</w->(<k->5</k-> <w->r</w->) {
+            <t->int</t-> (<t->int</t-> <p->a</p->) <f->q</f-> (<t->int</t-> <p->b</p->) : <k->5</k-> <w->r</w-> { //FIXME outdated r and l
                 <w->return</w-> b <f->-</f-> a;
             }
 
@@ -446,11 +446,11 @@
     <example->
         <label->Example 2 - Associativity</label->
         <div>
-            <t->int</t-> (<t->int</t-> <p->a</p->) <f->o</f-> (<t->int</t-> <p->b</p->) <w->priority</w->(<k->4</k-> <w->l</w->) {
+            <t->int</t-> (<t->int</t-> <p->a</p->) <f->o</f-> (<t->int</t-> <p->b</p->) : <k->4</k-> <w->l</w-> { //FIXME outdated r and l
                 <w->return</w-> a <f->+</f-> b <f->*</f-> b;
             }
 
-            <t->int</t-> (<t->int</t-> <p->a</p->) <f->p</f-> (<t->int</t-> <p->b</p->) <w->priority</w->(<k->4</k-> <w->l</w->) {
+            <t->int</t-> (<t->int</t-> <p->a</p->) <f->p</f-> (<t->int</t-> <p->b</p->) : <k->4</k-> <w->l</w-> { //FIXME outdated r and l
                 <w->return</w-> a <f->*</f-> 2 <f->+</f-> b;
             }
 

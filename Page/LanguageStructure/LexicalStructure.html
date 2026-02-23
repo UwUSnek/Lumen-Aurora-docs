@@ -152,7 +152,6 @@
                     </div>
                     <div class="split-td">
                         <a href="#specialization-constraint">       <code><w->when</w-></code></a>
-                        <a href="#declarations.operator-precedence"><code><w->priority</w-></code></a>
                         <code><w->as</w-></code>
                         <code><w->to</w-></code>
                         <code>=</code>
@@ -431,13 +430,6 @@
                 </span>
             </li>
             <li>
-                <span><a href="#declarations.operator-precedence"><code><w->priority</w-></code></a></span>
-                <span>
-                    Defines the <a href="#declarations.operator-precedence">priority</a> of an <a href="#operators">operator</a><br>
-                    <span class="meta-keyword-constraint">[When used at the end of the signature of an <a href="#operators">operator</a> or <a href="#templates">operator template</a> declaration]</span>.
-                </span>
-            </li>
-            <li>
                 <span><code><w->as</w-></code></span>
                 <span>
                     Defines the name of the counter <a href="#variables">variable</a> of a <a href="#for-loops">for loop</a>, a new name for an <a href="#export-directive">exported</a> or <a href="#import-directive">imported</a> <a href="#name-resolution"> symbol</a>, or the new identifier used for a <a href="#symbol-aliases">symbol alias</a><br>
@@ -461,8 +453,11 @@
             <li>
                 <span><code>:</code></span>
                 <span>
-                    Specifies the base type of an enum<br>
-                    <span class="meta-keyword-constraint">[When used after the identifier of an enum declaration]</span>.
+                    Specifies the base type of an enum, or the priority of an operator<br>
+                    <span class="meta-keyword-constraint">
+                        [When used after the identifier of an enum declaration].<br>
+                        [When used at the end of the signature of an <a href="#operators">operator</a> or <a href="#templates">operator template</a> declaration].
+                    </span>
                 </span>
             </li>
             <li>

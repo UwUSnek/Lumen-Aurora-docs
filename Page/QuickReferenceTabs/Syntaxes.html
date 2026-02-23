@@ -536,31 +536,8 @@
 
 
     <syntax- class="qrt">
-        <label- id="syntax--path" class="s-path">Path</label->
+        <label- id="syntax--path-reflection" class="s-path">Reflection path</label->
         <table class="s-path">
-            <tr>
-                <td data-arrows="lr lb ar"></td>
-                <td><s-sub->reflection path</s-sub-></td>
-                <td data-arrows="lr br ar"></td>
-            </tr>
-            <tr>
-                <td data-arrows="tr ar tb"></td>
-                <td><s-sub->template path</s-sub-></td>
-                <td data-arrows="lt bt"></td>
-            </tr>
-            <tr>
-                <td data-arrows="tr ar tb"></td>
-                <td><s-sub->basic path</s-sub-></td>
-                <td data-arrows="lt bt"></td>
-            </tr>
-            <tr>
-                <td data-arrows="tr ar"></td>
-                <td><s-type->type path</s-type-></td>
-                <td data-arrows="lt"></td>
-            </tr>
-        </table>
-        <label- id="syntax--path-reflection" class="s-sub">Reflection path</label->
-        <table class="s-sub">
             <tr>
                 <td data-arrows="lr ar"></td>
                 <td><s-path->path&nbsp;<span class="hidden">(target)</span></s-path-></td>
@@ -571,8 +548,8 @@
                 <td data-arrows="lr ar"></td>
             </tr>
         </table>
-        <label- id="syntax--path-template" class="s-sub">Template path</label->
-        <table class="s-sub">
+        <label- id="syntax--path-template" class="s-path">Template path</label->
+        <table class="s-path">
             <tr>
                 <td></td>
                 <td></td>
@@ -607,8 +584,8 @@
                 <td data-arrows="lr ar"></td>
             </tr>
         </table>
-        <label- id="syntax--path-basic" class="s-sub">Basic path</label->
-        <table class="s-sub">
+        <label- id="syntax--path-basic" class="s-path">Basic path</label->
+        <table class="s-path">
             <tr>
                 <td data-arrows="lr br ar"></td>
                 <td><s-id->identifier<span class="hidden">&nbsp;*</span></s-id-></td>
@@ -633,41 +610,8 @@
 
 
     <syntax- class="qrt">
-        <label- id="syntax--type-path" class="s-type">Type path</label->
+        <label- id="syntax--path-type-typeof" class="s-type">Typeof type path</label->
         <table class="s-type">
-            <tr>
-                <td data-arrows="br ar"></td>
-                <td><s-sub->typeof type name</s-sub-></td>
-                <td data-arrows="lb"></td>
-                <td data-arrows="br"></td>
-                <td data-arrows="lr"></td>
-                <td data-arrows="lr lb"></td>
-                <td data-arrows="lr"></td>
-                <td data-arrows="lr br ar"></td>
-            </tr>
-            <tr>
-                <td data-arrows="lr lt lb ar"></td>
-                <td><s-sub->function type name</s-sub-></td>
-                <td data-arrows="lr tr br"></td>
-                <td data-arrows="lr ar lt"></td>
-                <td><s-vbtm->const</s-vbtm-></td>
-                <td data-arrows="lr tr ar"></td>
-                <td><s-vbtm->*</s-vbtm-></td>
-                <td data-arrows="lt"></td>
-            </tr>
-            <tr>
-                <td data-arrows="tr ar"></td>
-                <td><s-sub->basic type name</s-sub-></td>
-                <td data-arrows="lt"></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </table>
-        <label- id="syntax--path-type-typeof" class="s-sub">Typeof type name</label->
-        <table class="s-sub">
             <tr>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->typeof</s-vbtm-></td>
@@ -678,10 +622,12 @@
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->)</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
+                <td><s-sub->type modifiers</s-sub-></td>
+                <td data-arrows="lr ar"></td>
             </tr>
         </table>
-        <label- id="syntax--path-type-function" class="s-sub">Function type name</label->
-        <table class="s-sub">
+        <label- id="syntax--path-type-function" class="s-type">Function type path</label->
+        <table class="s-type">
             <tr>
                 <td data-arrows="lr ar"></td>
                 <td><s-type->return type</s-type-></td>
@@ -692,11 +638,8 @@
                 <td data-arrows="lr ar lb"></td>
                 <td><s-vbtm->)</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td><s-sub->type modifiers</s-sub-></td>
+                <td data-arrows="lr ar"></td>
             </tr>
             <tr>
                 <td></td>
@@ -711,16 +654,33 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td></td>
-                <td></td>
             </tr>
         </table>
-        <label- id="syntax--path-type-basic" class="s-sub">Basic type name</label->
-        <table class="s-sub">
+        <label- id="syntax--path-type-basic" class="s-type">Basic type path</label->
+        <table class="s-type">
             <tr>
                 <td data-arrows="lr ar"></td>
                 <td><s-path->path</s-path-></td>
                 <td data-arrows="lr ar"></td>
+                <td><s-sub->type modifiers</s-sub-></td>
+                <td data-arrows="lr ar"></td>
+            </tr>
+        </table>
+        <label- id="syntax--path-type-modifiers" class="s-sub">Type modifiers</label->
+        <table class="s-sub">
+            <tr>
+                <td data-arrows="br"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lr lb"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lr br ar"></td>
+            </tr>
+            <tr>
+                <td data-arrows="lr ar lt"></td>
+                <td><s-vbtm->const</s-vbtm-></td>
+                <td data-arrows="lr tr ar"></td>
+                <td><s-vbtm->*</s-vbtm-></td>
+                <td data-arrows="lt"></td>
             </tr>
         </table>
     </syntax->
@@ -1252,10 +1212,6 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
             </tr>
             <tr>
                 <td data-arrows="lr ar"></td>
@@ -1267,13 +1223,9 @@
                 <td data-arrows="rl-high rl-low"></td>
                 <td data-arrows="rl-high rl-low"></td>
                 <td data-arrows="bl-high tr br ar lt-low"></td>
-                <td><s-vbtm->priority</s-vbtm-></td>
-                <td data-arrows="lr ar"></td>
-                <td><s-vbtm->(</s-vbtm-></td>
+                <td><s-vbtm->:</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-expr-><t->[ulong]</t-> &nbsp;priority</s-expr-></td>
-                <td data-arrows="lr ar"></td>
-                <td><s-vbtm->)</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
             </tr>
             <tr>
@@ -1290,10 +1242,6 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
             </tr>
             <tr>
                 <td></td>
@@ -1303,10 +1251,6 @@
                 <td data-arrows="tr ar"></td>
                 <td><s-decl->reference parameter<span class="hidden">&nbsp;**</span></s-decl-></td>
                 <td data-arrows="lt"></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>

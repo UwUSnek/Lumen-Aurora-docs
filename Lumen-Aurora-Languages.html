@@ -916,7 +916,6 @@
                     </div>
                     <div class="split-td">
                         <a href="#specialization-constraint">       <code><w->when</w-></code></a>
-                        <a href="#declarations.operator-precedence"><code><w->priority</w-></code></a>
                         <code><w->as</w-></code>
                         <code><w->to</w-></code>
                         <code>=</code>
@@ -1161,13 +1160,6 @@
                 </span>
             </li>
             <li>
-                <span><a href="#declarations.operator-precedence"><code><w->priority</w-></code></a></span>
-                <span>
-                    Defines the <a href="#declarations.operator-precedence">priority</a> of an <a href="#operators">operator</a><br>
-                    <span class="meta-keyword-constraint">[When used at the end of the signature of an <a href="#operators">operator</a> or <a href="#templates">operator template</a> declaration]</span>.
-                </span>
-            </li>
-            <li>
                 <span><code><w->as</w-></code></span>
                 <span>
                     Defines the name of the counter <a href="#variables">variable</a> of a <a href="#for-loops">for loop</a>, a new name for an <a href="#export-directive">exported</a> or <a href="#import-directive">imported</a> <a href="#name-resolution"> symbol</a>, or the new identifier used for a <a href="#symbol-aliases">symbol alias</a><br>
@@ -1191,8 +1183,11 @@
             <li>
                 <span><code>:</code></span>
                 <span>
-                    Specifies the base type of an enum<br>
-                    <span class="meta-keyword-constraint">[When used after the identifier of an enum declaration]</span>.
+                    Specifies the base type of an enum, or the priority of an operator<br>
+                    <span class="meta-keyword-constraint">
+                        [When used after the identifier of an enum declaration].<br>
+                        [When used at the end of the signature of an <a href="#operators">operator</a> or <a href="#templates">operator template</a> declaration].
+                    </span>
                 </span>
             </li>
             <li>
@@ -1373,7 +1368,9 @@
             </li>
             <li>
                 <span><a href="#operators">Operator</a> signature</span>
-                <span>Defines the names, <a href="#return-statement">return type</a>, <a href="#routine-parameters">parameters</a>, <a href="#declarations.operator-precedence">priority</a> and <a href="#declarations.operator-precedence">associativity</a> of an <a href="#operators">operator</a></span>
+                <span>Defines the names, <a href="#return-statement">return type</a>, <a href="#routine-parameters">parameters</a>,
+                    <a href="#declarations.operator-precedence">priority</a> and <a href="#declarations.operator-precedence">associativity</a> of an <a href="#operators">operator</a></span>
+                //TODO idk if this actually defines the associativity. check
             </li>
             <li>
                 <span><a href="#routines">Routine</a> body</span>
@@ -1646,10 +1643,13 @@
         Reflection paths are a subset of Symbol paths that can access compile time informations about the referenced symbol. These are detailedly explained in <a href="#reflection">Reflection</a>.
     </p>
     <syntax->
-        <label- id="copy.syntax--path-standard">Standard path</label->
-        <label- id="copy.syntax--path-type">Type path</label->
+        <label- id="copy.syntax--path-basic">Basic path</label->
+        <label- id="copy.syntax--path-template">Template path</label->
         <label- id="copy.syntax--path-reflection">Reflection path</label->
-        <label- id="copy.syntax--path-name">Symbol name</label->
+        <label- id="copy.syntax--path-type-basic">Basic type path</label->
+        <label- id="copy.syntax--path-type-function">Function type path</label->
+        <label- id="copy.syntax--path-type-typeof">Typeof type path</label->
+        <label- id="copy.syntax--path-type-modifiers">Type modifiers</label->
     </syntax->
 </moveto-doc->
 
@@ -4097,7 +4097,7 @@
     <example->
         <label->Example</label->
         <div>
-            <t->void</t-> <f->halve</f->(<t->float</t->* &<p->n</p->) <w->priority</w->(<k->1</k-> <w->l</w->) {
+            <t->void</t-> <f->halve</f->(<t->float</t->* &<p->n</p->) : <k->1</k-> <w->l</w-> { //FIXME outdated r and l
                 @n <f->/=</f-> <k->2.0</k->;
             }
 
@@ -4189,7 +4189,7 @@
     <example->
         <label->Example 1 - Promotion operator</label->
         <div>
-            <t->int</t-> <f->+</f-> (<t->int</t-> <p->n</p->) <w->priority</w->(<k->3</k->) {
+            <t->int</t-> <f->+</f-> (<t->int</t-> <p->n</p->) : <k->3</k-> {
                 <w->return</w-> n;
             }
 
@@ -4201,7 +4201,7 @@
     <example->
         <label->Example 2 - Python-like ternary operator</label->
         <div>
-            <t->int</t-> (<t->int</t-> <p->a</p->) <f->if_</f-> (<t->bool</t-> <p->condition</p->) <f->else_</f-> (<t->int</t-> <p->b</p->) <w->priority</w->(<k->15</k->) {
+            <t->int</t-> (<t->int</t-> <p->a</p->) <f->if_</f-> (<t->bool</t-> <p->condition</p->) <f->else_</f-> (<t->int</t-> <p->b</p->) : <k->15</k-> {
                 <w->if</w->(condition) <w->return</w-> a;
                 <w->else</w-> <w->return</w-> b;
             }
@@ -4240,15 +4240,15 @@
     <example->
         <label->Example 1 - Priority</label->
         <div>
-            <t->int</t-> (<t->int</t-> <p->a</p->) <f->o</f-> (<t->int</t-> <p->b</p->) <w->priority</w->(<k->4</k-> <w->l</w->) {
+            <t->int</t-> (<t->int</t-> <p->a</p->) <f->o</f-> (<t->int</t-> <p->b</p->) : <k->4</k-> <w->l</w-> { //FIXME outdated r and l
                 <w->return</w-> a <f->+</f-> b <f->*</f-> b;
             }
 
-            <t->int</t-> (<t->int</t-> <p->a</p->) <f->p</f-> (<t->int</t-> <p->b</p->) <w->priority</w->(<k->4</k-> <w->r</w->) {
+            <t->int</t-> (<t->int</t-> <p->a</p->) <f->p</f-> (<t->int</t-> <p->b</p->) : <k->4</k-> <w->r</w-> { //FIXME outdated r and l
                 <w->return</w-> a <f->*</f-> 2 <f->+</f-> b;
             }
 
-            <t->int</t-> (<t->int</t-> <p->a</p->) <f->q</f-> (<t->int</t-> <p->b</p->) <w->priority</w->(<k->5</k-> <w->r</w->) {
+            <t->int</t-> (<t->int</t-> <p->a</p->) <f->q</f-> (<t->int</t-> <p->b</p->) : <k->5</k-> <w->r</w-> { //FIXME outdated r and l
                 <w->return</w-> b <f->-</f-> a;
             }
 
@@ -4261,11 +4261,11 @@
     <example->
         <label->Example 2 - Associativity</label->
         <div>
-            <t->int</t-> (<t->int</t-> <p->a</p->) <f->o</f-> (<t->int</t-> <p->b</p->) <w->priority</w->(<k->4</k-> <w->l</w->) {
+            <t->int</t-> (<t->int</t-> <p->a</p->) <f->o</f-> (<t->int</t-> <p->b</p->) : <k->4</k-> <w->l</w-> { //FIXME outdated r and l
                 <w->return</w-> a <f->+</f-> b <f->*</f-> b;
             }
 
-            <t->int</t-> (<t->int</t-> <p->a</p->) <f->p</f-> (<t->int</t-> <p->b</p->) <w->priority</w->(<k->4</k-> <w->l</w->) {
+            <t->int</t-> (<t->int</t-> <p->a</p->) <f->p</f-> (<t->int</t-> <p->b</p->) : <k->4</k-> <w->l</w-> { //FIXME outdated r and l
                 <w->return</w-> a <f->*</f-> 2 <f->+</f-> b;
             }
 
@@ -6244,31 +6244,8 @@
 
 
     <syntax- class="qrt">
-        <label- id="syntax--path" class="s-path">Path</label->
+        <label- id="syntax--path-reflection" class="s-path">Reflection path</label->
         <table class="s-path">
-            <tr>
-                <td data-arrows="lr lb ar"></td>
-                <td><s-sub->reflection path</s-sub-></td>
-                <td data-arrows="lr br ar"></td>
-            </tr>
-            <tr>
-                <td data-arrows="tr ar tb"></td>
-                <td><s-sub->template path</s-sub-></td>
-                <td data-arrows="lt bt"></td>
-            </tr>
-            <tr>
-                <td data-arrows="tr ar tb"></td>
-                <td><s-sub->basic path</s-sub-></td>
-                <td data-arrows="lt bt"></td>
-            </tr>
-            <tr>
-                <td data-arrows="tr ar"></td>
-                <td><s-type->type path</s-type-></td>
-                <td data-arrows="lt"></td>
-            </tr>
-        </table>
-        <label- id="syntax--path-reflection" class="s-sub">Reflection path</label->
-        <table class="s-sub">
             <tr>
                 <td data-arrows="lr ar"></td>
                 <td><s-path->path&nbsp;<span class="hidden">(target)</span></s-path-></td>
@@ -6279,8 +6256,8 @@
                 <td data-arrows="lr ar"></td>
             </tr>
         </table>
-        <label- id="syntax--path-template" class="s-sub">Template path</label->
-        <table class="s-sub">
+        <label- id="syntax--path-template" class="s-path">Template path</label->
+        <table class="s-path">
             <tr>
                 <td></td>
                 <td></td>
@@ -6315,8 +6292,8 @@
                 <td data-arrows="lr ar"></td>
             </tr>
         </table>
-        <label- id="syntax--path-basic" class="s-sub">Basic path</label->
-        <table class="s-sub">
+        <label- id="syntax--path-basic" class="s-path">Basic path</label->
+        <table class="s-path">
             <tr>
                 <td data-arrows="lr br ar"></td>
                 <td><s-id->identifier<span class="hidden">&nbsp;*</span></s-id-></td>
@@ -6341,41 +6318,8 @@
 
 
     <syntax- class="qrt">
-        <label- id="syntax--type-path" class="s-type">Type path</label->
+        <label- id="syntax--path-type-typeof" class="s-type">Typeof type path</label->
         <table class="s-type">
-            <tr>
-                <td data-arrows="br ar"></td>
-                <td><s-sub->typeof type name</s-sub-></td>
-                <td data-arrows="lb"></td>
-                <td data-arrows="br"></td>
-                <td data-arrows="lr"></td>
-                <td data-arrows="lr lb"></td>
-                <td data-arrows="lr"></td>
-                <td data-arrows="lr br ar"></td>
-            </tr>
-            <tr>
-                <td data-arrows="lr lt lb ar"></td>
-                <td><s-sub->function type name</s-sub-></td>
-                <td data-arrows="lr tr br"></td>
-                <td data-arrows="lr ar lt"></td>
-                <td><s-vbtm->const</s-vbtm-></td>
-                <td data-arrows="lr tr ar"></td>
-                <td><s-vbtm->*</s-vbtm-></td>
-                <td data-arrows="lt"></td>
-            </tr>
-            <tr>
-                <td data-arrows="tr ar"></td>
-                <td><s-sub->basic type name</s-sub-></td>
-                <td data-arrows="lt"></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </table>
-        <label- id="syntax--path-type-typeof" class="s-sub">Typeof type name</label->
-        <table class="s-sub">
             <tr>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->typeof</s-vbtm-></td>
@@ -6386,10 +6330,12 @@
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->)</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
+                <td><s-sub->type modifiers</s-sub-></td>
+                <td data-arrows="lr ar"></td>
             </tr>
         </table>
-        <label- id="syntax--path-type-function" class="s-sub">Function type name</label->
-        <table class="s-sub">
+        <label- id="syntax--path-type-function" class="s-type">Function type path</label->
+        <table class="s-type">
             <tr>
                 <td data-arrows="lr ar"></td>
                 <td><s-type->return type</s-type-></td>
@@ -6400,11 +6346,8 @@
                 <td data-arrows="lr ar lb"></td>
                 <td><s-vbtm->)</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td><s-sub->type modifiers</s-sub-></td>
+                <td data-arrows="lr ar"></td>
             </tr>
             <tr>
                 <td></td>
@@ -6419,16 +6362,33 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td></td>
-                <td></td>
             </tr>
         </table>
-        <label- id="syntax--path-type-basic" class="s-sub">Basic type name</label->
-        <table class="s-sub">
+        <label- id="syntax--path-type-basic" class="s-type">Basic type path</label->
+        <table class="s-type">
             <tr>
                 <td data-arrows="lr ar"></td>
                 <td><s-path->path</s-path-></td>
                 <td data-arrows="lr ar"></td>
+                <td><s-sub->type modifiers</s-sub-></td>
+                <td data-arrows="lr ar"></td>
+            </tr>
+        </table>
+        <label- id="syntax--path-type-modifiers" class="s-sub">Type modifiers</label->
+        <table class="s-sub">
+            <tr>
+                <td data-arrows="br"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lr lb"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lr br ar"></td>
+            </tr>
+            <tr>
+                <td data-arrows="lr ar lt"></td>
+                <td><s-vbtm->const</s-vbtm-></td>
+                <td data-arrows="lr tr ar"></td>
+                <td><s-vbtm->*</s-vbtm-></td>
+                <td data-arrows="lt"></td>
             </tr>
         </table>
     </syntax->
@@ -6882,10 +6842,6 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
             </tr>
             <tr>
                 <td data-arrows="lr ar"></td>
@@ -6897,13 +6853,9 @@
                 <td data-arrows="rl-high rl-low"></td>
                 <td data-arrows="rl-high rl-low"></td>
                 <td data-arrows="bl-high tr br ar lt-low"></td>
-                <td><s-vbtm->priority</s-vbtm-></td>
-                <td data-arrows="lr ar"></td>
-                <td><s-vbtm->(</s-vbtm-></td>
+                <td><s-vbtm->:</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-expr-><t->[ulong]</t-> &nbsp;priority</s-expr-></td>
-                <td data-arrows="lr ar"></td>
-                <td><s-vbtm->)</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
             </tr>
             <tr>
@@ -6920,10 +6872,6 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
             </tr>
             <tr>
                 <td></td>
@@ -6933,10 +6881,6 @@
                 <td data-arrows="tr ar"></td>
                 <td><s-decl->reference parameter<span class="hidden">&nbsp;**</span></s-decl-></td>
                 <td data-arrows="lt"></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
