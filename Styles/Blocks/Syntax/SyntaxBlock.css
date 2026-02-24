@@ -9,19 +9,18 @@ syntax- table tr > td {
     max-height: var(--syntax-line-h);
     /**/height: var(--syntax-line-h);
 }
+syntax- table {
+    display: block;
+    min-width: 100%;
+    max-width: 100%;
+    overflow: scroll;
+}
 syntax- table tbody {
     display: flex;
     flex-direction: column;
     padding:  var(--syntax-table-padding) 0 var(--syntax-table-padding) 0;
     margin: 0 var(--syntax-table-padding) 0 var(--syntax-table-padding);
-    overflow: auto;
-
-    min-width:  calc(100% - 2 * var(--syntax-table-padding));
-    max-width:  calc(100% - 2 * var(--syntax-table-padding));
-    /**/width:  calc(100% - 2 * var(--syntax-table-padding));
-    min-height: calc(100% - 2 * var(--syntax-table-padding));
-    max-height: calc(100% - 2 * var(--syntax-table-padding));
-    /**/height: calc(100% - 2 * var(--syntax-table-padding));
+    overflow: visible;
 }
 syntax- table tr > td {
     display: inline-block;

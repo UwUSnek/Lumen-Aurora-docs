@@ -1632,7 +1632,7 @@
 <h1 id="language-structure.paths"></h1>
 <moveto-doc->
     <p>
-        Paths are used to reference things declared in in the code, either explicitly or implicitly, in order to retrieve or pass informations about them.<br>
+        Paths are used to reference things declared in the code, either explicitly or implicitly, in order to retrieve or pass informations about them.<br>
         Any accessible module, namespace, symbol alias, primitive type, enum, struct, special type, routine, variable and temporary variable is considered a symbol.<br>
         Paths are a foundamental part of most <a href="#name-resolution">semantic elements</a>.
     </p>
@@ -6838,34 +6838,34 @@
         <label- class="s-sub" id="syntax--declaration-operator-signature"><a href="#operators">Operator signature</a></label->
         <table class="s-sub">
             <tr>
+                <td data-arrows="| lr ar"></td>
+                <td><s-type->return type</s-type-></td>
+                <td data-arrows="lb rb"></td>
+                <td data-arrows="rl"></td>
+                <td data-arrows="rl"></td>
+                <td data-arrows="rl"></td>
+                <td data-arrows="rl"></td>
+                <td data-arrows="rl"></td>
+                <td data-arrows="br bl ar"></td>
+                <td><s-vbtm->:</s-vbtm-></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-expr-><t->[ulong]</t-> &nbsp;priority</s-expr-></td>
+                <td data-arrows="lr ar|"></td>
+            </tr>
+            <tr>
                 <td></td>
                 <td></td>
-                <td data-arrows="br"></td>
+                <td data-arrows="tr tb"></td>
                 <td data-arrows="lr"></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-id->name<span class="hidden">&nbsp;**</span></s-id-></td>
                 <td data-arrows="lr"></td>
                 <td data-arrows="lr"></td>
-                <td data-arrows="lb"></td>
+                <td data-arrows="lt bt"></td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
-            </tr>
-            <tr>
-                <td data-arrows="lr ar"></td>
-                <td><s-type->return type</s-type-></td>
-                <td data-arrows="lt lb rt-high rb-low"></td>
-                <td data-arrows="rl-high rl-low"></td>
-                <td data-arrows="rl-high rl-low"></td>
-                <td data-arrows="rl-high rl-low"></td>
-                <td data-arrows="rl-high rl-low"></td>
-                <td data-arrows="rl-high rl-low"></td>
-                <td data-arrows="bl-high tr br ar lt-low"></td>
-                <td><s-vbtm->:</s-vbtm-></td>
-                <td data-arrows="lr ar"></td>
-                <td><s-expr-><t->[ulong]</t-> &nbsp;priority</s-expr-></td>
-                <td data-arrows="lr ar"></td>
             </tr>
             <tr>
                 <td></td>
@@ -6936,7 +6936,7 @@
             <a href="#syntax--variables">variable</a> or a
             <a href="#syntax--declaration-symbol-alias">symbol alias</a>.<br>
 
-            ** At least one name and one parameter declaration.<br>
+            ** Must alternate between identifiers and parameter declarations.<br>
 
             *** No more than once.
         </syntax-note->

@@ -1207,6 +1207,126 @@
         <label- class="s-sub" id="syntax--declaration-operator-signature"><a href="#operators">Operator signature</a></label->
         <table class="s-sub">
             <tr>
+                <td data-arrows="| lr ar"></td>
+                <td><s-type->return type</s-type-></td>
+                <td data-arrows="lb rb"></td>
+                <td data-arrows="rl"></td>
+                <td data-arrows="rl"></td>
+                <td data-arrows="rl"></td>
+                <td data-arrows="rl"></td>
+                <td data-arrows="rl"></td>
+                <td data-arrows="br bl ar"></td>
+                <td><s-vbtm->:</s-vbtm-></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-expr-><t->[ulong]</t-> &nbsp;priority</s-expr-></td>
+                <td data-arrows="lr ar|"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td data-arrows="tr tb"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-id->name<span class="hidden">&nbsp;**</span></s-id-></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lt bt"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td data-arrows="tr ar"></td>
+                <td><s-vbtm->(</s-vbtm-></td>
+                <td data-arrows="lr ar lb"></td>
+                <td><s-decl->basic parameter<span class="hidden">&nbsp;**</span></s-decl-></td>
+                <td data-arrows="lr ar br"></td>
+                <td><s-vbtm->)</s-vbtm-></td>
+                <td data-arrows="tl"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td data-arrows="tr ar"></td>
+                <td><s-decl->reference parameter<span class="hidden">&nbsp;**</span></s-decl-></td>
+                <td data-arrows="lt"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <!-- <tr>
+                <td></td>
+                <td></td>
+                <td data-arrows="br"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-id->name<span class="hidden">&nbsp;**</span></s-id-></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lb"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td data-arrows="l lr ar"></td>
+                <td><s-type->return type</s-type-></td>
+                <td data-arrows="lt lb rt rb"></td>
+                <td data-arrows="rl"></td>
+                <td data-arrows="rl"></td>
+                <td data-arrows="rl"></td>
+                <td data-arrows="rl"></td>
+                <td data-arrows="rl"></td>
+                <td data-arrows="bl tr br ar lt"></td>
+                <td><s-vbtm->:</s-vbtm-></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-expr-><t->[ulong]</t-> &nbsp;priority</s-expr-></td>
+                <td data-arrows="lr ar r"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td data-arrows="tr ar"></td>
+                <td><s-vbtm->(</s-vbtm-></td>
+                <td data-arrows="lr ar lb"></td>
+                <td><s-decl->basic parameter<span class="hidden">&nbsp;**</span></s-decl-></td>
+                <td data-arrows="lr ar br"></td>
+                <td><s-vbtm->)</s-vbtm-></td>
+                <td data-arrows="tl"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td data-arrows="tr ar"></td>
+                <td><s-decl->reference parameter<span class="hidden">&nbsp;**</span></s-decl-></td>
+                <td data-arrows="lt"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr> -->
+            <!-- <tr>
                 <td></td>
                 <td></td>
                 <td data-arrows="br"></td>
@@ -1265,7 +1385,7 @@
                 <td></td>
                 <td></td>
                 <td></td>
-            </tr>
+            </tr> -->
         </table>
         <label- class="s-sub" id="syntax--declaration-routine-body"><a href="#routines">Routine body</a></label->
         <table class="s-sub">
@@ -1305,7 +1425,7 @@
             <a href="#syntax--variables">variable</a> or a
             <a href="#syntax--declaration-symbol-alias">symbol alias</a>.<br>
 
-            ** At least one name and one parameter declaration.<br>
+            ** Must alternate between identifiers and parameter declarations.<br>
 
             *** No more than once.
         </syntax-note->

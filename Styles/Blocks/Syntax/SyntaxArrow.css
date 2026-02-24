@@ -1,4 +1,16 @@
 
-syntax- svg {
+
+syntax- path.arrow-line,
+syntax- path.arrow-head {
+    stroke: hsl(212, 14%, 24%);
+    stroke-width: 2.5px;
+    fill: none;
     overflow: visible;
+    clip-path: none;
+}
+syntax- path.arrow-line {
+    stroke-linecap: butt;
+}
+syntax- path.arrow-head {
+    stroke-linecap: round;
 }

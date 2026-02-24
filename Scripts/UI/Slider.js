@@ -49,7 +49,6 @@ const ui_slider = {
 
     // Updates the width of the left and right main containers
     update_main_width : function(){
-        console.log("value: " + Number.parseInt(slider.value));
         left.style.width  =             `${ Math.max(0, Number.parseInt(slider.value) - main_padding_l_px) }px`;
         right.style.width = `calc(100% - ${ Math.max(0, Number.parseInt(slider.value) + main_padding_l_px + main_padding_r_px * 2) }px)`;
         //! ^ HTML Slider's minimum value doesn't actually work. The Math.max calls are used to prevent elements' widths from going negative

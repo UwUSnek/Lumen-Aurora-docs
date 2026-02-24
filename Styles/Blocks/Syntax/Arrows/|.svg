@@ -6,12 +6,13 @@
         .arrow{
             stroke: hsl(212, 14%, 24%);
             stroke-width: 2.5px;
-            stroke-linecap: butt;
+            : round;
             fill: none;
         }
     </style>
-    <path vector-effect="non-scaling-stroke" shape-rendering="crisp edges" class="arrow" d="
-        M 50,5
-        L 50,0
+    <path vector-effect="non-scaling-stroke" shape-rendering="crisp edges" class="arrow-head" d="
+        M 0,25
+        L 0,75
+
     "/>
 </svg>

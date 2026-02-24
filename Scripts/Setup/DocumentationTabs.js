@@ -101,8 +101,6 @@ const setup_tabs = {
             let local_root = setup_tabs.get_local_root(elm);
             let parent_header = setup_tabs.get_parent_header(local_root);
             if(parent_header == null) continue;
-            console.log(parent_header);
-            console.log("inner html: "+ parent_header.innerHTML);
             let header_number = (parent_header.innerHTML).match(/(\d+\.)+/g)[0];
 
             // Create content list in the map if it doesnt exist yet (and add the header element as first element)
