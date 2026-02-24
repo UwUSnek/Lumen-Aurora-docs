@@ -6,9 +6,9 @@
     <path vector-effect="non-scaling-stroke" shape-rendering="crisp edges" class="arrow-head" d="
         M 100,25
         L 100,75
-        M 90,50
+        M 95,50
         l -10,-10
-        M 90,50
+        M 95,50
         l -10,10
 
     "/>
