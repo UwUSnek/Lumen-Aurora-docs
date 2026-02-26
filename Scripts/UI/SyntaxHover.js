@@ -63,7 +63,8 @@ const ui_syntax_hover = {
     f_expr : function(e) { ui_syntax_hover.add_tooltip(
         e.target,
         "<b style=\"font-size:16px;\">Expression block</b><br><br>" +
-        "This block represents an expression. Square brackets [] indicate that the expression must be of the specified type."
+        "This block represents an expression.<br><br>" +
+        "If present, square brackets [] indicate that the expression must be of the specified type."
     );},
     f_path : function(e) { ui_syntax_hover.add_tooltip(
         e.target,
@@ -75,6 +76,11 @@ const ui_syntax_hover = {
         "<b style=\"font-size:16px;\">Type block</b><br><br>" +
         "This block represents a path to a declared or implicit type.<br><br>" +
         "Types are a subset of symbol paths that can be used to declare variables, routines and other typed symbols."
+    );},
+    f_sttm : function(e) { ui_syntax_hover.add_tooltip(
+        e.target,
+        "<b style=\"font-size:16px;\">Statement</b><br><br>" +
+        "This block represents a routine statement."
     );},
 
 
@@ -162,6 +168,13 @@ const ui_syntax_hover = {
         // Type name
         for(const e of tab_doc.querySelectorAll("S-TYPE-")) {
             e.addEventListener("mouseenter", ui_syntax_hover.f_type);
+            e.addEventListener("mouseleave", ui_syntax_hover.on_leave);
+            e.addEventListener("mousemove",  ui_syntax_hover.on_move);
+        }
+
+        // Statements
+        for(const e of tab_doc.querySelectorAll("S-STTM-")) {
+            e.addEventListener("mouseenter", ui_syntax_hover.f_sttm);
             e.addEventListener("mouseleave", ui_syntax_hover.on_leave);
             e.addEventListener("mousemove",  ui_syntax_hover.on_move);
         }
