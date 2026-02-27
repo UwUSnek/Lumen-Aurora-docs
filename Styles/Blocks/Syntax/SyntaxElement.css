@@ -78,22 +78,14 @@ syntax- table tr > td > * > div {
 
 
 s-id-   { font-style: italic; border-color: var(--bd-id  );                        }
-s-sub-  { font-style: italic; border-color: var(--bd-sub ); border-style: dashed;  }
+s-sub-  { font-style: normal; border-color: var(--bd-sub ); border-style: dashed;  }
 s-decl- { font-style: italic; border-color: var(--bd-decl);                        }
 s-expr- { font-style: italic; border-color: var(--bd-expr);                        }
 s-path- { font-style: italic; border-color: var(--bd-path);                        }
 s-type- { font-style: italic; border-color: var(--bd-type);                        }
 s-sttm- { font-style: italic; border-color: var(--bd-sttm);                        }
-
-s-vbtm- {
-    border-width: 0;
-    background-color: var(--bg-vbtm);
-}
-s-sgr- {
-    border-width: 0;
-    color:            var(--fg-sgr);
-    background-color: var(--bg-sgr);
-}
+s-vbtm- { font-style: normal; border-width: 0; background-color: var(--bg-vbtm); }
+s-sgr-  { font-style: normal; border-width: 0; background-color: var(--bg-sgr);  color: var(--fg-sgr); }
 
 
 
