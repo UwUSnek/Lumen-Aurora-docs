@@ -7967,6 +7967,7 @@
 
 
 
+
     <syntax- class="qrt">
         <label- class="s-expr" id="syntax--expression-try"><a href="#try-expression">Try expression</a></label->
         <table class="s-expr">
@@ -7976,7 +7977,7 @@
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->{</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
-                <td><s-vbtm->idk</s-vbtm-></td>
+                <td><s-decl->module contents</s-decl-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->}</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
@@ -8009,13 +8010,6 @@
 
 
 
-
-
-
-
-
-
-
     <syntax- class="qrt">
         <label- class="s-expr" id="syntax--expression-temporary-variable"><a href="#temporary-variables">Temporary variables</a></label->
         <table class="s-expr">
@@ -8031,13 +8025,6 @@
             * Must be a literal
         </syntax-note->
     </syntax->
-
-
-
-
-
-
-
 
 
 
@@ -8064,13 +8051,6 @@
 
 
 
-
-
-
-
-
-
-
     <syntax- class="qrt">
         <label- class="s-expr" id="syntax--expression-function-call"><a href="#declarations.functions">Function call</a></label->
         <table class="s-expr">
@@ -8079,22 +8059,22 @@
                 <td></td>
                 <td></td>
                 <td></td>
+                <td data-arrows="br"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lb"></td>
                 <td></td>
                 <td></td>
-                <td data-arrows="br ar"></td>
-                <td><s-vbtm->)</s-vbtm-></td>
-                <td data-arrows="lr ar"></td>
             </tr>
             <tr>
                 <td data-arrows="lr ar"></td>
                 <td><s-path->path to function</s-path-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->(</s-vbtm-></td>
-                <td data-arrows="lr br ar"></td>
+                <td data-arrows="lr br ar lt"></td>
                 <td><s-expr->argument</s-expr-></td>
-                <td data-arrows="lr ar lt"></td>
-                <td><s-vbtm->,</s-vbtm-></td>
-                <td data-arrows="lb"></td>
+                <td data-arrows="lr ar lb tr"></td>
+                <td><s-vbtm->)</s-vbtm-></td>
+                <td data-arrows="lr ar"></td>
             </tr>
             <tr>
                 <td></td>
@@ -8102,22 +8082,13 @@
                 <td></td>
                 <td></td>
                 <td data-arrows="rt"></td>
-                <td data-arrows="lr"></td>
-                <td data-arrows="lr"></td>
-                <td data-arrows="rl"></td>
-                <td data-arrows="tl"></td>
+                <td><s-vbtm->,</s-vbtm-></td>
+                <td data-arrows="tl al"></td>
+                <td></td>
+                <td></td>
             </tr>
         </table>
     </syntax->
-
-
-
-
-
-
-
-
-
 
 
 
@@ -8130,40 +8101,27 @@
         <label- class="s-expr" id="syntax--expression-operator-call"><a href="#declarations.operators">Operator call</a></label->
         <table class="s-expr">
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td data-arrows="br"></td>
-                <td data-arrows="lr"></td>
-                <td data-arrows="br lr ar"></td>
+                <td data-arrows="br ar"></td>
+                <td><s-id->operator identifier<span class="hidden">&nbsp;* **</span></s-id-></td>
+                <td data-arrows="lb"></td>
             </tr>
             <tr>
-                <td data-arrows="lr lb"></td>
-                <td data-arrows="lr br ar"></td>
-                <td><s-path->path to operator<span class="hidden">&nbsp;**</span></s-path-></td>
-                <td data-arrows="lr br ar lt"></td>
+                <td data-arrows="br bt ar"></td>
                 <td><s-expr->argument<span class="hidden">&nbsp;*</span></s-expr-></td>
-                <td data-arrows="lt lb"></td>
+                <td data-arrows="lb tb"></td>
             </tr>
             <tr>
-                <td data-arrows="tr-high"></td>
-                <td data-arrows="rt-low lr-high"></td>
-                <td data-arrows="rl-low lr-high"></td>
-                <td data-arrows="rl-low lt-high"></td>
-                <td data-arrows="rl-low"></td>
-                <td data-arrows="tl-low"></td>
+                <td data-arrows="lt rt"></td>
+                <td data-arrows="rl"></td>
+                <td data-arrows="tl tr ar"></td>
             </tr>
         </table>
         <syntax-note->
-            * At least one argument and one path.<br>
-            ** Noninitial paths are not required to specify the names of parent symbols or template instantiation types. Their identifier is enough.
+            * Must follow the identifier/parameter syntax as defined by the operator.<br>
+            ** Operator calls cannot specify the full path. You must import or alias the operator as needed.
         </syntax-note->
     </syntax->
 </moveto-doc->
-
-
-
-
 
 
 <h1 id="undefined-behaviours"></h1>
