@@ -1,0 +1,153 @@
+
+<!--------------------------------------------------------------------->
+<!-- keywords                                                        -->
+<!--------------------------------------------------------------------->
+<h1 id="keywords"></h1>
+<moveto-doc->
+    <p>
+        <b>Keywords</b> are <b>built-in <a href="#tokens">tokens</a></b> that perform hard coded actions or have <b>special meaning</b>.<br>
+        The language defines a total of 28 alphanumeric keywords and 6 symbolic keywords.<br>
+        Their usage is detailedly explained in their respective sections.
+    </p>
+    <ul>
+        <li>Misc keywords</li>
+        <ul class="summary-list">
+            <li>
+                <span><a href="#import-directive"><code><w->from</w-></code></a></span>
+                <span>Introduces an <a href="#import-directive">import directive</a>.</span>
+            </li>
+            <li>
+                <span><a href="#import-directive"><code><w->import</w-></code></a></span>
+                <span>Imports symbols from a <a href="#modules">module</a> while preserving the container <a href="#namespaces">namespace</a>.</span>
+            </li>
+            <li>
+                <span><a href="#export-directive"><code><w->export</w-></code></a></span>
+                <span>Defines which symbols can be exported from the current <a href="#modules">module</a>.</span>
+            </li>
+            <li>
+                <span><a href="#pointer-types"><code><w->addr</w-></code></a></span>
+                <span>Retrieves the address of an <a href="#right-and-left-values">l-value</a>.</span>
+            </li>
+            <li>
+                <span><a href="#pointer-types"><code>@</code></a></span>
+                <span>Dereferences a <a href="#pointer-types">pointer</a> in order to acces its value.</span>
+            </li>
+        </ul><br>
+        <li>Declaration keywords</li>
+        <ul class="summary-list">
+            <li>
+                <span><a href="#namespaces"><code><w->namespace</w-></code></a></span>
+                <span>Used to declare a <a href="#namespaces">namespace</a>.</span>
+            </li>
+            <li>
+                <span><a href="#enums"><code><w->enum</w-></code></a></span>
+                <span>Used to declare an <a href="#enums">enum</a>.</span>
+            </li>
+            <li>
+                <span><a href="#structs"><code><w->struct</w-></code></a></span>
+                <span>Used to declare a <a href="#structs">struct</a>.</span>
+            </li>
+            <li>
+                <span><a href="#symbol-aliases"><code><w->alias</w-></code></a></span>
+                <span>Creates an alternative <a href="#name-resolution">path</a> for a <a href="#name-resolution">symbol</a>.</span>
+            </li>
+            <li>
+                <span><a href="#const-qualifier"><code><t->const</t-></code></a></span>
+                <span>Specifies that a pointer type is const. Also used to declare const variables and routine parameters.</span>
+            </li>
+            <li>
+                <span><a href="#auto-specifier"><code><t->auto</t-></code></a></span>
+                <span>Can be used in place of the <a href="#types">type</a> in the declaration of a <a href="#variables">variable</a>, a <a href="#routine-parameters">routine parameter</a> or a <a href="#routines">routine</a> to automatically use the best type based on its initializer <a href="#values">value</a> or return value.</span>
+            </li>
+            <li>
+                <span><a href="#typeof-specifier"><code><t->typeof</t-></code></a></span>
+                <span>Retrieves the <a href="#types">type</a> of an <a href="#expressions">expression</a>.</span>
+            </li>
+        </ul><br>
+        <li>Flow control keywords</li>
+        <ul class="summary-list">
+            <li>
+                <span><a href="#if-statement"><code><w->if</w-></code></a></span>
+                <span>Used in the if selection statement.</span>
+            </li>
+            <li>
+                <span><a href="#match-statement"><code><w->match</w-></code></a></span>
+                <span>Used in the match selection statement.</span>
+            </li>
+            <li>
+                <span><a href="#for-loops"><code><w->for</w-></code></a></span>
+                <span>Used in the for loops.</span>
+            </li>
+            <li>
+                <span><a href="#while-loops"><code><w->while</w-></code></a></span>
+                <span>Used in the while loops.</span>
+            </li>
+            <li>
+                <span><a href="#while-loops"><code><w->do</w-></code></a></span>
+                <span>Used with <a href="#while-loops"><code><w->while</w-></code></a> to check the <a href="#bool-type">condition</a> after having executed the <a href="#statements">statement</a> instead of the other way around.</span>
+            </li>
+            <li>
+                <span><a href="#continue-and-break-statements"><code><w->continue</w-></code></a></span>
+                <span>Used to skip iterations.</span>
+            </li>
+            <li>
+                <span><a href="#continue-and-break-statements"><code><w->break</w-></code></a></span>
+                <span>Used to skip all the remaining iteration of one or more loops.</span>
+            </li>
+            <li>
+                <span><a href="#once-statement"><code><w->once</w-></code></a></span>
+                <span>Used to execute a statement during the first iteration.</span>
+            </li>
+            <li>
+                <span><a href="#then-statement"><code><w->then</w-></code></a></span>
+                <span>Used to execute a statement based on the outcome of the preceding loop, <a href="#if-statement">if statement</a> or <a href="#match-statement">match statement</a>.</span>
+            </li>
+            <li>
+                <span><a href="#else-statement"><code><w->else</w-></code></a></span>
+                <span>Used to execute a statement based on the outcome of the preceding loop, <a href="#if-statement">if statement</a> or <a href="#match-statement">match statement</a>.</span>
+            </li>
+            <li>
+                <span><a href="#return-statement"><code><w->return</w-></code></a></span>
+                <span>Returns the execution to the <a href="#function-calls">caller function</a>.</span>
+            </li>
+            <li>
+                <span><a href="#defer-statement"><code><w->defer</w-></code></a></span>
+                <span>Delays a <a href="#routine-calls">routine call</a> until the first <a href="#return-statement"><code><w->return</w-></code></a> statement is encountered.</span>
+            </li>
+        </ul><br>
+        <li>Containers</li>
+        <ul class="summary-list">
+            <li>
+                <span><elm-><code>(</code><code>)</code></elm-></span>
+                <span>Groups an <a href="#expressions">expression</a>, or encloses a list of <a href="#routine-parameters">routine parameters</a>. Also used for <a href="#declarations.operator-precedence">operator precedence</a> and <a href="#specialization-constraints">specialization constraints.</a></span>
+            </li>
+            <li>
+                <span><a href="#scopes"><elm-><code>{</code><code>}</code></elm-></a></span>
+                <span>Declares a new <a href="#scopes">scope</a>. Used to declare most <a href="#syntactic-elements">syntactic elements</a>.</span>
+            </li>
+        </ul><br>
+        <li>Separators</li>
+        <ul class="summary-list">
+            <li>
+                <span><a href="#statements"><code>,</code></a></span>
+                <span>Separates 2 or more <a href="#expressions">expressions</a> or <a href="#match-statement">match cases</a>.</span>
+            </li>
+            <li>
+                <span><a href="#statements"><code>;</code></a></span>
+                <span>Defines the end of <a href="#expression-statements">expression statements</a> or certain declarations and directives.</span>
+            </li>
+            <li>
+                <span><a href="#name-resolution"><code>.</code></a></span>
+                <span>Concatenates 2 or more symbol names to form a <a href="#language-structure.paths">symbol path</a>.
+            </li>
+            <li>
+                <span><a href="#reflection"><code>:</code></a></span>
+                <span>Concatenates 2 or more symbol names to form a <a href="#reflection">Reflection path</a>.</span>
+            </li>
+        </ul>
+    </ul>
+    <p>
+        <a href="#keywords">Keywords</a> cannot be <a href="#name-shadowing">shadowed</a> like <a href="#identifiers">identifiers</a>.<br>
+        Attempting to do so generates a semantic error. //TODO LINK
+    </p>
+</moveto-doc->

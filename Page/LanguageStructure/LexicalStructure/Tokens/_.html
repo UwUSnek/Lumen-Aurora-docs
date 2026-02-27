@@ -1,0 +1,130 @@
+
+<!--------------------------------------------------------------------->
+<!-- Tokens                                                          -->
+<!--------------------------------------------------------------------->
+<h1 id="tokens"></h1>
+<moveto-doc->
+    <p>
+        <b>Tokens</b> are the fundamental elements of the source code of any program.<br>
+        They are <b>sequences</b> of one or more <a href="#character-set">allowed <b>characters</b></a> that follow specific patterns.<br>
+        One or more tokens create a <a href="#syntactic-elements">syntactic element</a>.
+    </p>
+    <p>
+        A token ends when a character that isn't allowed in its pattern is encountered. //TODO   ".:"    "(?"    and similar cases
+        Tokens can also be separated by any number of <code><tab-></tab-></code>, <code><space-></space-></code> and <code><nl-></nl-></code> characters.<br>
+        Sequences of characters that don't follow any of the recognized patterns generate an error. //TODO LINK
+    </p>
+    <p>
+        Tokens are case sensitive, with the only exception of <a href="#literals">hexadecimal literals</a>.<br>
+        <code><tab-></tab-></code>, <code><space-></space-></code> and <code><nl-></nl-></code> characters are not not considered tokens.
+        Instead, they are simply discarded during the tokenization phase.
+    </p>
+    <p>
+        Tokens are divided in 4 categories:
+    </p>
+
+    <div class="table-container"><table>
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th style="text-align: center;" colspan="4">Pattern</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th class="nowrap medium"><a href="#keywords">Keyword</a></th>
+                <td><div class="split-td-outer">
+                    <div class="split-td" style="line-height: 3ch;">
+                        <a href="#namespaces">                   <code><w->namespace</w-></code></a>
+                        <a href="#enums">                        <code><w->enum</w-></code></a>
+                        <a href="#structs">                      <code><w->struct</w-></code></a>
+                        <a href="#const-qualifier">              <code><t->const</t-></code></a>
+                        <a href="#auto-specifier">               <code><t->auto</t-></code></a>
+                        <a href="#typeof-specifier">             <code><t->typeof</t-></code></a>
+                        <a href="#symbol-aliases">               <code><w->alias</w-></code></a>
+                        <a href="#import-directive">             <code><w->from</w-></code></a>
+                        <a href="#import-directive">             <code><w->import</w-></code></a>
+                        <a href="#export-directive">             <code><w->export</w-></code></a>
+                        <a href="#pointer-types">                <code><w->addr</w-></code></a>
+                        <a href="#pointer-types">                <code>@</code></a>
+                    </div>
+                    <div class="split-td" style="line-height: 3ch;">
+                        <a href="#if-statement">                 <code><w->if</w-></code></a>
+                        <a href="#match-statement">              <code><w->match</w-></code></a>
+                        <a href="#for-loops">                    <code><w->for</w-></code></a>
+                        <a href="#while-loops">                  <code><w->while</w-></code></a>
+                        <a href="#while-loops">                  <code><w->do</w-></code></a>
+                        <a href="#continue-and-break-statements"><code><w->continue</w-></code></a>
+                        <a href="#continue-and-break-statements"><code><w->break</w-></code></a>
+                        <a href="#once-statement">               <code><w->once</w-></code></a>
+                        <a href="#then-statement">               <code><w->then</w-></code></a>
+                        <a href="#else-statement">               <code><w->else</w-></code></a>
+                        <a href="#return-statement">             <code><w->return</w-></code></a>
+                        <a href="#defer-statement">              <code><w->defer</w-></code></a>
+                    </div>
+                    <div class="split-td" style="line-height: 3ch;">
+                        <elm->                                   <code>(</code><code>)</code></elm->
+                        <a href="#scopes-and-symbols">           <elm-><code>{</code><code>}</code></elm-></a>
+                        <a href="#statements">                   <code>,</code></a>
+                        <a href="#statements">                   <code> ;</code></a>
+                        <a href="#scopes-and-symbols">           <code>.</code></a>
+                        <a href="#reflection">                   <code>:</code></a>
+                    </div>
+                </div></td>
+            </tr>
+            <tr>
+                <th class="nowrap medium"><a href="#meta-keywords">Meta keyword</a></th>
+                <td><div class="split-td-outer">
+                    <div class="split-td">
+                        <a href="#templates">                       <code><w->template</w-></code></a>
+                        <a href="#templates">                       <elm-><code>&lt;</code><code>&gt;</code></elm-></a>
+                        <a href="#template-parameters">             <code><w->type</w-></code></a>
+                        <a href="#template-parameters">             <code>!</code></a>
+                        <a href="#abbreviated-template-syntax">     <code>?</code></a>
+                    </div>
+                    <div class="split-td">
+                        <a href="#specialization-constraint">       <code><w->when</w-></code></a>
+                        <code><w->as</w-></code>
+                        <code><w->to</w-></code>
+                        <code>=</code>
+                        <a href="enums"><code>:</code></a>
+                        <code>...</code>
+                        <a href="#reference-parameters"><code>&</code></a>
+                        <a href="#pointer-types"><code>*</code></a>
+                    </div>
+                </div></td>
+            </tr>
+            <tr>
+                <th class="nowrap medium"><a href="#literals">Literal</a></th>
+                <td><div class="split-td-outer">
+                    <div clas="split-td" style="line-height: 3ch;">
+                        <ul><ul>Any sequence of characters with pattern:
+                            <li><code><regex->(0[dbxo])?[0-9a-zA-Z_]+(\.[0-9a-zA-Z_]*)?</regex-></code></li>
+                            <li><code><regex->[rf]?"</regex-><c- class="x-small">anything but unescaped double-quotes</c-><s->"</s-></code></li>
+                            <li><code><s->'</s-><c- class="x-small">anything but unescaped quotes</c-><s->'</s-></code></li>
+                        </ul></ul>
+                    </div>
+                </div></td>
+            </tr>
+            <tr>
+                <th class="nowrap medium"><a href="#identifiers">Identifier</a></th>
+                <td><div class="split-td-outer">
+                    <div clas="split-td">
+                        Any sequence of characters with pattern
+                        <code><regex->[a-zA-Z][a-zA-Z0-9]*</regex-></code> or
+                        <code><regex->[!$%&*+\-/&lt;=&gt;?\[\]^`|~]+</regex-></code>
+                        that isn't a <a href="#keywords">keyword</a> or a <a href="#literals">literal</a>.
+                    </div>
+                </div></td>
+            </tr>
+        </tbody>
+    </table></div>
+</moveto-doc->
+
+
+
+
+#include "./Page/LanguageStructure/LexicalStructure/Tokens/Keywords.html"
+#include "./Page/LanguageStructure/LexicalStructure/Tokens/MetaKeywords.html"
+#include "./Page/LanguageStructure/LexicalStructure/Tokens/LiteralTokens.html"
+#include "./Page/LanguageStructure/LexicalStructure/Tokens/Identifiers.html"

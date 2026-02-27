@@ -1,0 +1,49 @@
+
+<!--------------------------------------------------------------------->
+<!-- Expressions                                                     -->
+<!--------------------------------------------------------------------->
+<h1 id="language-structure.expressions"></h1>
+<moveto-doc->
+    <p>
+        <b>Expressions</b> generate values. They are mostly used to declare <a href="#name-resolution">symbols</a> and call <a href="#routines">routines</a>.
+    </p>
+    <ul>
+        <li>Inline values</li>
+        <ul class="summary-list">
+            <li>
+                <span><elm-><a href="#literals">Literal</a></elm-></span>
+                <span>Generates a value of a <a href="#primitive-types">primitive type</a> by interpreting the token in the specified numerical base.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#try-expression"><code><w->try</w-></code> expression</a></elm-></span>
+                <span>Compiles a portion of code. Evaluates to <a href="#boolean-type"><code><k->true</k-></code></a> if the code doesn't generate <a href="#compilation">syntactic</a> or <a href="#compilation">semantic errors</a>.</span>
+            </li>
+        </ul><br>
+        <li>Stored values</li>
+        <ul class="summary-list">
+            <li>
+                <span><elm-><a href="#variables">Variable</a></elm-></span>
+                <span>Accesses the value stored in a previously declared <a href="#variables">variable</a>.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#temporary-variables">Temporary variable</a></elm-></span>
+                <span>Accesses the value stored in a <a href="#temporary-variables">temporary variable</a>.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#routine-parameters">Routine parameter</a></elm-></span>
+                <span>Accesses the value that was passed to a <a href="#variables">routine parameter</a>.</span>
+            </li>
+        </ul><br>
+        <li>Routine calls</li>
+        <ul class="summary-list">
+            <li>
+                <span><elm-><a href="#function-calls">Function call</a></elm-></span>
+                <span>Generates a value by calling a <a href="#functions">function</a> or <a href="#templates">function template</a>.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#operator-calls">Operator call</a></elm-></span>
+                <span>Generates a value by calling an <a href="#operators">operator</a> or <a href="#templates">operator template</a>.</span>
+            </li>
+        </ul>
+    </ul>
+</moveto-doc->

@@ -1,0 +1,29 @@
+
+<!--------------------------------------------------------------------->
+<!-- Character set                                                   -->
+<!--------------------------------------------------------------------->
+<h1 id="character-set"></h1>
+<moveto-doc->
+    <p>
+        After the <a href="#preprocessor">preprocessing phase</a>, only a <b>small number</b> of <b>characters</b> are left.<br>
+        These characters <b>compose the <a href="#tokens">tokens</a></b> that are used in the compilation phase.<br>
+        Any unknown character generates an error.
+    </p>
+    <p>
+        The allowed characters are:
+    </p>
+    <p>
+        <code>a</code> <code>b</code> <code>c</code> <code>d</code> <code>e</code> <code>f</code> <code>g</code> <code>h</code> <code>i</code> <code>j</code> <code>k</code> <code>l</code> <code>m</code>
+        <code>n</code> <code>o</code> <code>p</code> <code>q</code> <code>r</code> <code>s</code> <code>t</code> <code>u</code> <code>v</code> <code>w</code> <code>x</code> <code>y</code> <code>z</code><br>
+        <code>A</code> <code>B</code> <code>C</code> <code>D</code> <code>E</code> <code>F</code> <code>G</code> <code>H</code> <code>I</code> <code>J</code> <code>K</code> <code>L</code> <code>M</code>
+        <code>N</code> <code>O</code> <code>P</code> <code>Q</code> <code>R</code> <code>S</code> <code>T</code> <code>U</code> <code>V</code> <code>W</code> <code>X</code> <code>Y</code> <code>Z</code><br>
+        <code>0</code> <code>1</code> <code>2</code> <code>3</code> <code>4</code> <code>5</code> <code>6</code> <code>7</code> <code>8</code> <code>9</code> <code>_</code><br>
+        <code>!</code> <code>$</code> <code>%</code> <code>&</code> <code>(</code> <code>)</code> <code>*</code> <code>+</code> <code>-</code> <code>/</code> <code>:</code> <code>&lt;</code> <code>=</code>
+        <code>&gt;</code> <code>?</code> <code>@</code> <code>^</code> <code>`</code> <code>|</code> <code>~</code> <code>;</code> <code>{</code> <code>}</code> <code>[</code> <code>]</code> <code>.</code><br>
+        <code><space-></space-></code> <code><tab-></tab-></code> <code><nl-></nl-></code>
+    </p>
+    <p>
+        String <a href="#literals">literals</a> can contain any unicode character. They are converted to allowed characters during the compilation phase.//TODO<br>
+        Carriage return characters (\r) are ignored.
+    </p>
+</moveto-doc->

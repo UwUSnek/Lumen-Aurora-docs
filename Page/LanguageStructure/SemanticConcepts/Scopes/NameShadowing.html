@@ -1,0 +1,55 @@
+
+<!--------------------------------------------------------------------->
+<!-- Name shadowing                                                  -->
+<!--------------------------------------------------------------------->
+<h1 id="name-shadowing"></h1>
+    <moveto-doc->
+    <p>
+        <a href="#name-resolution"><b>Symbols</b></a> in <b>different <a href="#scopes">scopes</a></b> can be declared using the <b>same <a href="#identifiers">identifier</a></b>. This is known as <b>name shadowing</b>.<br>
+    </p>
+    <p>
+        When the <a href="#identifiers">identifier</a> is used, the <a href="#name-resolution">symbol</a> declared in the innermost <a href="#scopes">scope</a>, relatively to where the <a href="#identifiers">identifier</a> is used, always takes precedence.
+        This can be avoided by starting the <a href="#name-resolution">path</a> from a parent <a href="#scopes">scope</a> so that the <a href="#identifiers">identifier</a> is not ambiguous.<br>
+        Any <a href="#identifiers">identifier</a> can be shadowed, including <a href="#primitive-types">primitive types</a>, the <a href="#name-resolution"><code>module</code></a> <a href="#identifiers">identifier</a> and <a href="#name-resolution">symbols</a> from the <a href="#core-module">core module</a>.
+    </p>
+    <p>
+        The first declaration in a scope is the only one that actually shadows eventual identifiers in parent scopes. Subsequent declarations that use the same identifier will refer to the symbol declared in the same scope.<br>
+    </p>
+</moveto-doc->
+<moveto-examples->
+    <example->
+        <label->Example</label->
+        <div>
+            <w->namespace</w-> s {
+                <w->namespace</w-> {
+                    <t->float</t-> n;
+                    <c->// n references module.s.*unnamed*.n</c->
+                }
+
+                <t->void</t-> <f->n</f->(<t->uint</t-> <p->n</p->) {
+                    <c->// n references module.s.n.n</c->
+                }
+
+                <c->// n references module.s.n</c->
+            }
+        </div>
+    </example->
+
+    <example->
+        <label->Example</label->
+        <div>
+            <c->// Ok, declares a struct with name "t"</c->
+            <w->strct</w-> t {
+                <t->int</t-> n;
+            }
+
+            <t->void</t-> <f->main</f->(){
+                <t->t</t-> t;            <c->// Ok, declares a variable with name "t" and type "module.t"</c->
+                <c->//t a;</c->          <ce->// Error, "t" is a variable and not a type</ce->
+                <c->//module.t t;</c->   <ce->// Error, redeclaration of "module.main.t"</ce->
+                module.<t->t</t-> a;     <c->// Ok, declares a variable with name "a" and type "module.t"</c->
+            }
+
+        </div>
+    </example->
+</moveto-examples->

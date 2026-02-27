@@ -1,0 +1,80 @@
+
+<!--------------------------------------------------------------------->
+<!-- Compile time expression                                         -->
+<!--------------------------------------------------------------------->
+<h1 id="compile-time-expressions"></h1>
+<moveto-doc->
+    <p>
+        <b>Compile time expressions</b> are <a href="#expressions">expressions</a> that can be <b>calculated during</b> the <a href="#compilation"><b>compilation</b></a> phase.<br>
+        These <a href="#expressions">expressions</a> are required in certain syntaxes, such as <a href="#operators">operator</a> declarations, <a href="#enums">enum</a> elements, <a href="#template">template</a> <a href="#name-resolution">paths</a> and <a href="#specialization-constraints">specialization constraints</a>.<br>
+    </p>
+    <ul>
+        <li>Whether an <a href="#expressions">expression</a> can be compile time or not is determined in the following way:</li>
+        <ul>
+            <li>
+                A <a href="#routine">routine</a> is suitable for compile time <a href="#routine-calls">calls</a> if it is not declared with the <a href="#runtime-qualifier"><code><w->runtime</w-></code> qualifier</a>,
+                it doesn't contain <a href="#inline-cpp">inline C++</a> or <a href="#inline-glsl">inline GLSL</a> statements and
+                every <a href="#routine-calls">routine call</a> within its body, including constructors and destructor called implicitly or not, are compile time.
+            </li>
+            <li>
+                A <a href="#routine-calls">routine call</a> is compile time if the <a href="#routines">routine</a> is suitable for compile time <a href="#routine-calls">calls</a> and
+                all of its <a href="#routine-parameters">arguments</a> are compile time expressions.
+            </li>
+            <li>
+                A <a href="#variables">variable</a> or <a href="#temporary-variables">temporary variable</a> is compile time if its initializer expression is compile time,
+                all the <a href="#routine-calls">routine calls</a> in which it is used as <a href="#routine-calls">argument</a> to a <a href="#references">reference</a> <a href="#routine-parameters">parameter</a> refer to routines that are suitable for compile time calls and
+                all the additional <a href="#routine-parameters">arguments</a> of such <a href="#routine-calls">calls</a> are compile time expressions.
+            </li>
+            <li>
+                <a href="#literals">Literals</a>, <a href="#enums">enum</a> elements, <a href="#templates">template</a> parameters and <a href="#try-expression"><code><w->try</w-></code> expressions</a> are always compile time.
+            </li>
+        </ul>
+    </ul>
+    <p>
+        For consistency reasons, cases in which a <a href="#routine">routine</a> is runtime but it doesn't actually need to run during runtime,
+        either by containing empty <a href="#inline-cpp">inline C++</a> or <a href="#inline-glsl">inline GLSL</a> statements or
+        by containing runtime <a href="#routine-calls">routine calls</a> that are empty or have the aforementioned properties,
+        are not considered suitable for compile time <a href="#routine-calls">calls</a>, even though it would be possible to determine their <a href="#return-statement">return value</a> and operations on reference <a href="#routine-parameters">parameters</a> during the <a href="#compilation">compilation</a> process.
+    </p>
+    <br><br><br>
+    <p>
+        Notice that compile time expressions are not required to run during compile time, and they don't affect <a href="#value-precomputation">optimizations</a> in any way.<br>
+        Compile time expressions are exclusively used to determine which <a href="#expressions">expressions</a> can be used in contexts where a compile time value is required.
+    </p>
+    <p>
+        Any routine declared in <a href="#standard-modules">standard modules</a> that could change the observable behaviour of the program if executed during compile time is properly marked as <a href="#runtime-qualifier"><code><w->runtime</w-></code></a>,
+        therefore is not possible to accidentally modify the program behaviour by inadvertently executing <a href="#routines">routines</a> that are not supposed to be executed during the <a href="#compilation">compilation</a> process.
+    </p>
+    <p>
+        //TODO template<t = ulong> t random(t from, t to)
+        //TODO template<t = ulong> t random(t to) //from 0
+    </p>
+</moveto-doc->
+<moveto-examples->
+    <example->
+        <label->Example</label->
+        <div>
+            <w->from</w-> <s->&lt;random&gt;</s-> <w->include</w-> rand;
+
+            <w->enum</w-> q : <t->bool</t-> {
+                to_be     = <k->0</k->,
+                not_to_be = <k->1</k->
+            }
+
+            <c->// Suitable for compile time calls</c->
+            <t->bool</t-> <f->add_1</f->(<t->ulong</t-> <p->n</p->) {
+                <w->return</w-> n <f->+</f-> <k->1</k->;
+            }
+
+
+            <t->bool</t-> <f->f</f->(<t->ulong</t-> <p->n</p->) {
+                <t->ulong</t-> a = <k->True</k->;
+
+                <c->// return q:elms[n];</c->           <ce->// Error, "n" is not a compile time expression</ce->
+                <c->// return q[add_1(n)];</c->   <ce->// Error, the routine call is not compile time</ce->
+                <c->// return q[rand(2)];</c->    <ce->// Error, the routine "random.rand" is not suitable for compile time calls</ce->
+                <w->return</w-> q<f->[</f->n<f->]</f->;             <c->// Ok</c->
+            }
+        </div>
+    </example->
+</moveto-examples->

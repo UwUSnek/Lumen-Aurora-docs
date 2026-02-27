@@ -1,0 +1,170 @@
+
+<!--------------------------------------------------------------------->
+<!-- Syntactic elements                                               -->
+<!--------------------------------------------------------------------->
+<h1 id="syntactic-elements"></h1>
+<moveto-doc->
+    <p>
+        <b>Syntactic elements</b> are <b>sequences</b> of one or more <a href="#tokens"><b>tokens</b></a> or other syntactic elements that follow specific patterns.<br>
+        They define the contents and interface of the <a href="#modules">module</a>.
+    </p>
+    <p>
+        Syntactic elements are divided in 6 categories:
+    </p>
+
+
+    <div class="table-container"><table>
+        <tr>
+            <th>Category</th>
+            <th>Syntactic element</th>
+        </tr>
+        <tr>
+            <th class="nowrap medium"><a href="#language-structure.directives">Directive</a></th>
+            <td><div class="split-td-outer">
+                <div class="split-td">
+                    <even-elm-><a href="#import-directive">Import </a> directive</even-elm->
+                    <even-elm-><a href="#export-directive"><code><w->export</w-></code></a> directive</even-elm->
+                    <even-elm-><a href="#construct-directive"><code><w->construct</w-></code></a> directive</even-elm->
+                </div>
+            </div></td>
+        </tr>
+        <tr>
+            <th class="nowrap medium"><a href="#name-resolution">Declaration</a></th>
+            <td><div class="split-td-outer">
+                <div class="split-td">
+                    <even-elm-><a href="#enums"><code><w->enum</w-></code></a> declaration</even-elm->
+                    <even-elm-><a href="#enums"><code><w->enum</w-></code></a> element declaration</even-elm->
+                    <even-elm-><a href="#structs"><code><w->struct</w-></code></a> declaration</even-elm->
+                    <even-elm-><a href="#structs"><code><w->struct</w-></code></a> member declaration</even-elm->
+                </div>
+                <div class="split-td">
+                    <even-elm-><a href="#functions">Function</a> declaration</even-elm->
+                    <even-elm-><a href="#operators">Operator</a> declaration</even-elm->
+                    <even-elm-><a href="#routine-parameters">Routine parameter</a></even-elm->
+                </div>
+                <div class="split-td">
+                    <even-elm-><a href="#namespaces"><code><w->namespace</w-></code></a> declaration</even-elm->
+                    <even-elm-><a href="#templates"><code><w->template</w-></code></a> declaration</even-elm->
+                    <even-elm-><a href="#symbol-aliases"><code><w->alias</w-></code></a> declaration</even-elm->
+                    <even-elm-><a href="#variables">Variable</a> declaration</even-elm->
+                </div>
+            </div></td>
+        </tr>
+        <tr>
+            <th class="nowrap medium"><a href="#language-structure.statements">Statement</a></th>
+            <td><div class="split-td-outer">
+                <div class="split-td">
+                    <even-elm-><a href="#if-statement"><code><w->if</w-></code></a> statement</even-elm->
+                    <even-elm-><a href="#match-statement"><code><w->match</w-></code></a> statement</even-elm->
+                </div>
+                <div class="split-td">
+                    <even-elm-><a href="#while-loops"><code><w->while</w-></code></a> loop</even-elm->
+                    <even-elm-><a href="#for-loops"><code><w->for</w-></code></a> loop</even-elm->
+                    <even-elm-><a href="#once-statement"><code><w->once</w-></code></a> statement</even-elm->
+                    <even-elm-><a href="#then-statement"><code><w->then</w-></code></a> statement</even-elm->
+                    <even-elm-><a href="#break-statement"><code><w->break</w-></code></a> statement</even-elm->
+                    <even-elm-><a href="#continue-statement"><code><w->continue</w-></code></a> statement</even-elm->
+                </div>
+                <div class="split-td">
+                    <even-elm-><a href="#return-statement"><code><w->return</w-></code></a> statement</even-elm->
+                    <even-elm-><a href="#defer-statement"><code><w->defer</w-></code></a> statement</even-elm->
+                </div>
+                <div class="split-td">
+                    <even-elm-><a href="#else-statement"><code><w->else</w-></code></a> statement</even-elm->
+                    <even-elm-><a href="#expressions">Expression statement</a></even-elm->
+                    <even-elm-><a href="#unnamed-scopes">Unnamed scope</a></even-elm->
+                    <even-elm-><a href="#empty-statement">Empty statement</a></even-elm->
+                    <even-elm-><a href="#inline-glsl">Inline GLSL</a></even-elm->
+                    <even-elm-><a href="#inline-cpp">Inline C++</a></even-elm->
+                </div>
+            </div></td>
+        </tr>
+        <tr>
+            <th class="nowrap medium"><a href="#language-structure.expressions">Expression</a></th>
+            <td><div class="split-td-outer">
+                <div class="split-td">
+                    <even-elm-><a href="#literals">Literal</a></even-elm->
+                    <even-elm-><a href="#try-expression"><code><w->try</w-></code> expression</a></even-elm->
+                </div>
+                <div class="split-td">
+                    <even-elm-><a href="#variables">Variable</a></even-elm->
+                    <even-elm-><a href="#temporary-variables">Temporary variable</a></even-elm->
+                    <even-elm-><a href="#routine-parameters">Routine parameter</a></even-elm->
+                </div>
+                <div class="split-td">
+                    <even-elm-><a href="#function-calls">Function call</a></even-elm->
+                    <even-elm-><a href="#operator-calls">Operator call</a></even-elm->
+                </div>
+            </div></td>
+        </tr>
+        <tr>
+            <th class="nowrap medium"><a href="#language-structure.paths">Paths</a></th>
+            <td><div class="split-td-outer">
+                <div>
+                    <even-elm-><a href="#symbol-paths">Symbol path</a></even-elm->
+                    <even-elm-><a href="#symbol-reflection-paths">Symbol reflection path</a></even-elm->
+                </div>
+            </div></td>
+        </tr>
+    </table></div>
+
+
+
+    <p>
+        <a href="#structs">structs</a>, <a href="#routines">routines</a>, <a href="#templates">templates</a> and the <a href="#while-loops"><code><w->while</w-></code> loop</a>
+        are divided in sub-elements in order to provide a clear and concise syntax.<br>
+    </p>
+    <ul>
+        <li>Declaration sub-elements</li>
+        <ul class="summary-list">
+            <li>
+                <span><a href="#structs">Struct</a> signature</span>
+                <span>Defines the name of a <a href="#structs">struct</a>.</span>
+            </li>
+            <li>
+                <span><a href="#structs">Struct</a> body</span>
+                <span>Contains the <a href="#structs">struct</a> members and other allowed declarations.</span>
+            </li>
+            <li>
+                <span><a href="#functions">Function</a> signature</span>
+                <span>Defines the name, <a href="#return-statement">return type</a> and <a href="#routine-parameters">parameters</a> of a <a href="#functions">function</a></span>
+            </li>
+            <li>
+                <span><a href="#operators">Operator</a> signature</span>
+                <span>Defines the names, <a href="#return-statement">return type</a>, <a href="#routine-parameters">parameters</a>,
+                    <a href="#declarations.operator-precedence">priority</a> and <a href="#declarations.operator-precedence">associativity</a> of an <a href="#operators">operator</a></span>
+                //TODO idk if this actually defines the associativity. check
+            </li>
+            <li>
+                <span><a href="#routines">Routine</a> body</span>
+                <span>Contains the <a href="#statements">statements</a> and other allowed declarations of a <a href="#routines">routine</a></span>
+            </li>
+            <li>
+                <span><a href="#templates">Template</a> signature</span>
+                <span>Defines the name and parameters of a <a href="#templates">template</a></span>
+            </li>
+            <li>
+                <span><a href="#specialization-constraints">Specialization constraint</a></span>
+                <span>Defines the <a href="#specialization-constraints">constraint</a> that determines when the subsequent element body is suitable for specialization</span>
+            </li>
+        </ul><br>
+        <li>Other sub-elements</li>
+        <ul class="summary-list">
+            <li>
+                <span><a href="#while-loops">While</a> signature</span>
+                <span>Defines the <a href="boolean-type">condition</a> of a <a href="while-loops">while loop</a></span>
+            </li>
+            <li>
+                <span>Specialization constraint</span>
+                <span>Specifies a constraint whose result determines when a struct or routine declaration can be used.</span>
+            </li>
+        </ul>
+    </ul>
+</moveto-doc->
+
+
+#include "./Page/LanguageStructure/SyntacticElements/Directives.html"
+#include "./Page/LanguageStructure/SyntacticElements/Declarations.html"
+#include "./Page/LanguageStructure/SyntacticElements/Statements.html"
+#include "./Page/LanguageStructure/SyntacticElements/Expressions.html"
+#include "./Page/LanguageStructure/SyntacticElements/Paths.html"

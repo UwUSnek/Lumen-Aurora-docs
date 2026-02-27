@@ -1,0 +1,46 @@
+
+<!--------------------------------------------------------------------->
+<!-- Multiple declarations                                           -->
+<!--------------------------------------------------------------------->
+<h1 id="multiple-declarations"></h1>
+<moveto-doc->
+    <p> //TODO linkkk
+        Some types of symbol can be declared multiple times in the same scope.<br>
+    </p>
+    <p>
+        <code><w->namespace</w-></code>.<br>
+        All the declared namespaces with the same absolute path merge their contents.<br>
+        <br>
+        Routines.<br>
+        Functions and routines declared in the same scope using the same identifier create a specialized routine.<br>
+        This is explained in <a href="#routine-specialization">Routine specialization</a>.<br>
+        The <code><f->main</f-></code> function cannot be specialized.<br>
+        Structs.<br>
+        Structs declared in the same scope using the same identifier create a specialized struct.<br>
+        This is explained in <a href="#struct-specialization">Struct specialization</a>.<br>
+        <br>
+        Other symbols.<br>
+        Multiple declarations of other symbols generate a semantic error. //TODO LINK
+    </p>
+</moveto-doc->
+<moveto-examples->
+    <example->
+        <label->Example</label->
+        <div>
+            <w->namespace</w-> a {     <c->// Ok, merges with the second declaration</c->
+                <t->int</t-> n;        <c->// Ok</c->
+                <t->int</t-> a;        <c->// Ok, shadows "module.a"</c->
+            }
+            <w->namespace</w-> a {     <c->// Ok, merges with the first declaration</c->
+                <c->//int n;</c->      <ce->// Error, redeclaration of "module.a.n"</ce->
+                <t->int</t-> b;        <c->// Ok</c->
+            }
+            <t->void</t-> <f->main</f->(){
+                a.b <f->=</f-> <k->5</k->;      <c->// Ok</c->
+            }
+
+            <t->void</t-> <f->f</f->(<t->int</t-> <p->n</p->) { } <c->// Ok</c->
+            <t->void</t-> <f->f</f->() { }      <c->// Ok, specialization of "module.f"</c->
+        </div>
+    </example->
+</moveto-examples->

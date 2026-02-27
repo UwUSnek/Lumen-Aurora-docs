@@ -1,0 +1,114 @@
+
+<!--------------------------------------------------------------------->
+<!-- Meta keywords                                                   -->
+<!--------------------------------------------------------------------->
+<h1 id="meta-keywords"></h1>
+<moveto-doc->
+    <p>
+        <b>Meta keywords</b> are <a href="#tokens">tokens</a> that only have meaning when <b>combined</b> with other <a href="#keywords"><b>keywords</b></a> or <a href="#name-resolution">semantic elements</a>.<br>
+        When active, they always take precedence over <a href="#identifiers">identifiers</a>.
+    </p>
+    <ul>
+        <li><a href="#templates">Templates</a></li>
+        <ul class="summary-list">
+            <li>
+                <span><a href="#templates"><code><w->template</w-></code></a></span>
+                <span>
+                    Used to declare a <a href="#templates">template</a><br>
+                    <span class="meta-keyword-constraint">[When used before the <a href="#templates"><elm-><code>&lt;</code><code>&gt;</code></elm-></a> meta keyword]</span>.
+                </span>
+            </li>
+            <li>
+                <span><elm-><code>&lt;</code><code>&gt;</code></elm-></span>
+                <span>
+                    Part of the <a href="#templates">template</a> declaration, or part of the the <a href="#local-names">local name</a> of <a href="#templates">template</a> <a href="#name-resolution">symbols</a>. Also used in <a href="#import-directive">import directives</a><br>
+                    <span class="meta-keyword-constraint">[When used after the <a href="#templates"><code><w->template</w-></code></a> meta keyword, after the <a href="#name-resolution">path</a> to a <a href="#templates">template</a> <a href="#name-resolution">symbol</a> or around the module name in an <a href="#import-directive">import directive</a>]</span>.
+                </span>
+            </li>
+            <li>
+                <span><a href="#template-parameters"><code><w->type</w-></code></a></span>
+                <span>
+                    Used to declare type <a href="#template-parameters">template parameters</a> or type <a href="#template-parameter-packs">template parameter packs</a><br>
+                    <span class="meta-keyword-constraint">[When used as type in the declaration of a <a href="#template-parameters">template parameter</a> or <a href="#template-parameter-packs">template parameter pack</a>]</span>.
+                </span>
+            </li>
+            <li>
+                <span><a href="#abbreviated-template-syntax"><code>!</code></a></span>
+                <span>
+                    Identifies the parameters whose arguments are used to deduce a type template parameter or type template parameter pack<br>
+                    <span class="meta-keyword-constraint">[When used between the type and the identifier in the declaration of a routine parameter or function parameter pack]</span>.
+                </span>
+            </li>
+            <li>
+                <span><a href="#abbreviated-template-syntax"><code>?</code></a></span>
+                <span>
+                    <a href="#abbreviated-template-syntax">Abbreviated template syntax</a><br>
+                    <span class="meta-keyword-constraint">[When used between the type and the identifier of a <a href="#name-resolution">symbol</a> declaration inside a struct or routine declaration]</span>.
+                </span>
+            </li>
+        </ul><br>
+        <li>Misc</li>
+        <ul class="summary-list">
+            <li>
+                <span><a href="#templates"><code><w->when</w-></code></a></span>
+                <span>
+                    Specifies a <a href="#specialization-constraints">specialization constraint</a><br>
+                    <span class="meta-keyword-constraint">[When used before the body of a routine or struct declaration</span>.
+                </span>
+            </li>
+            <li>
+                <span><code><w->as</w-></code></span>
+                <span>
+                    Defines the name of the counter <a href="#variables">variable</a> of a <a href="#for-loops">for loop</a>, a new name for an <a href="#export-directive">exported</a> or <a href="#import-directive">imported</a> <a href="#name-resolution"> symbol</a>, or the new identifier used for a <a href="#symbol-aliases">symbol alias</a><br>
+                    <span class="meta-keyword-constraint">[When used in the signature of a <a href="#for-loops">for-each</a>, <a href="#for-loops">for-n</a> or <a href="#for-loops">for-range</a> loop, after the name of a <a href="#name-resolution">symbol</a> in an <a href="#import-directive">import</a> or <a href="#export-directive">export</a> directive or in a <a href="#symbol-aliases">symbol alias</a> declaration]</span>.
+                </span>
+            </li>
+            <li>
+                <span><code><w->to</w-></code></span>
+                <span>
+                    Defines the end of a numerical range<br>
+                    <span class="meta-keyword-constraint">[When used in the value of a <a href="#for-loops">for-range</a> loop or a <a href="#match-statement">match case</a>]</span>.
+                </span>
+            </li>
+            <li>
+                <span><code>=</code></span>
+                <span>
+                    Used to assign initializer values to <a href="#variables">variables</a> and default values to <a href="#routine-parameter">routine parameters</a><br> //TODO templates can prob have def values<br>
+                    <span class="meta-keyword-constraint">[When used after the name of a <a href="#variables">variable</a> or <a href="#routine-parameters">routine parameter</a> declaration]</span>.
+                </span>
+            </li>
+            <li>
+                <span><code>:</code></span>
+                <span>
+                    Specifies the base type of an enum, the priority of an operator, or introduces a match case<br>
+                    <span class="meta-keyword-constraint">
+                        [When used after the identifier of an enum declaration].<br>
+                        [When used at the end of the signature of an <a href="#operators">operator</a> or <a href="#templates">operator template</a> declaration].<br>
+                        [When used after the case values of a <a href="#match-statement">match statement</a> case].
+                    </span>
+                </span>
+            </li>
+            <li>
+                <span><code>...</code></span>
+                <span>
+                    Used to declare <a href="#template-parameter-packs">template parameter packs</a> and <a href="function parameter packs">function parameter packs</a><br>
+                    <span class="meta-keyword-constraint">[When used after the identifier in the declaration of a template parameter pack or function parameter pack, or, if inside a struct or routine declaration, between the type and the identifier in the declaration of a routine parameter or function parameter pack]</span>.
+                </span>
+            </li>
+            <li>
+                <span><code>&</code></span>
+                <span>
+                    Used todeclare a reference parameter<br>
+                    <span class="meta-keyword-constraint">[When used between the type and the identifier of a reference parameter]</span>.
+                </span>
+            </li>
+            <li>
+                <span><a href="#pointer-types"><code>*</code></a></span>
+                <span>
+                    Identifies the <a href="pointer-types">pointer version</a> of a type.<br>
+                    <span class="meta-keyword-constraint">[When used at the end of a type path]</span>.
+                </span>
+            </li>
+        </ul>
+    </ul>
+</moveto-doc->

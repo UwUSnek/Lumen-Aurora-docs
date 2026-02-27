@@ -1,0 +1,72 @@
+
+<!--------------------------------------------------------------------->
+<!-- Name resolution                                                 -->
+<!--------------------------------------------------------------------->
+<h1 id="name-resolution"></h1>
+<moveto-doc->
+    <p>
+        <b><a href="#semantic-elements.declarations">User defined elements</a></b>, or <a href="#name-resolution">Symbols</a>, can be referenced to use them as <a href="#types">types</a>, access their value or perform <a href="#routine-calls">routine calls</a>.
+        This is done through their <b>name</b> or <b>path</b>.
+    </p>
+    <p>
+        The name is the <a href="#identifiers">identifier</a> that was used to declare the <a href="#name-resolution">symbol</a>, optionally followed, if the symbol is a <a href="#templates">template</a>,
+        by <elm-><code>&lt;</code><code>&gt;</code></elm-> tokens containing the <a href="#types">types</a> that identify the generated <a href="#name-resolution">symbol</a>.<br>
+        Names are used to reference <a href="#name-resolution">symbols</a> that are declared in the current <a href="#scopes">scope</a> or in one of the enclosing ones.
+    </p>
+    <p>
+        Paths, instead, are used to reference <a href="#name-resolution">symbols</a> declared in <a href="#scopes">scopes</a> that are not parents of the current <a href="#scopes">scope</a>.<br>
+        They consist of the names of the enclosing <a href="#scopes">scopes</a> of the <a href="#name-resolution">symbol</a> and the name of the <a href="#name-resolution">symbol</a> itself separated by <code>.</code> tokens, starting from the outermost.<br>
+        The <code>.</code> token is used to access the children <a href="#name-resolution">symbols</a> of the <a href="#scopes">scope</a>.<br>
+        Paths work in the same way as file paths, with <a href="#scopes">scopes</a> acting like directories.
+    </p>
+    <p>
+        The path of a symbol can start from any of its enclosing <a href="#scopes">scopes</a>.<br>
+        <a href="#name-resolution">Symbols</a> declared within unnamed <a href="#scopes">scopes</a> cannot be referenced from the outside.<br>
+        The <code>module</code> identifier is used to reference the <a href="#scopes">scope</a> of the current <a href="#modules">module</a>.<br>
+        A path that starts from the module <a href="#scopes">scope</a> of the current <a href="#modules">module</a> or any of the <a href="#import-directive">imported</a> ones is called an absolute path.
+    </p>
+</moveto-doc->
+<moveto-examples->
+    <example->
+        <label->Example</label->
+        <div>
+            <c->// Absolute path: module</c->
+
+
+            <c->// Absolute path: module.s</c->
+            <w->namespace</w-> s {
+                <c->// Absolute path: module.s.fun</c->
+                <t->void</t-> <f->fun</f->(<t->uint</t-> <p->n</p->) {
+                    <c->//        ^</c->
+                    <c->// Absolute path: module.s.fun.n</c->
+                }
+            }
+
+            <w->namespace</w-> {
+                <c->// No absolute path, cannot be referenced from outside</c->
+                <t->uint</t-> n;
+            }
+        </div>
+    </example->
+    <example->
+        <label->Example</label->
+        <div>
+            <c->// Absolute path: module</c->
+
+
+            <c->// Absolute path: module.s</c->
+            <w->namespace</w-> s {
+                <c->// Absolute path: module.s.fun</c->
+                <t->void</t-> <f->fun</f->(<t->uint</t-> <p->n</p->) {
+                    <c->//        ^</c->
+                    <c->// Absolute path: module.s.fun.n</c->
+                }
+            }
+
+            <w->namespace</w-> {
+                <c->// No absolute path, cannot be referenced from outside</c->
+                <t->uint</t-> n;
+            }
+        </div>
+    </example->
+</moveto-examples->

@@ -1,0 +1,67 @@
+
+<!--------------------------------------------------------------------->
+<!-- Declarations                                                    -->
+<!--------------------------------------------------------------------->
+<h1 id="language-structure.declarations"></h1>
+<moveto-doc->
+    <p>
+        <b>Declarations</b> define user-defined elements, such as <a href="#structs">structs</a>, <a href="#enums">enums</a>, <a href="#routines">routines</a>, <a href="#namespaces">namespaces</a>, <a href="#templates">templates</a>, <a href="#symbol-aliases">symbol aliases and <a href="#variables">variables</a>.</a><br>
+        Anything defined through a declaration is called a <b>Symbol</b>. Symbols can be referenced through their <a href="#name-resolution">path</a>. This is explained in <a href="#name-resolution">Name resolution</a>.<br>
+        There are a total of 11 user-defined elements. They are available in both languages.
+    </p>
+    <ul>
+        <li>Types</li>
+        <ul class="summary-list">
+            <li>
+                <span><elm-><a href="#enums"><code><w->enum</w-></code></a> declaration</elm-></span>
+                <span>Declares an <a href="#enums">enum</a>, a type used to group <a href="#compile-time-expressions">compile time expressions</a> of the same <a href="#types">type</a>.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#enums"><code><w->enum</w-></code></a> element declaration</elm-></span>
+                <span>Defines one or more <a href="#enums">enum</a> elements and their values.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#structs"><code><w->struct</w-></code></a> declaration</elm-></span>
+                <span>Declares a <a href="#structs">struct</a>, a type used to group <a href="#variables">variables</a> of different <a href="#types">types</a>.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#structs"><code><w->struct</w-></code></a> member declaration</elm-></span>
+                <span>Defines one ore more <a href="#structs">struct</a> members.</span>
+            </li>
+        </ul><br>
+        <li>Routines</li>
+        <ul class="summary-list">
+            <li>
+                <span><elm-><a href="#functions">Function</a> declaration</elm-></span>
+                <span>Declares a <a href="#functions">function</a>, a prefix <a href="#routines">routine</a> that requires parentheses to be <a href="#function-calls">called</a>.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#operators">Operator</a> declaration</elm-></span>
+                <span>Declares an <a href="#operators">operator</a>, a <a href="#routines">routine</a> that doesn't require parentheses to be <a href="#operator-calls">called</a> and can use multiple symbolic or alphanumeric <a href="#identifiers">identifiers</a>.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#routine-parameters">Routine parameter</a></elm-></span>
+                <span>Defines an input values for a <a href="routines">routine</a>.</span>
+            </li>
+        </ul><br>
+        <li>Misc</li>
+        <ul class="summary-list">
+            <li>
+                <span><elm-><a href="#namespaces"><code><w->namespace</w-></code></a> declaration</elm-></span>
+                <span>Declares a named <a href="#scopes">scope</a>.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#templates"><code><w->template</w-></code></a> declaration</elm-></span>
+                <span>Generates <a href="#structs">struct</a>, <a href="#functions">function</a> or <a href="#operators">operator</a> declarations based on the explicit <a href="#templates">template</a> arguments or the <a href="#types">types</a> used in the <a href="#routine-calls">routine calls</a>.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#symbol-aliases"><code><w->alias</w-></code></a> declaration</elm-></span>
+                <span>Declares an alternative <a href="#symbol-paths">path</a> for a <a href="#name-resolution">symbol</a>.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#variables">Variable</a> declaration</elm-></span>
+                <span>Declares one or more named memory locations that can store <a href="#values">values</a>.</span>
+            </li>
+        </ul>
+    </ul>
+</moveto-doc->

@@ -1,0 +1,31 @@
+
+<!--------------------------------------------------------------------->
+<!-- Directives                                                      -->
+<!--------------------------------------------------------------------->
+<h1 id="language-structure.directives"></h1>
+<moveto-doc->
+    <p>
+        <b>Directives</b> are instructions that <b>modify</b> the <a href="#modules">module</a> on a <b>semantic</b> level.<br>
+        They are used to define which <a href="#name-resolution">symbols</a> are <a href="#import-directive">imported</a> and/or <a href="#export-directive">exported</a> and to programmatically generate code.
+    </p>
+    <ul>
+        <li>Module interface</li>
+        <ul class="summary-list">
+            <li>
+                <span><elm-><a href="#import-directive">Improt</a> directive</elm-></span>
+                <span><a href="#import-directive">Imports</a> <a href="#name-resolution">symbols</a> from a <a href="#modules">module</a>.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#export-directive"><code><w->export</w-></code></a> directive</elm-></span>
+                <span>Defines the <a href="#name-resolution">symbols</a> the <a href="#modules">module</a> provides when <a href="#import-directive">imported</a>.</span>
+            </li>
+        </ul>
+        <li>Code generation</li>
+        <ul class="summary-list">
+            <li>
+                <span><elm-><a href="#construct-directive"><code><w->construct</w-></code></a> directive</elm-></span>
+                <span>Generates code in the corresponding language by compiling and running Lumen code before the compilation phase. //TODO other languages</span>
+            </li>
+        </ul>
+    </ul>
+</moveto-doc->

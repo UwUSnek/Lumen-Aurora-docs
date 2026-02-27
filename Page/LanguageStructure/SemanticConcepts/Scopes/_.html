@@ -1,0 +1,138 @@
+
+<!--------------------------------------------------------------------->
+<!-- Scopes                                                          -->
+<!--------------------------------------------------------------------->
+<h1 id="scopes"></h1>
+<moveto-doc->
+    <p>
+        <b>Scopes</b> define the <a href="#name-resolution"><b>path</b></a> to the <b>symbols</b> declared within them.<br>
+        Any portion of code enclosed in <elm-><code>{</code><code>}</code></elm-> tokens defines a new scope.
+        The only exception is the module scope, which contains anything declared in the module.
+    </p>
+    <p>
+        Each scope can only contain certain types of <a href="#name-resolution">symbols</a>:
+    </p>
+
+    <div class="scope-table-container">
+        <div class="table-container scope-table-left-container"><table class="scope-table-left">
+            <tr><th class="medium"><div><span>Scope / Can contain</span></div></th></tr>
+            <tr><th class="medium"><div><a href="#modules">       Module                                     </a></div></th></tr>
+            <tr><th class="medium"><div><a href="#namespaces">    Namespace                                  </a></div></th></tr>
+            <tr><th class="medium"><div><a href="#enums">         Enum<span class="hidden">&nbsp;*</span>    </a></div></th></tr>
+            <tr><th class="medium"><div><a href="#structs">       Struct<span class="hidden">&nbsp;*</span>  </a></div></th></tr>
+            <tr><th class="medium"><div><a href="#functions">     Function<span class="hidden">&nbsp;*</span></a></div></th></tr>
+            <tr><th class="medium"><div><a href="#opertors">      Operator<span class="hidden">&nbsp;*</span></a></div></th></tr>
+            <tr><th class="medium"><div><a href="#unnamed-scopes">Unnamed<br>scope    </a></div></th></tr>
+        </table></div>
+        <div class="table-container scope-table-right-container"><table class="scope-table-right">
+            <tr>
+                <th><div><a class="medium" href="#namespaces">    Namespace                                  </a></div></th>
+                <th><div><a class="medium" href="#enums">         Enum<span class="hidden">&nbsp;*</span>    </a></div></th>
+                <th><div><a class="medium" href="#structs">       Struct<span class="hidden">&nbsp;*</span>  </a></div></th>
+                <th><div><a class="medium" href="#functions">     Function<span class="hidden">&nbsp;*</span></a></div></th>
+                <th><div><a class="medium" href="#operators">     Operator<span class="hidden">&nbsp;*</span></a></div></th>
+                <th><div><a class="medium" href="#variables">     Variable                                   </a></div></th>
+                <th><div><a class="medium" href="#symbol-aliases">Symbol<br>alias                            </a></div></th>
+                <th><div><a class="medium" href="#enums">         Enum<br>member                             </a></div></th>
+                <th><div><a class="medium" href="#structs">       Struct<br>member                           </a></div></th>
+                <th><div><a class="medium" href="#routines">      Routine<br>parameter                       </a></div></th>
+            </tr>
+            <tr>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+            </tr>
+            <tr>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div class="nobefore"><span>Inherited</span></div></td>
+                <td class="scope-table-y"><div class="nobefore"><span>Inherited</span></div></td>
+                <td class="scope-table-y"><div class="nobefore"><span>Inherited</span></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+            </tr>
+            <tr>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+            </tr>
+            <tr>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+            </tr>
+            <tr>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-y"><div class="nobefore noafter"><div>Yes<span class="hidden" style="min-width: fit-content; max-width: fit-content;">&nbsp;**</span></div></div></td>
+            </tr>
+            <tr>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-y"><div class="nobefore noafter"><div>Yes<span class="hidden" style="min-width: fit-content; max-width: fit-content;">&nbsp;**</span></div></div></td>
+            </tr>
+            <tr>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+            </tr>
+        </table></div>
+    </div>
+    <div>
+        <syntax-note->
+            * Also applies to the respective <a href="templates">template</a>.<br>
+            ** Declared in the routine signature, but part of the routine scope.
+        </syntax-note->
+    </div>
+</moveto-doc->
+
+
+
+#include "./Page/LanguageStructure/SemanticConcepts/Scopes/NameResolution.html"
+#include "./Page/LanguageStructure/SemanticConcepts/Scopes/NameShadowing.html"
+#include "./Page/LanguageStructure/SemanticConcepts/Scopes/MultipleDeclarations.html"

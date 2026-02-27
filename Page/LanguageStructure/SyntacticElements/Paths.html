@@ -1,0 +1,29 @@
+
+<!-- TODO RENAME SYMBOL PATHS as they aren't just for symbols -->
+<!--------------------------------------------------------------------->
+<!-- Paths                                                           -->
+<!--------------------------------------------------------------------->
+<h1 id="language-structure.paths"></h1>
+<moveto-doc->
+    <p>
+        Paths are used to reference things declared in the code, either explicitly or implicitly, in order to retrieve or pass informations about them.<br>
+        Any accessible module, namespace, symbol alias, primitive type, enum, struct, special type, routine, variable and temporary variable is considered a symbol.<br>
+        Paths are a foundamental part of most <a href="#name-resolution">semantic elements</a>.
+    </p>
+    <p>
+        Type paths are a subset of Symbol paths that point to symbols suitable to be used as types, such as primitive types, enums, structs and special types.
+    </p>
+    <p>
+        Reflection paths are a subset of Symbol paths that can access compile time informations about the referenced symbol. These are detailedly explained in <a href="#reflection">Reflection</a>.
+    </p>
+    <syntax->
+        <label- id="copy.syntax--path-basic">Basic path</label->
+        <label- id="copy.syntax--path-template">Template path</label->
+        <label- id="copy.syntax--path-reflection">Reflection path</label->
+        <label- id="copy.syntax--path-type-basic">Basic type path</label->
+        <label- id="copy.syntax--path-type-function">Function type path</label->
+        <label- id="copy.syntax--path-type-typeof">Typeof type path</label->
+        <label- id="copy.syntax--path-type-auto">Auto type path</label->
+        <label- id="copy.syntax--path-type-modifiers">Type modifiers</label->
+    </syntax->
+</moveto-doc->

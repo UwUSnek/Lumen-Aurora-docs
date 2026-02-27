@@ -1,0 +1,89 @@
+
+<!--------------------------------------------------------------------->
+<!-- Statements                                                      -->
+<!--------------------------------------------------------------------->
+<h1 id="language-structure.statements"></h1>
+<moveto-doc->
+    <p>
+        <b>Statements</b> perform actions during runtime. They define the behaviour of each <a href="#routines">routine</a>, their return value and runtime performance.<br>
+        Statements are hard coded into the languages and cannot be modified. There are a total of 16 statements, 2 of which can only be used in their respective language.
+    </p>
+    <ul>
+        <li>Selection</li>
+        <ul class="summary-list">
+            <li>
+                <span><elm-><a href="#if-statement"><code><w->if</w-></code></a> statement</elm-></span>
+                <span>Executes a <a href="#statements">statement</a> if its condition evaluates to <a href="#boolean-type"><code><k->true</k-></code></a>.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#match-statement"><code><w->match</w-></code></a> statement</elm-></span>
+                <span>Executes <a href="#statements">statements</a> based on the value of an <a href="#expressions">expression</a>.</span>
+            </li>
+        </ul><br>
+        <li>Iteration</li>
+        <ul class="summary-list">
+            <li>
+                <span><elm-><a href="#for-loops"><code><w->for</w-></code></a> loop</elm-></span>
+                <span>Executes a <a href="#statements">statement</a> a fixed amount of times.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#while-loops"><code><w->while</w-></code></a> loop</elm-></span>
+                <span>Executes a <a href="#statements">statement</a> until its condition evaluates to <a href="#boolean-type"><code><k->false</k-></code></a>.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#continue-statement"><code><w->continue</w-></code></a> statement</elm-></span>
+                <span>Skips an arbitrary number of iterations of the innermost enclosing <a href="#iteration">loop</a>.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#break-statement"><code><w->break</w-></code></a> statement</elm-></span>
+                <span>Skips all the remaining iterations of an arbitrary number of enclosing <a href="#iteration">loops</a>, starting from the innermost.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#once-statement"><code><w->once</w-></code></a> statement</elm-></span>
+                <span>Executes a <a href="#statements">statement</a> during the first iteration of the innermost enclosing <a href="#iteration">loop</a>.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#then-statement"><code><w->then</w-></code></a> statement</elm-></span>
+                <span>Executes a <a href="#statements">statement</a> if the immediatly preceding <a href="#iteration">loop</a> didn't stop through a <a href="#break-statement"><code><w->break</w-></code> statement</a> and completed at least one iteration.</span>
+            </li>
+        </ul><br>
+        <li>Non-local</li>
+        <ul class="summary-list">
+            <li>
+                <span><elm-><a href="#return-statement"><code><w->return</w-></code></a> statement</elm-></span>
+                <span>Returns the flow control to the caller <a href="#routines">routine</a>.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#defer-statement"><code><w->defer</w-></code></a> statement</elm-></span>
+                <span>Evaluates all the <a href="#routine-calls">arguments</a> of a <a href="#routine-calls">routine call</a> but delays its execution until the first <a href="#return-statement"><code><w->return</w-></code> statement</a> is encountered and all the <a href="#routine-calls">routine calls</a> of subsequent <a href="defer-statement"><code><w->defer</w-></code> statements</a> are executed.</span>
+            </li>
+        </ul><br>
+        <li>Misc</li>
+        <ul class="summary-list">
+            <li>
+                <span><elm-><a href="#else-statement"><code><w->else</w-></code></a> statement</elm-></span>
+                <span>Executes a <a href="#statements">statement</a> if the <a href="#bool-type">condition</a> of the immediatly preceding <a href="#iteration">loop</a> or <a href="#if-statement"><code><w->if</w-></code> statement</a> evaluated to <code><t->false</t-></code> before the first iteration.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#expressions">Expression statement</a></elm-></span>
+                <span>Evaluates an <a href="#expresisons">expression</a>.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#unnamed-scopes">Unnamed scope</a></elm-></span>
+                <span>Groups multiple <a href="#statements">statements</a> in one.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#empty-statement">Empty statement</a></elm-></span>
+                <span>Does nothing.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#inline-glsl">Inline GLSL</a></elm-></span>
+                <span><Lumen-logo-></Lumen-logo-> Allows GLSL 4.60 code to be used from within Lumen.</span>
+            </li>
+            <li>
+                <span><elm-><a href="#inline-cpp">Inline C++</a></elm-></span>
+                <span><aurora-logo-></aurora-logo-> Allows C++20 code to be used from within Aurora.</span>
+            </li>
+        </ul>
+    </ul>
+</moveto-doc->
