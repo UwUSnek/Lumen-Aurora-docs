@@ -57,3 +57,6 @@
 .summary-list li > div {
     border-bottom: 1px solid var(--bd-table-cell)
 }
+.summary-list li > div > span:last-child > span {
+    opacity: 50%;
+}

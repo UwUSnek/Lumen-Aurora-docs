@@ -2,14 +2,16 @@
 
 
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="100px" height="100px" viewBox="0 0 100 100">
-
+    <style type="text/css">
+        .arrow{
+            stroke: hsl(212, 14%, 24%);
+            stroke-width: 2.5px;
+            : round;
+            fill: none;
+        }
+    </style>
     <path vector-effect="non-scaling-stroke" shape-rendering="crisp edges" class="arrow-head" d="
-        M 100,25
-        L 100,75
-        M 95,50
-        l -10,-10
-        M 95,50
-        l -10,10
-
+        M -12,25
+        L -12,75
     "/>
 </svg>

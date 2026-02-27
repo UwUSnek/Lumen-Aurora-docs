@@ -305,11 +305,11 @@
             </li>
             <li>
                 <span><a href="#then-statement"><code><w->then</w-></code></a></span>
-                <span>Used to execute a statement based on the outcome of the preceding loop or if.</span>
+                <span>Used to execute a statement based on the outcome of the preceding loop, <a href="#if-statement">if statement</a> or <a href="#match-statement">match statement</a>.</span>
             </li>
             <li>
                 <span><a href="#else-statement"><code><w->else</w-></code></a></span>
-                <span>Used to execute a statement based on the outcome of the preceding loop or if.</span>
+                <span>Used to execute a statement based on the outcome of the preceding loop, <a href="#if-statement">if statement</a> or <a href="#match-statement">match statement</a>.</span>
             </li>
             <li>
                 <span><a href="#return-statement"><code><w->return</w-></code></a></span>
@@ -453,10 +453,11 @@
             <li>
                 <span><code>:</code></span>
                 <span>
-                    Specifies the base type of an enum, or the priority of an operator<br>
+                    Specifies the base type of an enum, the priority of an operator, or introduces a match case<br>
                     <span class="meta-keyword-constraint">
                         [When used after the identifier of an enum declaration].<br>
-                        [When used at the end of the signature of an <a href="#operators">operator</a> or <a href="#templates">operator template</a> declaration].
+                        [When used at the end of the signature of an <a href="#operators">operator</a> or <a href="#templates">operator template</a> declaration].<br>
+                        [When used after the case values of a <a href="#match-statement">match statement</a> case].
                     </span>
                 </span>
             </li>

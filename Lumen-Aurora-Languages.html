@@ -1052,11 +1052,11 @@
             </li>
             <li>
                 <span><a href="#then-statement"><code><w->then</w-></code></a></span>
-                <span>Used to execute a statement based on the outcome of the preceding loop or if.</span>
+                <span>Used to execute a statement based on the outcome of the preceding loop, <a href="#if-statement">if statement</a> or <a href="#match-statement">match statement</a>.</span>
             </li>
             <li>
                 <span><a href="#else-statement"><code><w->else</w-></code></a></span>
-                <span>Used to execute a statement based on the outcome of the preceding loop or if.</span>
+                <span>Used to execute a statement based on the outcome of the preceding loop, <a href="#if-statement">if statement</a> or <a href="#match-statement">match statement</a>.</span>
             </li>
             <li>
                 <span><a href="#return-statement"><code><w->return</w-></code></a></span>
@@ -1183,10 +1183,11 @@
             <li>
                 <span><code>:</code></span>
                 <span>
-                    Specifies the base type of an enum, or the priority of an operator<br>
+                    Specifies the base type of an enum, the priority of an operator, or introduces a match case<br>
                     <span class="meta-keyword-constraint">
                         [When used after the identifier of an enum declaration].<br>
-                        [When used at the end of the signature of an <a href="#operators">operator</a> or <a href="#templates">operator template</a> declaration].
+                        [When used at the end of the signature of an <a href="#operators">operator</a> or <a href="#templates">operator template</a> declaration].<br>
+                        [When used after the case values of a <a href="#match-statement">match statement</a> case].
                     </span>
                 </span>
             </li>
@@ -5935,13 +5936,13 @@
                 <td data-arrows="lb"></td>
             </tr>
             <tr>
-                <td data-arrows="lt lb"></td>
+                <td data-arrows="|l lt lb"></td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td data-arrows="tr br ar"></td>
                 <td><s-vbtm-><eof-></eof-></s-vbtm-></td>
-                <td data-arrows="tr br lr ar"></td>
+                <td data-arrows="tr br lr ar |r"></td>
             </tr>
             <tr>
                 <td data-arrows="tr ar"></td>
@@ -5958,18 +5959,11 @@
 
 
 
-
-
-
-
-
-
-
     <syntax->
         <label- id="syntax--preprocessor-include">Include</label->
         <table>
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-vbtm->#include</s-vbtm-></td>
                 <td data-arrows="lr ar lb"></td>
                 <td><s-vbtm->"</s-vbtm-></td>
@@ -5977,7 +5971,7 @@
                 <td class="center"><elm->path/to/file</elm-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->"</s-vbtm-></td>
-                <td data-arrows="lr br ar"></td>
+                <td data-arrows="lr br ar |r"></td>
             </tr>
             <tr>
                 <td></td>
@@ -5996,22 +5990,16 @@
 
 
 
-
-
-
-
-
-
     <syntax->
         <label- id="syntax--preprocessor-line-splicing-token">Line splicing tokens</label->
         <table>
             <tr>
-                <td data-arrows="lr ar lb"></td>
+                <td data-arrows="|l lr ar lb"></td>
                 <td><s-vbtm->\</s-vbtm-></td>
                 <td data-arrows="lr br"></td>
                 <td data-arrows="lr lb ar"></td>
                 <td><s-vbtm-><nl-></nl-></s-vbtm-></td>
-                <td data-arrows="lr br ar"></td>
+                <td data-arrows="lr br ar |r"></td>
             </tr>
             <tr>
                 <td data-arrows="tr ar"></td>
@@ -6048,9 +6036,9 @@
         <label- id="syntax--declaration-module" class="s-decl"><a href="#modules">Module</a></label->
         <table class="s-decl">
             <tr>
-                <td data-arrows="lr br"></td>
+                <td data-arrows="|l lr br"></td>
                 <td data-arrows="lr"></td>
-                <td data-arrows="lr ar lb"></td>
+                <td data-arrows="lr ar lb |r"></td>
             </tr>
             <tr>
                 <td data-arrows="rt bt"></td>
@@ -6090,19 +6078,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     <syntax- class="qrt">
         <label- class="s-decl" id="syntax--misc-import-directive"><a href="#import-directive">Import directive</a></label->
         <table class="s-decl">
@@ -6125,10 +6100,10 @@
                 <td data-arrows="lr"></td>
                 <td data-arrows="br lr ar"></td>
                 <td><s-vbtm->;</s-vbtm-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
             <tr>
-                <td data-arrows="lr ar lt"></td>
+                <td data-arrows="|l lr ar lt"></td>
                 <td><s-vbtm->from</s-vbtm-></td>
                 <td data-arrows="lr-low ar-low tr-high ar-high"></td>
                 <td><s-expr-><t->[str]</t->&nbsp;module path</s-id-></td>
@@ -6183,10 +6158,10 @@
                 <td data-arrows="lr"></td>
                 <td data-arrows="br lr ar"></td>
                 <td><s-vbtm->;</s-vbtm-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-vbtm->export</s-vbtm-></td>
                 <td data-arrows="lr ar br"></td>
                 <td><s-path->symbol</s-path-></td>
@@ -6221,18 +6196,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     <syntax- class="qrt">
         <label- class="s-decl" id="syntax--misc-construct-directive"><a href="#construct-directive">Construct directive</a></label->
         <table class="s-decl">
@@ -6254,13 +6217,13 @@
         <label- id="syntax--path-reflection" class="s-path">Reflection path</label->
         <table class="s-path">
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-path->path&nbsp;<span class="hidden">(target)</span></s-path-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->:</s-sbtm-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-path->path&nbsp;<span class="hidden">(reflection value)</span></s-path-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
         <label- id="syntax--path-template" class="s-path">Template path</label->
@@ -6288,7 +6251,7 @@
                 <td></td>
             </tr>
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-path->path&nbsp;<span class="hidden">(template symbol)</span></s-path-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->&lt;</s-vbtm-></td>
@@ -6296,15 +6259,15 @@
                 <td><s-vbtm->,</s-vbtm-></td>
                 <td data-arrows="tl al tr ar"></td>
                 <td><s-vbtm->&gt;</s-vbtm-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
         <label- id="syntax--path-basic" class="s-path">Basic path</label->
         <table class="s-path">
             <tr>
-                <td data-arrows="lr br ar"></td>
+                <td data-arrows="|l lr br ar"></td>
                 <td><s-id->identifier<span class="hidden">&nbsp;*</span></s-id-></td>
-                <td data-arrows="lb lr ar"></td>
+                <td data-arrows="lb lr ar |r"></td>
             </tr>
             <tr>
                 <td data-arrows="rt"></td>
@@ -6328,7 +6291,7 @@
         <label- id="syntax--path-type-typeof" class="s-type">Typeof type path</label->
         <table class="s-type">
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-vbtm->typeof</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->(</s-vbtm-></td>
@@ -6338,21 +6301,21 @@
                 <td><s-vbtm->)</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-sub->type modifiers</s-sub-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
         <label- id="syntax--path-type-auto" class="s-type">Auto type path</label->
         <table class="s-type">
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-vbtm->auto</s-vbtm-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
         <label- id="syntax--path-type-function" class="s-type">Function type path</label->
         <table class="s-type">
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-type->return type</s-type-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->(</s-vbtm-></td>
@@ -6362,7 +6325,7 @@
                 <td><s-vbtm->)</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-sub->type modifiers</s-sub-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
             <tr>
                 <td></td>
@@ -6382,11 +6345,11 @@
         <label- id="syntax--path-type-basic" class="s-type">Basic type path</label->
         <table class="s-type">
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-path->path</s-path-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-sub->type modifiers</s-sub-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
         <label- id="syntax--path-type-modifiers" class="s-sub">Type modifiers</label->
@@ -6396,10 +6359,10 @@
                 <td data-arrows="lr"></td>
                 <td data-arrows="lr lb"></td>
                 <td data-arrows="lr"></td>
-                <td data-arrows="lr br ar"></td>
+                <td data-arrows="lr br ar |r"></td>
             </tr>
             <tr>
-                <td data-arrows="lr ar lt"></td>
+                <td data-arrows="|l lr ar lt"></td>
                 <td><s-vbtm->const</s-vbtm-></td>
                 <td data-arrows="lr tr ar"></td>
                 <td><s-vbtm->*</s-vbtm-></td>
@@ -6447,7 +6410,7 @@
                 <td></td>
             </tr>
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-vbtm->namespace</s-vbtm-></td>
                 <td data-arrows="lr ar lt"></td>
                 <td><s-id->name</s-id-></td>
@@ -6457,7 +6420,7 @@
                 <td><s-decl->declaration<span class="hidden">&nbsp;*</span></s-decl-></td>
                 <td data-arrows="lr tr ar lb"></td>
                 <td><s-vbtm->}</s-vbtm-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
             <tr>
                 <td></td>
@@ -6497,7 +6460,7 @@
         <label- class="s-decl" id="syntax--declaration-enum"><a href="#enums">Enum declaration</a></label->
         <table class="s-decl">
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-vbtm->enum</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-id->name</s-id-></td>
@@ -6511,7 +6474,7 @@
                 <td data-arrows="lr"></td>
                 <td data-arrows="lr ar lb"></td>
                 <td><s-vbtm->}</s-vbtm-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
             <tr>
                 <td></td>
@@ -6563,7 +6526,7 @@
                 <td></td>
             </tr>
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-id->name</s-id-></td>
                 <td data-arrows="lr ar lt"></td>
                 <td><s-vbtm->=</s-vbtm-></td>
@@ -6571,7 +6534,7 @@
                 <td><s-expr-><t->[base type]</t->&nbsp;value</s-expr-></td>
                 <td data-arrows="lr ar tr"></td>
                 <td><s-vbtm->;</s-vbtm-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
         <syntax-note->
@@ -6610,13 +6573,13 @@
                 <td></td>
             </tr>
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-sub->struct signature</s-sub-></td>
                 <td data-arrows="lr ar lt br"></td>
                 <td><s-sub->specialization constraint</s-sub-></td>
                 <td data-arrows="lr tr br ar"></td>
                 <td><s-sub->struct body</s-sub-></td>
-                <td data-arrows="lr ar lb"></td>
+                <td data-arrows="lr ar lb |r"></td>
             </tr>
             <tr>
                 <td></td>
@@ -6631,23 +6594,23 @@
         <label- class="s-sub" id="syntax--declaration-struct-signature"><a href="#structs">Struct signature</a></label->
         <table class="s-sub">
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-vbtm->struct</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-id->name</s-id-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
         <label- class="s-sub" id="syntax--declaration-struct-body"><a href="#structs">Struct body</a></label->
         <table class="s-sub">
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-vbtm->{</s-vbtm-></td>
                 <td data-arrows="lr br"></td>
                 <td data-arrows="lr"></td>
                 <td data-arrows="lr ar lb"></td>
                 <td><s-vbtm->}</s-vbtm-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
             <tr>
                 <td></td>
@@ -6671,13 +6634,13 @@
         <label- class="s-decl" id="syntax--declaration-struct-member"><a href="#structs">Struct member</a></label->
         <table class="s-decl">
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-type->type</s-type-></td>
                 <td data-arrows="lr br ar"></td>
                 <td><s-id->name</s-id-></td>
                 <td data-arrows="lb lr ar"></td>
                 <td><s-vbtm->;</s-vbtm-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
             <tr>
                 <td></td>
@@ -6725,13 +6688,13 @@
                 <td></td>
             </tr>
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-sub->function signature</s-sub-></td>
                 <td data-arrows="lr ar lt br"></td>
                 <td><s-sub->specialization constraint</s-sub-></td>
                 <td data-arrows="lr tr br ar"></td>
                 <td><s-sub->routine body</s-sub-></td>
-                <td data-arrows="lr ar lb"></td>
+                <td data-arrows="lr ar lb |r"></td>
             </tr>
             <tr>
                 <td></td>
@@ -6755,13 +6718,13 @@
                 <td></td>
             </tr>
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-sub->operator signature</s-sub-></td>
                 <td data-arrows="lr ar lt br"></td>
                 <td><s-sub->specialization constraint</s-sub-></td>
                 <td data-arrows="lr tr br ar"></td>
                 <td><s-sub->routine body</s-sub-></td>
-                <td data-arrows="lr ar lb"></td>
+                <td data-arrows="lr ar lb |r"></td>
             </tr>
             <tr>
                 <td></td>
@@ -6815,7 +6778,7 @@
                 <td></td>
             </tr>
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-type->return type</s-type-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-id->name</s-id-></td>
@@ -6825,7 +6788,7 @@
                 <td><s-vbtm->,</s-vbtm-></td>
                 <td data-arrows="tl tr br ar al"></td>
                 <td><s-vbtm->)</s-vbtm-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
             <tr>
                 <td></td>
@@ -6844,7 +6807,7 @@
         <label- class="s-sub" id="syntax--declaration-operator-signature"><a href="#operators">Operator signature</a></label->
         <table class="s-sub">
             <tr>
-                <td data-arrows="| lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-type->return type</s-type-></td>
                 <td data-arrows="lb rb"></td>
                 <td data-arrows="rl"></td>
@@ -6856,7 +6819,7 @@
                 <td><s-vbtm->:</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-expr-><t->[ulong]</t-> &nbsp;priority</s-expr-></td>
-                <td data-arrows="lr ar|"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
             <tr>
                 <td></td>
@@ -6907,13 +6870,13 @@
         <label- class="s-sub" id="syntax--declaration-routine-body"><a href="#routines">Routine body</a></label->
         <table class="s-sub">
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-vbtm->{</s-vbtm-></td>
                 <td data-arrows="lr br"></td>
                 <td data-arrows="lr"></td>
                 <td data-arrows="lr ar lb"></td>
                 <td><s-vbtm->}</s-vbtm-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
             <tr>
                 <td></td>
@@ -6949,28 +6912,22 @@
         <label- class="s-decl" id="syntax--declaration-basic-parameter"><a href="#basic-parameters">Basic parameter</a></label->
         <table class="s-decl">
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-type->type</s-type-></td>
                 <td data-arrows="lr ar"></td>
-                <td><s-id->name</s-id-></td>
+                <td><s-id->name</s-id |r-></td>
             </tr>
         </table>
         <label- class="s-decl" id="syntax--declaration-optional-parameter"><a href="#optional-parameters">Optional parameter</a></label->
         <table class="s-decl">
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-decl->basic parameter</s-decl-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->=</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-expr-><t->[type]</t->&nbsp;value</s-expr-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
         <label- class="s-decl" id="syntax--declaration-function-parameter-pack"><a href="#function-parameter-packs">Function parameter pack</a></label->
@@ -6985,23 +6942,23 @@
                 <td></td>
             </tr>
             <tr>
-                <td data-arrows="lr ar lt"></td>
+                <td data-arrows="|l lr ar lt"></td>
                 <td><s-type->type</s-type-></td>
                 <td data-arrows="lr ar tr"></td>
                 <td><s-id->name</s-id-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->...</s-vbtm-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
         <label- class="s-decl" id="syntax--declaration-reference-parameter"><a href="#reference-parameters">Reference parameter</a></label->
         <table class="s-decl">
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-decl->basic parameter</s-decl-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->&</s-vbtm-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
     </syntax->
@@ -7064,10 +7021,10 @@
                 <td data-arrows="lr"></td>
                 <td data-arrows="br lr ar"></td>
                 <td><s-vbtm->;</s-vbtm-></td>
-                <td data-arrows="lr ar|"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
             <tr>
-                <td data-arrows="| lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-type->type</s-type-></td>
                 <td data-arrows="lr br ar"></td>
                 <td><s-id->name</s-id-></td>
@@ -7110,7 +7067,7 @@
         <label- class="s-decl" id="syntax--declaration-symbol-alias"><a href="#symbol-aliases">Symbol alias declaration</a></label->
         <table class="s-decl">
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-vbtm->alias</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-path->symbol</s-path-></td>
@@ -7120,7 +7077,7 @@
                 <td><s-id->name</s-id-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->;</s-vbtm-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
     </syntax->
@@ -7140,7 +7097,7 @@
         <label- class="s-sub" id="syntax--declaration-specialization-constraint"><a href="#specialization-constraints">Specialization constraint</a></label->
         <table class="s-sub">
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-vbtm->when</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->(</s-vbtm-></td>
@@ -7148,7 +7105,7 @@
                 <td><s-expr-><t->[bool]</t->&nbsp;condition</s-expr-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->)</s-vbtm-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
     </syntax->
@@ -7186,31 +7143,31 @@
         <label- class="s-decl" id="syntax--declaration-template-struct"><a href="#templates">Struct template declaration</a></label->
         <table class="s-decl">
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-sub->template signature<span class="hidden">&nbsp;*</span></s-sub-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-decl->struct declaration</s-decl-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
         <label- class="s-decl" id="syntax--declaration-template-function"><a href="#templates">Function template declaration</a></label->
         <table class="s-decl">
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-sub->template signature<span class="hidden">&nbsp;*</span></s-sub-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-decl->function declaration</s-decl-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
         <label- class="s-decl" id="syntax--declaration-template-operator"><a href="#templates">Operator template declaration</a></label->
         <table class="s-decl">
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-sub->template signature<span class="hidden">&nbsp;*</span></s-sub-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-decl->operator declaration</s-decl-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
         <label- class="s-sub" id="syntax--declaration-template-signature"><a href="#templates">Template signature</a></label->
@@ -7238,7 +7195,7 @@
                 <td></td>
             </tr>
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-vbtm->template</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->&lt;</s-vbtm-></td>
@@ -7246,7 +7203,7 @@
                 <td><s-vbtm->,</s-vbtm-></td>
                 <td data-arrows="tl al tr br ar"></td>
                 <td><s-vbtm->&gt;</s-vbtm-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
             <tr>
                 <td></td>
@@ -7274,32 +7231,21 @@
                 <td></td>
             </tr>
             <tr>
-                <td data-arrows="lr ar lt"></td>
+                <td data-arrows="|l lr ar lt"></td>
                 <td><s-type->type<span class="hidden">&nbsp;*</span></s-type-></td>
                 <td data-arrows="lr tr ar"></td>
                 <td><s-id->name</s-id-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
         <label- class="s-decl" id="syntax--declaration-template-parameter-pack"><a href="#template-parameter-packs">Template parameter pack</a></label->
         <table class="s-decl">
             <tr>
-                <td data-arrows="br ar"></td>
-                <td><s-vbtm->type</s-vbtm-></td>
-                <td data-arrows="lb"></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td data-arrows="lr ar lt"></td>
-                <td><s-type->type<span class="hidden">&nbsp;*</span></s-type-></td>
-                <td data-arrows="lr tr ar"></td>
-                <td><s-id->name</s-id-></td>
+                <td data-arrows="|l lr ar"></td>
+                <td><s-decl->template parameter</s-decl-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->...</s-vbtm-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
         <syntax-note->
@@ -7324,7 +7270,7 @@
         <label- class="s-sttm" id="syntax--statement-if"><a href="#if-statement">If statement</a></label->
         <table class="s-sttm">
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-vbtm->if</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->(</s-vbtm-></td>
@@ -7334,7 +7280,7 @@
                 <td><s-vbtm->)</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-sttm->statement</s-sttm-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
     </syntax->
@@ -7348,7 +7294,7 @@
         <label- class="s-sttm" id="syntax--statement-match"><a href="#match-statement">Match statement</a></label->
         <table class="s-sttm">
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-vbtm->match</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->(</s-vbtm-></td>
@@ -7362,7 +7308,7 @@
                 <td><s-sub->match case</s-sub-></td>
                 <td data-arrows="lr ar lb"></td>
                 <td><s-vbtm->}</s-vbtm-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
             <tr>
                 <td></td>
@@ -7393,16 +7339,22 @@
                 <td data-arrows="lr"></td>
                 <td data-arrows="lb"></td>
                 <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
             <tr>
-                <td data-arrows="lr br ar"></td>
+                <td data-arrows="|l lr br ar"></td>
                 <td><s-expr->value 1</s-expr-></td>
                 <td data-arrows="lr ar lt lb"></td>
                 <td><s-vbtm->to</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-expr->value 2</s-expr-></td>
                 <td data-arrows="lr tr ar lb"></td>
+                <td><s-vbtm->:</s-vbtm-></td>
+                <td data-arrows="lr ar"></td>
                 <td><s-sttm->statement</s-sttm-></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
             <tr>
                 <td data-arrows="rt"></td>
@@ -7412,6 +7364,9 @@
                 <td data-arrows="rl"></td>
                 <td data-arrows="rl"></td>
                 <td data-arrows="tl"></td>
+                <td></td>
+                <td></td>
+                <td></td>
                 <td></td>
             </tr>
         </table>
@@ -7449,7 +7404,7 @@
                 <td></td>
             </tr>
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-vbtm->for</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->(</s-vbtm-></td>
@@ -7459,7 +7414,7 @@
                 <td><s-vbtm->)</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-sttm->statement</s-sttm-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
             <tr>
                 <td></td>
@@ -7491,7 +7446,7 @@
                 <td data-arrows="lb"></td>
             </tr>
             <tr>
-                <td data-arrows="lr ar lt lb"></td>
+                <td data-arrows="|l lr ar lt lb"></td>
                 <td><s-expr->initializer expression</s-expr-></td>
                 <td data-arrows="lr tr br ar"></td>
                 <td><s-vbtm->;</s-vbtm-></td>
@@ -7501,7 +7456,7 @@
                 <td><s-vbtm->;</s-vbtm-></td>
                 <td data-arrows="lr ar lt"></td>
                 <td><s-expr->iteration expression</s-expr-></td>
-                <td data-arrows="lr tr ar"></td>
+                <td data-arrows="lr tr ar |r"></td>
             </tr>
             <tr>
                 <td data-arrows="tr ar"></td>
@@ -7520,13 +7475,13 @@
         <label- class="s-sub" id="syntax--statement-for-header-foreach"><a href="#for-statement">For-each for header</a></label->
         <table class="s-sub">
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-id->name</s-id-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->in</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-expr->value</s-expr-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
         <label- class="s-sub" id="syntax--statement-for-header-range"><a href="#for-statement">Range for header</a></label->
@@ -7545,7 +7500,7 @@
                 <td></td>
             </tr>
             <tr>
-                <td data-arrows="lr ar lt"></td>
+                <td data-arrows="|l lr ar lt"></td>
                 <td><s-expr->value 1</s-expr-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->to</s-vbtm-></td>
@@ -7555,7 +7510,7 @@
                 <td><s-vbtm->as</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-id->name</s-id-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
     </syntax->
@@ -7578,29 +7533,29 @@
         <label- class="s-sttm" id="syntax--statement-while"><a href="#while-statement">While statement</a></label->
         <table class="s-sttm">
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-sub->while header</s-sub-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-sttm->statement</s-sttm-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
         <label- class="s-sttm" id="syntax--statement-do-while"><a href="#while-statement">Do-while statement</a></label->
         <table class="s-sttm">
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-vbtm->do</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-sttm->statement</s-sttm-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-sub->while header</s-sub-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
         <label- class="s-sub" id="syntax--statement-while-header"><a href="#while-statement">While header</a></label->
         <table class="s-sub">
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-vbtm->while</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->(</s-vbtm-></td>
@@ -7608,7 +7563,7 @@
                 <td><s-expr-><t->[bool]</t->&nbsp;condition</s-expr-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->)</s-vbtm-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
     </syntax->
@@ -7640,28 +7595,19 @@
                 <td></td>
             </tr>
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-vbtm->continue</s-vbtm-></td>
                 <td data-arrows="lr ar lt"></td>
                 <td><s-expr-><t->[ulong]</t->&nbsp;amount</s-expr-></td>
                 <td data-arrows="lr tr ar"></td>
                 <td><s-vbtm->;</s-vbtm-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
-    </syntax->
 
 
 
 
-
-
-
-
-
-
-
-    <syntax- class="qrt">
         <label- class="s-sttm" id="syntax--statement-break"><a href="#continue-and-break-statements">Break statement</a></label->
         <table class="s-sttm">
             <tr>
@@ -7674,84 +7620,47 @@
                 <td></td>
             </tr>
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-vbtm->break</s-vbtm-></td>
                 <td data-arrows="lr ar lt"></td>
                 <td><s-expr-><t->[ulong]</t->&nbsp;amount</s-expr-></td>
                 <td data-arrows="lr tr ar"></td>
                 <td><s-vbtm->;</s-vbtm-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
-    </syntax->
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-    <syntax- class="qrt">
         <label- class="s-sttm" id="syntax--statement-once"><a href="#once-statement">Once statement</a></label->
         <table class="s-sttm">
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-vbtm->once</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-sttm->statement</s-sttm-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
-    </syntax->
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-    <syntax- class="qrt">
         <label- class="s-sttm" id="syntax--statement-then"><a href="#then-statement">Then statement</a></label->
         <table class="s-sttm">
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-vbtm->then</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-sttm->statement</s-sttm-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
-    </syntax->
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-    <syntax- class="qrt">
         <label- class="s-sttm" id="syntax--statement-return"><a href="#return-statement">Return statement</a></label->
         <table class="s-sttm">
             <tr>
@@ -7764,41 +7673,32 @@
                 <td></td>
             </tr>
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-vbtm->return</s-vbtm-></td>
                 <td data-arrows="lr ar lt"></td>
                 <td><s-expr-><t->[return type]</t->&nbsp;value<span class="hidden">&nbsp;*</span></s-expr-></td>
                 <td data-arrows="lr tr ar"></td>
                 <td><s-vbtm->;</s-vbtm-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
         <syntax-note->
             * "return type" = routine return type used in the function or operator signature
         </syntax-note->
-    </syntax->
 
 
 
 
-
-
-
-
-
-
-
-    <syntax- class="qrt">
         <label- class="s-sttm" id="syntax--statement-defer"><a href="#defer-statement">Defer statement</a></label->
         <table class="s-sttm">
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-vbtm->defer</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
                 <td><a href="#syntax--expression-routine-call"><s-expr->call<span class="hidden">&nbsp;*</span></s-expr-></a></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->;</s-vbtm-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
         <syntax-note->
@@ -7824,11 +7724,11 @@
         <label- class="s-sttm" id="syntax--statement-else"><a href="#else-statement">Else statement</a></label->
         <table class="s-sttm">
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-vbtm->else</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-sttm->statement</s-sttm-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
     </syntax->
@@ -7842,13 +7742,13 @@
         <label- class="s-sttm" id="syntax--statement-unnamed-scope"><a href="#unnamed-scopes">Unnamed scope</a></label->
         <table class="s-sttm">
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-vbtm->{</s-vbtm-></td>
                 <td data-arrows="lr br"></td>
                 <td data-arrows="lr"></td>
                 <td data-arrows="lr ar lb"></td>
                 <td><s-vbtm->}</s-vbtm-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
             <tr>
                 <td></td>
@@ -7898,11 +7798,11 @@
         <label- class="s-sttm" id="syntax--statement-expression"><a href="#expression-statement">Expression statement</a></label->
         <table class="s-sttm">
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-expr->expression</s-expr-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->;</s-vbtm-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
     </syntax->
@@ -7932,9 +7832,9 @@
         <label- class="s-sttm" id="syntax--statement-empty"><a href="#empty-statement">Empty statement</a></label->
         <table class="s-sttm">
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-vbtm->;</s-vbtm-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
     </syntax->
@@ -7954,9 +7854,9 @@
         <label- class="s-expr" id="syntax--expression-literal"><a href="#literals">Literal</a></label->
         <table class="s-expr">
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-expr->literal token</s-expr-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
     </syntax->
@@ -7972,7 +7872,7 @@
         <label- class="s-expr" id="syntax--expression-try"><a href="#try-expression">Try expression</a></label->
         <table class="s-expr">
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-vbtm->try</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->{</s-vbtm-></td>
@@ -7980,7 +7880,7 @@
                 <td><s-decl->module contents</s-decl-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->}</s-vbtm-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
     </syntax->
@@ -7996,9 +7896,9 @@
         <label- class="s-expr" id="syntax--expression-variable"><a href="#variables">Variables</a></label->
         <table class="s-expr">
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-path->path to variable</s-path-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
     </syntax->
@@ -8014,11 +7914,11 @@
         <label- class="s-expr" id="syntax--expression-temporary-variable"><a href="#temporary-variables">Temporary variables</a></label->
         <table class="s-expr">
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-vbtm->$</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-expr-><t->[ulong]</t->&nbsp;name&nbsp<span class="hidden">*</span></s-expr-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
         <syntax-note->
@@ -8037,9 +7937,9 @@
         <label- class="s-expr" id="syntax--expression-routine-parameter"><a href="#declarations.routine-parameters">Routine parameter</a></label->
         <table class="s-expr">
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-path->path to parameter</s-path-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
     </syntax->
@@ -8066,7 +7966,7 @@
                 <td></td>
             </tr>
             <tr>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-path->path to function</s-path-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->(</s-vbtm-></td>
@@ -8074,7 +7974,7 @@
                 <td><s-expr->argument</s-expr-></td>
                 <td data-arrows="lr ar lb tr"></td>
                 <td><s-vbtm->)</s-vbtm-></td>
-                <td data-arrows="lr ar"></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
             <tr>
                 <td></td>
@@ -8111,9 +8011,9 @@
                 <td data-arrows="lb tb"></td>
             </tr>
             <tr>
-                <td data-arrows="lt rt"></td>
+                <td data-arrows="|l lt rt"></td>
                 <td data-arrows="rl"></td>
-                <td data-arrows="tl tr ar"></td>
+                <td data-arrows="tl tr ar |r"></td>
             </tr>
         </table>
         <syntax-note->
