@@ -1,0 +1,30 @@
+
+<!--------------------------------------------------------------------->
+<!-- Types                                                           -->
+<!--------------------------------------------------------------------->
+<h1 id="types"></h1>
+<moveto-doc->
+    <p>
+        <b>Data types</b> define how <b><a href="#values">values</a></b> are <b>interpreted</b> during runtime and how they can be used within <a href="#expressions">expressions</a>.<br>
+    </p>
+    <p>
+        Both languages are statically types.<br>
+        Every <a href="#values">value</a> has an associated type, regardless of it being a <a href="#left-and-right-values">right</a> or a <a href="#left-and-right-values">left value</a>.<br>
+        The type of each <a href="#values">value</a> must be known at compile time, as there are no runtime type informations.
+    </p>
+    <p>
+        There are no classes, characters, matrices or vectors. The latter 2 are <a href="#symbol-aliases">aliases</a> of <a href="#arrays">array</a> types. See <a href="#standard-modules">Standard Modules</a>.
+        //FIXME ^
+
+        //TODO specify that types are a subset of symbol paths that contains any path to structs, enums, primitive types or special types, which are all considered symbols
+    </p>
+</moveto-doc->
+
+#include "./Page/LanguageSpecification/Types/PrimitiveTypes/_.html"
+#include "./Page/LanguageSpecification/Types/Enums/_.html"
+#include "./Page/LanguageSpecification/Types/Structs/_.html"
+#include "./Page/LanguageSpecification/Types/SpecialTypes/_.html"
+#include "./Page/LanguageSpecification/Types/ConstQualifier.html"
+#include "./Page/LanguageSpecification/Types/AutoSpecifier.html"
+#include "./Page/LanguageSpecification/Types/TypeofSpecifier.html"
+#include "./Page/LanguageSpecification/Types/ImplicitConversions/_.html"

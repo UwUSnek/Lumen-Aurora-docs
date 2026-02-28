@@ -1,0 +1,27 @@
+
+<!--------------------------------------------------------------------->
+<!-- Variables                                                       -->
+<!--------------------------------------------------------------------->
+<h1 id="variables"></h1>
+<moveto-doc->
+    <p>
+        <b>Variables</b> are <b>named memory locations</b> used to <b>store values</b> of the corresponding <a href="#types">type</a>.<br>
+        Multiple variables of the same <a href="#types">type</a> can be declared in one declaration. If an initializer <a href="#expressions">expression</a> is not specified, the variable has <a href="#undefined-values">undefined value</a>.<br>
+    </p>
+    <p>
+        Differently from other <a href="#name-resolution">symbols</a>, each variable <b>must be declared</b> before being <a href="#name-resolution">referenced</a>. Variables <b>cannot be redeclared</b> and their <b><a href="#types">type</a> cannot be changed</b> after the declaration.<br>
+    </p>
+    <syntax->
+        <label- id="copy.syntax--declaration-variable">Declaration syntax</label->
+    </syntax->
+</moveto-doc->
+<moveto-examples->
+    <example->
+        <label->Example</label->
+        <div>
+            <t->uint</t-> var = <k->0</k->;              <c->// Ok, var has value 0</c->
+            <t->float</t-> nya = <k->5</k-> + <k->var</k->;       <c->// Ok, nya has value 5.0</c->
+            <t->bool</t-> var2, &var3 = var2;   <c->// Ok, both var2 and var3 have undefined value.</c->
+        </div>
+    </example->
+</moveto-examples->

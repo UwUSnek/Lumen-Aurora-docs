@@ -1,0 +1,58 @@
+
+<!--------------------------------------------------------------------->
+<!-- Constructor function                                            -->
+<!--------------------------------------------------------------------->
+<h1 id="constructor-function"></h1>
+<moveto-doc->
+    <p>
+        The <b>constructor</b> function is a <b>special</b> struct <b>method</b> that is called each time a value of its parent struct type is created.<br>
+        It has <b>no name</b> and <b>no explicit return type</b> and it's declared using the <code><w->constructor</w-></code> meta keyword. Constructor calls always return an l-value of type their parent struct.<br>
+        Differently from other struct methods, the constructor can modify members when called on constant values.
+    </p>
+    <p>
+        Each struct can only have one constructor, but it can be specialized.<br>
+        Template constructors are allowed, although it is not possible to reference a specific template through the <elm-><code>&lt;</code><code>&gt;</code></elm->
+        meta keyword while creating a new value, meaning that the declaration is chosen solely based on the passed arguments.<br>
+        Constructors cannot be called after the value has been created, but each constructor declaration can call other declarations in the same struct.
+    </p>
+    <p>
+        By default, each struct contains one implicit constructor that takes a reference parameter for each member in the same order in which they were declared and initializes them by copying the value from their respective parameter.<br>
+        This constructor is not present in structs declared using the <code><w->nodefault</w-></code> meta keyword.<br>
+        Constructors are allowed to take no arguments.
+    </p>
+</moveto-doc->
+<moveto-examples->
+    <example->
+        <label->Example</label->
+        <div>
+            <w->struct</w-> <t->uint2</t-> {
+                <t->uint</t-> x, y;
+            }
+
+
+            <w->struct</w-> <t->uint3</t-> <w->nodefault</w-> {
+                <t->uint</t-> x, y, z;
+
+                <w->constructor</w->(<t->uint2</t-> <p->a</p->, <t->uint</t-> <p->b</p->) {
+                    x <f->=</f-> a.x;
+                    y <f->=</f-> a.y;
+                    z <f->=</f-> b;
+                }
+
+                <w->constructor</w->(<t->uint</t-> <p->a</p->, <t->uint2</t-> <p->b</p->) {
+                    x <f->=</f-> a;
+                    y <f->=</f-> b.x;
+                    z <f->=</f-> b.y;
+                }
+            }
+
+
+            <t->void</t-> <f->main</f->(){
+                <t->uint2</t-> a = { <k->1</k->, <k->2</k-> };     <c->// Default constructor</c->
+                <t->uint3</t-> b = { <k->a</k->, <k->5</k-> };     <c->// User-defined constructor</c->
+                <t->uint3</t-> c = { <k->5</k->, <k->a</k-> };     <c->// User-defined constructor</c->
+                <c->//uint3 d = (1, 2, 3);</c->  <ce->// Error, no suitable constructor declaration</ce->
+            }
+        </div>
+    </example->
+</moveto-examples->

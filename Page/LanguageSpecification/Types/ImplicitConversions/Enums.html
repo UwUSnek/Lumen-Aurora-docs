@@ -1,0 +1,34 @@
+
+<!--------------------------------------------------------------------->
+<!-- Implicit conversions - enums                                    -->
+<!--------------------------------------------------------------------->
+<h1 id="implicit-conversions.enums"></h1>
+<moveto-doc->
+    <p>
+        <a href="#expressions">Expressions</a> of enum <a href="#types">types</a> are <a href="#implicit-conversions">implicitly convertible</a> to their base <a href="#types">type</a>
+        and those whose base <a href="#types">type</a> is a <a href="#primitive-types">primitive type</a> are implicitly convertible to any <a href="#primitive-types">primitive type</a>,
+        following all the <a href="#impliti-conversions">implicit conversion rules</a> their base <a href="#types">type</a> is subject to.
+    </p>
+</moveto-doc->
+<moveto-examples->
+    <example->
+        <label->Example</label->
+        <div>
+            <w->enum</w-> <t->e</t-> : <t->int</t-> {
+                <k->a</k->, <k->b</k->, <k->c</k->;
+            }
+
+            <w->enum</w-> <t->e2</t-> : <t->e</t-> {
+                <k->a</k-> = e.<k->b</k->, <k->b</k-> = e.<k->a</k->;
+            }
+
+            <t->void</t-> <f->main</f->(){
+                <t->int</t->   a = e.<k->b</k->;
+                <t->float</t-> b = e.<k->c</k->;
+
+                <t->e</t->   c = e2.<k->a</k->;
+                <t->int</t-> d = <k->c</k->;
+            }
+        </div>
+    </example->
+</moveto-examples->

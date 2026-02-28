@@ -1,0 +1,32 @@
+
+<!--------------------------------------------------------------------->
+<!-- Auto specifier                                                  -->
+<!--------------------------------------------------------------------->
+<h1 id="auto-specifier"></h1>
+<moveto-doc->
+    <p>
+        The <b><code><t->auto</t-></code></b> specifier can be <b>used as</b> a <b><a href="#types">type</a></b> when declaring a <a href="#name-resolution">symbol</a>.<br>
+        The actual <a href="#types">type</a> of the <a href="#name-resolution">symbol</a> is determined by the initializer value if a <a href="#variables">variable</a>, or by the <a href="#return-statement">return value</a> if a <a href="#routines">routine</a>.<br>
+    </p>
+    <p>
+        <code><t->auto</t-></code> is not allowed in <a href="#structs">struct</a> member declarations or <a href="#routine-parameters">routine parameters</a>.<br>
+        The <a href="#types">types</a> of the <a href="#expressions">expressions</a> returned from an <code><t->auto</t-></code> <a href="#routines">routine</a> must match.
+    </p>
+</moveto-doc->
+<moveto-examples->
+    <example->
+        <label->Example 1</label->
+        <div>
+            <t->auto</t-> <f->func</f->(){
+                <w->return</w-> <k->true</k->;        <c->// func has type bool</c->
+            }
+
+            <t->auto</t-> <f->main</f->(){
+                <t->auto</t-> a = <k->2</k->;         <c->// a has type ulong</c->
+                <t->auto</t-> b = <k->5.4</k-> * <k->a</k->;   <c->// b has type double</c->
+                <t->auto</t-> c = <f->func</f->();    <c->// c has type bool</c->
+                <c->// No return statement, main has type void</c->
+            }
+        </div>
+    </example->
+</moveto-examples->

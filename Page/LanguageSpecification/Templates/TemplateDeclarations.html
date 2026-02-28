@@ -1,0 +1,29 @@
+
+<!--------------------------------------------------------------------->
+<!-- Template declarations                                           -->
+<!--------------------------------------------------------------------->
+<h1 id="template-declarations"></h1>
+<moveto-doc->
+    <p>
+        Struct and routines that use templates are introduced by the <code><w->template</w-></code> meta keyword,
+        followed by the <elm-><code>&lt;</code><code>&gt;</code></elm-> meta keywords, in which the template parameters are specified.<br>
+        The rest of the declaration is identical to standard routines or structs.<br>
+        Notice that //TODO (maybe?) in specialization constraints, the value of template parameters is decided after the instantiation, but everything else is done from the position of the parameter declaration
+    </p>
+    <syntax->
+        <label- id="copy.syntax--declaration-template-struct">Template struct declaration</label->
+        <label- id="copy.syntax--declaration-template-function">Template function declaration</label->
+        <label- id="copy.syntax--declaration-template-operator">Template operator declaration</label->
+        <label- id="copy.syntax--declaration-template-signature">Template signature</label->
+    </syntax->
+</moveto-doc->
+<moveto-examples->
+    <example->
+        <label->Example</label->
+        <div>
+            <w->template</w->&lt;<w->type</w-> <t->t</t->&gt; <t->t</t-> <f->add</f->(<t->t</t-> <p->a</p->, <t->t</t-> <p->b</p->){
+                <w->return</w-> a <f->+</f-> b;
+            }
+        </div>
+    </example->
+</moveto-examples->

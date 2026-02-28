@@ -1,0 +1,34 @@
+
+<!--------------------------------------------------------------------->
+<!-- Function declarations                                           -->
+<!--------------------------------------------------------------------->
+<h1 id="function-declarations"></h1>
+<moveto-doc->
+    <p>
+        <b>Functions</b> are a type of <b><a href="declarations.routines">routine</a></b> that requires parentheses to be called.<br>
+        They always use the infix notation and can take any number of <a href="#declarations.routine-parameters">parameters</a>.
+    </p>
+    <p>
+        Function <a href="#identifiers">identifiers</a> must be alphanumeric.
+    </p>
+    <syntax->
+        <label- id="copy.syntax--declaration-function">Declaration syntax</label->
+        <label- id="copy.syntax--declaration-function-signature">Function signature</label->
+        <label- id="copy.syntax--declaration-routine-body">Routine body</label->
+        <label- id="copy.syntax--declaration-specialization-constraint">Specialization constraint</label->
+    </syntax->
+</moveto-doc->
+<moveto-examples->
+    <example->
+        <label->Example - Add function</label->
+        <div>
+            <t->int</t-> <f->add</f->(<t->int</t-> <p->a</p->, <t->int</t-> <p->b</p->){
+                <w->return</w-> a + b;
+            }
+
+            <t->void</t-> <f->main</f->(){
+                <t->int</t-> n = </t-><f->add</f->(<k->4</k->, <k->6</k->)
+            }
+        </div>
+    </example->
+</moveto-examples->

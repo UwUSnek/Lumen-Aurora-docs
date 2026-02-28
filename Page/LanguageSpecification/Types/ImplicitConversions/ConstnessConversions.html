@@ -1,0 +1,46 @@
+
+<!--------------------------------------------------------------------->
+<!-- Implicit conversions - constness conversions                    -->
+<!--------------------------------------------------------------------->
+<h1 id="implicit-conversions.constness-conversions"></h1>
+<moveto-doc->
+    <p>
+        Non-<code><t->const</t-></code> pointer types are implicitly convertible to their respective <code><t->const</t-></code> pointer type.<br>
+        If the base type is itself a pointer type, then it must be convertible to the base type of the target type.<br>
+        For instance, an <code><t->int@</t-></code> expression would be convertible to <code><t->int const@</t-></code> only,
+        and an <code><t->int const@ const@</t-></code> would be convertible to <code><t->int@ const@</t-></code>, <code><t->int const@@</t-></code> and <code><t->int@@</t-></code>.
+    </p>
+    <p>
+        This also applies to const pointer types used as part of function types, with the added constraint that
+        all of the pointer types used in the source function type must be implicitly convertible to their respective pointer types in the target function type.
+    </p>
+    <p>
+        //FIXME REMOVE THIS. CONST IS NOT PART OF THE TYPE ANYMORE
+        //FIXME REMOVE THIS. CONST IS NOT PART OF THE TYPE ANYMORE
+        //FIXME REMOVE THIS. CONST IS NOT PART OF THE TYPE ANYMORE
+        //FIXME REMOVE THIS. CONST IS NOT PART OF THE TYPE ANYMORE
+        //FIXME REMOVE THIS. CONST IS NOT PART OF THE TYPE ANYMORE
+    </p>
+</moveto-doc->
+<moveto-examples->
+    <example->
+        <label->Example 1</label->
+        <div>
+            <t->void</t-> <f->main</f->(){
+                <t->int</t-> <k->n</k->;
+                <t->int</t-> <t->const</t->@ p = $<k->n</k->;    <c->// Ok, non-const to const conversion</c->
+                <c->//int@ p2 = p;</c->        <ce->// Error, cannot convert int const@ to int@</ce->
+            }
+        </div>
+        <label->Example 2</label->
+        <div>
+            <t->void</t-> <f->main</f->(){
+                <t->double const@</t->(<t->float@</t->, <t->float const@ const@</t->) f;
+                <f->f</f-> <f->=</f-> <t->double@</t->(<t->float@</t-> <p->a</p->, <t->float@@</t-> <p->b</p->) { <w->return</w-> <k->0</k->; };              <c->// Ok</c->
+                <f->f</f-> <f->=</f-> <t->double</t-> <t->const@</t->(<t->float@</t-> <p->a</p->, <t->float@</t-> <t->const@</t-> <p->b</p->) { <w->return</w-> <k->0</k->; };  <c->// Ok</c->
+                <c->//f = double const @(float const@ a, float@ const@ b) { return 0; };</c->
+                <ce->//  ^ Error, cannot convert double const@(float const@, float@ const@) to double const@(float@, float const@ const@)</ce->
+            }
+        </div>
+    </example->
+</moveto-examples->

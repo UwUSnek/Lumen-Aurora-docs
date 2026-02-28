@@ -1,0 +1,101 @@
+
+<!--------------------------------------------------------------------->
+<!-- Literals                                                        -->
+<!--------------------------------------------------------------------->
+<h1 id="literals"></h1>
+<moveto-doc->
+    <p>
+        <b>Literals</b> are used to <b>create</b> compile time known <b><a href="#left-and-right-values">r-values</a></b>.<br>
+        The type of the value is determined by the way it is represented in the source code, and it can only be of <code><t->ulong</t-></code>,
+        <code><t->double</t-></code>, <code><t->bool</t-></code>, <code><t->char</t-></code>, or <code><t->str</t-></code> type.<br>
+        Literals can be used in place of any expression of compatible type. Their value is converted following the <a href="#implicit-conversions">implicit conversions</a> rules.
+    </p>
+    <p>
+        Base prefixes can be used to specify the numerical base of the value.<br>
+        The decimal prefix is optional.<br>
+        Hexadecimal literals are case insensitive, leading zeroes and trailing decimal zeroes are ignored.<br>
+        Unary <a href="#common-operators"><code>+</code></a> and <a href="#common-operators"><code>-</code></a> operators are not part of the literal.
+    </p>
+    <p>
+        Literals are not sequences of <a href="#tokens">tokens</a> like other <a href="#syntactic-elements">syntactic elements</a>,
+        but a category of <a href="#tokens">token</a>.<br>
+        Regex syntax is used to describe their pattern:
+    </p>
+    <div class="table-container"><table>
+        <tr>
+            <th>Type/Base</th>
+            <th>Hexadecimal (hex)</th>
+            <th>Decimal (dec)</th>
+            <th>Octal (oct)</th>
+            <th>Binary (bin)</th>
+        </tr>
+        <tr>
+            <th><t->ulong</t-></th>
+            <td class="center"><code><regex->0x[\dA-F_]+</regex-></code></td>
+            <td class="center"><code><regex->(0d)?[\d_]+</regex-></code></td>
+            <td class="center"><code><regex->0o[0-7_]+</regex-></code></td>
+            <td class="center"><code><regex->0b[01_]+</regex-></code></td>
+        </tr>
+        <tr>
+            <th rowspan="2"><t->double</t-></th>
+            <td class="center"><code><regex->0x[\dA-F_]*\.[\dA-F_]+</regex-></code></td>
+            <td class="center"><code><regex->(0d[\d_]*)|([\d_]+)\.[\d_]+</regex-></code></td>
+            <td class="center"><code><regex->0o[0-7_]*\.[0-7_]+</regex-></code></td>
+            <td class="center"><code><regex->0b[01_]*\.[01_]+</regex-></code></td>
+        </tr>
+        <tr>
+            <fake-td-></fake-td->
+            <td class="center" colspan="4"><code><regex->inf|nan</regex-></code></td>
+        </tr>
+        <tr>
+            <th><t->bool</t-></th>
+            <td class="center" colspan="4"><code><regex->true|false</regex-></code></td>
+        </tr>
+        <tr>
+            <th><t->string</t-></th>
+            <td class="center" colspan="4">
+                <code><regex->[rf]?"</regex-><c- class="x-small">anything but unescaped double-quotes</c-><s->"</s-></code>
+                 <code><c- class="x-small">No length limit</c-></code>
+            </td>
+        </tr>
+            <th><t->char</t-></th>
+            <td class="center" colspan="4">
+                <code><s->'</s-><c- class="x-small">anything but unescaped quotes</c-><s->'</s-></code>
+                 <code><c- class="x-small">1 byte max</c-></code>
+            </td>
+        </tr>
+    </table></div>
+    <p>
+        Type-specific <code>inf</code> and <code>nan</code> values are also available through proper <a href="#reflection">Reflection paths</a>.
+    </p>
+</moveto-doc->
+<moveto-examples->
+    <example->
+        <label->Example</label->
+        <div>
+            <t->int</t-> n = <k->4</k->;             <c->// Ok</c->
+            <t->bool</t-> b =<k-> true</k->;         <c->// Ok</c->
+            <t->float</t-> f1 = <k->0x0d.aAb4</k->;  <c->// Ok</c->
+            <c->float f4 = AAAB4;      </c-><ce->// Error, undeclared identifier "AAAB4"</ce->
+            <c->float f4 = 0o97;       </c-><ce->// Error, invalid octal literal</ce->
+            <c->float f4 = 0xAEGF;     </c-><ce->// Error, invalid hexadecimal literal</ce->
+        </div>
+    </example->
+    <p>
+        The <code>_</code> character can be used anywhere after the base prefix of numerical literals to separate digits and improve readability.<br>
+        Decimal literals without base prefix cannot start with <code>_</code>.
+    </p>
+    <example->
+        <label->Example</label->
+        <div>
+            <t->int</t-> n = <k->395_935</k->;             <c->// Ok</c->
+            <t->int</t-> n = <k->654_3_21___</k->;         <c->// Ok, doesn't make sense but it is allowed</c->
+            <t->int</t-> n = <k->0x_32_A4_FF_E2</k->;      <c->// Ok</c->
+            <c->//int n = _123_456;</c->          <ce->// Error, undeclared identifier "_123_456".</ce->
+        </div>
+    </example->
+    <p>
+        There are no literal suffixes and no <code><t->float</t-></code>, <code><t->uint</t-></code> or <code><t->int</t-></code> literals.<br>
+        To create inline values of specific types, <a href="#constructors">Constructors</a> are used.
+    </p>
+</moveto-examples->

@@ -1,0 +1,45 @@
+
+<!--------------------------------------------------------------------->
+<!-- Floating point types                                            -->
+<!--------------------------------------------------------------------->
+<h1 id="floating-point-types"></h1>
+<moveto-doc->
+    <p>
+        <code><t->float</t-></code>, <code><t->double</t-></code>.<br>
+        <b>Floating point types</b> are used to <b>approximately represent real numbers</b>.<br>
+    </p>
+    <p>
+        Both floating point types are encoded according to the IEEE 754 Standard.<br>
+        Positive and negative inf, nan and signed <code><k->0</k-></code> are all supported.<br>
+        <code><k->+0</k-></code> and <code><k->-0</k-></code> are equal.
+    </p>
+    <example->
+            <div style="border-top-left-radius: var(--code-decoration-r);">
+                                                <c-> 1     8            23</c->
+                                               <c->sign exponent    mantissa</c->
+                                                <c->│┌───┴──┐┌──────────┴──────────┐</c->  <t->float</t->
+                                                <regex-group->┕</regex-group-><regex-token->┷┷┷┷┷┷┷┷</regex-token-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->
+                                                <c->00000000000000000000000000000000</c->  <k->+0.0</k->
+                                                <c->10000000000000000000000000000000</c->  <k->-0.0</k->
+                                                <c->01111111100000000000000000000000</c->  <k->+inf</k->
+                                                <c->11111111100000000000000000000000</c->  <k->-inf</k->
+                                                <c->011111111&lt;─────── not 0 ───────&gt;</c->  <k->nan</k->
+                                                <c->111111111&lt;─────── not 0 ───────&gt;</c->  <k->nan</k->
+
+                <c-> 1      11                           52</c->
+                <c->sign exponent                     mantissa</c->
+                <c->│┌────┴────┐┌─────────────────────────┴────────────────────────┐</c->  <t->double</t->
+                <regex-group->┕</regex-group-><regex-token->┷┷┷┷┷┷┷┷┷┷┷</regex-token-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->
+                <c->0000000000000000000000000000000000000000000000000000000000000000</c->  <k->+0.0</k->
+                <c->1000000000000000000000000000000000000000000000000000000000000000</c->  <k->-0.0</k->
+                <c->0111111111110000000000000000000000000000000000000000000000000000</c->  <k->+inf</k->
+                <c->1111111111110000000000000000000000000000000000000000000000000000</c->  <k->-inf</k->
+                <c->011111111111&lt;────────────────────── not 0 ─────────────────────&gt;</c->  <k->nan</k->
+                <c->111111111111&lt;────────────────────── not 0 ─────────────────────&gt;</c->  <k->nan</k->
+            </div>
+    </example->
+    <p>
+        inf values are generated as required by the standard.<br>
+        nan values are not generated for consistency and performance reasons.
+    </p>
+</moveto-doc->

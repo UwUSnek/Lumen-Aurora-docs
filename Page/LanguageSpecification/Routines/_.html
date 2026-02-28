@@ -1,0 +1,26 @@
+
+<!--------------------------------------------------------------------->
+<!-- Routines                                                        -->
+<!--------------------------------------------------------------------->
+<h1 id="routines"></h1>
+<moveto-doc->
+    <p>
+        <b>Routines</b> are the <b>main component</b> of the <b>language</b>. They contain the <a href="#statements"><b>statements</b></a> that will be executed during runtime.<br>
+        They are used to organize the module, provide features and prevent code duplication.<br>
+        The routine execution starts from its first <a href="#statements">statement</a> and ends after the first encountered <a href="#return-statements">return statement</a>.
+    </p>
+    <p>
+        There are 2 types of routines: <a href="#declarations.functions">Functions</a> and <a href="#declarations.operators">Operators</a>.<br>
+        They use different signatures and <a href="#routine-calls">calling</a> syntaxes but share the same <a href="#declarations.routine-parameters">parameter</a> and body declarations.
+    </p>
+    <p>
+        Each routine can <a href="#return-statement">return</a> a single value when <a href="#routine-calls">called</a>.<br>
+        The <a href="#types">type</a> of the <a href="#return-statement">returned</a> value is defined by the <a href="#types">type</a> of the routine.<br>
+        Routines that don't return a value have to be declared using the <code><t->void</t-></code> type.
+    </p>
+</moveto-doc->
+
+#include "./Page/LanguageSpecification/Routines/Parameters/_.html"
+#include "./Page/LanguageSpecification/Routines/Functions/_.html"
+#include "./Page/LanguageSpecification/Routines/Operators/_.html"
+#include "./Page/LanguageSpecification/Routines/RoutineSpecialization.html"

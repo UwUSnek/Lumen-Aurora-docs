@@ -1,0 +1,42 @@
+
+<!--------------------------------------------------------------------->
+<!-- Function calls                                                  -->
+<!--------------------------------------------------------------------->
+<h1 id="function-calls"></h1>
+<moveto-doc->
+    <p>
+        <b>Functions</b> are <b>called</b> using their <b>name</b> and a list of <b>arguments</b>.<br>
+        A function call must provide an argument for each parameter of the function.<br>
+        Reference parameters (<a href="#references"><code>&</code></a>) only allow <a href="#left-and-right-values">l-values</a> as arguments.
+    </p>
+    <p>
+        The result is returned by the function through the return statement, which is detailedly explained in <a href="#return-statement">Return statement</a>
+        //TODO templates
+        //TODO functions are called with *function reference* and a list of parameters. not just their name
+    </p>
+
+    <syntax->
+        <label- id="copy.syntax--expression-function-call">Syntax</label->
+    </syntax->
+</moveto-doc->
+<moveto-examples->
+    <example->
+        <label->Example</label->
+        <div>
+            <t->void</t-> <f->empty_function_1</f->() { <w->return</w->; }    <c->// Ok</c->
+            <t->void</t-> <f->empty_function_2</f->() {}             <c->// Ok</c->
+
+            <t->uint</t-> <f->empty_function_3</f->() { <w->return</w-> <k->0</k->; }  <c->// Ok</c->
+            <c->//uint empty_function_4() {}           </c-><ce->// Error, non-void functions must return a value</ce->
+
+            <t->uint</t-> <f->f</f->(<t->uint</t-> <p->n</p->) { <w->return</w-> n * <k->2</k->; }       <c->// Ok</c->
+            <c->//void f() { }                         </c-><ce->// Error, f is already defined</ce->
+
+            <t->void</t-> <f->main</f->(){
+                <t->uint</t-> n = <f->empty_function_3</f->();       <c->// Ok</c->
+                n = <f->f</f->(<f->f</f->(<k->n</k->));                       <c->// Ok</c->
+            }
+        </div>
+    </example->
+    //TODO update example
+</moveto-examples->

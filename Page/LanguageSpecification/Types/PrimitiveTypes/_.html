@@ -1,0 +1,59 @@
+
+<!--------------------------------------------------------------------->
+<!-- Primitive types                                                 -->
+<!--------------------------------------------------------------------->
+<h1 id="primitive-types"></h1>
+<moveto-doc->
+    <p>Lumen and Aurora feature <b>7 primitive types</b>, which can be used to define more complex types such as <a href="#structs">structs</a>, <a href="#arrays">arrays</a> and <a href="#tuples">tuples</a>.</p>
+    <p>
+        These types are always defined and they act as if they were declared in the <a href="#core-module">core module</a>.<br>
+        Primitive types are <b>not <a href="#keywords">keywords</a></b> and can be <a href="#name-shadowing">shadowed</a> like any other <a href="#name-resolution">symbol</a>.
+    </p>
+    <p>The primitive types are:</p>
+    <div class="table-container"><table>
+        <tr>
+            <th>Type name   </th>
+            <th>Size (bytes)</th>
+            <th>Value type  </th>
+        </tr>
+        <tr>
+            <td class="center"><code><t->uint</t-></code></td>
+            <td class="center">4</td>
+            <td rowspan="2">Unsigned integral number</td>
+        </tr>
+        <tr>
+            <td class="center"><code><t->ulong</t-></code></td>
+            <td class="center">8</td>
+        </tr>
+        <tr>
+            <td class="center"><code><t->int</t-></code></td>
+            <td class="center">4</td>
+            <td rowspan="2">Signed integral number</td>
+        </tr>
+        <tr>
+            <td class="center"><code><t->long</t-></code></td>
+            <td class="center">8</td>
+        </tr>
+        <tr>
+            <td class="center"><code><t->float</t-></code></td>
+            <td class="center">4</td>
+            <td rowspan="2">Floating point number</td>
+        </tr>
+        <tr>
+            <td class="center"><code><t->double</t-></code></td>
+            <td class="center">8</td>
+        </tr>
+        <tr>
+            <td class="center"><code><t->bool</t-></code></td>
+            <td class="center">4</td>
+            <td>Boolean value</td>
+        </tr>
+    </table></div>
+    <p>
+        All primitives types are convertible to each other. This is explained in detail in <a href="#implicit-conversions">Implicit conversions</a>.<br>
+    </p>
+</moveto-doc->
+
+#include "./Page/LanguageSpecification/Types/PrimitiveTypes/IntegralTypes.html"
+#include "./Page/LanguageSpecification/Types/PrimitiveTypes/FloatingPointTypes.html"
+#include "./Page/LanguageSpecification/Types/PrimitiveTypes/BooleanType.html"

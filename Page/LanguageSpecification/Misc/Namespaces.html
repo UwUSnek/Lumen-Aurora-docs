@@ -1,0 +1,34 @@
+
+<!--------------------------------------------------------------------->
+<!-- Namespaces                                                      -->
+<!--------------------------------------------------------------------->
+<h1 id="declarations.namespaces"></h1>
+<moveto-doc->
+    <p>
+        <b>Namespaces</b> are used to create <b>named <a href="#scopes">scopes</a></b> to group <a href="#name-resolution">symbols</a>.<br>
+        The <a href="#name-resolution">symbol</a> categories they can contain are the same as their parent <a href="#scopes">scope</a>.<br>
+        They cannot contain <a href="#statements">statements</a>.
+    </p>
+    <p>
+        Namespaces don't affect compiler <a href="#optimizations">optimizations</a> or the <a href="#runtime-performance">runtime performance</a> of the program and can be declared in any <a href="#scopes">scope</a>.<br>
+        Unnamed namespaces are allowed. Empty namespaces are also allowed.
+    </p>
+    <syntax->
+        <label- id="copy.syntax--declaration-namespace">Declaration syntax</label->
+    </syntax->
+</moveto-doc->
+<moveto-examples->
+    <example->
+        <label->Example</label->
+        <div>
+            <w->namespace</w-> a {
+                <t->int</t-> n = <k->4</k->;
+            }
+            <w->namespace</w-> {
+                <t->int</t-> n = <k->4</k->;
+            }
+
+            <t->int</t-> n2 = a.<k->n</k->;
+        </div>
+    </example->
+</moveto-examples->

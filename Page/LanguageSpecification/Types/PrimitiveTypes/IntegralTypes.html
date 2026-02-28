@@ -1,0 +1,40 @@
+
+<!--------------------------------------------------------------------->
+<!-- Integral types                                                  -->
+<!--------------------------------------------------------------------->
+<h1 id="integral-types"></h1>
+<moveto-doc->
+    <p>
+        <code><t->int</t-></code>, <code><t->uint</t-></code>, <code><t->long</t-></code>, <code><t->ulong</t-></code>.<br>
+        <b>Integral types</b> are used to <b>represent integers</b>.<br>
+        Unsigned integers cannot represent negative numbers, but the maximum value is twice as high as their signed counterpart.
+    </p>
+    <p>
+        All signed integral types use the Two's Complement to represent negative numbers.<br>
+        Positive numbers and <code><k->0</k-></code> use the corresponding binary value in both signed and unsigned integral types.
+    </p>
+    <example->
+            <div style="border-top-left-radius: var(--code-decoration-r);">
+                                              <c->  1                31</c->
+                                               <c->sign            value</c->
+                                                <c->│┌───────────────┴─────────────┐</c->  <t->int</t->
+                                                <regex-group->┕</regex-group-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->
+                                                                 <c->32</c->
+                                                               <c->value</c->
+                                                <c->┌────────────────┴─────────────┐</c->  <t->uint</t->
+                                                <s->┕┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->
+                <c->  1                              63</c->
+                <c->sign                           value</c->
+                <c->│┌───────────────────────────────┴─────────────────────────────┐</c->  <t->long</t->
+                <regex-group->┕</regex-group-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->
+                                                 <c->64</c->
+                                                <c->value</c->
+                <c->┌────────────────────────────────┴─────────────────────────────┐</c->  <t->ulong</t->
+                <s->┕┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->
+            </div>
+    </example->
+    <p>
+        //TODO GL_EXT_shader_explicit_arithmetic_types_int64
+    </p>
+</moveto-doc->
+//TODO move internal info to internal functioning

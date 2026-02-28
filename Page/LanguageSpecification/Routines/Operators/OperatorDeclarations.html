@@ -1,0 +1,50 @@
+
+<!--------------------------------------------------------------------->
+<!-- Operator declarations                                           -->
+<!--------------------------------------------------------------------->
+<h1 id="operator-declarations"></h1>
+<moveto-doc->
+    <p>
+        <b>Operators</b> are a type of <b><a href="#declarations.routines">routine</a></b> that doesn't require parentheses to be <a href="#routine-calls">called</a> and can use <b>multiple <a href="#identifiers">identifiers</a></b>.<br>
+        Each <a href="#identifiers">identifier</a> can be prefix, infix or postfix, depending on where it is declared in the operator signature.<br>
+        Operators can take any number of <a href="#declarations.routine-parameters">parameters</a>, but they cannot be 0 and must be separated by exactly 1 <a href="#identifiers">identifier</a>.
+    </p>
+    <p>
+        Operator <a href="#identifiers">identifiers</a> can be alphanumeric or symbolic.<br>
+        Declaring consecutive <a href="#idnetifiers">identifiers</a> is not allowed.<br>
+        Operator precedence is explained in <a href="#declarations.operator-precedence">Operator precedence</a>.
+    </p>
+    <syntax->
+        <label- id="copy.syntax--declaration-operator">Declaration syntax</label->
+        <label- id="copy.syntax--declaration-operator-signature">Operator signature</label->
+        <label- id="copy.syntax--declaration-routine-body">Routine body</label->
+        <label- id="copy.syntax--declaration-specialization-constraint">Specialization constraint</label->
+    </syntax->
+</moveto-doc->
+<moveto-examples->
+    <example->
+        <label->Example 1 - Promotion operator</label->
+        <div>
+            <t->int</t-> <f->+</f-> (<t->int</t-> <p->n</p->) : <k->3</k-> {
+                <w->return</w-> n;
+            }
+
+            <t->void</t-> <f->main</f->(){
+                <t->int</t-> r = <f->+</f->2;
+            }
+        </div>
+    </example->
+    <example->
+        <label->Example 2 - Python-like ternary operator</label->
+        <div>
+            <t->int</t-> (<t->int</t-> <p->a</p->) <f->if_</f-> (<t->bool</t-> <p->condition</p->) <f->else_</f-> (<t->int</t-> <p->b</p->) : <k->15</k-> {
+                <w->if</w->(condition) <w->return</w-> a;
+                <w->else</w-> <w->return</w-> b;
+            }
+
+            <t->void</t-> <f->main</f->(<t->bool</t-> <p->c</p->){
+                <t->int</t-> r = 5 <f->if_</f-> c <f->else_</f-> 6;
+            }
+        </div>
+    </example->
+</moveto-examples->

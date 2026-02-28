@@ -1,0 +1,26 @@
+
+<!--------------------------------------------------------------------->
+<!-- Boolean type                                                    -->
+<!--------------------------------------------------------------------->
+<h1 id="boolean-type"></h1>
+<moveto-doc->
+    <p>
+        <code><t->bool</t-></code>.<br>
+        The <b>Boolean type</b> is used to <b>represent boolean values</b>.<br>
+        <code><k->true</k-></code> and <code><k->false</k-></code> are the only values that can be stored in a <code><t->bool</t-></code>.
+    </p>
+    <example->
+            <div style="border-top-left-radius: var(--code-decoration-r);">
+                                <c->32</c->
+                              <c->value</c->
+                <c->┌───────────────┴──────────────┐</c->  <t->bool</t->
+                <s->┕┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->
+                <c->00000000000000000000000000000001</c->  <k->true</k->
+                <c->00000000000000000000000000000000</c->  <k->false</k->
+            </div>
+    </example->
+    <p>
+        Booleans purposely waste 31 bits for performance reasons.<br>
+        Smaller types require additional bitwise operations and expensive conversions between the CPU and GPU data.
+    </p>
+</moveto-doc->

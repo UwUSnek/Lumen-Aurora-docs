@@ -1,0 +1,81 @@
+
+<!--------------------------------------------------------------------->
+<!-- Pointer types                                                   -->
+<!--------------------------------------------------------------------->
+<h1 id="pointer-types"></h1>
+<moveto-doc->
+    <p>
+        Pointer types are implicit types that can store a memory address of a specific type. Their size is always 8 byes.<br>
+        They are referenced through the symbol path of the pointed type, also known as base type, followed by the <code>*</code> keyword.<br>
+        The <code><t->const</t-></code> meta keyword can be placed between the base type and the <code>*</code> meta keyword to reference the corresponding const pointer.
+        Const pointers are detailedly explained in <a href="#const-qualifier">Const qualifier</a>.
+    </p>
+    <p>
+        The <code>@</code> keyword is used to access the value pointed by a pointer expression.<br>
+        The address of any l-value can be retrieved through the <code><w->addr</w-></code> keyword.
+    </p>
+    <p>
+        Pointer types don't have to be declared. Each existing type but <code><t->void</t-></code> has its own corresponding pointer type and <code><t->const</t-></code> pointer type ready to use, including the pointer types themselves.
+        <code><t->void</t-></code> pointers are not allowed.<br>
+        There is no limit to the amount of nested pointer types one can use as base type.
+    </p>
+</moveto-doc->
+<moveto-examples->
+    //TODO add memory allocation examples
+    <split-example-container->
+        <split-example-container-left->
+            <example->
+                <label->Example 1</label->
+                <div>
+                    <w->import</w-> <s->&lt;io&gt;</s->;
+
+                    <t->void</t-> <f->main</f->(){
+                        <t->int</t-> n = <k->5</k->;
+                        <t->int*</t-> p = <w->addr</w-> <k->n</k->;
+
+                        @p = <k->6</k->;
+                        io.<f->print</f->(<k->n</k->);
+                    }
+                </div>
+            </example->
+        </split-example-container-left->
+        <split-example-container-right->
+            <example->
+                <label->Output</label->
+                <div>
+                    <console-prefix-></console-prefix->
+                    6<cursor-></cursor->
+                </div>
+            </example->
+        </split-example-container-right->
+    </split-example-container->
+    <split-example-container->
+        <split-example-container-left->
+            <example->
+                <label->Example 2 - Nested pointer types</label->
+                <div>
+                    <w->import</w-> <s->&lt;io&gt;</s->;
+
+                    <t->void</t-> <f->main</f->(){
+                        <t->int</t-> a = <k->5</k->;
+                        <t->int*</t-> p;
+                        <t->int**</t-> p2 = <w->addr</w-> p;
+                        p = <w->addr</w-> <k->a</k->;
+
+                        @@p2 = <k->8</k->;
+                        io.<f->print</f->(<k->a</k->);
+                    }
+                </div>
+            </example->
+        </split-example-container-left->
+        <split-example-container-right->
+            <example->
+                <label->Output</label->
+                <div>
+                    <console-prefix-></console-prefix->
+                    8<cursor-></cursor->
+                </div>
+            </example->
+        </split-example-container-right->
+    </split-example-container->
+</moveto-examples->

@@ -1,0 +1,77 @@
+
+<!--------------------------------------------------------------------->
+<!-- Abbreviated template sytntax                                    -->
+<!--------------------------------------------------------------------->
+<h1 id="abbreviated-template-syntax"></h1>
+<moveto-doc->
+    <p>
+        The abbreviated template syntax allows template symbols to be declared without specifying the template signature explicitly.<br>
+        In these cases, the <code>?</code> meta keyword is used to identify type template parameters, and type template parameter packs are identified through the <code>...</code> meta keyword.
+    </p>
+    <p>
+        The order of template parameters and template parameter packs is the same in which their first occurrence in the routine or struct declaration is found and its still possible to specify the arguments explicitly when referencing the symbol.<br>
+        Value template parameters are not allowed, as well as value template parameter packs.
+    </p>
+</moveto-doc->
+<moveto-examples->
+    <split-example-container->
+        <split-example-container-left->
+            <example->
+                <label->Example</label->
+                <div>
+                    <t->t</t-> <f->add</f->(<t->u</t->?! <p->a</p->, <t->t</t->?! <p->b</p->) {
+                        <w->return</w-> a <f->+</f-> b;
+                    }
+
+                    <t->void</t-> <f->main</f->(){
+                        <f->add</f->(<k->5</k->, <k->0.5</k->)                <c->// Returns a double</c->
+                        <f->add</f->&lt;<t->ulong</t->, <t->double</t->&gt;(<k->5</k->, <k->0.5</k->) <c->// Returns a ulong, both routine arguments are implicitly converted</c->
+                    }
+                </div>
+            </example->
+        </split-example-container-left->
+        <split-example-container-right->
+            <example->
+                <label->Equivalent code</label->
+                <div>
+                    <w->template</w->&lt;<w->type</w-> <t->t</t->, <w->type</w-> <t->u</t->&gt; <t->t</t-> <f->add</f->(<t->u</t->! <p->a</p->, <t->t</t->! <p->b</p->) {
+                        <w->return</w-> a <f->+</f-> b;
+                    }
+
+                    <t->void</t-> <f->main</f->(){
+                        <f->add</f->(<k->5</k->, <k->0.5</k->)
+                        <f->add</f->&lt;<t->ulong</t->, <t->double</t->&gt;(<k->5</k->, <k->0.5</k->)
+                    }
+                </div>
+            </example->
+        </split-example-container-right->
+    </split-example-container->
+    <split-example-container->
+        <split-example-container-left->
+            <example->
+                <label->Example</label->
+                <div>
+                    <t->t</t-> <f->mul</f->(<t->t</t->?! <p->arg</p->, <t->u</t->...! <p->args</p->...) {
+                        <w->return</w-> arg <f->*</f-> <f->mul</f->&lt;<t->u</t->...&gt;(args); //TODO this is ambiguous
+                    }
+                    <t->t</t-> <f->mul</f->(<t->t</t->?! <p->arg</p->) {
+                        <w->return</w-> arg;
+                    }
+                </div>
+            </example->
+        </split-example-container-left->
+        <split-example-container-right->
+            <example->
+                <label->Equivalent code</label->
+                <div>
+                    <w->template</w->&lt;<w->type</w-> <t->t</t->, <w->type</w-> <w->u</w->&gt; <t->t</t-> <f->mul</f->(<t->t</t->! <p->arg</p->, <t->u</t->! <p->args</p->...) {
+                        <w->return</w-> arg <f->*</f-> <f->mul</f->&lt;<t->u</t->&gt;(args);
+                    }
+                    <w->template</w->&lt;<w->type</w-> <t->t</t->&gt; <t->t</t-> <f->mul</f->(<t->t</t->! <p->arg</p->) {
+                        <w->return</w-> arg;
+                    }
+                </div>
+            </example->
+        </split-example-container-right->
+    </split-example-container->
+</moveto-examples->

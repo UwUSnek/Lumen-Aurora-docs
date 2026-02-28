@@ -1,0 +1,54 @@
+
+<!--------------------------------------------------------------------->
+<!-- Template parameters                                             -->
+<!--------------------------------------------------------------------->
+<h1 id="template-parameters"></h1>
+<moveto-doc->
+    <p>
+        Template parameters can either be values of enum or integral type or type paths, and can be used as such by each declaration after it has been instantiated.<br>
+        Value parameters are declared using their respective type, whilst type parameters have to be declared using the <code><w->type</w-></code> meta keyword.
+    </p>
+    <p>
+        By default, each template parameter must be specified explicitly when referencing a template symbol.<br>
+        If the declaration of a routine parameter uses a type template parameter as type, the <code>!</code> meta keyword can be placed after the type to allow it to be deduced from the passed argument.<br>
+        This also applies to function parameter packs that use a type template parameter pack as type, in which case each type of the type template parameter pack is deduced from the respective argument in the routine parameter pack.<br>
+        If one or more template arguments cannot be deduced, then all the arguments must be specified explicitly.
+    </p>
+    <p>
+        Type template arguments deduced from multiple routine arguments are explained in <a href="multi-argument-type-deduction">Multi argument type deduction</a><br>
+        Type deduction is not performed when the template arguments are specified.
+    </p>
+    <syntax->
+        <label- id="copy.syntax--declaration-template-parameter">Template parameter declaration</label->
+    </syntax->
+</moveto-doc->
+<moveto-examples->
+    <example->
+        <label->Example 1</label->
+        <div>
+            <w->template</w->&lt;<w->type</w-> <t->t</t->&gt; <t->t</t-> <f->twice</f->(<t->t</t->! <p->n</p->){
+                <w->return</w-> n <f->*</f-> <k->2</k->;
+            }
+            <w->template</w->&lt;<t->int</t-> <p->n</p->&gt; <t->int</t-> <f->return_n</f->(){
+                <w->return</w-> <k->n</k->;
+            }
+
+            <t->void</t-> <f->main</f->(){
+                <t->auto</t-> var1 = <f->twice</f->(<k->8</k->);         <c->// Ok, type t deduced as ulong</c->
+                <t->auto</t-> var2 = <f->twice</f->&lt;<t->float</t->&gt;(<k->8</k->);  <c->// Ok, type t specified as float, 8 is converted to from ulong to float</c->
+                <t->auto</t-> var3 = <f->return_n</f->&lt;<k->5</k->&gt;();    <c->// Ok, value n specified as 5</c->
+            }
+        </div>
+        <label->Example 2</label->
+        <div>
+            <w->template</w->&lt;<t->int</t-> <p->n</p->, <w->type</w-> <t->t</t->&gt; <t->t</t-> <f->mult_by_n</f->(<t->t</t->! <p->arg</p->){
+                <w->return</w-> arg <f->*</f-> <k->n</k->;
+            }
+
+            <t->void</t-> <f->main</f->(){
+                <c->//auto var3 = mult_by_n&lt;5&gt;(2);</c->       <ce->// Error, n cannot be deduced. All arguments must be specified</ce->
+                <t->auto</t-> var3 = <f->mult_by_n</f->&lt;<k->5</k->, <t->ulong</t->&gt;(<k->2</k->);  <c->// Ok, value n specified as 5, type t specified as ulong</c->
+            }
+        </div>
+    </example->
+</moveto-examples->

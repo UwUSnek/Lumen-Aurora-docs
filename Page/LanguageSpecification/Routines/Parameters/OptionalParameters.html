@@ -1,0 +1,35 @@
+
+<!--------------------------------------------------------------------->
+<!-- Optional parameters                                             -->
+<!--------------------------------------------------------------------->
+<h1 id="optional-parameters"></h1>
+<moveto-doc->
+    <p>
+        <b>Optional parameters</b> are parameters that can specify a default value when no argument is provided by the caller.<br>
+        Optional parameters are only available for functions and template functions.<br>
+        A function can have multiple optional parameters, but they must all be declared after the last mandatory parameter.
+    </p>
+    <p>
+        <a href="#reference-parameters">Reference parameters</a> cannot be optional.<br>
+        <a href="#parameter-packs">Parameter packs</a> also cannot be optional.
+    </p>
+    <syntax->
+        <label- id="copy.syntax--declaration-optional-parameter">Declaration syntax</label->
+    </syntax->
+</moveto-doc->
+<moveto-examples->
+    <example->
+        <label->Example</label->
+        <div>
+            <w->import</w-> <s->&lt;math&gt;</s->;
+            <t->double</t-> <f->pow</f->(<t->double</t-> <p->a</p->, <t->double</t-> <p->b</p-> = <k->2</k->) {
+                <w->return</w-> math.<f->pow</f->(a, b);
+            }
+
+            <t->void</t-> <f->main</f->(){
+                <f->pow</f->(<k->3</k->, <k->3</k->);  <c->// Returns 27</c->
+                <f->pow</f->(<k->3</k->);     <c->// Returns 9</c->
+            }
+        </div>
+    </example->
+</moveto-examples->

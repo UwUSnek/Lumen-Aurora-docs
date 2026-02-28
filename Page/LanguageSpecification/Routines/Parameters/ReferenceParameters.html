@@ -1,0 +1,37 @@
+
+<!--------------------------------------------------------------------->
+<!-- Reference parameters                                            -->
+<!--------------------------------------------------------------------->
+<h1 id="reference-parameters"></h1>
+<moveto-doc->
+    <p>
+        <b>Reference parameters</b> use the <b>address of the argument</b> as <b>initializer value</b> instead of the argument itself.<br>
+        They are declared by appending a <code>&</code> <a href="#meta-keywords">meta keyword</a> to the name of the parameter and are only available for operators.<br>
+    </p>
+    <p>
+        Reference parameters can only be of <a href="#pointer-types">pointer type</a> and the passed arguments must be <a href="#left-and-right-values">l-values</a>.<br>
+        Inside the <a href="#routines">routine</a>, reference parameters act exactly as normal parameters.
+    </p>
+    <p>
+        Reference parameters cannot be <a href="#default-values">optional</a>.
+    </p>
+    <syntax->
+        <label- id="copy.syntax--declaration-reference-parameter">Declaration syntax</label->
+    </syntax->
+</moveto-doc->
+<moveto-examples->
+    <example->
+        <label->Example</label->
+        <div>
+            <t->void</t-> <f->halve</f->(<t->float</t->* &<p->n</p->) : <k->1</k-> <w->l</w-> { //FIXME outdated r and l
+                @n <f->/=</f-> <k->2.0</k->;
+            }
+
+            <t->void</t-> <f->main</f->(){
+                <t->float</t-> n = <k->8</k->;    <c->// n has value 8</c->
+                <f->halve</f-> <k->n</k->;        <c->// n has value 4</c->
+                <c->//halve 8;</c->       <ce->// Error, 8 is not an l-value</ce->
+            }
+        </div>
+    </example->
+</moveto-examples->

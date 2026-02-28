@@ -1,0 +1,66 @@
+
+<!--------------------------------------------------------------------->
+<!-- Operator precedence                                             -->
+<!--------------------------------------------------------------------->
+<h1 id="operator-precedence"></h1>
+<moveto-doc->
+    <p>
+        In <b>absence</b> of <b>parentheses</b>, the order in which <b><a href="#declarations.operators">operators</a></b> in the <b>same <a href="#expressions">expression</a></b> are <b><a href="#operator-calls">called</a></b> depends on their <b>priority</b> and <b>associativity</b>.<br>
+        Priority and associativity are specified in the <a href="#declarations.operators">operator signature</a> as a <a href="#compile-time-expressions">compile time</a> <a href="#integral-types"><code><t->ulong</t-></code></a> <a href="#expressions">expression</a>
+        ranging from <code><k->0</k-></code> to <code><k->15</k-></code>, followed by the <code><w->r</w-></code> or <code><w->l</w-></code> <a href="#meta-keywords">meta keyword</a>.<br>
+        //FIXME remove, probably? this is outdated
+    </p>
+    <p>
+        The value indicates the priority.<br>
+        Operators declared with lower values have higher priority and are evaluated first.<br>
+        Left-associative operators are always evaluated before right-associative operators with the same priority.
+    </p>
+    <p>
+        //FIXME remove, probably? this is outdated
+        //FIXME remove, probably? this is outdated
+        //FIXME remove, probably? this is outdated
+        The <code><w->r</w-></code> and <code><w->l</w-></code> <a href="#meta-keywords">meta keywords</a> indicate right and left associativity.<br>
+        Associativity defines the order in which operators with the same priority and associativity are evaluated.<br>
+        Right-associative operators are evaluated starting from the right, whilst left-associative operators are evaluated starting from the left.<br>
+    </p>
+</moveto-doc->
+<moveto-examples->
+    <example->
+        <label->Example 1 - Priority</label->
+        <div>
+            <t->int</t-> (<t->int</t-> <p->a</p->) <f->o</f-> (<t->int</t-> <p->b</p->) : <k->4</k-> <w->l</w-> { //FIXME outdated r and l
+                <w->return</w-> a <f->+</f-> b <f->*</f-> b;
+            }
+
+            <t->int</t-> (<t->int</t-> <p->a</p->) <f->p</f-> (<t->int</t-> <p->b</p->) : <k->4</k-> <w->r</w-> { //FIXME outdated r and l
+                <w->return</w-> a <f->*</f-> 2 <f->+</f-> b;
+            }
+
+            <t->int</t-> (<t->int</t-> <p->a</p->) <f->q</f-> (<t->int</t-> <p->b</p->) : <k->5</k-> <w->r</w-> { //FIXME outdated r and l
+                <w->return</w-> b <f->-</f-> a;
+            }
+
+            <t->void</t-> <f->main</f->(<t->int</t-> <p->a</p->, <t->int</t-> <p->b</p->, <t->int</t-> <p->c</p->){
+                <c->// Evaluated as ((a o (b p c)) q a)</c->
+                <t->int</t-> r = a <f->o</f-> b <f->p</f-> c <f->q</f-> a;
+            }
+        </div>
+    </example->
+    <example->
+        <label->Example 2 - Associativity</label->
+        <div>
+            <t->int</t-> (<t->int</t-> <p->a</p->) <f->o</f-> (<t->int</t-> <p->b</p->) : <k->4</k-> <w->l</w-> { //FIXME outdated r and l
+                <w->return</w-> a <f->+</f-> b <f->*</f-> b;
+            }
+
+            <t->int</t-> (<t->int</t-> <p->a</p->) <f->p</f-> (<t->int</t-> <p->b</p->) : <k->4</k-> <w->l</w-> { //FIXME outdated r and l
+                <w->return</w-> a <f->*</f-> 2 <f->+</f-> b;
+            }
+
+            <t->void</t-> <f->main</f->(<t->int</t-> <p->a</p->, <t->int</t-> <p->b</p->, <t->int</t-> <p->c</p->){
+                <c->// Evaluated as ((a o b) p c)</c->
+                <t->int</t-> r = a <f->o</f-> b <f->p</f-> c
+            }
+        </div>
+    </example->
+</moveto-examples->

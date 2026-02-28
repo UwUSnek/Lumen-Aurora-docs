@@ -1,0 +1,30 @@
+
+<!--------------------------------------------------------------------->
+<!-- Basic parameters                                                -->
+<!--------------------------------------------------------------------->
+<h1 id="basic-parameters"></h1>
+<moveto-doc->
+    <p>
+        Basic parameters are named memory locations used to pass arguments to <a href="#routine-calls">routine calls</a>.<br>
+        They work in the same way as <a href="#variables">variables</a>, but the initializer value is defined by the caller routine.<br>
+        Just like <a href="#variables">variables</a>, basic parameters are first allocated and then initialized by calling the <code>=</code> operator, one parameter at a time, following the order in which they were declared.
+    </p>
+    <syntax->
+        <label- id="copy.syntax--declaration-basic-parameter">Declaration syntax</label->
+    </syntax->
+</moveto-doc->
+<moveto-examples->
+    <example->
+        <label->Example</label->
+        <div>
+            <t->int</t-> <f->add</f->(<t->uint</t-> <p->a</p->, <t->uint</t-> <p->b</p->) {
+                <w->return</w-> a <f->+</f-> b;
+            }
+
+            <t->void</t-> <f->main</f->(){
+                <t->uint</t-> a = <k->5</k->;
+                <t->uint</t-> r = <f->add</f->(<k->a</k->, <k->6</k->);
+            }
+        </div>
+    </example->
+</moveto-examples->

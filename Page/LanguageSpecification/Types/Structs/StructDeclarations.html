@@ -1,0 +1,39 @@
+
+<!--------------------------------------------------------------------->
+<!-- Struct declarations                                             -->
+<!--------------------------------------------------------------------->
+<h1 id="struct-declarations"></h1>
+<moveto-doc->
+    <p>
+        <b>Structs</b> are used to <b>create</b> new <b>types</b> composed by 0 or more separate members that can have differing type.<br>
+        The members are declared in the same way as <a href="#variables">variables</a> but cannot have initializer values.
+    </p>
+    <p>
+        Empty structs are allowed.<br>
+        Struct members can be of any <a href="#types">type</a>, including other structs.
+    </p>
+    <syntax->
+        <label- id="copy.syntax--declaration-struct">Declaration syntax</label->
+        <label- id="copy.syntax--declaration-struct-signature">Struct signature</label->
+        <label- id="copy.syntax--declaration-struct-body">Struct body</label->
+        <label- id="copy.syntax--declaration-specialization-constraint">Specialization constraint</label->
+        <label- id="copy.syntax--declaration-struct-member">Member declaration syntax</label->
+    </syntax->
+</moveto-doc->
+<moveto-examples->
+    <example->
+        <label->Example</label->
+        <div>
+            <w->struct</w-> <t->idk</t-> {
+                <t->uint</t-> a, b;        <c->// Ok</c->
+                <t->double</t->[<k->4</k->] c;      <c->// Ok</c->
+            }
+
+            <t->void</t-> <f->main</f->(){
+                <t->idk</t-> var;
+                var.a = <k->4</k->;              <c->// Ok, var = (4, ?, ?)</c->
+                var.b = <k->var.a</k-> * <k->4</k->;      <c->// Ok, var = (4, 8, ?)</c->
+            }
+        </div>
+    </example->
+</moveto-examples->

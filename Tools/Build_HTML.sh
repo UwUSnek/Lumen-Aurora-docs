@@ -3,7 +3,7 @@
 
 
 
-cat ./Page/Lumen-Aurora-Languages.html \
+cat ./Page/main.html \
     | perl -ne "s/^\s*#include/#include/; print;"                                           `# Remove leading spaces for traditional cpp`               \
     | gcc -I. -E -P -CC -w -xc -traditional-cpp - 2>/dev/tty                                `# Run C preprocessor to merge #include d files`            \
     | perl -0ne "s/^[\S\s]*?(?=<!DOCTYPE html>)//; print;"                                  `# Remove everything added by cpp before the !DOCTYPE tag`  \

@@ -1,0 +1,46 @@
+
+<!--------------------------------------------------------------------->
+<!-- Enum declarations                                               -->
+<!--------------------------------------------------------------------->
+<h1 id="enum-declarations"></h1>
+<moveto-doc->
+    <p>
+        <b>Enums</b> are used to create <b>new types</b> whose allowed values are a <b>subset</b> of the possible values of their <b>base <a href="#types">type</a></b> and can only be used throught their names.<br>
+        The base <a href="#types">type</a> of an enum is specified after its name and, differently from most languages, it can be any type, including <a href="#structs">structs</a> or other enums.<br>
+        Enum elements are declared in the same way as <a href="#variables">variables</a>, but the type is not specified explicitly and their initializer values must be <a href="#compile-time-values">known at compile time</a>.<br>
+        These elements identify the allowed values.
+    </p>
+    <p>
+        Elements of <a href="#integral-types">integral</a> enums which are not initialized are given the value of the preceding element + <code><k->1</k-></code>, or <code><k->0</k-></code> if first.<br>
+        Elements of enums with any other base <a href="#types">type</a> must always be initialized.<br>
+        Multiple elements can have identical <a href="#values">values</a>, but each <a href="#identifiers">identifier</a> can only be declared once.<br>
+        Empty enums are allowed.
+    </p>
+
+    <syntax->
+        <label- id="copy.syntax--declaration-enum">Declaration syntax</label->
+        <label- id="copy.syntax--declaration-enum-element">Element declaration syntax</label->
+    </syntax->
+
+    <p>
+        Enum elements are <a href="#constant-values">constant values</a>.<br>
+        <a href="#expressions">Expressions</a> of enum <a href="#types">type</a> are <a href="#implicit-conversions">implicitly convertible</a> to any type their base type is implicitly convertible to and the base type itself.<br>
+        This is detailedly explained in <a href="#implicit-conversions">Implicit conversions</a>.
+    </p>
+</moveto-doc->
+<moveto-examples->
+    <example->
+        <label->Example</label->
+        <div>
+            <w->enum</w-> <t->e</t-> : <t->int</t-> {
+                a, b;              <c->// a = 0, b = 1</c->
+                c = <k->-266250</k->;       <c->// c = -266250</c->
+                d, e = <k->0</k->;          <c->// d = -266249, e = 0</c->
+            }
+
+            <t->float</t-> <f->main</f->(){
+                <w->return</w-> e.<k->c</k->; <c->// Implicitly convert e to float</c->
+            }
+        </div>
+    </example->
+</moveto-examples->

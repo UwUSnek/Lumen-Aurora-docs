@@ -1,0 +1,59 @@
+
+<!--------------------------------------------------------------------->
+<!-- Destructor function                                             -->
+<!--------------------------------------------------------------------->
+<h1 id="destructor-function"></h1>
+<moveto-doc->
+    <p>
+        The <b>destructor</b> function is a <b>special</b> struct <b>method</b> that is called each time a value of its parent struct type is destroyed.<br>
+        It has <b>no name</b> and <b>no return value</b> and it's declared using the <code><w->destructor</w-></code> meta keyword.<br>
+    </p>
+    <p>
+        Each struct can only have one destructor. It cannot be specialized and cannot take any argument, nor can it be called explicitly.<br>
+        Template destructors are not allowed.<br>
+        There is no default destructor.
+    </p>
+</moveto-doc->
+<moveto-examples->
+    <split-example-container->
+        <split-example-container-left->
+            <example->
+                <label->Example</label->
+                <div>
+                    <w->import</w-> <s->&lt;io&gt;</s->;
+                    <t->int</t-> last = <k->0</k->;
+
+                    <w->struct</w-> <t->s</t-> {
+                        <t->float</t-> n;
+                        <t->int</t-> i;
+
+                        <w->constructor</w->(<t->float</t-> <p->n</p->){
+                            i <f->=</f-> last<f->++</f->;
+                            this.n <f->=</f-> n;
+                        }
+
+                        <w->destructor</w->(){
+                            io.<f->print</f->(<s->"Destroyed instance n."</s-> <f->+</f-> <t->str</t->(i) <f->+</f-> <s->"\n"</s->);
+                        }
+                    }
+
+
+                    <t->void</t-> <f->main</f->(){
+                        <t->s</t-> var = { <k->0.5</k-> };
+                    }
+                </div>
+            </example->
+        </split-example-container-left->
+        <split-example-container-right->
+            <example->
+                <label->Output</label->
+                <div>
+                    <console-prefix-></console-prefix->
+                    Destroyed instance n.0
+                    Destroyed instance n.1
+                    <cursor-></cursor->
+                </div>
+            </example->
+        </split-example-container-right->
+    </split-example-container->
+</moveto-examples->

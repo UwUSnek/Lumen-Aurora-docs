@@ -1,0 +1,26 @@
+
+<!--------------------------------------------------------------------->
+<!-- Statements                                                      -->
+<!--------------------------------------------------------------------->
+<h1 id="statements"></h1>
+<moveto-doc->
+    <p>
+        <b>Statements</b> are the <b>instructions</b> that are <b>executed during runtime</b>.<br>
+        They determine the behaviour of the shader, its execution time and <a href="#compiler-optimizations">compiler optimizations</a>.<br>
+        The <code>;</code> <a href="#tokens">token</a> defines the end of a statement.
+    </p>
+    <p>
+        A statement can be an expression or a flow control <a href="#keywords">keyword</a>.<br>
+        //FIXME wtf is this even suppposed to mean? its probably wrong and outdated anyway
+        Any sequence of <a href="#syntactic-elements">syntactic elements</a> entirely composed of <a href="#left-and-right-values">values</a> and <a href="#function-calls">function calls</a> is considered an expression.
+        //FIXME wtf is this even suppposed to mean? its probably wrong and outdated anyway
+    </p>
+    <p>
+        Statements can only be used within <a href="#functions">functions</a> and <a href="#unnamed-scopes">unnamed scopes</a>.
+    </p>
+</moveto-doc->
+
+#include "./Page/LanguageSpecification/Statements/Selection/_.html"
+#include "./Page/LanguageSpecification/Statements/Iteration/_.html"
+#include "./Page/LanguageSpecification/Statements/NonLocalFlowControl/_.html"
+#include "./Page/LanguageSpecification/Statements/Misc/_.html"

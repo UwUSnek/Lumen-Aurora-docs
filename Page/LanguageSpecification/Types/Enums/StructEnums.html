@@ -1,0 +1,32 @@
+
+<!--------------------------------------------------------------------->
+<!-- Struct enums                                                    -->
+<!--------------------------------------------------------------------->
+<h1 id="struct-enums"></h1>
+<moveto-doc->
+    <p style="margin-bottom: 0;">
+        Enums with a <b>struct</b> as <b>base type</b> behave <b>slightly differently</b> than standard enums:<br>
+    </p>
+    <ul><ul>
+        <li>Elements are initialized through one of the constructors of the base type and destroyed before the process ends as if they were global variables.</li>
+        <li>The size of the type is always 8 bytes, regardless of the size of the base struct.</li>
+        <li>Struct methods declared in the base struct are not inherited.</li>
+        <li>Creating or destroying enum values doesn't call constructors or destructors declared in the base struct.</li>
+    </ul></ul>
+</moveto-doc->
+<moveto-examples->
+    <example->
+        <label->Example</label->
+        <div>
+            <w->struct</w-> <t->s</t-> {
+                <t->uint</t-> n1, n2;
+            }
+
+            <w->enum</w-> <t->e</t-> : <t->s</t-> {
+                a = (<k->10</k->, <k->90</k->),
+                b = (<k->8</k->, <k->140</k->),
+                c = (<k->50</k->, <k->60</k->)
+            }
+        </div>
+    </example->
+</moveto-examples->
