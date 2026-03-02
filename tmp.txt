@@ -198,7 +198,6 @@ Extra layer
 
 Adds:
     Abbreviated template syntax
-    For-n statement
     For-range statement
     For-each statement
 
@@ -206,9 +205,6 @@ Adds:
 Descending:
     Abbreviated template syntax
         rewritten as a template declaration
-
-    For-n statement
-        rewritten as a for statement
 
     For-range statement
         rewritten as a for statement
