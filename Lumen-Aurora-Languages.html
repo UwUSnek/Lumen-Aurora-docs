@@ -159,6 +159,9 @@
                 <indexd->operator-declarations</indexd->
                 <indexd->operator-precedence</indexd->
             </index-elms-></index->
+            <index-><indexh->call-types</indexh-><index-elms->
+                <indexd->defer-call</indexd->
+            </index-elms-></index->
             <indexd->routine-specialization</indexd->
         </index-elms-></index->
         <index-><indexh->templates</indexh-><index-elms->
@@ -180,11 +183,8 @@
                 <indexd->once-statement</indexd->
                 <indexd->then-statement</indexd->
             </index-elms-></index->
-            <index-><indexh->non-local-flow-control</indexh-><index-elms->
-                <indexd->return-statement</indexd->
-                <indexd->defer-statement</indexd->
-            </index-elms-></index->
             <index-><indexh->statements.misc</indexh-><index-elms->
+                <indexd->return-statement</indexd->
                 <indexd->else-statement</indexd->
                 <indexd->expression-statement</indexd->
                 <indexd->empty-statement</indexd->
@@ -891,7 +891,7 @@
                         <a href="#then-statement">               <code><w->then</w-></code></a>
                         <a href="#else-statement">               <code><w->else</w-></code></a>
                         <a href="#return-statement">             <code><w->return</w-></code></a>
-                        <a href="#defer-statement">              <code><w->defer</w-></code></a>
+                        <a href="#defer-call">              <code><w->defer</w-></code></a>
                     </div>
                     <div class="split-td" style="line-height: 3ch;">
                         <elm->                                   <code>(</code><code>)</code></elm->
@@ -1063,7 +1063,7 @@
                 <span>Returns the execution to the <a href="#function-calls">caller function</a>.</span>
             </li>
             <li>
-                <span><a href="#defer-statement"><code><w->defer</w-></code></a></span>
+                <span><a href="#defer-call"><code><w->defer</w-></code></a></span>
                 <span>Delays a <a href="#routine-calls">routine call</a> until the first <a href="#return-statement"><code><w->return</w-></code></a> statement is encountered.</span>
             </li>
         </ul><br>
@@ -1312,7 +1312,7 @@
                 </div>
                 <div class="split-td">
                     <even-elm-><a href="#return-statement"><code><w->return</w-></code></a> statement</even-elm->
-                    <even-elm-><a href="#defer-statement"><code><w->defer</w-></code></a> statement</even-elm->
+                    <even-elm-><a href="#defer-call"><code><w->defer</w-></code></a> statement</even-elm->
                 </div>
                 <div class="split-td">
                     <even-elm-><a href="#else-statement"><code><w->else</w-></code></a> statement</even-elm->
@@ -1554,8 +1554,8 @@
                 <span>Returns the flow control to the caller <a href="#routines">routine</a>.</span>
             </li>
             <li>
-                <span><elm-><a href="#defer-statement"><code><w->defer</w-></code></a> statement</elm-></span>
-                <span>Evaluates all the <a href="#routine-calls">arguments</a> of a <a href="#routine-calls">routine call</a> but delays its execution until the first <a href="#return-statement"><code><w->return</w-></code> statement</a> is encountered and all the <a href="#routine-calls">routine calls</a> of subsequent <a href="defer-statement"><code><w->defer</w-></code> statements</a> are executed.</span>
+                <span><elm-><a href="#defer-call"><code><w->defer</w-></code></a> statement</elm-></span>
+                <span>Evaluates all the <a href="#routine-calls">arguments</a> of a <a href="#routine-calls">routine call</a> but delays its execution until the first <a href="#return-statement"><code><w->return</w-></code> statement</a> is encountered and all the <a href="#routine-calls">routine calls</a> of subsequent <a href="defer-call"><code><w->defer</w-></code> statements</a> are executed.</span>
             </li>
         </ul><br>
         <li>Misc</li>
@@ -4266,6 +4266,14 @@
 </moveto-examples->
 
 
+<h1 id="call-types"></h1>
+<moveto-doc-></moveto-doc->
+
+
+<h1 id="defer-call"></h1>
+<moveto-doc-></moveto-doc->
+
+
 <h1 id="routine-specialization"></h1>
 <moveto-doc->
     <p style="margin-bottom: 0;">
@@ -4759,36 +4767,6 @@
 <moveto-doc-></moveto-doc->
 
 
-<h1 id="non-local-flow-control"></h1>
-<moveto-doc-></moveto-doc->
-
-
-<h1 id="return-statement"></h1>
-<moveto-doc->
-    <p>
-        The <b><code><w->return</w-></code></b> statement skips all remaining statements in the function and <b>returns</b> the <b>code execution</b> to the <b>caller function</b>.<br>
-        Multiple return statements are allowed, but their value must be implicitly convertible to the type of the function.
-    </p>
-    <p>
-        All execution paths of non-<code><t->void</t-></code> functions must return a value.<br>
-        The return value can then be used by the caller function or be ignored.<br>
-        Calls to <code><t->void</t-></code> functions cannot be used in expressions.
-    </p>
-    <p>
-        There is no default return value.
-    </p>
-    <syntax->
-        <label- id="copy.syntax--statement-return">Syntax</label->
-    </syntax-><p>
-        //TODO EXAMPLE
-    </p>
-</moveto-doc->
-
-
-<h1 id="defer-statement"></h1>
-<moveto-doc-></moveto-doc->
-
-
 <h1 id="statements.misc"></h1>
 <moveto-doc-></moveto-doc->
 
@@ -4813,6 +4791,28 @@
 
 <h1 id="unnamed-scope"></h1>
 <moveto-doc-></moveto-doc->
+
+
+<h1 id="return-statement"></h1>
+<moveto-doc->
+    <p>
+        The <b><code><w->return</w-></code></b> statement skips all remaining statements in the function and <b>returns</b> the <b>code execution</b> to the <b>caller function</b>.<br>
+        Multiple return statements are allowed, but their value must be implicitly convertible to the type of the function.
+    </p>
+    <p>
+        All execution paths of non-<code><t->void</t-></code> functions must return a value.<br>
+        The return value can then be used by the caller function or be ignored.<br>
+        Calls to <code><t->void</t-></code> functions cannot be used in expressions.
+    </p>
+    <p>
+        There is no default return value.
+    </p>
+    <syntax->
+        <label- id="copy.syntax--statement-return">Syntax</label->
+    </syntax-><p>
+        //TODO EXAMPLE
+    </p>
+</moveto-doc->
 
 
 <h1 id="misc"></h1>
@@ -7664,7 +7664,7 @@
 
 
 
-        <label- class="s-sttm" id="syntax--statement-defer"><a href="#defer-statement">Defer statement</a></label->
+        <label- class="s-sttm" id="syntax--statement-defer"><a href="#defer-call">Defer statement</a></label->
         <table class="s-sttm">
             <tr>
                 <td data-arrows="|l lr ar"></td>

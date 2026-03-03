@@ -52,9 +52,11 @@
 
 - fix syntax notes
 
-- add call types. defer statement is one of them. call them specialized call statements
+- add call types. defer statement is one of them
   - call (default, redundant. only used for clarity)
   - defer
   - async
   - process
   - compute (run an aurora gpu shader)
+
+- ADD CALL TYPE (optional) SPECIFIER TO FUNCTION CALL SYNTAX
