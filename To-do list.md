@@ -50,4 +50,11 @@
 
 - Move operators' reference parameters to syntactic sugar
 
-- remove syntax notes. replace with hover popup info
+- fix syntax notes
+
+- add call types. defer statement is one of them. call them specialized call statements
+  - call (default, redundant. only used for clarity)
+  - defer
+  - async
+  - process
+  - compute (run an aurora gpu shader)
