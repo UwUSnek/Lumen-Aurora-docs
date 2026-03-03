@@ -1,7 +1,9 @@
 
 
 syntax- svg path.arrow-line,
-syntax- svg path.arrow-head {
+syntax- svg path.arrow-head,
+syntax- svg path.boundary-l,
+syntax- svg path.boundary-r {
     stroke: hsl(212, 14%, 24%);
     stroke-width: 2.5px;
     fill: none;
@@ -12,4 +14,11 @@ syntax- svg path.arrow-line {
 }
 syntax- svg path.arrow-head {
     stroke-linecap: round;
+}
+
+
+syntax- svg path.boundary-l,
+syntax- svg path.boundary-r {
+    stroke-linecap: round;
+    stroke-width: 5px;
 }
