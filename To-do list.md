@@ -66,3 +66,4 @@
   - const variables can only be initialized with constant values.
   - routines can be called, but ones that depend on non-const values are detected and cannot be used to create const values (this is logged as error)
   - specify that values that can be computed in compile time are compile time values but cannot be used for const values. these are only used for optimization
+
