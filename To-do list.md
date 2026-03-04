@@ -66,3 +66,7 @@
   - const variables can only be initialized with constant values.
   - routines can be called, but ones that depend on non-const values are detected and cannot be used to create const values (this is logged as error)
   - specify that values that can be computed in compile time are compile time values but cannot be used for const values. these are only used for optimization
+
+- Specify this thing somewhere - function types and typeof types don't have modifiers in their syntax
+  - Modifiers are part of the basic type. Only basic types can have modifiers.
+  - typeof(5)* is a basic type with a typeof type as base path.
