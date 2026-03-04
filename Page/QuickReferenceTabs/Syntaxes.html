@@ -529,7 +529,7 @@
                 <td></td>
                 <td></td>
                 <td data-arrows="br bt ar"></td>
-                <td><s-expr->value</s-expr-></td>
+                <td><s-expr->value&nbsp;<span class="hidden">**</span></s-expr-></td>
                 <td data-arrows="lb tb"></td>
                 <td></td>
                 <td></td>
@@ -560,7 +560,8 @@
             </tr>
         </table>
         <syntax-note->
-            * For operators, the first identifier is used.
+            * For operators, the first identifier is used.<br>
+            ** Must be a constant value.
         </syntax-note->
     </syntax->
 
@@ -2072,7 +2073,7 @@
                 <td data-arrows="|l lr ar"></td>
                 <td><s-vbtm->break</s-vbtm-></td>
                 <td data-arrows="lr ar lt"></td>
-                <td><s-expr-><t->[ulong]</t->&nbsp;amount</s-expr-></td>
+                <td><s-expr-><t->[ulong]</t->&nbsp;amount&nbsp;<span class="hidden">**</span></s-expr-></td>
                 <td data-arrows="lr tr ar"></td>
                 <td><s-vbtm->;</s-vbtm-></td>
                 <td data-arrows="lr ar |r"></td>
@@ -2132,7 +2133,8 @@
             </tr>
         </table>
         <syntax-note->
-            * "return type" = routine return type used in the function or operator signature
+            * "return type" = routine return type used in the function or operator signature<br>
+            ** Must be a constant value
         </syntax-note->
 
 
@@ -2405,7 +2407,7 @@
         <table class="s-expr">
             <tr>
                 <td data-arrows="|l lr ar"></td>
-                <td><s-expr->literal token</s-expr-></td>
+                <td><elm->literal token</elm-></td>
                 <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
