@@ -1,0 +1,5 @@
+exclude:
+  - "To-do list.md"
+  - "tmp.txt"
+  - "LICENSE"
+  - "Build_HTML.sh"
