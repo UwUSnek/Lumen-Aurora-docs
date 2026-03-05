@@ -167,6 +167,7 @@
         <index-><indexh->templates</indexh-><index-elms->
             <indexd->template-declarations</indexd->
             <indexd->template-parameters</indexd->
+            <indexd->template-instancing</indexd->
             <indexd->template-parameter-packs</indexd->
             <indexd->abbreviated-template-syntax</indexd->
             <indexd->multi-argument-type-deduction</indexd->
@@ -1651,14 +1652,15 @@
         Reflection paths are a subset of Symbol paths that can access compile time informations about the referenced symbol. These are detailedly explained in <a href="#reflection">Reflection</a>.
     </p>
     <syntax->
-        <label- id="copy.syntax--path-basic">Basic path</label->
-        <label- id="copy.syntax--path-template">Template path</label->
         <label- id="copy.syntax--path-reflection">Reflection path</label->
-        <label- id="copy.syntax--path-type-basic">Basic type path</label->
-        <label- id="copy.syntax--path-type-function">Function type path</label->
+        <label- id="copy.syntax--path-template-instance">Template instance path</label->
+        <label- id="copy.syntax--path-temporary-variable">Temporary variable path</label->
+        <label- id="copy.syntax--path-basic">Basic path</label->
+
         <label- id="copy.syntax--path-type-typeof">Typeof type path</label->
         <label- id="copy.syntax--path-type-auto">Auto type path</label->
-        <label- id="copy.syntax--path-type-modifiers">Type modifiers</label->
+        <label- id="copy.syntax--path-type-function">Function type path</label->
+        <label- id="copy.syntax--path-type-pointer">Pointer type path</label->
     </syntax->
 </moveto-doc->
 
@@ -4463,6 +4465,42 @@
 </moveto-examples->
 
 
+<h1 id="template-instancing"></h1>
+<moveto-doc->
+    <p>
+        Templates are instanced when needed.
+    </p>
+    <p>
+        Specific instances can be referenced by explicitly specifying the template arguments between agle brackets.<br>
+        This disables argument type deduction.
+    </p>
+    <syntax->
+        <label- id="copy.syntax--path-template-instance">Template instance path&nbsp;<span class="hidden">*</span></label->
+    </syntax->
+</moveto-doc->
+<moveto-examples->
+    <example->
+        <label->Example</label->
+        <div>
+            struct s {
+                int n = 5;
+            }
+            <w->template</w->&lt;<w->type</w-> <t->t</t->&gt; <t->t</t-> <f->add</f->(<t->t</t-> <p->a</p->, <t->t</t-> <p->b</p->){
+                <w->return</w-> a <f->+</f-> b;
+            }
+
+            void main() {
+                add&lt;float&gt;(5, 6);  <c->// 5 and 6 are converted to float</c->
+                add&lt;s&gt;({});        <ce->// add&lt;s&gt; cannot be instantiated without generating semantic errors</ce->
+
+                float(float) fn = add&lt;float&gt;;
+                fn(0.0, 6.7);
+            }
+        </div>
+    </example->
+</moveto-examples->
+
+
 <h1 id="template-parameters"></h1>
 <moveto-doc->
     <p>
@@ -6223,7 +6261,7 @@
                 <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
-        <label- id="syntax--path-template" class="s-path">Template path</label->
+        <label- id="syntax--path-template-instance" class="s-path">Template instance path&nbsp;<span class="hidden">*</span></label->
         <table class="s-path">
             <tr>
                 <td></td>
@@ -6259,6 +6297,10 @@
                 <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
+        <syntax-note->
+            * Valid for template instances.<br>
+            ** Must be a constant value.
+        </syntax-note->
         <label- id="syntax--path-temporary-variable" class="s-path">Temporary variable path</label->
         <table class="s-path">
             <tr>
@@ -6269,11 +6311,11 @@
                 <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
-        <label- id="syntax--path-basic" class="s-path">Basic path</label->
+        <label- id="syntax--path-basic" class="s-path">Basic path&nbsp;<span class="hidden">*</span></label->
         <table class="s-path">
             <tr>
                 <td data-arrows="|l lr br ar"></td>
-                <td><s-id->identifier<span class="hidden">&nbsp;*</span></s-id-></td>
+                <td><s-id->identifier</s-id-></td>
                 <td data-arrows="lb lr ar |r"></td>
             </tr>
             <tr>
@@ -6283,8 +6325,7 @@
             </tr>
         </table>
         <syntax-note->
-            * For operators, the first identifier is used.<br>
-            ** Must be a constant value.
+            * Valid for functions, operators, templates, variables, template arguments, routine arguments. For operators, the first identifier is used.<br>
         </syntax-note->
     </syntax->
 
@@ -6376,7 +6417,7 @@
             </tr>
         </table>
         <syntax-note->
-            * Must be an <a href="#enums">enum</a>, a <a href="#structs">struct</a>, void, or one of the primitive types.<br>
+            * Valid for <a href="#enums">enums</a>, a <a href="#structs">structs</a>, void, or one of the primitive types.<br>
         </syntax-note->
     </syntax->
 </moveto-doc->

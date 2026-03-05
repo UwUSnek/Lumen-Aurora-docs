@@ -510,7 +510,7 @@
                 <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
-        <label- id="syntax--path-template" class="s-path">Template path</label->
+        <label- id="syntax--path-template-instance" class="s-path">Template instance path&nbsp;<span class="hidden">*</span></label->
         <table class="s-path">
             <tr>
                 <td></td>
@@ -546,6 +546,10 @@
                 <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
+        <syntax-note->
+            * Valid for template instances.<br>
+            ** Must be a constant value.
+        </syntax-note->
         <label- id="syntax--path-temporary-variable" class="s-path">Temporary variable path</label->
         <table class="s-path">
             <tr>
@@ -556,11 +560,11 @@
                 <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
-        <label- id="syntax--path-basic" class="s-path">Basic path</label->
+        <label- id="syntax--path-basic" class="s-path">Basic path&nbsp;<span class="hidden">*</span></label->
         <table class="s-path">
             <tr>
                 <td data-arrows="|l lr br ar"></td>
-                <td><s-id->identifier<span class="hidden">&nbsp;*</span></s-id-></td>
+                <td><s-id->identifier</s-id-></td>
                 <td data-arrows="lb lr ar |r"></td>
             </tr>
             <tr>
@@ -570,8 +574,7 @@
             </tr>
         </table>
         <syntax-note->
-            * For operators, the first identifier is used.<br>
-            ** Must be a constant value.
+            * Valid for functions, operators, templates, variables, template arguments, routine arguments. For operators, the first identifier is used.<br>
         </syntax-note->
     </syntax->
 
@@ -663,7 +666,7 @@
             </tr>
         </table>
         <syntax-note->
-            * Must be an <a href="#enums">enum</a>, a <a href="#structs">struct</a>, void, or one of the primitive types.<br>
+            * Valid for <a href="#enums">enums</a>, a <a href="#structs">structs</a>, void, or one of the primitive types.<br>
         </syntax-note->
     </syntax->
 </moveto-doc->
