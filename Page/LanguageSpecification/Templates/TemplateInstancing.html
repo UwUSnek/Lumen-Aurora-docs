@@ -5,7 +5,7 @@
 <h1 id="template-instancing"></h1>
 <moveto-doc->
     <p>
-        Templates are instanced when needed.
+        Templates are instanciated when needed.
     </p>
     <p>
         Specific instances can be referenced by explicitly specifying the template arguments between agle brackets.<br>
@@ -17,7 +17,24 @@
 </moveto-doc->
 <moveto-examples->
     <example->
-        <label->Example</label->
+        <label->Example 1</label->
+        <div>
+            struct s {
+                int n = 5;
+            }
+            <w->template</w->&lt;<w->type</w-> <t->t</t->&gt; <t->t</t-> <f->add</f->(<t->t</t-> <p->a</p->, <t->t</t-> <p->b</p->){
+                <w->return</w-> a <f->+</f-> b;
+            }
+
+            void main() {
+                add&lt;float&gt;(5, 6);  <c->// 5 and 6 are converted to float</c->
+                add&lt;s&gt;({});        <ce->// add&lt;s&gt; cannot be instantiated without generating semantic errors</ce->
+
+                float(float) fn = add&lt;float&gt;;
+                fn(0.0, 6.7);
+            }
+        </div>
+        <label->Example 2</label->
         <div>
             struct s {
                 int n = 5;
