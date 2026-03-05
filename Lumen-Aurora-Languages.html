@@ -6259,6 +6259,16 @@
                 <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
+        <label- id="syntax--path-temporary-variable" class="s-path">Temporary variable path</label->
+        <table class="s-path">
+            <tr>
+                <td data-arrows="|l lr ar"></td>
+                <td><s-vbtm->@</s-vbtm-></td>
+                <td data-arrows="lr ar"></td>
+                <td><elm->ulong literal</elm-></td>
+                <td data-arrows="lr ar |r"></td>
+            </tr>
+        </table>
         <label- id="syntax--path-basic" class="s-path">Basic path</label->
         <table class="s-path">
             <tr>
@@ -7871,20 +7881,8 @@
             </tr>
         </table>
         <syntax-note->
-            * This is valid for Template value parameters, Routine parameters, Variables, Function values.
+            * This is valid for Template value parameters, Routine parameters, Variables, Temporary variable, and Function values.
         </syntax-note->
-
-
-        <label- class="s-expr" id="syntax--expression-temporary-variable"><a href="#temporary-variables">Temporary variables</a></label->
-        <table class="s-expr">
-            <tr>
-                <td data-arrows="|l lr ar"></td>
-                <td><s-vbtm->@</s-vbtm-></td>
-                <td data-arrows="lr ar"></td>
-                <td><elm->name</elm-></td>
-                <td data-arrows="lr ar |r"></td>
-            </tr>
-        </table>
     </syntax->
 
 
