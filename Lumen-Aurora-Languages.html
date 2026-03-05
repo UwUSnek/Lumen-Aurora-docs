@@ -137,11 +137,13 @@
                 <indexd->function-calls</indexd->
                 <indexd->operator-calls</indexd->
                 <indexd->try-expression</indexd->
+                <indexd->function-values</indexd->
             </index-elms-></index->
             <index-><indexh->stored-values</indexh-><index-elms->
                 <indexd->variables</indexd->
                 <indexd->temporary-variables</indexd->
                 <indexd->exp.routine-parameters</indexd->
+                <indexd->exp.template-value-parameters</indexd->
             </index-elms-></index->
         </index-elms-></index->
         <index-><indexh->routines</indexh-><index-elms->
@@ -229,10 +231,10 @@
     <index-><indexh->core-module</indexh-><index-elms->
         <index-><indexh->core.operators</indexh-><index-elms->
             <indexd->common-operators</indexd->
-            <indexd->arithmetic-operators</indexd-> 
-            <indexd->logical-operators</indexd-> 
-            <indexd->bitwise-operators</indexd-> 
-            <indexd->relational-operators</indexd-> 
+            <indexd->arithmetic-operators</indexd->
+            <indexd->logical-operators</indexd->
+            <indexd->bitwise-operators</indexd->
+            <indexd->relational-operators</indexd->
 
             <indexd->assignment-operators</indexd->
             <indexd->special-operators</indexd->
@@ -319,7 +321,7 @@
     <logo- style="background-image: url('Logos/Lumen-cropped.png');"></logo->
     <p style="min-height: 2vh;margin:0"></p>
     <logo- style="background-image: url('Logos/Aurora-cropped.png');"></logo->
-    <p style="min-height: 100vh;margin:0"></p> 
+    <p style="min-height: 100vh;margin:0"></p>
 </moveto-doc->
 
 
@@ -3816,6 +3818,13 @@
 </moveto-doc->
 
 
+<h1 id="function-values"></h1>
+<moveto-doc->
+    <p>
+    </p>
+</moveto-doc->
+
+
 <h1 id="stored-values"></h1>
 <moveto-doc->
     <p>
@@ -3919,6 +3928,13 @@
     <syntax->
         <label- id="copy.syntax--expression-routine-parameter">Referencing syntax</label->
     </syntax->
+</moveto-doc->
+
+
+<h1 id="exp.template-value-parameters"></h1>
+<moveto-doc->
+    <p>
+    </p>
 </moveto-doc->
 
 
@@ -4979,19 +4995,19 @@
 
 
 
-                <h1 id="compilation"></h1>                        
+                <h1 id="compilation"></h1>
                 <moveto-doc-></moveto-doc->
-                <h1 id="modules"></h1>                            
+                <h1 id="modules"></h1>
                 <moveto-doc-></moveto-doc->
-                <h1 id="compilation-phases-and-error-types"></h1> 
+                <h1 id="compilation-phases-and-error-types"></h1>
                 <moveto-doc-></moveto-doc->
-                <h1 id="global-initialization-order"></h1>        
+                <h1 id="global-initialization-order"></h1>
                 <moveto-doc-></moveto-doc->
-                <h1 id="runtime-performance"></h1>                
+                <h1 id="runtime-performance"></h1>
                 <moveto-doc-></moveto-doc->
-                <h1 id="branching-performance"></h1>              
+                <h1 id="branching-performance"></h1>
                 <moveto-doc-></moveto-doc->
-                <h1 id="value-precomputation"></h1>               
+                <h1 id="value-precomputation"></h1>
                 <moveto-doc-></moveto-doc->
 
 
@@ -5524,7 +5540,7 @@
             <example- style="margin: 0;">
                 <label->Existence</label->
                 <div>
-                    <t->bool</t-> (<t->baseof</t->(<t->t</t->) <p->a</p->) <f->=:</f-> (?<t->t</t-> <p->b</p->) { 
+                    <t->bool</t-> (<t->baseof</t->(<t->t</t->) <p->a</p->) <f->=:</f-> (?<t->t</t-> <p->b</p->) {
                         <w->for</w->(<t->uint</t-> i = <k->0</k->; i &lt; b.<f->len</f->(); ++i) {
                             <w->if</w->(a == b[i]) <w->return</w-> <k->true</k->;
                         }
@@ -5537,7 +5553,7 @@
             <example- style="margin: 0;">
                 <label->Inexistence</label->
                 <div>
-                    <t->bool</t-> (<t->baseof</t->(<t->t</t->) <p->a</p->) <f->!:</f-> (?<t->t</t-> <p->b</p->) { 
+                    <t->bool</t-> (<t->baseof</t->(<t->t</t->) <p->a</p->) <f->!:</f-> (?<t->t</t-> <p->b</p->) {
                         <w->for</w->(<t->uint</t-> i = <k->0</k->; i &lt; b.<f->len</f->(); ++i) {
                             <w->if</w->(a == b[i]) <w->return</w-> <k->false</k->;
                         }
@@ -6335,7 +6351,7 @@
             </tr>
         </table>
         <syntax-note->
-            * Valid for functions, operators, templates, variables, template arguments, routine arguments. For operators, the first identifier is used.<br>
+            * Valid for functions, operators, templates, variables, template parameters, routine parameters. For operators, the first identifier is used.<br>
         </syntax-note->
     </syntax->
 
@@ -7932,7 +7948,7 @@
             </tr>
         </table>
         <syntax-note->
-            * This is valid for Template value parameters, Routine parameters, Variables, Temporary variable, and Function values.
+            * Valid for routine parameters, variables, temporary variables, and function values.
         </syntax-note->
     </syntax->
 
