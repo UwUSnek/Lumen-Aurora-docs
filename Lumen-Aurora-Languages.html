@@ -167,7 +167,7 @@
         <index-><indexh->templates</indexh-><index-elms->
             <indexd->template-declarations</indexd->
             <indexd->template-parameters</indexd->
-            <indexd->template-instancing</indexd->
+            <indexd->template-instantiation</indexd->
             <indexd->template-parameter-packs</indexd->
             <indexd->abbreviated-template-syntax</indexd->
             <indexd->multi-argument-type-deduction</indexd->
@@ -4464,7 +4464,7 @@
 </moveto-examples->
 
 
-<h1 id="template-instancing"></h1>
+<h1 id="template-instantiation"></h1>
 <moveto-doc->
     <p>
         Templates are instanciated when needed.
@@ -4481,19 +4481,13 @@
     <example->
         <label->Example 1</label->
         <div>
-            struct s {
-                int n = 5;
-            }
             <w->template</w->&lt;<w->type</w-> <t->t</t->&gt; <t->t</t-> <f->add</f->(<t->t</t-> <p->a</p->, <t->t</t-> <p->b</p->){
                 <w->return</w-> a <f->+</f-> b;
             }
 
             void main() {
-                add&lt;float&gt;(5, 6);  <c->// 5 and 6 are converted to float</c->
-                add&lt;s&gt;({});        <ce->// add&lt;s&gt; cannot be instantiated without generating semantic errors</ce->
-
-                float(float) fn = add&lt;float&gt;;
-                fn(0.0, 6.7);
+                auto r = add(5, 6);  <c->// Instantiates add&lt;long&gt;</c->
+                add(r, 0.1);         <c->// Instantiates add&lt;double&gt;</c->
             }
         </div>
         <label->Example 2</label->
@@ -4510,7 +4504,7 @@
                 add&lt;s&gt;({});        <ce->// add&lt;s&gt; cannot be instantiated without generating semantic errors</ce->
 
                 float(float) fn = add&lt;float&gt;;
-                fn(0.0, 6.7);
+                fn(0.0, 6.7);      <c->// 0.0 and 6.7 are converted to float</c->
             }
         </div>
     </example->
