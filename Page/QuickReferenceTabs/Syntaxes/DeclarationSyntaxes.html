@@ -1,0 +1,833 @@
+
+<!--------------------------------------------------------------------->
+<!-- Declaration syntaxes                                            -->
+<!--------------------------------------------------------------------->
+<h1 id="declaration-syntaxes"></h1>
+<moveto-doc->
+    <p>
+        This section summarizes all the syntaxes used to declare user-defined symbols.<br>
+    </p>
+
+
+    <syntax- class="qrt">
+        <label- class="s-decl" id="syntax--declaration-namespace"><a href="#namespaces">Namespace declaration</a></label->
+            <table class="s-decl">
+            <tr>
+                <td></td>
+                <td></td>
+                <td data-arrows="br"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lb"></td>
+                <td></td>
+                <td data-arrows="br"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lb"></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td data-arrows="|l lr ar"></td>
+                <td><s-vbtm->namespace</s-vbtm-></td>
+                <td data-arrows="lr ar lt"></td>
+                <td><s-id->name</s-id-></td>
+                <td data-arrows="lr ar tr"></td>
+                <td><s-vbtm->{</s-vbtm-></td>
+                <td data-arrows="lr br ar lt"></td>
+                <td><s-decl->declaration<span class="hidden">&nbsp;*</span></s-decl-></td>
+                <td data-arrows="lr tr ar lb"></td>
+                <td><s-vbtm->}</s-vbtm-></td>
+                <td data-arrows="lr ar |r"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td data-arrows="rt"></td>
+                <td data-arrows="rl"></td>
+                <td data-arrows="tl"></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+        <syntax-note->
+            * One of the <a href="#symbol-declarations">declarations</a> allowed in the parent scope.
+        </syntax-note->
+    </syntax->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <syntax- class="qrt">
+        <label- class="s-decl" id="syntax--declaration-enum"><a href="#enums">Enum declaration</a></label->
+        <table class="s-decl">
+            <tr>
+                <td data-arrows="|l lr ar"></td>
+                <td><s-vbtm->enum</s-vbtm-></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-id->name</s-id-></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-vbtm->:</s-vbtm-></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-type->base type</s-type-></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-vbtm->{</s-vbtm-></td>
+                <td data-arrows="lr br"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lr ar lb"></td>
+                <td><s-vbtm->}</s-vbtm-></td>
+                <td data-arrows="lr ar |r"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td data-arrows="rt bt"></td>
+                <td><s-decl->declaration<span class="hidden">&nbsp;*</span></s-decl-></td>
+                <td data-arrows="tl al tb"></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td data-arrows="rt"></td>
+                <td><s-decl->enum element</s-decl-></td>
+                <td data-arrows="tl al"></td>
+                <td></td>
+                <td></td>
+            </tr>
+
+        </table>
+        <label- class="s-decl" id="syntax--declaration-enum-element"><a href="#enums">Enum element</a></label->
+        <table class="s-decl">
+            <tr>
+                <td></td>
+                <td></td>
+                <td data-arrows="br"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lb"></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td data-arrows="|l lr ar"></td>
+                <td><s-id->name</s-id-></td>
+                <td data-arrows="lr ar lt"></td>
+                <td><s-vbtm->=</s-vbtm-></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-expr-><t->[base type]</t->&nbsp;value</s-expr-></td>
+                <td data-arrows="lr ar tr"></td>
+                <td><s-vbtm->;</s-vbtm-></td>
+                <td data-arrows="lr ar |r"></td>
+            </tr>
+        </table>
+        <syntax-note->
+            * An
+            <a href="#syntax--declaration-enum">enum</a>,
+            <a href="#syntax--declaration-struct">struct</a>,
+            <a href="#syntax--template-declaration">struct template</a> or a
+            <a href="#syntax--declaration-symbol-alias">symbol alias</a>.
+        </syntax-note->
+    </syntax->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <syntax- class="qrt">
+        <label- class="s-decl" id="syntax--declaration-struct"><a href="#structs">Struct declaration</a></label->
+        <table class="s-decl">
+            <tr>
+                <td></td>
+                <td></td>
+                <td data-arrows="br"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lb"></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td data-arrows="|l lr ar"></td>
+                <td><s-sub->struct signature</s-sub-></td>
+                <td data-arrows="lr ar lt br"></td>
+                <td><s-sub->specialization constraint</s-sub-></td>
+                <td data-arrows="lr tr br ar"></td>
+                <td><s-sub->struct body</s-sub-></td>
+                <td data-arrows="lr ar lb |r"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td data-arrows="rt"></td>
+                <td data-arrows="rl"></td>
+                <td data-arrows="rl rt"></td>
+                <td data-arrows="rl"></td>
+                <td data-arrows="tl"></td>
+            </tr>
+        </table>
+        <label- class="s-sub" id="syntax--declaration-struct-signature"><a href="#structs">Struct signature</a></label->
+        <table class="s-sub">
+            <tr>
+                <td data-arrows="|l lr ar"></td>
+                <td><s-vbtm->struct</s-vbtm-></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-id->name</s-id-></td>
+                <td data-arrows="lr ar |r"></td>
+            </tr>
+        </table>
+        <label- class="s-sub" id="syntax--declaration-struct-body"><a href="#structs">Struct body</a></label->
+        <table class="s-sub">
+            <tr>
+                <td data-arrows="|l lr ar"></td>
+                <td><s-vbtm->{</s-vbtm-></td>
+                <td data-arrows="lr br"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lr ar lb"></td>
+                <td><s-vbtm->}</s-vbtm-></td>
+                <td data-arrows="lr ar |r"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td data-arrows="rt bt"></td>
+                <td><s-decl->declaration<span class="hidden">&nbsp;*</span></s-decl-></td>
+                <td data-arrows="tl al tb"></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td data-arrows="rt"></td>
+                <td><s-decl->struct member</s-decl-></td>
+                <td data-arrows="tl al"></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+        <label- class="s-decl" id="syntax--declaration-struct-member"><a href="#structs">Struct member</a></label->
+        <table class="s-decl">
+            <tr>
+                <td data-arrows="|l lr ar"></td>
+                <td><s-type->type</s-type-></td>
+                <td data-arrows="lr br ar"></td>
+                <td><s-id->name</s-id-></td>
+                <td data-arrows="lb lr ar"></td>
+                <td><s-vbtm->;</s-vbtm-></td>
+                <td data-arrows="lr ar |r"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td data-arrows="rt"></td>
+                <td><s-vbtm->,</s-vbtm-></td>
+                <td data-arrows="tl al"></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+        <syntax-note->
+            * An
+            <a href="#syntax--declaration-enum">enum</a>,
+            <a href="#syntax--declaration-struct">struct</a>,
+            <a href="#syntax--template-declaration">struct template</a> or a
+            <a href="#syntax--declaration-symbol-alias">symbol alias</a>.
+        </syntax-note->
+    </syntax->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <syntax- class="qrt">
+        <label- class="s-decl" id="syntax--declaration-function"><a href="#functions">Function declaration</a></label->
+        <table class="s-decl">
+            <tr>
+                <td></td>
+                <td></td>
+                <td data-arrows="br"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lb"></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td data-arrows="|l lr ar"></td>
+                <td><s-sub->function signature</s-sub-></td>
+                <td data-arrows="lr ar lt br"></td>
+                <td><s-sub->specialization constraint</s-sub-></td>
+                <td data-arrows="lr tr br ar"></td>
+                <td><s-sub->routine body</s-sub-></td>
+                <td data-arrows="lr ar lb |r"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td data-arrows="rt"></td>
+                <td data-arrows="rl"></td>
+                <td data-arrows="rl rt"></td>
+                <td data-arrows="rl"></td>
+                <td data-arrows="tl"></td>
+            </tr>
+        </table>
+        <label- class="s-decl" id="syntax--declaration-operator"><a href="#operators">Operator declaration</a></label->
+        <table class="s-decl">
+            <tr>
+                <td></td>
+                <td></td>
+                <td data-arrows="br"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lb"></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td data-arrows="|l lr ar"></td>
+                <td><s-sub->operator signature</s-sub-></td>
+                <td data-arrows="lr ar lt br"></td>
+                <td><s-sub->specialization constraint</s-sub-></td>
+                <td data-arrows="lr tr br ar"></td>
+                <td><s-sub->routine body</s-sub-></td>
+                <td data-arrows="lr ar lb |r"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td data-arrows="rt"></td>
+                <td data-arrows="rl"></td>
+                <td data-arrows="rl rt"></td>
+                <td data-arrows="rl"></td>
+                <td data-arrows="tl"></td>
+            </tr>
+        </table>
+        <label- class="s-sub" id="syntax--declaration-function-signature"><a href="#functions">Function signature</a></label->
+        <table class="s-sub">
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td data-arrows="br ar"></td>
+                <td><s-decl->basic parameter</s-decl-></td>
+                <td data-arrows="lb"></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td data-arrows="br ar bt"></td>
+                <td><s-decl->optional parameter<span class="hidden">&nbsp;***</span></s-decl-></td>
+                <td data-arrows="lb tb"></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td data-arrows="br ar bt"></td>
+                <td><s-decl->parameter pack<span class="hidden">&nbsp;***</span></s-decl-></td>
+                <td data-arrows="lb tb"></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td data-arrows="|l lr ar"></td>
+                <td><s-type->return type</s-type-></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-id->name</s-id-></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-vbtm->(</s-vbtm-></td>
+                <td data-arrows="lt rt lb"></td>
+                <td><s-vbtm->,</s-vbtm-></td>
+                <td data-arrows="tl tr br ar al"></td>
+                <td><s-vbtm->)</s-vbtm-></td>
+                <td data-arrows="lr ar |r"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td data-arrows="tr"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lt"></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+        <label- class="s-sub" id="syntax--declaration-operator-signature"><a href="#operators">Operator signature</a></label->
+        <table class="s-sub">
+            <tr>
+                <td data-arrows="|l lr ar"></td>
+                <td><s-type->return type</s-type-></td>
+                <td data-arrows="lb rb"></td>
+                <td data-arrows="rl"></td>
+                <td data-arrows="rl"></td>
+                <td data-arrows="rl"></td>
+                <td data-arrows="rl"></td>
+                <td data-arrows="rl"></td>
+                <td data-arrows="br bl ar"></td>
+                <td><s-vbtm->:</s-vbtm-></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-expr-><t->[ulong]</t-> &nbsp;priority</s-expr-></td>
+                <td data-arrows="lr ar |r"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td data-arrows="tr tb"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-id->name<span class="hidden">&nbsp;**</span></s-id-></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lt bt"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td data-arrows="tr ar"></td>
+                <td><s-vbtm->(</s-vbtm-></td>
+                <td data-arrows="lr ar lb"></td>
+                <td><s-decl->basic parameter<span class="hidden">&nbsp;**</span></s-decl-></td>
+                <td data-arrows="lr ar br"></td>
+                <td><s-vbtm->)</s-vbtm-></td>
+                <td data-arrows="tl"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td data-arrows="tr ar"></td>
+                <td><s-decl->reference parameter<span class="hidden">&nbsp;**</span></s-decl-></td>
+                <td data-arrows="lt"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+        <label- class="s-sub" id="syntax--declaration-routine-body"><a href="#routines">Routine body</a></label->
+        <table class="s-sub">
+            <tr>
+                <td data-arrows="|l lr ar"></td>
+                <td><s-vbtm->{</s-vbtm-></td>
+                <td data-arrows="lr br"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lr ar lb"></td>
+                <td><s-vbtm->}</s-vbtm-></td>
+                <td data-arrows="lr ar |r"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td data-arrows="rt bt"></td>
+                <td><s-sttm-><a href="#statements">statement</a></s-sttm-></td>
+                <td data-arrows="tl al tb"></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td data-arrows="rt"></td>
+                <td><s-decl->declaration<span class="hidden">&nbsp;*</span></s-decl-></td>
+                <td data-arrows="tl al"></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+        <syntax-note->
+            * An
+            <a href="#syntax--declaration-enum">enum</a>,
+            <a href="#syntax--declaration-struct">struct</a>,
+            <a href="#syntax--template-declaration">struct template</a>,
+            <a href="#syntax--variables">variable</a> or a
+            <a href="#syntax--declaration-symbol-alias">symbol alias</a>.<br>
+
+            ** Must alternate between identifiers and parameter declarations.<br>
+
+            *** No more than once.
+        </syntax-note->
+        <label- class="s-decl" id="syntax--declaration-basic-parameter"><a href="#basic-parameters">Basic parameter</a></label->
+        <table class="s-decl">
+            <tr>
+                <td data-arrows="|l lr ar"></td>
+                <td><s-type->type</s-type-></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-id->name</s-id |r-></td>
+            </tr>
+        </table>
+        <label- class="s-decl" id="syntax--declaration-optional-parameter"><a href="#optional-parameters">Optional parameter</a></label->
+        <table class="s-decl">
+            <tr>
+                <td data-arrows="|l lr ar"></td>
+                <td><s-decl->basic parameter</s-decl-></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-vbtm->=</s-vbtm-></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-expr-><t->[type]</t->&nbsp;value</s-expr-></td>
+                <td data-arrows="lr ar |r"></td>
+            </tr>
+        </table>
+        <label- class="s-decl" id="syntax--declaration-function-parameter-pack"><a href="#function-parameter-packs">Function parameter pack</a></label->
+        <table class="s-decl">
+            <tr>
+                <td data-arrows="br ar"></td>
+                <td><s-type->template parameter pack</s-type-></td>
+                <td data-arrows="lb"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td data-arrows="|l lr ar lt"></td>
+                <td><s-type->type</s-type-></td>
+                <td data-arrows="lr ar tr"></td>
+                <td><s-id->name</s-id-></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-vbtm->...</s-vbtm-></td>
+                <td data-arrows="lr ar |r"></td>
+            </tr>
+        </table>
+        <label- class="s-decl" id="syntax--declaration-reference-parameter"><a href="#reference-parameters">Reference parameter</a></label->
+        <table class="s-decl">
+            <tr>
+                <td data-arrows="|l lr ar"></td>
+                <td><s-decl->basic parameter</s-decl-></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-vbtm->&</s-vbtm-></td>
+                <td data-arrows="lr ar |r"></td>
+            </tr>
+        </table>
+    </syntax->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <syntax- class="qrt">
+        <label- class="s-decl" id="syntax--declaration-variable"><a href="#variables">Variable declaration</a></label->
+        <table class="s-decl">
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td data-arrows="br"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="br lr ar"></td>
+                <td><s-vbtm->;</s-vbtm-></td>
+                <td data-arrows="lr ar |r"></td>
+            </tr>
+            <tr>
+                <td data-arrows="|l lr ar"></td>
+                <td><s-type->type</s-type-></td>
+                <td data-arrows="lr br ar"></td>
+                <td><s-id->name</s-id-></td>
+                <td data-arrows="lr ar lt lb"></td>
+                <td><s-vbtm->=</s-vbtm-></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-expr-><t->[type]</t->&nbsp;value</s-expr-></td>
+                <td data-arrows="lt lb"></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td data-arrows="rt"></td>
+                <td><s-vbtm->,</s-vbtm-></td>
+                <td data-arrows="rl tl al"></td>
+                <td data-arrows="rl"></td>
+                <td data-arrows="rl"></td>
+                <td data-arrows="rl"></td>
+                <td data-arrows="tl"></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+    </syntax->
+
+
+
+
+
+
+
+
+
+
+
+
+    <syntax- class="qrt">
+        <label- class="s-decl" id="syntax--declaration-symbol-alias"><a href="#symbol-aliases">Symbol alias declaration</a></label->
+        <table class="s-decl">
+            <tr>
+                <td data-arrows="|l lr ar"></td>
+                <td><s-vbtm->alias</s-vbtm-></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-path->symbol</s-path-></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-vbtm->as</s-vbtm-></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-id->name</s-id-></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-vbtm->;</s-vbtm-></td>
+                <td data-arrows="lr ar |r"></td>
+            </tr>
+        </table>
+    </syntax->
+
+
+
+
+
+
+
+
+
+
+
+
+    <syntax- class="qrt">
+        <label- class="s-sub" id="syntax--declaration-specialization-constraint"><a href="#specialization-constraints">Specialization constraint</a></label->
+        <table class="s-sub">
+            <tr>
+                <td data-arrows="|l lr ar"></td>
+                <td><s-vbtm->when</s-vbtm-></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-vbtm->(</s-vbtm-></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-expr-><t->[bool]</t->&nbsp;condition</s-expr-></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-vbtm->)</s-vbtm-></td>
+                <td data-arrows="lr ar |r"></td>
+            </tr>
+        </table>
+    </syntax->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <syntax- class="qrt">
+        <label- class="s-decl" id="syntax--declaration-template-struct"><a href="#templates">Struct template declaration</a></label->
+        <table class="s-decl">
+            <tr>
+                <td data-arrows="|l lr ar"></td>
+                <td><s-sub->template signature<span class="hidden">&nbsp;*</span></s-sub-></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-decl->struct declaration</s-decl-></td>
+                <td data-arrows="lr ar |r"></td>
+            </tr>
+        </table>
+        <label- class="s-decl" id="syntax--declaration-template-function"><a href="#templates">Function template declaration</a></label->
+        <table class="s-decl">
+            <tr>
+                <td data-arrows="|l lr ar"></td>
+                <td><s-sub->template signature<span class="hidden">&nbsp;*</span></s-sub-></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-decl->function declaration</s-decl-></td>
+                <td data-arrows="lr ar |r"></td>
+            </tr>
+        </table>
+        <label- class="s-decl" id="syntax--declaration-template-operator"><a href="#templates">Operator template declaration</a></label->
+        <table class="s-decl">
+            <tr>
+                <td data-arrows="|l lr ar"></td>
+                <td><s-sub->template signature<span class="hidden">&nbsp;*</span></s-sub-></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-decl->operator declaration</s-decl-></td>
+                <td data-arrows="lr ar |r"></td>
+            </tr>
+        </table>
+        <label- class="s-sub" id="syntax--declaration-template-signature"><a href="#templates">Template signature</a></label->
+        <table class="s-sub">
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td data-arrows="br ar"></td>
+                <td><s-decl->template parameter</s-decl-></td>
+                <td data-arrows="lb"></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td data-arrows="br bt ar"></td>
+                <td><s-decl->template parameter pack<span class="hidden">&nbsp;**</span></s-decl-></td>
+                <td data-arrows="lb tb"></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td data-arrows="|l lr ar"></td>
+                <td><s-vbtm->template</s-vbtm-></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-vbtm->&lt;</s-vbtm-></td>
+                <td data-arrows="lt lb rt"></td>
+                <td><s-vbtm->,</s-vbtm-></td>
+                <td data-arrows="tl al tr br ar"></td>
+                <td><s-vbtm->&gt;</s-vbtm-></td>
+                <td data-arrows="lr ar |r"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td data-arrows="tr"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lt"></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+        <syntax-note->
+            * Can be omitted when using the <a href="#abbreviated-template-syntax">Abbreviated template syntax</a>.<br>
+            ** No more than once.
+        </syntax-note->
+        <label- class="s-decl" id="syntax--declaration-template-parameter"><a href="#template-parameters">Template parameter</a></label->
+        <table class="s-decl">
+            <tr>
+                <td data-arrows="|l lr ar"></td>
+                <td><s-type->type<span class="hidden">&nbsp;*</span></s-type-></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-id->name</s-id-></td>
+                <td data-arrows="lr ar |r"></td>
+            </tr>
+        </table>
+        <label- class="s-decl" id="syntax--declaration-template-parameter-pack"><a href="#template-parameter-packs">Template parameter pack</a></label->
+        <table class="s-decl">
+            <tr>
+                <td data-arrows="|l lr ar"></td>
+                <td><s-decl->template parameter</s-decl-></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-vbtm->...</s-vbtm-></td>
+                <td data-arrows="lr ar |r"></td>
+            </tr>
+        </table>
+        <syntax-note->
+            * Can be an integral type or an enum.
+        </syntax-note->
+    </syntax->
+</moveto-doc->

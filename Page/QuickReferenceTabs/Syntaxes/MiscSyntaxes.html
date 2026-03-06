@@ -1,0 +1,181 @@
+
+<!--------------------------------------------------------------------->
+<!-- Misc syntaxes                                                   -->
+<!--------------------------------------------------------------------->
+<h1 id="misc-syntaxes"></h1>
+<moveto-doc->
+
+
+    <syntax- class="qrt">
+        <label- id="syntax--declaration-module" class="s-decl"><a href="#modules">Module</a></label->
+        <table class="s-decl">
+            <tr>
+                <td data-arrows="|l lr br"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lr ar lb |r"></td>
+            </tr>
+            <tr>
+                <td data-arrows="rt bt"></td>
+                <td><s-decl->import directive</s-decl-></td>
+                <td data-arrows="tl al tb"></td>
+            </tr>
+            <tr>
+                <td data-arrows="rt bt"></td>
+                <td><s-decl->export directive</s-decl-></td>
+                <td data-arrows="tl al tb"></td>
+            </tr>
+            <tr>
+                <td data-arrows="rt"></td>
+                <td><s-decl->declaration<span class="hidden">&nbsp;*</span></s-decl-></td>
+                <td data-arrows="tl al"></td>
+            </tr>
+        </table>
+        <syntax-note->
+            * A
+            <a href="#syntax--declaration-namespace">   namespace</a>,
+            <a href="#syntax--declaration-enum">        enum</a>,
+            <a href="#syntax--declaration-struct">      struct</a>,
+            <a href="#syntax--template-declaration">    struct template</a>,
+            <a href="#syntax--function-declaration">    function</a>,
+            <a href="#syntax--template-declaration">    function template</a>,
+            <a href="#syntax--operator-declaration">    operator</a>,
+            <a href="#syntax--template-declaration">    operator template</a>,
+            <a href="#syntax--declaration-variable">    variable</a> or a
+            <a href="#syntax--declaration-symbol-alias">symbol alias</a>.
+        </syntax-note->
+    </syntax->
+
+
+
+
+
+
+
+
+    <syntax- class="qrt">
+        <label- class="s-decl" id="syntax--misc-import-directive"><a href="#import-directive">Import directive</a></label->
+        <table class="s-decl">
+            <tr>
+                <td data-arrows="br ar"></td>
+                <td><s-vbtm->import</s-vbtm-></td>
+                <td data-arrows="lb"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td data-arrows="br"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lr br"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="br lr ar"></td>
+                <td><s-vbtm->;</s-vbtm-></td>
+                <td data-arrows="lr ar |r"></td>
+            </tr>
+            <tr>
+                <td data-arrows="|l lr ar lt"></td>
+                <td><s-vbtm->from</s-vbtm-></td>
+                <td data-arrows="lr-low ar-low tr-high ar-high"></td>
+                <td><s-expr-><t->[str]</t->&nbsp;module path</s-id-></td>
+                <td data-arrows="lr-low ar-low lb-low lr-high ar-high"></td>
+                <td><s-vbtm->as</s-vbtm-></td>
+                <td data-arrows="lr-low ar-low lr-high ar-high"></td>
+                <td><s-id->name</s-id-></td>
+                <td data-arrows="br-low lr-low ar-low lt-high"></td>
+                <td><s-vbtm->import</s-vbtm-></td>
+                <td data-arrows="lr br ar"></td>
+                <td><s-path->symbol</s-path-></td>
+                <td data-arrows="lr ar lt lb"></td>
+                <td><s-vbtm->as</s-vbtm-></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-id->name</s-id-></td>
+                <td data-arrows="lt lb"></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td data-arrows="tr"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lt"></td>
+                <td></td>
+                <td data-arrows="rt"></td>
+                <td><s-vbtm->,</s-vbtm-></td>
+                <td data-arrows="rl tl al"></td>
+                <td data-arrows="rl"></td>
+                <td data-arrows="rl"></td>
+                <td data-arrows="rl"></td>
+                <td data-arrows="tl"></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+        <label- class="s-decl" id="syntax--misc-export-directive"><a href="#export-directive">Export directive</a></label->
+        <table class="s-decl">
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td data-arrows="br"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="br lr ar"></td>
+                <td><s-vbtm->;</s-vbtm-></td>
+                <td data-arrows="lr ar |r"></td>
+            </tr>
+            <tr>
+                <td data-arrows="|l lr ar"></td>
+                <td><s-vbtm->export</s-vbtm-></td>
+                <td data-arrows="lr ar br"></td>
+                <td><s-path->symbol</s-path-></td>
+                <td data-arrows="lr ar lt lb"></td>
+                <td><s-vbtm->as</s-vbtm-></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-id->name</s-id-></td>
+                <td data-arrows="lt lb"></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td data-arrows="rt"></td>
+                <td><s-vbtm->,</s-vbtm-></td>
+                <td data-arrows="rl tl al"></td>
+                <td data-arrows="rl"></td>
+                <td data-arrows="rl"></td>
+                <td data-arrows="rl"></td>
+                <td data-arrows="tl"></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+    </syntax->
+
+
+
+
+
+
+
+
+    <syntax- class="qrt">
+        <label- class="s-decl" id="syntax--misc-construct-directive"><a href="#construct-directive">Construct directive</a></label->
+        <table class="s-decl">
+            <tr>
+                <td></td>
+            </tr>
+        </table>
+    </syntax->
+</moveto-doc->

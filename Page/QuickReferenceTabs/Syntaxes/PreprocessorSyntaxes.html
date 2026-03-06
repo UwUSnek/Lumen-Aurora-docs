@@ -1,0 +1,97 @@
+
+<!--------------------------------------------------------------------->
+<!-- Preprocessor syntaxes                                           -->
+<!--------------------------------------------------------------------->
+<h1 id="preprocessor-syntaxes"></h1>
+<moveto-doc->
+
+
+    <syntax->
+        <label- id="syntax--preprocessor-comment">Comment</label->
+        <table>
+            <tr>
+                <td data-arrows="br ar"></td>
+                <td><s-vbtm->//</s-vbtm-></td>
+                <td data-arrows="lr ar"></td>
+                <td><elm->comment string</elm-></td>
+                <td data-arrows="lr ar lb"></td>
+                <td><s-vbtm-><nl-></nl-></s-vbtm-></td>
+                <td data-arrows="lb"></td>
+            </tr>
+            <tr>
+                <td data-arrows="|l lt lb"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td data-arrows="tr br ar"></td>
+                <td><s-vbtm-><eof-></eof-></s-vbtm-></td>
+                <td data-arrows="tr br lr ar |r"></td>
+            </tr>
+            <tr>
+                <td data-arrows="tr ar"></td>
+                <td><s-vbtm->/*</s-vbtm-></td>
+                <td data-arrows="lr ar"></td>
+                <td><elm->comment string</elm-></td>
+                <td data-arrows="lr ar lt"></td>
+                <td><s-vbtm->*/</s-vbtm-></td>
+                <td data-arrows="lt"></td>
+            </tr>
+        </table>
+    </syntax->
+
+
+
+
+    <syntax->
+        <label- id="syntax--preprocessor-include">Include</label->
+        <table>
+            <tr>
+                <td data-arrows="|l lr ar"></td>
+                <td><s-vbtm->#include</s-vbtm-></td>
+                <td data-arrows="lr ar lb"></td>
+                <td><s-vbtm->"</s-vbtm-></td>
+                <td data-arrows="lr ar"></td>
+                <td class="center"><elm->path/to/file</elm-></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-vbtm->"</s-vbtm-></td>
+                <td data-arrows="lr br ar |r"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td data-arrows="tr ar"></td>
+                <td><s-vbtm->&lt;</s-vbtm-></td>
+                <td data-arrows="lr ar"></td>
+                <td class="center"><elm->module name</elm-></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-vbtm->&gt;</s-vbtm-></td>
+                <td data-arrows="lt"></td>
+            </tr>
+        </table>
+    </syntax->
+
+
+
+
+    <syntax->
+        <label- id="syntax--preprocessor-line-splicing-tokens">Line splicing tokens</label->
+        <table>
+            <tr>
+                <td data-arrows="|l lr ar lb"></td>
+                <td><s-vbtm->\</s-vbtm-></td>
+                <td data-arrows="lr br"></td>
+                <td data-arrows="lr lb ar"></td>
+                <td><s-vbtm-><nl-></nl-></s-vbtm-></td>
+                <td data-arrows="lr br ar |r"></td>
+            </tr>
+            <tr>
+                <td data-arrows="tr ar"></td>
+                <td><s-vbtm->\\</s-vbtm-></td>
+                <td data-arrows="lt"></td>
+                <td data-arrows="tr ar"></td>
+                <td><s-vbtm-><eof-></eof-></s-vbtm-></td>
+                <td data-arrows="lt"></td>
+            </tr>
+        </table>
+    </syntax->
+</moveto-doc->

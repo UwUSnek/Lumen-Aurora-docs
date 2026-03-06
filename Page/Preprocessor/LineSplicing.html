@@ -107,12 +107,8 @@
     </split-example-container->
 </moveto-examples->
 <moveto-internal->
-    <ul>
-        Line splicing tokens are <b>not</b> considered whitespace and are simply removed during the preprocessing phase.<br>
-        This means that they can be used inside of any literal, including Strings and Character literals.
-    </ul>
     <p>
-        Because of how the parser is implemented, any whitespace near a Line junction token is considered to be part of it,
-        even though the token's syntax doesn't enforce the presence of whitespace characters.
+        Line splicing tokens are not considered whitespace and are simply removed during the preprocessing phase.<br>
+        This means that they can be used inside of any token, including <a href="#string-literals">Strings</a> and Character literals.
     </p>
 </moveto-internal->

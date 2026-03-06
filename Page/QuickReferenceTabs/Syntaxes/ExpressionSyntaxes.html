@@ -1,0 +1,116 @@
+
+<!--------------------------------------------------------------------->
+<!-- Expression syntaxes                                             -->
+<!--------------------------------------------------------------------->
+<h1 id="expression-syntaxes"></h1>
+<moveto-doc->
+
+
+    <syntax- class="qrt">
+        <label- class="s-expr" id="syntax--expression-literal"><a href="#literals">Literal</a></label->
+        <table class="s-expr">
+            <tr>
+                <td data-arrows="|l lr ar"></td>
+                <td><elm->literal token</elm-></td>
+                <td data-arrows="lr ar |r"></td>
+            </tr>
+        </table>
+        <label- class="s-expr" id="syntax--expression-try"><a href="#try-expression">Try expression</a></label->
+        <table class="s-expr">
+            <tr>
+                <td data-arrows="|l lr ar"></td>
+                <td><s-vbtm->try</s-vbtm-></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-vbtm->{</s-vbtm-></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-decl->module contents</s-decl-></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-vbtm->}</s-vbtm-></td>
+                <td data-arrows="lr ar |r"></td>
+            </tr>
+        </table>
+        <label- class="s-expr" id="syntax--expression-reference">Reference expressions&nbsp;<span class="hidden">*</span></label->
+        <table class="s-expr">
+            <tr>
+                <td data-arrows="|l lr ar"></td>
+                <td><s-path->path to value</s-path-></td>
+                <td data-arrows="lr ar |r"></td>
+            </tr>
+        </table>
+        <syntax-note->
+            * Valid for routine parameters, variables, temporary variables, and function values.
+        </syntax-note->
+    </syntax->
+
+
+
+
+
+
+
+
+    <syntax- class="qrt">
+        <label- class="s-expr" id="syntax--expression-function-call"><a href="#declarations.functions">Function call</a></label->
+        <table class="s-expr">
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td data-arrows="br"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lb"></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td data-arrows="|l lr ar"></td>
+                <td><s-path->path to function</s-path-></td>
+                <td data-arrows="lr ar"></td>
+                <td><s-vbtm->(</s-vbtm-></td>
+                <td data-arrows="lr br ar lt"></td>
+                <td><s-expr->argument</s-expr-></td>
+                <td data-arrows="lr ar lb tr"></td>
+                <td><s-vbtm->)</s-vbtm-></td>
+                <td data-arrows="lr ar |r"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td data-arrows="rt"></td>
+                <td><s-vbtm->,</s-vbtm-></td>
+                <td data-arrows="tl al"></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+
+
+
+
+        <label- class="s-expr" id="syntax--expression-operator-call"><a href="#declarations.operators">Operator call</a></label->
+        <table class="s-expr">
+            <tr>
+                <td data-arrows="br ar"></td>
+                <td><s-id->operator identifier<span class="hidden">&nbsp;* **</span></s-id-></td>
+                <td data-arrows="lb"></td>
+            </tr>
+            <tr>
+                <td data-arrows="br bt ar"></td>
+                <td><s-expr->argument<span class="hidden">&nbsp;*</span></s-expr-></td>
+                <td data-arrows="lb tb"></td>
+            </tr>
+            <tr>
+                <td data-arrows="|l lt rt"></td>
+                <td data-arrows="rl"></td>
+                <td data-arrows="tl tr ar |r"></td>
+            </tr>
+        </table>
+        <syntax-note->
+            * Must follow the identifier/parameter syntax as defined by the operator.<br>
+            ** Operator calls cannot specify the full path. You must import or alias the operator as needed.
+        </syntax-note->
+    </syntax->
+</moveto-doc->
