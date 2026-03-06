@@ -524,31 +524,29 @@
                 <td></td>
             </tr>
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td data-arrows="br bt ar"></td>
-                <td><s-expr->value&nbsp;<span class="hidden">**</span></s-expr-></td>
-                <td data-arrows="lb tb"></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
                 <td data-arrows="|l lr ar"></td>
                 <td><s-path->path&nbsp;<span class="hidden">(template symbol)</span></s-path-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->&lt;</s-vbtm-></td>
-                <td data-arrows="rt lt"></td>
+                <td data-arrows="rt lt lb"></td>
                 <td><s-vbtm->,</s-vbtm-></td>
-                <td data-arrows="tl al tr ar"></td>
+                <td data-arrows="tl al tr br ar"></td>
                 <td><s-vbtm->&gt;</s-vbtm-></td>
                 <td data-arrows="lr ar |r"></td>
             </tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td data-arrows="tr"></td>
+                <td data-arrows="lr"></td>
+                <td data-arrows="lt"></td>
+                <td></td>
+                <td></td>
+            </tr>
         </table>
         <syntax-note->
-            * Valid for template instances.<br>
-            ** Must be a constant value.
+            * Valid for template instances.
         </syntax-note->
         <label- id="syntax--path-temporary-variable" class="s-path">Temporary variable path</label->
         <table class="s-path">
@@ -1601,16 +1599,9 @@
         <label- class="s-decl" id="syntax--declaration-template-parameter"><a href="#template-parameters">Template parameter</a></label->
         <table class="s-decl">
             <tr>
-                <td data-arrows="br ar"></td>
-                <td><s-vbtm->type</s-vbtm-></td>
-                <td data-arrows="lb"></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td data-arrows="|l lr ar lt"></td>
+                <td data-arrows="|l lr ar"></td>
                 <td><s-type->type<span class="hidden">&nbsp;*</span></s-type-></td>
-                <td data-arrows="lr tr ar"></td>
+                <td data-arrows="lr ar"></td>
                 <td><s-id->name</s-id-></td>
                 <td data-arrows="lr ar |r"></td>
             </tr>
