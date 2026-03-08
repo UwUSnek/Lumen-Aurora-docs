@@ -10,5 +10,11 @@
         "*.sh" : "shellscript",
         "*.json" : "json",
         "*.tcc": "cpp", "*.inc": "cpp"
+    },
+    "triggerTaskOnSave.selectedTask": "Build HTML",
+    "triggerTaskOnSave.tasks": {
+        "Build HTML": [
+            "**"
+        ]
     }
 }

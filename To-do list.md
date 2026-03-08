@@ -172,6 +172,13 @@ int main() {
 
 
 
+
+
+
+
+
+
+
 - language-level assignments
   - the = meta keyword is part of the language. valid anywhere (it's a meta keyword so the = character can still be used in identifiers)
   - operators cannot be called "=" only. == += and others are allowed.
@@ -269,6 +276,11 @@ int main() {
       - at this point you are playing with fire while covered in gasoline
       - the unsafe block is there so the compiler trusts you know what you are doing and lets you do it without questions
     - also needed to make raw pointer values escape their parent scope
+    - editor syntax highlight should color unsafe blocks in bright red or something as visible
+
+
+
+
 
 
 
