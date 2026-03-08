@@ -55,8 +55,8 @@
 - add call types. defer statement is one of them
   - call (default, redundant. only used for clarity)
   - defer
-  - async
-  - process
+  - async (returns an Atomic<t*>^. RO pointer to an atomic pointer. The atomic pointer is set to non-null by the new thread after it returns)
+    - Standard modules and implementations handle polling, waiting and other synchronization strategies. all based on the atomic pointer
   - compute (run an aurora gpu shader)
 
 - ADD CALL TYPE (optional) SPECIFIER TO FUNCTION CALL SYNTAX
@@ -67,3 +67,166 @@
   - routines can be called, but ones that depend on non-const values are detected and cannot be used to create const values (this is logged as error)
   - specify that values that can be computed in compile time are compile time values but cannot be used for const values. these are only used for optimization
 
+- Atomic types built on top of LLVM's Atomics
+  - basically free, just copy llvm 1:1
+
+- add process to standard modules
+  - creates a new process
+  - process("path/to/executable", "option1", "option2");
+- add error types to standard modules
+  - Error/Success
+  - Optional
+  - other similar stuff.
+
+- add Shared syntax and stuff
+
+
+
+
+
+- add constructors - equivalent of copy constructor replaces the default "copy-every-byte" behaviour
+  - can be called or optimized out by the compiler as it sees fit
+
+
+- add function values to documentation
+  - rename them to something else. function value should only mean "a value of function type"
+- add function literals to documentation
+- add function values as a syntax to initialize elements of buffers separately - function takes the index
+
+
+
+
+
+
+- add this somewhere in the documentation
+  - The language is meant to be handy, readable and powerful. Not idiot-proof.
+  - You are given sharp tools and you are expected to know how not to cut yourself, though the compiler will do its best to provide first aid.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+- language-level assignments
+  - the = meta keyword is part of the language. valid anywhere (it's a meta keyword so the = character can still be used in identifiers)
+  - operators cannot be called "=" only. == += and others are allowed.
+  - by default, assignments simply copy the value at their right into the value at their left.
+    - deep copy of every byte in the data. pointers are copied by-value, without duplicating the pointed data.
+    - this can be changed using struct constructors.
+
+- constructors and destructors
+  - special functions tied to the struct value's lifetime
+  - a struct can define multiple constructors in order to accept different initializer values
+    - constructors allow specialization and templates. name resolution is identical to normal functions
+    - one of the constructors is called when a new value is created (using a constructor call)
+  - a struct can define a single destructor
+    - the destructor is called when the struct value goes out of scope
+
+- constructor calls
+  - new values can be created using constructor calls
+  - the compiler decides if to put them on the stack or the heap, programmer doesn't need to care about that
+  - value constructor calls return the value itself
+    - type{<constructor parameters>};
+    - `int n = int{ 7 };`
+  - buffer constructor calls return a rw pointer to the first element. they also accept an initializer function which is passed the index of the element being initialized
+    - type[number]{<constructor parameters or initializer function>};
+    - `int* p = int[9]{ 7 };`
+    - `int* p = int[6]{ int(ulong i){ return i * 2;} };`
+  - resource constructor calls always return the rw arc pointer of the first element (or the value)
+    - resource <normal constructor call>;
+    - `int^ p = resource int[98]{ 12 }; // a resource buffer of 98 ints initialized to value 12`
+  - primitive types and structs that don't specify a constructor get a default constructor that takes a value for each member.
+  - the type can be omitted in contexts where a specific type is required.
+    - `struct s { int n; }`
+    - `void f(s value){}`
+    - `f({ s{ 5 } });  // ok, explicit constructor call`
+    - `f({ 5 });       // ok, type is omitted`
+
+- arc and read-only pointers
+  - pointers can be arc and/or read-only.
+  - raw pointers: `t*`
+    - no arc metadata. just a simple 64bit address
+  - arc pointers: `t^`
+    - has arc metadata. used to handle resources.
+    - reference counter is updated on direct assignment.
+    - arc pointers bind to the resource they were created for or to the resource associated with the arc pointer that was last assigned to them
+    - cannot be dereferenced if pointing to a resource struct
+  - read-only raw/arc pointers: `t~*` `t~^`
+    - ~ means "whatever is at the left is read only". ~ reads as "locked/unmodifiable"
+    - works just like the read/write version, but doesn't allow assigning values to the underlying data
+  - implicit conversions
+    - arc pointers can freely convert into raw pointers, losing resource tracking metadata. these don't count as a resource reference.
+    - read-write pointers can freely convert into read-only pointers, maintaining their raw/arc status.
+
+- resources and resource-only structs
+  - normally, values are owned by the function that creates them.
+    - they cannot escape the scope in which they were created. Other threads and functions only see copies
+    - they are destroyed as soon as they run out of scope.
+  - resources are special values that can escape their scop
+    - data of any type can be a resource, including primitive types. the only exception is void
+    - resources are created by putting the resource keyword before the constructor call. this returns an arc pointer associated with the new resource
+    - the data can only be accessed through arc pointers associated with it
+    - ownership is shared between all threads and functions that use arc pointers associated with a resource
+    - resources can escape and outlive their scope if one of the arc pointers associated with it is assigned to globals or passed to other threads
+    - the value is destroyed after all of the referencing arc pointers run out of scope (meaning the value is inaccessible)
+    - circular dependencies are the programmer's responsibility. they can create memory leaks. don't do that.
+    - a struct can be declared as "resource"
+      - a resource struct can only be created through a resource constructor call
+      - pointers to resource structs cannot be dereferenced
+
+- other additions
+  - struct members can be accessed through pointers directly
+    - uses the dot syntax just like namespace paths and normal struct value member access
+    - member access through read-only pointers return read-only values (cannot be assigned to. just like normal dereferencing of a RO pointer)
+    - works just fine with arc pointers
+  - pointers have a [] operator from the standard module.
+    - returns the address of the element at the specified index
+    - subscription of read-only pointers returns a read-only pointer
+    - subscription of an arc pointer returns an arc pointer that tracks the same resource
+  - pointer arithmetics and arbitrary conversions are restricted to unsafe {}
+    - unsafe block means "i know what im doing, i take full responsibility. compiler, give me unlimited power"
+
+
+
+
+resource struct file {
+  ulong __os_handler = 0;
+
+  constructor(str path) {
+    __os_handler = __os_open(path);
+  }
+  destructor() {
+    __os_close(__os_handler);
+  }
+}
+
+
+
+
+
+
+
+
+
+- each value in expression trees carries these informations
+  - known to the programmer
+    - writeable: true/false (can be assigned to)
+    - constant: true/false (can be used for constant expressions)
+    - can use addr on it: true/false (only true for variables and routine parameters)
+  - compiler internals
+    - computable in compile time: true/false (used for optimization)
+    - stored: true/false (has an address. temporary values don't have one)
