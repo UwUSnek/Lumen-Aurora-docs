@@ -115,7 +115,58 @@
 
 
 
+import __internal;
 
+
+resource struct file {
+  ulong handle;
+
+  constructor(str path, str permissions = "rw") {
+    handle = __internal.open(path, permissions);
+  }
+
+  destructor() {
+    __internal.close(handle);
+  }
+
+  // no export directive, so handle is not visible from the outside
+}
+
+void write(file^ f, str data) {
+  __internal.write(f.handle, data);
+}
+
+
+struct float2 {
+  float x;
+  float y;
+
+  constructor() {
+    x = 0;
+    y = 0;
+  }
+  constructor(float _x, float _y) {
+    x = _x;
+    y = _y;
+  }
+
+  export x, y;
+}
+
+float dot(float2 a, float2 b) {
+  return a.x * b.x + a.y * b.y;
+}
+
+
+
+
+int main() {
+  file^ f;
+  // write(f, "hi") // error, f might not be initialized here
+  f = resource file{ "./test.txt" };
+  f->write("hello");
+  f->write(str{ float2{ 5, 6 }->dot(float2{ 9, -1 }) });
+}
 
 
 
@@ -127,14 +178,26 @@
   - by default, assignments simply copy the value at their right into the value at their left.
     - deep copy of every byte in the data. pointers are copied by-value, without duplicating the pointed data.
     - this can be changed using struct constructors.
+  - if you want to share a value with other functions, pass its address as a pointer
+    - this lets other functions access it but it doesn't extend its lifetime. it will still get destroyed when it runs out of its original scope
+
+- initialization
+  - variables and members can be left uninitialized, but:
+    - constructors must initialize all of them
+    - values can only be passed to routines, dereferenced or have its members accessed through "." if the compiler is certain they are initialized there
+  - compiler should generate errors if it detects raw pointers assigned to external variables or passed to other threads
+    - this is only allowed inside of the unsafe{} block
+  - so the programmer never has to deal with uninitialized values at runtime. anything is detected during compilation, creating errors
 
 - constructors and destructors
   - special functions tied to the struct value's lifetime
   - a struct can define multiple constructors in order to accept different initializer values
     - constructors allow specialization and templates. name resolution is identical to normal functions
     - one of the constructors is called when a new value is created (using a constructor call)
+    - if no constructor is defined, a default one is generated for the struct. this constructor takes one argument for each struct member.
   - a struct can define a single destructor
     - the destructor is called when the struct value goes out of scope
+    - there is no default destructor
 
 - constructor calls
   - new values can be created using constructor calls
@@ -176,7 +239,7 @@
   - normally, values are owned by the function that creates them.
     - they cannot escape the scope in which they were created. Other threads and functions only see copies
     - they are destroyed as soon as they run out of scope.
-  - resources are special values that can escape their scop
+  - resources are special values that can escape their scope
     - data of any type can be a resource, including primitive types. the only exception is void
     - resources are created by putting the resource keyword before the constructor call. this returns an arc pointer associated with the new resource
     - the data can only be accessed through arc pointers associated with it
@@ -199,20 +262,16 @@
     - subscription of an arc pointer returns an arc pointer that tracks the same resource
   - pointer arithmetics and arbitrary conversions are restricted to unsafe {}
     - unsafe block means "i know what im doing, i take full responsibility. compiler, give me unlimited power"
+    - "unsafe blocks" are a kind of expression, not a statement.
+    - it can be used within expressions and can be thought of as returning whatever expression it contains, unchanged.
+    - this is valid: `int* p = unsafe{ int*{ 0x71b64a } };`
+    - this is also valid: `int* p2 = p[unsafe{ p + 5 * p }];`
+      - at this point you are playing with fire while covered in gasoline
+      - the unsafe block is there so the compiler trusts you know what you are doing and lets you do it without questions
+    - also needed to make raw pointer values escape their parent scope
 
 
 
-
-resource struct file {
-  ulong __os_handler = 0;
-
-  constructor(str path) {
-    __os_handler = __os_open(path);
-  }
-  destructor() {
-    __os_close(__os_handler);
-  }
-}
 
 
 
