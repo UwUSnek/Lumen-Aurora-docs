@@ -1,11 +1,25 @@
+:root {
+    --separator-h-margin: 25px;
+}
 
-index-separator- {
+
+index-separator-,
+index-separator-2- {
     display: block;
     background-color: var(--fg-separator);
     min-height: 1px;
     max-height: 1px;
-    min-width: 100%;
-    max-width: 100%;
-    border-radius: 2.5px;
-    margin: 20px 0 20px 0;
+    margin-left:  var(--separator-h-margin);
+    margin-right: var(--separator-h-margin);
+    min-width: calc(100% - calc(2 * var(--separator-h-margin)));
+    max-width: calc(100% - calc(2 * var(--separator-h-margin)));
+}
+index-separator- {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+index-separator-2- {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    opacity: 30%;
 }

@@ -88,7 +88,7 @@ const setup_index = {
             let separators = 0;
             for(let i = 0; i < children.length; i++){
                 let c = children[i];
-                if(c.tagName == 'INDEX-SEPARATOR-'){
+                if(c.tagName == 'INDEX-SEPARATOR-' || c.tagName == 'INDEX-SEPARATOR-2-'){
                     separators++;
                 }
                 else {

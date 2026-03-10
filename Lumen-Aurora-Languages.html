@@ -99,6 +99,9 @@
             <indexd->export-directive</indexd->
             <indexd->construct-directive</indexd->
         </index-elms-></index->
+
+        <index-separator-2-></index-separator-2->
+
         <index-><indexh->types</indexh-><index-elms->
             <index-><indexh->primitive-types</indexh-><index-elms->
                 <indexd->integral-types</indexd->
@@ -116,9 +119,13 @@
                 <indexd->destructor-function</indexd->
                 <indexd->struct-specialization</indexd->
             </index-elms-></index->
+            <index-><indexh->pointers</indexh-><index-elms->
+                <indexd->raw-pointers</indexd->
+                <indexd->arc-pointers</indexd->
+                <indexd->read-only-pointers</indexd->
+            </index-elms-></index->
             <index-><indexh->special-types</indexh-><index-elms->
                 <indexd->void-type</indexd->
-                <indexd->pointer-types</indexd->
                 <indexd->function-types</indexd->
             </index-elms-></index->
             <indexd->const-qualifier</indexd->
@@ -131,20 +138,29 @@
                 <indexd->implicit-conversions.constness-conversions</indexd->
             </index-elms-></index->
         </index-elms-></index->
+
+        <index-separator-2-></index-separator-2->
+
         <index-><indexh->expressions</indexh-><index-elms->
             <index-><indexh->inline-values</indexh-><index-elms->
                 <indexd->literals</indexd->
                 <indexd->function-calls</indexd->
                 <indexd->operator-calls</indexd->
+                <indexd->conditional-value</indexd->
                 <indexd->try-expression</indexd->
                 <indexd->function-values</indexd->
+                <indexd->inline-statements</indexd->
             </index-elms-></index->
             <index-><indexh->stored-values</indexh-><index-elms->
                 <indexd->variables</indexd->
                 <indexd->temporary-variables</indexd->
                 <indexd->exp.routine-parameters</indexd->
             </index-elms-></index->
+            <indexd->unsafe-block</indexd->
         </index-elms-></index->
+
+        <index-separator-2-></index-separator-2->
+
         <index-><indexh->routines</indexh-><index-elms->
             <index-><indexh->parameters</indexh-><index-elms->
                 <indexd->basic-parameters</indexd->
@@ -162,9 +178,14 @@
             </index-elms-></index->
             <index-><indexh->call-types</indexh-><index-elms->
                 <indexd->defer-call</indexd->
+                <indexd->async-call</indexd->
+                <indexd->compute-call</indexd->
             </index-elms-></index->
             <indexd->routine-specialization</indexd->
         </index-elms-></index->
+
+        <index-separator-2-></index-separator-2->
+
         <index-><indexh->templates</indexh-><index-elms->
             <indexd->template-declarations</indexd->
             <indexd->template-parameters</indexd->
@@ -173,34 +194,55 @@
             <indexd->abbreviated-template-syntax</indexd->
             <indexd->multi-argument-type-deduction</indexd->
         </index-elms-></index->
+
+        <index-separator-2-></index-separator-2->
+
         <index-><indexh->statements</indexh-><index-elms->
             <index-><indexh->selection</indexh-><index-elms->
-                    <indexd->if-statement</indexd->
-                    <indexd->match-statement</indexd->
+                <indexd->if-statement</indexd->
+                <indexd->match-statement</indexd->
+                <indexd->else-statement</indexd->
+                <indexd->then-statement</indexd->
             </index-elms-></index->
             <index-><indexh->iteration</indexh-><index-elms->
                 <indexd->for-loops</indexd->
                 <indexd->while-loops</indexd->
-                <indexd->continue-and-break-statements</indexd->
+                <indexd->continue-statement</indexd->
+                <indexd->break-statement</indexd->
                 <indexd->once-statement</indexd->
-                <indexd->then-statement</indexd->
             </index-elms-></index->
             <index-><indexh->statements.misc</indexh-><index-elms->
                 <indexd->return-statement</indexd->
-                <indexd->else-statement</indexd->
                 <indexd->expression-statement</indexd->
                 <indexd->empty-statement</indexd->
                 <indexd->unnamed-scope</indexd->
             </index-elms-></index->
         </index-elms-></index->
+
+        <index-separator-2-></index-separator-2->
+
+        <index-><indexh->threads</indexh-><index-elms->
+            <indexd->async-execution</indexd->
+            <indexd->memory-ordering</indexd->
+            <indexd->atomic-values</indexd->
+        </index-elms-></index->
+
+        <index-separator-2-></index-separator-2->
+
         <index-><indexh->misc</indexh-><index-elms->
             <indexd->declarations.namespaces</indexd->
             <indexd->symbol-aliases</indexd->
             <indexd->inline-declarations</indexd->
             <indexd->inline-glsl</indexd->
         </index-elms-></index->
+
+        <index-separator-2-></index-separator-2->
+
         <index-><indexh->reflection</indexh-><index-elms->
         </index-elms-></index->
+
+        <index-separator-2-></index-separator-2->
+
         <index-><indexh->syntactic-sugar</indexh-><index-elms->
         </index-elms-></index->
     </index-elms-></index->
@@ -284,8 +326,20 @@
 
     <index-separator-></index-separator->
 
-    <indexd->omitted-features</indexd->
-    <indexh-></indexh-><index-elms->
+    <index-><indexh->omitted-features</indexh-><index-elms->
+        <indexd->omitted.goto-statement</indexd->
+        <indexd->omitted.reference-types</indexd->
+        <indexd->omitted.runtime-type-informations</indexd->
+        <indexd->omitted.interfaces</indexd->
+        <indexd->omitted.inheritance-and-polymorphism</indexd->
+        <indexd->omitted.exceptions</indexd->
+        <indexd->omitted.garbage-collection</indexd->
+        <indexd->omitted.move-semantics</indexd->
+        <indexd->omitted.left-and-right-values</indexd->
+        <indexd->omitted.stack-and-heap-concepts</indexd->
+        <indexd->omitted.process-forking</indexd->
+        <indexd->omitted.non-local-jumps</indexd->
+    </index-elms-></index->
 </index-elms-></index->
     </left->
     <right->
@@ -792,7 +846,9 @@
 
 
 <h1 id="language-structure"></h1>
-<moveto-doc-></moveto-doc->
+<moveto-doc->
+    <p></p>
+</moveto-doc->
 
 
 <h1 id="lexical-structure"></h1>
@@ -863,40 +919,40 @@
                 <th class="nowrap medium"><a href="#keywords">Keyword</a></th>
                 <td><div class="split-td-outer">
                     <div class="split-td" style="line-height: 3ch;">
-                        <a href="#namespaces">                   <code><w->namespace</w-></code></a>
-                        <a href="#enums">                        <code><w->enum</w-></code></a>
-                        <a href="#structs">                      <code><w->struct</w-></code></a>
-                        <a href="#const-qualifier">              <code><t->const</t-></code></a>
-                        <a href="#auto-specifier">               <code><t->auto</t-></code></a>
-                        <a href="#typeof-specifier">             <code><t->typeof</t-></code></a>
-                        <a href="#symbol-aliases">               <code><w->alias</w-></code></a>
-                        <a href="#import-directive">             <code><w->from</w-></code></a>
-                        <a href="#import-directive">             <code><w->import</w-></code></a>
-                        <a href="#export-directive">             <code><w->export</w-></code></a>
-                        <a href="#pointer-types">                <code><w->addr</w-></code></a>
-                        <a href="#pointer-types">                <code>@</code></a>
+                        <a href="#namespaces">         <code><w->namespace</w-></code></a>
+                        <a href="#enums">              <code><w->enum</w-></code></a>
+                        <a href="#structs">            <code><w->struct</w-></code></a>
+                        <a href="#const-qualifier">    <code><t->const</t-></code></a>
+                        <a href="#auto-specifier">     <code><t->auto</t-></code></a>
+                        <a href="#typeof-specifier">   <code><t->typeof</t-></code></a>
+                        <a href="#symbol-aliases">     <code><w->alias</w-></code></a>
+                        <a href="#import-directive">   <code><w->from</w-></code></a>
+                        <a href="#import-directive">   <code><w->import</w-></code></a>
+                        <a href="#export-directive">   <code><w->export</w-></code></a>
+                        <a href="#pointer-types">      <code><w->addr</w-></code></a>
+                        <a href="#pointer-types">      <code>@</code></a>
                     </div>
                     <div class="split-td" style="line-height: 3ch;">
-                        <a href="#if-statement">                 <code><w->if</w-></code></a>
-                        <a href="#match-statement">              <code><w->match</w-></code></a>
-                        <a href="#for-loops">                    <code><w->for</w-></code></a>
-                        <a href="#while-loops">                  <code><w->while</w-></code></a>
-                        <a href="#while-loops">                  <code><w->do</w-></code></a>
-                        <a href="#continue-and-break-statements"><code><w->continue</w-></code></a>
-                        <a href="#continue-and-break-statements"><code><w->break</w-></code></a>
-                        <a href="#once-statement">               <code><w->once</w-></code></a>
-                        <a href="#then-statement">               <code><w->then</w-></code></a>
-                        <a href="#else-statement">               <code><w->else</w-></code></a>
-                        <a href="#return-statement">             <code><w->return</w-></code></a>
-                        <a href="#defer-call">              <code><w->defer</w-></code></a>
+                        <a href="#if-statement">       <code><w->if</w-></code></a>
+                        <a href="#match-statement">    <code><w->match</w-></code></a>
+                        <a href="#for-loops">          <code><w->for</w-></code></a>
+                        <a href="#while-loops">        <code><w->while</w-></code></a>
+                        <a href="#while-loops">        <code><w->do</w-></code></a>
+                        <a href="#continue-statement"> <code><w->continue</w-></code></a>
+                        <a href="#break-statement">    <code><w->break</w-></code></a>
+                        <a href="#once-statement">     <code><w->once</w-></code></a>
+                        <a href="#then-statement">     <code><w->then</w-></code></a>
+                        <a href="#else-statement">     <code><w->else</w-></code></a>
+                        <a href="#return-statement">   <code><w->return</w-></code></a>
+                        <a href="#defer-call">         <code><w->defer</w-></code></a>
                     </div>
                     <div class="split-td" style="line-height: 3ch;">
-                        <elm->                                   <code>(</code><code>)</code></elm->
-                        <a href="#scopes-and-symbols">           <elm-><code>{</code><code>}</code></elm-></a>
-                        <a href="#statements">                   <code>,</code></a>
-                        <a href="#statements">                   <code> ;</code></a>
-                        <a href="#scopes-and-symbols">           <code>.</code></a>
-                        <a href="#reflection">                   <code>:</code></a>
+                        <elm->                         <code>(</code><code>)</code></elm->
+                        <a href="#scopes-and-symbols"> <elm-><code>{</code><code>}</code></elm-></a>
+                        <a href="#statements">         <code>,</code></a>
+                        <a href="#statements">         <code> ;</code></a>
+                        <a href="#scopes-and-symbols"> <code>.</code></a>
+                        <a href="#reflection">         <code>:</code></a>
                     </div>
                 </div></td>
             </tr>
@@ -1036,11 +1092,11 @@
                 <span>Used with <a href="#while-loops"><code><w->while</w-></code></a> to check the <a href="#bool-type">condition</a> after having executed the <a href="#statements">statement</a> instead of the other way around.</span>
             </li>
             <li>
-                <span><a href="#continue-and-break-statements"><code><w->continue</w-></code></a></span>
+                <span><a href="#continue-statement"><code><w->continue</w-></code></a></span>
                 <span>Used to skip iterations.</span>
             </li>
             <li>
-                <span><a href="#continue-and-break-statements"><code><w->break</w-></code></a></span>
+                <span><a href="#break-statement"><code><w->break</w-></code></a></span>
                 <span>Used to skip all the remaining iteration of one or more loops.</span>
             </li>
             <li>
@@ -1662,7 +1718,9 @@
 
 
 <h1 id="semantic-concepts"></h1>
-<moveto-doc-></moveto-doc->
+<moveto-doc->
+    <p></p>
+</moveto-doc->
 
 
 <h1 id="scopes"></h1>
@@ -2109,11 +2167,15 @@
 
 
 <h1 id="language-specification"></h1>
-<moveto-doc-></moveto-doc->
+<moveto-doc->
+    <p></p>
+</moveto-doc->
 
 
 <h1 id="directives"></h1>
-<moveto-doc-></moveto-doc->
+<moveto-doc->
+    <p></p>
+</moveto-doc->
 
 
 <h1 id="import-directive"></h1>
@@ -2822,65 +2884,7 @@
     </split-example-container->
 </moveto-examples->
 
-
-<h1 id="special-types"></h1>
-<moveto-doc->
-    //TODO
-</moveto-doc->
-
-
-<h1 id="void-type"></h1>
-<moveto-doc->
-    <p>
-        The <code><t->void</t-></code> type is used to declare routines that don't return any value.<br>
-        It has no other purpose but it can be passed to type template parameters to generate different declarations.
-    </p>
-</moveto-doc->
-<moveto-examples->
-    <example->
-        <label->Example 1</label->
-        <div>
-            <f->uint</f-> counter = <k->0</k->;
-            <t->void</t-> <f->inc_counter</f->(){ counter<f->++</f->; }
-
-            <t->void</t-> <f->main</f->(){
-                <f->inc_counter</f->();
-            }
-        </div>
-    </example->
-    <split-example-container->
-        <split-example-container-left->
-            <example->
-                <label->Example 2</label->
-                <div>
-                    <w->import</w-> <s->&lt;io&gt;</s->;
-                    <w->template</w->&lt;<w->type</w-> <t->t</t->&gt; <t->void</t-> <f->print_template_info</f->()
-                    <w->when</w->(<t->t</t->:<k->id</k-> <f->!=</f-> <t->void</t->:<k->id</k->) { io.<f->print</f->(<s->"not void"</s->); }
-                    <w->when</w->(<t->t</t->:<k->id</k-> <f->==</f-> <t->void</t->:<k->id</k->) { io.<f->print</f->(<s->"void"</s->); }
-
-                    <t->void</t-> <f->main</f->(){
-                        <f->print_template_info</f->&lt;<t->void</t->&gt;();
-                        <f->print_template_info</f->&lt;<t->int</t->&gt;();
-                    }
-                </div>
-            </example->
-        </split-example-container-left->
-        <split-example-container-right->
-            <example->
-                <label->Output</label->
-                <div>
-                    <console-prefix-></console-prefix->
-                    void
-                    not void
-                    <cursor-></cursor->
-                </div>
-            </example->
-        </split-example-container-right->
-    </split-example-container->
-</moveto-examples->
-
-
-<h1 id="pointer-types"></h1>
+<h1 id="pointers"></h1>
 <moveto-doc->
     <p>
         Pointer types are implicit types that can store a memory address of a specific type. Their size is always 8 byes.<br>
@@ -2952,6 +2956,82 @@
                 <div>
                     <console-prefix-></console-prefix->
                     8<cursor-></cursor->
+                </div>
+            </example->
+        </split-example-container-right->
+    </split-example-container->
+</moveto-examples->
+
+
+<h1 id="raw-pointers"></h1>
+<moveto-doc->
+    <p>
+    </p>
+</moveto-doc->
+
+<h1 id="arc-pointers"></h1>
+<moveto-doc->
+    <p>
+    </p>
+</moveto-doc->
+
+<h1 id="read-only-pointers"></h1>
+<moveto-doc->
+    <p>
+    </p>
+</moveto-doc->
+
+
+<h1 id="special-types"></h1>
+<moveto-doc->
+    //TODO
+</moveto-doc->
+
+
+<h1 id="void-type"></h1>
+<moveto-doc->
+    <p>
+        The <code><t->void</t-></code> type is used to declare routines that don't return any value.<br>
+        It has no other purpose but it can be passed to type template parameters to generate different declarations.
+    </p>
+</moveto-doc->
+<moveto-examples->
+    <example->
+        <label->Example 1</label->
+        <div>
+            <f->uint</f-> counter = <k->0</k->;
+            <t->void</t-> <f->inc_counter</f->(){ counter<f->++</f->; }
+
+            <t->void</t-> <f->main</f->(){
+                <f->inc_counter</f->();
+            }
+        </div>
+    </example->
+    <split-example-container->
+        <split-example-container-left->
+            <example->
+                <label->Example 2</label->
+                <div>
+                    <w->import</w-> <s->&lt;io&gt;</s->;
+                    <w->template</w->&lt;<w->type</w-> <t->t</t->&gt; <t->void</t-> <f->print_template_info</f->()
+                    <w->when</w->(<t->t</t->:<k->id</k-> <f->!=</f-> <t->void</t->:<k->id</k->) { io.<f->print</f->(<s->"not void"</s->); }
+                    <w->when</w->(<t->t</t->:<k->id</k-> <f->==</f-> <t->void</t->:<k->id</k->) { io.<f->print</f->(<s->"void"</s->); }
+
+                    <t->void</t-> <f->main</f->(){
+                        <f->print_template_info</f->&lt;<t->void</t->&gt;();
+                        <f->print_template_info</f->&lt;<t->int</t->&gt;();
+                    }
+                </div>
+            </example->
+        </split-example-container-left->
+        <split-example-container-right->
+            <example->
+                <label->Output</label->
+                <div>
+                    <console-prefix-></console-prefix->
+                    void
+                    not void
+                    <cursor-></cursor->
                 </div>
             </example->
         </split-example-container-right->
@@ -3643,7 +3723,9 @@
 
 
 <h1 id="expressions"></h1>
-<moveto-doc-></moveto-doc->
+<moveto-doc->
+    <p></p>
+</moveto-doc->
 
 
 <h1 id="inline-values"></h1>
@@ -3806,6 +3888,14 @@
 </moveto-doc->
 
 
+<h1 id="conditional-value"></h1>
+<moveto-doc->
+    <p>
+        //TODO specify that values are evaluated lazily. only the executed branch is evaluated
+    </p>
+</moveto-doc->
+
+
 <h1 id="try-expression"></h1>
 <moveto-doc->
     <p>
@@ -3814,6 +3904,13 @@
 
 
 <h1 id="function-values"></h1>
+<moveto-doc->
+    <p>
+    </p>
+</moveto-doc->
+
+
+<h1 id="inline-statements"></h1>
 <moveto-doc->
     <p>
     </p>
@@ -3926,6 +4023,12 @@
 </moveto-doc->
 
 
+<h1 id="unsafe-block"></h1>
+<moveto-doc->
+    <p></p>
+</moveto-doc->
+
+
 <h1 id="routines"></h1>
 <moveto-doc->
     <p>
@@ -3946,7 +4049,9 @@
 
 
 <h1 id="parameters"></h1>
-<moveto-doc-></moveto-doc->
+<moveto-doc->
+    <p></p>
+</moveto-doc->
 
 
 <h1 id="basic-parameters"></h1>
@@ -4116,7 +4221,9 @@
 
 
 <h1 id="functions"></h1>
-<moveto-doc-></moveto-doc->
+<moveto-doc->
+    <p></p>
+</moveto-doc->
 
 
 <h1 id="function-declarations"></h1>
@@ -4167,7 +4274,9 @@
 
 
 <h1 id="operators"></h1>
-<moveto-doc-></moveto-doc->
+<moveto-doc->
+    <p></p>
+</moveto-doc->
 
 
 <h1 id="operator-declarations"></h1>
@@ -4283,11 +4392,29 @@
 
 
 <h1 id="call-types"></h1>
-<moveto-doc-></moveto-doc->
+<moveto-doc->
+    <p></p>
+</moveto-doc->
 
 
 <h1 id="defer-call"></h1>
-<moveto-doc-></moveto-doc->
+<moveto-doc->
+    <p>
+        aa
+    </p>
+</moveto-doc->
+
+
+<h1 id="async-call"></h1>
+<moveto-doc->
+    <p></p>
+</moveto-doc->
+
+
+<h1 id="compute-call"></h1>
+<moveto-doc->
+    <p></p>
+</moveto-doc->
 
 
 <h1 id="routine-specialization"></h1>
@@ -4791,47 +4918,21 @@
 
 
 <h1 id="selection"></h1>
-<moveto-doc-></moveto-doc->
-
-
-<h1 id="if-statement"></h1>
-<moveto-doc-></moveto-doc->
-
-
-<h1 id="match-statement"></h1>
-<moveto-doc-></moveto-doc->
-
-
-<h1 id="iteration"></h1>
-<moveto-doc-></moveto-doc->
-
-
-<h1 id="for-loops"></h1>
-<moveto-doc-></moveto-doc->
-
-
-<h1 id="while-loops"></h1>
-<moveto-doc-></moveto-doc->
-
-
-<h1 id="continue-and-break-statements"></h1>
 <moveto-doc->
-    <p>
-        //TODO break 2; continue;
-    </p>
+    <p></p>
 </moveto-doc->
 
 
-<h1 id="once-statement"></h1>
-<moveto-doc-></moveto-doc->
+<h1 id="if-statement"></h1>
+<moveto-doc->
+    <p></p>
+</moveto-doc->
 
 
-<h1 id="then-statement"></h1>
-<moveto-doc-></moveto-doc->
-
-
-<h1 id="statements.misc"></h1>
-<moveto-doc-></moveto-doc->
+<h1 id="match-statement"></h1>
+<moveto-doc->
+    <p></p>
+</moveto-doc->
 
 
 <h1 id="else-statement"></h1>
@@ -4844,16 +4945,74 @@
 </moveto-doc->
 
 
+<h1 id="then-statement"></h1>
+<moveto-doc->
+    <p></p>
+</moveto-doc->
+
+
+<h1 id="iteration"></h1>
+<moveto-doc->
+    <p></p>
+</moveto-doc->
+
+
+<h1 id="for-loops"></h1>
+<moveto-doc->
+    <p></p>
+</moveto-doc->
+
+
+<h1 id="while-loops"></h1>
+<moveto-doc->
+    <p></p>
+</moveto-doc->
+
+
+<h1 id="continue-statement"></h1>
+<moveto-doc->
+    <p>
+        //TODO continue;
+    </p>
+</moveto-doc->
+
+
+<h1 id="break-statement"></h1>
+<moveto-doc->
+    <p>
+        //TODO break 2;
+    </p>
+</moveto-doc->
+
+
+<h1 id="once-statement"></h1>
+<moveto-doc->
+    <p></p>
+</moveto-doc->
+
+
+<h1 id="statements.misc"></h1>
+<moveto-doc->
+    <p></p>
+</moveto-doc->
+
+
 <h1 id="expression-statement"></h1>
-<moveto-doc-></moveto-doc->
+<moveto-doc->
+    <p></p>
+</moveto-doc->
 
 
 <h1 id="empty-statement"></h1>
-<moveto-doc-></moveto-doc->
+<moveto-doc->
+    <p></p>
+</moveto-doc->
 
 
 <h1 id="unnamed-scope"></h1>
-<moveto-doc-></moveto-doc->
+<moveto-doc->
+    <p></p>
+</moveto-doc->
 
 
 <h1 id="return-statement"></h1>
@@ -4879,7 +5038,9 @@
 
 
 <h1 id="misc"></h1>
-<moveto-doc-></moveto-doc->
+<moveto-doc->
+    <p></p>
+</moveto-doc->
 
 
 <h1 id="declarations.namespaces"></h1>
@@ -4954,16 +5115,22 @@
 
 
 <h1 id="inline-declarations"></h1>
-<moveto-doc-></moveto-doc->
+<moveto-doc->
+    <p></p>
+</moveto-doc->
 
 
 <h1 id="inline-glsl"></h1>
-<moveto-doc-></moveto-doc->
+<moveto-doc->
+    <p></p>
+</moveto-doc->
 
 
 
 <h1 id="reflection"></h1>
-<moveto-doc-></moveto-doc->
+<moveto-doc->
+    <p></p>
+</moveto-doc->
 
 
 <h1 id="syntactic-sugar"></h1>
@@ -4984,23 +5151,39 @@
 
 
                 <h1 id="compilation"></h1>                        
-                <moveto-doc-></moveto-doc->
+                <moveto-doc->
+    <p></p>
+</moveto-doc->
                 <h1 id="modules"></h1>                            
-                <moveto-doc-></moveto-doc->
+                <moveto-doc->
+    <p></p>
+</moveto-doc->
                 <h1 id="compilation-phases-and-error-types"></h1> 
-                <moveto-doc-></moveto-doc->
+                <moveto-doc->
+    <p></p>
+</moveto-doc->
                 <h1 id="global-initialization-order"></h1>        
-                <moveto-doc-></moveto-doc->
+                <moveto-doc->
+    <p></p>
+</moveto-doc->
                 <h1 id="runtime-performance"></h1>                
-                <moveto-doc-></moveto-doc->
+                <moveto-doc->
+    <p></p>
+</moveto-doc->
                 <h1 id="branching-performance"></h1>              
-                <moveto-doc-></moveto-doc->
+                <moveto-doc->
+    <p></p>
+</moveto-doc->
                 <h1 id="value-precomputation"></h1>               
-                <moveto-doc-></moveto-doc->
+                <moveto-doc->
+    <p></p>
+</moveto-doc->
 
 
 <h1 id="core-module"></h1>
-<moveto-doc-></moveto-doc->
+<moveto-doc->
+    <p></p>
+</moveto-doc->
 
 
 <h1 id="core.operators"></h1>
@@ -5917,49 +6100,71 @@
 
 
 <h1 id="core.data-types"></h1>
-<moveto-doc-></moveto-doc->
+<moveto-doc->
+    <p></p>
+</moveto-doc->
 
 
 <h1 id="core.arrays"></h1>
-<moveto-doc-></moveto-doc->
+<moveto-doc->
+    <p></p>
+</moveto-doc->
 
 
 <h1 id="core.tuples"></h1>
-<moveto-doc-></moveto-doc->
+<moveto-doc->
+    <p></p>
+</moveto-doc->
 
 
 
 <h1 id="standard-modules"></h1>
-<moveto-doc-></moveto-doc->
+<moveto-doc->
+    <p></p>
+</moveto-doc->
 
 
 <h1 id="limits-module"></h1>
-<moveto-doc-></moveto-doc->
+<moveto-doc->
+    <p></p>
+</moveto-doc->
 
 
 <h1 id="math-module"></h1>
-<moveto-doc-></moveto-doc->
+<moveto-doc->
+    <p></p>
+</moveto-doc->
 
 
 <h1 id="bits-module"></h1>
-<moveto-doc-></moveto-doc->
+<moveto-doc->
+    <p></p>
+</moveto-doc->
 
 
 <h1 id="types-module"></h1>
-<moveto-doc-></moveto-doc->
+<moveto-doc->
+    <p></p>
+</moveto-doc->
 
 
 <h1 id="memory-module"></h1>
-<moveto-doc-></moveto-doc->
+<moveto-doc->
+    <p></p>
+</moveto-doc->
 
 
 
 <h1 id="quick-reference-tabs"></h1>
-<moveto-doc-></moveto-doc->
+<moveto-doc->
+    <p></p>
+</moveto-doc->
 
 
 <h1 id="syntaxes"></h1>
-<moveto-doc-></moveto-doc->
+<moveto-doc->
+    <p></p>
+</moveto-doc->
 
 
 <h1 id="declaration-syntaxes"></h1>
@@ -7502,7 +7707,7 @@
 
 
     <syntax- class="qrt">
-        <label- class="s-sttm" id="syntax--statement-continue"><a href="#continue-and-break-statements">Continue statement</a></label->
+        <label- class="s-sttm" id="syntax--statement-continue"><a href="#continue-statement">Continue statement</a></label->
         <table class="s-sttm">
             <tr>
                 <td data-arrows="|l lr ar"></td>
@@ -7516,7 +7721,7 @@
 
 
 
-        <label- class="s-sttm" id="syntax--statement-break"><a href="#continue-and-break-statements">Break statement</a></label->
+        <label- class="s-sttm" id="syntax--statement-break"><a href="#break-statement">Break statement</a></label->
         <table class="s-sttm">
             <tr>
                 <td></td>
@@ -7930,23 +8135,84 @@
 
 
 <h1 id="undefined-behaviours"></h1>
-<moveto-doc-></moveto-doc->
+<moveto-doc->
+    <p></p>
+</moveto-doc->
 
 
 <h1 id="conversions"></h1>
-<moveto-doc-></moveto-doc->
+<moveto-doc->
+    <p></p>
+</moveto-doc->
 
 
 <h1 id="core-module-operators"></h1>
-<moveto-doc-></moveto-doc->
+<moveto-doc->
+    <p></p>
+</moveto-doc->
 
 
 <h1 id="math-module-functions"></h1>
-<moveto-doc-></moveto-doc->
+<moveto-doc->
+    <p></p>
+</moveto-doc->
 
 
 <h1 id="omitted-features"></h1>
-<moveto-doc-></moveto-doc->
+<moveto-doc->
+    <p></p>
+</moveto-doc->
+
+
+
+<h1 id="omitted.goto-statement"></h1>
+<moveto-doc->
+    <p></p>
+</moveto-doc->
+<h1 id="omitted.reference-types"></h1>
+<moveto-doc->
+    <p></p>
+</moveto-doc->
+<h1 id="omitted.runtime-type-informations"></h1>
+<moveto-doc->
+    <p></p>
+</moveto-doc->
+<h1 id="omitted.interfaces"></h1>
+<moveto-doc->
+    <p></p>
+</moveto-doc->
+<h1 id="omitted.inheritance-and-polymorphism"></h1>
+<moveto-doc->
+    <p></p>
+</moveto-doc->
+<h1 id="omitted.exceptions"></h1>
+<moveto-doc->
+    <p></p>
+</moveto-doc->
+<h1 id="omitted.garbage-collection"></h1>
+<moveto-doc->
+    <p></p>
+</moveto-doc->
+<h1 id="omitted.move-semantics"></h1>
+<moveto-doc->
+    <p></p>
+</moveto-doc->
+<h1 id="omitted.left-and-right-values"></h1>
+<moveto-doc->
+    <p></p>
+</moveto-doc->
+<h1 id="omitted.stack-and-heap-concepts"></h1>
+<moveto-doc->
+    <p></p>
+</moveto-doc->
+<h1 id="omitted.process-forking"></h1>
+<moveto-doc->
+    <p></p>
+</moveto-doc->
+<h1 id="omitted.non-local-jumps"></h1>
+<moveto-doc->
+    <p></p>
+</moveto-doc->
             </div>
             <div id="main-right-doc" class="hide-scrollbar">
                 <main-right-doc-scroll->
