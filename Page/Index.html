@@ -1,3 +1,4 @@
+
 <index- class="hide-scrollbar"><index-elms->
     <index-><indexh->overview</indexh-><index-elms->
         <indexd->lumen</indexd->
@@ -15,7 +16,6 @@
         <indexd->comments</indexd->
         <indexd->include-statement</indexd->
         <indexd->macros</indexd->
-        <indexd->conditionals</indexd->
     </index-elms-></index->
 
 
@@ -47,10 +47,9 @@
                 <indexd->name-shadowing</indexd->
                 <indexd->multiple-declarations</indexd->
             </index-elms-></index->
-            <indexd->left-and-right-values</indexd->
             <indexd->undefined-values</indexd->
             <indexd->undefined-behaviour</indexd->
-            <indexd->compile-time-expressions</indexd->
+            <indexd->constant-expressions</indexd->
         </index-elms-></index->
     </index-elms-></index->
 
@@ -64,6 +63,8 @@
         <index-><indexh->directives</indexh-><index-elms->
             <indexd->import-directive</indexd->
             <indexd->export-directive</indexd->
+            <indexd->unsafe-directive</indexd->
+            <indexd->try-directive</indexd->
             <indexd->construct-directive</indexd->
         </index-elms-></index->
 
@@ -86,14 +87,9 @@
                 <indexd->destructor-function</indexd->
                 <indexd->struct-specialization</indexd->
             </index-elms-></index->
-            <index-><indexh->pointers</indexh-><index-elms->
-                <indexd->raw-pointers</indexd->
-                <indexd->arc-pointers</indexd->
-                <indexd->read-only-pointers</indexd->
-            </index-elms-></index->
             <index-><indexh->special-types</indexh-><index-elms->
+                <indexd->pointer-types</indexd->
                 <indexd->void-type</indexd->
-                <indexd->function-types</indexd->
             </index-elms-></index->
             <indexd->const-qualifier</indexd->
             <indexd->auto-specifier</indexd->
@@ -114,7 +110,6 @@
                 <indexd->function-calls</indexd->
                 <indexd->operator-calls</indexd->
                 <indexd->conditional-value</indexd->
-                <indexd->try-expression</indexd->
                 <indexd->function-values</indexd->
                 <indexd->inline-statements</indexd->
             </index-elms-></index->
@@ -188,14 +183,6 @@
 
         <index-separator-2-></index-separator-2->
 
-        <index-><indexh->threads</indexh-><index-elms->
-            <indexd->async-execution</indexd->
-            <indexd->memory-ordering</indexd->
-            <indexd->atomic-values</indexd->
-        </index-elms-></index->
-
-        <index-separator-2-></index-separator-2->
-
         <index-><indexh->misc</indexh-><index-elms->
             <indexd->declarations.namespaces</indexd->
             <indexd->symbol-aliases</indexd->
@@ -249,10 +236,6 @@
             <indexd->arithmetic-exceptions</indexd->
             <indexd->array-operations</indexd->
         </index-elms-></index->
-        <index-><indexh->core.data-types</indexh-><index-elms->
-            <indexd->core.arrays</indexd->
-            <indexd->core.tuples</indexd->
-        </index-elms-></index->
     </index-elms-></index->
 
 
@@ -262,11 +245,13 @@
 
 
     <index-><indexh->standard-modules</indexh-><index-elms->
-        <indexd->limits-module</indexd->
-        <indexd->math-module</indexd->
-        <indexd->bits-module</indexd->
-        <indexd->types-module</indexd->
-        <indexd->memory-module</indexd->
+        <indexd->standard-module.io</indexd->
+        <indexd->standard-module.math</indexd->
+        <indexd->standard-module.bits</indexd->
+        <indexd->standard-module.atomic</indexd->
+        <indexd->standard-module.future</indexd->
+        <indexd->standard-module.arc</indexd->
+        <indexd->standard-module.functional</indexd->
     </index-elms-></index->
 
 
@@ -285,26 +270,31 @@
             <indexd->expression-syntaxes</indexd->
         </index-elms-></index->
         <index-><indexh->undefined-behaviours</indexh-><index-elms->
-            <indexd->conversions</indexd->
-            <indexd->core-module-operators</indexd->
-            <indexd->math-module-functions</indexd->
+            <indexd->undefined-behaviours.conversions</indexd->
         </index-elms-></index->
     </index-elms-></index->
 
     <index-separator-></index-separator->
 
     <index-><indexh->omitted-features</indexh-><index-elms->
-        <indexd->omitted.goto-statement</indexd->
-        <indexd->omitted.reference-types</indexd->
-        <indexd->omitted.runtime-type-informations</indexd->
-        <indexd->omitted.interfaces</indexd->
-        <indexd->omitted.inheritance-and-polymorphism</indexd->
-        <indexd->omitted.exceptions</indexd->
-        <indexd->omitted.garbage-collection</indexd->
-        <indexd->omitted.move-semantics</indexd->
-        <indexd->omitted.left-and-right-values</indexd->
-        <indexd->omitted.stack-and-heap-concepts</indexd->
-        <indexd->omitted.process-forking</indexd->
-        <indexd->omitted.non-local-jumps</indexd->
+        <index-><indexh->omitted.type-system</indexh-><index-elms->
+            <indexd->omitted.reference-types</indexd->
+            <indexd->omitted.member-functions</indexd->
+            <indexd->omitted.interfaces</indexd->
+            <indexd->omitted.runtime-type-informations</indexd->
+            <indexd->omitted.inheritance-and-polymorphism</indexd->
+        </index-elms-></index->
+        <index-><indexh->omitted.control-flow</indexh-><index-elms->
+            <indexd->omitted.goto-statement</indexd->
+            <indexd->omitted.exceptions</indexd->
+            <indexd->omitted.process-forking</indexd->
+            <indexd->omitted.non-local-jumps</indexd->
+        </index-elms-></index->
+        <index-><indexh->omitted.misc</indexh-><index-elms->
+            <indexd->omitted.garbage-collection</indexd->
+            <indexd->omitted.move-semantics</indexd->
+            <indexd->omitted.left-and-right-values</indexd->
+            <indexd->omitted.stack-and-heap-concepts</indexd->
+        </index-elms-></index->
     </index-elms-></index->
 </index-elms-></index->
