@@ -48,6 +48,68 @@
 
 - Automatically optimize string concatenation and other similar operations to use a buffer instead of reallocating every time the final output grows
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 - Move operators' reference parameters to syntactic sugar
 
 - fix syntax notes
@@ -66,9 +128,6 @@
   - const variables can only be initialized with constant values.
   - routines can be called, but ones that depend on non-const values are detected and cannot be used to create const values (this is logged as error)
   - specify that values that can be computed in compile time are compile time values but cannot be used for const values. these are only used for optimization
-
-- Atomic types built on top of LLVM's Atomics
-  - basically free, just copy llvm 1:1
 
 - add process to standard modules
   - creates a new process
@@ -115,25 +174,10 @@
 
 
 
-import __internal;
 
 
-resource struct file {
-  ulong handle;
-
-  constructor(str path, str permissions = "rw") {
-    handle = __internal.open(path, permissions);
-  }
-
-  destructor() {
-    __internal.close(handle);
-  }
-
-  // no export directive, so handle is not visible from the outside
-}
-
-void write(file^ f, str data) {
-  __internal.write(f.handle, data);
+void write(rc<file> f, str data) {
+  __internal.write(f.data.handle, data);
 }
 
 
@@ -161,9 +205,7 @@ float dot(float2 a, float2 b) {
 
 
 int main() {
-  file^ f;
-  // write(f, "hi") // error, f might not be initialized here
-  f = resource file{ "./test.txt" };
+  rc<file> f = { "./test.txt" };
   f->write("hello");
   f->write(str{ float2{ 5, 6 }->dot(float2{ 9, -1 }) });
 }
@@ -192,8 +234,6 @@ int main() {
   - variables and members can be left uninitialized, but:
     - constructors must initialize all of them
     - values can only be passed to routines, dereferenced or have its members accessed through "." if the compiler is certain they are initialized there
-  - compiler should generate errors if it detects raw pointers assigned to external variables or passed to other threads
-    - this is only allowed inside of the unsafe{} block
   - so the programmer never has to deal with uninitialized values at runtime. anything is detected during compilation, creating errors
 
 - constructors and destructors
@@ -208,17 +248,8 @@ int main() {
 
 - constructor calls
   - new values can be created using constructor calls
-  - the compiler decides if to put them on the stack or the heap, programmer doesn't need to care about that
-  - value constructor calls return the value itself
     - type{<constructor parameters>};
     - `int n = int{ 7 };`
-  - buffer constructor calls return a rw pointer to the first element. they also accept an initializer function which is passed the index of the element being initialized
-    - type[number]{<constructor parameters or initializer function>};
-    - `int* p = int[9]{ 7 };`
-    - `int* p = int[6]{ int(ulong i){ return i * 2;} };`
-  - resource constructor calls always return the rw arc pointer of the first element (or the value)
-    - resource <normal constructor call>;
-    - `int^ p = resource int[98]{ 12 }; // a resource buffer of 98 ints initialized to value 12`
   - primitive types and structs that don't specify a constructor get a default constructor that takes a value for each member.
   - the type can be omitted in contexts where a specific type is required.
     - `struct s { int n; }`
@@ -226,63 +257,246 @@ int main() {
     - `f({ s{ 5 } });  // ok, explicit constructor call`
     - `f({ 5 });       // ok, type is omitted`
 
-- arc and read-only pointers
-  - pointers can be arc and/or read-only.
+- read-only pointers
+  - pointers can be read-only.
   - raw pointers: `t*`
     - no arc metadata. just a simple 64bit address
-  - arc pointers: `t^`
-    - has arc metadata. used to handle resources.
-    - reference counter is updated on direct assignment.
-    - arc pointers bind to the resource they were created for or to the resource associated with the arc pointer that was last assigned to them
-    - cannot be dereferenced if pointing to a resource struct
-  - read-only raw/arc pointers: `t~*` `t~^`
-    - ~ means "whatever is at the left is read only". ~ reads as "locked/unmodifiable"
+  - read-only pointers: `t^`
+    - means "whatever is at the left is read only"
     - works just like the read/write version, but doesn't allow assigning values to the underlying data
   - implicit conversions
-    - arc pointers can freely convert into raw pointers, losing resource tracking metadata. these don't count as a resource reference.
-    - read-write pointers can freely convert into read-only pointers, maintaining their raw/arc status.
-
-- resources and resource-only structs
-  - normally, values are owned by the function that creates them.
-    - they cannot escape the scope in which they were created. Other threads and functions only see copies
-    - they are destroyed as soon as they run out of scope.
-  - resources are special values that can escape their scope
-    - data of any type can be a resource, including primitive types. the only exception is void
-    - resources are created by putting the resource keyword before the constructor call. this returns an arc pointer associated with the new resource
-    - the data can only be accessed through arc pointers associated with it
-    - ownership is shared between all threads and functions that use arc pointers associated with a resource
-    - resources can escape and outlive their scope if one of the arc pointers associated with it is assigned to globals or passed to other threads
-    - the value is destroyed after all of the referencing arc pointers run out of scope (meaning the value is inaccessible)
-    - circular dependencies are the programmer's responsibility. they can create memory leaks. don't do that.
-    - a struct can be declared as "resource"
-      - a resource struct can only be created through a resource constructor call
-      - pointers to resource structs cannot be dereferenced
+    - read-write pointers can freely convert into read-only pointers
 
 - other additions
   - struct members can be accessed through pointers directly
     - uses the dot syntax just like namespace paths and normal struct value member access
     - member access through read-only pointers return read-only values (cannot be assigned to. just like normal dereferencing of a RO pointer)
     - works just fine with arc pointers
-  - pointers have a [] operator from the standard module.
-    - returns the address of the element at the specified index
-    - subscription of read-only pointers returns a read-only pointer
-    - subscription of an arc pointer returns an arc pointer that tracks the same resource
+  - pointers don't have a [] by default. only dereference and arithmetics (unsafe)
+    - values that come from dereferenced read-only pointers cannot be assigned to
+  - structs can use export directives just like modules. these define what is visible to external code
+    - this fully replaces the public/private modifier system of other languages
+    - protected and friend not needed as inheritance is not a thing
+    - by default, no member is visible. an export directive is required in order to expose them
+
+
+
+
+- add named parameters
+  - use = just like assignments
+  - assignment doesn't return the value like in c. if needed, people can define their own custom operator that does that
+
+  void f(int a, int b) {
+    ...
+  }
+  void main() {
+    f(b = 6, a = 2);
+  }
+
+
+- try expression should consider the code it contains to be in its parent scope
+  - it's an expression so it can be used anywhere expressions are allowed
+  - works just like an instantly called function literal
+
+- construct directives consider the code to be in their own module
+  - any output to stdout replaces the directive
+
+
+
+- void pointers
+  - forbidden - replaced by templates
+  - void type can still be used as template parameters
+
+- global stuff to specify
+  - global variables can be of any type
+  - thread safety depends on the type. primitives are not thread safe unless wrapped in a thread-safe wrapper
+  - globals in each module are initialized in the order they are declared in
+    - statements can access any global from anywhere
+    - statements in functions used to initialize globals follow the usual uninitialized value rules - can't use globals declared after it
+      - this propagates through the call stack
+  - all globals of a module are initialized when the module is first imported within the import tree.
+    - no circular dependencies allowed, so a clear order can always be determined
+  - globals are destroyed in inverse oder when the program ends
+
+
+
+
+
+- ^ is a read-only pointer
+  - pointer conversions are valid even within other types
+  - atomic<int*> can convert into atomic<int^> freely
+
+- unsafe keyword
+  - can be used to specify unsafe blocks
+  - can also be used in the definition of a function or operator to mark it as unsafe
+  - unsafe expressions are expressions that return the value they contain unchanged
+  - unsafe statements are statements that run all of the statements they contain. same syntax as an unnamed scope
   - pointer arithmetics and arbitrary conversions are restricted to unsafe {}
-    - unsafe block means "i know what im doing, i take full responsibility. compiler, give me unlimited power"
-    - "unsafe blocks" are a kind of expression, not a statement.
-    - it can be used within expressions and can be thought of as returning whatever expression it contains, unchanged.
-    - this is valid: `int* p = unsafe{ int*{ 0x71b64a } };`
-    - this is also valid: `int* p2 = p[unsafe{ p + 5 * p }];`
-      - at this point you are playing with fire while covered in gasoline
-      - the unsafe block is there so the compiler trusts you know what you are doing and lets you do it without questions
-    - also needed to make raw pointer values escape their parent scope
-    - editor syntax highlight should color unsafe blocks in bright red or something as visible
+  - editor syntax highlight should color unsafe blocks in bright red or something as visible
+  - the IDE extension should make unsafe operations within unsafe blocks very visible - color them bright red or something
+
+- __internal standard module
+  - contains stuff that binds directly to llvm's and c's low level operations. no actual function bodies
+  - mostly used by standard modules.
+  - every routine in here is marked as unsafe
+  - imported by default. language features can depend on it
+  - DROP THE WHOLE AUTO-IMPORTED-"CORE MODULE" CONCEPT
+
+- atomic standard module
+  - provides the atomic struct template (limited to raw pointers and primitive types)
+    - compiler does some magic to make it actually atomic and let it hold values
+    - `struct atomic{ constructor(atomic<t>* value) when(false) {} /* delete copy constructor */ }`
+  - provides the Ordering enum
+    - enum `enum Ordering : int { Sequential, Release, Aquire, AquireRelease, Relaxed }`
+    - sequential - all threads agree on a global order
+    - release, aquire, releaseAquire - 2 threads agree on a specific order
+    - relaxed - free for all, no ordering guarantees
+    - sequential and release/aquire interact with each other
+    - relaxed is fully independent. doesn't interact with sequential and aquire/release at all
+  - provides:
+    - function `void fence(Ordering ordering)`
+  - provides:
+    - function `t load(atomic<t?>* a, Ordering ordering)`
+    - function `void store(atomic<t?>* a, t value, Ordering ordering)`
+    - function `t exchange(atomic<t?>* a, t value, Ordering ordering) // returns old value in a`
+    - function `t compareExchange(atomic<t?>* a, t expected, t value, Ordering ordering)`
+    - function `t add(atomic<t?>* a, t value, Ordering ordering) // returns old value in a`
+    - function `t sub(atomic<t?>* a, t value, Ordering ordering) // returns old value in a`
+    - function `t and(atomic<t?>* a, t value, Ordering ordering) // returns old value in a`
+    - function `t nand(atomic<t?>* a, t value, Ordering ordering) // returns old value in a`
+    - function `t or(atomic<t?>* a, t value, Ordering ordering) // returns old value in a`
+    - function `t xor(atomic<t?>* a, t value, Ordering ordering) // returns old value in a`
+    - function `t max(atomic<t?>* a, t value, Ordering ordering) // returns old value in a`
+    - function `t min(atomic<t?>* a, t value, Ordering ordering) // returns old value in a`
+    - function `t increment(atomic<t?>* a, t value, Ordering ordering) // increment by 1. returns old value in a`
+    - function `t decrement(atomic<t?>* a, t value, Ordering ordering) // decrement by 1. returns old value in a`
+  
+- other standard modules provide wrappers for pipes, semaphore, mutexes
+
+- resource standard module
+
+  template<t, counter_t> truct __internal_rc {
+    t* data;
+    counter_t* count;
+
+    constructor(__internal_rc<t, counter_t>* value) when(counter_t:isAtomic) { // copy constructor takes the address of the data to copy
+      data = value.data; // . can access members through pointers directly
+      count = value.count;
+      count->increment(.Sequential); //.Sequential is automatic enum scoping
+    } when(!counter_t:isAtomic) {
+      data = value.data; // . can access members through pointers directly
+      count = value.count;
+      ++@count;
+    }
+    template<u...> constructor(u params...) { // template pack + function pack, they expand automatically
+      data = unsafe{ __internal.malloc(t:size); } // : is a reflection path
+      unsafe{ __internal.call_constructor(data, params); }; // internal call_constructor is magic and can call constructors it in-place without copying
+      count = unsafe{ __internal.malloc(counter_t:size); };
+      unsafe{ __internal.call_constructor(count, 1); }; // internal call_constructor is magic and can call constructors it in-place without copying
+    }
+    destructor() when(counter_t:isAtomic) {
+      if(count->decrement(.Sequential) == 1) {
+        unsafe{ __internal.call_destructor(data); };
+        unsafe{ __internal.free(data); };
+        unsafe{ __internal.free(count); };
+      }
+    } when(!counter_t:isAtomic) {
+      if(--@count == 0) {
+        unsafe{ __internal.call_destructor(data); };
+        unsafe{ __internal.free(data); };
+        unsafe{ __internal.free(count); };
+      }
+    }
+
+    // you can access and copy the contained data freely, but that will create a copy without arc semantics
+    // this generates an error if the struct type is arc-bound
+    export data;
+  }
+
+  template<t> alias __internal_rc<t, atomic<ulong>> as arc; // atomic refere counted
+  template<t> alias __internal_rc<t,        ulong > as  rc; // non-atomic reference counted
+
+  void main() {
+    arc<file> f = { "./test.txt" };
+    // can access whatever you need using f.data.[...]
+    // file gets closed here
+  }
 
 
 
 
+- add compiler annotations
+  - tell the compiler specific things about routines and structs
+  - they start with : and must be specified after the name of the element
+  - available annotations for structs:
+    - `:nocopy` cannot be copied. only pointer member access is allowed
+      - does not propagate to the pointer types
+      - this forces any struct with default constructor containing this type to be declared as `:nocopy`
+      - template struct instantiations with default constructor that specify members of `:nocopy` struct type are implicitly `:nocopy`
+      - can be ignored inside of unsafe blocks
+  - available annotations for routines (functions and operators):
+    - `:noconst` cannot be used to calculate constant expressions (compile-time values usable in language syntax; think of `break n;`), but doesn't necessarily perform runtime-only operations
+      - can never be ignored
+    - `:runtime` the routine is considered to perform runtime-only operations even if the compiler can't detect any (impliest `:noconst`)
+      - effectively disables compile time optimizations
+      - can never be ignored
+    - `:unsafe` marks a routine as unsafe. unsafe routines can only be called within unsafe{} blocks.
+  - the IDE extension should make unsafe operations within unsafe blocks very visible - color them bright red or something
 
+- functional standard module
+  - the language allows taking the address of any function by specifying their path without a parameter list
+    - this returns an __internal.fptr_call_data with the right type list (required for type checks)
+    - the compiler automatically allocates(stack or heap, compiler decides) the list of captured values as a custom-made plain struct and saves it as a char*
+    - no allocations are performed if nothing is captures
+      template<t...> struct fptr_call_data{
+        char* addr;
+        char* captures;
+        ulong captures_size;
 
+        // no explicit constructor. compiler allocates stuff and sets them directly
+        constructor(fptr_call_data<t>* e) {
+          addr = e.addr;
+          captures_size = e.captures_size;
+          if(captures_size > 0) {
+            captures = unsafe{__internal.malloc(captures_size)};
+            unsafe{ __internal.memcpy(captures, e.captures, captures_size) };
+          }
+        }
+
+        destructor() {
+          if(captures_size > 0) {
+            unsafe{__internal.free(captures)};
+          }
+        }
+      }
+  - struct literals are rewritten by the compiler
+    - this step makes them manually unpack the captures buffer to use it as parameters
+    - this is done through llvm's getelementptr instruction
+    - their types don't need to be saved anywhere because the logic in the function body already handles types and conversions from the char*
+    - constructors and destructors of the packed parameters are always called after unpacking and before the return. 
+      - slightly counter intuitive but necessary. needs to be documented well
+      - this is needed to maintain consisten ref counts
+  - in functional:
+    template<ret_t, args_t...> struct fn {
+      __internal.fptr_call_data<ret_t, args_t> call_data;
+      constructor(__internal.fptr_call_data<ret_t, args_t> _call_data) {
+        call_data = _call_data;
+      }
+
+      ret_t run(args_t args...) {
+        return unsafe{ __internal.call(call_data.addr, args, call_data.captures); };
+      }
+    }
+
+- asyncs returns __internal.atomic_ptr^
+  - this is a read-only pointer to an atomic pointer containing the address of the return data.
+  - becomes non-null after the function returns
+  - this is convoluted but the "future" standard module provides a future struct that takes it as a constructor
+    - final syntax becomes: `future<int> r = async add(5, 6);`
+    - future has .poll and other useful methods that call internal stuff to work
+
+- drop buffer constructor calls
+  - just have standard types handle the memory manually with __internal malloc and free and call_constructor calls
 
 
 
@@ -301,3 +515,4 @@ int main() {
   - compiler internals
     - computable in compile time: true/false (used for optimization)
     - stored: true/false (has an address. temporary values don't have one)
+    - //TODO def needs other stuff
