@@ -57,10 +57,9 @@ const ui_slider = {
         left.style.width = `${ left_w }px`;
 
         // Right side (calc width and right distance. center element, limit width to 800, min padding of main_padding_r_px)
-        let max_right_w = 800;
-        // let right_w_total = Math.max(0, window.innerWidth - (slider_value + main_padding_l_px + main_padding_r_px * 2))
-        let right_w_total = window.innerWidth - (left_w + main_padding_r_px * 2)
-        let right_w = Math.min(max_right_w, right_w_total)
+        let right_w_limit = 800;
+        let right_w_total = window.innerWidth - left_w;
+        let right_w = Math.min(right_w_limit, right_w_total) - (main_padding_r_px * 2);
         let right_right = Math.max(main_padding_r_px, (right_w_total - right_w) / 2);
         right.style.width = `${ right_w }px`;
         right.style.right = `${ right_right }px`;
