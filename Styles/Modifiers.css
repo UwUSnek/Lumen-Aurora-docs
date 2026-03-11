@@ -1,12 +1,14 @@
 :root {
-    --font-size-xx-small: 8px;
-    --font-size-x-small:  12px;
-    --font-size-small:    13px;
-    --font-size-medium:   14px;
-    --font-size-large:    22px;
-    --font-size-x-large:  28px;
-    --font-size-xx-large: 36px;
-    --font-size-xxx-large:48px;
+    --font-size-xxx-small:   8px;
+    --font-size-xx-small:    10px;
+    --font-size-x-small:     12px;
+    --font-size-small:       13px;
+    --font-size-medium:      14px;
+    --font-size-mediumlarge: 18px;
+    --font-size-large:       22px;
+    --font-size-x-large:     28px;
+    --font-size-xx-large:    36px;
+    --font-size-xxx-large:   48px;
 }
 
 
@@ -25,13 +27,16 @@
 
 
 /* Text size */
-.xx-large { font-size: var(--font-size-xx-large) !important; }
-.x-large  { font-size: var(--font-size-x-large)  !important; }
-.small    { font-size: var(--font-size-small)    !important; }
-.medium   { font-size: var(--font-size-medium)   !important; }
-.large    { font-size: var(--font-size-large)    !important; }
-.xx-small { font-size: var(--font-size-xx-small) !important; }
-.x-small  { font-size: var(--font-size-x-small)  !important; }
+.xxx-large  { font-size: var(--font-size-xxx-large)   !important; }
+.xx-large   { font-size: var(--font-size-xx-large)    !important; }
+.x-large    { font-size: var(--font-size-x-large)     !important; }
+.small      { font-size: var(--font-size-small)       !important; }
+.medium     { font-size: var(--font-size-medium)      !important; }
+.mediumlarge{ font-size: var(--font-size-mediumlarge) !important; }
+.large      { font-size: var(--font-size-large)       !important; }
+.x-small    { font-size: var(--font-size-x-small)     !important; }
+.xx-small   { font-size: var(--font-size-xx-small)    !important; }
+.xxx-small  { font-size: var(--font-size-xxx-small)   !important; }
 
 
 /* Whitespace wrapping */

@@ -15,5 +15,6 @@
         "Build HTML": [
             "**"
         ]
-    }
+    },
+    "figura.librariesFolderPath": "/home/Ila/.local/share/.minecraft/figura/avatars/libraries/"
 }

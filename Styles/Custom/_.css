@@ -12,3 +12,6 @@
 @import "./MetaKeywordConstraint.css";
 @import "./SyntaxHoverTooltip.css";
 @import "./RegexColors.css";
+
+/* Targeted singletons */
+@import "./DesignPhilosophyHeader.css";

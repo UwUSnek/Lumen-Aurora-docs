@@ -1,5 +1,5 @@
-@import "./Defaults/main.css";
-@import "./PageLayout/main.css";
-@import "./Blocks/main.css";
-@import "./Custom/main.css";
+@import "./Defaults/_.css";
+@import "./PageLayout/_.css";
+@import "./Blocks/_.css";
+@import "./Custom/_.css";
 @import "./Modifiers.css";

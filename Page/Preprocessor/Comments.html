@@ -38,9 +38,9 @@
             <c->       line     /</c->
             <c->      comment */</c->
         </div>
-        <label->Example 2</label->
+        <label->Example 2 - No nesting</label->
         <div>
-            <c->/* Multi line /* u.u */ comment */</c->
+            <c->/* Multi line /* u.u */</c-> comment */
                                     <ce->^ Error, unexpected token "comment"</ce->
 
             <c->/* Non-closed comment</c->
@@ -53,7 +53,7 @@
             <w->import</w-> <s->io</s->;
 
             <c->// comment</c->
-            <t->i<c->/*comments_are_not_whitespace*/</c->nt</t-> <f->main</f->(){
+            <t->vo<c->/*comments_are_not_whitespace*/</c->id</t-> <f->main</f->(){
                 io.<f->pr<c->/*they_cannot_separate_tokens*/</c->int</f->(<s->":3"</s->);
             }
         </div>
@@ -62,7 +62,7 @@
 <moveto-internal->
     <p>
         Comments are <b>not</b> considered whitespace.<br>
-        Syntactically, they act in the same way as <a href="#line-splicing">line continuation tokens</a>,
+        Syntactically, they act in the same way as <a href="#line-splicing">line splicing tokens</a>,
         as they are removed in the same step before any additional operation is performed.
     </p>
     <p>

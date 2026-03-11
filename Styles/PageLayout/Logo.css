@@ -26,7 +26,7 @@ logo- {
     /* Max height is set from JS */
 }
 
-Lumen-logo-, aurora-logo- {
+lumen-logo-, aurora-logo- {
     display: inline-block;
     background-color: transparent;
     background-size: contain;
@@ -40,7 +40,7 @@ Lumen-logo-, aurora-logo- {
     vertical-align: bottom;
 }
 aurora-logo- { background-image: var(--logo-link-Lumen); }
-Lumen-logo- { background-image: var(--logo-link-aurora);   }
+lumen-logo- { background-image: var(--logo-link-aurora);   }
 
 
 
@@ -50,7 +50,7 @@ Lumen-logo- { background-image: var(--logo-link-aurora);   }
 
 
 /* Smaller language logo */
-body > right- > logo- {
+body > main- > right- > logo- {
     display: block;
     position: relative;
 

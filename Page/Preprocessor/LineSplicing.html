@@ -14,12 +14,12 @@
         The preprocessor provides 2 types of line splicing tokens:
         <ul>
             <li>
-                Line continuation token: It consists of a <code>&bsol;</code> immediately followed by a <code><nl-></nl-></code> character.<br>
+                Line continuation token: It consists of a <code>\</code> immediately followed by a <code><nl-></nl-></code> character.<br>
                 This type of line splicing doesn't trim any whitespace. All adjacent tabs and spaces are preserved.
                 Only the token itself (which includes the <code><nl-></nl-></code> character) is removed.
             </li>
             <li>
-                Line junction token: It consists of two <code>&bsol;</code> characters immediately followed by a <code><nl-></nl-></code> character.<br>
+                Line junction token: It consists of two <code>\</code> characters immediately followed by a <code><nl-></nl-></code> character.<br>
                 This type of line splicing trims any whitespace before the token and at the start of the next line.
                 This effectively allows the Line junction token to remove indentation and/or be freely aligned vertically.
             </li>
@@ -28,7 +28,8 @@
     <p>
         Line splicing tokens are the very first thing that's processed by the preprocessor.
         This makes it possible to use them inside <a href="#comments">comments</a> or preprocessor directives, thought they cannot be nested.<br>
-        Using a line splicing token at the end of a file is allowed and has no effect.
+        Using a line splicing token at the end of a file is allowed and has no effect.<br>
+        Line splicing tokens cannot be nested
     </p>
 
     <syntax->
@@ -41,24 +42,24 @@
             <example->
                 <label->Example 1</label->
                 <div>
-                    <c->// single line comment </c-><regex-token->&bsol;</regex-token->
+                    <c->// single line comment </c-><regex-token->\</regex-token->
                     <c->on two lines</c->
 
 
-                    <k->#include</k-><regex-token->&bsol;</regex-token->
-                        <s->&lt;ma</s-><regex-token->&bsol;&bsol;</regex-token->
-                        <s->th</s-><regex-token->&bsol;&bsol;</regex-token->
-                               <s->&gt;</s->
+                    <k->#include</k-><regex-token->\</regex-token->
+                        <s->&lt;ma</s-><regex-token->\\</regex-token->
+                        <s->th</s-><regex-token->\\</regex-token->
+                               <s->;</s->
 
 
-                    <t->vo</t-><regex-token->&bsol;</regex-token->
-                    <t->id</t-> <f->fun</f-><regex-token->&bsol;</regex-token->
+                    <t->vo</t-><regex-token->\</regex-token->
+                    <t->id</t-> <f->fun</f-><regex-token->\</regex-token->
                     <f->ction</f->() {
-                        <t->uint</t-> va<regex-token->&bsol;&bsol;</regex-token->
+                        <t->uint</t-> va<regex-token->\\</regex-token->
                         r = <k->0</k->, b = <k->0</k->;
-                        v    <regex-token->&bsol;&bsol;</regex-token->
-                        ar + <regex-token->&bsol;&bsol;</regex-token->
-                             <regex-token->&bsol;&bsol;</regex-token->
+                        v    <regex-token->\\</regex-token->
+                        ar + <regex-token->\\</regex-token->
+                             <regex-token->\\</regex-token->
                         = <k->b</k->;
                     }
                 </div>
@@ -87,9 +88,10 @@
             <example->
                 <label->Example 2</label->
                 <div>
-                    <t->void</t-> ma&bsol;<regex-token->&bsol;&bsol;</regex-token->   <ce->Error, unexpected token "\"</ce->
+                    jififj
+                    <t->void</t-> ma\<regex-token->\\</regex-token->   <ce->Error, unexpected token "\"</ce->
 
-                    <c->in(){}</c->      <ce->Error,  unexpected token "in"</ce->
+                    <c->in(){}</c->       <ce->Error,  unexpected token "in"</ce->
                 </div>
             </example->
         </split-example-container-left->
@@ -97,8 +99,8 @@
             <example->
                 <label->Code after line splicing</label->
                 <div>
-                    <t->void</t-> <f->ma</f->&bsol;  <c->// &lt; This doesn't count as a line continuation token:</c->
-                    <c->in(){}    //   the replacement step has already been performed</c->
+                    <t->void</t-> <f->ma</f->\  <c->// &lt; Not a line splicing token</c->
+                    <c->in(){}    //   LSTs cannot be stacked</c->
                 </div>
             </example->
         </split-example-container-right->

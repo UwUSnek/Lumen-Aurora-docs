@@ -32,99 +32,101 @@
 
 <body onresize="update_vw_values(); ui_slider._onresize();">
     <!--------------------------------------------------------------------->
-    <!-- Fix                                                             -->
+    <!-- Main mask (used for reloads)                                    -->
     <!--------------------------------------------------------------------->
     <div id="main-mask" class="main-mask"></div>
+
+
+
+
+    <!--------------------------------------------------------------------->
+    <!-- Main slider (controls index width)                              -->
+    <!--------------------------------------------------------------------->
     <input type="range" min="0" max="9999" value="0" step="0.1" class="slider" id="main-slider">
 
 
+
+
     <!--------------------------------------------------------------------->
-    <!-- Index                                                           -->
+    <!-- Main container (footer + left/right sides)                      -->
     <!--------------------------------------------------------------------->
-    <left- class="hide-scrollbar">
-        #include "./Page/Index.html"
-    </left->
-    <right->
-        <div id="main-right-tab-container">
-            <div id="main-right-staging">
-                #include "./Page/Overview/_.html"
-                #include "./Page/Preprocessor/_.html"
-                #include "./Page/LanguageStructure/_.html"
-                #include "./Page/LanguageSpecification/_.html"
+    <main->
+        <left- class="hide-scrollbar">
+            #include "./Page/Index.html"
+        </left->
+        <right->
+            <div id="main-right-tab-container">
+                <div id="main-right-staging">
+                    #include "./Page/Overview/_.html"
+                    #include "./Page/Preprocessor/_.html"
+                    #include "./Page/LanguageStructure/_.html"
+                    #include "./Page/LanguageSpecification/_.html"
 
 
-                <h1 id="compilation"></h1>                        <!--TODO add this file-->
-                <moveto-doc->
-    <p></p>
-</moveto-doc->
-                <h1 id="modules"></h1>                            <!--TODO add this file-->
-                <moveto-doc->
-    <p></p>
-</moveto-doc->
-                <h1 id="compilation-phases-and-error-types"></h1> <!--TODO add this file-->
-                <moveto-doc->
-    <p></p>
-</moveto-doc->
-                <h1 id="global-initialization-order"></h1>        <!--TODO add this file-->
-                <moveto-doc->
-    <p></p>
-</moveto-doc->
-                <h1 id="runtime-performance"></h1>                <!--TODO add this file-->
-                <moveto-doc->
-    <p></p>
-</moveto-doc->
-                <h1 id="branching-performance"></h1>              <!--TODO add this file-->
-                <moveto-doc->
-    <p></p>
-</moveto-doc->
-                <h1 id="value-precomputation"></h1>               <!--TODO add this file-->
-                <moveto-doc->
-    <p></p>
-</moveto-doc->
+                    <h1 id="compilation"></h1>                        <!--TODO add this file-->
+                    <moveto-doc->
+                        <p></p>
+                    </moveto-doc->
+                    <h1 id="modules"></h1>                            <!--TODO add this file-->
+                    <moveto-doc->
+                        <p></p>
+                    </moveto-doc->
+                    <h1 id="compilation-phases-and-error-types"></h1> <!--TODO add this file-->
+                    <moveto-doc->
+                        <p></p>
+                    </moveto-doc->
+                    <h1 id="global-initialization-order"></h1>        <!--TODO add this file-->
+                    <moveto-doc->
+                        <p></p>
+                    </moveto-doc->
+                    <h1 id="runtime-performance"></h1>                <!--TODO add this file-->
+                    <moveto-doc->
+                        <p></p>
+                    </moveto-doc->
+                    <h1 id="branching-performance"></h1>              <!--TODO add this file-->
+                    <moveto-doc->
+                        <p></p>
+                    </moveto-doc->
+                    <h1 id="value-precomputation"></h1>               <!--TODO add this file-->
+                    <moveto-doc->
+                        <p></p>
+                    </moveto-doc->
 
 
-                #include "./Page/CoreModule/_.html"
-                #include "./Page/StandardModules/_.html"
-                #include "./Page/QuickReferenceTabs/_.html"
-
-
-
-
-                <!--
-                //TODO
-                //module.x module.y module.z
-                module.pos.x
-                module.pos.y
-                module.pos.z
-                ^ coordinates in current workspace
-
-                sequence function //TODO
-                sequence(start, end, step)
-                -->
+                    #include "./Page/CoreModule/_.html"
+                    #include "./Page/StandardModules/_.html"
+                    #include "./Page/QuickReferenceTabs/_.html"
 
 
 
 
-
-                #include "./Page/OmittedFeatures/_.html"
+                    #include "./Page/OmittedFeatures/_.html"
+                </div>
+                <div id="main-right-doc" class="hide-scrollbar">
+                    <main-right-doc-scroll->
+                        <!--! Elements are added dynamically -->
+                    </main-right-doc-scroll->
+                </div>
+                <div id="main-right-examples" class="hide-scrollbar">
+                    <main-right-examples-scroll->
+                        <!--! Elements are added dynamically -->
+                    </main-right-examples-scroll->
+                </div>
+                <div id="main-right-internal" class="hide-scrollbar">
+                    <main-right-internal-scroll->
+                        <!--! Elements are added dynamically -->
+                    </main-right-internal-scroll->
+                </div>
             </div>
-            <div id="main-right-doc" class="hide-scrollbar">
-                <main-right-doc-scroll->
-                    <!--! Elements are added dynamically -->
-                </main-right-doc-scroll->
-            </div>
-            <div id="main-right-examples" class="hide-scrollbar">
-                <main-right-examples-scroll->
-                    <!--! Elements are added dynamically -->
-                </main-right-examples-scroll->
-            </div>
-            <div id="main-right-internal" class="hide-scrollbar">
-                <main-right-internal-scroll->
-                    <!--! Elements are added dynamically -->
-                </main-right-internal-scroll->
-            </div>
-        </div>
-    </right->
+        </right->
+    </main->
+    <footer->
+        <span class="xx-small">
+            Lumen and Aurora are a work of passion.
+            Licensed under <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPL-3.0</a>. Free to use and contribute to.
+            Do not contribute with AI-generated code.
+        </span>
+    </footer->
 
 
     <!-- Page format -->
