@@ -18,7 +18,7 @@ const format_examples = {
         for(let i = 0; i < s.length; i++){
             let line = s[i];
             s[i] = (i == 0 || i == s.length - 1) ? '' : '<span class="hidden">' +(('0' + i).slice(-2)) + '&nbsp;&nbsp;</span>';
-            s[i] += line.substring(min, line.length).replaceAll(/ (?!<ce->)/g, "·").replaceAll(/(·+)/g, "<sc->$1<\/sc->");
+            s[i] += line.substring(min, line.length).replaceAll(/ (?!<ce->)/g, "·").replaceAll(/(·+)/g, "<sc->$1</sc->");
         }
 
         // Join and return all lines

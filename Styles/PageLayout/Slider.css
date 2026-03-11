@@ -13,8 +13,8 @@
     .slider {
         position: fixed;
         z-index: -5;
-        margin: 50vh 0 0 calc(var(--main-padding-l));
-        width: calc(100vw - var(--main-padding-r) * 2 - var(--main-padding-l));
+        margin: 50vh 0 0 0;
+        width: calc(100vw - var(--main-padding-r) * 2);
         height: 0;
         -webkit-appearance: none;
         appearance: none;

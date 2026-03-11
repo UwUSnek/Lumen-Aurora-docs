@@ -15,7 +15,7 @@ const ui_copy_code = {
             output_text[i] = ui_copy_code.decodeHTML(
                 output_text[i]                                         // Base line output
                 .replaceAll(/<ce->.*?<\/ce->/g, "")                    // Remove error tags
-                .replaceAll(/<\/?(!--|([a-zA-Z0-9_\-]+))[^>]+>/g, '')) // Remove tags
+                .replaceAll(/<\/?(!--|([a-zA-Z0-9_-]+))[^>]+>/g, '')) // Remove tags
                 .slice(4)                                              // Remove line number
             ;
         }

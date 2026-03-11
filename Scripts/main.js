@@ -1,19 +1,16 @@
 
 
-let left = document.querySelector("body > left-");
-let right = document.querySelector("body > right-");
+let left = document.querySelector("body > main- > left-");
+let right = document.querySelector("body > main- > right-");
 
 
 // Main padding is expressed in vw
 let page_style = getComputedStyle(document.body);
-let main_padding_l_vw = parseInt(page_style.getPropertyValue("--main-padding-l").slice(0, -2));
-let main_padding_r_vw = parseInt(page_style.getPropertyValue("--main-padding-r").slice(0, -2));
-let main_padding_l_px;
+let main_padding_r_vw = Number.parseInt(page_style.getPropertyValue("--main-padding-r").slice(0, -2));
 let main_padding_r_px;
 
 function update_vw_values(){
     let page_width = document.documentElement.clientWidth;
-    main_padding_l_px = main_padding_l_vw * page_width / 100;
     main_padding_r_px = main_padding_r_vw * page_width / 100;
 }
 
@@ -22,9 +19,9 @@ function update_vw_values(){
 
 
 function exec_and_log(f, name){
-    var startTime = performance.now()
+    let startTime = performance.now()
     f();
-    var endTime = performance.now()
+    let endTime = performance.now()
     console.debug(`${ name } took ${endTime - startTime} ms`)
 }
 

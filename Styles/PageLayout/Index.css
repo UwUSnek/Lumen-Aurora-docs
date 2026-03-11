@@ -1,6 +1,8 @@
 :root {
     --bg-index-hover:   hsl(222, 21%, 18%);
     --bg-index-active:  hsl(223, 23%, 30%);
+    --main-index-margin-top: 1em;
+    --main-index-margin-bottom: 4em;
 }
 
 
@@ -8,12 +10,12 @@
 
 
 /* Page index */
-body > left- > index- {
+body > main- > left- > index- {
     display: block;
-    min-width: calc(100% - var(--main-padding-l));
-    max-width: calc(100% - var(--main-padding-l));
-    margin-top: 1em;
-    margin-bottom: 4em;
+    min-width: 100%;
+    max-width: 100%;
+    margin-top: var(--main-index-margin-top);
+    margin-bottom: var(--main-index-margin-bottom);
 
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -24,8 +26,8 @@ body > left- > index- {
 
 
 /* Index elements */
-body > left- > index- indexd-,
-body > left- > index- indexh- {
+body > main- > left- > index- indexd-,
+body > main- > left- > index- indexh- {
     display: block;
     background-color: var(--bg);
     white-space: nowrap;
@@ -39,25 +41,24 @@ body > left- > index- indexh- {
     /**/width: 100%;
     /* max-width Set from JS */
 }
-body > left- > index- indexh- {
+body > main- > left- > index- indexh- {
     min-height: 2em;
     max-height: 2em;
     line-height: 2em;
 }
-body > left- > index- indexd- {
+body > main- > left- > index- indexd- {
     min-height: 1.5em;
     max-height: 1.5em;
     line-height: 1.5em;
 }
-body > left- > index- index-elms- {
+body > main- > left- > index- index-elms- {
     margin: 0;
     padding: 0;
     display: block;
 
-    /*! Max height needs to be a fixed value in order to be animated */
+    /*! max-height needs to be a fixed value in order to be animated */
     /* max-heght Set from JS */
     transition: max-height 0.25s ease-in-out;
-    /* overflow: visible; */
     overflow: hidden;
 }
 
@@ -65,8 +66,8 @@ body > left- > index- index-elms- {
 
 
 /* Index links */
-body > left- > index- indexd- > *,
-body > left- > index- indexh- > * {
+body > main- > left- > index- indexd- > *,
+body > main- > left- > index- indexh- > * {
     display: inline-block;
     padding: 0;
     transform-origin: -1em;
@@ -76,10 +77,10 @@ body > left- > index- indexh- > * {
     min-height: 100%;
     max-height: 100%;
 }
-body > left- > index- indexh- > * {
+body > main- > left- > index- indexh- > * {
     line-height: 2em;
 }
-body > left- > index- indexd- > * {
+body > main- > left- > index- indexd- > * {
     opacity: 75%;
     line-height: 1.5em;
     transform: translateY(-0.2em);
@@ -89,18 +90,18 @@ body > left- > index- indexd- > * {
 
 
 /* Hover animations */
-body > left- > index- indexd-:hover,
-body > left- > index- indexh-:hover {
+body > main- > left- > index- indexd-:hover,
+body > main- > left- > index- indexh-:hover {
     background-color: var(--bg-index-hover);
 }
-body > left- > index- indexd-:hover > *,
-body > left- > index- indexh-:hover > * {
+body > main- > left- > index- indexd-:hover > *,
+body > main- > left- > index- indexh-:hover > * {
     transition: transform 0.2s cubic-bezier(.17,.84,.44,1);
 }
-body > left- > index- indexh-:hover > * {
+body > main- > left- > index- indexh-:hover > * {
     transform: matrix(1.025, 0, 0.0, 1, 0, 0);
 }
-body > left- > index- indexd-:hover > * {
+body > main- > left- > index- indexd-:hover > * {
     transform: matrix(1.025, 0, 0.0, 1, 0, 0) translateY(-0.2em);
 }
 
@@ -108,7 +109,7 @@ body > left- > index- indexd-:hover > * {
 
 
 /* Collapsed elements */
-body > left- > index- indexh- > span::before {
+body > main- > left- > index- indexh- > span::before {
     content: '▾  ';
     opacity: 25%;
     font-size: 1.1em;
@@ -118,7 +119,7 @@ body > left- > index- indexh- > span::before {
     transition: transform 0.25s ease-in-out;
 }
 
-body > left- > index- indexd- > span::before {
+body > main- > left- > index- indexd- > span::before {
     content: '• ';
     opacity: 25%;
     transform: translateY(0.1em);
@@ -126,10 +127,10 @@ body > left- > index- indexd- > span::before {
     display: inline-block;
 }
 
-body > left- > index- index-.collapsed > indexh- > span::before {
+body > main- > left- > index- index-.collapsed > indexh- > span::before {
     transform: rotate(-90deg);
 }
 
-body > left- > index- index-.collapsed index-elms- {
+body > main- > left- > index- index-.collapsed index-elms- {
     max-height: 0 !important;
 }

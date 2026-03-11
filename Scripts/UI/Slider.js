@@ -15,7 +15,7 @@ let slider_width_px = Number.parseInt(page_style.getPropertyValue("--slider-w").
 const ui_slider = {
     // Updates the maximum and minimum values of the slider. Used in browser zoom and window resize
     update_range : function(){
-        slider.min = main_padding_l_px;
+        slider.min = 0;
         slider.max = document.documentElement.clientWidth - main_padding_r_px * 2 - slider_width_px;
     },
 
@@ -34,10 +34,10 @@ const ui_slider = {
             for(const element of logos){
 
                 // Move the background image from left of the viewport to center of the element (X only)
-                element.style.backgroundPositionX = `calc(${ (page_width + Number.parseInt(slider.value) + main_padding_l_px) / 2 }px - ${ getComputedStyle(element).backgroundSize } / 2)`;
+                element.style.backgroundPositionX = `calc(${ (page_width + Number.parseInt(slider.value)) / 2 }px - ${ getComputedStyle(element).backgroundSize } / 2)`;
 
                 // Make its height identical to its (dynamic) width  //! Only setting the height property with min-height at 0 doesn't work
-                let height = `min(25vh, ${ page_width - Number.parseInt(slider.value) - main_padding_r_px - main_padding_l_px * 2 }px)`;
+                let height = `min(25vh, ${ page_width - Number.parseInt(slider.value) - main_padding_r_px }px)`;
                 element.style.minHeight = height;
                 element.style.maxHeight = height;
             }
@@ -49,9 +49,21 @@ const ui_slider = {
 
     // Updates the width of the left and right main containers
     update_main_width : function(){
-        left.style.width  =             `${ Math.max(0, Number.parseInt(slider.value) - main_padding_l_px) }px`;
-        right.style.width = `calc(100% - ${ Math.max(0, Number.parseInt(slider.value) + main_padding_l_px + main_padding_r_px * 2) }px)`;
-        //! ^ HTML Slider's minimum value doesn't actually work. The Math.max calls are used to prevent elements' widths from going negative
+
+        //! HTML Slider's minimum value doesn't actually work. The Math.max calls are used to prevent elements' widths from going negative
+        // Left side (calc width)
+        let slider_value = Number.parseInt(slider.value);
+        let left_w = slider_value;
+        left.style.width = `${ left_w }px`;
+
+        // Right side (calc width and right distance. center element, limit width to 800, min padding of main_padding_r_px)
+        let max_right_w = 800;
+        // let right_w_total = Math.max(0, window.innerWidth - (slider_value + main_padding_l_px + main_padding_r_px * 2))
+        let right_w_total = window.innerWidth - (left_w + main_padding_r_px * 2)
+        let right_w = Math.min(max_right_w, right_w_total)
+        let right_right = Math.max(main_padding_r_px, (right_w_total - right_w) / 2);
+        right.style.width = `${ right_w }px`;
+        right.style.right = `${ right_right }px`;
 
         globalThis.localStorage.setItem("slider-value", slider.value);
     },
@@ -67,7 +79,7 @@ const ui_slider = {
 
     init_slider_first_time : function(){
         globalThis.localStorage.setItem("slider-set", "set");
-        let min = main_padding_l_px;
+        let min = 0;
         let max = document.documentElement.clientWidth - main_padding_r_px * 2 - slider_width_px;
         globalThis.localStorage.setItem("slider-value", (min + max) / 2);
     },
@@ -76,7 +88,10 @@ const ui_slider = {
         if(globalThis.localStorage.getItem("slider-set") != "set") {
             ui_slider.init_slider_first_time();
         }
-        slider.addEventListener("mouseup", function(){ ui_slider.update_main_width(); ui_slider.update_logos() });
+        slider.addEventListener("mousemove", function(){
+            ui_slider.update_main_width();
+            ui_slider.update_logos()
+        });
         slider.value = globalThis.localStorage.getItem("slider-value");
     },
 

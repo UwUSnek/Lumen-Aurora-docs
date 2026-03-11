@@ -157,16 +157,6 @@
 
 
 
-- add this somewhere in the documentation
-  - The language is meant to be handy, readable and powerful. Not idiot-proof.
-  - You are given sharp tools and you are expected to know how not to cut yourself, though the compiler will do its best to provide first aid.
-
-
-
-
-
-
-
 
 
 
@@ -516,3 +506,79 @@ int main() {
     - computable in compile time: true/false (used for optimization)
     - stored: true/false (has an address. temporary values don't have one)
     - //TODO def needs other stuff
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+- make examples and syntax blocks full-width
+- even though the right block itself is limited to 800px
+
+
+
+
+- Aurora should probably compile straight to SPIR-V
+  - SPIR-V is the intermediate language between front-end shading languages and Vulkan shader binaries
+  - just like Lumen compiles to LLVM, the intermediate between front ends and CPU binary format
+  - Vulkan's library is required. It's written in C.
+  - might need to call it from LLVM or from a dedicated Lumen wrapper
+
+- Lumen still needs a way to call/define C functions.
+  - this is required in order to use external C libraries such as Vulkan
+  - might need a magic implementation in __internal

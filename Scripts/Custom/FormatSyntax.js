@@ -119,7 +119,7 @@ const format_syntax = {
                     td.setAttribute("format_syntax-arrows_2", "1");
                     const r = td.getBoundingClientRect();
                     cell_data.push({
-                        arrows: td.dataset.arrows.split(/[\s]+/),
+                        arrows: td.dataset.arrows.split(/\s+/),
                         x: r.left - table_rect.left,
                         y: r.top - table_rect.top,
                         w: r.width,
