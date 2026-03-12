@@ -2,7 +2,7 @@
 const doc_list = new Map();
 const example_list = new Map();
 const internal_list = new Map();
-let active_tab;
+let active_tab = 0;
 
 let tab_doc      = document.getElementById("main-right-doc");
 let tab_examples = document.getElementById("main-right-examples");
@@ -11,11 +11,37 @@ let tab_button_doc;
 let tab_button_examples;
 let tab_button_internal;
 
+let transition_movement = "margin-left 0.3s cubic-bezier(0.99, 0, 0.01, 1)";
 
 
 
-//FIXME add quick fade-out/fade-in to tab transitions
 const setup_tabs = {
+    get_tab : function(number){
+        switch(number) {
+            case 0: return tab_doc;
+            case 1: return tab_examples;
+            case 2: return tab_internal;
+            default: return null;
+        }
+    },
+
+
+    disable_tab : function(tab) {
+        tab.style.opacity = "0%";
+        tab.style.transition = `${ transition_movement }, opacity 0.3s cubic-bezier(0.165, 0.84, 0.44, 1)`; // Quartic ease out
+        tab.style.setProperty("pointer-events", "none", "important");
+        //! !important is required in order to overwrite other stuff.
+        //! no clicks on invisible tabs is of the highest priority.
+    },
+
+
+    enable_tab : function(tab) {
+        tab.style.opacity = "100%";
+        tab.style.transition = `${ transition_movement }, opacity 0.3s cubic-bezier(0.895, 0.03, 0.685, 0.22)`; // Quartic ease in
+        tab.style.pointerEvents = "auto";
+    },
+
+
     create_button : function(tab_num){
 
         // Create the button element
@@ -26,7 +52,12 @@ const setup_tabs = {
 
         // Add click listener
         b.addEventListener("click", function() {
-            // Update active tab
+
+            // Disable old tab, enable new tab
+            setup_tabs.disable_tab(setup_tabs.get_tab(active_tab));
+            setup_tabs.enable_tab(setup_tabs.get_tab(tab_num));
+
+            // Change active tab index and move the elements
             active_tab = tab_num;
             tab_doc.style.marginLeft = `calc(0px - 100% * ${ tab_num } - var(--main-padding-r) * ${ tab_num })`;
 
@@ -132,6 +163,14 @@ const setup_tabs = {
 
         // Create buttons for the user
         setup_tabs.create_tab_buttons();
+
+        //FIXME save active tab in local storage, don't disable it from here
+        // Initialize the content: All tabs start as disabled
+        for(let i = 0; i < 3; ++i) {
+            if(i != 0) {
+                setup_tabs.disable_tab(setup_tabs.get_tab(i));
+            }
+        }
 
         // Force spawn the content (Normally this requires a click from the user)
         setup_index.on_location_changed();
