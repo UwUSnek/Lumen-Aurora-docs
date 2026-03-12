@@ -3,6 +3,7 @@
     --sep-2: 256px;
     --sep-3: 256px;
     --sep-4: 128px;
+    --header-margin: 50px;
 }
 
 
@@ -42,12 +43,13 @@ sep-4- {
 }
 
 
-.h1, .h2, .h3, .h4 {
-    font-weight: bold;
+h1 {
+    min-width: 100%;
+    max-width: 100%;
+    text-align: left;
+    font-weight: bolder;
+    font-size: var(--font-size-xx-large);
     display: block;
     line-height: 1em;
+    margin: var(--header-margin) 0 var(--header-margin) 0;
 }
-.h1 { font-size: var(--font-size-xxx-large); }
-.h2 { font-size: var(--font-size-xx-large);  }
-.h3 { font-size: var(--font-size-x-large);   }
-.h4 { font-size: var(--font-size-large);     }

@@ -22,31 +22,6 @@ const ui_slider = {
 
 
 
-    // Updates the logo- X-position and height
-    update_logos : function(){
-
-        // If one of more logo elements are present in the current documentation tab
-        let logos = tab_doc.querySelectorAll("logo-");
-        let page_width = document.documentElement.clientWidth;
-        if(logos != null && logos.length > 0) {
-
-            // For each logo element
-            for(const element of logos){
-
-                // Move the background image from left of the viewport to center of the element (X only)
-                element.style.backgroundPositionX = `calc(${ (page_width + Number.parseInt(slider.value)) / 2 }px - ${ getComputedStyle(element).backgroundSize } / 2)`;
-
-                // Make its height identical to its (dynamic) width  //! Only setting the height property with min-height at 0 doesn't work
-                let height = `min(25vh, ${ page_width - Number.parseInt(slider.value) - main_padding_r_px }px)`;
-                element.style.minHeight = height;
-                element.style.maxHeight = height;
-            }
-        }
-    },
-
-
-
-
     // Updates the width of the left and right main containers
     update_main_width : function(){
 
@@ -60,12 +35,12 @@ const ui_slider = {
         let right_w_limit = 900;
         let right_w_total = window.innerWidth - left_w;
         let right_w = Math.min(right_w_limit, right_w_total) - (main_padding_r_px * 2);
-        let right_right = Math.max(main_padding_r_px, (right_w_total - right_w) / 2);
-        right.style.width = `${ right_w }px`;
-        right.style.right = `${ right_right }px`;
-
-        //BUG continue from here
-        //FIXME make syntax and example blocks stretch outside of the normal width, all the way to the minimum margins
+        for(let e of right.querySelectorAll(":scope > #main-right-tab-container > * > :not(syntax-, example-, ce-full-size-, h1, .no-text-width-limit)")) {
+            e.style.minWidth = `${ right_w }px`;
+            e.style.maxWidth = `${ right_w }px`;
+        }
+        right.style.right = `${ main_padding_r_px }px`;
+        right.style.width = `${ right_w_total - main_padding_r_px * 2 }px`;
 
         globalThis.localStorage.setItem("slider-value", slider.value);
     },
@@ -75,7 +50,6 @@ const ui_slider = {
     _onresize : function() {
         ui_slider.update_range();
         ui_slider.update_main_width();
-        ui_slider.update_logos();
     },
 
 
@@ -92,7 +66,6 @@ const ui_slider = {
         }
         slider.addEventListener("mousemove", function(){
             ui_slider.update_main_width();
-            ui_slider.update_logos()
         });
         slider.value = globalThis.localStorage.getItem("slider-value");
     },
@@ -106,6 +79,5 @@ const ui_slider = {
     init : function() {
         ui_slider.init_slider();
         ui_slider.update_range();
-        ui_slider.update_main_width();
     }
 }

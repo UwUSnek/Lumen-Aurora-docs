@@ -36,7 +36,8 @@ body > main- > * {
 body > main- > left- {
     display: block;
     background-color: var(--bg);
-    overflow: scroll;
+    overflow-x: clip;
+    overflow-y: scroll;
     position: fixed;
     z-index: 6; /*! 1 higher than right-'s in order to hide moving tabs */
 
@@ -110,6 +111,8 @@ body > main- > right- > #main-right-tab-container > #main-right-internal {
 
     flex-direction: column;
     white-space: normal;
+    /*! visible x but scrollable y is not possible */
+    /*! so each element has its width set from JS */
     overflow: scroll;
 
     /*! opacity animated from JS */
@@ -144,9 +147,6 @@ body > main- > right- > #main-right-tab-container tab-placeholder-::after {
 body > main- > right- > #main-right-tab-container > #main-right-doc {
     /* Set transition for full example list tab */
     /*! transition is set from JS - different easing depending on direction */
-    /* transition: margin-left 0.3s; */
-    transition: margin-left 0.3s;
-
     margin-right: var(--main-padding-r); /* Push examples out of view */
 }
 

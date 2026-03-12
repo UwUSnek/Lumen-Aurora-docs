@@ -64,7 +64,6 @@ const setup_index = {
             let heading = document.getElementById(id);
             if(heading == null) console.error(`heading for ID ${ id } not found`);
             heading.innerHTML = `${ number_str } ${ name }`;
-            heading.classList.add('h' + (depth + 1));
         }
 
 
@@ -146,11 +145,11 @@ const setup_index = {
         let ec =  example_list.get(header_number); tab_examples.replaceChildren(...(ec == null ? [tab_placeholder_examples] : ec), tab_spacer_examples);
         let ic = internal_list.get(header_number); tab_internal.replaceChildren(...(ic == null ? [tab_placeholder_internal] : ic), tab_spacer_internal);
 
+        // Update width of elements
+        ui_slider.update_main_width();
+
         // Update tab names
         create_tab_names.start();
-
-        // Resize logos (if they exist)
-        ui_slider.update_logos();
 
         // Color regex elements
         regex_colors.start();
