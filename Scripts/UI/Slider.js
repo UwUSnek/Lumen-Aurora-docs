@@ -22,7 +22,7 @@ const ui_slider = {
 
 
 
-    // Updates the width of the left and right main containers
+    // Updates the width of the left and center main containers
     update_main_width : function(){
 
         //! HTML Slider's minimum value doesn't actually work. The Math.max calls are used to prevent elements' widths from going negative
@@ -31,16 +31,26 @@ const ui_slider = {
         let left_w = slider_value;
         left.style.width = `${ left_w }px`;
 
-        // Right side (calc width and right distance. center element, limit width to 800, min padding of main_padding_r_px)
+        // Center (calc width and right distance. center element, limit width to 800, min padding of main_padding_r_px)
         let right_w_limit = 900;
-        let right_w_total = window.innerWidth - left_w;
+        let right_w_total = window.innerWidth - left_w - main_right_w_px;
         let right_w = Math.min(right_w_limit, right_w_total) - (main_padding_r_px * 2);
-        for(let e of right.querySelectorAll(":scope > #main-right-tab-container > * > :not(syntax-, example-, ce-full-size-, h1, .no-text-width-limit)")) {
+        for(let e of center.querySelectorAll(
+            ":scope > #main-center-tab-container > * > :not(" +
+                "syntax-," +
+                "example-," +
+                "split-example-container-," +
+                "ce-full-size-," +
+                "h1," +
+                "table," +
+                ".table-container," +
+                ".no-text-width-limit" +
+            ")"
+        )) {
             e.style.minWidth = `${ right_w }px`;
             e.style.maxWidth = `${ right_w }px`;
         }
-        right.style.right = `${ main_padding_r_px }px`;
-        right.style.width = `${ right_w_total - main_padding_r_px * 2 }px`;
+        center.style.width = `${ right_w_total - main_padding_r_px * 2 }px`;
 
         globalThis.localStorage.setItem("slider-value", slider.value);
     },

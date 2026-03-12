@@ -66,7 +66,7 @@ syntax- table {
     border-top-left-radius: 0;
     background-color: var(--bg-pre);
     box-sizing: border-box;
-    overflow: hidden;
+    overflow: clip;
     margin: 0;
 
     min-width: 100%;

@@ -1,6 +1,6 @@
 :root {
-    --main-padding-r: 4vw;
-    /* --main-padding-r: 16vw; */
+    --main-padding-c: 4vw; /*! Must be in vw to let JS parse the value correctly & based on the viewport's width */
+    --main-right-w:   3vw; /*! Must be in vw to let JS parse the value correctly & based on the viewport's width */
 }
 
 
@@ -44,6 +44,7 @@ body > main- > left- {
     left: 0;
     top: 0;
     margin: 0;
+
     border-right: 1px solid var(--fg-separator);
     /* width set from JS */
     max-width: 100%;
@@ -58,7 +59,7 @@ body > main- > left- {
 
 
 /* Page container */
-body > main- > right- {
+body > main- > center- {
     display: block;
     z-index: 5;
     overflow-y: clip;
@@ -66,12 +67,12 @@ body > main- > right- {
     position: fixed;
 
     white-space: nowrap; /* Force stacking documentation and examples horizotally */
-    /*! right set from JS */
+    right: calc(var(--main-padding-c) + var(--main-right-w));
     top: 0;
     padding: 0 1px 0 1px;
 
 
-    /*! width and margin set from JS */
+    /*! width set from JS */
     max-width: 100%;
     min-height: calc(100vh - var( --main-footer-h));
     max-height: calc(100vh - var( --main-footer-h));
@@ -80,7 +81,7 @@ body > main- > right- {
 }
 
 
-body > main- > right- > #main-right-tab-container {
+body > main- > center- > #main-center-tab-container {
     display: flex;
     flex-direction: row;
     position: relative;
@@ -98,9 +99,9 @@ body > main- > right- > #main-right-tab-container {
 
 
 /* Helper documentation and examples divs */
-body > main- > right- > #main-right-tab-container > #main-right-doc,
-body > main- > right- > #main-right-tab-container > #main-right-examples,
-body > main- > right- > #main-right-tab-container > #main-right-internal {
+body > main- > center- > #main-center-tab-container > #main-center-doc,
+body > main- > center- > #main-center-tab-container > #main-center-examples,
+body > main- > center- > #main-center-tab-container > #main-center-internal {
     display: inline-block;
     position: relative;
 
@@ -121,7 +122,7 @@ body > main- > right- > #main-right-tab-container > #main-right-internal {
 
 }
 
-body > main- > right- > #main-right-tab-container virtual-spacer- {
+body > main- > center- > #main-center-tab-container virtual-spacer- {
     background-color: transparent;
     display: block;
     position: relative;
@@ -129,7 +130,7 @@ body > main- > right- > #main-right-tab-container virtual-spacer- {
     max-height: 40vh;
 }
 
-body > main- > right- > #main-right-tab-container tab-placeholder-::after {
+body > main- > center- > #main-center-tab-container tab-placeholder-::after {
     display: block;
     position: relative;
 
@@ -144,25 +145,49 @@ body > main- > right- > #main-right-tab-container tab-placeholder-::after {
 
 
 
-body > main- > right- > #main-right-tab-container > #main-right-doc {
+body > main- > center- > #main-center-tab-container > #main-center-doc {
     /* Set transition for full example list tab */
     /*! transition is set from JS - different easing depending on direction */
-    margin-right: var(--main-padding-r); /* Push examples out of view */
+    margin-right: var(--main-padding-c); /* Push examples out of view */
 }
 
-body > main- > right- > #main-right-tab-container > #main-right-examples {
-    margin-left: calc(0 - var(--main-padding-r)); /* (aesthetic mirrored padding) */
-    margin-right: var(--main-padding-r); /* Push internal functioning out of view */
+body > main- > center- > #main-center-tab-container > #main-center-examples {
+    margin-left: calc(0 - var(--main-padding-c)); /* (aesthetic mirrored padding) */
+    margin-right: var(--main-padding-c); /* Push internal functioning out of view */
 }
-body > main- > right- > #main-right-tab-container > #main-right-internal {
-    margin-left: calc(0 - var(--main-padding-r)); /* (aesthetic mirrored padding) */
+body > main- > center- > #main-center-tab-container > #main-center-internal {
+    margin-left: calc(0 - var(--main-padding-c)); /* (aesthetic mirrored padding) */
 }
 
 
 
 
 /* *Hopefully* improve loading time by using "none" as display */
-body > main- > right- > #main-right-tab-container > #main-right-staging {
+body > main- > center- > #main-center-tab-container > #main-center-staging {
     display: none;
 }
 
+
+
+
+
+
+
+
+/* Right side buttons container */
+body > main- > right- {
+    display: block;
+    z-index: 6; /*! 1 higher than right-'s in order to hide moving tabs */
+    overflow: clip;
+    position: fixed;
+
+    right: 0;
+    top: 0;
+    margin: 0;
+
+    border-left: 1px solid var(--fg-separator);
+    min-width: var(--main-right-w);
+    max-width: var(--main-right-w);
+    min-height: calc(100vh - var( --main-footer-h));
+    max-height: calc(100vh - var( --main-footer-h));
+}

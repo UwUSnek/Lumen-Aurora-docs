@@ -31,15 +31,14 @@ body > main- > left- > index- indexh- {
     display: block;
     background-color: var(--bg);
     white-space: nowrap;
-    transition: background-color 0.2s cubic-bezier(.17,.84,.44,1);
-    transition: border-color     0.2s cubic-bezier(.17,.84,.44,1);
-    overflow: hidden;
+    overflow: clip;
     cursor: pointer;
 
     border-radius: 0 6px 6px 0;
     padding: 2px 0 2px 0;
     /**/width: 100%;
     /* max-width Set from JS */
+    transition: background-color 0.2s cubic-bezier(.17,.84,.44,1);
 }
 body > main- > left- > index- indexh- {
     min-height: 2em;
@@ -59,7 +58,7 @@ body > main- > left- > index- index-elms- {
     /*! max-height needs to be a fixed value in order to be animated */
     /* max-heght Set from JS */
     transition: max-height 0.25s ease-in-out;
-    overflow: hidden;
+    overflow: clip;
 }
 
 
@@ -93,16 +92,6 @@ body > main- > left- > index- indexd- > * {
 body > main- > left- > index- indexd-:hover,
 body > main- > left- > index- indexh-:hover {
     background-color: var(--bg-index-hover);
-}
-body > main- > left- > index- indexd-:hover > *,
-body > main- > left- > index- indexh-:hover > * {
-    transition: transform 0.2s cubic-bezier(.17,.84,.44,1);
-}
-body > main- > left- > index- indexh-:hover > * {
-    transform: matrix(1.025, 0, 0.0, 1, 0, 0);
-}
-body > main- > left- > index- indexd-:hover > * {
-    transform: matrix(1.025, 0, 0.0, 1, 0, 0) translateY(-0.2em);
 }
 
 

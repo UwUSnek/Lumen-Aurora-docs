@@ -50,16 +50,16 @@ lumen-logo- { background-image: var(--logo-link-aurora);   }
 
 
 /* Smaller language logo */
-body > main- > right- > logo- {
+body > main- > center- > logo- {
     display: block;
     position: relative;
 
-    margin: var(--main-padding-r) 0 var(--main-padding-r) 0;
+    margin: var(--main-padding-c) 0 var(--main-padding-c) 0;
     background-position-y: center;
     /* background-position-x: Set from JS */
     background-size: var(--logo-size);
     min-width: 100%;
     max-width: 100%;
-    min-height: calc(100vh - var(--main-padding-r) * 2);
-    max-height: calc(100vh - var(--main-padding-r) * 2);
+    min-height: calc(100vh - var(--main-padding-c) * 2);
+    max-height: calc(100vh - var(--main-padding-c) * 2);
 }/*

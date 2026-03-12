@@ -29,7 +29,7 @@ const format_examples = {
 
     // Fix code indentation because apparently HTML5+CSS3 can't do that
     indent_code : function() {
-        for(const elms of right.querySelectorAll('#main-right-tab-container example-')) {
+        for(const elms of center.querySelectorAll('#main-center-tab-container example-')) {
             if(!elms.hasAttribute("format_blocks-is_fixed")) {
                 elms.setAttribute("format_blocks-is_fixed", "1"); //! Mark as fixed for future iterations
 

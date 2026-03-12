@@ -335,9 +335,9 @@
     </index-elms-></index->
 </index-elms-></index->
         </left->
-        <right->
-            <div id="main-right-tab-container">
-                <div id="main-right-staging">
+        <center->
+            <div id="main-center-tab-container">
+                <div id="main-center-staging">
 
 <h1 id="overview"></h1>
 <moveto-doc->
@@ -361,20 +361,6 @@
         <img src="./Logos/2K.png", alt="language logos" style="width: 100%; display: block; margin: 0; padding: 0;">
     </div>
 </moveto-doc->
-
-//TODO write more stuff
-
-//TODO talk about the module system
-//TODO talk about the incremental compilation
-//TODO talk about the multithreaded compilation
-
-
-//TODO specify that this project is a work of passion and no ai was involved in creating any part of it
-
-//TODO add support links and such
-
-
-
 
 
 
@@ -439,13 +425,13 @@
 
 <h1 id="design-philosophy"></h1>
 <moveto-doc->
-    <span style="text-align: center; display: flex; flex-direction: column;" class="no-text-width-limit"><p>
+    <p class="center no-text-width-limit">
         The languages are built to be readable, practical, and powerful,<br>
         not foolproof.<br>
         <br>
         You are given sharp tools and you are expected to use them responsibly,<br>
         though the compiler will try its best to provide first aid.
-    </p></span>
+    </p>
 </moveto-doc->
 
 
@@ -882,7 +868,7 @@
     <p>
         The allowed characters are:
     </p>
-    <p>
+    <p class="no-text-width-limit">
         <code>a</code> <code>b</code> <code>c</code> <code>d</code> <code>e</code> <code>f</code> <code>g</code> <code>h</code> <code>i</code> <code>j</code> <code>k</code> <code>l</code> <code>m</code>
         <code>n</code> <code>o</code> <code>p</code> <code>q</code> <code>r</code> <code>s</code> <code>t</code> <code>u</code> <code>v</code> <code>w</code> <code>x</code> <code>y</code> <code>z</code><br>
         <code>A</code> <code>B</code> <code>C</code> <code>D</code> <code>E</code> <code>F</code> <code>G</code> <code>H</code> <code>I</code> <code>J</code> <code>K</code> <code>L</code> <code>M</code>
@@ -4968,6 +4954,9 @@
                     <moveto-doc->
                         <p></p>
                     </moveto-doc->
+//TODO write more stuff
+//TODO talk about the incremental compilation
+//TODO talk about the multithreaded compilation
                     <h1 id="modules"></h1>                            
                     <moveto-doc->
                         <p></p>
@@ -8063,19 +8052,29 @@
     <p></p>
 </moveto-doc->
                 </div>
-                <div id="main-right-doc" class="hide-scrollbar">
-                    <main-right-doc-scroll->
-                    </main-right-doc-scroll->
+                <div id="main-center-doc" class="hide-scrollbar">
+                    <main-center-doc-scroll->
+                    </main-center-doc-scroll->
                 </div>
-                <div id="main-right-examples" class="hide-scrollbar">
-                    <main-right-examples-scroll->
-                    </main-right-examples-scroll->
+                <div id="main-center-examples" class="hide-scrollbar">
+                    <main-center-examples-scroll->
+                    </main-center-examples-scroll->
                 </div>
-                <div id="main-right-internal" class="hide-scrollbar">
-                    <main-right-internal-scroll->
-                    </main-right-internal-scroll->
+                <div id="main-center-internal" class="hide-scrollbar">
+                    <main-center-internal-scroll->
+                    </main-center-internal-scroll->
                 </div>
             </div>
+        </center->
+        <right->
+
+
+<buttons->
+    <button-><img src="./Styles/PageLayout/Icons/Github.svg" alt="GitHub"/></button->
+    <button-><img src="./Styles/PageLayout/Icons/About.svg" alt="About"/></button->
+    <button-><img src="./Styles/PageLayout/Icons/TextWrap.svg" alt="Toggle text wrap"/></button->
+    <button-><img src="./Styles/PageLayout/Icons/Sandbox.svg" alt="Sandbox"/></button->
+</buttons->
         </right->
     </main->
     <footer->
@@ -8088,6 +8087,7 @@
     <script src="Scripts/Setup/Fix.js"></script>
     <script src="Scripts/Setup/DocumentationTabs.js"></script>
     <script src="Scripts/Setup/Index.js"></script>
+    <script src="Scripts/Setup/LoadButtonIcons.js"></script>
     <script src="Scripts/Custom/CopySyntax.js"></script>
     <script src="Scripts/main.js"></script>
     <script src="Scripts/UI/Slider.js"></script>

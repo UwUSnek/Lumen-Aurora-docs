@@ -4,9 +4,9 @@ const example_list = new Map();
 const internal_list = new Map();
 let active_tab = 0;
 
-let tab_doc      = document.getElementById("main-right-doc");
-let tab_examples = document.getElementById("main-right-examples");
-let tab_internal = document.getElementById("main-right-internal");
+let tab_doc      = document.getElementById("main-center-doc");
+let tab_examples = document.getElementById("main-center-examples");
+let tab_internal = document.getElementById("main-center-internal");
 let tab_button_doc;
 let tab_button_examples;
 let tab_button_internal;
@@ -59,7 +59,7 @@ const setup_tabs = {
 
             // Change active tab index and move the elements
             active_tab = tab_num;
-            tab_doc.style.marginLeft = `calc(0px - 100% * ${ tab_num } - var(--main-padding-r) * ${ tab_num })`;
+            tab_doc.style.marginLeft = `calc(0px - 100% * ${ tab_num } - var(--main-padding-c) * ${ tab_num })`;
 
             // Update button colors
             tab_button_doc.style.removeProperty("background-color");
@@ -97,7 +97,7 @@ const setup_tabs = {
         tab_button_internal = setup_tabs.create_button(2); container.appendChild(tab_button_internal);
 
         // Spawn the container and set the default tab to documentation
-        right.insertBefore(container, right.children[0]);
+        center.insertBefore(container, center.children[0]);
         tab_button_doc.dispatchEvent(new Event("click"))
     },
 
@@ -107,7 +107,7 @@ const setup_tabs = {
 
 
     get_local_root : function(elm){
-        if(elm.parentNode.id === "main-right-staging") return elm;
+        if(elm.parentNode.id === "main-center-staging") return elm;
         else return setup_tabs.get_local_root(elm.parentNode);
     },
 
@@ -159,7 +159,7 @@ const setup_tabs = {
         setup_tabs.move_elements("moveto-doc-", doc_list);
         setup_tabs.move_elements("moveto-examples-", example_list);
         setup_tabs.move_elements("moveto-internal-", internal_list);
-        document.getElementById("main-right-staging").replaceChildren(); //! Empty the staging tab to improve performance and tidiness
+        document.getElementById("main-center-staging").replaceChildren(); //! Empty the staging tab to improve performance and tidiness
 
         // Create buttons for the user
         setup_tabs.create_tab_buttons();

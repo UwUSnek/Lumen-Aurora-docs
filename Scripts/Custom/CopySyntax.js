@@ -53,6 +53,6 @@ const copy_syntax = {
 
     init : function() {
         // Cache source syntax elements
-        syntax_sources = [...(document.querySelectorAll('#main-right-staging syntax-'))];
+        syntax_sources = [...(document.querySelectorAll('#main-center-staging syntax-'))];
     }
 }

@@ -9,7 +9,7 @@
     margin: 0;
     min-width: 100%;
     border-radius: 10px 0 0 0;
-    overflow: hidden;
+    overflow: clip;
     word-spacing: -100vw;
 }
 .scope-table-right-container {
@@ -26,7 +26,7 @@
 }
 .scope-table-left-container {
     vertical-align: top;
-    overflow-x: hidden !important;
+    overflow-x: clip !important;
     display: inline-block;
     max-width: var(--scope-table-left-container-w);
     border-bottom-left-radius: 10px;

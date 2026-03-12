@@ -25,7 +25,7 @@ table {
     border-radius: 10px;
     line-height: 2.4ch;
     width: 100%;
-    overflow: hidden;
+    overflow: clip;
 }
 table tr th {
     white-space: nowrap;

@@ -25,7 +25,7 @@ syntax- > label- {
     padding: var(--syntax-label-padding-top) var(--syntax-label-padding) 0 var(--syntax-label-padding);
     font-weight: bold;
     white-space: nowrap;
-    overflow: hidden;
+    overflow: clip;
     font-size: var(--font-size-medium);
 
     min-width: 0;

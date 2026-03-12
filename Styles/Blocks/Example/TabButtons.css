@@ -20,7 +20,7 @@
 .tab-buttons-container > .tab-button {
     display: block;
     position: relative;
-    overflow: hidden;
+    overflow: clip;
 
     min-width: calc(100% / 3);
     max-width: calc(100% / 3);

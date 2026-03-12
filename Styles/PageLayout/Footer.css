@@ -10,7 +10,7 @@ body > footer- {
     justify-content: center;
 
     background-color: var(--main-footer-color);
-    overflow: hidden;
+    overflow: clip;
     min-width:  100vw;
     max-width:  100vw;
     min-height: var(--main-footer-h);

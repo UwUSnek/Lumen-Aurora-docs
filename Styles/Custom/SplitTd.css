@@ -28,7 +28,7 @@ div.split-td-outer > div.split-td > div {
     flex-direction: row;
     align-items: center;
     text-align: center;
-    overflow: hidden;
+    overflow: clip;
 
     min-height: 80px;
     max-height: fit-content;

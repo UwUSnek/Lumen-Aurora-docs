@@ -11,7 +11,7 @@ code {
     border-radius: var(--code-decoration-r);
     padding: 4px 8px 4px 8px;
     background-color: var(--bg-code);
-    font-family: monospace, monospace;
+    font-family: monospace;
     color: var(--fg-text);
     font-size: var(--font-size-code);
 }
