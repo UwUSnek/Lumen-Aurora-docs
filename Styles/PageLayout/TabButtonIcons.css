@@ -1,0 +1,38 @@
+:root {
+    --tab-button-icon-size: 25px;
+    --tab-button-icon-padding-right: 15px;
+}
+
+
+
+
+
+
+.tab-buttons-container > .tab-button > icon- {
+    display: block;
+    position: relative;
+    padding: 0;
+    margin: 0 var(--tab-button-icon-padding-right) 0 0;
+
+    min-width: var(--tab-button-icon-size);
+    max-width: var(--tab-button-icon-size);
+    min-height: var(--tab-button-icon-size);
+    max-height: var(--tab-button-icon-size);
+}
+.tab-buttons-container > .tab-button > icon- > svg {
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    max-height: 100%;
+
+    color: var(--button-color-hover); /*! Using hover as idle color and full white as hover color */
+    animation: fadein 0.2s ease;
+    transition: color 0.2s ease;
+}
+.tab-buttons-container > .tab-button:hover > icon- > svg {
+    color: white;
+}
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}

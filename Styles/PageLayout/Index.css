@@ -94,6 +94,10 @@ body > main- > left- > index- indexd- > * {
 body > main- > left- > index- indexd-:hover,
 body > main- > left- > index- indexh-:hover {
     background-color: var(--bg-index-hover);
+
+    /*! Make hover more visible with a 1px white glow */
+    /*! Use shadow instead of increasing text weight as that doesn't make the letters wider */
+    text-shadow: 0px 0px 1px white;
 }
 
 

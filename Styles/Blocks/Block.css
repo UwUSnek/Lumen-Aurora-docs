@@ -12,9 +12,6 @@
 
     --syntax-elm-margin:         4px;
     --example-line-h:            2.4ch;
-
-
-    --bd-block:          hsl(212, 14%, 24%);
 }
 
 
@@ -61,7 +58,7 @@ example-.qrt, syntax-.qrt {
 example- div,
 syntax- table {
     display: block;
-    border: 1px solid var(--bd-block);
+    border: 1px solid var(--fg-separator);
     border-radius: var(--code-decoration-r);
     border-top-left-radius: 0;
     background-color: var(--bg-pre);

@@ -1,4 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
-    <path fill="currentColor"
-        d="M4 20q-.825 0-1.412-.587T2 18V6q0-.825.588-1.412T4 4h16q.825 0 1.413.588T22 6v12q0 .825-.587 1.413T20 20zm0-2h16V8H4zm3.5-1l-1.4-1.4L8.675 13l-2.6-2.6L7.5 9l4 4zm4.5 0v-2h6v2z" />
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="120" height="120">
+  <path fill="currentColor" fill-rule="evenodd" d="
+    M14 20h-4v4a1 1 0 0 1-2 0v-4H5a1 1 0 0 1-1-1v-3H1a1 1 0 0 1 0-2h3v-4H1a1 1 0 0 1 0-2h3V5a1 1 0 0 1 1-1h3V1a1 1 0 0 1 2 0v3h4V1a1 1 0 0 1 2 0v3h3a1 1 0 0 1 1 1v3h3a1 1 0 0 1 0 2h-3v4h3a1 1 0 0 1 0 2h-3v3a1 1 0 0 1-1 1h-3v4a1 1 0 0 1-2 0v-4z
+    M6 18h12V6H6z
+  "/>
+  <path fill="currentColor" d="M8.5 9.8 L11.2 12 L8.5 14.2 L9.6 15.4 L13.4 12 L9.6 8.6Z"/>
+  <rect fill="currentColor" x="11" y="14.4" width="4" height="1.4" rx="0.3"/>
 </svg>

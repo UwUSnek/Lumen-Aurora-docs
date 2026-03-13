@@ -28,7 +28,8 @@ body > main- > right- > buttons- {
 
 
 
-body > main- > right- > buttons- > button- {
+body > main- > right- > buttons- > button-,
+body > main- > right- > buttons- > spacer- {
     display: block;
     position: relative;
     padding: 0;
@@ -38,6 +39,9 @@ body > main- > right- > buttons- > button- {
     max-width: var(--button-size);
     min-height: var(--button-size);
     max-height: var(--button-size);
+}
+body > main- > right- > buttons- > button- {
+    cursor: pointer;
 }
 body > main- > right- > buttons- > button- > svg {
     min-width: 100%;

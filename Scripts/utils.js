@@ -36,12 +36,14 @@ const utils = {
 
 
 
-    loadSVG : async (path) => {
+    loadSVG : async (path, strip_size = true) => {
         const res = await fetch(path);
         const text = await res.text();
         let svg = new DOMParser().parseFromString(text, "image/svg+xml").documentElement;
-        svg.removeAttribute("width");
-        svg.removeAttribute("height");
+        if(strip_size) {
+            svg.removeAttribute("width");
+            svg.removeAttribute("height");
+        }
         return svg;
     },
 

@@ -13,7 +13,7 @@
 example- > label-,
 syntax- > label- {
     display: flex;
-    border: 1px solid var(--bd-block);
+    border: 1px solid var(--fg-separator);
     border-radius: var(--code-decoration-r);
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
@@ -43,9 +43,6 @@ syntax- > label- {
 example- > label-:not(:first-child),
 syntax- > label-:not(:first-child) {
     margin-top: var(--syntax-internal-margin);
-}
-example- > label- {
-    cursor: pointer;
 }
 syntax- > label- {
     cursor: default;

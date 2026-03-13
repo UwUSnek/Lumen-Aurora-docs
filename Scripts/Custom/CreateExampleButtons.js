@@ -21,7 +21,7 @@ const create_example_buttons = {
 
                 // Add copy button
                 let copy_button = document.createElement("button-");
-                (async () => {copy_button.appendChild(await utils.loadSVG("./Styles/Blocks/Example/Icons/CopyButton.svg"));})();
+                (async () => {copy_button.appendChild(await utils.loadSVG("./Styles/Blocks/Example/Icons/CopyExampleButton.svg"));})();
                 copy_button.dataset.tooltip = "Copy example";
                 copy_button.classList.add("tooltip-top-high");
                 copy_button.addEventListener('click', function(){ ui_example_button_triggers.trigger_copy_code(label); });

@@ -37,6 +37,7 @@ body > main- > center- example- buttons- > button- {
     max-width: var(--example-button-size);
     min-height: var(--example-button-size);
     max-height: var(--example-button-size);
+    cursor: pointer;
 }
 body > main- > center- example- buttons- > button- > svg {
     min-width: 100%;

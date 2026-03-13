@@ -8072,6 +8072,15 @@
 
 
 <buttons->
+
+
+    <button- class="tooltip-left"
+        data-tooltip="Downloads"
+        onclick="button_triggers.open_downloads()"
+        data-icon = "./Styles/PageLayout/Icons/Downloads.svg";
+    ></button->
+
+
     <button- class="tooltip-left"
         data-tooltip="GitHub"
         onclick="button_triggers.open_github()"
@@ -8084,7 +8093,14 @@
         onclick="button_triggers.open_about()"
         data-icon = "./Styles/PageLayout/Icons/About.svg";
     ></button->
-    <button-></button->
+    <spacer-></spacer->
+
+
+    <button- class="tooltip-left"
+        data-tooltip="Search"
+        onclick="button_triggers.open_search()"
+        data-icon = "./Styles/PageLayout/Icons/SearchButton.svg";
+    ></button->
 
 
     <button- class="tooltip-left"
@@ -8105,8 +8121,8 @@
     <footer->
         <span class="xx-small">
             Lumen and Aurora are a work of passion.
-            Licensed under <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPL-3.0</a>. Free to use and contribute to.
-            Do not contribute with AI-generated code.
+            Licensed under <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPL-3.0</a>. Free to use.
+            Contributions are welcome; AI-generated code is not.
         </span>
     </footer->
     <script src="Scripts/utils.js"></script>

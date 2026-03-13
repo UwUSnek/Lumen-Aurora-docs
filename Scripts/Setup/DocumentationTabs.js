@@ -63,9 +63,27 @@ const setup_tabs = {
 
         // Create the button element
         let b = document.createElement("div");
-        b.innerHTML = "-------"; //! Required for the text animation to work properly
         b.classList = "tab-button";
         b.style.setProperty("--tab-num", `${ tab_num }`);
+
+
+        // Append icon and SVG element
+        let icon = document.createElement("icon-");
+        (async () => {
+            switch(tab_num) {
+                case 0: icon.appendChild(await utils.loadSVG("./Styles/PageLayout/Icons/DocumentationTabButton.svg")); break;
+                case 1: icon.appendChild(await utils.loadSVG("./Styles/PageLayout/Icons/ExampleTabButton.svg"));       break;
+                case 2: icon.appendChild(await utils.loadSVG("./Styles/PageLayout/Icons/InternalTabButton.svg"));      break;
+                default: break;
+            }
+        })();
+        b.appendChild(icon);
+
+
+        // Append text element
+        let spanElm = document.createElement("span");
+        spanElm.innerHTML = "-------"; //! Required for the text animation to work properly
+        b.appendChild(spanElm);
 
 
         // Add click listener

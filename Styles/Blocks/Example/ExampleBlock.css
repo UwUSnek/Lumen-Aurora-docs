@@ -35,7 +35,7 @@ ce-full-size- {
     margin: var(--def-margin) 0 0 0;
     min-width: calc(100% - 2px - 28px);
     max-width: calc(100% - 2px - 28px);
-    color: #c29696;
+    color: #df9d9d;
 }
 
 

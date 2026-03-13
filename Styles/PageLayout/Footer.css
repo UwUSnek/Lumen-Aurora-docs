@@ -6,8 +6,10 @@
 
 body > footer- {
     display: flex;
+    position: fixed;
     flex-direction: row;
     justify-content: center;
+    z-index: 7; /*! 1 more than left and right */
 
     background-color: var(--main-footer-color);
     overflow: clip;
@@ -16,9 +18,11 @@ body > footer- {
     min-height: var(--main-footer-h);
     max-height: var(--main-footer-h);
     bottom: 0;
+    left: 0;
 
     text-align: center;
     align-items: center;
+    box-shadow: 0px -4px 8px var(--shadow-color);
 }
 
 

@@ -1,5 +1,12 @@
 
 const button_triggers = {
+    open_downloads : function() {
+        // TODO
+    },
+
+
+
+
     open_github : function() {
         // TODO
     },
@@ -9,6 +16,13 @@ const button_triggers = {
 
     open_about : function() {
         // TODO
+    },
+
+
+
+
+    open_search : function() {
+        //TODO
     },
 
 
