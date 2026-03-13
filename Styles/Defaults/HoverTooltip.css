@@ -1,0 +1,22 @@
+
+/* Hover tooltip */
+.tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    right: 175%;
+    top: 50%;
+    transform: translateY(-50%);
+
+    background: #222;
+    color: var(--fg-text);
+    padding: 4px 16px;
+    border-radius: 4px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.tooltip:hover::after {
+    opacity: 1;
+}

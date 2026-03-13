@@ -2,7 +2,6 @@
 const doc_list = new Map();
 const example_list = new Map();
 const internal_list = new Map();
-let active_tab = 0;
 
 let tab_doc      = document.getElementById("main-center-doc");
 let tab_examples = document.getElementById("main-center-examples");
@@ -11,11 +10,19 @@ let tab_button_doc;
 let tab_button_examples;
 let tab_button_internal;
 
-let transition_movement = "margin-left 0.3s cubic-bezier(0.99, 0, 0.01, 1)";
+let doc_tab_opacity_easing_exit  = getComputedStyle(document.documentElement).getPropertyValue("--doc-tab-opacity-easing-exit").trim()
+let doc_tab_opacity_easing_enter = getComputedStyle(document.documentElement).getPropertyValue("--doc-tab-opacity-easing-enter").trim()
+let doc_tab_movement_easing      = getComputedStyle(document.documentElement).getPropertyValue("--doc-tab-movement-easing").trim()
+let transition_movement = `margin-left 0.3s ${ doc_tab_movement_easing }`;
 
 
 
 const setup_tabs = {
+    get_active_tab_index : function() {
+        return Number.parseInt(localStorage.getItem("active_tab") ?? "0");
+    },
+
+
     get_tab : function(number){
         switch(number) {
             case 0: return tab_doc;
@@ -26,9 +33,19 @@ const setup_tabs = {
     },
 
 
+    get_tab_button : function(number){
+        switch(number) {
+            case 0: return tab_button_doc;
+            case 1: return tab_button_examples;
+            case 2: return tab_button_internal;
+            default: return null;
+        }
+    },
+
+
     disable_tab : function(tab) {
         tab.style.opacity = "0%";
-        tab.style.transition = `${ transition_movement }, opacity 0.3s cubic-bezier(0.165, 0.84, 0.44, 1)`; // Quartic ease out
+        tab.style.transition = `${ transition_movement }, opacity 0.3s ${ doc_tab_opacity_easing_exit }`;
         tab.style.setProperty("pointer-events", "none", "important");
         //! !important is required in order to overwrite other stuff.
         //! no clicks on invisible tabs is of the highest priority.
@@ -37,7 +54,7 @@ const setup_tabs = {
 
     enable_tab : function(tab) {
         tab.style.opacity = "100%";
-        tab.style.transition = `${ transition_movement }, opacity 0.3s cubic-bezier(0.895, 0.03, 0.685, 0.22)`; // Quartic ease in
+        tab.style.transition = `${ transition_movement }, opacity 0.3s ${ doc_tab_opacity_easing_enter }`;
         tab.style.pointerEvents = "auto";
     },
 
@@ -54,11 +71,11 @@ const setup_tabs = {
         b.addEventListener("click", function() {
 
             // Disable old tab, enable new tab
-            setup_tabs.disable_tab(setup_tabs.get_tab(active_tab));
+            setup_tabs.disable_tab(setup_tabs.get_tab(setup_tabs.get_active_tab_index()));
             setup_tabs.enable_tab(setup_tabs.get_tab(tab_num));
 
             // Change active tab index and move the elements
-            active_tab = tab_num;
+            localStorage.setItem("active_tab", tab_num);
             tab_doc.style.marginLeft = `calc(0px - 100% * ${ tab_num } - var(--main-padding-c) * ${ tab_num })`;
 
             // Update button colors
@@ -68,12 +85,12 @@ const setup_tabs = {
             b.style.backgroundColor = "var(--bg-index-active)";
         });
         b.addEventListener("mouseenter", function(){
-            if(Number.parseInt(b.style.getPropertyValue("--tab-num"), 10) != active_tab) {
+            if(Number.parseInt(b.style.getPropertyValue("--tab-num"), 10) != setup_tabs.get_active_tab_index()) {
                 b.style.backgroundColor = "var(--bg-index-hover)";
             }
         });
         b.addEventListener("mouseleave", function(){
-            if(Number.parseInt(b.style.getPropertyValue("--tab-num"), 10) != active_tab) {
+            if(Number.parseInt(b.style.getPropertyValue("--tab-num"), 10) != setup_tabs.get_active_tab_index()) {
                 b.style.removeProperty("background-color");
             }
         });
@@ -98,7 +115,7 @@ const setup_tabs = {
 
         // Spawn the container and set the default tab to documentation
         center.insertBefore(container, center.children[0]);
-        tab_button_doc.dispatchEvent(new Event("click"))
+        this.get_tab_button(setup_tabs.get_active_tab_index()).dispatchEvent(new Event("click"))
     },
 
 
@@ -164,10 +181,10 @@ const setup_tabs = {
         // Create buttons for the user
         setup_tabs.create_tab_buttons();
 
-        //FIXME save active tab in local storage, don't disable it from here
         // Initialize the content: All tabs start as disabled
         for(let i = 0; i < 3; ++i) {
-            if(i != 0) {
+            let active_tab = setup_tabs.get_active_tab_index();
+            if(i != active_tab) {
                 setup_tabs.disable_tab(setup_tabs.get_tab(i));
             }
         }

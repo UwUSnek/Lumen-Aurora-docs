@@ -24,6 +24,8 @@ const ui_slider = {
 
     // Updates the width of the left and center main containers
     update_main_width : function(){
+        globalThis.localStorage.setItem("slider-value", slider.value);
+
 
         //! HTML Slider's minimum value doesn't actually work. The Math.max calls are used to prevent elements' widths from going negative
         // Left side (calc width)
@@ -35,24 +37,28 @@ const ui_slider = {
         let right_w_limit = 900;
         let right_w_total = window.innerWidth - left_w - main_right_w_px;
         let right_w = Math.min(right_w_limit, right_w_total) - (main_padding_r_px * 2);
-        for(let e of center.querySelectorAll(
-            ":scope > #main-center-tab-container > * > :not(" +
-                "syntax-," +
-                "example-," +
-                "split-example-container-," +
-                "ce-full-size-," +
-                "h1," +
-                "table," +
-                ".table-container," +
-                ".no-text-width-limit" +
-            ")"
-        )) {
-            e.style.minWidth = `${ right_w }px`;
-            e.style.maxWidth = `${ right_w }px`;
-        }
         center.style.width = `${ right_w_total - main_padding_r_px * 2 }px`;
 
-        globalThis.localStorage.setItem("slider-value", slider.value);
+        // Init text wrap preference if null
+        if(localStorage.getItem("text_wrap") === null) {
+            localStorage.setItem("text_wrap", true);
+        }
+
+        // Wrap text if needed
+        let text_wrap = (localStorage.getItem("text_wrap")) === "true";
+        for(let e of center.querySelectorAll(":scope > #main-center-tab-container > * > *")) {
+            if (!e.dataset.transitionSet) {
+                e.style.transition += `max-width 0.2s ease`;
+                e.dataset.transitionSet = "1";
+            }
+            if(text_wrap && !e.matches("syntax-, example-, split-example-container-, ce-full-size-, h1, table, .table-container, .no-text-width-limit")) {
+                console.log(e.id)
+                e.style.maxWidth = `${ right_w }px`;
+            }
+            else {
+                e.style.maxWidth = `100%`;
+            }
+        }
     },
 
 
@@ -67,7 +73,7 @@ const ui_slider = {
         globalThis.localStorage.setItem("slider-set", "set");
         let min = 0;
         let max = document.documentElement.clientWidth - main_padding_r_px * 2 - slider_width_px;
-        globalThis.localStorage.setItem("slider-value", (min + max) / 2);
+        globalThis.localStorage.setItem("slider-value", (min + max) / 4);
     },
     // Set slider value after page refresh and initialize it if needed
     init_slider : function(){

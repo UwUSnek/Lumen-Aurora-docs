@@ -1,6 +1,10 @@
 :root {
     --main-padding-c: 4vw; /*! Must be in vw to let JS parse the value correctly & based on the viewport's width */
     --main-right-w:   3vw; /*! Must be in vw to let JS parse the value correctly & based on the viewport's width */
+
+    --doc-tab-opacity-easing-exit:  cubic-bezier(0.165, 0.84, 0.44, 1); /* Quartic ease out */
+    --doc-tab-opacity-easing-enter: cubic-bezier(0.895, 0.03, 0.685, 0.22); /* Quartic ease in */
+    --doc-tab-movement-easing:      cubic-bezier(0.99, 0, 0.01, 1);
 }
 
 
@@ -178,7 +182,7 @@ body > main- > center- > #main-center-tab-container > #main-center-staging {
 body > main- > right- {
     display: block;
     z-index: 6; /*! 1 higher than right-'s in order to hide moving tabs */
-    overflow: clip;
+    overflow: visible;
     position: fixed;
 
     right: 0;

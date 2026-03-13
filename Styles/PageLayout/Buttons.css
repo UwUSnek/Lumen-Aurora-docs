@@ -3,7 +3,7 @@
     --button-dist: 20px;
 
     --button-color:       #8d8d8d;
-    --button-color-hover: #f5f5f5;
+    --button-color-hover: var(--fg-text);
 }
 
 
@@ -29,6 +29,11 @@ body > main- > right- > buttons- {
 
 
 body > main- > right- > buttons- > button- {
+    display: block;
+    position: relative;
+    padding: 0;
+    margin: 0;
+
     min-width: var(--button-size);
     max-width: var(--button-size);
     min-height: var(--button-size);
