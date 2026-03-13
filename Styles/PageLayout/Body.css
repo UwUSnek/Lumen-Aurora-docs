@@ -13,7 +13,7 @@ body {
     word-spacing: var(--word-spacing);
     letter-spacing: var(--char-spacing);
     line-height: var(--line-h);
-    font-weight: normal;
+    font-weight: 400;
     font-size: var(--font-size-medium);
     min-width:  100vw;
     max-width:  100vw;

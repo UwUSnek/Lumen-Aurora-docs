@@ -10,9 +10,9 @@ let tab_button_doc;
 let tab_button_examples;
 let tab_button_internal;
 
-let doc_tab_opacity_easing_exit  = getComputedStyle(document.documentElement).getPropertyValue("--doc-tab-opacity-easing-exit").trim()
-let doc_tab_opacity_easing_enter = getComputedStyle(document.documentElement).getPropertyValue("--doc-tab-opacity-easing-enter").trim()
-let doc_tab_movement_easing      = getComputedStyle(document.documentElement).getPropertyValue("--doc-tab-movement-easing").trim()
+let doc_tab_opacity_easing_exit  = utils.page_style.getPropertyValue("--doc-tab-opacity-easing-exit").trim()
+let doc_tab_opacity_easing_enter = utils.page_style.getPropertyValue("--doc-tab-opacity-easing-enter").trim()
+let doc_tab_movement_easing      = utils.page_style.getPropertyValue("--doc-tab-movement-easing").trim()
 let transition_movement = `margin-left 0.3s ${ doc_tab_movement_easing }`;
 
 
@@ -63,6 +63,7 @@ const setup_tabs = {
 
         // Create the button element
         let b = document.createElement("div");
+        b.innerHTML = "-------"; //! Required for the text animation to work properly
         b.classList = "tab-button";
         b.style.setProperty("--tab-num", `${ tab_num }`);
 
@@ -180,6 +181,7 @@ const setup_tabs = {
 
         // Create buttons for the user
         setup_tabs.create_tab_buttons();
+
 
         // Initialize the content: All tabs start as disabled
         for(let i = 0; i < 3; ++i) {

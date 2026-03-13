@@ -1,6 +1,8 @@
 :root {
-    --tab-buttons-container-height: 20px;
-    --tab-button-padding: 10px;
+    --tab-button-padding: 4px;
+
+    /*! This is required in order to calculate the correct height of the central panel */
+    --tab-buttons-container-height: calc(2em + var(--tab-button-padding) * 2);
 }
 
 
@@ -11,9 +13,10 @@
     position: relative;
 
     width: auto;
-    height: fit-content;
+    min-height: var(--tab-buttons-container-height);
+    max-height: var(--tab-buttons-container-height);
 
-    border-bottom: 1px solid var(--bd-block);
+    border-bottom: 1px solid var(--fg-separator);
 }
 
 
@@ -24,12 +27,12 @@
 
     min-width: calc(100% / 3);
     max-width: calc(100% / 3);
-    min-height: var(--tab-buttons-container-height);
-    max-height: var(--tab-buttons-container-height);
     padding: var(--tab-button-padding) 0 var(--tab-button-padding) 0;
 
     text-align: center;
+    font-size: var(--font-size-mediumlarge);
+    font-weight: 200;
     cursor: pointer;
-    transition: background-color 0.1s;
+    transition: background-color 0.2s ease, opacity 0.2s ease;
     user-select: none;
 }

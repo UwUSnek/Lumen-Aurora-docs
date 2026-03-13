@@ -19,6 +19,7 @@
     --bg-pre:           #0f0f0f;
 
     --fg-separator:     hsl(213, 12%, 18%);
+    --fg-separator-thin:     color-mix(in srgb, var(--fg-separator) 25%, transparent);
     --fg-text:          hsl(240, 2%, 88%);
 }
 
@@ -30,8 +31,12 @@
 *:not(ol) {
     margin:  0;
     padding: 0;
+    image-rendering: auto; /*! For some reason using optimizeQuality or smooth results in having no antialiasing */
+    shape-rendering: geometricPrecision;
     scrollbar-width: thin;
     text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 p, table, h1, h2, h3{
     margin: var(--def-margin) 0 var(--def-margin) 0;

@@ -9,7 +9,7 @@
 
 // Save slider element
 let slider = document.getElementById("main-slider");
-let slider_width_px = Number.parseInt(page_style.getPropertyValue("--slider-w").slice(0, -2));
+let slider_width_px = Number.parseInt(utils.page_style.getPropertyValue("--slider-w").slice(0, -2));
 
 
 const ui_slider = {
@@ -52,11 +52,10 @@ const ui_slider = {
                 e.dataset.transitionSet = "1";
             }
             if(text_wrap && !e.matches("syntax-, example-, split-example-container-, ce-full-size-, h1, table, .table-container, .no-text-width-limit")) {
-                console.log(e.id)
                 e.style.maxWidth = `${ right_w }px`;
             }
             else {
-                e.style.maxWidth = `100%`;
+                e.style.maxWidth = "100%";
             }
         }
     },

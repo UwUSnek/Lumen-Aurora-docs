@@ -1,6 +1,6 @@
 :root {
-    --bg-index-hover:   hsl(222, 21%, 18%);
-    --bg-index-active:  hsl(223, 23%, 30%);
+    --bg-index-hover:   hsl(222, 22%, 15%);
+    --bg-index-active:  hsl(222, 24%, 22%);
     --main-index-margin-top: 1em;
     --main-index-margin-bottom: 4em;
 }
@@ -70,6 +70,7 @@ body > main- > left- > index- indexh- > * {
     display: inline-block;
     padding: 0;
     transform-origin: -1em;
+    font-weight: 400;
 
     min-width: 100%;
     max-width: 100%;
@@ -81,6 +82,7 @@ body > main- > left- > index- indexh- > * {
 }
 body > main- > left- > index- indexd- > * {
     opacity: 75%;
+    font-weight: 300;
     line-height: 1.5em;
     transform: translateY(-0.2em);
 }

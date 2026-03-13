@@ -2,7 +2,7 @@
     --button-size: 25px;
     --button-dist: 20px;
 
-    --button-color:       #8d8d8d;
+    --button-color-idle:  #8d8d8d;
     --button-color-hover: var(--fg-text);
 }
 
@@ -39,16 +39,13 @@ body > main- > right- > buttons- > button- {
     min-height: var(--button-size);
     max-height: var(--button-size);
 }
-body > main- > right- > buttons- > button- img {
-    visibility: hidden;
-}
 body > main- > right- > buttons- > button- > svg {
     min-width: 100%;
     max-width: 100%;
     min-height: 100%;
     max-height: 100%;
 
-    color: var(--button-color);
+    color: var(--button-color-idle);
     animation: fadein 0.2s ease;
     transition: color 0.2s ease;
 }

@@ -20,8 +20,8 @@
 
 
 @import "./Example/ExampleBlock.css";
-@import "./Example/CopyButton.css";
 @import "./Example/Cursor.css";
 @import "./Example/ConsolePrefix.css";
 @import "./Example/TabButtons.css";
+@import "./Example/ExampleButtons.css";
 

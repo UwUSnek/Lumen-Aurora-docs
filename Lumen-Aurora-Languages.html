@@ -345,20 +345,22 @@
         Lumen and Aurora are high-level programming languages designed to work together seamlessly,
         offering an integrated solution for both general-purpose programming and GPU computing.<br>
     </p>
-    <div style="max-width: 75%; margin-left: calc(25% / 2);" class="no-text-width-limit">
-        <div style="text-align: center; display: flex; flex-direction: row; margin-top: 100px; margin-bottom: 50px;">
-            <div style="min-width: 50%;">
-                <span class="large"><b>Lumen</b></span><br>
-                Programming language<br>
-                Based on LLVM
+    <div class="no-text-width-limit"> 
+        <div style="max-width: 75%; margin-left: calc(25% / 2);">
+            <div style="text-align: center; display: flex; flex-direction: row; margin-top: 100px; margin-bottom: 50px;">
+                <div style="min-width: 50%;">
+                    <span class="large"><b>Lumen</b></span><br>
+                    Programming language<br>
+                    Based on LLVM
+                </div>
+                <div style="min-width: 50%;">
+                    <span class="large"><b>Aurora</b></span><br>
+                    Shading language<br>
+                    Based on SPIR-V
+                </div>
             </div>
-            <div style="min-width: 50%;">
-                <span class="large"><b>Aurora</b></span><br>
-                Shading language<br>
-                Based on SPIR-V
-            </div>
+            <img src="./Logos/2K.png", alt="language logos" style="width: 100%; display: block; margin: 0; padding: 0;">
         </div>
-        <img src="./Logos/2K.png", alt="language logos" style="width: 100%; display: block; margin: 0; padding: 0;">
     </div>
 </moveto-doc->
 
@@ -8070,25 +8072,33 @@
 
 
 <buttons->
-    <button- class="tooltip" data-tooltip="GitHub" onclick="button_triggers.open_github()">
-        <img src="./Styles/PageLayout/Icons/Github.svg" alt="GitHub"/>
-    </button->
+    <button- class="tooltip-left"
+        data-tooltip="GitHub"
+        onclick="button_triggers.open_github()"
+        data-icon = "./Styles/PageLayout/Icons/Github.svg";
+    ></button->
 
 
-    <button- class="tooltip" data-tooltip="About" onclick="button_triggers.open_about()">
-        <img src="./Styles/PageLayout/Icons/About.svg" alt="About"/>
-    </button->
+    <button- class="tooltip-left"
+        data-tooltip="About"
+        onclick="button_triggers.open_about()"
+        data-icon = "./Styles/PageLayout/Icons/About.svg";
+    ></button->
     <button-></button->
 
 
-    <button- class="tooltip" data-tooltip="Toggle text wrap" onclick="button_triggers.open_toggle_text_wrap()">
-        <img src="./Styles/PageLayout/Icons/TextWrap.svg" alt="Toggle text wrap"/>
-    </button->
+    <button- class="tooltip-left"
+        data-tooltip="Toggle text wrap"
+        onclick="button_triggers.open_toggle_text_wrap()"
+        data-icon = "./Styles/PageLayout/Icons/TextWrap.svg";
+    ></button->
 
 
-    <button- class="tooltip" data-tooltip="Open Sandbox" onclick="button_triggers.open_sandbox()">
-        <img src="./Styles/PageLayout/Icons/Sandbox.svg" alt="Sandbox"/>
-    </button->
+    <button- class="tooltip-left"
+        data-tooltip="Open ALC Sandbox"
+        onclick="button_triggers.open_sandbox()"
+        data-icon = "./Styles/PageLayout/Icons/Sandbox.svg";
+    ></button->
 </buttons->
         </right->
     </main->
@@ -8099,24 +8109,25 @@
             Do not contribute with AI-generated code.
         </span>
     </footer->
+    <script src="Scripts/utils.js"></script>
     <script src="Scripts/Setup/Fix.js"></script>
     <script src="Scripts/Setup/DocumentationTabs.js"></script>
     <script src="Scripts/Setup/Index.js"></script>
-    <script src="Scripts/Setup/LoadButtonIcons.js"></script>
     <script src="Scripts/Setup/ButtonTriggers.js"></script>
     <script src="Scripts/Custom/CopySyntax.js"></script>
     <script src="Scripts/main.js"></script>
     <script src="Scripts/UI/Slider.js"></script>
     <script src="Scripts/UI/SmoothLinks.js"></script>
-    <script src="Scripts/UI/CopyCode.js"></script>
+    <script src="Scripts/UI/ExampleButtonTriggers.js"></script>
     <script src="Scripts/UI/SyntaxHover.js"></script>
+    <script src="Scripts/UI/LoadButtonIcons.js"></script>
     <script src="Scripts/Custom/FormatSummaryLists.js"></script>
     <script src="Scripts/Custom/FormatBlocks.js"></script>
     <script src="Scripts/Custom/RegexColors.js"></script>
     <script src="Scripts/Custom/FormatExamples.js"></script>
     <script src="Scripts/Custom/FormatSyntax.js"></script>
-
-    <script src="Scripts/Custom/CreateTabNames.js"></script>
+    <script src="Scripts/Custom/CreateExampleButtons.js"></script>
+    <script src="Scripts/Custom/UpdateTabNames.js"></script>
 
 
 

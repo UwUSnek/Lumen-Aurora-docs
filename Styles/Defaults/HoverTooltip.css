@@ -1,13 +1,16 @@
+:root {
+    --hover-tooltip-color: #222;
+}
 
-/* Hover tooltip */
-.tooltip::after {
+
+
+.tooltip-left::after,
+.tooltip-top::after,
+.tooltip-top-high::after {
     content: attr(data-tooltip);
     position: absolute;
-    right: 175%;
-    top: 50%;
-    transform: translateY(-50%);
 
-    background: #222;
+    background: var(--hover-tooltip-color);
     color: var(--fg-text);
     padding: 4px 16px;
     border-radius: 4px;
@@ -15,8 +18,28 @@
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.2s ease;
+    font-weight: 200;
+    box-shadow: 0px 4px 8px var(--shadow-color);
+}
+.tooltip-left::after {
+    right: 175%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.tooltip-top::after {
+    bottom: 175%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.tooltip-top-high::after {
+    bottom: 200%;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
-.tooltip:hover::after {
+
+.tooltip-left:hover::after,
+.tooltip-top:hover::after,
+.tooltip-top-high:hover::after {
     opacity: 1;
 }

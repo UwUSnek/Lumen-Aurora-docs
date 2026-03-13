@@ -19,7 +19,7 @@ const format_syntax = {
 
 
 
-    min_w : Number.parseFloat(page_style.getPropertyValue('--syntax-arrow-w').slice(0, -2)),
+    min_w : Number.parseFloat(utils.page_style.getPropertyValue('--syntax-arrow-w').slice(0, -2)),
 
 
 

@@ -1,6 +1,6 @@
 
 // Tooltip opacity transition duration in milliseconds
-let tooltip_opacity_duration = Number.parseFloat(page_style.getPropertyValue("--syntax-hover-tooltip-opacity-duration")) * 1000;
+let tooltip_opacity_duration = Number.parseFloat(utils.page_style.getPropertyValue("--syntax-hover-tooltip-opacity-duration")) * 1000;
 
 
 

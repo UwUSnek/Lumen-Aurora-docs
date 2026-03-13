@@ -47,8 +47,8 @@ h1 {
     min-width: 100%;
     max-width: 100%;
     text-align: left;
-    font-weight: bolder;
-    font-size: var(--font-size-xx-large);
+    font-weight: 200;
+    font-size: var(--font-size-xxx-large);
     display: block;
     line-height: 1em;
     margin: var(--header-margin) 0 var(--header-margin) 0;

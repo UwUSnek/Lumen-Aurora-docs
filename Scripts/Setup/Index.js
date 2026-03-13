@@ -19,6 +19,8 @@ function capitalize(string) {
 
 
 const setup_index = {
+    call_index : 0,
+
 
     format_elm_self : function(elm, depth, number_str) {
 
@@ -145,31 +147,35 @@ const setup_index = {
         let ec =  example_list.get(header_number); tab_examples.replaceChildren(...(ec == null ? [tab_placeholder_examples] : ec), tab_spacer_examples);
         let ic = internal_list.get(header_number); tab_internal.replaceChildren(...(ic == null ? [tab_placeholder_internal] : ic), tab_spacer_internal);
 
+
         // Update width of elements
-        ui_slider.update_main_width();
+        utils.exec_and_log(ui_slider.update_main_width, `[tab contents #${ this.call_index }] ui_slider.update_main_width`);
 
         // Update tab names
-        create_tab_names.start();
+        utils.exec_and_log(update_tab_names.start, `[tab contents #${ this.call_index }] update_tab_names`);
 
         // Color regex elements
-        regex_colors.start();
+        utils.exec_and_log(regex_colors.start, `[tab contents #${ this.call_index }] regex_colors`);
 
         // Format blocks
-        format_blocks.start();
+        utils.exec_and_log(format_blocks.start, `[tab contents #${ this.call_index }] format_blocks`);
 
         // Format summary lists
-        format_summary_lists.start();
+        utils.exec_and_log(format_summary_lists.start, `[tab contents #${ this.call_index }] format_summary_lists`);
 
         // Format examples
-        format_examples.start();
+        utils.exec_and_log(format_examples.start, `[tab contents #${ this.call_index }] format_examples`);
+        utils.exec_and_log(create_example_buttons.start, `[tab contents #${ this.call_index }] create_example_buttons`);
 
         // Copy and format syntax blocks
-        copy_syntax.start();
-        format_syntax.start();
+        utils.exec_and_log(copy_syntax.start, `[tab contents #${ this.call_index }] copy_syntax`);
+        utils.exec_and_log(format_syntax.start, `[tab contents #${ this.call_index }] format_syntax`);
 
 
         // Add syntax cursor tooltips  //! Event listeners cannot be added before spawning the actual elements
-        ui_syntax_hover.start();
+        utils.exec_and_log(ui_syntax_hover.start, `[tab contents #${ this.call_index }] ui_syntax_hover`);
+
+        this.call_index += 1;
     },
 
 
@@ -222,6 +228,9 @@ const setup_index = {
 
 
     init : function(){
+        tab_placeholder_doc      .classList += "center no-text-width-limit";
+        tab_placeholder_examples .classList += "center no-text-width-limit";
+        tab_placeholder_internal .classList += "center no-text-width-limit";
         setup_index.format_elm(document.querySelector('index-'), -0.5, '');
 
         // Setup location change listener
