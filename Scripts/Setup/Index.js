@@ -9,6 +9,9 @@ let tab_placeholder_doc      = document.createElement("tab-placeholder-");
 let tab_placeholder_examples = document.createElement("tab-placeholder-");
 let tab_placeholder_internal = document.createElement("tab-placeholder-");
 
+const index_id_to_text_map = new Map();
+const index_id_to_number_map = new Map();
+
 
 function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -20,6 +23,9 @@ function capitalize(string) {
 
 const setup_index = {
     call_index : 0,
+
+
+
 
 
     format_elm_self : function(elm, depth, number_str) {
@@ -49,23 +55,34 @@ const setup_index = {
             elm.classList.add('small');
         }
         if(elm.tagName == 'INDEXD-' || elm.tagName == 'INDEXH-') {
-            let id = elm.innerHTML;
-            if(id.length == 0) {
+            let id_stripped = elm.innerHTML;
+            if(id_stripped.length == 0) {
                 elm.style.minHeight = '2em';
                 return;
             }
 
 
             // Fix index element
-            let name = capitalize(id.split('.').pop()).replaceAll('-', ' ');
-            elm.innerHTML = `<span id="index--${ id }">${ number_str } ${ name }</span>`;
+            let name = capitalize(id_stripped.split('.').pop()).replaceAll('-', ' ');
+            elm.innerHTML = `<span id="index--${ id_stripped }">${ number_str } ${ name }</span>`;
             elm.style.paddingLeft = `calc(` +   `${ index_indent } * ${ depth })`;
             elm.style.maxWidth    = `calc(100% - ${ index_indent } * ${ depth })`;
 
+
             //Fix referenced heading
-            let heading = document.getElementById(id);
-            if(heading == null) console.error(`heading for ID ${ id } not found`);
-            heading.innerHTML = `${ number_str } ${ name }`;
+            let heading = document.getElementById(id_stripped);
+            if(heading == null) console.error(`heading for ID ${ id_stripped } not found`);
+            heading.innerHTML = name;
+
+
+            // Store name in the map
+            let id = `index--${ id_stripped }`;
+            if(!index_id_to_number_map.has(id)) {
+                index_id_to_number_map.set(id, number_str);
+            }
+            if(!index_id_to_text_map.has(id)) {
+                index_id_to_text_map.set(id, name);
+            }
         }
 
 
@@ -142,10 +159,12 @@ const setup_index = {
     refresh_tab_content : function() {
 
         // Retrieve the header number and spawn new paragraph contents, replacing the old ones //! (And also add the virtual spacer element back)
-        let header_number = (document.getElementById(index_active_id).innerHTML.match(/(\d+\.)+/g)[0]);
-        let dc =      doc_list.get(header_number); tab_doc.     replaceChildren(...(dc == null ? [tab_placeholder_doc]      : dc), tab_spacer_doc);
-        let ec =  example_list.get(header_number); tab_examples.replaceChildren(...(ec == null ? [tab_placeholder_examples] : ec), tab_spacer_examples);
-        let ic = internal_list.get(header_number); tab_internal.replaceChildren(...(ic == null ? [tab_placeholder_internal] : ic), tab_spacer_internal);
+        let dc =      doc_list.get(index_active_id);
+        let ec =  example_list.get(index_active_id);
+        let ic = internal_list.get(index_active_id);
+        tab_doc.     replaceChildren(...(dc == null ? [tab_placeholder_doc]      : dc), tab_spacer_doc);
+        tab_examples.replaceChildren(...(ec == null ? [tab_placeholder_examples] : ec), tab_spacer_examples);
+        tab_internal.replaceChildren(...(ic == null ? [tab_placeholder_internal] : ic), tab_spacer_internal);
 
 
         // Update width of elements
@@ -199,17 +218,31 @@ const setup_index = {
 
 
 
+    update_index_indicator : function() {
+        let e = document.querySelector("body > main- > right- > index-indicator-");
+        if(e.textContent.length == 0) e.innerHTML = "";
+        let number = index_id_to_number_map.get(index_active_id);
+        let text   = index_id_to_text_map  .get(index_active_id);
+        utils.type_to(e, `${ number } ${ text }`, 25);
+    },
+
+
+
 
     // Callback that updates the session storage, the index UI and the tab contents
     on_location_changed : function() {
+
+        // Update active id
         let old = globalThis.sessionStorage.getItem('index.selected_id');
         index_active_id = `index--${ location.hash.slice(1) }`;
         if(index_active_id == 'index--' || document.getElementById(index_active_id) == null) index_active_id = 'index--overview'
         globalThis.sessionStorage.setItem('index.selected_id', index_active_id);
 
-        setup_index.update_index_colors(old);
+        // Update other stuff
         setup_index.move_to_view(true);
         setup_index.refresh_tab_content();
+        setup_index.update_index_colors(old);
+        setup_index.update_index_indicator();
     },
 
 

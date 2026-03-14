@@ -1,0 +1,21 @@
+:root {
+    --index-indicator-margin: 10px;
+}
+
+
+
+
+
+body > main- > right- > index-indicator- {
+    display: flex;
+    padding: 0;
+    margin: var(--index-indicator-margin) 0 0 0;
+    width: var(--main-right-w);
+    height: fit-content;
+
+    align-items: center;   /*! Centers on the narrow axis (horizontal here (which is the global vertical axis)) */
+    writing-mode: vertical-lr;
+    white-space: nowrap;
+    font-weight: 100;
+    font-size: var(--font-size-mediumlarge);
+}

@@ -1,9 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
-  <g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M6 4 C4 4 3 5 3 7 L3 10 C3 11.5 2 12 1.5 12 C2 12 3 12.5 3 14 L3 17 C3 19 4 20 6 20"/>
-    <path d="M18 4 C20 4 21 5 21 7 L21 10 C21 11.5 22 12 22.5 12 C22 12 21 12.5 21 14 L21 17 C21 19 20 20 18 20"/>
-    <line x1="8" y1="8"  x2="16" y2="8"/>
-    <line x1="8" y1="12" x2="16" y2="12"/>
-    <line x1="8" y1="16" x2="13" y2="16"/>
-  </g>
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="120" height="120">
+  <rect x="6" y="6" width="12" height="12" rx="2" fill="none" stroke="white" stroke-width="1"/>
+  <line x1="9" y1="3" x2="9" y2="6" stroke="white" stroke-width="1"/>
+  <line x1="15" y1="3" x2="15" y2="6" stroke="white" stroke-width="1"/>
+  <line x1="9" y1="18" x2="9" y2="21" stroke="white" stroke-width="1"/>
+  <line x1="15" y1="18" x2="15" y2="21" stroke="white" stroke-width="1"/>
+  <line x1="3" y1="9" x2="6" y2="9" stroke="white" stroke-width="1"/>
+  <line x1="3" y1="15" x2="6" y2="15" stroke="white" stroke-width="1"/>
+  <line x1="18" y1="9" x2="21" y2="9" stroke="white" stroke-width="1"/>
+  <line x1="18" y1="15" x2="21" y2="15" stroke="white" stroke-width="1"/>
 </svg>

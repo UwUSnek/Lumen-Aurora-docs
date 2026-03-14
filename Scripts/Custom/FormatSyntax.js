@@ -6,12 +6,9 @@ const format_syntax = {
 
     // Cache fetched SVG content
     fetch_svg : async function (name) {
-        if (!svg_cache[name]) {
-            const res = await fetch(`./Styles/Blocks/Syntax/Arrows/${name}.svg`);
-            const text = await res.text();
-            const parsed = new DOMParser().parseFromString(text, 'image/svg+xml');
-            // Extract just the inner content (paths, styles etc), not the <svg> wrapper
-            svg_cache[name] = Array.from(parsed.documentElement.children);
+        if(!svg_cache[name]) {
+            const svg = await utils.loadSVG(`./Styles/Blocks/Syntax/Arrows/${name}.svg`);
+            svg_cache[name] = Array.from(svg.children);
         }
         return svg_cache[name];
     },

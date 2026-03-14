@@ -8070,8 +8070,11 @@
         </center->
         <right->
 
+<index-indicator-></index-indicator->
+
 
 <buttons->
+    <spacer-></spacer->
 
 
     <button- class="tooltip-left"
@@ -8104,6 +8107,13 @@
 
 
     <button- class="tooltip-left"
+        data-tooltip="Toggle index"
+        onclick="button_triggers.open_toggle_index()"
+        data-icon = "./Styles/PageLayout/Icons/ToggleIndex.svg";
+    ></button->
+
+
+    <button- class="tooltip-left"
         data-tooltip="Toggle text wrap"
         onclick="button_triggers.open_toggle_text_wrap()"
         data-icon = "./Styles/PageLayout/Icons/TextWrap.svg";
@@ -8122,7 +8132,7 @@
         <span class="xx-small">
             Lumen and Aurora are a work of passion.
             Licensed under <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPL-3.0</a>. Free to use.
-            Contributions are welcome; AI-generated code is not.
+            Contributions are welcome, AI-generated code is not.
         </span>
     </footer->
     <script src="Scripts/utils.js"></script>

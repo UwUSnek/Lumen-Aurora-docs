@@ -3,6 +3,11 @@
     --main-right-w:   3vw; /*! Must be in vw to let JS parse the value correctly & based on the viewport's width */
     --shadow-color: rgba(0, 0, 0, 0.2);
     --light-shadow-color: rgba(0, 0, 0, 0.1);
+    --main-center-min-w: 25vw; /*! Must be precalculated and in vw to let JS parse the value correctly */
+
+    --main-drag-icon-margin-l: 5px;
+    --main-drag-icon-w: 15px;
+    --main-drag-icon-h: 50px;
 
     --doc-tab-opacity-easing-exit:  cubic-bezier(0.165, 0.84, 0.44, 1); /* Quartic ease out */
     --doc-tab-opacity-easing-enter: cubic-bezier(0.895, 0.03, 0.685, 0.22); /* Quartic ease in */
@@ -84,6 +89,26 @@ body > main- > center- {
     max-height: calc(100vh - var( --main-footer-h));
 
     transition: width 0.3s, right 0.3s;
+}
+
+/* Drag icon */
+body > main- > center-::after {
+    display: block;
+    position: absolute;
+    pointer-events: none;
+
+    width: var(--main-drag-icon-w);
+    height: var(--main-drag-icon-h);
+    background-color: color-mix(in srgb, var(--button-color-idle) 25%, transparent);
+    mask-image: url("./Icons/MainDragIcon.svg");
+    mask-repeat: no-repeat;
+    mask-size: cover;
+    mask-position: center;
+
+    left: calc(0px - var(--main-padding-c) + var(--main-drag-icon-margin-l));
+    top: 50%;
+    transform: translateY(-50%);
+    content: ""; /*! Required in order to display the pseudo element */
 }
 
 
@@ -189,6 +214,7 @@ body > main- > right- {
     top: 0;
     margin: 0;
 
+    background-color: var(--bg);
     border-left: 1px solid var(--fg-separator-thin);
     min-width: var(--main-right-w);
     max-width: var(--main-right-w);

@@ -4,8 +4,6 @@ const utils = {
     page_style: getComputedStyle(document.body),
 
 
-    // idk what to use this for but it looks cool
-    // it's too tacky for documentation tabs or really anything that needs to be read often
     type_to : function(elm, new_text, speed = 25) {
         const old_text = elm.textContent;
         const longer = old_text.length > new_text.length ? old_text : new_text;

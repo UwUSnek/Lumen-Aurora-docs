@@ -10,8 +10,8 @@ const format_blocks = {
             let rc = exampleContainer.querySelector('split-example-container-right-');
 
             // Get contained divs
-            let l = lc.querySelector('DIV');
-            let r = rc.querySelector('DIV');
+            let l = lc.querySelector('div');
+            let r = rc.querySelector('div');
 
             // Fix heights
             if(r.offsetHeight < l.offsetHeight) r.style.minHeight = r.style.maxHeight = `${ l.offsetHeight }px`

@@ -14,7 +14,7 @@
         position: fixed;
         z-index: -5;
         margin: 50vh 0 0 0;
-        width: calc(100vw - var(--main-padding-c) * 2);
+        width: calc(100vw - var(--main-center-min-w));
         height: 0;
         -webkit-appearance: none;
         appearance: none;

@@ -1,8 +1,6 @@
-<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="120" height="120">
-  <path fill="currentColor" fill-rule="evenodd" d="
-    M14 20h-4v4a1 1 0 0 1-2 0v-4H5a1 1 0 0 1-1-1v-3H1a1 1 0 0 1 0-2h3v-4H1a1 1 0 0 1 0-2h3V5a1 1 0 0 1 1-1h3V1a1 1 0 0 1 2 0v3h4V1a1 1 0 0 1 2 0v3h3a1 1 0 0 1 1 1v3h3a1 1 0 0 1 0 2h-3v4h3a1 1 0 0 1 0 2h-3v3a1 1 0 0 1-1 1h-3v4a1 1 0 0 1-2 0v-4z
-    M6 18h12V6H6z
-  "/>
-  <path fill="currentColor" d="M8.5 9.8 L11.2 12 L8.5 14.2 L9.6 15.4 L13.4 12 L9.6 8.6Z"/>
-  <rect fill="currentColor" x="11" y="14.4" width="4" height="1.4" rx="0.3"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+    <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+        <path d="m8 9l3 3l-3 3m5 0h3" />
+        <path d="M3 6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+    </g>
 </svg>

@@ -101,7 +101,7 @@ const regex_colors = {
 
     start : function() {
         for(let elm of document.querySelectorAll('regex-:not([regex-formatted])')) {
-            elm.innerHTML = this.tokenize(elm.innerHTML);
+            elm.innerHTML = regex_colors.tokenize(elm.innerHTML);
             elm.setAttribute('regex-formatted', '');
         }
     }

@@ -16,7 +16,7 @@ const ui_slider = {
     // Updates the maximum and minimum values of the slider. Used in browser zoom and window resize
     update_range : function(){
         slider.min = 0;
-        slider.max = document.documentElement.clientWidth - main_padding_r_px * 2 - slider_width_px;
+        slider.max = document.documentElement.clientWidth - main_centeR_width_w_px - slider_width_px;
     },
 
 
@@ -27,9 +27,14 @@ const ui_slider = {
         globalThis.localStorage.setItem("slider-value", slider.value);
 
 
+        // Init index toggle preference if null
+        if(localStorage.getItem("toggle_index") === null) {
+            localStorage.setItem("toggle_index", true);
+        }
+
         //! HTML Slider's minimum value doesn't actually work. The Math.max calls are used to prevent elements' widths from going negative
         // Left side (calc width)
-        let slider_value = Number.parseInt(slider.value);
+        let slider_value = localStorage.getItem("toggle_index") === "true" ? Number.parseInt(slider.value) : 0;
         let left_w = slider_value;
         left.style.width = `${ left_w }px`;
 
@@ -69,19 +74,22 @@ const ui_slider = {
 
 
     init_slider_first_time : function(){
+
+        // Set slider value
         globalThis.localStorage.setItem("slider-set", "set");
         let min = 0;
-        let max = document.documentElement.clientWidth - main_padding_r_px * 2 - slider_width_px;
+        let max = document.documentElement.clientWidth - main_centeR_width_w_px - slider_width_px;
         globalThis.localStorage.setItem("slider-value", (min + max) / 4);
     },
+
+
     // Set slider value after page refresh and initialize it if needed
     init_slider : function(){
         if(globalThis.localStorage.getItem("slider-set") != "set") {
             ui_slider.init_slider_first_time();
         }
-        slider.addEventListener("mousemove", function(){
-            ui_slider.update_main_width();
-        });
+        slider.addEventListener("mousemove",  ui_slider.update_main_width);
+        slider.addEventListener("mouseup",  ui_slider.update_main_width);
         slider.value = globalThis.localStorage.getItem("slider-value");
     },
 

@@ -1,6 +1,7 @@
 :root {
-    --button-size: 25px;
-    --button-dist: 20px;
+    --sidebar-button-size: 25px;
+    --sidebar-button-dist: 20px;
+    --sidebar-spacer-margin: 10px;
 
     --button-color-idle:  #8d8d8d;
     --button-color-hover: var(--fg-text);
@@ -13,16 +14,14 @@
 body > main- > right- > buttons- {
     display: flex;
     padding: 0;
-    margin: 0;
-    min-width: 100%;
-    max-width: 100%;
-    min-height: calc(100vh - var(--main-footer-h));
-    max-height: calc(100vh - var(--main-footer-h));
+    margin: 0 0 var(--sidebar-button-dist) 0;
+    width: 100%;
+    height: calc(100vh - var(--main-footer-h) - var(--sidebar-button-dist));
 
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: var(--button-dist);
+    justify-content: end;
+    gap: var(--sidebar-button-dist);
 }
 
 
@@ -33,14 +32,19 @@ body > main- > right- > buttons- > spacer- {
     display: block;
     position: relative;
     padding: 0;
-    margin: 0;
-
-    min-width: var(--button-size);
-    max-width: var(--button-size);
-    min-height: var(--button-size);
-    max-height: var(--button-size);
+    min-width: var(--sidebar-button-size);
+    max-width: var(--sidebar-button-size);
+}
+body > main- > right- > buttons- > spacer- {
+    margin: var(--sidebar-spacer-margin) 0 var(--sidebar-spacer-margin) 0;
+    background-color: var(--fg-separator);
+    min-height: 1px;
+    max-height: 1px;
 }
 body > main- > right- > buttons- > button- {
+    margin: 0;
+    min-height: var(--sidebar-button-size);
+    max-height: var(--sidebar-button-size);
     cursor: pointer;
 }
 body > main- > right- > buttons- > button- > svg {

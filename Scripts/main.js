@@ -5,15 +5,18 @@ let center = document.querySelector("body > main- > center-");
 
 
 // Main padding is expressed in vw
-let main_padding_r_vw = Number.parseInt(utils.page_style.getPropertyValue("--main-padding-c").slice(0, -2));
-let main_right_w_vw   = Number.parseInt(utils.page_style.getPropertyValue("--main-right-w")  .slice(0, -2));
+let main_padding_r_vw      = Number.parseInt(utils.page_style.getPropertyValue("--main-padding-c")   .slice(0, -2));
+let main_right_w_vw        = Number.parseInt(utils.page_style.getPropertyValue("--main-right-w")     .slice(0, -2));
+let main_centeR_width_w_vw = Number.parseInt(utils.page_style.getPropertyValue("--main-center-min-w").slice(0, -2));
 let main_padding_r_px;
 let main_right_w_px;
+let main_centeR_width_w_px;
 
 function update_vw_values(){
     let page_width = document.documentElement.clientWidth;
-    main_padding_r_px = main_padding_r_vw * page_width / 100;
-    main_right_w_px   = main_right_w_vw   * page_width / 100;
+    main_padding_r_px      = main_padding_r_vw      * page_width / 100;
+    main_right_w_px        = main_right_w_vw        * page_width / 100;
+    main_centeR_width_w_px = main_centeR_width_w_vw * page_width / 100;
 }
 
 

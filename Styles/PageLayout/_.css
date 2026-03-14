@@ -11,4 +11,5 @@
 
 @import "./TabButtons.css";
 @import "./TabButtonIcons.css";
-@import "./Buttons.css";
+@import "./SidebarButtons.css";
+@import "./SidebarIndexIndicator.css";

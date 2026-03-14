@@ -1,6 +1,6 @@
 :root {
     --tab-button-icon-size: 25px;
-    --tab-button-icon-padding-right: 15px;
+    --tab-button-icon-padding: 15px;
 }
 
 
@@ -9,13 +9,14 @@
 
 
 .tab-buttons-container > .tab-button > icon- {
+    flex-shrink: 0; /* Disable shrinking */
+    min-width: 0; /*! Needed for flex-shrink to work */
     display: block;
     position: relative;
     padding: 0;
-    margin: 0 var(--tab-button-icon-padding-right) 0 0;
+    margin: 0 var(--tab-button-icon-padding) 0 var(--tab-button-icon-padding);
 
-    min-width: var(--tab-button-icon-size);
-    max-width: var(--tab-button-icon-size);
+    width: var(--tab-button-icon-size);
     min-height: var(--tab-button-icon-size);
     max-height: var(--tab-button-icon-size);
 }
