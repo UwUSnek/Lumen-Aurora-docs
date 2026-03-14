@@ -23,8 +23,8 @@ const format_syntax = {
     // Align the colums to the maximum width of their cells
     even_widths : function(){
         let tables = tab_doc.querySelectorAll('syntax- > table');
-        for(const table of tables) if(!table.hasAttribute("format_syntax-widths")) {
-            table.setAttribute("format_syntax-widths", "1"); //! Mark as fixed for future iterations
+        for(const table of tables) if(!table.hasAttribute("syntax-block-is-even")) {
+            table.setAttribute("syntax-block-is-even", "1"); //! Mark as even for future iterations
             let trs = table.querySelectorAll('tr');
 
 
@@ -78,66 +78,71 @@ const format_syntax = {
         const tds = tab_doc.querySelectorAll('syntax- > table td');
 
         // Fix inverted arrows (sync, no change)
-        for(const td of tds) if(!td.hasAttribute("format_syntax-arrows_0")) {
-            td.setAttribute("format_syntax-arrows_0", "1");
-            if(td.dataset.arrows?.length) td.dataset.arrows = td.dataset.arrows
-                .replaceAll(/\bbt\b/g, "tb")
-                .replaceAll(/\brl\b/g, "lr")
-                .replaceAll(/\btl\b/g, "lt")
-                .replaceAll(/\brt\b/g, "tr")
-                .replaceAll(/\bbr\b/g, "rb")
-                .replaceAll(/\blb\b/g, "bl")
-            ;
+        for(const td of tds) {
+            if(!td.hasAttribute("syntax-block-arrows-formatted")) {
+                td.setAttribute("syntax-block-arrows-formatted", "1"); //! Mark arrows as formatted for future iterations
+                if(td.dataset.arrows?.length) td.dataset.arrows = td.dataset.arrows
+                    .replaceAll(/\bbt\b/g, "tb")
+                    .replaceAll(/\brl\b/g, "lr")
+                    .replaceAll(/\btl\b/g, "lt")
+                    .replaceAll(/\brt\b/g, "tr")
+                    .replaceAll(/\bbr\b/g, "rb")
+                    .replaceAll(/\blb\b/g, "bl")
+                ;
+            }
         }
 
         for (const table of tab_doc.querySelectorAll('syntax- > table')) {
-            const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-            Object.assign(svg.style, {
-                position: "absolute",
-                overflow: "visible",
-                inset: "0",
-                width: "100%",
-                height: "100%",
-                isolation: "isolate",
-                pointerEvents: "none"
-            });
-            table.style.position = "relative";
-            table.appendChild(svg);
+            if(!table.hasAttribute("syntax-block-has-svgs")) {
+                table.setAttribute("syntax-block-has-svgs", "1"); //! Mark svg as present for future iterations
+                const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                Object.assign(svg.style, {
+                    position: "absolute",
+                    overflow: "visible",
+                    inset: "0",
+                    width: "100%",
+                    height: "100%",
+                    isolation: "isolate",
+                    pointerEvents: "none"
+                });
+                table.style.position = "relative";
+                table.appendChild(svg);
 
-            const g_root = document.createElementNS("http://www.w3.org/2000/svg", "g");
-            svg.appendChild(g_root);
+                const g_root = document.createElementNS("http://www.w3.org/2000/svg", "g");
+                svg.appendChild(g_root);
 
-            const table_rect = table.getBoundingClientRect();
-            const cell_data = [];
+                const table_rect = table.getBoundingClientRect();
+                const cell_data = [];
 
-            // Read rects synchronously before any await
-            for(const td of table.querySelectorAll("td")) {
-                if(!td.hasAttribute("format_syntax-arrows_2") && td.dataset.arrows?.length) {
-                    td.setAttribute("format_syntax-arrows_2", "1");
-                    const r = td.getBoundingClientRect();
-                    cell_data.push({
-                        arrows: td.dataset.arrows.split(/\s+/),
-                        x: r.left - table_rect.left,
-                        y: r.top - table_rect.top,
-                        w: r.width,
-                        h: r.height,
-                    });
-                }
-            }
-
-            // Do async work with saved rects
-            await Promise.all(cell_data.map(async ({ arrows, x, y, w, h }) => {
-                const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
-                g.setAttribute("transform", `translate(${x}, ${y}) scale(${w / 100}, ${h / 100})`);
-                g_root.appendChild(g);
-
-                const results = await Promise.all(arrows.map(this.fetch_svg));
-                for (const nodes of results) {
-                    for (const node of nodes) {
-                        g.appendChild(node.cloneNode(true));
+                // Read rects synchronously before any await
+                for(const td of table.querySelectorAll("td")) {
+                    if(!td.hasAttribute("format_syntax-arrows_2") && td.dataset.arrows?.length) {
+                        td.setAttribute("format_syntax-arrows_2", "1");
+                        const r = td.getBoundingClientRect();
+                        cell_data.push({
+                            arrows: td.dataset.arrows.split(/\s+/),
+                            x: r.left - table_rect.left,
+                            y: r.top - table_rect.top,
+                            w: r.width,
+                            h: r.height,
+                        });
                     }
                 }
-            }));
+
+                // Do async work with saved rects
+                await Promise.all(cell_data.map(async ({ arrows, x, y, w, h }) => {
+                    const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+                    g.setAttribute("transform", `translate(${x}, ${y}) scale(${w / 100}, ${h / 100})`);
+                    g_root.appendChild(g);
+
+                    const results = await Promise.all(arrows.map(this.fetch_svg));
+                    for (const nodes of results) {
+                        for (const node of nodes) {
+                            g.appendChild(node.cloneNode(true));
+                        }
+                    }
+                }));
+            }
         }
     },
 
