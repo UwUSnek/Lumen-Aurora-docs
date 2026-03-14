@@ -9,6 +9,7 @@
 /* Singletons */
 @import "./ConversionRanges.css";
 @import "./ScopeTable.css";
+@import "./ConversionTable.css";
 @import "./MetaKeywordConstraint.css";
 @import "./SyntaxHoverTooltip.css";
 @import "./RegexColors.css";

@@ -11,7 +11,7 @@
     --syntax-arrow-w:     36px; /* must be in pixels as it is used by js */
 
     --syntax-elm-margin:         4px;
-    --example-line-h:            2.4ch;
+    --example-line-h:            2.8ch;
 }
 
 
@@ -64,6 +64,7 @@ syntax- table {
     background-color: var(--bg-pre);
     overflow: clip;
 
+    font-weight: 400;
     box-sizing: border-box;
     margin: 0 -1px 0 -1px; /*! Expand the element 1px horizontally to re-align 1px wide borders */
     min-width: 100%;

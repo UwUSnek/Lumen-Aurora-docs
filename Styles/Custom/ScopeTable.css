@@ -11,6 +11,9 @@
     border-radius: 10px 0 0 0;
     overflow: clip;
     word-spacing: -100vw;
+
+    /*! CSS clipping straight up cuts shadows and there is no sane way around it */
+    box-shadow: 0px 4px 4px var(--light-shadow-color), 0px -4px 4px var(--light-shadow-color), 4px 0px 4px var(--light-shadow-color), -4px 0px 4px var(--light-shadow-color);
 }
 .scope-table-right-container {
     vertical-align: top;
@@ -37,10 +40,10 @@
     word-spacing: var(--word-spacing);
     margin-bottom: 0;
 }
-.scope-table-y > div { text-align: center; background-color: #0a7a003a; }
-.scope-table-n > div { text-align: center; background-color: #7a00003a; }
-.scope-table-y > div::before { vertical-align: -50%; margin-left: 50%; max-width: 0px; overflow: visible; content: "Yes"; }
-.scope-table-n > div::before { vertical-align: -50%; margin-left: 50%; max-width: 0px; overflow: visible; content: "No";  }
+.scope-table-y > div { text-align: center; background-color: hsla(115, 70%, 60%, 0.1); }
+.scope-table-n > div { text-align: center; background-color: hsla(0,   70%, 60%, 0.1); }
+.scope-table-y > div::before { vertical-align: -50%; width: 100%; overflow: visible; content: "Yes"; }
+.scope-table-n > div::before { vertical-align: -50%; width: 100%; overflow: visible; content: "No";  }
 
 
 .scope-table-right td,
@@ -54,12 +57,14 @@
 .scope-table-right th > div,
 .scope-table-right td > div {
     display: inline-flex;
+    flex-direction: column;
     align-items: center;
     text-align: center;
+    justify-content: center;
 
-    padding: 0, 8px, 0, 8px;
-    min-height: 64px;
-    max-height: 64px;
+    padding: 0;
+    min-height: 48px;
+    max-height: 48px;
     width: 100%;
     min-width:  128px;
     max-width:  100%;
@@ -73,13 +78,6 @@
 .scope-table-right th > div > *,
 .scope-table-right td > div > * {
     display: inline-block;
-
     min-width: 100%;
     max-width: 100%;
 }
-
-
-/* TODO MOVE TO SPECIFIC .CSS */
-.conv-cell-y { border-left: 2px solid hsla(115, 50%, 20%, 100%); }
-.conv-cell-m { border-left: 2px solid hsla(64,  50%, 20%, 100%); }
-.conv-cell-n { border-left: 2px solid hsla(0,   50%, 20%, 100%); }

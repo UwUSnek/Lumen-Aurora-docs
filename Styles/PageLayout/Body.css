@@ -13,10 +13,13 @@ body {
     word-spacing: var(--word-spacing);
     letter-spacing: var(--char-spacing);
     line-height: var(--line-h);
-    font-weight: 400;
+    font-weight: 300;
     font-size: var(--font-size-medium);
     min-width:  100vw;
     max-width:  100vw;
     min-height: 100vh;
     max-height: 100vh;
+}
+body b {
+    font-weight: 500;
 }

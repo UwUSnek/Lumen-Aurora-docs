@@ -297,13 +297,21 @@
 
 
     <index-><indexh->quick-reference-tabs</indexh-><index-elms->
-        <index-><indexh->syntaxes</indexh-><index-elms->
-            <indexd->preprocessor-syntaxes</indexd->
-            <indexd->misc-syntaxes</indexd->
-            <indexd->path-syntaxes</indexd->
-            <indexd->declaration-syntaxes</indexd->
-            <indexd->statement-syntaxes</indexd->
-            <indexd->expression-syntaxes</indexd->
+        <index-><indexh->quick-reference.lexicon</indexh-><index-elms->
+            <indexd->quick-reference.lexicon.characters</indexd->
+            <indexd->quick-reference.lexicon.tokens</indexd->
+            <indexd->quick-reference.lexicon.syntactic-elements</indexd->
+        </index-elms-></index->
+        <index-><indexh->quick-reference.semantics</indexh-><index-elms->
+            <indexd->quick-reference.semantics.scopes</indexd->
+        </index-elms-></index->
+        <index-><indexh->quick-reference.syntaxes</indexh-><index-elms->
+            <indexd->quick-reference.syntaxes.preprocessor</indexd->
+            <indexd->quick-reference.syntaxes.misc</indexd->
+            <indexd->quick-reference.syntaxes.paths</indexd->
+            <indexd->quick-reference.syntaxes.declarations</indexd->
+            <indexd->quick-reference.syntaxes.statements</indexd->
+            <indexd->quick-reference.syntaxes.expressions</indexd->
         </index-elms-></index->
         <index-><indexh->undefined-behaviours</indexh-><index-elms->
             <indexd->undefined-behaviours.conversions</indexd->
@@ -868,19 +876,6 @@
         Any unknown character generates an error.
     </p>
     <p>
-        The allowed characters are:
-    </p>
-    <p class="no-text-width-limit">
-        <code>a</code> <code>b</code> <code>c</code> <code>d</code> <code>e</code> <code>f</code> <code>g</code> <code>h</code> <code>i</code> <code>j</code> <code>k</code> <code>l</code> <code>m</code>
-        <code>n</code> <code>o</code> <code>p</code> <code>q</code> <code>r</code> <code>s</code> <code>t</code> <code>u</code> <code>v</code> <code>w</code> <code>x</code> <code>y</code> <code>z</code><br>
-        <code>A</code> <code>B</code> <code>C</code> <code>D</code> <code>E</code> <code>F</code> <code>G</code> <code>H</code> <code>I</code> <code>J</code> <code>K</code> <code>L</code> <code>M</code>
-        <code>N</code> <code>O</code> <code>P</code> <code>Q</code> <code>R</code> <code>S</code> <code>T</code> <code>U</code> <code>V</code> <code>W</code> <code>X</code> <code>Y</code> <code>Z</code><br>
-        <code>0</code> <code>1</code> <code>2</code> <code>3</code> <code>4</code> <code>5</code> <code>6</code> <code>7</code> <code>8</code> <code>9</code> <code>_</code><br>
-        <code>!</code> <code>$</code> <code>%</code> <code>&</code> <code>(</code> <code>)</code> <code>*</code> <code>+</code> <code>-</code> <code>/</code> <code>:</code> <code>&lt;</code> <code>=</code>
-        <code>&gt;</code> <code>?</code> <code>@</code> <code>^</code> <code>`</code> <code>|</code> <code>~</code> <code>;</code> <code>{</code> <code>}</code> <code>[</code> <code>]</code> <code>.</code><br>
-        <code><space-></space-></code> <code><tab-></tab-></code> <code><nl-></nl-></code>
-    </p>
-    <p>
         String <a href="#literals">literals</a> can contain any unicode character. They are converted to allowed characters during the compilation phase.//TODO<br>
         Carriage return characters (\r) are ignored.
     </p>
@@ -903,107 +898,6 @@
         <code><tab-></tab-></code>, <code><space-></space-></code> and <code><nl-></nl-></code> characters are not not considered tokens.
         Instead, they are simply discarded during the tokenization phase.
     </p>
-    <p>
-        Tokens are divided in 4 categories:
-    </p>
-
-    <div class="table-container"><table>
-        <thead>
-            <tr>
-                <th>Category</th>
-                <th style="text-align: center;" colspan="4">Pattern</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th class="nowrap medium"><a href="#keywords">Keyword</a></th>
-                <td><div class="split-td-outer">
-                    <div class="split-td" style="line-height: 3ch;">
-                        <a href="#namespaces">         <code><w->namespace</w-></code></a>
-                        <a href="#enums">              <code><w->enum</w-></code></a>
-                        <a href="#structs">            <code><w->struct</w-></code></a>
-                        <a href="#const-qualifier">    <code><t->const</t-></code></a>
-                        <a href="#auto-specifier">     <code><t->auto</t-></code></a>
-                        <a href="#typeof-specifier">   <code><t->typeof</t-></code></a>
-                        <a href="#symbol-aliases">     <code><w->alias</w-></code></a>
-                        <a href="#import-directive">   <code><w->from</w-></code></a>
-                        <a href="#import-directive">   <code><w->import</w-></code></a>
-                        <a href="#export-directive">   <code><w->export</w-></code></a>
-                        <a href="#pointer-types">      <code><w->addr</w-></code></a>
-                        <a href="#pointer-types">      <code>@</code></a>
-                    </div>
-                    <div class="split-td" style="line-height: 3ch;">
-                        <a href="#if-statement">       <code><w->if</w-></code></a>
-                        <a href="#match-statement">    <code><w->match</w-></code></a>
-                        <a href="#for-loops">          <code><w->for</w-></code></a>
-                        <a href="#while-loops">        <code><w->while</w-></code></a>
-                        <a href="#while-loops">        <code><w->do</w-></code></a>
-                        <a href="#continue-statement"> <code><w->continue</w-></code></a>
-                        <a href="#break-statement">    <code><w->break</w-></code></a>
-                        <a href="#once-statement">     <code><w->once</w-></code></a>
-                        <a href="#then-statement">     <code><w->then</w-></code></a>
-                        <a href="#else-statement">     <code><w->else</w-></code></a>
-                        <a href="#return-statement">   <code><w->return</w-></code></a>
-                        <a href="#defer-call">         <code><w->defer</w-></code></a>
-                    </div>
-                    <div class="split-td" style="line-height: 3ch;">
-                        <elm->                         <code>(</code><code>)</code></elm->
-                        <a href="#scopes-and-symbols"> <elm-><code>{</code><code>}</code></elm-></a>
-                        <a href="#statements">         <code>,</code></a>
-                        <a href="#statements">         <code> ;</code></a>
-                        <a href="#scopes-and-symbols"> <code>.</code></a>
-                        <a href="#reflection">         <code>:</code></a>
-                    </div>
-                </div></td>
-            </tr>
-            <tr>
-                <th class="nowrap medium"><a href="#meta-keywords">Meta keyword</a></th>
-                <td><div class="split-td-outer">
-                    <div class="split-td">
-                        <a href="#templates">                       <code><w->template</w-></code></a>
-                        <a href="#templates">                       <elm-><code>&lt;</code><code>&gt;</code></elm-></a>
-                        <a href="#template-parameters">             <code><w->type</w-></code></a>
-                        <a href="#template-parameters">             <code>!</code></a>
-                        <a href="#abbreviated-template-syntax">     <code>?</code></a>
-                    </div>
-                    <div class="split-td">
-                        <a href="#specialization-constraint">       <code><w->when</w-></code></a>
-                        <code><w->as</w-></code>
-                        <code><w->in</w-></code>
-                        <code><w->to</w-></code>
-                        <code>=</code>
-                        <a href="enums"><code>:</code></a>
-                        <code>...</code>
-                        <a href="#reference-parameters"><code>&</code></a>
-                        <a href="#pointer-types"><code>*</code></a>
-                    </div>
-                </div></td>
-            </tr>
-            <tr>
-                <th class="nowrap medium"><a href="#literals">Literal</a></th>
-                <td><div class="split-td-outer">
-                    <div clas="split-td" style="line-height: 3ch;">
-                        <ul><ul>Any sequence of characters with pattern:
-                            <li><code><regex->(0[dbxo])?[0-9a-zA-Z_]+(\.[0-9a-zA-Z_]*)?</regex-></code></li>
-                            <li><code><regex->[rf]?"</regex-><c- class="x-small">anything but unescaped double-quotes</c-><s->"</s-></code></li>
-                            <li><code><s->'</s-><c- class="x-small">anything but unescaped quotes</c-><s->'</s-></code></li>
-                        </ul></ul>
-                    </div>
-                </div></td>
-            </tr>
-            <tr>
-                <th class="nowrap medium"><a href="#identifiers">Identifier</a></th>
-                <td><div class="split-td-outer">
-                    <div clas="split-td">
-                        Any sequence of characters with pattern
-                        <code><regex->[a-zA-Z][a-zA-Z0-9]*</regex-></code> or
-                        <code><regex->[!$%&*+\-/&lt;=&gt;?\[\]^`|~]+</regex-></code>
-                        that isn't a <a href="#keywords">keyword</a> or a <a href="#literals">literal</a>.
-                    </div>
-                </div></td>
-            </tr>
-        </tbody>
-    </table></div>
 </moveto-doc->
 
 
@@ -1017,143 +911,6 @@
         The language defines a total of 28 alphanumeric keywords and 6 symbolic keywords.<br>
         Their usage is detailedly explained in their respective sections.
     </p>
-    <ul>
-        <li>Misc keywords</li>
-        <ul class="summary-list">
-            <li>
-                <span><a href="#import-directive"><code><w->from</w-></code></a></span>
-                <span>Introduces an <a href="#import-directive">import directive</a>.</span>
-            </li>
-            <li>
-                <span><a href="#import-directive"><code><w->import</w-></code></a></span>
-                <span>Imports symbols from a <a href="#modules">module</a> while preserving the container <a href="#namespaces">namespace</a>.</span>
-            </li>
-            <li>
-                <span><a href="#export-directive"><code><w->export</w-></code></a></span>
-                <span>Defines which symbols can be exported from the current <a href="#modules">module</a>.</span>
-            </li>
-            <li>
-                <span><a href="#pointer-types"><code><w->addr</w-></code></a></span>
-                <span>Retrieves the address of an <a href="#right-and-left-values">l-value</a>.</span>
-            </li>
-            <li>
-                <span><a href="#pointer-types"><code>@</code></a></span>
-                <span>Dereferences a <a href="#pointer-types">pointer</a> in order to acces its value.</span>
-            </li>
-        </ul><br>
-        <li>Declaration keywords</li>
-        <ul class="summary-list">
-            <li>
-                <span><a href="#namespaces"><code><w->namespace</w-></code></a></span>
-                <span>Used to declare a <a href="#namespaces">namespace</a>.</span>
-            </li>
-            <li>
-                <span><a href="#enums"><code><w->enum</w-></code></a></span>
-                <span>Used to declare an <a href="#enums">enum</a>.</span>
-            </li>
-            <li>
-                <span><a href="#structs"><code><w->struct</w-></code></a></span>
-                <span>Used to declare a <a href="#structs">struct</a>.</span>
-            </li>
-            <li>
-                <span><a href="#symbol-aliases"><code><w->alias</w-></code></a></span>
-                <span>Creates an alternative <a href="#name-resolution">path</a> for a <a href="#name-resolution">symbol</a>.</span>
-            </li>
-            <li>
-                <span><a href="#const-qualifier"><code><t->const</t-></code></a></span>
-                <span>Specifies that a pointer type is const. Also used to declare const variables and routine parameters.</span>
-            </li>
-            <li>
-                <span><a href="#auto-specifier"><code><t->auto</t-></code></a></span>
-                <span>Can be used in place of the <a href="#types">type</a> in the declaration of a <a href="#variables">variable</a>, a <a href="#routine-parameters">routine parameter</a> or a <a href="#routines">routine</a> to automatically use the best type based on its initializer <a href="#values">value</a> or return value.</span>
-            </li>
-            <li>
-                <span><a href="#typeof-specifier"><code><t->typeof</t-></code></a></span>
-                <span>Retrieves the <a href="#types">type</a> of an <a href="#expressions">expression</a>.</span>
-            </li>
-        </ul><br>
-        <li>Flow control keywords</li>
-        <ul class="summary-list">
-            <li>
-                <span><a href="#if-statement"><code><w->if</w-></code></a></span>
-                <span>Used in the if selection statement.</span>
-            </li>
-            <li>
-                <span><a href="#match-statement"><code><w->match</w-></code></a></span>
-                <span>Used in the match selection statement.</span>
-            </li>
-            <li>
-                <span><a href="#for-loops"><code><w->for</w-></code></a></span>
-                <span>Used in the for loops.</span>
-            </li>
-            <li>
-                <span><a href="#while-loops"><code><w->while</w-></code></a></span>
-                <span>Used in the while loops.</span>
-            </li>
-            <li>
-                <span><a href="#while-loops"><code><w->do</w-></code></a></span>
-                <span>Used with <a href="#while-loops"><code><w->while</w-></code></a> to check the <a href="#bool-type">condition</a> after having executed the <a href="#statements">statement</a> instead of the other way around.</span>
-            </li>
-            <li>
-                <span><a href="#continue-statement"><code><w->continue</w-></code></a></span>
-                <span>Used to skip iterations.</span>
-            </li>
-            <li>
-                <span><a href="#break-statement"><code><w->break</w-></code></a></span>
-                <span>Used to skip all the remaining iteration of one or more loops.</span>
-            </li>
-            <li>
-                <span><a href="#once-statement"><code><w->once</w-></code></a></span>
-                <span>Used to execute a statement during the first iteration.</span>
-            </li>
-            <li>
-                <span><a href="#then-statement"><code><w->then</w-></code></a></span>
-                <span>Used to execute a statement based on the outcome of the preceding loop, <a href="#if-statement">if statement</a> or <a href="#match-statement">match statement</a>.</span>
-            </li>
-            <li>
-                <span><a href="#else-statement"><code><w->else</w-></code></a></span>
-                <span>Used to execute a statement based on the outcome of the preceding loop, <a href="#if-statement">if statement</a> or <a href="#match-statement">match statement</a>.</span>
-            </li>
-            <li>
-                <span><a href="#return-statement"><code><w->return</w-></code></a></span>
-                <span>Returns the execution to the <a href="#function-calls">caller function</a>.</span>
-            </li>
-            <li>
-                <span><a href="#defer-call"><code><w->defer</w-></code></a></span>
-                <span>Delays a <a href="#routine-calls">routine call</a> until the first <a href="#return-statement"><code><w->return</w-></code></a> statement is encountered.</span>
-            </li>
-        </ul><br>
-        <li>Containers</li>
-        <ul class="summary-list">
-            <li>
-                <span><elm-><code>(</code><code>)</code></elm-></span>
-                <span>Groups an <a href="#expressions">expression</a>, or encloses a list of <a href="#routine-parameters">routine parameters</a>. Also used for <a href="#declarations.operator-precedence">operator precedence</a> and <a href="#specialization-constraints">specialization constraints.</a></span>
-            </li>
-            <li>
-                <span><a href="#scopes"><elm-><code>{</code><code>}</code></elm-></a></span>
-                <span>Declares a new <a href="#scopes">scope</a>. Used to declare most <a href="#syntactic-elements">syntactic elements</a>.</span>
-            </li>
-        </ul><br>
-        <li>Separators</li>
-        <ul class="summary-list">
-            <li>
-                <span><a href="#statements"><code>,</code></a></span>
-                <span>Separates 2 or more <a href="#expressions">expressions</a> or <a href="#match-statement">match cases</a>.</span>
-            </li>
-            <li>
-                <span><a href="#statements"><code>;</code></a></span>
-                <span>Defines the end of <a href="#expression-statements">expression statements</a> or certain declarations and directives.</span>
-            </li>
-            <li>
-                <span><a href="#name-resolution"><code>.</code></a></span>
-                <span>Concatenates 2 or more symbol names to form a <a href="#language-structure.paths">symbol path</a>.
-            </li>
-            <li>
-                <span><a href="#reflection"><code>:</code></a></span>
-                <span>Concatenates 2 or more symbol names to form a <a href="#reflection">Reflection path</a>.</span>
-            </li>
-        </ul>
-    </ul>
     <p>
         <a href="#keywords">Keywords</a> cannot be <a href="#name-shadowing">shadowed</a> like <a href="#identifiers">identifiers</a>.<br>
         Attempting to do so generates a semantic error. //TODO LINK
@@ -1166,116 +923,6 @@
         <b>Meta keywords</b> are <a href="#tokens">tokens</a> that only have meaning when <b>combined</b> with other <a href="#keywords"><b>keywords</b></a> or <a href="#name-resolution">semantic elements</a>.<br>
         When active, they always take precedence over <a href="#identifiers">identifiers</a>.
     </p>
-    <ul>
-        <li><a href="#templates">Templates</a></li>
-        <ul class="summary-list">
-            <li>
-                <span><a href="#templates"><code><w->template</w-></code></a></span>
-                <span>
-                    Used to declare a <a href="#templates">template</a><br>
-                    <span class="meta-keyword-constraint">[When used before the <a href="#templates"><elm-><code>&lt;</code><code>&gt;</code></elm-></a> meta keyword]</span>.
-                </span>
-            </li>
-            <li>
-                <span><elm-><code>&lt;</code><code>&gt;</code></elm-></span>
-                <span>
-                    Part of the <a href="#templates">template</a> declaration, or part of the the <a href="#local-names">local name</a> of <a href="#templates">template</a> <a href="#name-resolution">symbols</a>. Also used in <a href="#import-directive">import directives</a><br>
-                    <span class="meta-keyword-constraint">[When used after the <a href="#templates"><code><w->template</w-></code></a> meta keyword, after the <a href="#name-resolution">path</a> to a <a href="#templates">template</a> <a href="#name-resolution">symbol</a> or around the module name in an <a href="#import-directive">import directive</a>]</span>.
-                </span>
-            </li>
-            <li>
-                <span><a href="#template-parameters"><code><w->type</w-></code></a></span>
-                <span>
-                    Used to declare type <a href="#template-parameters">template parameters</a> or type <a href="#template-parameter-packs">template parameter packs</a><br>
-                    <span class="meta-keyword-constraint">[When used as type in the declaration of a <a href="#template-parameters">template parameter</a> or <a href="#template-parameter-packs">template parameter pack</a>]</span>.
-                </span>
-            </li>
-            <li>
-                <span><a href="#abbreviated-template-syntax"><code>!</code></a></span>
-                <span>
-                    Identifies the parameters whose arguments are used to deduce a type template parameter or type template parameter pack<br>
-                    <span class="meta-keyword-constraint">[When used between the type and the identifier in the declaration of a routine parameter or function parameter pack]</span>.
-                </span>
-            </li>
-            <li>
-                <span><a href="#abbreviated-template-syntax"><code>?</code></a></span>
-                <span>
-                    <a href="#abbreviated-template-syntax">Abbreviated template syntax</a><br>
-                    <span class="meta-keyword-constraint">[When used between the type and the identifier of a <a href="#name-resolution">symbol</a> declaration inside a struct or routine declaration]</span>.
-                </span>
-            </li>
-        </ul><br>
-        <li>Misc</li>
-        <ul class="summary-list">
-            <li>
-                <span><a href="#templates"><code><w->when</w-></code></a></span>
-                <span>
-                    Specifies a <a href="#specialization-constraints">specialization constraint</a><br>
-                    <span class="meta-keyword-constraint">[When used before the body of a routine or struct declaration</span>.
-                </span>
-            </li>
-            <li>
-                <span><code><w->as</w-></code></span>
-                <span>
-                    Defines the name of the counter <a href="#variables">variable</a> of a <a href="#for-loops">for loop</a>, a new name for an <a href="#export-directive">exported</a> or <a href="#import-directive">imported</a> <a href="#name-resolution"> symbol</a>, or the new identifier used for a <a href="#symbol-aliases">symbol alias</a><br>
-                    <span class="meta-keyword-constraint">[When used in the signature of a <a href="#for-loops">for-each</a> or <a href="#for-loops">for-range</a> loop, after the name of a <a href="#name-resolution">symbol</a> in an <a href="#import-directive">import</a> or <a href="#export-directive">export</a> directive or in a <a href="#symbol-aliases">symbol alias</a> declaration]</span>.
-                </span>
-            </li>
-            <li>
-                <span><code><w->in</w-></code></span>
-                <span>
-                    Part of the for-each for loop syntax.<br>
-                    <span class="meta-keyword-constraint">[When used after the identifier in a <a href="#for-loops">for-each</a> for loop]</span>.
-                </span>
-            </li>
-            <li>
-                <span><code><w->to</w-></code></span>
-                <span>
-                    Defines the end of a numerical range<br>
-                    <span class="meta-keyword-constraint">[When used in the value of a <a href="#for-loops">for-range</a> loop or a <a href="#match-statement">match case</a>]</span>.
-                </span>
-            </li>
-            <li>
-                <span><code>=</code></span>
-                <span>
-                    Used to assign initializer values to <a href="#variables">variables</a> and default values to <a href="#routine-parameter">routine parameters</a><br> //TODO templates can prob have def values<br>
-                    <span class="meta-keyword-constraint">[When used after the name of a <a href="#variables">variable</a> or <a href="#routine-parameters">routine parameter</a> declaration]</span>.
-                </span>
-            </li>
-            <li>
-                <span><code>:</code></span>
-                <span>
-                    Specifies the base type of an enum, the priority of an operator, or introduces a match case<br>
-                    <span class="meta-keyword-constraint">
-                        [When used after the identifier of an enum declaration].<br>
-                        [When used at the end of the signature of an <a href="#operators">operator</a> or <a href="#templates">operator template</a> declaration].<br>
-                        [When used after the case values of a <a href="#match-statement">match statement</a> case].
-                    </span>
-                </span>
-            </li>
-            <li>
-                <span><code>...</code></span>
-                <span>
-                    Used to declare <a href="#template-parameter-packs">template parameter packs</a> and <a href="function parameter packs">function parameter packs</a><br>
-                    <span class="meta-keyword-constraint">[When used after the identifier in the declaration of a template parameter pack or function parameter pack, or, if inside a struct or routine declaration, between the type and the identifier in the declaration of a routine parameter or function parameter pack]</span>.
-                </span>
-            </li>
-            <li>
-                <span><code>&</code></span>
-                <span>
-                    Used todeclare a reference parameter<br>
-                    <span class="meta-keyword-constraint">[When used between the type and the identifier of a reference parameter]</span>.
-                </span>
-            </li>
-            <li>
-                <span><a href="#pointer-types"><code>*</code></a></span>
-                <span>
-                    Identifies the <a href="pointer-types">pointer version</a> of a type.<br>
-                    <span class="meta-keyword-constraint">[When used at the end of a type path]</span>.
-                </span>
-            </li>
-        </ul>
-    </ul>
 </moveto-doc->
 
 <h1 id="literal-tokens"></h1>
@@ -1305,158 +952,6 @@
         <b>Syntactic elements</b> are <b>sequences</b> of one or more <a href="#tokens"><b>tokens</b></a> or other syntactic elements that follow specific patterns.<br>
         They define the contents and interface of the <a href="#modules">module</a>.
     </p>
-    <p>
-        Syntactic elements are divided in 6 categories:
-    </p>
-
-
-    <div class="table-container"><table>
-        <tr>
-            <th>Category</th>
-            <th>Syntactic element</th>
-        </tr>
-        <tr>
-            <th class="nowrap medium"><a href="#language-structure.directives">Directive</a></th>
-            <td><div class="split-td-outer">
-                <div class="split-td">
-                    <even-elm-><a href="#import-directive">Import </a> directive</even-elm->
-                    <even-elm-><a href="#export-directive"><code><w->export</w-></code></a> directive</even-elm->
-                    <even-elm-><a href="#construct-directive"><code><w->construct</w-></code></a> directive</even-elm->
-                </div>
-            </div></td>
-        </tr>
-        <tr>
-            <th class="nowrap medium"><a href="#name-resolution">Declaration</a></th>
-            <td><div class="split-td-outer">
-                <div class="split-td">
-                    <even-elm-><a href="#enums"><code><w->enum</w-></code></a> declaration</even-elm->
-                    <even-elm-><a href="#enums"><code><w->enum</w-></code></a> element declaration</even-elm->
-                    <even-elm-><a href="#structs"><code><w->struct</w-></code></a> declaration</even-elm->
-                    <even-elm-><a href="#structs"><code><w->struct</w-></code></a> member declaration</even-elm->
-                </div>
-                <div class="split-td">
-                    <even-elm-><a href="#functions">Function</a> declaration</even-elm->
-                    <even-elm-><a href="#operators">Operator</a> declaration</even-elm->
-                    <even-elm-><a href="#routine-parameters">Routine parameter</a></even-elm->
-                </div>
-                <div class="split-td">
-                    <even-elm-><a href="#namespaces"><code><w->namespace</w-></code></a> declaration</even-elm->
-                    <even-elm-><a href="#templates"><code><w->template</w-></code></a> declaration</even-elm->
-                    <even-elm-><a href="#symbol-aliases"><code><w->alias</w-></code></a> declaration</even-elm->
-                    <even-elm-><a href="#variables">Variable</a> declaration</even-elm->
-                </div>
-            </div></td>
-        </tr>
-        <tr>
-            <th class="nowrap medium"><a href="#language-structure.statements">Statement</a></th>
-            <td><div class="split-td-outer">
-                <div class="split-td">
-                    <even-elm-><a href="#if-statement"><code><w->if</w-></code></a> statement</even-elm->
-                    <even-elm-><a href="#match-statement"><code><w->match</w-></code></a> statement</even-elm->
-                </div>
-                <div class="split-td">
-                    <even-elm-><a href="#while-loops"><code><w->while</w-></code></a> loop</even-elm->
-                    <even-elm-><a href="#for-loops"><code><w->for</w-></code></a> loop</even-elm->
-                    <even-elm-><a href="#once-statement"><code><w->once</w-></code></a> statement</even-elm->
-                    <even-elm-><a href="#then-statement"><code><w->then</w-></code></a> statement</even-elm->
-                    <even-elm-><a href="#break-statement"><code><w->break</w-></code></a> statement</even-elm->
-                    <even-elm-><a href="#continue-statement"><code><w->continue</w-></code></a> statement</even-elm->
-                </div>
-                <div class="split-td">
-                    <even-elm-><a href="#return-statement"><code><w->return</w-></code></a> statement</even-elm->
-                    <even-elm-><a href="#defer-call"><code><w->defer</w-></code></a> statement</even-elm->
-                </div>
-                <div class="split-td">
-                    <even-elm-><a href="#else-statement"><code><w->else</w-></code></a> statement</even-elm->
-                    <even-elm-><a href="#expressions">Expression statement</a></even-elm->
-                    <even-elm-><a href="#unnamed-scopes">Unnamed scope</a></even-elm->
-                    <even-elm-><a href="#empty-statement">Empty statement</a></even-elm->
-                    <even-elm-><a href="#inline-glsl">Inline GLSL</a></even-elm->
-                    <even-elm-><a href="#inline-cpp">Inline C++</a></even-elm->
-                </div>
-            </div></td>
-        </tr>
-        <tr>
-            <th class="nowrap medium"><a href="#language-structure.expressions">Expression</a></th>
-            <td><div class="split-td-outer">
-                <div class="split-td">
-                    <even-elm-><a href="#literals">Literal</a></even-elm->
-                    <even-elm-><a href="#try-expression"><code><w->try</w-></code> expression</a></even-elm->
-                </div>
-                <div class="split-td">
-                    <even-elm-><a href="#variables">Variable</a></even-elm->
-                    <even-elm-><a href="#temporary-variables">Temporary variable</a></even-elm->
-                    <even-elm-><a href="#routine-parameters">Routine parameter</a></even-elm->
-                </div>
-                <div class="split-td">
-                    <even-elm-><a href="#function-calls">Function call</a></even-elm->
-                    <even-elm-><a href="#operator-calls">Operator call</a></even-elm->
-                </div>
-            </div></td>
-        </tr>
-        <tr>
-            <th class="nowrap medium"><a href="#language-structure.paths">Paths</a></th>
-            <td><div class="split-td-outer">
-                <div>
-                    <even-elm-><a href="#symbol-paths">Symbol path</a></even-elm->
-                    <even-elm-><a href="#symbol-reflection-paths">Symbol reflection path</a></even-elm->
-                </div>
-            </div></td>
-        </tr>
-    </table></div>
-
-
-
-    <p>
-        <a href="#structs">structs</a>, <a href="#routines">routines</a>, <a href="#templates">templates</a> and the <a href="#while-loops"><code><w->while</w-></code> loop</a>
-        are divided in sub-elements in order to provide a clear and concise syntax.<br>
-    </p>
-    <ul>
-        <li>Declaration sub-elements</li>
-        <ul class="summary-list">
-            <li>
-                <span><a href="#structs">Struct</a> signature</span>
-                <span>Defines the name of a <a href="#structs">struct</a>.</span>
-            </li>
-            <li>
-                <span><a href="#structs">Struct</a> body</span>
-                <span>Contains the <a href="#structs">struct</a> members and other allowed declarations.</span>
-            </li>
-            <li>
-                <span><a href="#functions">Function</a> signature</span>
-                <span>Defines the name, <a href="#return-statement">return type</a> and <a href="#routine-parameters">parameters</a> of a <a href="#functions">function</a></span>
-            </li>
-            <li>
-                <span><a href="#operators">Operator</a> signature</span>
-                <span>Defines the names, <a href="#return-statement">return type</a>, <a href="#routine-parameters">parameters</a>,
-                    <a href="#declarations.operator-precedence">priority</a> and <a href="#declarations.operator-precedence">associativity</a> of an <a href="#operators">operator</a></span>
-                //TODO idk if this actually defines the associativity. check
-            </li>
-            <li>
-                <span><a href="#routines">Routine</a> body</span>
-                <span>Contains the <a href="#statements">statements</a> and other allowed declarations of a <a href="#routines">routine</a></span>
-            </li>
-            <li>
-                <span><a href="#templates">Template</a> signature</span>
-                <span>Defines the name and parameters of a <a href="#templates">template</a></span>
-            </li>
-            <li>
-                <span><a href="#specialization-constraints">Specialization constraint</a></span>
-                <span>Defines the <a href="#specialization-constraints">constraint</a> that determines when the subsequent element body is suitable for specialization</span>
-            </li>
-        </ul><br>
-        <li>Other sub-elements</li>
-        <ul class="summary-list">
-            <li>
-                <span><a href="#while-loops">While</a> signature</span>
-                <span>Defines the <a href="boolean-type">condition</a> of a <a href="while-loops">while loop</a></span>
-            </li>
-            <li>
-                <span>Specialization constraint</span>
-                <span>Specifies a constraint whose result determines when a struct or routine declaration can be used.</span>
-            </li>
-        </ul>
-    </ul>
 </moveto-doc->
 
 
@@ -1467,26 +962,6 @@
         <b>Directives</b> are instructions that <b>modify</b> the <a href="#modules">module</a> on a <b>semantic</b> level.<br>
         They are used to define which <a href="#name-resolution">symbols</a> are <a href="#import-directive">imported</a> and/or <a href="#export-directive">exported</a> and to programmatically generate code.
     </p>
-    <ul>
-        <li>Module interface</li>
-        <ul class="summary-list">
-            <li>
-                <span><elm-><a href="#import-directive">Improt</a> directive</elm-></span>
-                <span><a href="#import-directive">Imports</a> <a href="#name-resolution">symbols</a> from a <a href="#modules">module</a>.</span>
-            </li>
-            <li>
-                <span><elm-><a href="#export-directive"><code><w->export</w-></code></a> directive</elm-></span>
-                <span>Defines the <a href="#name-resolution">symbols</a> the <a href="#modules">module</a> provides when <a href="#import-directive">imported</a>.</span>
-            </li>
-        </ul>
-        <li>Code generation</li>
-        <ul class="summary-list">
-            <li>
-                <span><elm-><a href="#construct-directive"><code><w->construct</w-></code></a> directive</elm-></span>
-                <span>Generates code in the corresponding language by compiling and running Lumen code before the compilation phase. //TODO other languages</span>
-            </li>
-        </ul>
-    </ul>
 </moveto-doc->
 
 <h1 id="language-structure.declarations"></h1>
@@ -1496,61 +971,6 @@
         Anything defined through a declaration is called a <b>Symbol</b>. Symbols can be referenced through their <a href="#name-resolution">path</a>. This is explained in <a href="#name-resolution">Name resolution</a>.<br>
         There are a total of 11 user-defined elements. They are available in both languages.
     </p>
-    <ul>
-        <li>Types</li>
-        <ul class="summary-list">
-            <li>
-                <span><elm-><a href="#enums"><code><w->enum</w-></code></a> declaration</elm-></span>
-                <span>Declares an <a href="#enums">enum</a>, a type used to group <a href="#compile-time-expressions">compile time expressions</a> of the same <a href="#types">type</a>.</span>
-            </li>
-            <li>
-                <span><elm-><a href="#enums"><code><w->enum</w-></code></a> element declaration</elm-></span>
-                <span>Defines one or more <a href="#enums">enum</a> elements and their values.</span>
-            </li>
-            <li>
-                <span><elm-><a href="#structs"><code><w->struct</w-></code></a> declaration</elm-></span>
-                <span>Declares a <a href="#structs">struct</a>, a type used to group <a href="#variables">variables</a> of different <a href="#types">types</a>.</span>
-            </li>
-            <li>
-                <span><elm-><a href="#structs"><code><w->struct</w-></code></a> member declaration</elm-></span>
-                <span>Defines one ore more <a href="#structs">struct</a> members.</span>
-            </li>
-        </ul><br>
-        <li>Routines</li>
-        <ul class="summary-list">
-            <li>
-                <span><elm-><a href="#functions">Function</a> declaration</elm-></span>
-                <span>Declares a <a href="#functions">function</a>, a prefix <a href="#routines">routine</a> that requires parentheses to be <a href="#function-calls">called</a>.</span>
-            </li>
-            <li>
-                <span><elm-><a href="#operators">Operator</a> declaration</elm-></span>
-                <span>Declares an <a href="#operators">operator</a>, a <a href="#routines">routine</a> that doesn't require parentheses to be <a href="#operator-calls">called</a> and can use multiple symbolic or alphanumeric <a href="#identifiers">identifiers</a>.</span>
-            </li>
-            <li>
-                <span><elm-><a href="#routine-parameters">Routine parameter</a></elm-></span>
-                <span>Defines an input values for a <a href="routines">routine</a>.</span>
-            </li>
-        </ul><br>
-        <li>Misc</li>
-        <ul class="summary-list">
-            <li>
-                <span><elm-><a href="#namespaces"><code><w->namespace</w-></code></a> declaration</elm-></span>
-                <span>Declares a named <a href="#scopes">scope</a>.</span>
-            </li>
-            <li>
-                <span><elm-><a href="#templates"><code><w->template</w-></code></a> declaration</elm-></span>
-                <span>Generates <a href="#structs">struct</a>, <a href="#functions">function</a> or <a href="#operators">operator</a> declarations based on the explicit <a href="#templates">template</a> arguments or the <a href="#types">types</a> used in the <a href="#routine-calls">routine calls</a>.</span>
-            </li>
-            <li>
-                <span><elm-><a href="#symbol-aliases"><code><w->alias</w-></code></a> declaration</elm-></span>
-                <span>Declares an alternative <a href="#symbol-paths">path</a> for a <a href="#name-resolution">symbol</a>.</span>
-            </li>
-            <li>
-                <span><elm-><a href="#variables">Variable</a> declaration</elm-></span>
-                <span>Declares one or more named memory locations that can store <a href="#values">values</a>.</span>
-            </li>
-        </ul>
-    </ul>
 </moveto-doc->
 
 <h1 id="language-structure.statements"></h1>
@@ -1559,84 +979,6 @@
         <b>Statements</b> perform actions during runtime. They define the behaviour of each <a href="#routines">routine</a>, their return value and runtime performance.<br>
         Statements are hard coded into the languages and cannot be modified. There are a total of 16 statements, 2 of which can only be used in their respective language.
     </p>
-    <ul>
-        <li>Selection</li>
-        <ul class="summary-list">
-            <li>
-                <span><elm-><a href="#if-statement"><code><w->if</w-></code></a> statement</elm-></span>
-                <span>Executes a <a href="#statements">statement</a> if its condition evaluates to <a href="#boolean-type"><code><k->true</k-></code></a>.</span>
-            </li>
-            <li>
-                <span><elm-><a href="#match-statement"><code><w->match</w-></code></a> statement</elm-></span>
-                <span>Executes <a href="#statements">statements</a> based on the value of an <a href="#expressions">expression</a>.</span>
-            </li>
-        </ul><br>
-        <li>Iteration</li>
-        <ul class="summary-list">
-            <li>
-                <span><elm-><a href="#for-loops"><code><w->for</w-></code></a> loop</elm-></span>
-                <span>Executes a <a href="#statements">statement</a> a fixed amount of times.</span>
-            </li>
-            <li>
-                <span><elm-><a href="#while-loops"><code><w->while</w-></code></a> loop</elm-></span>
-                <span>Executes a <a href="#statements">statement</a> until its condition evaluates to <a href="#boolean-type"><code><k->false</k-></code></a>.</span>
-            </li>
-            <li>
-                <span><elm-><a href="#continue-statement"><code><w->continue</w-></code></a> statement</elm-></span>
-                <span>Skips an arbitrary number of iterations of the innermost enclosing <a href="#iteration">loop</a>.</span>
-            </li>
-            <li>
-                <span><elm-><a href="#break-statement"><code><w->break</w-></code></a> statement</elm-></span>
-                <span>Skips all the remaining iterations of an arbitrary number of enclosing <a href="#iteration">loops</a>, starting from the innermost.</span>
-            </li>
-            <li>
-                <span><elm-><a href="#once-statement"><code><w->once</w-></code></a> statement</elm-></span>
-                <span>Executes a <a href="#statements">statement</a> during the first iteration of the innermost enclosing <a href="#iteration">loop</a>.</span>
-            </li>
-            <li>
-                <span><elm-><a href="#then-statement"><code><w->then</w-></code></a> statement</elm-></span>
-                <span>Executes a <a href="#statements">statement</a> if the immediatly preceding <a href="#iteration">loop</a> didn't stop through a <a href="#break-statement"><code><w->break</w-></code> statement</a> and completed at least one iteration.</span>
-            </li>
-        </ul><br>
-        <li>Non-local</li>
-        <ul class="summary-list">
-            <li>
-                <span><elm-><a href="#return-statement"><code><w->return</w-></code></a> statement</elm-></span>
-                <span>Returns the flow control to the caller <a href="#routines">routine</a>.</span>
-            </li>
-            <li>
-                <span><elm-><a href="#defer-call"><code><w->defer</w-></code></a> statement</elm-></span>
-                <span>Evaluates all the <a href="#routine-calls">arguments</a> of a <a href="#routine-calls">routine call</a> but delays its execution until the first <a href="#return-statement"><code><w->return</w-></code> statement</a> is encountered and all the <a href="#routine-calls">routine calls</a> of subsequent <a href="defer-call"><code><w->defer</w-></code> statements</a> are executed.</span>
-            </li>
-        </ul><br>
-        <li>Misc</li>
-        <ul class="summary-list">
-            <li>
-                <span><elm-><a href="#else-statement"><code><w->else</w-></code></a> statement</elm-></span>
-                <span>Executes a <a href="#statements">statement</a> if the <a href="#bool-type">condition</a> of the immediatly preceding <a href="#iteration">loop</a> or <a href="#if-statement"><code><w->if</w-></code> statement</a> evaluated to <code><t->false</t-></code> before the first iteration.</span>
-            </li>
-            <li>
-                <span><elm-><a href="#expressions">Expression statement</a></elm-></span>
-                <span>Evaluates an <a href="#expresisons">expression</a>.</span>
-            </li>
-            <li>
-                <span><elm-><a href="#unnamed-scopes">Unnamed scope</a></elm-></span>
-                <span>Groups multiple <a href="#statements">statements</a> in one.</span>
-            </li>
-            <li>
-                <span><elm-><a href="#empty-statement">Empty statement</a></elm-></span>
-                <span>Does nothing.</span>
-            </li>
-            <li>
-                <span><elm-><a href="#inline-glsl">Inline GLSL</a></elm-></span>
-                <span><lumen-logo-></lumen-logo-> Allows GLSL 4.60 code to be used from within Lumen.</span>
-            </li>
-            <li>
-                <span><elm-><a href="#inline-cpp">Inline C++</a></elm-></span>
-                <span><aurora-logo-></aurora-logo-> Allows C++20 code to be used from within Aurora.</span>
-            </li>
-        </ul>
-    </ul>
 </moveto-doc->
 
 <h1 id="language-structure.expressions"></h1>
@@ -1644,45 +986,6 @@
     <p>
         <b>Expressions</b> generate values. They are mostly used to declare <a href="#name-resolution">symbols</a> and call <a href="#routines">routines</a>.
     </p>
-    <ul>
-        <li>Inline values</li>
-        <ul class="summary-list">
-            <li>
-                <span><elm-><a href="#literals">Literal</a></elm-></span>
-                <span>Generates a value of a <a href="#primitive-types">primitive type</a> by interpreting the token in the specified numerical base.</span>
-            </li>
-            <li>
-                <span><elm-><a href="#try-expression"><code><w->try</w-></code> expression</a></elm-></span>
-                <span>Compiles a portion of code. Evaluates to <a href="#boolean-type"><code><k->true</k-></code></a> if the code doesn't generate <a href="#compilation">syntactic</a> or <a href="#compilation">semantic errors</a>.</span>
-            </li>
-        </ul><br>
-        <li>Stored values</li>
-        <ul class="summary-list">
-            <li>
-                <span><elm-><a href="#variables">Variable</a></elm-></span>
-                <span>Accesses the value stored in a previously declared <a href="#variables">variable</a>.</span>
-            </li>
-            <li>
-                <span><elm-><a href="#temporary-variables">Temporary variable</a></elm-></span>
-                <span>Accesses the value stored in a <a href="#temporary-variables">temporary variable</a>.</span>
-            </li>
-            <li>
-                <span><elm-><a href="#routine-parameters">Routine parameter</a></elm-></span>
-                <span>Accesses the value that was passed to a <a href="#variables">routine parameter</a>.</span>
-            </li>
-        </ul><br>
-        <li>Routine calls</li>
-        <ul class="summary-list">
-            <li>
-                <span><elm-><a href="#function-calls">Function call</a></elm-></span>
-                <span>Generates a value by calling a <a href="#functions">function</a> or <a href="#templates">function template</a>.</span>
-            </li>
-            <li>
-                <span><elm-><a href="#operator-calls">Operator call</a></elm-></span>
-                <span>Generates a value by calling an <a href="#operators">operator</a> or <a href="#templates">operator template</a>.</span>
-            </li>
-        </ul>
-    </ul>
 </moveto-doc->
 <h1 id="language-structure.paths"></h1>
 <moveto-doc->
@@ -1697,17 +1000,6 @@
     <p>
         Reflection paths are a subset of Symbol paths that can access compile time informations about the referenced symbol. These are detailedly explained in <a href="#reflection">Reflection</a>.
     </p>
-    <syntax->
-        <label- id="copy.syntax--path-reflection">Reflection path</label->
-        <label- id="copy.syntax--path-template-instance">Template instance path</label->
-        <label- id="copy.syntax--path-temporary-variable">Temporary variable path</label->
-        <label- id="copy.syntax--path-basic">Basic path</label->
-
-        <label- id="copy.syntax--path-type-typeof">Typeof type path</label->
-        <label- id="copy.syntax--path-type-auto">Auto type path</label->
-        <label- id="copy.syntax--path-type-function">Function type path</label->
-        <label- id="copy.syntax--path-type-pointer">Pointer type path</label->
-    </syntax->
 </moveto-doc->
 
 
@@ -1726,126 +1018,6 @@
         Any portion of code enclosed in <elm-><code>{</code><code>}</code></elm-> tokens defines a new scope.
         The only exception is the module scope, which contains anything declared in the module.
     </p>
-    <p>
-        Each scope can only contain certain types of <a href="#name-resolution">symbols</a>:
-    </p>
-
-    <div class="scope-table-container">
-        <div class="table-container scope-table-left-container"><table class="scope-table-left">
-            <tr><th class="medium"><div><span>Scope / Can contain</span></div></th></tr>
-            <tr><th class="medium"><div><a href="#modules">       Module                                     </a></div></th></tr>
-            <tr><th class="medium"><div><a href="#namespaces">    Namespace                                  </a></div></th></tr>
-            <tr><th class="medium"><div><a href="#enums">         Enum<span class="hidden">&nbsp;*</span>    </a></div></th></tr>
-            <tr><th class="medium"><div><a href="#structs">       Struct<span class="hidden">&nbsp;*</span>  </a></div></th></tr>
-            <tr><th class="medium"><div><a href="#functions">     Function<span class="hidden">&nbsp;*</span></a></div></th></tr>
-            <tr><th class="medium"><div><a href="#opertors">      Operator<span class="hidden">&nbsp;*</span></a></div></th></tr>
-            <tr><th class="medium"><div><a href="#unnamed-scopes">Unnamed<br>scope    </a></div></th></tr>
-        </table></div>
-        <div class="table-container scope-table-right-container"><table class="scope-table-right">
-            <tr>
-                <th><div><a class="medium" href="#namespaces">    Namespace                                  </a></div></th>
-                <th><div><a class="medium" href="#enums">         Enum<span class="hidden">&nbsp;*</span>    </a></div></th>
-                <th><div><a class="medium" href="#structs">       Struct<span class="hidden">&nbsp;*</span>  </a></div></th>
-                <th><div><a class="medium" href="#functions">     Function<span class="hidden">&nbsp;*</span></a></div></th>
-                <th><div><a class="medium" href="#operators">     Operator<span class="hidden">&nbsp;*</span></a></div></th>
-                <th><div><a class="medium" href="#variables">     Variable                                   </a></div></th>
-                <th><div><a class="medium" href="#symbol-aliases">Symbol<br>alias                            </a></div></th>
-                <th><div><a class="medium" href="#enums">         Enum<br>member                             </a></div></th>
-                <th><div><a class="medium" href="#structs">       Struct<br>member                           </a></div></th>
-                <th><div><a class="medium" href="#routines">      Routine<br>parameter                       </a></div></th>
-            </tr>
-            <tr>
-                <td class="scope-table-y"><div></div></td>
-                <td class="scope-table-y"><div></div></td>
-                <td class="scope-table-y"><div></div></td>
-                <td class="scope-table-y"><div></div></td>
-                <td class="scope-table-y"><div></div></td>
-                <td class="scope-table-y"><div></div></td>
-                <td class="scope-table-y"><div></div></td>
-                <td class="scope-table-n"><div></div></td>
-                <td class="scope-table-n"><div></div></td>
-                <td class="scope-table-n"><div></div></td>
-            </tr>
-            <tr>
-                <td class="scope-table-y"><div></div></td>
-                <td class="scope-table-y"><div></div></td>
-                <td class="scope-table-y"><div></div></td>
-                <td class="scope-table-y"><div class="nobefore"><span>Inherited</span></div></td>
-                <td class="scope-table-y"><div class="nobefore"><span>Inherited</span></div></td>
-                <td class="scope-table-y"><div class="nobefore"><span>Inherited</span></div></td>
-                <td class="scope-table-y"><div></div></td>
-                <td class="scope-table-n"><div></div></td>
-                <td class="scope-table-n"><div></div></td>
-                <td class="scope-table-n"><div></div></td>
-            </tr>
-            <tr>
-                <td class="scope-table-y"><div></div></td>
-                <td class="scope-table-y"><div></div></td>
-                <td class="scope-table-y"><div></div></td>
-                <td class="scope-table-n"><div></div></td>
-                <td class="scope-table-n"><div></div></td>
-                <td class="scope-table-n"><div></div></td>
-                <td class="scope-table-y"><div></div></td>
-                <td class="scope-table-y"><div></div></td>
-                <td class="scope-table-n"><div></div></td>
-                <td class="scope-table-n"><div></div></td>
-            </tr>
-            <tr>
-                <td class="scope-table-y"><div></div></td>
-                <td class="scope-table-y"><div></div></td>
-                <td class="scope-table-y"><div></div></td>
-                <td class="scope-table-n"><div></div></td>
-                <td class="scope-table-n"><div></div></td>
-                <td class="scope-table-n"><div></div></td>
-                <td class="scope-table-y"><div></div></td>
-                <td class="scope-table-n"><div></div></td>
-                <td class="scope-table-y"><div></div></td>
-                <td class="scope-table-n"><div></div></td>
-            </tr>
-            <tr>
-                <td class="scope-table-y"><div></div></td>
-                <td class="scope-table-y"><div></div></td>
-                <td class="scope-table-y"><div></div></td>
-                <td class="scope-table-n"><div></div></td>
-                <td class="scope-table-n"><div></div></td>
-                <td class="scope-table-y"><div></div></td>
-                <td class="scope-table-y"><div></div></td>
-                <td class="scope-table-n"><div></div></td>
-                <td class="scope-table-n"><div></div></td>
-                <td class="scope-table-y"><div class="nobefore noafter"><div>Yes<span class="hidden" style="min-width: fit-content; max-width: fit-content;">&nbsp;**</span></div></div></td>
-            </tr>
-            <tr>
-                <td class="scope-table-y"><div></div></td>
-                <td class="scope-table-y"><div></div></td>
-                <td class="scope-table-y"><div></div></td>
-                <td class="scope-table-n"><div></div></td>
-                <td class="scope-table-n"><div></div></td>
-                <td class="scope-table-y"><div></div></td>
-                <td class="scope-table-y"><div></div></td>
-                <td class="scope-table-n"><div></div></td>
-                <td class="scope-table-n"><div></div></td>
-                <td class="scope-table-y"><div class="nobefore noafter"><div>Yes<span class="hidden" style="min-width: fit-content; max-width: fit-content;">&nbsp;**</span></div></div></td>
-            </tr>
-            <tr>
-                <td class="scope-table-y"><div></div></td>
-                <td class="scope-table-y"><div></div></td>
-                <td class="scope-table-y"><div></div></td>
-                <td class="scope-table-n"><div></div></td>
-                <td class="scope-table-n"><div></div></td>
-                <td class="scope-table-y"><div></div></td>
-                <td class="scope-table-y"><div></div></td>
-                <td class="scope-table-n"><div></div></td>
-                <td class="scope-table-n"><div></div></td>
-                <td class="scope-table-n"><div></div></td>
-            </tr>
-        </table></div>
-    </div>
-    <div>
-        <syntax-note->
-            * Also applies to the respective <a href="templates">template</a>.<br>
-            ** Declared in the routine signature, but part of the routine scope.
-        </syntax-note->
-    </div>
 </moveto-doc->
 
 
@@ -3101,381 +2273,390 @@
         //TODO it only works on  floating points. integers throw exceptions anyway
     </p>
 
-    <div class="table-container"><table>
-            <tr>
-                <th colspan="2">From / To</th>
-                <th><t->uint</t-></th>
-                <th><t->int</t-></th>
-                <th><t->ulong</t-></th>
-                <th><t->long</t-></th>
-                <th><t->float</t-></th>
-                <th><t->double</t-></th>
-                <th><t->bool</t-></th>
-            </tr>
+    <div class="table-container"><table class="conversion-table">
+        <tr>
+            <th colspan="2">From ↓ To →</th>
+            <th><t->uint</t-></th>
+            <th><t->int</t-></th>
+            <th><t->ulong</t-></th>
+            <th><t->long</t-></th>
+            <th><t->float</t-></th>
+            <th><t->double</t-></th>
+            <th><t->bool</t-></th>
+        </tr>
 
-            <tr class="even">
-                <th rowspan="13"><t->uint</t-><br><br><t->int</t-><br><br><t->ulong</t-><br><br><t->long</t-></th>
-                <th><range-val->== <k->-9223372036854775808</k-><br><range-var->long:min</range-var-></range-val-></th>
-                <td class="center wrap conv-cell-m" rowspan="5">Overflows to (-n - <k->1</k->) % (uint:<k->max</k-> - <k->1</k->)</td>
-                <td class="center wrap conv-cell-n" rowspan="3">Undefined</td>
-                <td class="center wrap conv-cell-m" rowspan="5">Overflows to (-n - <k->1</k->) % (ulong:<k->max</k-> - <k->1</k->)</td>
-                <td class="center wrap conv-cell-y" rowspan="11">Correct result</td>
-                <td class="center wrap conv-cell-m" rowspan="4">Conversions are not symmetric</td>
-                <td class="center wrap conv-cell-m" rowspan="2">Conversions are not symmetric</td>
-                <td class="center wrap conv-cell-y" rowspan="5"><k->true</k-></td>
-            </tr>
-            <tr class="even">
-                <fake-td></fake-td>
-                <th><range-val->&lt; <k->-9007199254740992</k-><br><range-var->double:min_precise_int</range-var-></range-val-></th>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-            </tr>
-            <tr class="even">
-                <fake-td></fake-td>
-                <th><range-val->&lt; <k->-2147483648</k-><br><range-var->int:min</range-var-></range-val-></th>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <td class="center wrap conv-cell-y" rowspan="8">Correctly rounded</td>
-                <fake-td></fake-td>
-            </tr>
-            <tr class="even">
-                <fake-td></fake-td>
-                <th><range-val->&lt; <k->-16777216</k-><br><range-var->float:min_precise_int</range-var-></range-val-></th>
-                <fake-td></fake-td>
-                <td class="center wrap conv-cell-y" rowspan="5">Correct result</td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-            </tr>
-            <tr class="even">
-                <fake-td></fake-td>
-                <th><range-val->&lt; <k->0</k-><br><range-var-></range-var-></range-val-></th>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <td class="center wrap conv-cell-y" rowspan="3">Correctly rounded</td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-            </tr>
-            <tr class="even">
-                <fake-td></fake-td>
-                <th><range-val->== <k->0</k-><br><range-var-></range-var-></range-val-></th>
-                <td class="center wrap conv-cell-y" rowspan="4">Correct result</td>
-                <fake-td></fake-td>
-                <td class="center wrap conv-cell-y" rowspan="8">Correct result</td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <td class="center wrap conv-cell-y"><k->false</k-></td>
-            </tr>
-            <tr class="even">
-                <fake-td></fake-td>
-                <th><range-val->&gt; <k->0</k-><br><range-var-></range-var-></range-val-></th>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <td class="center wrap conv-cell-y" rowspan="7"><k->true</k-></td>
-            </tr>
-            <tr class="even">
-                <fake-td></fake-td>
-                <th><range-val->&gt; <k->+16777216</k-><br><range-var->float:max_precise_int</range-var-></range-val-></th>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <td class="center wrap conv-cell-m" rowspan="6">Conversions are not symmetric</td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-            </tr>
-            <tr class="even">
-                <fake-td></fake-td>
-                <th><range-val->&gt; <k->+2147483647</k-><br><range-var->int:max</range-var-></range-val-></th>
-                <fake-td></fake-td>
-                <td class="center wrap conv-cell-n" rowspan="5">Undefined</td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-            </tr>
-            <tr class="even">
-                <fake-td></fake-td>
-                <th><range-val->&gt; <k->+4294967295</k-><br><range-var->uint:max</range-var-></range-val-></th>
-                <td class="center wrap conv-cell-m" rowspan="4">Overflows to n % (uint:<k->max</k-> + <k->1</k->)</td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-            </tr>
-            <tr class="even">
-                <fake-td></fake-td>
-                <th><range-val->&gt; <k->+9007199254740992</k-><br><range-var->double:max_precise_int</range-var-></range-val-></th>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <td class="center wrap conv-cell-m" rowspan="3">Conversions are not symmetric</td>
-                <fake-td></fake-td>
-            </tr>
-            <tr class="even">
-                <fake-td></fake-td>
-                <th><range-val->&gt; <k->+9223372036854775807</k-><br><range-var->long:max</range-var-></range-val-></th>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <td class="center wrap conv-cell-n" rowspan="2">Undefined</td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-            </tr>
-            <tr class="even">
-                <fake-td></fake-td>
-                <th><range-val->== <k->+18446744073709551615</k-><br><range-var->ulong:max</range-var-></range-val-></th>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-            </tr>
-            <tr>
-                <th colspan="2">From / To</th>
-                <th><t->uint</t-></th>
-                <th><t->int</t-></th>
-                <th><t->ulong</t-></th>
-                <th><t->long</t-></th>
-                <th><t->float</t-></th>
-                <th><t->double</t-></th>
-                <th><t->bool</t-></th>
-            </tr>
+        <tr class="even">
+            <th rowspan="13"><t->uint</t-><br><br><t->int</t-><br><br><t->ulong</t-><br><br><t->long</t-></th>
+            <th><range-val->== <k->-9223372036854775808</k-><br><range-var->long:min</range-var-></range-val-></th>
+            <td class="center wrap conv-cell-m" rowspan="5">Overflows to (-n - <k->1</k->) % (uint:<k->max</k-> - <k->1</k->)</td>
+            <td class="center wrap conv-cell-n" rowspan="3">Undefined</td>
+            <td class="center wrap conv-cell-m" rowspan="5">Overflows to (-n - <k->1</k->) % (ulong:<k->max</k-> - <k->1</k->)</td>
+            <td class="center wrap conv-cell-y" rowspan="11">Correct result</td>
+            <td class="center wrap conv-cell-m" rowspan="4">Conversions are not symmetric</td>
+            <td class="center wrap conv-cell-m" rowspan="2">Conversions are not symmetric</td>
+            <td class="center wrap conv-cell-y" rowspan="5"><k->true</k-></td>
+        </tr>
+        <tr class="even">
+            <fake-td></fake-td>
+            <th><range-val->&lt; <k->-9007199254740992</k-><br><range-var->double:min_precise_int</range-var-></range-val-></th>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+        </tr>
+        <tr class="even">
+            <fake-td></fake-td>
+            <th><range-val->&lt; <k->-2147483648</k-><br><range-var->int:min</range-var-></range-val-></th>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-y" rowspan="8">Correctly rounded</td>
+            <fake-td></fake-td>
+        </tr>
+        <tr class="even">
+            <fake-td></fake-td>
+            <th><range-val->&lt; <k->-16777216</k-><br><range-var->float:min_precise_int</range-var-></range-val-></th>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-y" rowspan="5">Correct result</td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+        </tr>
+        <tr class="even">
+            <fake-td></fake-td>
+            <th><range-val->&lt; <k->0</k-><br><range-var-></range-var-></range-val-></th>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-y" rowspan="3">Correctly rounded</td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+        </tr>
+        <tr class="even">
+            <fake-td></fake-td>
+            <th><range-val->== <k->0</k-><br><range-var-></range-var-></range-val-></th>
+            <td class="center wrap conv-cell-y" rowspan="4">Correct result</td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-y" rowspan="8">Correct result</td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-y"><k->false</k-></td>
+        </tr>
+        <tr class="even">
+            <fake-td></fake-td>
+            <th><range-val->&gt; <k->0</k-><br><range-var-></range-var-></range-val-></th>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-y" rowspan="7"><k->true</k-></td>
+        </tr>
+        <tr class="even">
+            <fake-td></fake-td>
+            <th><range-val->&gt; <k->+16777216</k-><br><range-var->float:max_precise_int</range-var-></range-val-></th>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-m" rowspan="6">Conversions are not symmetric</td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+        </tr>
+        <tr class="even">
+            <fake-td></fake-td>
+            <th><range-val->&gt; <k->+2147483647</k-><br><range-var->int:max</range-var-></range-val-></th>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-n" rowspan="5">Undefined</td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+        </tr>
+        <tr class="even">
+            <fake-td></fake-td>
+            <th><range-val->&gt; <k->+4294967295</k-><br><range-var->uint:max</range-var-></range-val-></th>
+            <td class="center wrap conv-cell-m" rowspan="4">Overflows to n % (uint:<k->max</k-> + <k->1</k->)</td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+        </tr>
+        <tr class="even">
+            <fake-td></fake-td>
+            <th><range-val->&gt; <k->+9007199254740992</k-><br><range-var->double:max_precise_int</range-var-></range-val-></th>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-m" rowspan="3">Conversions are not symmetric</td>
+            <fake-td></fake-td>
+        </tr>
+        <tr class="even">
+            <fake-td></fake-td>
+            <th><range-val->&gt; <k->+9223372036854775807</k-><br><range-var->long:max</range-var-></range-val-></th>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-n" rowspan="2">Undefined</td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+        </tr>
+        <tr class="even">
+            <fake-td></fake-td>
+            <th><range-val->== <k->+18446744073709551615</k-><br><range-var->ulong:max</range-var-></range-val-></th>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+        </tr>
+    </table></div>
 
-            <tr class="even">
-                <th rowspan="16"><t->float</t-><br><br><t->double</t-></th>
-                <th><range-val->== <k->-inf</k-><br><range-var->-double:inf</range-var-><br><range-var->-float:inf</range-var-></range-val-></th>
-                <td class="center wrap conv-cell-n" rowspan="6">Undefined</td>
-                <td class="center wrap conv-cell-n" rowspan="5">Undefined</td>
-                <td class="center wrap conv-cell-n" rowspan="6">Undefined</td>
-                <td class="center wrap conv-cell-n" rowspan="4">Undefined</td>
-                <td class="center wrap conv-cell-y" rowspan="1">Correct result</td>
-                <td class="center wrap conv-cell-y" rowspan="1">Correct result</td>
-                <td class="center wrap conv-cell-y" rowspan="6"><k->true</k-></td>
-            </tr>
-            <tr class="even">
-                <fake-td></fake-td>
-                <th><range-val->== <k->-1.7976931348623157081e+308</k-><br><range-var->double:min</range-var-></range-val-></th>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <td class="center wrap conv-cell-n" rowspan="2">Undefined</td>
-                <td class="center wrap conv-cell-y" rowspan="13">Correctly rounded</td>
-                <fake-td></fake-td>
-            </tr>
-            <tr class="even">
-                <fake-td></fake-td>
-                <th><range-val->&lt; <k->-3.4028234663852885981e+38</k-><br><range-var->float:min</range-var-></range-val-></th>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-            </tr>
-            <tr class="even">
-                <fake-td></fake-td>
-                <th><range-val->&lt; <k->-9223372036854775808.0</k-><br><range-var->long:min</range-var-></range-val-></th>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <td class="center wrap conv-cell-y" rowspan="9">Correctly rounded</td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-            </tr>
-            <tr class="even">
-                <fake-td></fake-td>
-                <th><range-val->&lt; <k->-2147483648.0</k-><br><range-var->int:min</range-var-></range-val-></th>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <td class="center wrap conv-cell-y" rowspan="6">Correctly rounded</td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-            </tr>
-            <tr class="even">
-                <fake-td></fake-td>
-                <th><range-val->&lt; <k->0.0</k-><br><range-var-></range-var-></range-val-></th>
-                <td class="center wrap conv-cell-y" rowspan="3">Correctly rounded</td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-            </tr>
-            <tr class="even">
-                <fake-td></fake-td>
-                <th><range-val->== <k->0.0</k-><br><range-var-></range-var-></range-val-></th>
-                <td class="center wrap conv-cell-y" rowspan="3">Correctly rounded</td>
-                <fake-td></fake-td>
-                <td class="center wrap conv-cell-y" rowspan="5">Correctly rounded</td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <td class="center wrap conv-cell-y" rowspan="1"><k->false</k-></td>
-            </tr>
-            <tr class="even">
-                <fake-td></fake-td>
-                <th><range-val->&gt; <k->0.0</k-><br><range-var-></range-var-></range-val-></th>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <td class="center wrap conv-cell-y" rowspan="8"><k->true</k-></td>
-            </tr>
-            <tr class="even">
-                <fake-td></fake-td>
-                <th><range-val->&gt; <k->+2147483647.0</k-><br><range-var->int:max</range-var-></range-val-></th>
-                <td class="center wrap conv-cell-n" rowspan="8">Undefined</td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-            </tr>
-            <tr class="even">
-                <fake-td></fake-td>
-                <th><range-val->&gt; <k->+4294967297.0</k-><br><range-var->uint:max</range-var-></range-val-></th>
-                <td class="center wrap conv-cell-n" rowspan="7">Undefined</td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-            </tr>
-            <tr class="even">
-                <fake-td></fake-td>
-                <th><range-val->&gt; <k->+9223372036854775807.0</k-><br><range-var->long:max</range-var-></range-val-></th>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <td class="center wrap conv-cell-n" rowspan="6">Undefined</td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-            </tr>
-            <tr class="even">
-                <fake-td></fake-td>
-                <th><range-val->&gt; <k->+18446744073709551615.0</k-><br><range-var->ulong:max</range-var-></range-val-></th>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <td class="center wrap conv-cell-n" rowspan="5">Undefined</td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-            </tr>
-            <tr class="even">
-                <fake-td></fake-td>
-                <th><range-val->&gt; <k->+3.4028234663852885981e+38</k-><br><range-var->float:max</range-var-></range-val-></th>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <td class="center wrap conv-cell-n" rowspan="2">Undefined</td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-            </tr>
-            <tr class="even">
-                <fake-td></fake-td>
-                <th><range-val->== <k->+1.7976931348623157081e+308</k-><br><range-var->double:max</range-var-></range-val-></th>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-            </tr>
-            <tr class="even">
-                <fake-td></fake-td>
-                <th><range-val->== <k->+inf</k-><br><range-var->double:inf</range-var-><br><range-var->float:inf</range-var-></range-val-></th>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <td class="center wrap conv-cell-y" rowspan="2">Correct result</td>
-                <td class="center wrap conv-cell-y" rowspan="2">Correct result</td>
-                <fake-td></fake-td>
-            </tr>
-            <tr class="even">
-                <fake-td></fake-td>
-                <th><range-val-><f->isnan</f->(n)<br><br><range-var->double:nan</range-var-><br><range-var->float:nan</range-var-></range-val-></th>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <fake-td></fake-td>
-                <td class="center wrap conv-cell-n" rowspan="1">undefined</td>
-            </tr>
-            <tr>
-                <th colspan="2">From / To</th>
-                <th><t->uint</t-></th>
-                <th><t->int</t-></th>
-                <th><t->ulong</t-></th>
-                <th><t->long</t-></th>
-                <th><t->float</t-></th>
-                <th><t->double</t-></th>
-                <th><t->bool</t-></th>
-            </tr>
 
-            <tr>
-                <th rowspan="2"><t->bool</t-></th>
-                <th class="nowrap small"><k->false</k-></th>
-                <td class="center wrap conv-cell-y"><k->0</k-></td>
-                <td class="center wrap conv-cell-y"><k->0</k-></td>
-                <td class="center wrap conv-cell-y"><k->0</k-></td>
-                <td class="center wrap conv-cell-y"><k->0</k-></td>
-                <td class="center wrap conv-cell-y"><k->0.0</k-></td>
-                <td class="center wrap conv-cell-y"><k->0.0</k-></td>
-                <td class="center wrap conv-cell-y"><k->false</k-></td>
-            </tr>
-            <tr>
-                <fake-td></fake-td>
-                <th class="nowrap small"><k->true</k-></th>
-                <td class="center wrap conv-cell-y"><k->1</k-> </k-></td>
-                <td class="center wrap conv-cell-y"><k->1</k-> </k-></td>
-                <td class="center wrap conv-cell-y"><k->1</k-> </k-></td>
-                <td class="center wrap conv-cell-y"><k->1</k-> </k-></td>
-                <td class="center wrap conv-cell-y"><k->1.0</k-></td>
-                <td class="center wrap conv-cell-y"><k->1.0</k-></td>
-                <td class="center wrap conv-cell-y"><k->true</k-></td>
-            </tr>
+    <div class="table-container"><table class="conversion-table">
+        <tr>
+            <th colspan="2">From ↓ To →</th>
+            <th><t->uint</t-></th>
+            <th><t->int</t-></th>
+            <th><t->ulong</t-></th>
+            <th><t->long</t-></th>
+            <th><t->float</t-></th>
+            <th><t->double</t-></th>
+            <th><t->bool</t-></th>
+        </tr>
+
+        <tr class="even">
+            <th rowspan="16"><t->float</t-><br><br><t->double</t-></th>
+            <th><range-val->== <k->-inf</k-><br><range-var->-double:inf, -float:inf</range-var-></range-val-></th>
+            <td class="center wrap conv-cell-n" rowspan="6">Undefined</td>
+            <td class="center wrap conv-cell-n" rowspan="5">Undefined</td>
+            <td class="center wrap conv-cell-n" rowspan="6">Undefined</td>
+            <td class="center wrap conv-cell-n" rowspan="4">Undefined</td>
+            <td class="center wrap conv-cell-y" rowspan="1">Correct result</td>
+            <td class="center wrap conv-cell-y" rowspan="1">Correct result</td>
+            <td class="center wrap conv-cell-y" rowspan="6"><k->true</k-></td>
+        </tr>
+        <tr class="even">
+            <fake-td></fake-td>
+            <th><range-val->== <k->-1.7976931348623157081e+308</k-><br><range-var->double:min</range-var-></range-val-></th>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-n" rowspan="2">Undefined</td>
+            <td class="center wrap conv-cell-y" rowspan="13">Correctly rounded</td>
+            <fake-td></fake-td>
+        </tr>
+        <tr class="even">
+            <fake-td></fake-td>
+            <th><range-val->&lt; <k->-3.4028234663852885981e+38</k-><br><range-var->float:min</range-var-></range-val-></th>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+        </tr>
+        <tr class="even">
+            <fake-td></fake-td>
+            <th><range-val->&lt; <k->-9223372036854775808.0</k-><br><range-var->long:min</range-var-></range-val-></th>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-y" rowspan="9">Correctly rounded</td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+        </tr>
+        <tr class="even">
+            <fake-td></fake-td>
+            <th><range-val->&lt; <k->-2147483648.0</k-><br><range-var->int:min</range-var-></range-val-></th>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-y" rowspan="6">Correctly rounded</td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+        </tr>
+        <tr class="even">
+            <fake-td></fake-td>
+            <th><range-val->&lt; <k->0.0</k-><br><range-var-></range-var-></range-val-></th>
+            <td class="center wrap conv-cell-y" rowspan="3">Correctly rounded</td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+        </tr>
+        <tr class="even">
+            <fake-td></fake-td>
+            <th><range-val->== <k->0.0</k-><br><range-var-></range-var-></range-val-></th>
+            <td class="center wrap conv-cell-y" rowspan="3">Correctly rounded</td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-y" rowspan="5">Correctly rounded</td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-y" rowspan="1"><k->false</k-></td>
+        </tr>
+        <tr class="even">
+            <fake-td></fake-td>
+            <th><range-val->&gt; <k->0.0</k-><br><range-var-></range-var-></range-val-></th>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-y" rowspan="8"><k->true</k-></td>
+        </tr>
+        <tr class="even">
+            <fake-td></fake-td>
+            <th><range-val->&gt; <k->+2147483647.0</k-><br><range-var->int:max</range-var-></range-val-></th>
+            <td class="center wrap conv-cell-n" rowspan="8">Undefined</td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+        </tr>
+        <tr class="even">
+            <fake-td></fake-td>
+            <th><range-val->&gt; <k->+4294967297.0</k-><br><range-var->uint:max</range-var-></range-val-></th>
+            <td class="center wrap conv-cell-n" rowspan="7">Undefined</td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+        </tr>
+        <tr class="even">
+            <fake-td></fake-td>
+            <th><range-val->&gt; <k->+9223372036854775807.0</k-><br><range-var->long:max</range-var-></range-val-></th>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-n" rowspan="6">Undefined</td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+        </tr>
+        <tr class="even">
+            <fake-td></fake-td>
+            <th><range-val->&gt; <k->+18446744073709551615.0</k-><br><range-var->ulong:max</range-var-></range-val-></th>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-n" rowspan="5">Undefined</td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+        </tr>
+        <tr class="even">
+            <fake-td></fake-td>
+            <th><range-val->&gt; <k->+3.4028234663852885981e+38</k-><br><range-var->float:max</range-var-></range-val-></th>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-n" rowspan="2">Undefined</td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+        </tr>
+        <tr class="even">
+            <fake-td></fake-td>
+            <th><range-val->== <k->+1.7976931348623157081e+308</k-><br><range-var->double:max</range-var-></range-val-></th>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+        </tr>
+        <tr class="even">
+            <fake-td></fake-td>
+            <th><range-val->== <k->+inf</k-><br><range-var->double:inf, float:inf</range-var-></range-val-></th>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-y" rowspan="2">Correct result</td>
+            <td class="center wrap conv-cell-y" rowspan="2">Correct result</td>
+            <fake-td></fake-td>
+        </tr>
+        <tr class="even">
+            <fake-td></fake-td>
+            <th><range-val-><f->isnan</f->(n)<br><range-var->double:nan, float:nan</range-var-></range-val-></th>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-n" rowspan="1">undefined</td>
+        </tr>
+    </table></div>
+
+
+
+    <div class="table-container"><table class="conversion-table">
+        <tr>
+            <th colspan="2">From ↓ To →</th>
+            <th><t->uint</t-></th>
+            <th><t->int</t-></th>
+            <th><t->ulong</t-></th>
+            <th><t->long</t-></th>
+            <th><t->float</t-></th>
+            <th><t->double</t-></th>
+            <th><t->bool</t-></th>
+        </tr>
+
+        <tr>
+            <th rowspan="2"><t->bool</t-></th>
+            <th class="nowrap small"><k->false</k-></th>
+            <td class="center wrap conv-cell-y"><k->0</k-></td>
+            <td class="center wrap conv-cell-y"><k->0</k-></td>
+            <td class="center wrap conv-cell-y"><k->0</k-></td>
+            <td class="center wrap conv-cell-y"><k->0</k-></td>
+            <td class="center wrap conv-cell-y"><k->0.0</k-></td>
+            <td class="center wrap conv-cell-y"><k->0.0</k-></td>
+            <td class="center wrap conv-cell-y"><k->false</k-></td>
+        </tr>
+        <tr>
+            <fake-td></fake-td>
+            <th class="nowrap small"><k->true</k-></th>
+            <td class="center wrap conv-cell-y"><k->1</k-> </k-></td>
+            <td class="center wrap conv-cell-y"><k->1</k-> </k-></td>
+            <td class="center wrap conv-cell-y"><k->1</k-> </k-></td>
+            <td class="center wrap conv-cell-y"><k->1</k-> </k-></td>
+            <td class="center wrap conv-cell-y"><k->1.0</k-></td>
+            <td class="center wrap conv-cell-y"><k->1.0</k-></td>
+            <td class="center wrap conv-cell-y"><k->true</k-></td>
+        </tr>
     </table></div>
 </moveto-doc->
 
@@ -5967,14 +5148,460 @@
 </moveto-doc->
 
 
-<h1 id="syntaxes"></h1>
+<h1 id="quick-reference.lexicon"></h1>
 <moveto-doc->
     <p></p>
 </moveto-doc->
 
 
 
-<h1 id="declaration-syntaxes"></h1>
+<h1 id="quick-reference.lexicon.characters"></h1>
+<moveto-doc->
+    <p>
+        The allowed characters are:
+    </p>
+    <p class="no-text-width-limit">
+        <code>a</code> <code>b</code> <code>c</code> <code>d</code> <code>e</code> <code>f</code> <code>g</code> <code>h</code> <code>i</code> <code>j</code> <code>k</code> <code>l</code> <code>m</code>
+        <code>n</code> <code>o</code> <code>p</code> <code>q</code> <code>r</code> <code>s</code> <code>t</code> <code>u</code> <code>v</code> <code>w</code> <code>x</code> <code>y</code> <code>z</code><br>
+        <code>A</code> <code>B</code> <code>C</code> <code>D</code> <code>E</code> <code>F</code> <code>G</code> <code>H</code> <code>I</code> <code>J</code> <code>K</code> <code>L</code> <code>M</code>
+        <code>N</code> <code>O</code> <code>P</code> <code>Q</code> <code>R</code> <code>S</code> <code>T</code> <code>U</code> <code>V</code> <code>W</code> <code>X</code> <code>Y</code> <code>Z</code><br>
+        <code>0</code> <code>1</code> <code>2</code> <code>3</code> <code>4</code> <code>5</code> <code>6</code> <code>7</code> <code>8</code> <code>9</code> <code>_</code><br>
+        <code>!</code> <code>$</code> <code>%</code> <code>&</code> <code>(</code> <code>)</code> <code>*</code> <code>+</code> <code>-</code> <code>/</code> <code>:</code> <code>&lt;</code> <code>=</code>
+        <code>&gt;</code> <code>?</code> <code>@</code> <code>^</code> <code>`</code> <code>|</code> <code>~</code> <code>;</code> <code>{</code> <code>}</code> <code>[</code> <code>]</code> <code>.</code><br>
+        <code><space-></space-></code> <code><tab-></tab-></code> <code><nl-></nl-></code>
+    </p>
+</moveto-doc->
+
+<h1 id="quick-reference.lexicon.tokens"></h1>
+<moveto-doc->
+    <div class="table-container"><table>
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th style="text-align: center;" colspan="4">Pattern</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th class="nowrap medium"><a href="#keywords">Keyword</a></th>
+                <td><div class="split-td-outer">
+                    <div class="split-td" style="line-height: 3ch;">
+                        <a href="#namespaces">         <code><w->namespace</w-></code></a>
+                        <a href="#enums">              <code><w->enum</w-></code></a>
+                        <a href="#structs">            <code><w->struct</w-></code></a>
+                        <a href="#const-qualifier">    <code><t->const</t-></code></a>
+                        <a href="#auto-specifier">     <code><t->auto</t-></code></a>
+                        <a href="#typeof-specifier">   <code><t->typeof</t-></code></a>
+                        <a href="#symbol-aliases">     <code><w->alias</w-></code></a>
+                        <a href="#import-directive">   <code><w->from</w-></code></a>
+                        <a href="#import-directive">   <code><w->import</w-></code></a>
+                        <a href="#export-directive">   <code><w->export</w-></code></a>
+                        <a href="#pointer-types">      <code><w->addr</w-></code></a>
+                        <a href="#pointer-types">      <code>@</code></a>
+                    </div>
+                    <div class="split-td" style="line-height: 3ch;">
+                        <a href="#if-statement">       <code><w->if</w-></code></a>
+                        <a href="#match-statement">    <code><w->match</w-></code></a>
+                        <a href="#for-loops">          <code><w->for</w-></code></a>
+                        <a href="#while-loops">        <code><w->while</w-></code></a>
+                        <a href="#while-loops">        <code><w->do</w-></code></a>
+                        <a href="#continue-statement"> <code><w->continue</w-></code></a>
+                        <a href="#break-statement">    <code><w->break</w-></code></a>
+                        <a href="#once-statement">     <code><w->once</w-></code></a>
+                        <a href="#then-statement">     <code><w->then</w-></code></a>
+                        <a href="#else-statement">     <code><w->else</w-></code></a>
+                        <a href="#return-statement">   <code><w->return</w-></code></a>
+                        <a href="#defer-call">         <code><w->defer</w-></code></a>
+                    </div>
+                    <div class="split-td" style="line-height: 3ch;">
+                        <elm->                         <code>(</code><code>)</code></elm->
+                        <a href="#scopes-and-symbols"> <elm-><code>{</code><code>}</code></elm-></a>
+                        <a href="#statements">         <code>,</code></a>
+                        <a href="#statements">         <code> ;</code></a>
+                        <a href="#scopes-and-symbols"> <code>.</code></a>
+                        <a href="#reflection">         <code>:</code></a>
+                    </div>
+                </div></td>
+            </tr>
+            <tr>
+                <th class="nowrap medium"><a href="#meta-keywords">Meta keyword</a></th>
+                <td><div class="split-td-outer">
+                    <div class="split-td">
+                        <a href="#templates">                       <code><w->template</w-></code></a>
+                        <a href="#templates">                       <elm-><code>&lt;</code><code>&gt;</code></elm-></a>
+                        <a href="#template-parameters">             <code><w->type</w-></code></a>
+                        <a href="#template-parameters">             <code>!</code></a>
+                        <a href="#abbreviated-template-syntax">     <code>?</code></a>
+                    </div>
+                    <div class="split-td">
+                        <a href="#specialization-constraint">       <code><w->when</w-></code></a>
+                        <code><w->as</w-></code>
+                        <code><w->in</w-></code>
+                        <code><w->to</w-></code>
+                        <code>=</code>
+                        <a href="enums"><code>:</code></a>
+                        <code>...</code>
+                        <a href="#reference-parameters"><code>&</code></a>
+                        <a href="#pointer-types"><code>*</code></a>
+                    </div>
+                </div></td>
+            </tr>
+            <tr>
+                <th class="nowrap medium"><a href="#literals">Literal</a></th>
+                <td><div class="split-td-outer">
+                    <div clas="split-td" style="line-height: 3ch;">
+                        <ul><ul>Any sequence of characters with pattern:
+                            <li><code><regex->(0[dbxo])?[0-9a-zA-Z_]+(\.[0-9a-zA-Z_]*)?</regex-></code></li>
+                            <li><code><regex->[rf]?"</regex-><c- class="x-small">anything but unescaped double-quotes</c-><s->"</s-></code></li>
+                            <li><code><s->'</s-><c- class="x-small">anything but unescaped quotes</c-><s->'</s-></code></li>
+                        </ul></ul>
+                    </div>
+                </div></td>
+            </tr>
+            <tr>
+                <th class="nowrap medium"><a href="#identifiers">Identifier</a></th>
+                <td><div class="split-td-outer">
+                    <div clas="split-td">
+                        Any sequence of characters with pattern
+                        <code><regex->[a-zA-Z][a-zA-Z0-9]*</regex-></code> or
+                        <code><regex->[!$%&*+\-/&lt;=&gt;?\[\]^`|~]+</regex-></code>
+                        that isn't a <a href="#keywords">keyword</a> or a <a href="#literals">literal</a>.
+                    </div>
+                </div></td>
+            </tr>
+        </tbody>
+    </table></div>
+</moveto-doc->
+
+<h1 id="quick-reference.lexicon.syntactic-elements"></h1>
+<moveto-doc->
+    <p>
+        Syntactic elements are divided in 6 categories:
+    </p>
+
+
+    <div class="table-container"><table>
+        <tr>
+            <th>Category</th>
+            <th>Syntactic element</th>
+        </tr>
+        <tr>
+            <th class="nowrap medium"><a href="#language-structure.directives">Directive</a></th>
+            <td><div class="split-td-outer">
+                <div class="split-td">
+                    <even-elm-><a href="#import-directive">Import </a> directive</even-elm->
+                    <even-elm-><a href="#export-directive"><code><w->export</w-></code></a> directive</even-elm->
+                    <even-elm-><a href="#construct-directive"><code><w->construct</w-></code></a> directive</even-elm->
+                </div>
+            </div></td>
+        </tr>
+        <tr>
+            <th class="nowrap medium"><a href="#name-resolution">Declaration</a></th>
+            <td><div class="split-td-outer">
+                <div class="split-td">
+                    <even-elm-><a href="#enums"><code><w->enum</w-></code></a> declaration</even-elm->
+                    <even-elm-><a href="#enums"><code><w->enum</w-></code></a> element declaration</even-elm->
+                    <even-elm-><a href="#structs"><code><w->struct</w-></code></a> declaration</even-elm->
+                    <even-elm-><a href="#structs"><code><w->struct</w-></code></a> member declaration</even-elm->
+                </div>
+                <div class="split-td">
+                    <even-elm-><a href="#functions">Function</a> declaration</even-elm->
+                    <even-elm-><a href="#operators">Operator</a> declaration</even-elm->
+                    <even-elm-><a href="#routine-parameters">Routine parameter</a></even-elm->
+                </div>
+                <div class="split-td">
+                    <even-elm-><a href="#namespaces"><code><w->namespace</w-></code></a> declaration</even-elm->
+                    <even-elm-><a href="#templates"><code><w->template</w-></code></a> declaration</even-elm->
+                    <even-elm-><a href="#symbol-aliases"><code><w->alias</w-></code></a> declaration</even-elm->
+                    <even-elm-><a href="#variables">Variable</a> declaration</even-elm->
+                </div>
+            </div></td>
+        </tr>
+        <tr>
+            <th class="nowrap medium"><a href="#language-structure.statements">Statement</a></th>
+            <td><div class="split-td-outer">
+                <div class="split-td">
+                    <even-elm-><a href="#if-statement"><code><w->if</w-></code></a> statement</even-elm->
+                    <even-elm-><a href="#match-statement"><code><w->match</w-></code></a> statement</even-elm->
+                </div>
+                <div class="split-td">
+                    <even-elm-><a href="#while-loops"><code><w->while</w-></code></a> loop</even-elm->
+                    <even-elm-><a href="#for-loops"><code><w->for</w-></code></a> loop</even-elm->
+                    <even-elm-><a href="#once-statement"><code><w->once</w-></code></a> statement</even-elm->
+                    <even-elm-><a href="#then-statement"><code><w->then</w-></code></a> statement</even-elm->
+                    <even-elm-><a href="#break-statement"><code><w->break</w-></code></a> statement</even-elm->
+                    <even-elm-><a href="#continue-statement"><code><w->continue</w-></code></a> statement</even-elm->
+                </div>
+                <div class="split-td">
+                    <even-elm-><a href="#return-statement"><code><w->return</w-></code></a> statement</even-elm->
+                    <even-elm-><a href="#defer-call"><code><w->defer</w-></code></a> statement</even-elm->
+                </div>
+                <div class="split-td">
+                    <even-elm-><a href="#else-statement"><code><w->else</w-></code></a> statement</even-elm->
+                    <even-elm-><a href="#expressions">Expression statement</a></even-elm->
+                    <even-elm-><a href="#unnamed-scopes">Unnamed scope</a></even-elm->
+                    <even-elm-><a href="#empty-statement">Empty statement</a></even-elm->
+                    <even-elm-><a href="#inline-glsl">Inline GLSL</a></even-elm->
+                    <even-elm-><a href="#inline-cpp">Inline C++</a></even-elm->
+                </div>
+            </div></td>
+        </tr>
+        <tr>
+            <th class="nowrap medium"><a href="#language-structure.expressions">Expression</a></th>
+            <td><div class="split-td-outer">
+                <div class="split-td">
+                    <even-elm-><a href="#literals">Literal</a></even-elm->
+                    <even-elm-><a href="#try-expression"><code><w->try</w-></code> expression</a></even-elm->
+                </div>
+                <div class="split-td">
+                    <even-elm-><a href="#variables">Variable</a></even-elm->
+                    <even-elm-><a href="#temporary-variables">Temporary variable</a></even-elm->
+                    <even-elm-><a href="#routine-parameters">Routine parameter</a></even-elm->
+                </div>
+                <div class="split-td">
+                    <even-elm-><a href="#function-calls">Function call</a></even-elm->
+                    <even-elm-><a href="#operator-calls">Operator call</a></even-elm->
+                </div>
+            </div></td>
+        </tr>
+        <tr>
+            <th class="nowrap medium"><a href="#language-structure.paths">Paths</a></th>
+            <td><div class="split-td-outer">
+                <div>
+                    <even-elm-><a href="#symbol-paths">Symbol path</a></even-elm->
+                    <even-elm-><a href="#symbol-reflection-paths">Symbol reflection path</a></even-elm->
+                </div>
+            </div></td>
+        </tr>
+    </table></div>
+
+
+
+    <p>
+        <a href="#structs">structs</a>, <a href="#routines">routines</a>, <a href="#templates">templates</a> and the <a href="#while-loops"><code><w->while</w-></code> loop</a>
+        are divided in sub-elements in order to provide a clear and concise syntax.<br>
+    </p>
+    <ul>
+        <li>Declaration sub-elements</li>
+        <ul class="summary-list">
+            <li>
+                <span><a href="#structs">Struct</a> signature</span>
+                <span>Defines the name of a <a href="#structs">struct</a>.</span>
+            </li>
+            <li>
+                <span><a href="#structs">Struct</a> body</span>
+                <span>Contains the <a href="#structs">struct</a> members and other allowed declarations.</span>
+            </li>
+            <li>
+                <span><a href="#functions">Function</a> signature</span>
+                <span>Defines the name, <a href="#return-statement">return type</a> and <a href="#routine-parameters">parameters</a> of a <a href="#functions">function</a></span>
+            </li>
+            <li>
+                <span><a href="#operators">Operator</a> signature</span>
+                <span>Defines the names, <a href="#return-statement">return type</a>, <a href="#routine-parameters">parameters</a>,
+                    <a href="#declarations.operator-precedence">priority</a> and <a href="#declarations.operator-precedence">associativity</a> of an <a href="#operators">operator</a></span>
+                //TODO idk if this actually defines the associativity. check
+            </li>
+            <li>
+                <span><a href="#routines">Routine</a> body</span>
+                <span>Contains the <a href="#statements">statements</a> and other allowed declarations of a <a href="#routines">routine</a></span>
+            </li>
+            <li>
+                <span><a href="#templates">Template</a> signature</span>
+                <span>Defines the name and parameters of a <a href="#templates">template</a></span>
+            </li>
+            <li>
+                <span><a href="#specialization-constraints">Specialization constraint</a></span>
+                <span>Defines the <a href="#specialization-constraints">constraint</a> that determines when the subsequent element body is suitable for specialization</span>
+            </li>
+        </ul><br>
+        <li>Other sub-elements</li>
+        <ul class="summary-list">
+            <li>
+                <span><a href="#while-loops">While</a> signature</span>
+                <span>Defines the <a href="boolean-type">condition</a> of a <a href="while-loops">while loop</a></span>
+            </li>
+            <li>
+                <span>Specialization constraint</span>
+                <span>Specifies a constraint whose result determines when a struct or routine declaration can be used.</span>
+            </li>
+        </ul>
+    </ul>
+</moveto-doc->
+
+<h1 id="quick-reference.semantics"></h1>
+<moveto-doc->
+    <p></p>
+</moveto-doc->
+
+
+
+<h1 id="quick-reference.semantics.scopes"></h1>
+<moveto-doc->
+    <p>
+        Each scope can only contain certain types of <a href="#name-resolution">symbols</a>:
+    </p>
+<div class="scope-table-container">
+        <div class="table-container scope-table-left-container"><table class="scope-table-left">
+            <tr><th><div class="medium"><span>Scope →<br>Can contain ↓</span></div></th></tr>
+            <tr><th><div class="medium"><a href="#namespaces">          Namespace                                             </a></div></th></tr>
+            <tr><th><div class="medium"><a href="#enums">               Enum    </a><br><a href="#templates">Enum template    </a></div></th></tr>
+            <tr><th><div class="medium"><a href="#structs">             Struct  </a><br><a href="#templates">Struct template  </a></div></th></tr>
+            <tr><th><div class="medium"><a href="#functions">           Function</a><br><a href="#templates">Function template</a></div></th></tr>
+            <tr><th><div class="medium"><a href="#operators">           Operator</a><br><a href="#templates">Operator template</a></div></th></tr>
+            <tr><th><div class="medium"><a href="#variables">           Variable                                              </a></div></th></tr>
+            <tr><th><div class="medium"><a href="#symbol-aliases">      Symbol alias                                          </a></div></th></tr>
+            <tr><th><div class="medium"><a href="#enums">               Enum member                                           </a></div></th></tr>
+            <tr><th><div class="medium"><a href="#structs">             Struct member                                         </a></div></th></tr>
+            <tr><th><div class="medium"><a href="#basic-parameters">    Basic parameter                                     </a></div></th></tr>
+            <tr><th><div class="medium"><a href="#optional-parameters"> Optional parameter                                     </a></div></th></tr>
+            <tr><th><div class="medium"><a href="#parameter-packs">     Parameter pack                                     </a></div></th></tr>
+            <tr><th><div class="medium"><a href="#reference-parameters">Reference parameter                                     </a></div></th></tr>
+        </table></div>
+        <div class="table-container scope-table-right-container"><table class="scope-table-right">
+            <tr>
+                <th><div class="medium"><a href="#modules">       Module                                                </a></div></th>
+                <th><div class="medium"><a href="#namespaces">    Namespace                                             </a></div></th>
+                <th><div class="medium"><a href="#enums">         Enum    </a><br><a href="#templates">Enum template    </a></div></th>
+                <th><div class="medium"><a href="#structs">       Struct  </a><br><a href="#templates">Struct template  </a></div></th>
+                <th><div class="medium"><a href="#functions">     Function</a><br><a href="#templates">Function template</a></div></th>
+                <th><div class="medium"><a href="#opertors">      Operator</a><br><a href="#templates">Operator template</a></div></th>
+                <th><div class="medium"><a href="#unnamed-scopes">Unnamed scope       </a></div></th>
+            </tr>
+            <tr>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+            </tr>
+            <tr>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+            </tr>
+            <tr>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+            </tr>
+            <tr>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div class="nobefore"><span>Inherited</span></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+            </tr>
+            <tr>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div class="nobefore"><span>Inherited</span></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+            </tr>
+            <tr>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div class="nobefore"><span>Inherited</span></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+            </tr>
+            <tr>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+            </tr>
+            <tr>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+            </tr>
+            <tr>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-y"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+            </tr>
+            <tr>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-y"><div class="nobefore noafter"><div>Yes<span class="hidden">&nbsp;*</span></div></div></td>
+                <td class="scope-table-y"><div class="nobefore noafter"><div>Yes<span class="hidden">&nbsp;*</span></div></div></td>
+                <td class="scope-table-n"><div></div></td>
+            </tr>
+            <tr>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-y"><div class="nobefore noafter"><div>Yes<span class="hidden">&nbsp;*</span></div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+            </tr>
+            <tr>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-y"><div class="nobefore noafter"><div>Yes<span class="hidden">&nbsp;*</span></div></div></td>
+                <td class="scope-table-n"><div></div></td>
+            </tr>
+            <tr>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-y"><div class="nobefore noafter"><div>Yes<span class="hidden">&nbsp;*</span></div></div></td>
+                <td class="scope-table-n"><div></div></td>
+                <td class="scope-table-n"><div></div></td>
+            </tr>
+        </table></div>
+    </div>
+    <div>
+        <syntax-note->
+            * Declared in the routine signature, but part of the routine scope.
+        </syntax-note->
+    </div>
+</moveto-doc->
+
+<h1 id="quick-reference.syntaxes"></h1>
+<moveto-doc->
+    <p></p>
+</moveto-doc->
+
+
+
+<h1 id="quick-reference.syntaxes.declarations"></h1>
 <moveto-doc->
     <p>
         This section summarizes all the syntaxes used to declare user-defined symbols.<br>
@@ -6804,7 +6431,7 @@
     </syntax->
 </moveto-doc->
 
-<h1 id="expression-syntaxes"></h1>
+<h1 id="quick-reference.syntaxes.expressions"></h1>
 <moveto-doc->
 
 
@@ -6903,7 +6530,7 @@
     </syntax->
 </moveto-doc->
 
-<h1 id="path-syntaxes"></h1>
+<h1 id="quick-reference.syntaxes.paths"></h1>
 <moveto-doc->
 
 
@@ -7081,7 +6708,7 @@
     </syntax->
 </moveto-doc->
 
-<h1 id="preprocessor-syntaxes"></h1>
+<h1 id="quick-reference.syntaxes.preprocessor"></h1>
 <moveto-doc->
 
 
@@ -7175,7 +6802,7 @@
     </syntax->
 </moveto-doc->
 
-<h1 id="statement-syntaxes"></h1>
+<h1 id="quick-reference.syntaxes.statements"></h1>
 <moveto-doc->
 
 
@@ -7743,7 +7370,7 @@
     </syntax->
 </moveto-doc->
 
-<h1 id="misc-syntaxes"></h1>
+<h1 id="quick-reference.syntaxes.misc"></h1>
 <moveto-doc->
 
 
@@ -8108,14 +7735,14 @@
 
     <button- class="tooltip-left"
         data-tooltip="Toggle index"
-        onclick="button_triggers.open_toggle_index()"
+        onclick="button_triggers.toggle_index()"
         data-icon = "./Styles/PageLayout/Icons/ToggleIndex.svg";
     ></button->
 
 
     <button- class="tooltip-left"
         data-tooltip="Toggle text wrap"
-        onclick="button_triggers.open_toggle_text_wrap()"
+        onclick="button_triggers.toggle_text_wrap()"
         data-icon = "./Styles/PageLayout/Icons/TextWrap.svg";
     ></button->
 
@@ -8129,11 +7756,17 @@
         </right->
     </main->
     <footer->
-        <span class="xx-small">
-            Lumen and Aurora are a work of passion.
-            Licensed under <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPL-3.0</a>. Free to use.
-            Contributions are welcome, AI-generated code is not.
-        </span>
+
+<footer-keybinds->
+    &lt; &gt; ɪ ᴡ ᴀ
+</footer-keybinds->
+
+
+<footer-message->
+    Lumen and Aurora are a work of passion.
+    Licensed under <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPL-3.0</a>. Free to use.
+    Contributions are welcome, AI-generated code is not.
+</footer-message->
     </footer->
     <script src="Scripts/utils.js"></script>
     <script src="Scripts/Setup/Fix.js"></script>
@@ -8141,6 +7774,7 @@
     <script src="Scripts/Setup/Index.js"></script>
     <script src="Scripts/Setup/ButtonTriggers.js"></script>
     <script src="Scripts/Custom/CopySyntax.js"></script>
+    <script src="Scripts/Setup/Keybinds.js"></script>
     <script src="Scripts/main.js"></script>
     <script src="Scripts/UI/Slider.js"></script>
     <script src="Scripts/UI/SmoothLinks.js"></script>

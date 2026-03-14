@@ -1,6 +1,6 @@
 :root {
-    --bg-index-hover:   hsl(222, 22%, 15%);
-    --bg-index-active:  hsl(222, 24%, 22%);
+    --bg-index-hover:   hsl(253, 12%, 17%);
+    --bg-index-active:  hsl(255, 14%, 22%);
     --main-index-margin-top: 1em;
     --main-index-margin-bottom: 4em;
 }

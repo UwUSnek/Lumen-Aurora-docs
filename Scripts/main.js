@@ -40,6 +40,10 @@ function init(){
     ui_slider.update_main_width();
 
 
+    // Load keybinds
+    keybinds.init();
+
+
     // The id="main-mask" div is used to hide the page before js is done moving stuff around as anything else just doesn't work
     // This line removes it from the body so that the user can see the page and think it loaded flawlessly
     let e = document.getElementById('main-mask');

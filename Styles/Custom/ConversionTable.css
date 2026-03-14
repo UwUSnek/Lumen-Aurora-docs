@@ -1,0 +1,35 @@
+:root {
+    --conversion-range-row-h: 48px;
+    --conversion-range-row-h-rendering: calc(var(--conversion-range-row-h) + 1px);
+    --conversion-value-separator-line-color: #fdfdfd07;
+}
+
+
+
+
+table.conversion-table {
+  border-collapse: separate;
+  border-spacing: 0;
+
+    /*! CSS clipping straight up cuts shadows and there is no sane way around it */
+    box-shadow: 0px 4px 4px var(--light-shadow-color), 0px -4px 4px var(--light-shadow-color), 4px 0px 4px var(--light-shadow-color), -4px 0px 4px var(--light-shadow-color);
+}
+table.conversion-table th,
+table.conversion-table td {
+    height: var(--conversion-range-row-h);
+    padding-top: 0;
+    padding-bottom: 0;
+}
+table.conversion-table td[rowspan] {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent                                  calc(var(--conversion-range-row-h-rendering) - 1px),
+    var(--conversion-value-separator-line-color) calc(var(--conversion-range-row-h-rendering) - 1px),
+    var(--conversion-value-separator-line-color)      var(--conversion-range-row-h-rendering)
+  );
+}
+
+.conv-cell-y { background-color: hsla(115, 70%, 60%, 0.1); }
+.conv-cell-m { background-color: hsla(64,  70%, 60%, 0.1); }
+.conv-cell-n { background-color: hsla(0,   70%, 60%, 0.1); }

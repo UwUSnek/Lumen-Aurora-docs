@@ -6,4 +6,8 @@
     M11.0 11.9h2.2v3.9h-2.2z
     M8.0 15.8h8.0a0.5 0.5 0 0 1 0.5 0.5v0.9a0.5 0.5 0 0 1-0.5 0.5H8.0a0.5 0.5 0 0 1-0.5-0.5v-0.9a0.5 0.5 0 0 1 0.5-0.5z
   "/>
+  <g transform="translate(18, -8) scale(0.5)">
+    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+      d="M12 6H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6m-7 1l9-9m-5 0h5v5" />
+  </g>
 </svg>

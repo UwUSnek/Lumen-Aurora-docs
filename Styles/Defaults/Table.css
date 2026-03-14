@@ -1,13 +1,15 @@
 :root {
-    --bg-table-odd:     hsl(226, 10%, 8%);
-    --bg-table-even:    hsl(226, 10%, 9%);
-    --bg-table-header:  hsl(223, 10%, 11%);
+    --bg-table-odd:     hsl(226, 5%, 9%);
+    --bg-table-even:    hsl(226, 5%, 10%);
+    --bg-table-header:  hsl(223, 5%, 12%);
 
-    --bd-table-cell:    hsl(213, 9%, 10%);
-    --bd-table-header:  hsl(213, 9%, 15%);
+    --bd-table-cell:    hsl(213, 4%, 10%);
+    --bd-table-header:  hsl(213, 4%, 15%);
 
     --padding-h-table-cell: 10px;
     --padding-w-table-cell: 20px;
+
+    --table-default-line-h: 2.4ch;
 }
 
 
@@ -23,7 +25,7 @@ table {
     border-collapse: separate;
     border-spacing: 0px;
     border-radius: 10px;
-    line-height: 2.4ch;
+    line-height: var(--table-default-line-h);
     width: 100%;
     overflow: clip;
 }
