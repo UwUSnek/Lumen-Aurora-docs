@@ -60,18 +60,38 @@ const setup_tabs = {
     },
 
 
-    create_button : function(tab_num){
+
+    change_tab : function(tab_button, tab_index) {
+
+        // Disable old tab, enable new tab
+        setup_tabs.disable_tab(setup_tabs.get_tab(setup_tabs.get_active_tab_index()));
+        setup_tabs.enable_tab(setup_tabs.get_tab(tab_index));
+
+        // Change active tab index and move the elements
+        localStorage.setItem("active_tab", tab_index);
+        tab_doc.style.marginLeft = `calc(0px - 100% * ${ tab_index } - var(--main-padding-c) * ${ tab_index })`;
+
+        // Update button colors
+        tab_button_doc.style.removeProperty("background-color");
+        tab_button_examples.style.removeProperty("background-color");
+        tab_button_internal.style.removeProperty("background-color");
+        tab_button.style.backgroundColor = "var(--bg-index-active)";
+    },
+
+
+
+    create_button : function(tab_index){
 
         // Create the button element
         let b = document.createElement("div");
         b.classList = "tab-button";
-        b.style.setProperty("--tab-num", `${ tab_num }`);
+        b.style.setProperty("--tab-num", `${ tab_index }`);
 
 
         // Append icon and SVG element
         let icon = document.createElement("icon-");
         (async () => {
-            switch(tab_num) {
+            switch(tab_index) {
                 case 0: icon.appendChild(await utils.loadSVG("./Styles/PageLayout/Icons/DocumentationTabButton.svg")); break;
                 case 1: icon.appendChild(await utils.loadSVG("./Styles/PageLayout/Icons/ExampleTabButton.svg"));       break;
                 case 2: icon.appendChild(await utils.loadSVG("./Styles/PageLayout/Icons/InternalTabButton.svg"));      break;
@@ -88,20 +108,7 @@ const setup_tabs = {
 
         // Add click listener
         b.addEventListener("click", function() {
-
-            // Disable old tab, enable new tab
-            setup_tabs.disable_tab(setup_tabs.get_tab(setup_tabs.get_active_tab_index()));
-            setup_tabs.enable_tab(setup_tabs.get_tab(tab_num));
-
-            // Change active tab index and move the elements
-            localStorage.setItem("active_tab", tab_num);
-            tab_doc.style.marginLeft = `calc(0px - 100% * ${ tab_num } - var(--main-padding-c) * ${ tab_num })`;
-
-            // Update button colors
-            tab_button_doc.style.removeProperty("background-color");
-            tab_button_examples.style.removeProperty("background-color");
-            tab_button_internal.style.removeProperty("background-color");
-            b.style.backgroundColor = "var(--bg-index-active)";
+            setup_tabs.change_tab(b, tab_index);
         });
         b.addEventListener("mouseenter", function(){
             if(Number.parseInt(b.style.getPropertyValue("--tab-num"), 10) != setup_tabs.get_active_tab_index()) {
@@ -131,6 +138,16 @@ const setup_tabs = {
         tab_button_doc      = setup_tabs.create_button(0); container.appendChild(tab_button_doc     );
         tab_button_examples = setup_tabs.create_button(1); container.appendChild(tab_button_examples);
         tab_button_internal = setup_tabs.create_button(2); container.appendChild(tab_button_internal);
+
+        // Add keybinds
+        document.addEventListener('keydown', e => {
+            let current_tab_index = setup_tabs.get_active_tab_index();
+            let new_tab_index;
+            if     (e.key === 'ArrowLeft' ) new_tab_index = Math.min(Math.max(current_tab_index - 1, 0), 3);
+            else if(e.key === 'ArrowRight') new_tab_index = Math.min(Math.max(current_tab_index + 1, 0), 3);
+            else return;
+            setup_tabs.change_tab(setup_tabs.get_tab_button(new_tab_index), new_tab_index);
+        });
 
         // Spawn the container and set the default tab to documentation
         center.insertBefore(container, center.children[0]);
