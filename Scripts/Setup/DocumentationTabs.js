@@ -61,21 +61,21 @@ const setup_tabs = {
 
 
 
-    change_tab : function(tab_button, tab_index) {
+    change_tab : function(new_tab_button, tab_index) {
+        let old_tab_index = setup_tabs.get_active_tab_index();
 
         // Disable old tab, enable new tab
-        setup_tabs.disable_tab(setup_tabs.get_tab(setup_tabs.get_active_tab_index()));
+        setup_tabs.disable_tab(setup_tabs.get_tab(old_tab_index));
         setup_tabs.enable_tab(setup_tabs.get_tab(tab_index));
 
         // Change active tab index and move the elements
+        let old_tab_button = setup_tabs.get_tab_button(old_tab_index);
         localStorage.setItem("active_tab", tab_index);
         tab_doc.style.marginLeft = `calc(0px - 100% * ${ tab_index } - var(--main-padding-c) * ${ tab_index })`;
 
         // Update button colors
-        tab_button_doc.style.removeProperty("background-color");
-        tab_button_examples.style.removeProperty("background-color");
-        tab_button_internal.style.removeProperty("background-color");
-        tab_button.style.backgroundColor = "var(--bg-index-active)";
+        old_tab_button.classList.remove("active-button");
+        new_tab_button.classList.add("active-button");
     },
 
 
@@ -109,16 +109,6 @@ const setup_tabs = {
         // Add click listener
         b.addEventListener("click", function() {
             setup_tabs.change_tab(b, tab_index);
-        });
-        b.addEventListener("mouseenter", function(){
-            if(Number.parseInt(b.style.getPropertyValue("--tab-num"), 10) != setup_tabs.get_active_tab_index()) {
-                b.style.backgroundColor = "var(--bg-index-hover)";
-            }
-        });
-        b.addEventListener("mouseleave", function(){
-            if(Number.parseInt(b.style.getPropertyValue("--tab-num"), 10) != setup_tabs.get_active_tab_index()) {
-                b.style.removeProperty("background-color");
-            }
         });
 
 

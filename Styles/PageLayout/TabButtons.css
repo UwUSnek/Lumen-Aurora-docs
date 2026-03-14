@@ -34,9 +34,30 @@
     padding: var(--tab-button-padding) 0 var(--tab-button-padding) 0;
 
     cursor: pointer;
-    transition: background-color 0.2s ease, opacity 0.2s ease;
     user-select: none;
+    color: var(--button-color-hover);
+
+    color: var(--button-color-idle);
+    transition: background-color 0.2s ease, color 0.2s ease;
+    background-color: transparent;
+    text-shadow: none;
 }
+
+
+.tab-buttons-container > .tab-button.active-button,
+.tab-buttons-container > .tab-button:not(.active-button):hover {
+    /*! Make hover more visible with a 1px white glow */
+    /*! Use shadow instead of increasing text weight as that doesn't make the letters wider */
+    text-shadow: 0px 0px 1px white;
+    color: var(--button-color-hover);
+}
+.tab-buttons-container > .tab-button.active-button {
+    background-color: var(--bg-index-active);
+}
+.tab-buttons-container > .tab-button:not(.active-button):hover {
+    background-color: var(--bg-index-hover);
+}
+
 
 
 
@@ -52,15 +73,6 @@
     text-align: center;
     font-size: var(--font-size-mediumlarge);
     font-weight: 200;
-    color: var(--button-color-hover); /*! Using hover as idle color and full white as hover color */
-    transition: color 0.2s ease;
-}
-.tab-buttons-container > .tab-button:hover > span {
-    color: white;
-
-    /*! Make hover more visible with a 1px white glow */
-    /*! Use shadow instead of increasing text weight as that doesn't make the letters wider */
-    text-shadow: 0px 0px 1px white;
 }
 
 
