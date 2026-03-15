@@ -19,7 +19,7 @@
     --bg-pre:           #0f0f0f;
 
     --fg-separator:     hsl(213, 12%, 18%);
-    --fg-separator-thin:     color-mix(in srgb, var(--fg-separator) 25%, transparent);
+    --fg-separator-thin: color-mix(in srgb, var(--fg-separator) 25%, transparent);
     --fg-text:          hsl(240, 2%, 88%);
 }
 
@@ -28,6 +28,7 @@
 
 
 
+/* Standard stuff for everything */
 *:not(ol) {
     margin:  0;
     padding: 0;
@@ -40,4 +41,20 @@
 }
 p, table, h1, h2, h3{
     margin: var(--def-margin) 0 var(--def-margin) 0;
+}
+
+
+
+
+/* Left border for hovered paragraphs and lists */
+:is(#main-center-doc, #main-center-examples, #main-center-internal) > p,
+:is(#main-center-doc, #main-center-examples, #main-center-internal) > ul {
+    border-left: 2px solid var(--fg-separator);
+    padding-left: 10px;
+    margin-left: -2px;
+    overflow: visible;
+}
+:is(#main-center-doc, #main-center-examples, #main-center-internal) > p:hover,
+:is(#main-center-doc, #main-center-examples, #main-center-internal) > ul:hover {
+    border-left: 2px solid var(--fg-separator);
 }

@@ -24,17 +24,17 @@ syntax- > label- {
     padding: var(--syntax-label-padding-top) var(--syntax-label-padding) 0 var(--syntax-label-padding);
     font-weight: bold;
     white-space: nowrap;
-    overflow: visible;
+    overflow: clip;
     font-size: var(--font-size-medium);
 
     box-sizing: border-box;
+    margin: 0 0 calc(0px - var(--syntax-overlap-fix)) 0;
     min-width: 0;
     max-width: calc(100% - var(--code-decoration-r));
     /**/width: fit-content;
     min-height: var(--syntax-label-h);
     max-height: var(--syntax-label-h);
     /**/height: var(--syntax-label-h);
-    margin: 0 -1px calc(0px - var(--syntax-overlap-fix)) -1px; /*! Expand the element 1px horizontally to re-align 1px wide borders */
 
 
     /*! CSS clipping straight up cuts shadows and there is no sane way around it */
@@ -43,9 +43,6 @@ syntax- > label- {
 example- > label-:not(:first-child),
 syntax- > label-:not(:first-child) {
     margin-top: var(--syntax-internal-margin);
-}
-syntax- > label- {
-    cursor: default;
 }
 
 

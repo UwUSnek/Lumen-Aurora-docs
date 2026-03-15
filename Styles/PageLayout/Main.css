@@ -140,7 +140,6 @@ body > main- > center- > #main-center-tab-container > #main-center-internal {
     max-width:  100%;
     min-height: 100%;
     max-height: 100%;
-    padding: 0 1px 0 1px; /*! This forces the 1-wide borders to be aligned with the tab buttons' borders */
 
     flex-direction: column;
     white-space: normal;

@@ -19,7 +19,7 @@ const keybinds = {
             switch(e.key) {
                 case "i": button_triggers.toggle_index(); break;
                 case "w": button_triggers.toggle_text_wrap(); break;
-                case "a": setup_index.move_to_view(); break;
+                case "a": setup_index.move_to_view(true); break;
                 default: return;
             }
         });

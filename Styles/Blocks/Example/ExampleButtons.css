@@ -1,6 +1,6 @@
 :root {
-    --example-button-size: 15px;
-    --example-button-dist: 5px;
+    --example-button-size: 16px;
+    --example-button-dist: 6px;
     --example-buttons-padding-left: 15px;
 }
 
@@ -28,28 +28,33 @@ body > main- > center- example- buttons- {
 
 
 body > main- > center- example- buttons- > button- {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
     padding: 0;
-    margin: 0;
 
-    min-width: var(--example-button-size);
-    max-width: var(--example-button-size);
-    min-height: var(--example-button-size);
-    max-height: var(--example-button-size);
+    /*! Use negative margin to increase element hitbox while maintaining the correct visual size and position */
+    margin:         calc(0px - var(--example-button-dist) / 2);
+    margin-bottom:  calc(0px - var(--example-button-dist));
+    min-width:  calc(var(--example-button-size) + var(--example-button-dist));
+    max-width:  calc(var(--example-button-size) + var(--example-button-dist));
+    min-height: calc(var(--example-button-size) + var(--example-button-dist));
+    max-height: calc(var(--example-button-size) + var(--example-button-dist));
+
     cursor: pointer;
 }
 body > main- > center- example- buttons- > button- > svg {
-    min-width: 100%;
-    max-width: 100%;
-    min-height: 100%;
-    max-height: 100%;
+    min-width:  calc(100% - var(--example-button-dist));
+    max-width:  calc(100% - var(--example-button-dist));
+    min-height: calc(100% - var(--example-button-dist));
+    max-height: calc(100% - var(--example-button-dist));
 
     color: var(--button-color-idle);
     animation: fadein 0.2s ease;
     transition: color 0.2s ease;
 }
-body > main- > center- example- buttons- > button- > svg:hover {
+body > main- > center- example- buttons- > button-:hover > svg {
     color: var(--button-color-hover);
 }
 @keyframes fadein {

@@ -1,7 +1,7 @@
 :root {
     --syntax-spacing:           20px;
     --syntax-width:             65%;
-    --syntax-overlap-fix:       2px;
+    --syntax-overlap-fix:       1px;
     --syntax-table-padding:     2ch;
     --syntax-margin:            32px;
     --syntax-margin-2:          128px;
@@ -63,10 +63,10 @@ syntax- table {
     border-top-left-radius: 0;
     background-color: var(--bg-pre);
     overflow: clip;
+    box-sizing: border-box;
+    margin: 0;
 
     font-weight: 400;
-    box-sizing: border-box;
-    margin: 0 -1px 0 -1px; /*! Expand the element 1px horizontally to re-align 1px wide borders */
     min-width: 100%;
     max-width: 100%;
     /**/width: 100%;
