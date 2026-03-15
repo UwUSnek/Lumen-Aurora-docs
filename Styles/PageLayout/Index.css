@@ -36,19 +36,20 @@ body > main- > left- > index- indexh- {
 
     border-radius: 0 6px 6px 0;
     padding: 2px 0 2px 0;
-    /**/width: 100%;
-    /* max-width Set from JS */
+    width: 100%;
     transition: background-color 0.2s cubic-bezier(.17,.84,.44,1);
 }
 body > main- > left- > index- indexh- {
-    min-height: 2em;
-    max-height: 2em;
-    line-height: 2em;
+    /*! Using px instead of em keeps the sized consistent and automatically aligns the text vertically */
+    min-height:  28px;
+    max-height:  28px;
+    line-height: 28px;
 }
 body > main- > left- > index- indexd- {
-    min-height: 1.5em;
-    max-height: 1.5em;
-    line-height: 1.5em;
+    /*! Using px instead of em keeps the sized consistent and automatically aligns the text vertically */
+    min-height:  22px;
+    max-height:  22px;
+    line-height: 22px;
 }
 body > main- > left- > index- index-elms- {
     margin: 0;

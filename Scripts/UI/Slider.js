@@ -7,6 +7,7 @@
 
 
 
+
 // Save slider element
 let slider = document.getElementById("main-slider");
 let slider_width_px = Number.parseInt(utils.page_style.getPropertyValue("--slider-w").slice(0, -2));
@@ -52,10 +53,6 @@ const ui_slider = {
         // Wrap text if needed
         let text_wrap = (localStorage.getItem("text_wrap")) === "true";
         for(let e of center.querySelectorAll(":scope > #main-center-tab-container > * > *")) {
-            if (!e.dataset.transitionSet) {
-                e.style.transition += `max-width 0.2s ease`;
-                e.dataset.transitionSet = "1";
-            }
             if(text_wrap && !e.matches("syntax-, example-, split-example-container-, ce-full-size-, h1, table, .table-container, .no-text-width-limit")) {
                 e.style.maxWidth = `${ right_w }px`;
             }
@@ -88,8 +85,8 @@ const ui_slider = {
         if(globalThis.localStorage.getItem("slider-set") != "set") {
             ui_slider.init_slider_first_time();
         }
-        slider.addEventListener("mousemove",  ui_slider.update_main_width);
-        slider.addEventListener("mouseup",  ui_slider.update_main_width);
+        slider.addEventListener("mousemove", ui_slider.update_main_width);
+        slider.addEventListener("mouseup",   ui_slider.update_main_width);
         slider.value = globalThis.localStorage.getItem("slider-value");
     },
 

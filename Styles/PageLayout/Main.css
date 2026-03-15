@@ -1,6 +1,7 @@
 :root {
-    --main-padding-c: 4vw; /*! Must be in vw to let JS parse the value correctly & based on the viewport's width */
-    --main-right-w:   3vw; /*! Must be in vw to let JS parse the value correctly & based on the viewport's width */
+    --main-padding-c: 4vw;         /*! Must be in vw to let JS parse the value & change with viewport's width */
+    --main-right-w:   3vw;         /*! Must be in vw to let JS parse the value & change with viewport's width */
+    --main-overflow-margin-c: 2vw; /*! Must be in vw to let JS parse the value & change with viewport's width */   /* Must also be < main-padding-c */
     --shadow-color: rgba(0, 0, 0, 0.2);
     --light-shadow-color: rgba(0, 0, 0, 0.1);
     --main-center-min-w: 25vw; /*! Must be precalculated and in vw to let JS parse the value correctly */
@@ -136,8 +137,11 @@ body > main- > center- > #main-center-tab-container > #main-center-internal {
     display: inline-block;
     position: relative;
 
-    min-width:  100%;
-    max-width:  100%;
+    /*! Create fake overflow margins using negative margins (JS for first tab, CSS+JS for the others) and padding */
+    /*! Because apparently CSS can't do that */
+    min-width:  calc(100% + var(--main-overflow-margin-c) * 2);
+    max-width:  calc(100% + var(--main-overflow-margin-c) * 2);
+    padding: 0 var(--main-overflow-margin-c) 0 var(--main-overflow-margin-c);
     min-height: 100%;
     max-height: 100%;
 
@@ -176,15 +180,16 @@ body > main- > center- > #main-center-tab-container tab-placeholder-::after {
 body > main- > center- > #main-center-tab-container > #main-center-doc {
     /* Set transition for full example list tab */
     /*! transition is set from JS - different easing depending on direction */
-    margin-right: var(--main-padding-c); /* Push examples out of view */
+    /*! left margin is set from JS - changes with active tab */
+    margin-right: calc(var(--main-padding-c) - var(--main-overflow-margin-c)); /* Push examples out of view */
 }
 
 body > main- > center- > #main-center-tab-container > #main-center-examples {
-    margin-left: calc(0 - var(--main-padding-c)); /* (aesthetic mirrored padding) */
-    margin-right: var(--main-padding-c); /* Push internal functioning out of view */
+    margin-left:  calc(0 - var(--main-padding-c) - var(--main-overflow-margin-c)); /* (aesthetic mirrored padding) */
+    margin-right:     calc(var(--main-padding-c) - var(--main-overflow-margin-c)); /* Push internal functioning out of view */
 }
 body > main- > center- > #main-center-tab-container > #main-center-internal {
-    margin-left: calc(0 - var(--main-padding-c)); /* (aesthetic mirrored padding) */
+    margin-left: calc(0 - var(--main-padding-c) - var(--main-overflow-margin-c)); /* (aesthetic mirrored padding) */
 }
 
 

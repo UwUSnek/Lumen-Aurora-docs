@@ -1,0 +1,30 @@
+:root {
+    --hover-border-distance: 12px;
+    --hover-border-width: 4px;
+
+    --hover-bd-color: color-mix(in srgb, var(--fg-separator)      50%, transparent);
+    --hover-bg-color: color-mix(in srgb, var(--fg-separator-thin) 25%, transparent);
+}
+
+
+
+/* Left border for hovered paragraphs and lists */
+:is(#main-center-doc, #main-center-examples, #main-center-internal) > p,
+:is(#main-center-doc, #main-center-examples, #main-center-internal) > ul {
+    border-left: var(--hover-border-width) solid transparent;
+    background-color: var(--hover-bg-color-transparent);
+    overflow: visible;
+
+    padding-left:  var(--hover-border-distance);
+    padding-right: var(--hover-border-distance);
+    margin-left: calc(0px - var(--hover-border-distance) - var(--hover-border-width));
+    /*! Transition value set by JS */
+}
+
+
+:is(#main-center-doc, #main-center-examples, #main-center-internal) > p:hover,
+:is(#main-center-doc, #main-center-examples, #main-center-internal) > ul:hover {
+    border-left-color: var(--hover-bd-color);
+    background: var(--hover-bg-color);
+    border-radius: 6px;
+}

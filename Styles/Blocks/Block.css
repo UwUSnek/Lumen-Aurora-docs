@@ -63,7 +63,6 @@ syntax- table {
     border-top-left-radius: 0;
     background-color: var(--bg-pre);
     overflow: clip;
-    box-sizing: border-box;
     margin: 0;
 
     font-weight: 400;
@@ -73,8 +72,6 @@ syntax- table {
     min-height: fit-content;
     max-height: fit-content;
     /**/height: fit-content;
-
-    /*! CSS clipping straight up cuts shadows and there is no sane way around it */
     box-shadow: 0px 4px 4px var(--light-shadow-color), 0px -4px 4px var(--light-shadow-color), 4px 0px 4px var(--light-shadow-color), -4px 0px 4px var(--light-shadow-color);
 }
 syntax- table:last-child {

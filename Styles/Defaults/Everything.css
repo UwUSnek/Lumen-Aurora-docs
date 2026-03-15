@@ -5,19 +5,18 @@
     --word-spacing:       0.4ch;
     --line-h:             3ch;
     --wide-line-h:        3.5ch;
-
     --font-size-mono:     13px;
 
 
     /* Sizes */
     --def-margin:         32px;
+    --def-padding:        8px;
     --list-indentation:   4ch;
 
 
     /* Color */
     --bg:               #171717;
     --bg-pre:           #0f0f0f;
-
     --fg-separator:     hsl(213, 12%, 18%);
     --fg-separator-thin: color-mix(in srgb, var(--fg-separator) 25%, transparent);
     --fg-text:          hsl(240, 2%, 88%);
@@ -29,7 +28,10 @@
 
 
 /* Standard stuff for everything */
+*:not(ol)::before,
+*:not(ol)::after,
 *:not(ol) {
+    box-sizing: border-box; /*! This makes the element's width include its padding. Which is what you want 99% of the times */
     margin:  0;
     padding: 0;
     image-rendering: auto; /*! For some reason using optimizeQuality or smooth results in having no antialiasing */
@@ -39,22 +41,18 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
-p, table, h1, h2, h3{
+p, table, h1, h2, h3 {
     margin: var(--def-margin) 0 var(--def-margin) 0;
+    padding: 0;
 }
 
 
 
-
-/* Left border for hovered paragraphs and lists */
-:is(#main-center-doc, #main-center-examples, #main-center-internal) > p,
-:is(#main-center-doc, #main-center-examples, #main-center-internal) > ul {
-    border-left: 2px solid var(--fg-separator);
-    padding-left: 10px;
-    margin-left: -2px;
-    overflow: visible;
-}
-:is(#main-center-doc, #main-center-examples, #main-center-internal) > p:hover,
-:is(#main-center-doc, #main-center-examples, #main-center-internal) > ul:hover {
-    border-left: 2px solid var(--fg-separator);
+/*! Handle transitions - text wrap (max-width) and hover border (background-color, left-border-color) */
+:is(#main-center-doc, #main-center-examples, #main-center-internal) > * {
+    margin-top:    calc(var(--def-margin) - var(--def-padding));
+    margin-bottom: calc(var(--def-margin) - var(--def-padding));
+    padding-top:    var(--def-padding);
+    padding-bottom: var(--def-padding);
+    transition: background-color 0.2s ease, max-width 0.2s ease, border-left-color 0.2s ease;
 }

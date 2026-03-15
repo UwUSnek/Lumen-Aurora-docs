@@ -7,8 +7,8 @@ const keybinds = {
         document.addEventListener('keydown', e => {
             let current_tab_index = setup_tabs.get_active_tab_index();
             let new_tab_index;
-            if     (e.key === 'ArrowLeft' ) new_tab_index = Math.min(Math.max(current_tab_index - 1, 0), 3);
-            else if(e.key === 'ArrowRight') new_tab_index = Math.min(Math.max(current_tab_index + 1, 0), 3);
+            if     (e.key === 'ArrowLeft' ) new_tab_index = Math.min(Math.max(current_tab_index - 1, 0), 2);
+            else if(e.key === 'ArrowRight') new_tab_index = Math.min(Math.max(current_tab_index + 1, 0), 2);
             else return;
             setup_tabs.change_tab(setup_tabs.get_tab_button(new_tab_index), new_tab_index);
         });

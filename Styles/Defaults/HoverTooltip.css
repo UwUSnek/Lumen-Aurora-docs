@@ -22,7 +22,7 @@
     box-shadow: 0px 4px 8px var(--shadow-color);
 }
 .tooltip-left::after {
-    right: 175%;
+    right: 200%;
     top: 50%;
     transform: translateY(-50%);
 }

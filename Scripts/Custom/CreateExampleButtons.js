@@ -23,7 +23,7 @@ const create_example_buttons = {
                 let copy_button = document.createElement("button-");
                 (async () => {copy_button.appendChild(await utils.loadSVG("./Styles/Blocks/Example/Icons/CopyExampleButton.svg"));})();
                 copy_button.dataset.tooltip = "Copy example";
-                copy_button.classList.add("tooltip-top-high");
+                copy_button.classList.add("tooltip-top");
                 copy_button.addEventListener('click', function(){ ui_example_button_triggers.trigger_copy_code(label); });
                 button_container.appendChild(copy_button);
 
@@ -31,7 +31,7 @@ const create_example_buttons = {
                 let sandbox_button = document.createElement("button-");
                 (async () => {sandbox_button.appendChild(await utils.loadSVG("./Styles/Blocks/Example/Icons/SandboxButton.svg"))})();
                 sandbox_button.dataset.tooltip = "Run in ALC Sandbox";
-                sandbox_button.classList.add("tooltip-top-high");
+                sandbox_button.classList.add("tooltip-top");
                 sandbox_button.addEventListener('click', function(){ ui_example_button_triggers.trigger_run_in_sandbox(label); });
                 button_container.appendChild(sandbox_button);
             }

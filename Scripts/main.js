@@ -12,6 +12,7 @@ let main_padding_r_px;
 let main_right_w_px;
 let main_centeR_width_w_px;
 
+
 function update_vw_values(){
     let page_width = document.documentElement.clientWidth;
     main_padding_r_px      = main_padding_r_vw      * page_width / 100;

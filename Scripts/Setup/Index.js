@@ -66,7 +66,6 @@ const setup_index = {
             let name = capitalize(id_stripped.split('.').pop()).replaceAll('-', ' ');
             elm.innerHTML = `<span id="index--${ id_stripped }">${ number_str } ${ name }</span>`;
             elm.style.paddingLeft = `calc(` +   `${ index_indent } * ${ depth })`;
-            elm.style.maxWidth    = `calc(100% - ${ index_indent } * ${ depth })`;
 
 
             //Fix referenced heading

@@ -13,7 +13,7 @@ let tab_button_internal;
 let doc_tab_opacity_easing_exit  = utils.page_style.getPropertyValue("--doc-tab-opacity-easing-exit").trim()
 let doc_tab_opacity_easing_enter = utils.page_style.getPropertyValue("--doc-tab-opacity-easing-enter").trim()
 let doc_tab_movement_easing      = utils.page_style.getPropertyValue("--doc-tab-movement-easing").trim()
-let transition_movement = `margin-left 0.3s ${ doc_tab_movement_easing }`;
+let default_tab_transitions = `margin-left 0.3s ${ doc_tab_movement_easing }`;
 
 
 
@@ -46,7 +46,7 @@ const setup_tabs = {
 
     disable_tab : function(tab) {
         tab.style.opacity = "0%";
-        tab.style.transition = `${ transition_movement }, opacity 0.3s ${ doc_tab_opacity_easing_exit }`;
+        tab.style.transition = `${ default_tab_transitions }, opacity 0.3s ${ doc_tab_opacity_easing_exit }`;
         tab.style.setProperty("pointer-events", "none", "important");
         //! !important is required in order to overwrite other stuff.
         //! no clicks on invisible tabs is of the highest priority.
@@ -55,7 +55,7 @@ const setup_tabs = {
 
     enable_tab : function(tab) {
         tab.style.opacity = "100%";
-        tab.style.transition = `${ transition_movement }, opacity 0.3s ${ doc_tab_opacity_easing_enter }`;
+        tab.style.transition = `${ default_tab_transitions }, opacity 0.3s ${ doc_tab_opacity_easing_enter }`;
         tab.style.pointerEvents = "auto";
     },
 
@@ -71,7 +71,8 @@ const setup_tabs = {
         // Change active tab index and move the elements
         let old_tab_button = setup_tabs.get_tab_button(old_tab_index);
         localStorage.setItem("active_tab", tab_index);
-        tab_doc.style.marginLeft = `calc(0px - 100% * ${ tab_index } - var(--main-padding-c) * ${ tab_index })`;
+        tab_doc.style.marginLeft = `calc(0px - 100% * ${ tab_index } - var(--main-padding-c) * ${ tab_index } - var(--main-overflow-margin-c) * ${ 1 + tab_index })`;
+        //! var(--main-overflow-margin-c) needs to be pulled from CSS - Computing it from JS doesn't seem to work properly when resizing the web page
 
         // Update button colors
         old_tab_button.classList.remove("active-button");
