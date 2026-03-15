@@ -1,6 +1,8 @@
 :root {
     --main-footer-h: 25px;
     --main-footer-keybinds-margin: 10px;
+    --main-footer-doodle-margin: 15px;
+    --main-footer-version-margin: 35px;
     --main-footer-color: #292929;
 }
 
@@ -34,11 +36,18 @@ body > footer- * {
 
 
 
+body > footer- > img.footer-doodle {
+    display: block;
+    text-align: left;
+    width:  calc(var(--main-footer-h) / 2);
+    height: calc(var(--main-footer-h) / 2);
+    margin-left: var(--main-footer-doodle-margin);
+}
 body > footer- > footer-version- {
     display: block;
     text-align: left;
-    width: calc(100% - var(--main-footer-keybinds-margin));
-    margin-left: var(--main-footer-keybinds-margin);
+    width: calc(100% - var(--main-footer-version-margin));
+    margin-left: var(--main-footer-version-margin);
 }
 body > footer- > footer-keybinds- {
     display: block;
