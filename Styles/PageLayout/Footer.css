@@ -32,12 +32,19 @@ body > footer- * {
 }
 
 
+
+
+body > footer- > footer-version- {
+    display: block;
+    text-align: left;
+    width: calc(100% - var(--main-footer-keybinds-margin));
+    margin-left: var(--main-footer-keybinds-margin);
+}
 body > footer- > footer-keybinds- {
     display: block;
     text-align: right;
     width: calc(100% - var(--main-footer-keybinds-margin));
     margin-right: var(--main-footer-keybinds-margin);
-    font-family: monospace;
 }
 body > footer- > footer-message- {
     display: block;

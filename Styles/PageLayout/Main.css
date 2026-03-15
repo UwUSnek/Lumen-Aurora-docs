@@ -47,7 +47,7 @@ body > main- > * {
 /*Index container */
 body > main- > left- {
     display: block;
-    background-color: var(--bg);
+    background-color: var(--bg-sides);
     overflow-x: clip;
     overflow-y: scroll;
     position: fixed;
@@ -218,7 +218,7 @@ body > main- > right- {
     top: 0;
     margin: 0;
 
-    background-color: var(--bg);
+    background-color: var(--bg-sides);
     border-left: 1px solid var(--fg-separator-thin);
     min-width: var(--main-right-w);
     max-width: var(--main-right-w);

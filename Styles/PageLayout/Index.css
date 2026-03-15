@@ -1,6 +1,6 @@
 :root {
-    --bg-index-hover:   hsl(253, 12%, 17%);
-    --bg-index-active:  hsl(255, 14%, 22%);
+    --bg-index-hover:   hsl(253, 10%, 17%);
+    --bg-index-active:  hsl(255, 14%, 26%);
     --main-index-margin-top: 1em;
     --main-index-margin-bottom: 4em;
 }
@@ -29,7 +29,7 @@ body > main- > left- > index- {
 body > main- > left- > index- indexd-,
 body > main- > left- > index- indexh- {
     display: block;
-    background-color: var(--bg);
+    background-color: var(--bg-sides);
     white-space: nowrap;
     overflow: clip;
     cursor: pointer;

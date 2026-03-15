@@ -22,6 +22,7 @@ ce- {
     margin: -1px -5px -2px -5px;
 
     color: #d14141;
+    background-color: #d1303011;
     font-weight: var(--font-size-code)
 }
 
@@ -35,7 +36,9 @@ ce-full-size- {
     margin: var(--def-margin) 0 0 0;
     min-width: 100%;
     max-width: 100%;
-    color: #df9d9d;
+
+    color: #f8bebe;
+    background-color: #ad25252a;
 }
 
 
@@ -45,5 +48,4 @@ ce-, ce-full-size- {
     border: 1px solid #d13030aa;
     border-width: 0 1px 0 1px;
     border-radius: 6px;
-    background-color: #d1303011;
 }
