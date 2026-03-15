@@ -497,7 +497,7 @@ int main() {
 
 
 
-- each value in expression trees carries these informations
+- each value in expression trees carries this Information
   - known to the programmer
     - writeable: true/false (can be assigned to)
     - constant: true/false (can be used for constant expressions)

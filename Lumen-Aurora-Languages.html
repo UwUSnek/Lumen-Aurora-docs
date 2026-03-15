@@ -48,9 +48,9 @@
 
 
     <index-><indexh->preprocessor</indexh-><index-elms->
+        <indexd->include-statement</indexd->
         <indexd->line-splicing</indexd->
         <indexd->comments</indexd->
-        <indexd->include-statement</indexd->
         <indexd->macros</indexd->
     </index-elms-></index->
 
@@ -325,7 +325,7 @@
             <indexd->omitted.reference-types</indexd->
             <indexd->omitted.member-functions</indexd->
             <indexd->omitted.interfaces</indexd->
-            <indexd->omitted.runtime-type-informations</indexd->
+            <indexd->omitted.runtime-type-information</indexd->
             <indexd->omitted.inheritance-and-polymorphism</indexd->
         </index-elms-></index->
         <index-><indexh->omitted.control-flow</indexh-><index-elms->
@@ -451,46 +451,28 @@
 <h1 id="preprocessor"></h1>
 <moveto-doc->
     <p>
-        The <b>preprocessing</b> phase precedes the compilation of the source code.<br>
-        It is responsible for <a href="#line-splicing-tokens">splicing lines</a>, removing <a href="#comments">comments</a>
-        and executing preprocessor directives</a>.
+        Traditionally, the <b>preprocessor</b> is a separate program invoked <b>before compilation</b>.
+        It is responsible for <a href="#line-splicing-tokens">splicing lines</a>, removing <a href="#comments">comments</a>,
+        and executing preprocessor directives.<br>
+        The ALC compiler implements the preprocessor as a compilation phase.
+        This lets it generate better diagnostics and reduce overhead.
     </p>
     <p>
-        <b>Preprocessor directives</b> are special instructions that allow the code of a module to be programmatically modified.<br>
-        All preprocessor directives are identified by the <code>#</code> character followed by their name and definition/parameters.<br>
-        The name of preprocessor directives is always case sensitive.
-    </p>
-    <p>
-        This phase is fully independent and works regardless of the code's correctness.<br>
-        At this stage, the concept of token doesn't exist yet. The entire source code is treated as a stream of single characters.
-        This allows the preprocessor to freely edit whitespace and create or split tokens.
+        This phase is <b>fully independent</b> and works regardless of the languages' lexicon and semantics.<br>
+        At this stage, tokens haven't been formed yet. The entire source code is treated as a stream of individual characters.
     </p>
     <ul>
         Preprocessor operations are performed in the following order:
         <ul>
-            <li>Include phase</li>
-            <li>Line splicing</li>
-            <li>Cleanup phase</li>
-            <li>Macro substitution</li>
+            <li>1. Include phase.<br><a href="#include-statements">Include statements</a> are recursively replaced with the contents of the specified file.</li>
+            <li>2. Line splicing.<br><a href="#line-splicing">Line splicing tokens</a> are removed, merging affected lines.</li>
+            <li>3. Cleanup phase.<br>All <a href="#comments">comments</a> are removed.</li>
+            <li>
+                4. Macro expansion.<br><a href="#macros">Macro definitions</a> are parsed and removed from the code,
+                then <a href="#macros">macro invocations</a> are recursively expanded using the provided arguments.</li>
         </ul>
     </ul>
-    <p>
-        Traditionally, the preprocessor is a separate program that is ran before the compiler.
-        The Lumen and Aurora compiler includes the preprocessor as a compilation phase.
-        This has the advantage of
-    </p>
 </moveto-doc->
-<moveto-internal->
-    <p>
-        //BUG fix all of this, the documentation is extremely outdated. look at how the compiler actually does it
-        Preprocessor operations are performed in the following order:<br>
-        &nbsp;&nbsp;1. Line splicing: <a href="#line-splicing">Line continuation tokens</a> and <a href="#line-splicing">Line junction tokens</a> are removed.<br>
-        &nbsp;&nbsp;3. Comment Removal: <a href="#comments">Comments</a> are removed from the code.<br>
-        &nbsp;&nbsp;4. File stitching: <a href="include-statement">Include statements</a> are processed recursively, merging all referenced files into one.<br>
-        &nbsp;&nbsp;5. Macro Definitions: <a href="#preprocessor-macro">Macro</a> definitions are evaluated and then removed from the code.<br>
-        &nbsp;&nbsp;6. Macro Calls: <a href="#preprocessor-macro">Macro</a> calls are replaced with their corresponding definitions, substituting each parameter with the provided argument, recursively.<br>
-    </p>
-</moveto-internal->
 
 
 
@@ -498,8 +480,8 @@
 <moveto-doc->
     <ce-full-size->
         <b>NOTICE:</b><br>
-        Splitting lines is a very easy way to create unreadable code.<br>
-        Proper language syntax should be preferred whenever possible.
+        Splitting lines can easily lead to unreadable code. Proper language syntax should be preferred whenever possible.<br>
+        Line splicing tokens are provided purely for completeness and familiarity. Use them responsibly.<br>
     </ce-full-size->
     <p>
         <b>Line splicing</b> can be used to <b>merge multiple lines</b> and allow <a hreaf="#macros">macros</a>, <a href="#comments">comments</a>,
@@ -606,31 +588,36 @@
         Line splicing tokens are not considered whitespace and are simply removed during the preprocessing phase.<br>
         This means that they can be used inside of any token, including <a href="#string-literals">Strings</a> and Character literals.
     </p>
+    <p>
+        //TODO add that interaction with include statements
+    </p>
+    <p>
+        //TODO specify that LSTs cannot bleed into other files if placed at the end of their file
+    </p>
 </moveto-internal->
 
 <h1 id="comments"></h1>
 <moveto-doc->
     <p>
         <b>Comments</b> are <b>portions of code</b> that are <b>intentionally ignored</b>.<br>
-        They can be used to provide informations or temporarily exclude lines of code.<br>
+        They can be used to provide information or temporarily exclude lines of code.<br>
         Comments are allowed to contain any sequence of Unicode characters of any length.
     </p>
     <ul>
-        There are two types of comments:
+        The preprocessor supports two types of comments:
         <ul>
             <li>
-                Single line comments start with <code>//</code> and end at the character that comes before the next <code><nl-></nl-></code> character (\n).
+                Single line comments start with <code>//</code> and end immediately before the next <code><nl-></nl-></code> character (\n).
             </li>
             <li>
                 Multiline comments start with <code>/*</code> and end with <code>*/</code>.
             </li>
         </ul>
-        Not closing a comment is allowed. This will cause it to include everything from its starting character sequence to the end of the file.
     </ul>
     <p>
         Comments cannot be nested.<br>
-        Because they are removed before preprocessor directives are parsed, they also cannot be included through <a href="#include-statement">include statements</a>
-        or processed using <a href="#macros">preprocessor macros</a>.
+        Unclosed comments are allowed. They include everything from their opening character sequence to the end of the file.<br>
+        Because they are removed before macro expansion takes place, comments cannot be generated with <a href="#macros">preprocessor macros</a>.
     </p>
 
     <syntax->
@@ -643,22 +630,25 @@
         <div>
             <c->// Single line comment</c->
 
-            <c->        /* Multi /</c->
-            <c->       line     /</c->
-            <c->      comment */</c->
+            <c->        /* Multi</c->
+            <c->       line          </c->
+            <c->      comment   */</c->
         </div>
         <label->Example 2 - No nesting</label->
         <div>
             <c->/* Multi line /* u.u */</c-> comment */
                                     <ce->^ Error, unexpected token "comment"</ce->
 
-            <c->/* Non-closed comment</c->
+            <c->/* Non-closed comment - everything after this is considered to be a comment</c->
             <c->void main {</c->
                 <c->return 0;</c->
             <c->}</c->
         </div>
-        <label->Example 3 - Whitespace</label->
+        <label->Example 3</label->
         <div>
+            <w->#inc</w-><c->/* This is a comment */</c-><w->lude</w-> <s->"./test"</s->;
+            <c->// This include statement is valid</c->
+
             <w->import</w-> <s->io</s->;
 
             <c->// comment</c->
@@ -670,13 +660,34 @@
 </moveto-examples->
 <moveto-internal->
     <p>
-        Comments are <b>not</b> considered whitespace.<br>
+        Comments are not considered whitespace.<br>
         Syntactically, they act in the same way as <a href="#line-splicing">line splicing tokens</a>,
-        as they are removed in the same step before any additional operation is performed.
+        as they are removed before performing any further operation.<br>
+        Just like <a href="#line-splicing">line splicing tokens</a>, they interact uniquely
+        with <a href="include-statement">include statements</a>, as the include statement parser specifically skips comments,
+        making it possible to place them anywhere within it, except inside the file path, which is a text literal.
     </p>
     <p>
-        Because the <code><nl-></nl-></code> character at the end of single-line comments is not considered part of the comment, it is not removed by the preprocessor.<br>
-        This means that single-line comments always separate tokens, rendering them unusable within <a href="#macros">macro</a> definitions.
+        Comments are removed after the <a href="#line-splicing">line splicing</a> phase.
+        This means that <a href="#line-splicing">line splicing tokens</a> are allowed and work normally within comments.
+    </p>
+    <p>
+        Unclosed comments cannot bleed into other files. They always end where their file ends.<br>
+        Including a file containing an unclosed comment is safe and doesn't cause the rest of the code to become commented.
+    </p>
+    <p>
+        Because the <code><nl-></nl-></code> character at the end of single-line comments is not considered part of the comment,
+        it is not removed by the preprocessor.<br>
+        This renders them unusable within <a href="#macros">macro</a> definitions.
+    </p>
+    <p>
+        The contents of <a href="string-literals">string</a> and <a href="char-literals">character</a> literals
+        are excluded from the cleanup phase (comment removal).<br>
+        This is done in order to allow literals to contain any sequence of characters, including comment-like patterns,
+        without the need for special syntax.<br>
+        Internally, the preprocessor tries to form text literal tokens using the same logic as the compiler's tokenizer.
+        Valid tokens are skipped entirely, resuming comment removal from the first character after their closing delimiter.<br>
+        This ensures that any valid Lumen or Aurora text literal is kept unaltered during the cleanup phase.
     </p>
 </moveto-internal->
 
@@ -985,7 +996,7 @@
 <h1 id="language-structure.paths"></h1>
 <moveto-doc->
     <p>
-        Paths are used to reference things declared in the code, either explicitly or implicitly, in order to retrieve or pass informations about them.<br>
+        Paths are used to reference things declared in the code, either explicitly or implicitly, in order to retrieve or pass information about them.<br>
         Any accessible module, namespace, symbol alias, primitive type, enum, struct, special type, routine, variable and temporary variable is considered a symbol.<br>
         Paths are a foundamental part of most <a href="#name-resolution">semantic elements</a>.
     </p>
@@ -993,7 +1004,7 @@
         Type paths are a subset of Symbol paths that point to symbols suitable to be used as types, such as primitive types, enums, structs and special types.
     </p>
     <p>
-        Reflection paths are a subset of Symbol paths that can access compile time informations about the referenced symbol. These are detailedly explained in <a href="#reflection">Reflection</a>.
+        Reflection paths are a subset of Symbol paths that can access compile time information about the referenced symbol. These are detailedly explained in <a href="#reflection">Reflection</a>.
     </p>
 </moveto-doc->
 
@@ -1497,7 +1508,7 @@
     <p>
         Both languages are statically types.<br>
         Every <a href="#values">value</a> has an associated type, regardless of it being a <a href="#left-and-right-values">right</a> or a <a href="#left-and-right-values">left value</a>.<br>
-        The type of each <a href="#values">value</a> must be known at compile time, as there are no runtime type informations.
+        The type of each <a href="#values">value</a> must be known at compile time, as there is no <a href="omitted.runtime-type-information">runtime type information</a>.
     </p>
     <p>
         There are no classes, characters, matrices or vectors. The latter 2 are <a href="#symbol-aliases">aliases</a> of <a href="#arrays">array</a> types. See <a href="#standard-modules">Standard Modules</a>.
@@ -7610,7 +7621,7 @@
     <p></p>
 </moveto-doc->
 
-<h1 id="omitted.runtime-type-informations"></h1>
+<h1 id="omitted.runtime-type-information"></h1>
 <moveto-doc->
     <p></p>
 </moveto-doc->

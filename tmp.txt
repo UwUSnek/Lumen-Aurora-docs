@@ -45,7 +45,7 @@ Syntax: <option>
 
 
 Syntax: <option>
--g0                             No debug informations
+-g0                             No debug Information
 -g1                             Equivalent to //TODO
 -g2                             Equivalent to //TODO
 -g3                             Equivalent to //TODO

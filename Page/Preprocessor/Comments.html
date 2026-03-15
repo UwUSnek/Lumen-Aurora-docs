@@ -3,25 +3,24 @@
 <moveto-doc->
     <p>
         <b>Comments</b> are <b>portions of code</b> that are <b>intentionally ignored</b>.<br>
-        They can be used to provide informations or temporarily exclude lines of code.<br>
+        They can be used to provide information or temporarily exclude lines of code.<br>
         Comments are allowed to contain any sequence of Unicode characters of any length.
     </p>
     <ul>
-        There are two types of comments:
+        The preprocessor supports two types of comments:
         <ul>
             <li>
-                Single line comments start with <code>//</code> and end at the character that comes before the next <code><nl-></nl-></code> character (\n).
+                Single line comments start with <code>//</code> and end immediately before the next <code><nl-></nl-></code> character (\n).
             </li>
             <li>
                 Multiline comments start with <code>/*</code> and end with <code>*/</code>.
             </li>
         </ul>
-        Not closing a comment is allowed. This will cause it to include everything from its starting character sequence to the end of the file.
     </ul>
     <p>
         Comments cannot be nested.<br>
-        Because they are removed before preprocessor directives are parsed, they also cannot be included through <a href="#include-statement">include statements</a>
-        or processed using <a href="#macros">preprocessor macros</a>.
+        Unclosed comments are allowed. They include everything from their opening character sequence to the end of the file.<br>
+        Because they are removed before macro expansion takes place, comments cannot be generated with <a href="#macros">preprocessor macros</a>.
     </p>
 
     <syntax->
@@ -34,22 +33,25 @@
         <div>
             <c->// Single line comment</c->
 
-            <c->        /* Multi /</c->
-            <c->       line     /</c->
-            <c->      comment */</c->
+            <c->        /* Multi</c->
+            <c->       line          </c->
+            <c->      comment   */</c->
         </div>
         <label->Example 2 - No nesting</label->
         <div>
             <c->/* Multi line /* u.u */</c-> comment */
                                     <ce->^ Error, unexpected token "comment"</ce->
 
-            <c->/* Non-closed comment</c->
+            <c->/* Non-closed comment - everything after this is considered to be a comment</c->
             <c->void main {</c->
                 <c->return 0;</c->
             <c->}</c->
         </div>
-        <label->Example 3 - Whitespace</label->
+        <label->Example 3</label->
         <div>
+            <w->#inc</w-><c->/* This is a comment */</c-><w->lude</w-> <s->"./test"</s->;
+            <c->// This include statement is valid</c->
+
             <w->import</w-> <s->io</s->;
 
             <c->// comment</c->
@@ -61,12 +63,33 @@
 </moveto-examples->
 <moveto-internal->
     <p>
-        Comments are <b>not</b> considered whitespace.<br>
+        Comments are not considered whitespace.<br>
         Syntactically, they act in the same way as <a href="#line-splicing">line splicing tokens</a>,
-        as they are removed in the same step before any additional operation is performed.
+        as they are removed before performing any further operation.<br>
+        Just like <a href="#line-splicing">line splicing tokens</a>, they interact uniquely
+        with <a href="include-statement">include statements</a>, as the include statement parser specifically skips comments,
+        making it possible to place them anywhere within it, except inside the file path, which is a text literal.
     </p>
     <p>
-        Because the <code><nl-></nl-></code> character at the end of single-line comments is not considered part of the comment, it is not removed by the preprocessor.<br>
-        This means that single-line comments always separate tokens, rendering them unusable within <a href="#macros">macro</a> definitions.
+        Comments are removed after the <a href="#line-splicing">line splicing</a> phase.
+        This means that <a href="#line-splicing">line splicing tokens</a> are allowed and work normally within comments.
+    </p>
+    <p>
+        Unclosed comments cannot bleed into other files. They always end where their file ends.<br>
+        Including a file containing an unclosed comment is safe and doesn't cause the rest of the code to become commented.
+    </p>
+    <p>
+        Because the <code><nl-></nl-></code> character at the end of single-line comments is not considered part of the comment,
+        it is not removed by the preprocessor.<br>
+        This renders them unusable within <a href="#macros">macro</a> definitions.
+    </p>
+    <p>
+        The contents of <a href="string-literals">string</a> and <a href="char-literals">character</a> literals
+        are excluded from the cleanup phase (comment removal).<br>
+        This is done in order to allow literals to contain any sequence of characters, including comment-like patterns,
+        without the need for special syntax.<br>
+        Internally, the preprocessor tries to form text literal tokens using the same logic as the compiler's tokenizer.
+        Valid tokens are skipped entirely, resuming comment removal from the first character after their closing delimiter.<br>
+        This ensures that any valid Lumen or Aurora text literal is kept unaltered during the cleanup phase.
     </p>
 </moveto-internal->

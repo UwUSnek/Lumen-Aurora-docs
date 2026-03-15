@@ -3,8 +3,8 @@
 <moveto-doc->
     <ce-full-size->
         <b>NOTICE:</b><br>
-        Splitting lines is a very easy way to create unreadable code.<br>
-        Proper language syntax should be preferred whenever possible.
+        Splitting lines can easily lead to unreadable code. Proper language syntax should be preferred whenever possible.<br>
+        Line splicing tokens are provided purely for completeness and familiarity. Use them responsibly.<br>
     </ce-full-size->
     <p>
         <b>Line splicing</b> can be used to <b>merge multiple lines</b> and allow <a hreaf="#macros">macros</a>, <a href="#comments">comments</a>,
@@ -110,5 +110,11 @@
     <p>
         Line splicing tokens are not considered whitespace and are simply removed during the preprocessing phase.<br>
         This means that they can be used inside of any token, including <a href="#string-literals">Strings</a> and Character literals.
+    </p>
+    <p>
+        //TODO add that interaction with include statements
+    </p>
+    <p>
+        //TODO specify that LSTs cannot bleed into other files if placed at the end of their file
     </p>
 </moveto-internal->
