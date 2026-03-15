@@ -15,7 +15,7 @@ const ui_example_button_triggers = {
             output_text[i] = ui_example_button_triggers.decodeHTML(
                 output_text[i]                                         // Base line output
                 .replaceAll(/<ce->.*?<\/ce->/g, "")                    // Remove error tags
-                .replaceAll(/<\/?(!--|([a-zA-Z0-9_-]+))[^>]+>/g, '')) // Remove tags
+                .replaceAll(/<\/?(!--|([a-zA-Z0-9_-]+))[^>]+>/g, ''))  // Remove tags
                 .slice(4)                                              // Remove line number
             ;
         }
@@ -29,13 +29,4 @@ const ui_example_button_triggers = {
         let code = ui_example_button_triggers.trigger_copy_code(label);
         //FIXME connect with sandbox
     },
-
-
-
-
-    // init : function() {
-    //     for(const label of document.querySelectorAll("example- > label-")){
-    //         label.addEventListener('click', function(){ ui_example_button_triggers.copy_code(label); });
-    //     }
-    // }
 }
