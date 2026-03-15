@@ -54,8 +54,11 @@ body > main- > center- example- buttons- > button- > svg {
     animation: fadein 0.2s ease;
     transition: color 0.2s ease;
 }
-body > main- > center- example- buttons- > button-:hover > svg {
+body > main- > center- example- buttons- > button-:not(.no-sandbox):hover > svg {
     color: var(--button-color-hover);
+}
+body > main- > center- example- buttons- > button-.no-sandbox > svg {
+    color: hsl(0, 42%, 52%);
 }
 @keyframes fadein {
     from { opacity: 0; }

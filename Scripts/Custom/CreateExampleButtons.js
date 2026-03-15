@@ -15,9 +15,11 @@ const create_example_buttons = {
                 text_elm.textContent = label.innerHTML;
                 label.replaceChildren(text_elm);
 
+
                 // Add button container
                 let button_container = document.createElement("buttons-");
                 label.appendChild(button_container);
+
 
                 // Add copy button
                 let copy_button = document.createElement("button-");
@@ -27,12 +29,20 @@ const create_example_buttons = {
                 copy_button.addEventListener('click', function(){ ui_example_button_triggers.trigger_copy_code(label); });
                 button_container.appendChild(copy_button);
 
-                // Add sandbox button
+
+                // Add sandbox button (or "sandbox not available icon")
                 let sandbox_button = document.createElement("button-");
-                (async () => {sandbox_button.appendChild(await utils.loadSVG("./Styles/Blocks/Example/Icons/SandboxButton.svg"))})();
-                sandbox_button.dataset.tooltip = "Run in ALC Sandbox";
                 sandbox_button.classList.add("tooltip-top");
-                sandbox_button.addEventListener('click', function(){ ui_example_button_triggers.trigger_run_in_sandbox(label); });
+                if(label.classList.contains("no-sandbox")) {
+                    (async () => {sandbox_button.appendChild(await utils.loadSVG("./Styles/Blocks/Example/Icons/NoSandboxButton.svg"))})();
+                    sandbox_button.dataset.tooltip = "Sandbox not available for this block";
+                    sandbox_button.classList.add("no-sandbox");
+                }
+                else {
+                    (async () => {sandbox_button.appendChild(await utils.loadSVG("./Styles/Blocks/Example/Icons/SandboxButton.svg"))})();
+                    sandbox_button.addEventListener('click', function(){ ui_example_button_triggers.trigger_run_in_sandbox(label); });
+                    sandbox_button.dataset.tooltip = "Run in ALC Sandbox";
+                }
                 button_container.appendChild(sandbox_button);
             }
         };

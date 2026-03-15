@@ -43,13 +43,11 @@ body > main- > left- > index- indexh- {
     transition: background-color 0.2s cubic-bezier(.17,.84,.44,1);
 }
 body > main- > left- > index- indexh- {
-    /*! Using px instead of em keeps the sized consistent and automatically aligns the text vertically */
     min-height: 100%;
     max-height: 100%;
     line-height: var(--main-index-line-height-indexh);
 }
 body > main- > left- > index- indexd- {
-    /*! Using px instead of em keeps the sized consistent and automatically aligns the text vertically */
     min-height: 100%;
     max-height: 100%;
     line-height: var(--main-index-line-height-indexd);

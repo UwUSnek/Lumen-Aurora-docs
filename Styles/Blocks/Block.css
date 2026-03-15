@@ -47,6 +47,11 @@ example- {
 example-.qrt, syntax-.qrt {
     margin: var(--syntax-margin-2) 0 var(--syntax-margin-2) 0;
 }
+/*! Remove inner margins from wrapped examples in split containers so the container doesn't grow abnormally tall */
+split-example-container- example- {
+    margin-top: 0;
+    margin-bottom: 0;
+}
 
 
 
