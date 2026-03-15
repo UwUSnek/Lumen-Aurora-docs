@@ -484,29 +484,27 @@
         Line splicing tokens are provided purely for completeness and familiarity. Use them responsibly.<br>
     </ce-full-size->
     <p>
-        <b>Line splicing</b> can be used to <b>merge multiple lines</b> and allow <a hreaf="#macros">macros</a>, <a href="#comments">comments</a>,
-        preprocessor directives and <a href="#tokens">tokens</a> to be written across multiple lines.<br>
+        <b>Line splicing</b> can be used to <b>merge multiple lines</b> and allow <a href="#macros">macros</a>, <a href="#comments">comments</a>,
+        <a href="#include-statement">include statements</a> and language <a href="#tokens">tokens</a> to be written across multiple lines.<br>
     </p>
     <ul>
-        The preprocessor provides 2 types of line splicing tokens:
+        The preprocessor supports two types of line splicing tokens:
         <ul>
             <li>
-                Line continuation token: It consists of a <code>\</code> immediately followed by a <code><nl-></nl-></code> character.<br>
-                This type of line splicing doesn't trim any whitespace. All adjacent tabs and spaces are preserved.
+                <b>Line continuation token</b>: It consists of a <code>\</code> immediately followed by a <code><nl-></nl-></code> character.<br>
+                This type of line splicing token doesn't trim any whitespace. All adjacent tabs and spaces are preserved.
                 Only the token itself (which includes the <code><nl-></nl-></code> character) is removed.
             </li>
             <li>
-                Line junction token: It consists of two <code>\</code> characters immediately followed by a <code><nl-></nl-></code> character.<br>
-                This type of line splicing trims any whitespace before the token and at the start of the next line.
-                This effectively allows the Line junction token to remove indentation and/or be freely aligned vertically.
+                <b>Line junction token</b>: It consists of two <code>\</code> characters immediately followed by a <code><nl-></nl-></code> character.<br>
+                This type of line splicing token trims any whitespace before it and at the start of the next line.
+                This allows it to remove code indentation.
             </li>
         </ul>
     </ul>
     <p>
-        Line splicing tokens are the very first thing that's processed by the preprocessor.
-        This makes it possible to use them inside <a href="#comments">comments</a> or preprocessor directives, thought they cannot be nested.<br>
-        Using a line splicing token at the end of a file is allowed and has no effect.<br>
-        Line splicing tokens cannot be nested
+        Line splicing tokens cannot be nested.<br>
+        Using a line splicing token at the end of a file without a trailing <code><nl-></nl-></code> is allowed and has no effect.<br>
     </p>
 
     <syntax->
@@ -521,16 +519,11 @@
                 <div>
                     <c->// single line comment </c-><regex-token->\</regex-token->
                     <c->on two lines</c->
-
-
                     <k->#include</k-><regex-token->\</regex-token->
                         <s->&lt;ma</s-><regex-token->\\</regex-token->
-                        <s->th</s-><regex-token->\\</regex-token->
-                               <s->;</s->
+                        <s->th&gt;</s->
 
-
-                    <t->vo</t-><regex-token->\</regex-token->
-                    <t->id</t-> <f->fun</f-><regex-token->\</regex-token->
+                    <t->void</t-> <f->fun</f-><regex-token->\</regex-token->
                     <f->ction</f->() {
                         <t->uint</t-> va<regex-token->\\</regex-token->
                         r = <k->0</k->, b = <k->0</k->;
@@ -547,10 +540,7 @@
                 <label->Code after line splicing</label->
                 <div>
                     <c->// single line comment on two lines</c->
-
-
                     <k->#include</k->    <s->&lt;math&gt;</s->
-
 
                     <t->void</t-> <f->function</f->() {
                         <t->uint</t-> var <f->=</f-> <k->0</k->, b <f->=</f-> <k->0</k->;
@@ -565,7 +555,6 @@
             <example->
                 <label->Example 2</label->
                 <div>
-                    jififj
                     <t->void</t-> ma\<regex-token->\\</regex-token->   <ce->Error, unexpected token "\"</ce->
 
                     <c->in(){}</c->       <ce->Error,  unexpected token "in"</ce->
@@ -574,7 +563,7 @@
         </split-example-container-left->
         <split-example-container-right->
             <example->
-                <label->Code after line splicing</label->
+                <label- class="no-sandbox">Code after line splicing</label->
                 <div>
                     <t->void</t-> <f->ma</f->\  <c->// &lt; Not a line splicing token</c->
                     <c->in(){}    //   LSTs cannot be stacked</c->
@@ -585,14 +574,15 @@
 </moveto-examples->
 <moveto-internal->
     <p>
-        Line splicing tokens are not considered whitespace and are simply removed during the preprocessing phase.<br>
-        This means that they can be used inside of any token, including <a href="#string-literals">Strings</a> and Character literals.
+        Line splicing tokens are not considered whitespace and are simply removed before performing any further operation.
+        //TODO link preprocessed modules
+        Preprocessed modules retain data about the original line number of each character.
     </p>
     <p>
-        //TODO add that interaction with include statements
-    </p>
-    <p>
-        //TODO specify that LSTs cannot bleed into other files if placed at the end of their file
+        Despite being removed after the <a href="#include-statement">include phase</a>,
+        line splicing tokens can be used anywhere in the source code, including in
+        <a href="#comments">comments</a>, <a href="#include-statement">include statements</a>, and text literals.
+        This is because all preprocessor parsers specifically look for and skip line splicing tokens.<br>
     </p>
 </moveto-internal->
 
@@ -607,10 +597,10 @@
         The preprocessor supports two types of comments:
         <ul>
             <li>
-                Single line comments start with <code>//</code> and end immediately before the next <code><nl-></nl-></code> character (\n).
+                <b>Single line comments</b> start with <code>//</code> and end immediately before the next <code><nl-></nl-></code> character (\n).
             </li>
             <li>
-                Multiline comments start with <code>/*</code> and end with <code>*/</code>.
+                <b>Multiline comments</b> start with <code>/*</code> and end with <code>*/</code>.
             </li>
         </ul>
     </ul>
@@ -663,6 +653,9 @@
         Comments are not considered whitespace.<br>
         Syntactically, they act in the same way as <a href="#line-splicing">line splicing tokens</a>,
         as they are removed before performing any further operation.<br>
+        //TODO link preprocessed modules
+        Preprocessed modules retain comment data.
+    <p>
         Just like <a href="#line-splicing">line splicing tokens</a>, they interact uniquely
         with <a href="include-statement">include statements</a>, as the include statement parser specifically skips comments,
         making it possible to place them anywhere within it, except inside the file path, which is a text literal.
@@ -695,64 +688,52 @@
 <moveto-doc->
     <ce-full-size->
         <b>NOTICE:</b><br>
-        The language provides include statements, but they should be avoided whenever possible.<br>
+        The languages provide include statements, but they should be avoided whenever possible.<br>
         The <a href="#import-directive">import directive</a> does a much better job at importing other modules, looks cleaner and can be debugged easily.<br>
         Include statements should only be used if you know what you are doing and you are certain that import directives won't be enough.
     </ce-full-size->
     <p>
         The <b>include statement</b> is used to <b>paste code</b> from other files.<br>
         Any existing file with read permissions can be included, regardless of its contents or extension.<br>
-        The path of the included file must be enclosed in <code>"</code> <code>"</code> characters.<br>
-        <a href="#standard-modules">standard modules</a> are included using the <code>&lt;</code> <code>&gt;</code> characters.<br>
-        The <a href="#core-module">core module</a> cannot be included.
+    </p>
+    <p>
+        An include statement consists of the sequence of characters <code>#include</code> followed by the path to the target file.<br>
+        The path of the included file must be enclosed in <code>"</code> <code>"</code> characters.
+        <a href="#standard-modules">Standard modules</a> are included using the <code>&lt;</code> <code>&gt;</code> characters.<br>
+    </p>
+    <p>
+        Absolute and relative paths are both supported. Relative paths are relative to the file the include statement is used in
+        or any one of the specified include paths.<br>
+        Glob patterns are also supported.
     </p>
     <syntax->
         <label- id="copy.syntax--preprocessor-include">Syntax</label->
     </syntax->
-    <p>
-        Absolute and relative paths are both supported.<br>
-        Relative paths are relative to the file the include statement is used in or any one of the specified include paths.<br> //TODO link. command line options
-        <code>~</code> is not recognized as the home directory but as the literal character <code>~</code>.<br>
-        <code>/</code> identifies the root directory.<br>
-        <code>.</code> identifies the current directory, while <code>..</code> identifies the parent directory.
-    </p>
-    <p>
-        The preprocessor supports Glob pattern wildcards:<br>
-        &nbsp;&nbsp;<code>**</code> - Any sequence of characters including <code>/</code> (any length, including 0).<br>
-        &nbsp;&nbsp;<code>*</code> - Any sequence of characters but <code>/</code> (any length, including 0).<br>
-        &nbsp;&nbsp;<code>?</code> - Any character but <code>/</code>.<br>
-        Glob patterns that don't match any file are allowed and have no effect.
-    </p>
-    <p>
-        Files cannot be named <code>.</code> or <code>..</code>
-        and their name cannot contain any of the these characters: <code>*?"&lt;&gt;\</code>.<br>
-        Any other character is allowed.
-    </p>
 </moveto-doc->
 <moveto-examples->
     <example->
-        <label->Example</label->
+        <label->Example 1 - Single file includes</label->
         <div>
             <k->#include</k-> <s->"/home/Snek/Lumen/file.lmn"</s->      <c->// Absolute path</c->
             <k->#include</k-> <s->"./file.lmn"</s->                     <c->// Relative path</c->
-            <k->#include</k-> <s->":,@ why is this a file name"</s->  <c->// Relative path</c->
+            <k->#include</k-> <s->":,@ why is this a file name"</s->    <c->// Relative path</c->
             <k->#include</k-> <s->&lt;math&gt;</s->                           <c->// Includes the standard module "math"</c->
 
             <c->#include ./file.ilsh</c->                       <ce->Error, "" or &lt;&gt; are required</ce->
             <c->#include "./nonexistent_file"</c->              <ce->Error, non-glob patterns must correspond to an existing file</ce->
             <c->#include ""</c->                                <ce->Error, file name not specified</ce->
         </div>
-        <label->Example</label->
+        <label->Example 2 - Glob patterns</label->
         <div>
-            <k->#include</k-> <s->"*.lmn"</s->                        <c->// Includes any file with lum extension in the current directory</c->
-            <k->#include</k-> <s->"/home/Snek/Documents/**.lmn"</s->  <c->// Includes any file with lum extension in the Documents directory, recursively</c->
+            <k->#include</k-> <s->"*.lmn"</s->                        <c->// Includes any file with lmn extension in the current directory</c->
+            <k->#include</k-> <s->"/home/Snek/Documents/**.lmn"</s->  <c->// Includes any file with lmn extension in the Documents directory, recursively</c->
             <k->#include</k-> <s->"generated/*"</s->                  <c->// Includes any file in the directory ./generated, but not the ones in sub-directories</c->
             <k->#include</k-> <s->"generated/**"</s->                 <c->// Includes any file in the directory ./generated, recursively</c->
 
-            <k->#include</k-> <s->"?????"</s->                        <c->// Includes any file in the current directory whose name is 5 characters long (including the extention and the . character)</c->
-            <k->#include</k-> <s->"**"</s->                           <c->// Tries to include every file on your computer (The compiler will stop you)</c->
+            <k->#include</k-> <s->"?????"</s->                        <c->// Includes any file in the current directory whose name is 5 characters long (including the extension and the . character)</c->
+            <k->#include</k-> <s->"**"</s->                           <c->// Tries to include every file on your computer (the compiler will stop you)</c->
         </div>
-        <label->Example</label->
+        <label->Example 3</label->
         <div>
             <t->int</t-> <f->main</f->(){ <k->#include</k-><s->"./generated/mainBody.txt"</s-> }
             <c->// Writing code on the same line, either before the # character or after the path, is allowed.</c->
@@ -761,18 +742,37 @@
 </moveto-examples->
 <moveto-internal->
     <p>
-        Include statements can be used to create other preprocessor directives, but not other include statements. This is by design.<br>
-        Include operations are performed by replacing the include statement in the destination file
-        (from the <code>#</code> character to the closing <code>"</code> or <code>&gt;</code>) with the contents of the source file.<br>
-        Every byte of the source file is copied without trimming or modifying any of it.
+        Include operations are performed by replacing the include statement
+        (from the <code>#</code> character to the closing <code>"</code> or <code>&gt;</code>) with the contents of the included file.<br>
+        Every byte of the source file is copied without modification.
+        This makes include directives recursive and preserves any macro definition and invocation pasted from included files.
     </p>
-    <p>
-        In the case of glob patterns, all the source files are copied in the same way, one after the other, without adding any separator between them.<br>
-        The order in which they are copied reflects their absolute file path:<br>
-        &nbsp;&nbsp;Each directory level is ordered alphabetically, starting from the root directory.<br>
-        &nbsp;&nbsp;If two or more matches are in the same directory, they are ordered based on the next level. This goes on until all the files are ordered.<br>
-        If the glob pattern has no matches, the include statement is simply removed.
-    </p>
+    <ul>
+        File paths have some limitations:
+        <ul>
+            <li>
+                Files cannot be named <code>.</code> or <code>..</code>.
+                <code>.</code> identifies the current directory, while <code>..</code> identifies the parent directory.
+            </li>
+            <li>
+                File names cannot contain any of the following characters: <code>*?"&lt;&gt;\</code>.
+                These are reserved for glob pattern wildcards and path delimiters. Any other character is allowed.
+            </li>
+            <li><code>~</code> is not recognized as the home directory but as the literal character <code>~</code>.</li>
+            <li><code>/</code> identifies the root directory.</li>
+        </ul>
+    </ul>
+    <ul>
+        When a glob pattern is used, all the source files are copied in the same way, one after the other, without adding separators in between.<br>
+        Matched files are copied in alphabetical order based on their absolute path.<br>
+        Glob patterns that don't match any file are allowed and have no effect.<br>
+        The preprocessor supports these glob pattern wildcards:
+        <ul>
+            <li>&nbsp;&nbsp;<code>**</code> - Any sequence of characters including <code>/</code> (any length, including 0).</li>
+            <li>&nbsp;&nbsp;<code>*</code> - Any sequence of characters but <code>/</code> (any length, including 0).</li>
+            <li>&nbsp;&nbsp;<code>?</code> - Any character but <code>/</code>.</li>
+        </ul>
+    </ul>
     <p>
         The last variable-length wildcard (<code>*</code> or <code>**</code>) of a glob pattern stops before the last occurrence of the character or wildcard that follows them.<br>
         Variable-length wildcards that are not last, instead, stop before the very first occurrence of the character or wildcard that follows them.<br>
@@ -6446,7 +6446,7 @@
         <table class="s-expr">
             <tr>
                 <td data-arrows="|l lr ar"></td>
-                <td><elm->literal token</elm-></td>
+                <td><s-none->literal token</s-none-></td>
                 <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
@@ -6599,7 +6599,7 @@
                 <td data-arrows="|l lr ar"></td>
                 <td><s-vbtm->@</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
-                <td><elm->ulong literal</elm-></td>
+                <td><s-none->ulong literal</s-none-></td>
                 <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
@@ -6725,7 +6725,7 @@
                 <td data-arrows="br ar"></td>
                 <td><s-vbtm->//</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
-                <td><elm->comment string</elm-></td>
+                <td><s-none->comment string</s-none-></td>
                 <td data-arrows="lr ar lb"></td>
                 <td><s-vbtm-><nl-></nl-></s-vbtm-></td>
                 <td data-arrows="lb"></td>
@@ -6743,7 +6743,7 @@
                 <td data-arrows="tr ar"></td>
                 <td><s-vbtm->/*</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
-                <td><elm->comment string</elm-></td>
+                <td><s-none->comment string</s-none-></td>
                 <td data-arrows="lr ar lt"></td>
                 <td><s-vbtm->*/</s-vbtm-></td>
                 <td data-arrows="lt"></td>
@@ -6763,7 +6763,7 @@
                 <td data-arrows="lr ar lb"></td>
                 <td><s-vbtm->"</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
-                <td class="center"><elm->path/to/file</elm-></td>
+                <td class="center"><s-none->path/to/file</s-none-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->"</s-vbtm-></td>
                 <td data-arrows="lr br ar |r"></td>
@@ -6774,7 +6774,7 @@
                 <td data-arrows="tr ar"></td>
                 <td><s-vbtm->&lt;</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
-                <td class="center"><elm->module name</elm-></td>
+                <td class="center"><s-none->module name</s-none-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->&gt;</s-vbtm-></td>
                 <td data-arrows="lt"></td>
@@ -7549,7 +7549,7 @@
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->{</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
-                <td><elm->code</elm-></td>
+                <td><s-none->code</s-none-></td>
                 <td data-arrows="lr ar"></td>
                 <td><s-vbtm->}</s-vbtm-></td>
                 <td data-arrows="lr ar |r"></td>
@@ -7763,9 +7763,19 @@
     </main->
     <footer->
 
-<footer-version->
-    ALC v0.2.0
-</footer-version->
+<img class="footer-doodle" src="./Styles/PageLayout/Icons/Doodle.png" alt="">
+
+
+
+
+<footer-version-></footer-version->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        utils.type_to(document.querySelector('footer-version-'), 'Made by Ila | ALC v0.2.0', 50);
+    });
+</script>
+
+
 
 
 <footer-message->
@@ -7775,9 +7785,14 @@
 </footer-message->
 
 
-<footer-keybinds->
-    &lt; &gt; ɪ ᴡ ᴀ
-</footer-keybinds->
+
+
+<footer-keybinds-></footer-keybinds->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        utils.type_to(document.querySelector('footer-keybinds-'), '< > ɪ ᴡ ᴀ', 100);
+    });
+</script>
     </footer->
     <script src="Scripts/utils.js"></script>
     <script src="Scripts/Setup/Fix.js"></script>

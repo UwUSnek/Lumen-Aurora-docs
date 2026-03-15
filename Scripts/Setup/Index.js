@@ -84,7 +84,6 @@ const setup_index = {
         // Elements container - Overwrite AUTO height with a fixed value
         //! This is required in order to animate the height
         else if(elm.tagName == "INDEX-ELMS-") {
-            console.log( elm.getBoundingClientRect().height);
             elm.style.maxHeight = elm.getBoundingClientRect().height + 'px';
         }
     },

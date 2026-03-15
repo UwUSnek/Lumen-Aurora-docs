@@ -10,10 +10,10 @@
         The preprocessor supports two types of comments:
         <ul>
             <li>
-                Single line comments start with <code>//</code> and end immediately before the next <code><nl-></nl-></code> character (\n).
+                <b>Single line comments</b> start with <code>//</code> and end immediately before the next <code><nl-></nl-></code> character (\n).
             </li>
             <li>
-                Multiline comments start with <code>/*</code> and end with <code>*/</code>.
+                <b>Multiline comments</b> start with <code>/*</code> and end with <code>*/</code>.
             </li>
         </ul>
     </ul>
@@ -66,6 +66,9 @@
         Comments are not considered whitespace.<br>
         Syntactically, they act in the same way as <a href="#line-splicing">line splicing tokens</a>,
         as they are removed before performing any further operation.<br>
+        //TODO link preprocessed modules
+        Preprocessed modules retain comment data.
+    <p>
         Just like <a href="#line-splicing">line splicing tokens</a>, they interact uniquely
         with <a href="include-statement">include statements</a>, as the include statement parser specifically skips comments,
         making it possible to place them anywhere within it, except inside the file path, which is a text literal.

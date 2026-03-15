@@ -22,3 +22,13 @@ syntax- svg path.boundary-r {
     stroke-linecap: round;
     stroke-width: 5px;
 }
+
+
+/* Animate loading fade in so they don't appear instantly but gradually become visible */
+syntax- svg {
+    animation: arrow-fadein 0.5s ease 0.5s both;
+}
+@keyframes arrow-fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}

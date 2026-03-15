@@ -9,7 +9,7 @@
 /* elm-: General purpose element | even-elm-: elm- but the padding is the same across all sides and the beackground is transparent*/
 elm-, even-elm-{
     display: inline-block;
-    font-family: monospace, monospace;
+    font-family: monospace;
     border: 1px solid;
     border-radius: var(--code-decoration-r);
     font-size: var(--font-size-code);

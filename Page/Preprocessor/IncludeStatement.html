@@ -3,64 +3,52 @@
 <moveto-doc->
     <ce-full-size->
         <b>NOTICE:</b><br>
-        The language provides include statements, but they should be avoided whenever possible.<br>
+        The languages provide include statements, but they should be avoided whenever possible.<br>
         The <a href="#import-directive">import directive</a> does a much better job at importing other modules, looks cleaner and can be debugged easily.<br>
         Include statements should only be used if you know what you are doing and you are certain that import directives won't be enough.
     </ce-full-size->
     <p>
         The <b>include statement</b> is used to <b>paste code</b> from other files.<br>
         Any existing file with read permissions can be included, regardless of its contents or extension.<br>
-        The path of the included file must be enclosed in <code>"</code> <code>"</code> characters.<br>
-        <a href="#standard-modules">standard modules</a> are included using the <code>&lt;</code> <code>&gt;</code> characters.<br>
-        The <a href="#core-module">core module</a> cannot be included.
+    </p>
+    <p>
+        An include statement consists of the sequence of characters <code>#include</code> followed by the path to the target file.<br>
+        The path of the included file must be enclosed in <code>"</code> <code>"</code> characters.
+        <a href="#standard-modules">Standard modules</a> are included using the <code>&lt;</code> <code>&gt;</code> characters.<br>
+    </p>
+    <p>
+        Absolute and relative paths are both supported. Relative paths are relative to the file the include statement is used in
+        or any one of the specified include paths.<br>
+        Glob patterns are also supported.
     </p>
     <syntax->
         <label- id="copy.syntax--preprocessor-include">Syntax</label->
     </syntax->
-    <p>
-        Absolute and relative paths are both supported.<br>
-        Relative paths are relative to the file the include statement is used in or any one of the specified include paths.<br> //TODO link. command line options
-        <code>~</code> is not recognized as the home directory but as the literal character <code>~</code>.<br>
-        <code>/</code> identifies the root directory.<br>
-        <code>.</code> identifies the current directory, while <code>..</code> identifies the parent directory.
-    </p>
-    <p>
-        The preprocessor supports Glob pattern wildcards:<br>
-        &nbsp;&nbsp;<code>**</code> - Any sequence of characters including <code>/</code> (any length, including 0).<br>
-        &nbsp;&nbsp;<code>*</code> - Any sequence of characters but <code>/</code> (any length, including 0).<br>
-        &nbsp;&nbsp;<code>?</code> - Any character but <code>/</code>.<br>
-        Glob patterns that don't match any file are allowed and have no effect.
-    </p>
-    <p>
-        Files cannot be named <code>.</code> or <code>..</code>
-        and their name cannot contain any of the these characters: <code>*?"&lt;&gt;\</code>.<br>
-        Any other character is allowed.
-    </p>
 </moveto-doc->
 <moveto-examples->
     <example->
-        <label->Example</label->
+        <label->Example 1 - Single file includes</label->
         <div>
             <k->#include</k-> <s->"/home/Snek/Lumen/file.lmn"</s->      <c->// Absolute path</c->
             <k->#include</k-> <s->"./file.lmn"</s->                     <c->// Relative path</c->
-            <k->#include</k-> <s->":,@ why is this a file name"</s->  <c->// Relative path</c->
+            <k->#include</k-> <s->":,@ why is this a file name"</s->    <c->// Relative path</c->
             <k->#include</k-> <s->&lt;math&gt;</s->                           <c->// Includes the standard module "math"</c->
 
             <c->#include ./file.ilsh</c->                       <ce->Error, "" or &lt;&gt; are required</ce->
             <c->#include "./nonexistent_file"</c->              <ce->Error, non-glob patterns must correspond to an existing file</ce->
             <c->#include ""</c->                                <ce->Error, file name not specified</ce->
         </div>
-        <label->Example</label->
+        <label->Example 2 - Glob patterns</label->
         <div>
-            <k->#include</k-> <s->"*.lmn"</s->                        <c->// Includes any file with lum extension in the current directory</c->
-            <k->#include</k-> <s->"/home/Snek/Documents/**.lmn"</s->  <c->// Includes any file with lum extension in the Documents directory, recursively</c->
+            <k->#include</k-> <s->"*.lmn"</s->                        <c->// Includes any file with lmn extension in the current directory</c->
+            <k->#include</k-> <s->"/home/Snek/Documents/**.lmn"</s->  <c->// Includes any file with lmn extension in the Documents directory, recursively</c->
             <k->#include</k-> <s->"generated/*"</s->                  <c->// Includes any file in the directory ./generated, but not the ones in sub-directories</c->
             <k->#include</k-> <s->"generated/**"</s->                 <c->// Includes any file in the directory ./generated, recursively</c->
 
-            <k->#include</k-> <s->"?????"</s->                        <c->// Includes any file in the current directory whose name is 5 characters long (including the extention and the . character)</c->
-            <k->#include</k-> <s->"**"</s->                           <c->// Tries to include every file on your computer (The compiler will stop you)</c->
+            <k->#include</k-> <s->"?????"</s->                        <c->// Includes any file in the current directory whose name is 5 characters long (including the extension and the . character)</c->
+            <k->#include</k-> <s->"**"</s->                           <c->// Tries to include every file on your computer (the compiler will stop you)</c->
         </div>
-        <label->Example</label->
+        <label->Example 3</label->
         <div>
             <t->int</t-> <f->main</f->(){ <k->#include</k-><s->"./generated/mainBody.txt"</s-> }
             <c->// Writing code on the same line, either before the # character or after the path, is allowed.</c->
@@ -69,18 +57,37 @@
 </moveto-examples->
 <moveto-internal->
     <p>
-        Include statements can be used to create other preprocessor directives, but not other include statements. This is by design.<br>
-        Include operations are performed by replacing the include statement in the destination file
-        (from the <code>#</code> character to the closing <code>"</code> or <code>&gt;</code>) with the contents of the source file.<br>
-        Every byte of the source file is copied without trimming or modifying any of it.
+        Include operations are performed by replacing the include statement
+        (from the <code>#</code> character to the closing <code>"</code> or <code>&gt;</code>) with the contents of the included file.<br>
+        Every byte of the source file is copied without modification.
+        This makes include directives recursive and preserves any macro definition and invocation pasted from included files.
     </p>
-    <p>
-        In the case of glob patterns, all the source files are copied in the same way, one after the other, without adding any separator between them.<br>
-        The order in which they are copied reflects their absolute file path:<br>
-        &nbsp;&nbsp;Each directory level is ordered alphabetically, starting from the root directory.<br>
-        &nbsp;&nbsp;If two or more matches are in the same directory, they are ordered based on the next level. This goes on until all the files are ordered.<br>
-        If the glob pattern has no matches, the include statement is simply removed.
-    </p>
+    <ul>
+        File paths have some limitations:
+        <ul>
+            <li>
+                Files cannot be named <code>.</code> or <code>..</code>.
+                <code>.</code> identifies the current directory, while <code>..</code> identifies the parent directory.
+            </li>
+            <li>
+                File names cannot contain any of the following characters: <code>*?"&lt;&gt;\</code>.
+                These are reserved for glob pattern wildcards and path delimiters. Any other character is allowed.
+            </li>
+            <li><code>~</code> is not recognized as the home directory but as the literal character <code>~</code>.</li>
+            <li><code>/</code> identifies the root directory.</li>
+        </ul>
+    </ul>
+    <ul>
+        When a glob pattern is used, all the source files are copied in the same way, one after the other, without adding separators in between.<br>
+        Matched files are copied in alphabetical order based on their absolute path.<br>
+        Glob patterns that don't match any file are allowed and have no effect.<br>
+        The preprocessor supports these glob pattern wildcards:
+        <ul>
+            <li>&nbsp;&nbsp;<code>**</code> - Any sequence of characters including <code>/</code> (any length, including 0).</li>
+            <li>&nbsp;&nbsp;<code>*</code> - Any sequence of characters but <code>/</code> (any length, including 0).</li>
+            <li>&nbsp;&nbsp;<code>?</code> - Any character but <code>/</code>.</li>
+        </ul>
+    </ul>
     <p>
         The last variable-length wildcard (<code>*</code> or <code>**</code>) of a glob pattern stops before the last occurrence of the character or wildcard that follows them.<br>
         Variable-length wildcards that are not last, instead, stop before the very first occurrence of the character or wildcard that follows them.<br>

@@ -1,9 +1,9 @@
 
-
+/* TODO remove this style sheet if not needed */
 
 .syntax-glossary {
     display: inline-block;
-    font-family: monospace, monospace;
+    font-family: monospace;
     width: 8em;
     text-align: center;
     padding: 0 4px 0 4px;
