@@ -3,6 +3,9 @@
     --bg-index-active:  hsl(255, 14%, 26%);
     --main-index-margin-top: 1em;
     --main-index-margin-bottom: 4em;
+
+    --main-index-line-height-indexh: 28px;
+    --main-index-line-height-indexd: 22px;
 }
 
 
@@ -35,26 +38,27 @@ body > main- > left- > index- indexh- {
     cursor: pointer;
 
     border-radius: 0 6px 6px 0;
-    padding: 2px 0 2px 0;
+    padding: 0;
     width: 100%;
     transition: background-color 0.2s cubic-bezier(.17,.84,.44,1);
 }
 body > main- > left- > index- indexh- {
     /*! Using px instead of em keeps the sized consistent and automatically aligns the text vertically */
-    min-height:  28px;
-    max-height:  28px;
-    line-height: 28px;
+    min-height: 100%;
+    max-height: 100%;
+    line-height: var(--main-index-line-height-indexh);
 }
 body > main- > left- > index- indexd- {
     /*! Using px instead of em keeps the sized consistent and automatically aligns the text vertically */
-    min-height:  22px;
-    max-height:  22px;
-    line-height: 22px;
+    min-height: 100%;
+    max-height: 100%;
+    line-height: var(--main-index-line-height-indexd);
 }
 body > main- > left- > index- index-elms- {
     margin: 0;
     padding: 0;
-    display: block;
+    display: flex;
+    flex-direction: column;
 
     /*! max-height needs to be a fixed value in order to be animated */
     /* max-heght Set from JS */
@@ -79,13 +83,12 @@ body > main- > left- > index- indexh- > * {
     max-height: 100%;
 }
 body > main- > left- > index- indexh- > * {
-    line-height: 2em;
+    line-height: var(--main-index-line-height-indexh);
 }
 body > main- > left- > index- indexd- > * {
     opacity: 75%;
     font-weight: 300;
-    line-height: 1.5em;
-    transform: translateY(-0.2em);
+    line-height: var(--main-index-line-height-indexd);
 }
 
 
@@ -108,8 +111,8 @@ body > main- > left- > index- indexh-:hover {
 body > main- > left- > index- indexh- > span::before {
     content: '▾  ';
     opacity: 25%;
-    font-size: 1.1em;
-    transform: translateY(-0.1em);
+    font-size: calc(0.5 * var(--main-index-line-height-indexh));
+    transform: translateY(calc(-0.07 * var(--main-index-line-height-indexh)));
     display: inline-block;
     transform-origin: 0.25em;
     transition: transform 0.25s ease-in-out;
@@ -118,8 +121,8 @@ body > main- > left- > index- indexh- > span::before {
 body > main- > left- > index- indexd- > span::before {
     content: '• ';
     opacity: 25%;
-    transform: translateY(0.1em);
-    font-size: 1.5em;
+    transform: translateY(calc(0.03 * var(--main-index-line-height-indexd)));
+    font-size: calc(0.9 * var(--main-index-line-height-indexd));
     display: inline-block;
 }
 

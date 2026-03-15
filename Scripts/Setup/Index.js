@@ -56,10 +56,6 @@ const setup_index = {
         }
         if(elm.tagName == 'INDEXD-' || elm.tagName == 'INDEXH-') {
             let id_stripped = elm.innerHTML;
-            if(id_stripped.length == 0) {
-                elm.style.minHeight = '2em';
-                return;
-            }
 
 
             // Fix index element
@@ -85,8 +81,10 @@ const setup_index = {
         }
 
 
-        // Elements container - set fixed height
+        // Elements container - Overwrite AUTO height with a fixed value
+        //! This is required in order to animate the height
         else if(elm.tagName == "INDEX-ELMS-") {
+            console.log( elm.getBoundingClientRect().height);
             elm.style.maxHeight = elm.getBoundingClientRect().height + 'px';
         }
     },
