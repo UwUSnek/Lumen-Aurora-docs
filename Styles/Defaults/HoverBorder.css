@@ -1,9 +1,10 @@
 :root {
     --hover-border-distance: 12px;
-    --hover-border-width: 4px;
+    --hover-border-width: 2px;
 
     --hover-bd-color: color-mix(in srgb, var(--fg-separator)      50%, transparent);
     --hover-bg-color: color-mix(in srgb, var(--fg-separator-thin) 25%, transparent);
+    --hover-shadow-color: #00000008;
 }
 
 
@@ -18,6 +19,8 @@
     padding-left:  var(--hover-border-distance);
     padding-right: var(--hover-border-distance);
     margin-left: calc(0px - var(--hover-border-distance) - var(--hover-border-width));
+    max-width:  calc(100% + var(--hover-border-distance) + var(--hover-border-width));
+    width: 200%;
     /*! Transition value set by JS */
 }
 
@@ -25,6 +28,7 @@
 :is(#main-center-doc, #main-center-examples, #main-center-internal) > p:hover,
 :is(#main-center-doc, #main-center-examples, #main-center-internal) > ul:hover {
     border-left-color: var(--hover-bd-color);
-    background: var(--hover-bg-color);
+    background-color: var(--hover-bg-color);
     border-radius: 6px;
+    box-shadow: 0px 4px 4px var(--hover-shadow-color), 0px -4px 4px var(--hover-shadow-color), 4px 0px 4px var(--hover-shadow-color), -4px 0px 4px var(--hover-shadow-color);
 }

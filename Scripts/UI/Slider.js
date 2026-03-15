@@ -57,7 +57,7 @@ const ui_slider = {
                 e.style.maxWidth = `${ right_w }px`;
             }
             else {
-                e.style.maxWidth = "100%";
+                e.style.removeProperty("max-width");
             }
         }
     },

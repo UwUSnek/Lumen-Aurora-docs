@@ -33,8 +33,8 @@ ce-full-size- {
     display: block;
     padding: 10px 14px 11px 14px;
     margin: var(--def-margin) 0 0 0;
-    min-width: calc(100% - 2px - 28px);
-    max-width: calc(100% - 2px - 28px);
+    min-width: 100%;
+    max-width: 100%;
     color: #df9d9d;
 }
 
