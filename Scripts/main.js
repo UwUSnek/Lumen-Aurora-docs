@@ -51,15 +51,3 @@ function init(){
     e.style.pointerEvents = 'none';
     e.style.opacity = '0%';
 }
-
-
-
-
-function unload(){
-    let e = document.getElementById('main-mask');
-    e.style.pointerEvents = 'all';
-    e.style.opacity = '100%';
-}
-
-
-
