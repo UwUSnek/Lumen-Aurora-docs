@@ -3,7 +3,7 @@
 
     /*! This is required in order to calculate the correct height of the central panel */
     /*! Automatic height breaks stuff */
-    --tab-buttons-container-height: calc(2em + var(--tab-button-padding) * 2);
+    --tab-buttons-container-height: calc(32px + var(--tab-button-padding) * 2);
 }
 
 

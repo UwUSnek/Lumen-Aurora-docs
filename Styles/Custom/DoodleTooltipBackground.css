@@ -1,0 +1,23 @@
+
+:root {
+    --footer-doodle-hover-image-size: 200px;
+}
+
+
+body > footer- > footer-doodle-.tooltip-top-high:hover::after {
+    width:  var(--footer-doodle-hover-image-size);
+    height: var(--footer-doodle-hover-image-size);
+
+    border: 1px solid var(--bd-elm);
+    background-image: url("../PageLayout/Icons/DoodleNoBorder.png");
+    background-size: 75%;
+    background-position-x: center;
+    background-position-y: calc(var(--footer-doodle-hover-image-size) * 0.15);
+    background-repeat: no-repeat;
+
+    font-size: var(--font-size-large);
+    font-weight: 100;
+
+    /*! Overwrite the default -50% X translation that vertically aligns the center of the element with its parent */
+    transform: translateX(-10px);
+}

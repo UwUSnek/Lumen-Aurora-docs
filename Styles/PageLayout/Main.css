@@ -86,8 +86,8 @@ body > main- > center- {
 
     /*! width set from JS */
     max-width: 100%;
-    min-height: calc(100vh - var( --main-footer-h));
-    max-height: calc(100vh - var( --main-footer-h));
+    min-height: calc(100vh - var(--main-footer-h));
+    max-height: calc(100vh - var(--main-footer-h));
 
     transition: width 0.3s, right 0.3s;
 }
@@ -120,8 +120,8 @@ body > main- > center- > #main-center-tab-container {
 
     min-width:  100%;
     max-width:  100%;
-    min-height: calc(100vh - var(--tab-buttons-container-height) - var(--tab-button-padding) * 2);
-    max-height: calc(100vh - var(--tab-buttons-container-height) - var(--tab-button-padding) * 2);
+    min-height: calc(100vh - var(--tab-buttons-container-height) - var(--main-footer-h));
+    max-height: calc(100vh - var(--tab-buttons-container-height) - var(--main-footer-h));
 
     overflow: visible;
     white-space: nowrap;
@@ -141,9 +141,9 @@ body > main- > center- > #main-center-tab-container > #main-center-internal {
     /*! Because apparently CSS can't do that */
     min-width:  calc(100% + var(--main-overflow-margin-c) * 2);
     max-width:  calc(100% + var(--main-overflow-margin-c) * 2);
-    padding: 0 var(--main-overflow-margin-c) 0 var(--main-overflow-margin-c);
     min-height: 100%;
     max-height: 100%;
+    padding: 0 var(--main-overflow-margin-c) 0 var(--main-overflow-margin-c);
 
     flex-direction: column;
     white-space: normal;
@@ -213,6 +213,7 @@ body > main- > right- {
     z-index: 6; /*! 1 higher than right-'s in order to hide moving tabs */
     overflow: visible;
     position: fixed;
+    user-select: none;
 
     right: 0;
     top: 0;

@@ -1,5 +1,9 @@
 
-<img class="footer-doodle" src="./Styles/PageLayout/Icons/Doodle.png" alt="">
+<footer-doodle- style="position: relative" class="tooltip-top-high" data-tooltip="Ila (aka Snek)">
+    <a href="https://github.com/UwUSnek">
+        <img class="footer-doodle" src="./Styles/PageLayout/Icons/Doodle.png" alt="github.com/UwUSnek">
+    </a>
+</footer-doodle->
 
 
 
@@ -15,17 +19,21 @@
 
 
 <footer-message->
-    Lumen and Aurora are a work of passion.
-    Licensed under <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPL-3.0</a>. Free to use.
-    Contributions are welcome, AI-generated code is not.
+    Lumen and Aurora are a work of passion. Licensed under
+    <span style="position: relative" class="tooltip-top-high" data-tooltip="GNU General Public License version 3">
+        <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPL-3.0</a></span>.
+    <!--! Span closing tag moved up to avoid indentation addings paces before the dot -->
+    Free to use. Contributions are welcome, AI-generated code is not.
 </footer-message->
 
 
 
 
-<footer-keybinds-></footer-keybinds->
+<footer-keybinds->
+    <span style="position: relative" class="tooltip-top-high" data-tooltip="Keybinds"></span>
+</footer-keybinds->
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        utils.type_to(document.querySelector('footer-keybinds-'), '< > ɪ ᴡ ᴀ', 100);
+        utils.type_to(document.querySelector('footer-keybinds- > span'), '< > ɪ ᴡ ᴀ', 100);
     });
 </script>

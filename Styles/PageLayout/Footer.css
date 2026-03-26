@@ -1,8 +1,8 @@
 :root {
     --main-footer-h: 25px;
-    --main-footer-keybinds-margin: 10px;
     --main-footer-doodle-margin: 15px;
-    --main-footer-version-margin: 35px;
+    --main-footer-version-margin: 10px;
+    --main-footer-keybinds-margin: 10px;
     --main-footer-color: #292929;
 }
 
@@ -10,12 +10,14 @@
 
 
 body > footer- {
-    display: grid;
+    user-select: none;
+    display: flex;
+    align-items: center;
     position: fixed;
     z-index: 7; /*! 1 more than left and right */
 
     background-color: var(--main-footer-color);
-    overflow: clip;
+    overflow: visible; /*! Required for hover tooltips */
     width:  100%;
     height: var(--main-footer-h);
     bottom: 0;
@@ -23,39 +25,53 @@ body > footer- {
 
     font-size: var(--font-size-xx-small);
     text-align: center;
-    align-items: center;
     box-shadow: 0px -4px 8px var(--shadow-color);
 }
-body > footer- * {
+body > footer- > * {
     grid-area: 1 / 1;
-    opacity: 75%;
-    width: 100%;
+    color: color-mix(in srgb, currentColor 90%, transparent);
     height: 100%;
+}
+body > footer- > * *::after,
+body > footer- > * *::before {
+    color: var(--fg-text);
 }
 
 
 
 
-body > footer- > img.footer-doodle {
+body > footer- > footer-doodle- {
     display: block;
-    text-align: left;
     width:  calc(var(--main-footer-h) / 2);
     height: calc(var(--main-footer-h) / 2);
     margin-left: var(--main-footer-doodle-margin);
+    /*! Pushes everything else to the right */
+    margin-right: 0;
+}
+body > footer- > footer-doodle- > a > img {
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 body > footer- > footer-version- {
     display: block;
     text-align: left;
-    width: calc(100% - var(--main-footer-version-margin));
     margin-left: var(--main-footer-version-margin);
-}
-body > footer- > footer-keybinds- {
-    display: block;
-    text-align: right;
-    width: calc(100% - var(--main-footer-keybinds-margin));
-    margin-right: var(--main-footer-keybinds-margin);
+    /*! Pushes everything else to the right */
+    margin-right: auto;
 }
 body > footer- > footer-message- {
     display: block;
     text-align: center;
+    /*! Centers the element horizontally */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+body > footer- > footer-keybinds- {
+    display: block;
+    text-align: right;
+    margin-right: var(--main-footer-keybinds-margin);
+    /*! Pushes everything else to the left */
+    margin-left: auto;
 }

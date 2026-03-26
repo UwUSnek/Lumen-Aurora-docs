@@ -10,6 +10,7 @@
     content: attr(data-tooltip);
     position: absolute;
 
+    font-size: var(--font-size-medium);
     background: var(--hover-tooltip-color);
     color: var(--fg-text);
     padding: 4px 16px;

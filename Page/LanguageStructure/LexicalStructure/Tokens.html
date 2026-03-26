@@ -1,0 +1,46 @@
+
+<h1 id="tokens"></h1>
+<moveto-doc->
+    <p>
+        <b>Tokens</b> are the fundamental elements of the source code of any program.<br>
+        They are <b>sequences</b> of one or more <a href="#character-set">allowed <b>characters</b></a> that follow specific patterns.<br>
+        One or more tokens create a <a href="#syntactic-elements">syntactic element</a>.
+    </p>
+    <p>
+        A token ends when a character that isn't allowed in its pattern is encountered. //TODO   ".:"    "(?"    and similar cases
+        Tokens can also be separated by any number of <code><tab-></tab-></code>, <code><space-></space-></code> and <code><nl-></nl-></code> characters.<br>
+        Sequences of characters that don't follow any of the recognized patterns generate an error. //TODO LINK
+    </p>
+    <p>
+        Tokens are case sensitive, with the only exception of <a href="#literals">hexadecimal literals</a>.<br>
+        <code><tab-></tab-></code>, <code><space-></space-></code> and <code><nl-></nl-></code> characters are not not considered tokens.
+        Instead, they are simply discarded during the tokenization phase.
+    </p>
+    <ul>
+        <ul>
+            <li>
+                <b>Keywords</b> are <b>built-in <a href="#tokens">tokens</a></b> that perform hard coded actions or have <b>special meaning</b>.<br>
+                The language defines a total of 28 alphanumeric keywords and 6 symbolic keywords.<br>
+                Their usage is detailedly explained in their respective sections.
+
+                <a href="#keywords">Keywords</a> cannot be <a href="#name-shadowing">shadowed</a> like <a href="#identifiers">identifiers</a>.<br>
+                Attempting to do so generates a semantic error. //TODO LINK
+            </li>
+            <li>
+                <b>Meta keywords</b> are <a href="#tokens">tokens</a> that only have meaning when <b>combined</b> with other <a href="#keywords"><b>keywords</b></a> or <a href="#name-resolution">semantic elements</a>.<br>
+                When active, they always take precedence over <a href="#identifiers">identifiers</a>.
+            </li>
+            <li>
+                <b>Literals</b> are a <b>special type</b> of <a href="#tokens"><b>token</b></a>, as they can contain both alphanumeric characters and <code>.</code>.<br>
+                Their usage and syntax are explained in <a href="#literals">Literals</a>.
+            </li>
+            <li>
+                <b>Identifiers</b> are used to <b>name and reference <a href="#name-resolution">symbols</a></b>.<br>
+                An identifier can be
+                alphanumeric (<code><regex->[a-zA-Z][a-zA-Z0-9]*</regex-></code>)
+                or symbolic (<code><regex->[!$%&*+\-/&lt;=&gt;?\[\]^`|~]+</regex-></code>).
+                Identifiers can be shadowed. This is explained in <a href="#name-shadowing">Name shadowing</a>.
+            </li>
+        </ul>
+    </ul>
+</moveto-doc->
