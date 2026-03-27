@@ -1,5 +1,5 @@
 :root {
-    --conversion-range-row-h: 48px;
+    --conversion-range-row-h: 24px;
     --conversion-range-row-h-rendering: calc(var(--conversion-range-row-h) + 1px);
     --conversion-value-separator-line-color: #fdfdfd07;
 }
@@ -17,15 +17,20 @@ table.conversion-table td {
     height: var(--conversion-range-row-h);
     padding-top: 0;
     padding-bottom: 0;
+    padding-left:  8px;
+    padding-right: 8px;
+}
+table.conversion-table td {
+    font-size: var(--font-size-x-small);
 }
 table.conversion-table td[rowspan] {
-  background-image: repeating-linear-gradient(
-    to bottom,
-    transparent,
-    transparent                                  calc(var(--conversion-range-row-h-rendering) - 1px),
-    var(--conversion-value-separator-line-color) calc(var(--conversion-range-row-h-rendering) - 1px),
-    var(--conversion-value-separator-line-color)      var(--conversion-range-row-h-rendering)
-  );
+    background-image: repeating-linear-gradient(
+        to bottom,
+        transparent,
+        transparent                                  calc(var(--conversion-range-row-h-rendering) - 1px),
+        var(--conversion-value-separator-line-color) calc(var(--conversion-range-row-h-rendering) - 1px),
+        var(--conversion-value-separator-line-color)      var(--conversion-range-row-h-rendering)
+    );
 }
 
 .conv-cell-y { background-color: hsla(115, 70%, 60%, 0.1); }

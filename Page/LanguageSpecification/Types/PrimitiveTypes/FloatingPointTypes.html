@@ -2,37 +2,38 @@
 <h1 id="floating-point-types"></h1>
 <moveto-doc->
     <p>
-        <code><t->float</t-></code>, <code><t->double</t-></code>.<br>
+        <code><t->float</t-></code>, <code><t->double</t-></code>, <code><t->quad</t-></code><lumen-logo-></lumen-logo->.<br>
         <b>Floating point types</b> are used to <b>approximately represent real numbers</b>.<br>
     </p>
     <p>
-        Both floating point types are encoded according to the IEEE 754 Standard.<br>
+        All floating point types are encoded according to the <a href="https://en.wikipedia.org/wiki/IEEE_754">IEEE 754 Standard</a>.<br>
         Positive and negative inf, nan and signed <code><k->0</k-></code> are all supported.<br>
         <code><k->+0</k-></code> and <code><k->-0</k-></code> are equal.
     </p>
     <example->
             <div style="border-top-left-radius: var(--code-decoration-r);">
-                                                <c-> 1     8            23</c->
-                                               <c->sign exponent    mantissa</c->
-                                                <c->│┌───┴──┐┌──────────┴──────────┐</c->  <t->float</t->
-                                                <regex-group->┕</regex-group-><regex-token->┷┷┷┷┷┷┷┷</regex-token-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->
-                                                <c->00000000000000000000000000000000</c->  <k->+0.0</k->
-                                                <c->10000000000000000000000000000000</c->  <k->-0.0</k->
-                                                <c->01111111100000000000000000000000</c->  <k->+inf</k->
-                                                <c->11111111100000000000000000000000</c->  <k->-inf</k->
-                                                <c->011111111&lt;─────── not 0 ───────&gt;</c->  <k->nan</k->
-                                                <c->111111111&lt;─────── not 0 ───────&gt;</c->  <k->nan</k->
+                <c->1    8              23</c->                        <c-> 1     11                              52</c->
+                <c->sign exponent    mantissa</c->                     <c->sign exponent                       mantissa</c->
+                <c->│┌───┴──┐┌──────────┴──────────┐</c->               <c->│┌────┴────┐┌─────────────────────────┴────────────────────────┐</c->
+                <regex-group->┕</regex-group-><regex-token->┷┷┷┷┷┷┷┷</regex-token-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->  <t->float</t->        <regex-group->┕</regex-group-><regex-token->┷┷┷┷┷┷┷┷┷┷┷</regex-token-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->  <t->double</t->
+                <c->00000000000000000000000000000000</c->  <k->+0.0</k->         <c->0000000000000000000000000000000000000000000000000000000000000000</c->  <k->+0.0</k->
+                <c->10000000000000000000000000000000</c->  <k->-0.0</k->         <c->1000000000000000000000000000000000000000000000000000000000000000</c->  <k->-0.0</k->
+                <c->01111111100000000000000000000000</c->  <k->+inf</k->         <c->0111111111110000000000000000000000000000000000000000000000000000</c->  <k->+inf</k->
+                <c->11111111100000000000000000000000</c->  <k->-inf</k->         <c->1111111111110000000000000000000000000000000000000000000000000000</c->  <k->-inf</k->
+                <c->011111111&lt;─────── not 0 ───────&gt;</c->  <k->nan</k->          <c->011111111111&lt;────────────────────── not 0 ─────────────────────&gt;</c->  <k->nan</k->
+                <c->111111111&lt;─────── not 0 ───────&gt;</c->  <k->nan</k->          <c->111111111111&lt;────────────────────── not 0 ─────────────────────&gt;</c->  <k->nan</k->
 
-                <c-> 1      11                           52</c->
-                <c->sign exponent                     mantissa</c->
-                <c->│┌────┴────┐┌─────────────────────────┴────────────────────────┐</c->  <t->double</t->
-                <regex-group->┕</regex-group-><regex-token->┷┷┷┷┷┷┷┷┷┷┷</regex-token-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->
-                <c->0000000000000000000000000000000000000000000000000000000000000000</c->  <k->+0.0</k->
-                <c->1000000000000000000000000000000000000000000000000000000000000000</c->  <k->-0.0</k->
-                <c->0111111111110000000000000000000000000000000000000000000000000000</c->  <k->+inf</k->
-                <c->1111111111110000000000000000000000000000000000000000000000000000</c->  <k->-inf</k->
-                <c->011111111111&lt;────────────────────── not 0 ─────────────────────&gt;</c->  <k->nan</k->
-                <c->111111111111&lt;────────────────────── not 0 ─────────────────────&gt;</c->  <k->nan</k->
+
+                <c->1       15                                                             112</c->
+                <c->sign exponent                                                        mantissa</c->
+                <c->│┌──────┴──────┐┌───────────────────────────────────────────────────────┴──────────────────────────────────────────────────────┐</c->
+                <regex-group->┕</regex-group-><regex-token->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷</regex-token-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->  <t->quad</t->  <lumen-only-></lumen-only-> Lumen only
+                <c->00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</c->  <k->+0.0</k->
+                <c->10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</c->  <k->-0.0</k->
+                <c->01111111111111110000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</c->  <k->+inf</k->
+                <c->11111111111111110000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</c->  <k->-inf</k->
+                <c->0111111111111111&lt;──────────────────────────────────────────────────── not 0 ───────────────────────────────────────────────────&gt;</c->  <k->nan</k->
+                <c->1111111111111111&lt;──────────────────────────────────────────────────── not 0 ───────────────────────────────────────────────────&gt;</c->  <k->nan</k->
             </div>
     </example->
     <p>
@@ -40,3 +41,15 @@
         nan values are not generated for consistency and performance reasons.
     </p>
 </moveto-doc->
+<moveto-internal->
+    <p>
+        The <code><t->quad</t-></code> type isn't natively supported in <a href="#lumen">Lumen</a> on most systems.
+        Instead, it's simulated using multiple <code><t->double</t-></code> values and operations. This makes it slower than the <code><t->double</t-></code> type.
+    </p>
+    <p>
+        The <code><t->quad</t-></code> type is not supported by <a href="#aurora">Aurora</a>
+        because most GPUs are simply not able to process it.<br>
+        The <code><t->double</t-></code> type is often much slower than <code><t->float</t-></code> in <a href="#aurora">Aurora</a>
+        because of missing hardware support. The <code><t->float</t-></code> type should be preferred whenever possible.
+    </p>
+</moveto-internal->

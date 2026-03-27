@@ -153,6 +153,8 @@
 - add function values as a syntax to initialize elements of buffers separately - function takes the index
 
 
+- add quad floating point type     (natively supported by llvm, no GPU support)
+- add cent and ucent integer types (natively supported by llvm, no GPU support)
 
 
 

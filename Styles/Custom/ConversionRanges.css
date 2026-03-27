@@ -1,19 +1,7 @@
-:root {
-    --conversion-range-line-h: 1.5ch;
-}
-
 
 range-val- {
     display: inline-block;
     font-size: var(--font-size-small);
-    line-height: var(--conversion-range-line-h);
-}
-range-var- {
-    display: inline;
-    white-space: pre;
-    font-size: var(--font-size-x-small);
-    font-weight: normal;
-    color: var(--fg-hidden);
 }
 
 

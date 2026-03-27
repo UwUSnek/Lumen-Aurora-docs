@@ -1438,48 +1438,40 @@
 
 <h1 id="primitive-types"></h1>
 <moveto-doc->
-    <p>Lumen and Aurora feature <b>7 primitive types</b>, which can be used to define more complex types such as <a href="#structs">structs</a>, <a href="#arrays">arrays</a> and <a href="#tuples">tuples</a>.</p>
     <p>
-        These types are always defined and they act as if they were declared in the <a href="#core-module">core module</a>.<br>
-        Primitive types are <b>not <a href="#keywords">keywords</a></b> and can be <a href="#name-shadowing">shadowed</a> like any other <a href="#name-resolution">symbol</a>.
+        <b>Primitive types</b> are the simplest kind of type.
+        They are used to represent integral numbers, decimal numbers and boolean values.
+        They are the foundation all other types and complex data structures are based on.
+    </p>
+    <p>
+        All primitive types are defined in the <code>__internal</code> module.<br>
+        Their names are <b>not <a href="#keywords">keywords</a></b>. They can be <a href="#name-shadowing">shadowed</a> like any other <a href="#name-resolution">symbol</a>.
     </p>
     <p>The primitive types are:</p>
     <div class="table-container"><table>
         <tr>
-            <th>Type name   </th>
-            <th>Size (bytes)</th>
-            <th>Value type  </th>
+            <th>Type name</th>
+            <th>Size</th>
+            <th>Value type</th>
         </tr>
         <tr>
-            <td class="center"><code><t->uint</t-></code></td>
-            <td class="center">4</td>
-            <td rowspan="2">Unsigned integral number</td>
+            <td class="center"><code><t->ubyte</t-></code> <code><t->uint</t-></code> <code><t->ulong</t-></code> <code><t->ucent</t-></code><lumen-logo-></lumen-logo-></td>
+            <td class="center">1, 4, 8, and 16 bytes</td>
+            <td>Unsigned integral number</td>
         </tr>
         <tr>
-            <td class="center"><code><t->ulong</t-></code></td>
-            <td class="center">8</td>
+            <td class="center"><code><t->byte</t-></code> <code><t->int</t-></code> <code><t->long</t-></code> <code><t->cent</t-></code><lumen-logo-></lumen-logo-></td>
+            <td class="center">1, 4, 8, and 16 bytes</td>
+            <td>Signed integral number</td>
         </tr>
         <tr>
-            <td class="center"><code><t->int</t-></code></td>
-            <td class="center">4</td>
-            <td rowspan="2">Signed integral number</td>
-        </tr>
-        <tr>
-            <td class="center"><code><t->long</t-></code></td>
-            <td class="center">8</td>
-        </tr>
-        <tr>
-            <td class="center"><code><t->float</t-></code></td>
-            <td class="center">4</td>
-            <td rowspan="2">Floating point number</td>
-        </tr>
-        <tr>
-            <td class="center"><code><t->double</t-></code></td>
-            <td class="center">8</td>
+            <td class="center"><code><t->float</t-></code> <code><t->double</t-></code> <code><t->quad</t-></code><lumen-logo-></lumen-logo-></td>
+            <td class="center">4, 8, and 16 bytes</td>
+            <td>Floating point number</td>
         </tr>
         <tr>
             <td class="center"><code><t->bool</t-></code></td>
-            <td class="center">4</td>
+            <td class="center">4 bytes</td>
             <td>Boolean value</td>
         </tr>
     </table></div>
@@ -1492,9 +1484,10 @@
 <h1 id="integral-types"></h1>
 <moveto-doc->
     <p>
-        <code><t->int</t-></code>, <code><t->uint</t-></code>, <code><t->long</t-></code>, <code><t->ulong</t-></code>.<br>
+        <code><t->byte</t-></code>, <code><t->ubyte</t-></code>, <code><t->int</t-></code>, <code><t->uint</t-></code>,
+        <code><t->long</t-></code>, <code><t->ulong</t-></code>, <code><t->cent</t-></code><lumen-only-></lumen-only->, <code><t->ucent</t-></code><lumen-only-></lumen-only->.<br>
         <b>Integral types</b> are used to <b>represent integers</b>.<br>
-        Unsigned integers cannot represent negative numbers, but the maximum value is twice as high as their signed counterpart.
+        Unsigned integral types cannot represent negative numbers, but the maximum value is twice as high as their signed counterpart.
     </p>
     <p>
         All signed integral types use the Two's Complement to represent negative numbers.<br>
@@ -1502,64 +1495,77 @@
     </p>
     <example->
             <div style="border-top-left-radius: var(--code-decoration-r);">
-                                              <c->  1                31</c->
-                                               <c->sign            value</c->
-                                                <c->│┌───────────────┴─────────────┐</c->  <t->int</t->
-                                                <regex-group->┕</regex-group-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->
-                                                                 <c->32</c->
-                                                               <c->value</c->
-                                                <c->┌────────────────┴─────────────┐</c->  <t->uint</t->
-                                                <s->┕┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->
-                <c->  1                              63</c->
-                <c->sign                           value</c->
-                <c->│┌───────────────────────────────┴─────────────────────────────┐</c->  <t->long</t->
-                <regex-group->┕</regex-group-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->
-                                                 <c->64</c->
-                                                <c->value</c->
-                <c->┌────────────────────────────────┴─────────────────────────────┐</c->  <t->ulong</t->
-                <s->┕┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->
+                  <c->  1    7</c->          <c->  1                31</c->                     <c->  1                                63</c->
+                  <c->sign value</c->         <c->sign            value</c->                     <c->sign                            value</c->
+                    <c->│┌───┴─┐</c->          <c->│┌───────────────┴─────────────┐</c->          <c->│┌───────────────────────────────┴─────────────────────────────┐</c->
+                    <regex-group->┕</regex-group-><s->┷┷┷┷┷┷┙</s-> <t->byte</t->     <regex-group->┕</regex-group-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s-> <t->int</t->      <regex-group->┕</regex-group-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s-> <t->long</t->
+                  <c->      8</c->                             <c->32</c->                                                         <c->64</c->
+                   <c->   value</c->                          <c->value</c->                                                     <c->value</c->
+                    <c->┌───┴──┐</c->          <c->┌────────────────┴─────────────┐</c->          <c->┌────────────────────────────────┴─────────────────────────────┐</c->
+                    <s->┕┷┷┷┷┷┷┙</s-> <t->ubyte</t->    <s->┕┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s-> <t->uint</t->     <s->┕┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s-> <t->ulong</t->
+
+                <c->1                                                               127</c->
+                <c->sign                                                           value</c->
+                <c->│┌───────────────────────────────────────────────────────────────┴─────────────────────────────────────────────────────────────┐</c->
+                <regex-group->┕</regex-group-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s-> <t->cent</t->  <lumen-only-></lumen-only-> Lumen only
+                                                                                <c->128</c->
+                                                                               <c->value</c->
+                <c->┌────────────────────────────────────────────────────────────────┴─────────────────────────────────────────────────────────────┐</c->
+                <s->┕┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s-> <t->ucent</t->  <lumen-only-></lumen-only-> Lumen only
             </div>
     </example->
     <p>
         //TODO GL_EXT_shader_explicit_arithmetic_types_int64
     </p>
 </moveto-doc->
-//TODO move internal info to internal functioning
+<moveto-internal->
+    <p>
+        128-bit types (<code><t->cent</t-></code> and <code><t->ucent</t-></code>) aren't natively supported in <a href="#lumen">Lumen</a> on most systems.
+        Instead, they are simulated using multiple 64-bit values and operations. This makes them slower than their 64-bit counterparts.
+    </p>
+    <p>
+        128-bit types (<code><t->cent</t-></code> and <code><t->ucent</t-></code>) are not supported by <a href="#aurora">Aurora</a>
+        because most GPUs are simply not able to process them.<br>
+        64-bit types (<code><t->long</t-></code> and <code><t->ulong</t-></code>) are often much slower than their 32-bit counterparts in <a href="#aurora">Aurora</a>
+        because of missing hardware support. Smaller types should be preferred whenever possible.
+    </p>
+</moveto-internal->
 
 <h1 id="floating-point-types"></h1>
 <moveto-doc->
     <p>
-        <code><t->float</t-></code>, <code><t->double</t-></code>.<br>
+        <code><t->float</t-></code>, <code><t->double</t-></code>, <code><t->quad</t-></code><lumen-logo-></lumen-logo->.<br>
         <b>Floating point types</b> are used to <b>approximately represent real numbers</b>.<br>
     </p>
     <p>
-        Both floating point types are encoded according to the IEEE 754 Standard.<br>
+        All floating point types are encoded according to the <a href="https://en.wikipedia.org/wiki/IEEE_754">IEEE 754 Standard</a>.<br>
         Positive and negative inf, nan and signed <code><k->0</k-></code> are all supported.<br>
         <code><k->+0</k-></code> and <code><k->-0</k-></code> are equal.
     </p>
     <example->
             <div style="border-top-left-radius: var(--code-decoration-r);">
-                                                <c-> 1     8            23</c->
-                                               <c->sign exponent    mantissa</c->
-                                                <c->│┌───┴──┐┌──────────┴──────────┐</c->  <t->float</t->
-                                                <regex-group->┕</regex-group-><regex-token->┷┷┷┷┷┷┷┷</regex-token-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->
-                                                <c->00000000000000000000000000000000</c->  <k->+0.0</k->
-                                                <c->10000000000000000000000000000000</c->  <k->-0.0</k->
-                                                <c->01111111100000000000000000000000</c->  <k->+inf</k->
-                                                <c->11111111100000000000000000000000</c->  <k->-inf</k->
-                                                <c->011111111&lt;─────── not 0 ───────&gt;</c->  <k->nan</k->
-                                                <c->111111111&lt;─────── not 0 ───────&gt;</c->  <k->nan</k->
+                <c->1    8              23</c->                        <c-> 1     11                              52</c->
+                <c->sign exponent    mantissa</c->                     <c->sign exponent                       mantissa</c->
+                <c->│┌───┴──┐┌──────────┴──────────┐</c->               <c->│┌────┴────┐┌─────────────────────────┴────────────────────────┐</c->
+                <regex-group->┕</regex-group-><regex-token->┷┷┷┷┷┷┷┷</regex-token-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->  <t->float</t->        <regex-group->┕</regex-group-><regex-token->┷┷┷┷┷┷┷┷┷┷┷</regex-token-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->  <t->double</t->
+                <c->00000000000000000000000000000000</c->  <k->+0.0</k->         <c->0000000000000000000000000000000000000000000000000000000000000000</c->  <k->+0.0</k->
+                <c->10000000000000000000000000000000</c->  <k->-0.0</k->         <c->1000000000000000000000000000000000000000000000000000000000000000</c->  <k->-0.0</k->
+                <c->01111111100000000000000000000000</c->  <k->+inf</k->         <c->0111111111110000000000000000000000000000000000000000000000000000</c->  <k->+inf</k->
+                <c->11111111100000000000000000000000</c->  <k->-inf</k->         <c->1111111111110000000000000000000000000000000000000000000000000000</c->  <k->-inf</k->
+                <c->011111111&lt;─────── not 0 ───────&gt;</c->  <k->nan</k->          <c->011111111111&lt;────────────────────── not 0 ─────────────────────&gt;</c->  <k->nan</k->
+                <c->111111111&lt;─────── not 0 ───────&gt;</c->  <k->nan</k->          <c->111111111111&lt;────────────────────── not 0 ─────────────────────&gt;</c->  <k->nan</k->
 
-                <c-> 1      11                           52</c->
-                <c->sign exponent                     mantissa</c->
-                <c->│┌────┴────┐┌─────────────────────────┴────────────────────────┐</c->  <t->double</t->
-                <regex-group->┕</regex-group-><regex-token->┷┷┷┷┷┷┷┷┷┷┷</regex-token-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->
-                <c->0000000000000000000000000000000000000000000000000000000000000000</c->  <k->+0.0</k->
-                <c->1000000000000000000000000000000000000000000000000000000000000000</c->  <k->-0.0</k->
-                <c->0111111111110000000000000000000000000000000000000000000000000000</c->  <k->+inf</k->
-                <c->1111111111110000000000000000000000000000000000000000000000000000</c->  <k->-inf</k->
-                <c->011111111111&lt;────────────────────── not 0 ─────────────────────&gt;</c->  <k->nan</k->
-                <c->111111111111&lt;────────────────────── not 0 ─────────────────────&gt;</c->  <k->nan</k->
+
+                <c->1       15                                                             112</c->
+                <c->sign exponent                                                        mantissa</c->
+                <c->│┌──────┴──────┐┌───────────────────────────────────────────────────────┴──────────────────────────────────────────────────────┐</c->
+                <regex-group->┕</regex-group-><regex-token->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷</regex-token-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->  <t->quad</t->  <lumen-only-></lumen-only-> Lumen only
+                <c->00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</c->  <k->+0.0</k->
+                <c->10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</c->  <k->-0.0</k->
+                <c->01111111111111110000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</c->  <k->+inf</k->
+                <c->11111111111111110000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</c->  <k->-inf</k->
+                <c->0111111111111111&lt;──────────────────────────────────────────────────── not 0 ───────────────────────────────────────────────────&gt;</c->  <k->nan</k->
+                <c->1111111111111111&lt;──────────────────────────────────────────────────── not 0 ───────────────────────────────────────────────────&gt;</c->  <k->nan</k->
             </div>
     </example->
     <p>
@@ -1567,6 +1573,18 @@
         nan values are not generated for consistency and performance reasons.
     </p>
 </moveto-doc->
+<moveto-internal->
+    <p>
+        The <code><t->quad</t-></code> type isn't natively supported in <a href="#lumen">Lumen</a> on most systems.
+        Instead, it's simulated using multiple <code><t->double</t-></code> values and operations. This makes it slower than the <code><t->double</t-></code> type.
+    </p>
+    <p>
+        The <code><t->quad</t-></code> type is not supported by <a href="#aurora">Aurora</a>
+        because most GPUs are simply not able to process it.<br>
+        The <code><t->double</t-></code> type is often much slower than <code><t->float</t-></code> in <a href="#aurora">Aurora</a>
+        because of missing hardware support. The <code><t->float</t-></code> type should be preferred whenever possible.
+    </p>
+</moveto-internal->
 
 <h1 id="boolean-type"></h1>
 <moveto-doc->
@@ -1579,8 +1597,8 @@
             <div style="border-top-left-radius: var(--code-decoration-r);">
                                 <c->32</c->
                               <c->value</c->
-                <c->┌───────────────┴──────────────┐</c->  <t->bool</t->
-                <s->┕┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->
+                <c->┌───────────────┴──────────────┐</c->
+                <s->┕┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s-> <t->bool</t->
                 <c->00000000000000000000000000000001</c->  <k->true</k->
                 <c->00000000000000000000000000000000</c->  <k->false</k->
             </div>
@@ -2187,6 +2205,8 @@
 
 <h1 id="implicit-conversions.primitive-types"></h1>
 <moveto-doc->
+    //FIXME add a toggle button in the conversion tables that shows the raw values instead of the reflection constants in the left column
+    //FIXME use a constant ID that is written from js instead of hard coding it from the HTML
     <p>
         <a href="#primitive-types">Primitive types</a> are all implicitly convertible to each other.<br>
         In Lumen, some conversions have <a href="#undefined-values">undefined result</a>.<br>
@@ -2195,122 +2215,170 @@
         //TODO use fedisableexcept(FE_ALL_EXCEPT);
         //TODO it only works on  floating points. integers throw exceptions anyway
     </p>
-
     <div class="table-container"><table class="conversion-table">
+        <p>
+            From <code><t->ubyte</t-></code>, <code><t->byte</t-></code>, <code><t->uint</t-></code>, <code><t->int</t-></code>,
+            <code><t->ulong</t-></code>, <code><t->long</t-></code>, <code><t->ucent</t-></code>, <code><t->cent</t-></code>:
+        </p>
         <tr>
-            <th colspan="2">From ↓ To →</th>
+            <th class="medium">From ↓ To →</th>
+            <th><t->ubyte</t-></th>
+            <th><t->byte</t-></th>
             <th><t->uint</t-></th>
             <th><t->int</t-></th>
             <th><t->ulong</t-></th>
             <th><t->long</t-></th>
+            <th><t->ucent</t-></th>
+            <th><t->cent</t-></th>
             <th><t->float</t-></th>
             <th><t->double</t-></th>
+            <th><t->quad</t-></th>
             <th><t->bool</t-></th>
         </tr>
 
         <tr class="even">
-            <th rowspan="13"><t->uint</t-><br><br><t->int</t-><br><br><t->ulong</t-><br><br><t->long</t-></th>
-            <th><range-val->== <k->-9223372036854775808</k-><br><range-var->long:min</range-var-></range-val-></th>
-            <td class="center wrap conv-cell-m" rowspan="5">Overflows to (-n - <k->1</k->) % (uint:<k->max</k-> - <k->1</k->)</td>
-            <td class="center wrap conv-cell-n" rowspan="3">Undefined</td>
-            <td class="center wrap conv-cell-m" rowspan="5">Overflows to (-n - <k->1</k->) % (ulong:<k->max</k-> - <k->1</k->)</td>
-            <td class="center wrap conv-cell-y" rowspan="11">Correct result</td>
-            <td class="center wrap conv-cell-m" rowspan="4">Conversions are not symmetric</td>
-            <td class="center wrap conv-cell-m" rowspan="2">Conversions are not symmetric</td>
-            <td class="center wrap conv-cell-y" rowspan="5"><k->true</k-></td>
+            <th><range-val->&lt; <k->quad:min_precise_int</k-></range-val-></th>
+            <td class="center wrap conv-cell-m" rowspan="7">Overflows to (-n - <k->1</k->) % (ubyte:<k->max</k-> - <k->1</k->)</td>
+            <td class="center wrap conv-cell-n" rowspan="6">Undefined</td>
+            <td class="center wrap conv-cell-m" rowspan="7">Overflows to (-n - <k->1</k->) % (uint:<k->max</k-> - <k->1</k->)</td>
+            <td class="center wrap conv-cell-n" rowspan="4">Undefined</td>
+            <td class="center wrap conv-cell-m" rowspan="7">Overflows to (-n - <k->1</k->) % (ulong:<k->max</k-> - <k->1</k->)</td>
+            <td class="center wrap conv-cell-n" rowspan="2">Undefined</td>
+            <td class="center wrap conv-cell-m" rowspan="7">Overflows to (-n - <k->1</k->) % (ucent:<k->max</k-> - <k->1</k->)</td>
+            <td class="center wrap conv-cell-y" rowspan="18">Correct result</td>
+            <td class="center wrap conv-cell-m" rowspan="5">Asymmetric</td>
+            <td class="center wrap conv-cell-m" rowspan="3">Asymmetric</td>
+            <td class="center wrap conv-cell-m" rowspan="1">Asymmetric</td>
+            <td class="center wrap conv-cell-y" rowspan="7"><k->true</k-></td>
         </tr>
         <tr class="even">
-            <fake-td></fake-td>
-            <th><range-val->&lt; <k->-9007199254740992</k-><br><range-var->double:min_precise_int</range-var-></range-val-></th>
-            <fake-td></fake-td>
+            <th><range-val->&lt; <k->long:min</k-></range-val-></th>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
-        </tr>
-        <tr class="even">
-            <fake-td></fake-td>
-            <th><range-val->&lt; <k->-2147483648</k-><br><range-var->int:min</range-var-></range-val-></th>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
-            <fake-td></fake-td>
-            <td class="center wrap conv-cell-y" rowspan="8">Correctly rounded</td>
+            <td class="center wrap conv-cell-y" rowspan="16">Correctly rounded</td>
             <fake-td></fake-td>
         </tr>
         <tr class="even">
+            <th><range-val->&lt; <k->double:min_precise_int</k-></range-val-></th>
             <fake-td></fake-td>
-            <th><range-val->&lt; <k->-16777216</k-><br><range-var->float:min_precise_int</range-var-></range-val-></th>
-            <fake-td></fake-td>
-            <td class="center wrap conv-cell-y" rowspan="5">Correct result</td>
-            <fake-td></fake-td>
+            <td class="center wrap conv-cell-y" rowspan="13">Correct result</td>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
-        </tr>
-        <tr class="even">
-            <fake-td></fake-td>
-            <th><range-val->&lt; <k->0</k-><br><range-var-></range-var-></range-val-></th>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
-            <td class="center wrap conv-cell-y" rowspan="3">Correctly rounded</td>
             <fake-td></fake-td>
             <fake-td></fake-td>
         </tr>
         <tr class="even">
+            <th><range-val->&lt; <k->int:min</k-></range-val-></th>
             <fake-td></fake-td>
-            <th><range-val->== <k->0</k-><br><range-var-></range-var-></range-val-></th>
-            <td class="center wrap conv-cell-y" rowspan="4">Correct result</td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-y" rowspan="11">Correctly rounded</td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+        </tr>
+        <tr class="even">
+            <th><range-val->&lt; <k->float:min_precise_int</k-></range-val-></th>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
             <fake-td></fake-td>
             <td class="center wrap conv-cell-y" rowspan="8">Correct result</td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+        </tr>
+        <tr class="even">
+            <th><range-val->&lt; <k->byte:min</k-></range-val-></th>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-y" rowspan="6">Correctly rounded</td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+        </tr>
+        <tr class="even">
+            <th><range-val->&lt; <k->0</k-><br><range-var-></range-var-></range-val-></range-val-></th>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-y" rowspan="3">Correct result</td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+        </tr>
+        <tr class="even">
+            <th><range-val->== <k->0</k-><br><range-var-></range-var-></range-val-></range-val-></th>
+            <td class="center wrap conv-cell-y" rowspan="3">Correct result</td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-y" rowspan="6">Correct result</td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-y" rowspan="9">Correct result</td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-y" rowspan="13">Correct result</td>
+            <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <td class="center wrap conv-cell-y"><k->false</k-></td>
         </tr>
         <tr class="even">
-            <fake-td></fake-td>
-            <th><range-val->&gt; <k->0</k-><br><range-var-></range-var-></range-val-></th>
-            <fake-td></fake-td>
+            <th><range-val->&gt; <k->0</k-><br><range-var-></range-var-></range-val-></range-val-></th>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
-            <td class="center wrap conv-cell-y" rowspan="7"><k->true</k-></td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-y" rowspan="12"><k->true</k-></td>
         </tr>
         <tr class="even">
+            <th><range-val->&gt; <k->byte:max</k-></range-val-></th>
             <fake-td></fake-td>
-            <th><range-val->&gt; <k->+16777216</k-><br><range-var->float:max_precise_int</range-var-></range-val-></th>
-            <fake-td></fake-td>
-            <fake-td></fake-td>
-            <fake-td></fake-td>
-            <fake-td></fake-td>
-            <td class="center wrap conv-cell-m" rowspan="6">Conversions are not symmetric</td>
-            <fake-td></fake-td>
-            <fake-td></fake-td>
-        </tr>
-        <tr class="even">
-            <fake-td></fake-td>
-            <th><range-val->&gt; <k->+2147483647</k-><br><range-var->int:max</range-var-></range-val-></th>
-            <fake-td></fake-td>
-            <td class="center wrap conv-cell-n" rowspan="5">Undefined</td>
+            <td class="center wrap conv-cell-n" rowspan="99">Undefined</td>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
-            <fake-td></fake-td>
-        </tr>
-        <tr class="even">
-            <fake-td></fake-td>
-            <th><range-val->&gt; <k->+4294967295</k-><br><range-var->uint:max</range-var-></range-val-></th>
-            <td class="center wrap conv-cell-m" rowspan="4">Overflows to n % (uint:<k->max</k-> + <k->1</k->)</td>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
@@ -2319,89 +2387,239 @@
             <fake-td></fake-td>
         </tr>
         <tr class="even">
+            <th><range-val->&gt; <k->ubyte:max</k-></range-val-></th>
             <fake-td></fake-td>
-            <th><range-val->&gt; <k->+9007199254740992</k-><br><range-var->double:max_precise_int</range-var-></range-val-></th>
-            <fake-td></fake-td>
-            <fake-td></fake-td>
-            <fake-td></fake-td>
-            <fake-td></fake-td>
-            <fake-td></fake-td>
-            <td class="center wrap conv-cell-m" rowspan="3">Conversions are not symmetric</td>
-            <fake-td></fake-td>
-        </tr>
-        <tr class="even">
-            <fake-td></fake-td>
-            <th><range-val->&gt; <k->+9223372036854775807</k-><br><range-var->long:max</range-var-></range-val-></th>
+            <td class="center wrap conv-cell-m" rowspan="99">Overflows to n % (ubyte:<k->max</k-> + <k->1</k->)</td>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
-            <td class="center wrap conv-cell-n" rowspan="2">Undefined</td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
         </tr>
         <tr class="even">
-            <fake-td></fake-td>
-            <th><range-val->== <k->+18446744073709551615</k-><br><range-var->ulong:max</range-var-></range-val-></th>
-            <fake-td></fake-td>
+            <th><range-val->&gt; <k->float:max_precise_int</k-></range-val-></th>
             <fake-td></fake-td>
             <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-m" rowspan="99">Asymmetric</td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+        </tr>
+        <tr class="even">
+            <th><range-val->&gt; <k->int:max</k-></range-val-></th>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-n" rowspan="99">Undefined</td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+        </tr>
+        <tr class="even">
+            <th><range-val->&gt; <k->uint:max</k-></range-val-></th>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-m" rowspan="99">Overflows to n % (uint:<k->max</k-> + <k->1</k->)</td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+        </tr>
+        <tr class="even">
+            <th><range-val->&gt; <k->double:max_precise_int</k-></range-val-></th>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-m" rowspan="99">Asymmetric</td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+        </tr>
+        <tr class="even">
+            <th><range-val->&gt; <k->long:max</k-></range-val-></th>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-n" rowspan="99">Undefined</td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+        </tr>
+        <tr class="even">
+            <th><range-val->&gt; <k->ulong:max</k-></range-val-></th>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-m" rowspan="99">Overflows to n % (ulong:<k->max</k-> + <k->1</k->)</td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+        </tr>
+        <tr class="even">
+            <th><range-val->&gt; <k->quad:max_precise_int</k-></range-val-></th>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-m" rowspan="99">Asymmetric</td>
+            <fake-td></fake-td>
+        </tr>
+        <tr class="even">
+            <th><range-val->&gt; <k->cent:max</k-></range-val-></th>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-n" rowspan="99">Undefined</td>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
         </tr>
     </table></div>
-
-
     <div class="table-container"><table class="conversion-table">
+        <p>
+            From <code><t->float</t-></code>, <code><t->double</t-></code>, <code><t->quad</t-></code>:
+        </p>
         <tr>
-            <th colspan="2">From ↓ To →</th>
+            <th class="medium">From ↓ To →</th>
+            <th><t->ubyte</t-></th>
+            <th><t->byte</t-></th>
             <th><t->uint</t-></th>
             <th><t->int</t-></th>
             <th><t->ulong</t-></th>
             <th><t->long</t-></th>
+            <th><t->ucent</t-></th>
+            <th><t->cent</t-></th>
             <th><t->float</t-></th>
             <th><t->double</t-></th>
+            <th><t->quad</t-></th>
             <th><t->bool</t-></th>
         </tr>
 
         <tr class="even">
-            <th rowspan="16"><t->float</t-><br><br><t->double</t-></th>
-            <th><range-val->== <k->-inf</k-><br><range-var->-double:inf, -float:inf</range-var-></range-val-></th>
+            <th><range-val->== <k->-inf</k-></range-val-></th>
+            <td class="center wrap conv-cell-n" rowspan="8">Undefined</td>
+            <td class="center wrap conv-cell-n" rowspan="7">Undefined</td>
+            <td class="center wrap conv-cell-n" rowspan="8">Undefined</td>
             <td class="center wrap conv-cell-n" rowspan="6">Undefined</td>
+            <td class="center wrap conv-cell-n" rowspan="8">Undefined</td>
             <td class="center wrap conv-cell-n" rowspan="5">Undefined</td>
-            <td class="center wrap conv-cell-n" rowspan="6">Undefined</td>
+            <td class="center wrap conv-cell-n" rowspan="8">Undefined</td>
             <td class="center wrap conv-cell-n" rowspan="4">Undefined</td>
-            <td class="center wrap conv-cell-y" rowspan="1">Correct result</td>
-            <td class="center wrap conv-cell-y" rowspan="1">Correct result</td>
-            <td class="center wrap conv-cell-y" rowspan="6"><k->true</k-></td>
+            <td class="center wrap conv-cell-y" rowspan="1" colspan="3">Correct result</td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-y" rowspan="8"><k->true</k-></td>
         </tr>
         <tr class="even">
+            <th><range-val->&lt; <k->double:min</k-></range-val-></th>
             <fake-td></fake-td>
-            <th><range-val->== <k->-1.7976931348623157081e+308</k-><br><range-var->double:min</range-var-></range-val-></th>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <td class="center wrap conv-cell-n" rowspan="2">Undefined</td>
-            <td class="center wrap conv-cell-y" rowspan="13">Correctly rounded</td>
+            <td class="center wrap conv-cell-n" rowspan="1">Undefined</td>
+            <td class="center wrap conv-cell-y" rowspan="19">Correctly rounded</td>
             <fake-td></fake-td>
         </tr>
         <tr class="even">
-            <fake-td></fake-td>
-            <th><range-val->&lt; <k->-3.4028234663852885981e+38</k-><br><range-var->float:min</range-var-></range-val-></th>
-            <fake-td></fake-td>
+            <th><range-val->&lt; <k->float:min</k-></range-val-></th>
             <fake-td></fake-td>
             <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-y" rowspan="17">Correctly rounded</td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+        </tr>
+        <tr class="even">
+            <th><range-val->&lt; <k->cent:min</k-></range-val-></th>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-y" rowspan="15">Correctly rounded</td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+        </tr>
+        <tr class="even">
+            <th><range-val->&lt; <k->long:min</k-></range-val-></th>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-y" rowspan="12">Correctly rounded</td>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
         </tr>
         <tr class="even">
+            <th><range-val->&lt; <k->int:min</k-></range-val-></th>
             <fake-td></fake-td>
-            <th><range-val->&lt; <k->-9223372036854775808.0</k-><br><range-var->long:min</range-var-></range-val-></th>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
@@ -2409,10 +2627,13 @@
             <td class="center wrap conv-cell-y" rowspan="9">Correctly rounded</td>
             <fake-td></fake-td>
             <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
         </tr>
         <tr class="even">
-            <fake-td></fake-td>
-            <th><range-val->&lt; <k->-2147483648.0</k-><br><range-var->int:min</range-var-></range-val-></th>
+            <th><range-val->&lt; <k->byte:min</k-></range-val-></th>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
@@ -2420,10 +2641,15 @@
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
         </tr>
         <tr class="even">
+            <th><range-val->&lt; <k->0.0</k-><br><range-var-></range-var-></range-val-></range-val-></th>
             <fake-td></fake-td>
-            <th><range-val->&lt; <k->0.0</k-><br><range-var-></range-var-></range-val-></th>
             <td class="center wrap conv-cell-y" rowspan="3">Correctly rounded</td>
             <fake-td></fake-td>
             <fake-td></fake-td>
@@ -2431,44 +2657,49 @@
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
         </tr>
         <tr class="even">
-            <fake-td></fake-td>
-            <th><range-val->== <k->0.0</k-><br><range-var-></range-var-></range-val-></th>
+            <th><range-val->== <k->0.0</k-><br><range-var-></range-var-></range-val-></range-val-></th>
             <td class="center wrap conv-cell-y" rowspan="3">Correctly rounded</td>
             <fake-td></fake-td>
             <td class="center wrap conv-cell-y" rowspan="5">Correctly rounded</td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-y" rowspan="7">Correctly rounded</td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-y" rowspan="9">Correctly rounded</td>
+            <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <td class="center wrap conv-cell-y" rowspan="1"><k->false</k-></td>
         </tr>
         <tr class="even">
-            <fake-td></fake-td>
-            <th><range-val->&gt; <k->0.0</k-><br><range-var-></range-var-></range-val-></th>
-            <fake-td></fake-td>
+            <th><range-val->&gt; <k->0.0</k-><br><range-var-></range-var-></range-val-></range-val-></th>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
-            <td class="center wrap conv-cell-y" rowspan="8"><k->true</k-></td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-y" rowspan="12"><k->true</k-></td>
         </tr>
         <tr class="even">
+            <th><range-val->&gt; <k->byte:max</k-></range-val-></th>
             <fake-td></fake-td>
-            <th><range-val->&gt; <k->+2147483647.0</k-><br><range-var->int:max</range-var-></range-val-></th>
-            <td class="center wrap conv-cell-n" rowspan="8">Undefined</td>
-            <fake-td></fake-td>
-            <fake-td></fake-td>
+            <td class="center wrap conv-cell-n" rowspan="99">Undefined</td>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
-        </tr>
-        <tr class="even">
-            <fake-td></fake-td>
-            <th><range-val->&gt; <k->+4294967297.0</k-><br><range-var->uint:max</range-var-></range-val-></th>
-            <td class="center wrap conv-cell-n" rowspan="7">Undefined</td>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
@@ -2477,30 +2708,117 @@
             <fake-td></fake-td>
         </tr>
         <tr class="even">
-            <fake-td></fake-td>
-            <th><range-val->&gt; <k->+9223372036854775807.0</k-><br><range-var->long:max</range-var-></range-val-></th>
-            <fake-td></fake-td>
-            <fake-td></fake-td>
-            <fake-td></fake-td>
-            <td class="center wrap conv-cell-n" rowspan="6">Undefined</td>
+            <th><range-val->&gt; <k->ubyte:max</k-></th>
+            <td class="center wrap conv-cell-n" rowspan="99">Undefined</td>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
-        </tr>
-        <tr class="even">
-            <fake-td></fake-td>
-            <th><range-val->&gt; <k->+18446744073709551615.0</k-><br><range-var->ulong:max</range-var-></range-val-></th>
             <fake-td></fake-td>
             <fake-td></fake-td>
-            <td class="center wrap conv-cell-n" rowspan="5">Undefined</td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
         </tr>
         <tr class="even">
+            <th><range-val->&gt; <k->int:max</k-></range-val-></th>
             <fake-td></fake-td>
-            <th><range-val->&gt; <k->+3.4028234663852885981e+38</k-><br><range-var->float:max</range-var-></range-val-></th>
+            <td class="center wrap conv-cell-n" rowspan="99">Undefined</td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+        </tr>
+        <tr class="even">
+            <th><range-val->&gt; <k->uint:max</k-></th>
+            <td class="center wrap conv-cell-n" rowspan="99">Undefined</td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+        </tr>
+        <tr class="even">
+            <th><range-val->&gt; <k->long:max</k-></range-val-></th>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-n" rowspan="99">Undefined</td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+        </tr>
+        <tr class="even">
+            <th><range-val->&gt; <k->ulong:max</k-></range-val-></th>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-n" rowspan="99">Undefined</td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+        </tr>
+        <tr class="even">
+            <th><range-val->&gt; <k->cent:max</k-></range-val-></th>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-n" rowspan="99">Undefined</td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+        </tr>
+        <tr class="even">
+            <th><range-val->&gt; <k->ucent:max</k-></range-val-></th>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-n" rowspan="99">Undefined</td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+        </tr>
+        <tr class="even">
+            <th><range-val->&gt; <k->float:max</k-></range-val-></th>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
@@ -2508,32 +2826,45 @@
             <td class="center wrap conv-cell-n" rowspan="2">Undefined</td>
             <fake-td></fake-td>
             <fake-td></fake-td>
-        </tr>
-        <tr class="even">
-            <fake-td></fake-td>
-            <th><range-val->== <k->+1.7976931348623157081e+308</k-><br><range-var->double:max</range-var-></range-val-></th>
-            <fake-td></fake-td>
-            <fake-td></fake-td>
-            <fake-td></fake-td>
-            <fake-td></fake-td>
-            <fake-td></fake-td>
-            <fake-td></fake-td>
             <fake-td></fake-td>
         </tr>
         <tr class="even">
-            <fake-td></fake-td>
-            <th><range-val->== <k->+inf</k-><br><range-var->double:inf, float:inf</range-var-></range-val-></th>
-            <fake-td></fake-td>
+            <th><range-val->&gt; <k->double:max</k-></range-val-></th>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
-            <td class="center wrap conv-cell-y" rowspan="2">Correct result</td>
-            <td class="center wrap conv-cell-y" rowspan="2">Correct result</td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-n" rowspan="1">Undefined</td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
             <fake-td></fake-td>
         </tr>
         <tr class="even">
+            <th><range-val->== <k->+inf</k-></range-val-></th>
             <fake-td></fake-td>
-            <th><range-val-><f->isnan</f->(n)<br><range-var->double:nan, float:nan</range-var-></range-val-></th>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <td class="center wrap conv-cell-y" rowspan="2" colspan="3">Correct result</td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+        </tr>
+        <tr class="even">
+            <th><range-val-><f->nan</f-></range-val-></th>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
+            <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
@@ -2543,39 +2874,52 @@
             <td class="center wrap conv-cell-n" rowspan="1">undefined</td>
         </tr>
     </table></div>
-
-
-
     <div class="table-container"><table class="conversion-table">
+        <p>
+            From <code><t->bool</t-></code>:
+        </p>
         <tr>
-            <th colspan="2">From ↓ To →</th>
+            <th class="medium">From ↓ To →</th>
+            <th><t->ubyte</t-></th>
+            <th><t->byte</t-></th>
             <th><t->uint</t-></th>
             <th><t->int</t-></th>
             <th><t->ulong</t-></th>
             <th><t->long</t-></th>
+            <th><t->ucent</t-></th>
+            <th><t->cent</t-></th>
             <th><t->float</t-></th>
             <th><t->double</t-></th>
+            <th><t->quad</t-></th>
             <th><t->bool</t-></th>
         </tr>
 
         <tr>
-            <th rowspan="2"><t->bool</t-></th>
             <th class="nowrap small"><k->false</k-></th>
             <td class="center wrap conv-cell-y"><k->0</k-></td>
             <td class="center wrap conv-cell-y"><k->0</k-></td>
             <td class="center wrap conv-cell-y"><k->0</k-></td>
             <td class="center wrap conv-cell-y"><k->0</k-></td>
+            <td class="center wrap conv-cell-y"><k->0</k-></td>
+            <td class="center wrap conv-cell-y"><k->0</k-></td>
+            <td class="center wrap conv-cell-y"><k->0</k-></td>
+            <td class="center wrap conv-cell-y"><k->0</k-></td>
+            <td class="center wrap conv-cell-y"><k->0.0</k-></td>
             <td class="center wrap conv-cell-y"><k->0.0</k-></td>
             <td class="center wrap conv-cell-y"><k->0.0</k-></td>
             <td class="center wrap conv-cell-y"><k->false</k-></td>
         </tr>
         <tr>
-            <fake-td></fake-td>
             <th class="nowrap small"><k->true</k-></th>
-            <td class="center wrap conv-cell-y"><k->1</k-> </k-></td>
-            <td class="center wrap conv-cell-y"><k->1</k-> </k-></td>
-            <td class="center wrap conv-cell-y"><k->1</k-> </k-></td>
-            <td class="center wrap conv-cell-y"><k->1</k-> </k-></td>
+            <td class="center wrap conv-cell-y"><k->1</k-></td>
+            <td class="center wrap conv-cell-y"><k->1</k-></td>
+            <td class="center wrap conv-cell-y"><k->1</k-></td>
+            <td class="center wrap conv-cell-y"><k->1</k-></td>
+            <td class="center wrap conv-cell-y"><k->1</k-></td>
+            <td class="center wrap conv-cell-y"><k->1</k-></td>
+            <td class="center wrap conv-cell-y"><k->1</k-></td>
+            <td class="center wrap conv-cell-y"><k->1</k-></td>
+            <td class="center wrap conv-cell-y"><k->1.0</k-></td>
             <td class="center wrap conv-cell-y"><k->1.0</k-></td>
             <td class="center wrap conv-cell-y"><k->1.0</k-></td>
             <td class="center wrap conv-cell-y"><k->true</k-></td>

@@ -1,48 +1,40 @@
 
 <h1 id="primitive-types"></h1>
 <moveto-doc->
-    <p>Lumen and Aurora feature <b>7 primitive types</b>, which can be used to define more complex types such as <a href="#structs">structs</a>, <a href="#arrays">arrays</a> and <a href="#tuples">tuples</a>.</p>
     <p>
-        These types are always defined and they act as if they were declared in the <a href="#core-module">core module</a>.<br>
-        Primitive types are <b>not <a href="#keywords">keywords</a></b> and can be <a href="#name-shadowing">shadowed</a> like any other <a href="#name-resolution">symbol</a>.
+        <b>Primitive types</b> are the simplest kind of type.
+        They are used to represent integral numbers, decimal numbers and boolean values.
+        They are the foundation all other types and complex data structures are based on.
+    </p>
+    <p>
+        All primitive types are defined in the <code>__internal</code> module.<br>
+        Their names are <b>not <a href="#keywords">keywords</a></b>. They can be <a href="#name-shadowing">shadowed</a> like any other <a href="#name-resolution">symbol</a>.
     </p>
     <p>The primitive types are:</p>
     <div class="table-container"><table>
         <tr>
-            <th>Type name   </th>
-            <th>Size (bytes)</th>
-            <th>Value type  </th>
+            <th>Type name</th>
+            <th>Size</th>
+            <th>Value type</th>
         </tr>
         <tr>
-            <td class="center"><code><t->uint</t-></code></td>
-            <td class="center">4</td>
-            <td rowspan="2">Unsigned integral number</td>
+            <td class="center"><code><t->ubyte</t-></code> <code><t->uint</t-></code> <code><t->ulong</t-></code> <code><t->ucent</t-></code><lumen-logo-></lumen-logo-></td>
+            <td class="center">1, 4, 8, and 16 bytes</td>
+            <td>Unsigned integral number</td>
         </tr>
         <tr>
-            <td class="center"><code><t->ulong</t-></code></td>
-            <td class="center">8</td>
+            <td class="center"><code><t->byte</t-></code> <code><t->int</t-></code> <code><t->long</t-></code> <code><t->cent</t-></code><lumen-logo-></lumen-logo-></td>
+            <td class="center">1, 4, 8, and 16 bytes</td>
+            <td>Signed integral number</td>
         </tr>
         <tr>
-            <td class="center"><code><t->int</t-></code></td>
-            <td class="center">4</td>
-            <td rowspan="2">Signed integral number</td>
-        </tr>
-        <tr>
-            <td class="center"><code><t->long</t-></code></td>
-            <td class="center">8</td>
-        </tr>
-        <tr>
-            <td class="center"><code><t->float</t-></code></td>
-            <td class="center">4</td>
-            <td rowspan="2">Floating point number</td>
-        </tr>
-        <tr>
-            <td class="center"><code><t->double</t-></code></td>
-            <td class="center">8</td>
+            <td class="center"><code><t->float</t-></code> <code><t->double</t-></code> <code><t->quad</t-></code><lumen-logo-></lumen-logo-></td>
+            <td class="center">4, 8, and 16 bytes</td>
+            <td>Floating point number</td>
         </tr>
         <tr>
             <td class="center"><code><t->bool</t-></code></td>
-            <td class="center">4</td>
+            <td class="center">4 bytes</td>
             <td>Boolean value</td>
         </tr>
     </table></div>

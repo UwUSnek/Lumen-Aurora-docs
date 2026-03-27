@@ -1,32 +1,12 @@
 :root {
     --logo-size:        50vw;
-    --logo-link-Lumen: url("../../Logos/Aurora-cropped.png");
-    --logo-link-aurora: url("../../Logos/Lumen-cropped.png");
+    --logo-link-lumen:  url("../../Logos/Lumen-cropped.png");
+    --logo-link-aurora: url("../../Logos/Aurora-cropped.png");
 }
 
 
-
-
-
-
-/* Language logo */
-logo- {
-    display: block;
-    z-index: -4;
-    background-color: black;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-    background-size:25vw;
-    border-radius: 8px;
-
-    min-width:  100%;
-    max-width:  100%;
-    /* Min height is set from JS */
-    /* Max height is set from JS */
-}
-
-lumen-logo-, aurora-logo- {
+lumen-logo-, aurora-logo-,
+lumen-only-, aurora-only- {
     display: inline-block;
     background-color: transparent;
     background-size: contain;
@@ -39,8 +19,8 @@ lumen-logo-, aurora-logo- {
     border-radius: calc(var(--line-h) / 2);
     vertical-align: bottom;
 }
-aurora-logo- { background-image: var(--logo-link-Lumen); }
-lumen-logo- { background-image: var(--logo-link-aurora);   }
+aurora-logo-, aurora-only- { background-image: var(--logo-link-aurora);  }
+lumen-logo-,  lumen-only-  { background-image: var(--logo-link-lumen); }
 
 
 
