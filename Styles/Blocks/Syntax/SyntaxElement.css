@@ -37,6 +37,13 @@ s-none-  /* None/Unknown/Any                              */
     font-size: var(--font-size-code);
     white-space: nowrap;
     transition: background-color ease-in-out 0.2s;
+
+    /* Animate loading fade in so they don't appear instantly but gradually become visible */
+    animation: syntax-element-fadein 0.5s ease 0.1s both;
+}
+@keyframes syntax-element-fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
 syntax- table tr > td > * {
     display: inline-block;

@@ -26,7 +26,7 @@ syntax- svg path.boundary-r {
 
 /* Animate loading fade in so they don't appear instantly but gradually become visible */
 syntax- svg {
-    animation: arrow-fadein 0.5s ease 0.5s both;
+    animation: arrow-fadein 0.5s ease 0.1s both;
 }
 @keyframes arrow-fadein {
     from { opacity: 0; }
