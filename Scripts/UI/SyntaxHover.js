@@ -28,9 +28,11 @@ const ui_syntax_hover = {
 
         // Add the specified text as HTML, append the container to the syntax block element and start the opacity transition
         tooltip.innerHTML += '<p style="margin: 0px;">' + text + '</p>';
-        e.appendChild(tooltip_c);
+        document.body.appendChild(tooltip_c);
         //! Forcibly flush pending style changes. This stops the opacity change from being calculated in this round and thus skipped
         tooltip.style.opacity = 1;
+
+        e._tooltip_c = tooltip_c;
     },
 
 
@@ -88,13 +90,13 @@ const ui_syntax_hover = {
 
     on_move: function(e){
         // Get elements and calculate the width of the tooltip / 2 to aligh it with the cursor
-        //! "this" assumes the value of the original element this event was attached to. e.target is the innermost and cannot be used in this case
-        let tooltip = this.getElementsByClassName("syntax-hover-tooltip-container")[0].getElementsByClassName("syntax-hover-tooltip")[0];
-        let parent_rect = this.getBoundingClientRect();
+        let container = e.currentTarget._tooltip_c;
+        if (!container) return;
+        let tooltip = container.getElementsByClassName("syntax-hover-tooltip")[0];
         let halfW = tooltip.getBoundingClientRect().width / 2;
 
         // Set the tooltip position and align it with the cursor
-        tooltip.style.top  = '' + (parent_rect.top + parent_rect.height) + 'px';
+        tooltip.style.top  = '' + (e.clientY + 16) + 'px';
         tooltip.style.left = '' + (e.pageX - halfW) + 'px';
     },
 
@@ -103,7 +105,8 @@ const ui_syntax_hover = {
 
     on_leave : function(e){
         // Get elements
-        let container = e.target.getElementsByClassName("syntax-hover-tooltip-container")[0];
+        let container = e.currentTarget._tooltip_c;
+        if (!container) return;
         let tooltip = container.getElementsByClassName("syntax-hover-tooltip")[0];
 
         // Start opacity transition and delete the element after it has finished
