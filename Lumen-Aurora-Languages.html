@@ -51,7 +51,6 @@
         <indexd->include-statement</indexd->
         <indexd->line-splicing</indexd->
         <indexd->comments</indexd->
-        <indexd->macros</indexd->
     </index-elms-></index->
 
 
@@ -316,12 +315,9 @@
     <index-separator-></index-separator->
 
     <index-><indexh->omitted-features</indexh-><index-elms->
-        <index-><indexh->omitted.type-system</indexh-><index-elms->
-            <indexd->omitted.reference-types</indexd->
-            <indexd->omitted.member-functions</indexd->
-            <indexd->omitted.interfaces</indexd->
-            <indexd->omitted.runtime-type-information</indexd->
-            <indexd->omitted.inheritance-and-polymorphism</indexd->
+        <index-><indexh->omitted.preprocessor</indexh-><index-elms->
+            <indexd->omitted.macros</indexd->
+            <indexd->omitted.conditionals</indexd->
         </index-elms-></index->
         <index-><indexh->omitted.control-flow</indexh-><index-elms->
             <indexd->omitted.goto-statement</indexd->
@@ -329,7 +325,15 @@
             <indexd->omitted.process-forking</indexd->
             <indexd->omitted.non-local-jumps</indexd->
         </index-elms-></index->
+        <index-><indexh->omitted.type-system</indexh-><index-elms->
+            <indexd->omitted.reference-types</indexd->
+            <indexd->omitted.member-functions</indexd->
+            <indexd->omitted.interfaces</indexd->
+            <indexd->omitted.runtime-type-information</indexd->
+            <indexd->omitted.inheritance-and-polymorphism</indexd->
+        </index-elms-></index->
         <index-><indexh->omitted.misc</indexh-><index-elms->
+            <indexd->omitted.header-files</indexd->
             <indexd->omitted.garbage-collection</indexd->
             <indexd->omitted.move-semantics</indexd->
             <indexd->omitted.left-and-right-values</indexd->
@@ -462,9 +466,6 @@
             <li>1. Include phase.<br><a href="#include-statements">Include statements</a> are recursively replaced with the contents of the specified file.</li>
             <li>2. Line splicing.<br><a href="#line-splicing">Line splicing tokens</a> are removed, merging affected lines.</li>
             <li>3. Cleanup phase.<br>All <a href="#comments">comments</a> are removed.</li>
-            <li>
-                4. Macro expansion.<br><a href="#macros">Macro definitions</a> are parsed and removed from the code,
-                then <a href="#macros">macro invocations</a> are recursively expanded using the provided arguments.</li>
         </ul>
     </ul>
 </moveto-doc->
@@ -479,7 +480,7 @@
         Line splicing tokens are provided purely for completeness and familiarity. Use them responsibly.<br>
     </ce-full-size->
     <p>
-        <b>Line splicing</b> can be used to <b>merge multiple lines</b> and allow <a href="#macros">macros</a>, <a href="#comments">comments</a>,
+        <b>Line splicing</b> can be used to <b>merge multiple lines</b> and allow <a href="#comments">comments</a>,
         <a href="#include-statement">include statements</a> and language <a href="#tokens">tokens</a> to be written across multiple lines.<br>
     </p>
     <ul>
@@ -602,7 +603,6 @@
     <p>
         Comments cannot be nested.<br>
         Unclosed comments are allowed. They include everything from their opening character sequence to the end of the file.<br>
-        Because they are removed before macro expansion takes place, comments cannot be generated with <a href="#macros">preprocessor macros</a>.
     </p>
 
     <syntax->
@@ -666,7 +666,6 @@
     <p>
         Because the <code><nl-></nl-></code> character at the end of single-line comments is not considered part of the comment,
         it is not removed by the preprocessor.<br>
-        This renders them unusable within <a href="#macros">macro</a> definitions.
     </p>
     <p>
         The contents of <a href="string-literals">string</a> and <a href="char-literals">character</a> literals
@@ -692,9 +691,10 @@
         Any existing file with read permissions can be included, regardless of its contents or extension.<br>
     </p>
     <p>
-        An include statement consists of the sequence of characters <code>#include</code> followed by the path to the target file.<br>
-        The path of the included file must be enclosed in <code>"</code> <code>"</code> characters.
-        <a href="#standard-modules">Standard modules</a> are included using the <code>&lt;</code> <code>&gt;</code> characters.<br>
+        An include statement consists of the sequence of characters <code>#include</code> followed by a string literal containing the path to the target file.<br>
+        Any amount of whitespace may be present between the <code>#include</code> and the file path.<br>
+        <a href="#standard-modules">Standard modules</a> can be included. They are accessed via the reserved <code>./standard</code> path.<br>
+        Because the path is a standard string literal, all escape sequences are available within it.
     </p>
     <p>
         Absolute and relative paths are both supported. Relative paths are relative to the file the include statement is used in
@@ -712,9 +712,8 @@
             <k->#include</k-> <s->"/home/Snek/Lumen/file.lmn"</s->      <c->// Absolute path</c->
             <k->#include</k-> <s->"./file.lmn"</s->                     <c->// Relative path</c->
             <k->#include</k-> <s->":,@ why is this a file name"</s->    <c->// Relative path</c->
-            <k->#include</k-> <s->&lt;math&gt;</s->                           <c->// Includes the standard module "math"</c->
+            <k->#include</k-> <s->"standard/math"</s->                  <c->// Includes the standard module "math"</c->
 
-            <c->#include ./file.ilsh</c->                       <ce->Error, "" or &lt;&gt; are required</ce->
             <c->#include "./nonexistent_file"</c->              <ce->Error, non-glob patterns must correspond to an existing file</ce->
             <c->#include ""</c->                                <ce->Error, file name not specified</ce->
         </div>
@@ -738,9 +737,8 @@
 <moveto-internal->
     <p>
         Include operations are performed by replacing the include statement
-        (from the <code>#</code> character to the closing <code>"</code> or <code>&gt;</code>) with the contents of the included file.<br>
-        Every byte of the source file is copied without modification.
-        This makes include directives recursive and preserves any macro definition and invocation pasted from included files.
+        (from the <code>#</code> character to the string's closing <code>"</code>) with the contents of the included file.<br>
+        Every byte of the source file is copied without modification, making include statements recursive.
     </p>
     <ul>
         File paths have some limitations:
@@ -750,8 +748,12 @@
                 <code>.</code> identifies the current directory, while <code>..</code> identifies the parent directory.
             </li>
             <li>
-                File names cannot contain any of the following characters: <code>*?"&lt;&gt;\</code>.
-                These are reserved for glob pattern wildcards and path delimiters. Any other character is allowed.
+                Local directories called <code>standard</code> are not accessible.
+                <code>standard</code> is a reserved name for the directory containing all standard modules.
+            </li>
+            <li>
+                File names cannot contain any of the following characters: <code>*?\</code>.
+                These are reserved for glob pattern wildcards. Backslashes are not valid on Windows systems. Any other character is allowed.
             </li>
             <li><code>~</code> is not recognized as the home directory but as the literal character <code>~</code>.</li>
             <li><code>/</code> identifies the root directory.</li>
@@ -774,6 +776,9 @@
         They are evaluated from left to right.<br>
     </p>
     <p>
+        Glob patterns never match standard modules.
+    </p>
+    <p>
         Symlinks in the included path are always resolved.
     </p>
     <example->
@@ -786,73 +791,6 @@
         </div>
     </example->
 </moveto-internal->
-
-<h1 id="macros"></h1>
-<moveto-doc->
-    <ce-full-size->
-        <b>NOTICE:</b><br>
-        The language provides preprocessor macros, but they should be avoided whenever possible.<br>
-        They are hard to read and can generate confusing error messages.<br>
-        More often than not, proper language features such as routines, templates, and specialization work better and look cleaner.<br>
-        Macros should only be used for cases in which all alternatives fail or are too verbose for the intended purpose.
-    </ce-full-size->
-    <p>
-        //TODO
-        import <io>
-
-
-        #define add(first, second)             ($first + $second)
-
-        #define add_3(first, second, third)             #add(#add($first, $second) $third)
-
-        #define merge(a, b)             #a#b
-
-
-        void main(){
-            io.#merge(pr,int)(#add_3(5, 12, 0.5));
-        }
-
-        //output is 17.5
-
-
-        //TODO \$ is a special token used to escape a $ in macro definitions. it's only recognized within macro definitions. This is also needed inside of string literals.
-            //TODO no \ means "this is a parameter"
-
-        //TODO macro parameter names must be valid identifiers.
-            //TODO they don't conflict with token-level identifiers. a macro and a function can be called the same
-            //TODO any non-escaped $ followed by a valid identifier is recognized as a macro parameter
-
-        //TODO Normally, only identifiers and literals can be passed as arguments. Not even keywords are allowed.
-            //TODO ` can be used to incldue "anything between them"
-            //TODO \` can be used to escape ` delimiters inside of ``
-
-        #define doNothing(argument) $argument
-
-        void main(){
-            #doNothing(#add(15, 5));    // Bad. can't pass # or ( as parameter
-            #doNothing(`#add(15, 5)`);  // Ok. Expands to #add(15, 5), which exands to (15 + 5)
-
-            #doNothing(`for(int i = 0; i < #add(\`1+1\`, 2);++i)io.print("hi")`);
-            // Ok. Expands to for(int i = 0; i < #add(`1+1`, 2);++i)io.print("hi")
-            // Which expands to for(int i = 0; i < 1+1 + 2;++i)io.print("hi")
-            // Which prints "hi" 4 times
-        }
-
-
-        //TODO extension should draw a └─────┘ under macro arguments to make them more easy to read
-
-
-
-
-        //TODO add to documentation:
-
-        //TODO The result of macro expansion is parsed again in order to expand any resulting macro invocation.
-        //TODO This allows macros to invoke other macros and even compose invocations from parameters or other invocations
-
-        //TODO Tokenization happens after macro expansion.
-        //TODO This means that macros can merge tokens and paste any character
-    </p>
-</moveto-doc->
 
 <h1 id="language-structure"></h1>
 <moveto-doc->
@@ -4054,7 +3992,7 @@
         Any declared symbol can be aliased, including modules, generated functions and other aliases.
     </p>
     <p>
-        An alias is not simply replaced like a <a href="#macros">macro</a> but it identifies the symbol itself in a unique way.<br>
+        An alias is not simply replaced but it identifies the symbol itself in a unique way.<br>
         Once an alias is declared, the alias and the symbol it aliases can be used interchangeably.
     </p>
     <p>
@@ -6739,24 +6677,9 @@
             <tr>
                 <td data-arrows="|l lr ar"></td>
                 <td><s-vbtm->#include</s-vbtm-></td>
-                <td data-arrows="lr ar lb"></td>
-                <td><s-vbtm->"</s-vbtm-></td>
                 <td data-arrows="lr ar"></td>
-                <td class="center"><s-none->path/to/file</s-none-></td>
-                <td data-arrows="lr ar"></td>
-                <td><s-vbtm->"</s-vbtm-></td>
-                <td data-arrows="lr br ar |r"></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td data-arrows="tr ar"></td>
-                <td><s-vbtm->&lt;</s-vbtm-></td>
-                <td data-arrows="lr ar"></td>
-                <td class="center"><s-none->module name</s-none-></td>
-                <td data-arrows="lr ar"></td>
-                <td><s-vbtm->&gt;</s-vbtm-></td>
-                <td data-arrows="lt"></td>
+                <td><s-none->"file path string literal"</s-none-></td>
+                <td data-arrows="lr ar |r"></td>
             </tr>
         </table>
     </syntax->
@@ -7433,7 +7356,7 @@
                 <td data-arrows="|l lr ar lt"></td>
                 <td><s-vbtm->from</s-vbtm-></td>
                 <td data-arrows="lr-low ar-low tr-high ar-high"></td>
-                <td><s-expr-><t->[str]</t->&nbsp;module path</s-id-></td>
+                <td><s-expr-><t->[str]</t->&nbsp;module path</s-expr-></td>
                 <td data-arrows="lr-low ar-low lb-low lr-high ar-high"></td>
                 <td><s-vbtm->as</s-vbtm-></td>
                 <td data-arrows="lr-low ar-low lr-high ar-high"></td>
@@ -7577,6 +7500,52 @@
 
 
 
+<h1 id="omitted.preprocessor"></h1>
+<moveto-doc->
+    <p></p>
+</moveto-doc->
+
+
+
+
+<h1 id="omitted.macros"></h1>
+<moveto-doc->
+    <p></p>
+</moveto-doc->
+
+<h1 id="omitted.conditionals"></h1>
+<moveto-doc->
+    <p></p>
+</moveto-doc->
+
+<h1 id="omitted.control-flow"></h1>
+<moveto-doc->
+    <p></p>
+</moveto-doc->
+
+
+
+
+<h1 id="omitted.goto-statement"></h1>
+<moveto-doc->
+    <p></p>
+</moveto-doc->
+
+<h1 id="omitted.exceptions"></h1>
+<moveto-doc->
+    <p></p>
+</moveto-doc->
+
+<h1 id="omitted.process-forking"></h1>
+<moveto-doc->
+    <p></p>
+</moveto-doc->
+
+<h1 id="omitted.non-local-jumps"></h1>
+<moveto-doc->
+    <p></p>
+</moveto-doc->
+
 <h1 id="omitted.type-system"></h1>
 <moveto-doc->
     <p></p>
@@ -7610,34 +7579,6 @@
     <p></p>
 </moveto-doc->
 
-<h1 id="omitted.control-flow"></h1>
-<moveto-doc->
-    <p></p>
-</moveto-doc->
-
-
-
-
-<h1 id="omitted.goto-statement"></h1>
-<moveto-doc->
-    <p></p>
-</moveto-doc->
-
-<h1 id="omitted.exceptions"></h1>
-<moveto-doc->
-    <p></p>
-</moveto-doc->
-
-<h1 id="omitted.process-forking"></h1>
-<moveto-doc->
-    <p></p>
-</moveto-doc->
-
-<h1 id="omitted.non-local-jumps"></h1>
-<moveto-doc->
-    <p></p>
-</moveto-doc->
-
 <h1 id="omitted.misc"></h1>
 <moveto-doc->
     <p></p>
@@ -7645,6 +7586,11 @@
 
 
 
+
+<h1 id="omitted.header-files"></h1>
+<moveto-doc->
+    <p></p>
+</moveto-doc->
 
 <h1 id="omitted.garbage-collection"></h1>
 <moveto-doc->
@@ -7806,7 +7752,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', init);
-        window.addEventListener('beforeunload', unload);
     </script>
 </body>
 </html>

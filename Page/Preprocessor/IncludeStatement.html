@@ -12,9 +12,10 @@
         Any existing file with read permissions can be included, regardless of its contents or extension.<br>
     </p>
     <p>
-        An include statement consists of the sequence of characters <code>#include</code> followed by the path to the target file.<br>
-        The path of the included file must be enclosed in <code>"</code> <code>"</code> characters.
-        <a href="#standard-modules">Standard modules</a> are included using the <code>&lt;</code> <code>&gt;</code> characters.<br>
+        An include statement consists of the sequence of characters <code>#include</code> followed by a string literal containing the path to the target file.<br>
+        Any amount of whitespace may be present between the <code>#include</code> and the file path.<br>
+        <a href="#standard-modules">Standard modules</a> can be included. They are accessed via the reserved <code>./standard</code> path.<br>
+        Because the path is a standard string literal, all escape sequences are available within it.
     </p>
     <p>
         Absolute and relative paths are both supported. Relative paths are relative to the file the include statement is used in
@@ -32,9 +33,8 @@
             <k->#include</k-> <s->"/home/Snek/Lumen/file.lmn"</s->      <c->// Absolute path</c->
             <k->#include</k-> <s->"./file.lmn"</s->                     <c->// Relative path</c->
             <k->#include</k-> <s->":,@ why is this a file name"</s->    <c->// Relative path</c->
-            <k->#include</k-> <s->&lt;math&gt;</s->                           <c->// Includes the standard module "math"</c->
+            <k->#include</k-> <s->"standard/math"</s->                  <c->// Includes the standard module "math"</c->
 
-            <c->#include ./file.ilsh</c->                       <ce->Error, "" or &lt;&gt; are required</ce->
             <c->#include "./nonexistent_file"</c->              <ce->Error, non-glob patterns must correspond to an existing file</ce->
             <c->#include ""</c->                                <ce->Error, file name not specified</ce->
         </div>
@@ -58,9 +58,8 @@
 <moveto-internal->
     <p>
         Include operations are performed by replacing the include statement
-        (from the <code>#</code> character to the closing <code>"</code> or <code>&gt;</code>) with the contents of the included file.<br>
-        Every byte of the source file is copied without modification.
-        This makes include directives recursive and preserves any macro definition and invocation pasted from included files.
+        (from the <code>#</code> character to the string's closing <code>"</code>) with the contents of the included file.<br>
+        Every byte of the source file is copied without modification, making include statements recursive.
     </p>
     <ul>
         File paths have some limitations:
@@ -70,8 +69,12 @@
                 <code>.</code> identifies the current directory, while <code>..</code> identifies the parent directory.
             </li>
             <li>
-                File names cannot contain any of the following characters: <code>*?"&lt;&gt;\</code>.
-                These are reserved for glob pattern wildcards and path delimiters. Any other character is allowed.
+                Local directories called <code>standard</code> are not accessible.
+                <code>standard</code> is a reserved name for the directory containing all standard modules.
+            </li>
+            <li>
+                File names cannot contain any of the following characters: <code>*?\</code>.
+                These are reserved for glob pattern wildcards. Backslashes are not valid on Windows systems. Any other character is allowed.
             </li>
             <li><code>~</code> is not recognized as the home directory but as the literal character <code>~</code>.</li>
             <li><code>/</code> identifies the root directory.</li>
@@ -92,6 +95,9 @@
         The last variable-length wildcard (<code>*</code> or <code>**</code>) of a glob pattern stops before the last occurrence of the character or wildcard that follows them.<br>
         Variable-length wildcards that are not last, instead, stop before the very first occurrence of the character or wildcard that follows them.<br>
         They are evaluated from left to right.<br>
+    </p>
+    <p>
+        Glob patterns never match standard modules.
     </p>
     <p>
         Symlinks in the included path are always resolved.

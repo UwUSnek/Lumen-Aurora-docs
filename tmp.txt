@@ -402,7 +402,6 @@ la dimensione e il padding delle cose non si può dare per scontato ma tanto non
 Preprocessing
     Conditionals evaluation
     File inclusion      +
-    Macro expansion
 
 Compilation
     Tokenization

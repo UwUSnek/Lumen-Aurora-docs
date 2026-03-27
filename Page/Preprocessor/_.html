@@ -18,9 +18,6 @@
             <li>1. Include phase.<br><a href="#include-statements">Include statements</a> are recursively replaced with the contents of the specified file.</li>
             <li>2. Line splicing.<br><a href="#line-splicing">Line splicing tokens</a> are removed, merging affected lines.</li>
             <li>3. Cleanup phase.<br>All <a href="#comments">comments</a> are removed.</li>
-            <li>
-                4. Macro expansion.<br><a href="#macros">Macro definitions</a> are parsed and removed from the code,
-                then <a href="#macros">macro invocations</a> are recursively expanded using the provided arguments.</li>
         </ul>
     </ul>
 </moveto-doc->
@@ -29,4 +26,3 @@
 #include "./Page/Preprocessor/LineSplicing.html"
 #include "./Page/Preprocessor/Comments.html"
 #include "./Page/Preprocessor/IncludeStatement.html"
-#include "./Page/Preprocessor/Macros.html"
