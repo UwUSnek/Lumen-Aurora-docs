@@ -109,7 +109,6 @@
             <index-><indexh->enums</indexh-><index-elms->
                 <indexd->enum-declarations</indexd->
                 <indexd->struct-enums</indexd->
-                <indexd->automatic-enum-scoping</indexd->
             </index-elms-></index->
             <index-><indexh->structs</indexh-><index-elms->
                 <indexd->struct-declarations</indexd->
@@ -122,8 +121,11 @@
                 <indexd->void-type</indexd->
             </index-elms-></index->
             <indexd->const-qualifier</indexd->
-            <indexd->auto-specifier</indexd->
-            <indexd->typeof-specifier</indexd->
+            <index-><indexh->type-deduction</indexh-><index-elms->
+                <indexd->auto-specifier</indexd->
+                <indexd->typeof-specifier</indexd->
+                <indexd->automatic-enum-scoping</indexd->
+            </index-elms-></index->
             <index-><indexh->implicit-conversions</indexh-><index-elms->
                 <indexd->implicit-conversions.primitive-types</indexd->
                 <indexd->implicit-conversions.enums</indexd->
@@ -135,20 +137,25 @@
         <index-separator-2-></index-separator-2->
 
         <index-><indexh->expressions</indexh-><index-elms->
-            <index-><indexh->inline-values</indexh-><index-elms->
-                <indexd->literals</indexd->
-                <indexd->function-calls</indexd->
-                <indexd->operator-calls</indexd->
-                <indexd->conditional-value</indexd->
-                <indexd->function-values</indexd->
-                <indexd->inline-statements</indexd->
+            <index-><indexh->expressions.literals</indexh-><index-elms->
+                <indexd->expressions.literals.numerical-literals</indexd->
+                <indexd->expressions.literals.text-literals</indexd->
+                <indexd->expressions.literals.escape-sequences</indexd->
             </index-elms-></index->
-            <index-><indexh->stored-values</indexh-><index-elms->
-                <indexd->variables</indexd->
-                <indexd->temporary-variables</indexd->
-                <indexd->exp.routine-parameters</indexd->
+            <index-><indexh->expressions.routine-calls</indexh-><index-elms->
+                <indexd->expressions.routine-calls.function-calls</indexd->
+                <indexd->expressions.routine-calls.operator-calls</indexd->
             </index-elms-></index->
-            <indexd->unsafe-block</indexd->
+            <index-><indexh->expressions.misc</indexh-><index-elms->
+                <indexd->expressions.misc.conditional-value</indexd->
+                <indexd->expressions.misc.function-values</indexd->
+                <indexd->expressions.misc.inline-statements</indexd->
+            </index-elms-></index->
+            <index-><indexh->expressions.stored-values</indexh-><index-elms->
+                <indexd->expressions.stored-values.variables</indexd->
+                <indexd->expressions.stored-values.temporary-variables</indexd->
+                <indexd->expressions.stored-values.routine-parameters</indexd->
+            </index-elms-></index->
         </index-elms-></index->
 
         <index-separator-2-></index-separator-2->
@@ -1699,55 +1706,6 @@
     </example->
 </moveto-examples->
 
-//TODO improve wording
-<h1 id="automatic-enum-scoping"></h1>
-<moveto-doc->
-    <p>
-        <b>Automatic enum scoping</b> can be used to <b>skip</b> the idenfiers of <b>parent scopes</b> in a symbol path and reference an enum element through its name alone.<br>
-        This is done by replacing the path to the element with a single <code>.</code> keyword.<br>
-        Automatic scoping can only be used where the only accepted values are of a specific enum type.
-    </p>
-</moveto-doc->
-<moveto-exmaples->
-    <split-example-container->
-        <split-example-container-left->
-            <example->
-                <label->Example</label->
-                <div>
-                    <w->import</w-> <s->&lt;io&gt;</s->;
-
-                    <w->enum</w-> <t->day</t-> : <t->uint</t-> {
-                        <k->mon</k->, <k->two</k->, <k->wed</k->, <k->thu</k->, <k->fri</k->, <k->sat</k->, <k->sun</k->;
-                    }
-
-                    <t->void</t-> <f->check_day</f->(<t->day</t-> <p->d</p->) {
-                        <w->match</w-> d {
-                            .<k->mon</k-> to .<k->fri</k-> { io.<f->print</f->(<s->"TwT"</s->); }
-                            .<k->sat</k-> or .<k->sun</k-> { io.<f->print</f->(<s->"OwO"</s->); }
-                        }
-                    }
-
-                    <t->void</t-> <f->main</f->(){
-                        <f->check_day</f->(.<k->sun</k->);
-                        io.print("\n");
-                        <f->check_day</f->(.<k->mon</k->);
-                    }
-                </div>
-            </example->
-        </split-example-container-left->
-        <split-example-container-right->
-            <example->
-                <label->Output</label->
-                <div>
-                    <console-prefix-></console-prefix->
-                    OwO
-                    TwT<cursor-></cursor->
-                </div>
-            </example->
-        </split-example-container-right->
-    </split-example-container->
-</moveto-exmaples->
-
 <h1 id="structs"></h1>
 <moveto-doc->
     <p>
@@ -2098,45 +2056,12 @@
     </split-example-container->
 </moveto-examples->
 
-<h1 id="const-qualifier"></h1>
+<h1 id="type-deduction"></h1>
 <moveto-doc->
     <p>
-        When used between the base type and the <code>*</code> meta keyword of a pointer type, the <b><code><t->const</t-></code> qualifier</b> indicates that the type is a <b>const pointer</b>.<br>
-        Data accessed by dereferencing a <code><t->const</t-></code> pointer value cannot be modified.<br>
-        Non-<code><t->const</t-></code> pointers are implicitly convertible to their respective <code><t->const</t-></code> pointer type. This is explained in <a href="implicit-conversions">Implicit coversions</a>.
-    </p>
-    <p>
-        <b><code><w->const</w-></code></b> can also be used before the name of a <b>variable</b> or <b>routine parameter</b> to <b>prevent them from being modified</b> after their declaration, although this doesn't turn the type of the symbol into a const type.<br>
-        The address of <code><w->const</w-></code> variables or <code><w->const</w-></code> routine parameters is always returned as a <code><t->const</t-></code> pointer.
-    </p>
-    <p>
-        //TODO explain that programmers are expected to not change critical values without knowing what they are doing (there are no const types).
-
-        //TODO Maybe move the const qualifier under "misc" as it's not part of the types nor does it affect them in any way
     </p>
 </moveto-doc->
-<moveto-examples->
-    <example->
-        <label->Example 1 - Const pointer</label->
-        <div>
-            <t->void</t-> <f->main</f->(){
-                <t->int</t-> var = <k->8</k->;
-                <t->int const*</t-> ptr = <w->addr</w-> <k->var</k->;
 
-                <k->var</k-> <f->=</f-> <k->9</k->;     <c->// Ok</c->
-                <c->//@ptr = 9;</c->  <ce->// Error, cannot modify data pointed by const pointers</ce->
-            }
-        </div>
-        <label->Example 2 - Const variable</label->
-        <div>
-            <t->void</t-> <f->main</f->(){
-                <t->int</t-> var <w->const</w-> = <k->8</k->;
-
-                <c->var = 9;</c->  <ce->// Error, cannot modify const variables</ce->
-            }
-        </div>
-    </example->
-</moveto-examples->
 
 <h1 id="auto-specifier"></h1>
 <moveto-doc->
@@ -2195,6 +2120,55 @@
         </div>
     </example->
 </moveto-examples->
+
+//TODO improve wording
+<h1 id="automatic-enum-scoping"></h1>
+<moveto-doc->
+    <p>
+        <b>Automatic enum scoping</b> can be used to <b>skip</b> the idenfiers of <b>parent scopes</b> in a symbol path and reference an enum element through its name alone.<br>
+        This is done by replacing the path to the element with a single <code>.</code> keyword.<br>
+        Automatic scoping can only be used where the only accepted values are of a specific enum type.
+    </p>
+</moveto-doc->
+<moveto-exmaples->
+    <split-example-container->
+        <split-example-container-left->
+            <example->
+                <label->Example</label->
+                <div>
+                    <w->import</w-> <s->&lt;io&gt;</s->;
+
+                    <w->enum</w-> <t->day</t-> : <t->uint</t-> {
+                        <k->mon</k->, <k->two</k->, <k->wed</k->, <k->thu</k->, <k->fri</k->, <k->sat</k->, <k->sun</k->;
+                    }
+
+                    <t->void</t-> <f->check_day</f->(<t->day</t-> <p->d</p->) {
+                        <w->match</w-> d {
+                            .<k->mon</k-> to .<k->fri</k-> { io.<f->print</f->(<s->"TwT"</s->); }
+                            .<k->sat</k-> or .<k->sun</k-> { io.<f->print</f->(<s->"OwO"</s->); }
+                        }
+                    }
+
+                    <t->void</t-> <f->main</f->(){
+                        <f->check_day</f->(.<k->sun</k->);
+                        io.print("\n");
+                        <f->check_day</f->(.<k->mon</k->);
+                    }
+                </div>
+            </example->
+        </split-example-container-left->
+        <split-example-container-right->
+            <example->
+                <label->Output</label->
+                <div>
+                    <console-prefix-></console-prefix->
+                    OwO
+                    TwT<cursor-></cursor->
+                </div>
+            </example->
+        </split-example-container-right->
+    </split-example-container->
+</moveto-exmaples->
 
 <h1 id="implicit-conversions"></h1>
 <moveto-doc->
@@ -3022,24 +2996,67 @@
     </example->
 </moveto-examples->
 
+//BUG move this to expressions. const(ant) expressions thingy
+
+<h1 id="const-qualifier"></h1>
+<moveto-doc->
+    <p>
+        When used between the base type and the <code>*</code> meta keyword of a pointer type, the <b><code><t->const</t-></code> qualifier</b> indicates that the type is a <b>const pointer</b>.<br>
+        Data accessed by dereferencing a <code><t->const</t-></code> pointer value cannot be modified.<br>
+        Non-<code><t->const</t-></code> pointers are implicitly convertible to their respective <code><t->const</t-></code> pointer type. This is explained in <a href="implicit-conversions">Implicit coversions</a>.
+    </p>
+    <p>
+        <b><code><w->const</w-></code></b> can also be used before the name of a <b>variable</b> or <b>routine parameter</b> to <b>prevent them from being modified</b> after their declaration, although this doesn't turn the type of the symbol into a const type.<br>
+        The address of <code><w->const</w-></code> variables or <code><w->const</w-></code> routine parameters is always returned as a <code><t->const</t-></code> pointer.
+    </p>
+    <p>
+        //TODO explain that programmers are expected to not change critical values without knowing what they are doing (there are no const types).
+
+        //TODO Maybe move the const qualifier under "misc" as it's not part of the types nor does it affect them in any way
+    </p>
+</moveto-doc->
+<moveto-examples->
+    <example->
+        <label->Example 1 - Const pointer</label->
+        <div>
+            <t->void</t-> <f->main</f->(){
+                <t->int</t-> var = <k->8</k->;
+                <t->int const*</t-> ptr = <w->addr</w-> <k->var</k->;
+
+                <k->var</k-> <f->=</f-> <k->9</k->;     <c->// Ok</c->
+                <c->//@ptr = 9;</c->  <ce->// Error, cannot modify data pointed by const pointers</ce->
+            }
+        </div>
+        <label->Example 2 - Const variable</label->
+        <div>
+            <t->void</t-> <f->main</f->(){
+                <t->int</t-> var <w->const</w-> = <k->8</k->;
+
+                <c->var = 9;</c->  <ce->// Error, cannot modify const variables</ce->
+            }
+        </div>
+    </example->
+</moveto-examples->
+
 <h1 id="expressions"></h1>
 <moveto-doc->
     <p></p>
 </moveto-doc->
 
 
-<h1 id="inline-values"></h1>
+<h1 id="expressions.literals"></h1>
 <moveto-doc->
     <p>
-        Inline values are <a href="#right-and-left-values">r-values</a> that are explicitly created and used within a single <a href="#runtime-statements">runtime statement</a>.<br>
-        They can be Literals or <a href="#try-expression"><code><w->try</w-></code> expressions</a>.
     </p>
 </moveto-doc->
 
 
-<h1 id="literals"></h1>
+<h1 id="expressions.literals.numerical-literals"></h1>
 <moveto-doc->
     <p>
+        //FIXME
+        //FIXME
+        //FIXME
         <b>Literals</b> are used to <b>create</b> compile time known <b><a href="#left-and-right-values">r-values</a></b>.<br>
         The type of the value is determined by the way it is represented in the source code, and it can only be of <code><t->ulong</t-></code>,
         <code><t->double</t-></code>, <code><t->bool</t-></code>, <code><t->char</t-></code>, or <code><t->str</t-></code> type.<br>
@@ -3135,7 +3152,26 @@
     </p>
 </moveto-examples->
 
-<h1 id="function-calls"></h1>
+<h1 id="expressions.literals.text-literals"></h1>
+<moveto-doc->
+    <p>
+    </p>
+</moveto-doc->
+
+<h1 id="expressions.literals.escape-sequences"></h1>
+<moveto-doc->
+    <p>
+    </p>
+</moveto-doc->
+
+<h1 id="expressions.routine-calls"></h1>
+<moveto-doc->
+    <p>
+    </p>
+</moveto-doc->
+
+
+<h1 id="expressions.routine-calls.function-calls"></h1>
 <moveto-doc->
     <p>
         <b>Functions</b> are <b>called</b> using their <b>name</b> and a list of <b>arguments</b>.<br>
@@ -3174,7 +3210,7 @@
     //TODO update example
 </moveto-examples->
 
-<h1 id="operator-calls"></h1>
+<h1 id="expressions.routine-calls.operator-calls"></h1>
 <moveto-doc->
     <p>
 
@@ -3185,26 +3221,33 @@
     </syntax->
 </moveto-doc->
 
-<h1 id="conditional-value"></h1>
+<h1 id="expressions.misc"></h1>
+<moveto-doc->
+    <p>
+    </p>
+</moveto-doc->
+
+
+<h1 id="expressions.misc.conditional-value"></h1>
 <moveto-doc->
     <p>
         //TODO specify that values are evaluated lazily. only the executed branch is evaluated
     </p>
 </moveto-doc->
 
-<h1 id="function-values"></h1>
+<h1 id="expressions.misc.function-values"></h1>
 <moveto-doc->
     <p>
     </p>
 </moveto-doc->
 
-<h1 id="inline-statements"></h1>
+<h1 id="expressions.misc.inline-statements"></h1>
 <moveto-doc->
     <p>
     </p>
 </moveto-doc->
 
-<h1 id="stored-values"></h1>
+<h1 id="expressions.stored-values"></h1>
 <moveto-doc->
     <p>
         <b>Stored values</b> are <b>named memory locations</b> that can contain values of the specified type.<br>
@@ -3212,7 +3255,7 @@
 </moveto-doc->
 
 
-<h1 id="variables"></h1>
+<h1 id="expressions.stored-values.variables"></h1>
 <moveto-doc->
     <p>
         <b>Variables</b> are <b>named memory locations</b> used to <b>store values</b> of the corresponding <a href="#types">type</a>.<br>
@@ -3237,7 +3280,7 @@
     </example->
 </moveto-examples->
 
-<h1 id="temporary-variables"></h1>
+<h1 id="expressions.stored-values.temporary-variables"></h1>
 <moveto-doc->
     <p>
         <b>Temporary variables</b> are a special set of identifiers that have <b>dynamic type</b> and don't need to be declared.<br>
@@ -3296,7 +3339,7 @@
     </example->
 </moveto-examples->
 
-<h1 id="exp.routine-parameters"></h1>
+<h1 id="expressions.stored-values.routine-parameters"></h1>
 <moveto-doc->
     <p>
         Routine parameters are explained in <a href="#parameters">Parameters</a>.<br>
@@ -3305,11 +3348,6 @@
     <syntax->
         <label- id="copy.syntax--expression-routine-parameter">Referencing syntax</label->
     </syntax->
-</moveto-doc->
-
-<h1 id="unsafe-block"></h1>
-<moveto-doc->
-    <p></p>
 </moveto-doc->
 
 <h1 id="routines"></h1>
