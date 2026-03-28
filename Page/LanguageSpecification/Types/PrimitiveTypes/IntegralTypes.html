@@ -2,41 +2,54 @@
 <h1 id="integral-types"></h1>
 <moveto-doc->
     <p>
-        <code><t->byte</t-></code>, <code><t->ubyte</t-></code>, <code><t->int</t-></code>, <code><t->uint</t-></code>,
-        <code><t->long</t-></code>, <code><t->ulong</t-></code>, <code><t->cent</t-></code><lumen-only-></lumen-only->, <code><t->ucent</t-></code><lumen-only-></lumen-only->.<br>
         <b>Integral types</b> are used to <b>represent integers</b>.<br>
-        Unsigned integral types cannot represent negative numbers, but the maximum value is twice as high as their signed counterpart.
+        They are available in 4 sizes: byte (8 bits), int (32 bits), long (64 bits) and cent (128 bits).
+        The programmer is responsible for choosing the size that best fits their use case.
     </p>
     <p>
-        All signed integral types use the Two's Complement to represent negative numbers.<br>
-        Positive numbers and <code><k->0</k-></code> use the corresponding binary value in both signed and unsigned integral types.
+        Each size has a signed and an unsigned version.<br>
+        Unsigned types cannot represent negative numbers, but have a larger maximum value than their signed counterpart.<br>
+        Signed types use the Two's Complement to represent negative numbers.
     </p>
     <example->
-            <div style="border-top-left-radius: var(--code-decoration-r);">
-                  <c->  1    7</c->          <c->  1                31</c->                     <c->  1                                63</c->
-                  <c->sign value</c->         <c->sign            value</c->                     <c->sign                            value</c->
-                    <c->│┌───┴─┐</c->          <c->│┌───────────────┴─────────────┐</c->          <c->│┌───────────────────────────────┴─────────────────────────────┐</c->
-                    <regex-group->┕</regex-group-><s->┷┷┷┷┷┷┙</s-> <t->byte</t->     <regex-group->┕</regex-group-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s-> <t->int</t->      <regex-group->┕</regex-group-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s-> <t->long</t->
-                  <c->      8</c->                             <c->32</c->                                                         <c->64</c->
-                   <c->   value</c->                          <c->value</c->                                                     <c->value</c->
-                    <c->┌───┴──┐</c->          <c->┌────────────────┴─────────────┐</c->          <c->┌────────────────────────────────┴─────────────────────────────┐</c->
-                    <s->┕┷┷┷┷┷┷┙</s-> <t->ubyte</t->    <s->┕┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s-> <t->uint</t->     <s->┕┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s-> <t->ulong</t->
-
-                <c->1                                                               127</c->
-                <c->sign                                                           value</c->
-                <c->│┌───────────────────────────────────────────────────────────────┴─────────────────────────────────────────────────────────────┐</c->
-                <regex-group->┕</regex-group-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s-> <t->cent</t->  <lumen-only-></lumen-only-> Lumen only
-                                                                                <c->128</c->
-                                                                               <c->value</c->
-                <c->┌────────────────────────────────────────────────────────────────┴─────────────────────────────────────────────────────────────┐</c->
-                <s->┕┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s-> <t->ucent</t->  <lumen-only-></lumen-only-> Lumen only
-            </div>
+        <div style="border-top-left-radius: var(--code-decoration-r);">
+                                                                     MIN                                                    MAX
+            <t->byte</t->                                                    -128                                                    127
+            <t->ubyte</t->                                                      0                                                    255
+            <t->int</t->                                           -2,147,483,648                                          2,147,483,647
+            <t->uint</t->                                                       0                                          4,294,967,295
+            <t->long</t->                              -9,223,372,036,854,775,808                              9,223,372,036,854,775,807
+            <t->ulong</t->                                                      0                             18,446,744,073,709,551,615
+            <t->cent</t->    -170,141,183,460,469,231,731,687,303,715,884,105,728    170,141,183,460,469,231,731,687,303,715,884,105,727
+            <t->ucent</t->                                                      0    340,282,366,920,938,463,463,374,607,431,768,211,455
+        </div>
     </example->
     <p>
         //TODO GL_EXT_shader_explicit_arithmetic_types_int64
     </p>
 </moveto-doc->
 <moveto-internal->
+    <example->
+        <div style="border-top-left-radius: var(--code-decoration-r);">
+              <c->  1    7</c->          <c->  1                31</c->                     <c->  1                                63</c->
+              <c->sign value</c->         <c->sign            value</c->                     <c->sign                            value</c->
+                <c->│┌───┴─┐</c->          <c->│┌───────────────┴─────────────┐</c->          <c->│┌───────────────────────────────┴─────────────────────────────┐</c->
+                <regex-group->┕</regex-group-><s->┷┷┷┷┷┷┙</s-> <t->byte</t->     <regex-group->┕</regex-group-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s-> <t->int</t->      <regex-group->┕</regex-group-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s-> <t->long</t->
+              <c->      8</c->                              <c->32</c->                                                        <c->64</c->
+               <c->   value</c->                          <c->value</c->                                                     <c->value</c->
+                <c->┌───┴──┐</c->          <c->┌────────────────┴─────────────┐</c->          <c->┌────────────────────────────────┴─────────────────────────────┐</c->
+                <s->┕┷┷┷┷┷┷┙</s-> <t->ubyte</t->    <s->┕┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s-> <t->uint</t->     <s->┕┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s-> <t->ulong</t->
+
+            <c->1                                                               127</c->
+            <c->sign                                                           value</c->
+            <c->│┌───────────────────────────────────────────────────────────────┴─────────────────────────────────────────────────────────────┐</c->
+            <regex-group->┕</regex-group-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s-> <t->cent</t->  <lumen-only-></lumen-only-> Lumen only
+                                                                            <c->128</c->
+                                                                           <c->value</c->
+            <c->┌────────────────────────────────────────────────────────────────┴─────────────────────────────────────────────────────────────┐</c->
+            <s->┕┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s-> <t->ucent</t->  <lumen-only-></lumen-only-> Lumen only
+        </div>
+    </example->
     <p>
         128-bit types (<code><t->cent</t-></code> and <code><t->ucent</t-></code>) aren't natively supported in <a href="#lumen">Lumen</a> on most systems.
         Instead, they are simulated using multiple 64-bit values and operations. This makes them slower than their 64-bit counterparts.

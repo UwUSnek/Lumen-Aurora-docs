@@ -890,8 +890,8 @@
 <h1 id="language-structure.directives"></h1>
 <moveto-doc->
     <p>
-        <b>Directives</b> are instructions that <b>modify</b> the <a href="#modules">module</a> on a <b>semantic</b> level.<br>
-        They are used to define which <a href="#name-resolution">symbols</a> are <a href="#import-directive">imported</a> and/or <a href="#export-directive">exported</a> and to programmatically generate code.
+        <b>Directives</b> are special instructions able to <b>modify</b>, <b>generate</b>, and <b>test</b> source code.
+        They are also used to define how different modules interact with each other.<br>
     </p>
 </moveto-doc->
 
@@ -1248,7 +1248,13 @@
 
 <h1 id="directives"></h1>
 <moveto-doc->
-    <p></p>
+    <p>
+        <b>Directives</b> are special compile-time instructions that <b>modify</b>, <b>generate</b>, and <b>test</b> source code.
+        They also control how different modules interact with each other.<br>
+    </p>
+    <p>
+        Each directive has its own syntax and behaviour, which are explained in their dedicated sections.
+    </p>
 </moveto-doc->
 
 
@@ -1456,7 +1462,7 @@
     </p>
     <p>
         All primitive types are defined in the <code>__internal</code> module.<br>
-        Their names are <b>not <a href="#keywords">keywords</a></b>. They can be <a href="#name-shadowing">shadowed</a> like any other <a href="#name-resolution">symbol</a>.
+        Their names are <b>not <a href="#keywords">keywords</a></b> and can be <a href="#name-shadowing">shadowed</a> like any other <a href="#name-resolution">symbol</a>.
     </p>
     <p>The primitive types are:</p>
     <div class="table-container"><table>
@@ -1495,41 +1501,54 @@
 <h1 id="integral-types"></h1>
 <moveto-doc->
     <p>
-        <code><t->byte</t-></code>, <code><t->ubyte</t-></code>, <code><t->int</t-></code>, <code><t->uint</t-></code>,
-        <code><t->long</t-></code>, <code><t->ulong</t-></code>, <code><t->cent</t-></code><lumen-only-></lumen-only->, <code><t->ucent</t-></code><lumen-only-></lumen-only->.<br>
         <b>Integral types</b> are used to <b>represent integers</b>.<br>
-        Unsigned integral types cannot represent negative numbers, but the maximum value is twice as high as their signed counterpart.
+        They are available in 4 sizes: byte (8 bits), int (32 bits), long (64 bits) and cent (128 bits).
+        The programmer is responsible for choosing the size that best fits their use case.
     </p>
     <p>
-        All signed integral types use the Two's Complement to represent negative numbers.<br>
-        Positive numbers and <code><k->0</k-></code> use the corresponding binary value in both signed and unsigned integral types.
+        Each size has a signed and an unsigned version.<br>
+        Unsigned types cannot represent negative numbers, but have a larger maximum value than their signed counterpart.<br>
+        Signed types use the Two's Complement to represent negative numbers.
     </p>
     <example->
-            <div style="border-top-left-radius: var(--code-decoration-r);">
-                  <c->  1    7</c->          <c->  1                31</c->                     <c->  1                                63</c->
-                  <c->sign value</c->         <c->sign            value</c->                     <c->sign                            value</c->
-                    <c->│┌───┴─┐</c->          <c->│┌───────────────┴─────────────┐</c->          <c->│┌───────────────────────────────┴─────────────────────────────┐</c->
-                    <regex-group->┕</regex-group-><s->┷┷┷┷┷┷┙</s-> <t->byte</t->     <regex-group->┕</regex-group-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s-> <t->int</t->      <regex-group->┕</regex-group-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s-> <t->long</t->
-                  <c->      8</c->                             <c->32</c->                                                         <c->64</c->
-                   <c->   value</c->                          <c->value</c->                                                     <c->value</c->
-                    <c->┌───┴──┐</c->          <c->┌────────────────┴─────────────┐</c->          <c->┌────────────────────────────────┴─────────────────────────────┐</c->
-                    <s->┕┷┷┷┷┷┷┙</s-> <t->ubyte</t->    <s->┕┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s-> <t->uint</t->     <s->┕┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s-> <t->ulong</t->
-
-                <c->1                                                               127</c->
-                <c->sign                                                           value</c->
-                <c->│┌───────────────────────────────────────────────────────────────┴─────────────────────────────────────────────────────────────┐</c->
-                <regex-group->┕</regex-group-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s-> <t->cent</t->  <lumen-only-></lumen-only-> Lumen only
-                                                                                <c->128</c->
-                                                                               <c->value</c->
-                <c->┌────────────────────────────────────────────────────────────────┴─────────────────────────────────────────────────────────────┐</c->
-                <s->┕┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s-> <t->ucent</t->  <lumen-only-></lumen-only-> Lumen only
-            </div>
+        <div style="border-top-left-radius: var(--code-decoration-r);">
+                                                                     MIN                                                    MAX
+            <t->byte</t->                                                    -128                                                    127
+            <t->ubyte</t->                                                      0                                                    255
+            <t->int</t->                                           -2,147,483,648                                          2,147,483,647
+            <t->uint</t->                                                       0                                          4,294,967,295
+            <t->long</t->                              -9,223,372,036,854,775,808                              9,223,372,036,854,775,807
+            <t->ulong</t->                                                      0                             18,446,744,073,709,551,615
+            <t->cent</t->    -170,141,183,460,469,231,731,687,303,715,884,105,728    170,141,183,460,469,231,731,687,303,715,884,105,727
+            <t->ucent</t->                                                      0    340,282,366,920,938,463,463,374,607,431,768,211,455
+        </div>
     </example->
     <p>
         //TODO GL_EXT_shader_explicit_arithmetic_types_int64
     </p>
 </moveto-doc->
 <moveto-internal->
+    <example->
+        <div style="border-top-left-radius: var(--code-decoration-r);">
+              <c->  1    7</c->          <c->  1                31</c->                     <c->  1                                63</c->
+              <c->sign value</c->         <c->sign            value</c->                     <c->sign                            value</c->
+                <c->│┌───┴─┐</c->          <c->│┌───────────────┴─────────────┐</c->          <c->│┌───────────────────────────────┴─────────────────────────────┐</c->
+                <regex-group->┕</regex-group-><s->┷┷┷┷┷┷┙</s-> <t->byte</t->     <regex-group->┕</regex-group-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s-> <t->int</t->      <regex-group->┕</regex-group-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s-> <t->long</t->
+              <c->      8</c->                              <c->32</c->                                                        <c->64</c->
+               <c->   value</c->                          <c->value</c->                                                     <c->value</c->
+                <c->┌───┴──┐</c->          <c->┌────────────────┴─────────────┐</c->          <c->┌────────────────────────────────┴─────────────────────────────┐</c->
+                <s->┕┷┷┷┷┷┷┙</s-> <t->ubyte</t->    <s->┕┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s-> <t->uint</t->     <s->┕┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s-> <t->ulong</t->
+
+            <c->1                                                               127</c->
+            <c->sign                                                           value</c->
+            <c->│┌───────────────────────────────────────────────────────────────┴─────────────────────────────────────────────────────────────┐</c->
+            <regex-group->┕</regex-group-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s-> <t->cent</t->  <lumen-only-></lumen-only-> Lumen only
+                                                                            <c->128</c->
+                                                                           <c->value</c->
+            <c->┌────────────────────────────────────────────────────────────────┴─────────────────────────────────────────────────────────────┐</c->
+            <s->┕┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s-> <t->ucent</t->  <lumen-only-></lumen-only-> Lumen only
+        </div>
+    </example->
     <p>
         128-bit types (<code><t->cent</t-></code> and <code><t->ucent</t-></code>) aren't natively supported in <a href="#lumen">Lumen</a> on most systems.
         Instead, they are simulated using multiple 64-bit values and operations. This makes them slower than their 64-bit counterparts.
@@ -1545,46 +1564,51 @@
 <h1 id="floating-point-types"></h1>
 <moveto-doc->
     <p>
-        <code><t->float</t-></code>, <code><t->double</t-></code>, <code><t->quad</t-></code><lumen-logo-></lumen-logo->.<br>
         <b>Floating point types</b> are used to <b>approximately represent real numbers</b>.<br>
+        They are available in 3 sizes: float (32 bits), double (64 bits), and quad (128 bits).
     </p>
     <p>
-        All floating point types are encoded according to the <a href="https://en.wikipedia.org/wiki/IEEE_754">IEEE 754 Standard</a>.<br>
-        Positive and negative inf, nan and signed <code><k->0</k-></code> are all supported.<br>
-        <code><k->+0</k-></code> and <code><k->-0</k-></code> are equal.
+        All floating point types support negative values.
+        They are encoded according to the <a href="https://en.wikipedia.org/wiki/IEEE_754">IEEE 754 Standard</a>.<br>
+        Positive and negative <code><k->inf</k-></code>, <code><k->nan</k-></code> and signed <code><k->0</k-></code> are all supported.
+        <code><k->+0</k-></code> and <code><k->-0</k-></code> are considered equal.
     </p>
     <example->
-            <div style="border-top-left-radius: var(--code-decoration-r);">
-                <c->1    8              23</c->                        <c-> 1     11                              52</c->
-                <c->sign exponent    mantissa</c->                     <c->sign exponent                       mantissa</c->
-                <c->│┌───┴──┐┌──────────┴──────────┐</c->               <c->│┌────┴────┐┌─────────────────────────┴────────────────────────┐</c->
-                <regex-group->┕</regex-group-><regex-token->┷┷┷┷┷┷┷┷</regex-token-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->  <t->float</t->        <regex-group->┕</regex-group-><regex-token->┷┷┷┷┷┷┷┷┷┷┷</regex-token-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->  <t->double</t->
-                <c->00000000000000000000000000000000</c->  <k->+0.0</k->         <c->0000000000000000000000000000000000000000000000000000000000000000</c->  <k->+0.0</k->
-                <c->10000000000000000000000000000000</c->  <k->-0.0</k->         <c->1000000000000000000000000000000000000000000000000000000000000000</c->  <k->-0.0</k->
-                <c->01111111100000000000000000000000</c->  <k->+inf</k->         <c->0111111111110000000000000000000000000000000000000000000000000000</c->  <k->+inf</k->
-                <c->11111111100000000000000000000000</c->  <k->-inf</k->         <c->1111111111110000000000000000000000000000000000000000000000000000</c->  <k->-inf</k->
-                <c->011111111&lt;─────── not 0 ───────&gt;</c->  <k->nan</k->          <c->011111111111&lt;────────────────────── not 0 ─────────────────────&gt;</c->  <k->nan</k->
-                <c->111111111&lt;─────── not 0 ───────&gt;</c->  <k->nan</k->          <c->111111111111&lt;────────────────────── not 0 ─────────────────────&gt;</c->  <k->nan</k->
-
-
-                <c->1       15                                                             112</c->
-                <c->sign exponent                                                        mantissa</c->
-                <c->│┌──────┴──────┐┌───────────────────────────────────────────────────────┴──────────────────────────────────────────────────────┐</c->
-                <regex-group->┕</regex-group-><regex-token->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷</regex-token-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->  <t->quad</t->  <lumen-only-></lumen-only-> Lumen only
-                <c->00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</c->  <k->+0.0</k->
-                <c->10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</c->  <k->-0.0</k->
-                <c->01111111111111110000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</c->  <k->+inf</k->
-                <c->11111111111111110000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</c->  <k->-inf</k->
-                <c->0111111111111111&lt;──────────────────────────────────────────────────── not 0 ───────────────────────────────────────────────────&gt;</c->  <k->nan</k->
-                <c->1111111111111111&lt;──────────────────────────────────────────────────── not 0 ───────────────────────────────────────────────────&gt;</c->  <k->nan</k->
-            </div>
+        <div style="border-top-left-radius: var(--code-decoration-r);">
+                        MIN                 MAX                   Decimal digits
+            <t->float</t->       ~1.175 × 10⁻³⁸      ~3.403 × 10³⁸          7.22
+            <t->double</t->      ~2.225 × 10⁻³⁰⁸     ~1.798 × 10³⁰⁸        15.95
+            <t->quad</t->        ~3.362 × 10⁻⁴⁹³²    ~1.189 × 10⁴⁹³²       34.02
+        </div>
     </example->
-    <p>
-        inf values are generated as required by the standard.<br>
-        nan values are not generated for consistency and performance reasons.
-    </p>
 </moveto-doc->
 <moveto-internal->
+    <example->
+        <div style="border-top-left-radius: var(--code-decoration-r);">
+            <c->1    8              23</c->                        <c-> 1     11                              52</c->
+            <c->sign exponent    mantissa</c->                     <c->sign exponent                       mantissa</c->
+            <c->│┌───┴──┐┌──────────┴──────────┐</c->               <c->│┌────┴────┐┌─────────────────────────┴────────────────────────┐</c->
+            <regex-group->┕</regex-group-><regex-token->┷┷┷┷┷┷┷┷</regex-token-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->  <t->float</t->        <regex-group->┕</regex-group-><regex-token->┷┷┷┷┷┷┷┷┷┷┷</regex-token-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->  <t->double</t->
+            <c->00000000000000000000000000000000</c->  <k->+0.0</k->         <c->0000000000000000000000000000000000000000000000000000000000000000</c->  <k->+0.0</k->
+            <c->10000000000000000000000000000000</c->  <k->-0.0</k->         <c->1000000000000000000000000000000000000000000000000000000000000000</c->  <k->-0.0</k->
+            <c->01111111100000000000000000000000</c->  <k->+inf</k->         <c->0111111111110000000000000000000000000000000000000000000000000000</c->  <k->+inf</k->
+            <c->11111111100000000000000000000000</c->  <k->-inf</k->         <c->1111111111110000000000000000000000000000000000000000000000000000</c->  <k->-inf</k->
+            <c->011111111&lt;─────── not 0 ───────&gt;</c->  <k->nan</k->          <c->011111111111&lt;────────────────────── not 0 ─────────────────────&gt;</c->  <k->nan</k->
+            <c->111111111&lt;─────── not 0 ───────&gt;</c->  <k->nan</k->          <c->111111111111&lt;────────────────────── not 0 ─────────────────────&gt;</c->  <k->nan</k->
+
+
+            <c->1       15                                                             112</c->
+            <c->sign exponent                                                        mantissa</c->
+            <c->│┌──────┴──────┐┌───────────────────────────────────────────────────────┴──────────────────────────────────────────────────────┐</c->
+            <regex-group->┕</regex-group-><regex-token->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷</regex-token-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->  <t->quad</t->  <lumen-only-></lumen-only-> Lumen only
+            <c->00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</c->  <k->+0.0</k->
+            <c->10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</c->  <k->-0.0</k->
+            <c->01111111111111110000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</c->  <k->+inf</k->
+            <c->11111111111111110000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</c->  <k->-inf</k->
+            <c->0111111111111111&lt;──────────────────────────────────────────────────── not 0 ───────────────────────────────────────────────────&gt;</c->  <k->nan</k->
+            <c->1111111111111111&lt;──────────────────────────────────────────────────── not 0 ───────────────────────────────────────────────────&gt;</c->  <k->nan</k->
+        </div>
+    </example->
     <p>
         The <code><t->quad</t-></code> type isn't natively supported in <a href="#lumen">Lumen</a> on most systems.
         Instead, it's simulated using multiple <code><t->double</t-></code> values and operations. This makes it slower than the <code><t->double</t-></code> type.
@@ -1595,30 +1619,36 @@
         The <code><t->double</t-></code> type is often much slower than <code><t->float</t-></code> in <a href="#aurora">Aurora</a>
         because of missing hardware support. The <code><t->float</t-></code> type should be preferred whenever possible.
     </p>
+    <p>
+        //TODO move this to the standard modules. float operators are defined in __internal or something like that
+        inf values are generated as required by the standard.<br>
+        nan values are not generated for consistency and performance reasons.
+    </p>
 </moveto-internal->
 
 <h1 id="boolean-type"></h1>
 <moveto-doc->
     <p>
-        <code><t->bool</t-></code>.<br>
         The <b>Boolean type</b> is used to <b>represent boolean values</b>.<br>
         <code><k->true</k-></code> and <code><k->false</k-></code> are the only values that can be stored in a <code><t->bool</t-></code>.
     </p>
-    <example->
-            <div style="border-top-left-radius: var(--code-decoration-r);">
-                                <c->32</c->
-                              <c->value</c->
-                <c->┌───────────────┴──────────────┐</c->
-                <s->┕┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s-> <t->bool</t->
-                <c->00000000000000000000000000000001</c->  <k->true</k->
-                <c->00000000000000000000000000000000</c->  <k->false</k->
-            </div>
-    </example->
     <p>
-        Booleans purposely waste 31 bits for performance reasons.<br>
-        Smaller types require additional bitwise operations and expensive conversions between the CPU and GPU data.
+        Booleans are 4 bytes in size. They purposely waste 31 bits for performance reasons.<br>
+        Smaller types would require additional bitwise operations and expensive conversions between CPU and GPU.
     </p>
 </moveto-doc->
+<moveto-internal->
+    <example->
+        <div style="border-top-left-radius: var(--code-decoration-r);">
+                            <c->32</c->
+                          <c->value</c->
+            <c->┌───────────────┴──────────────┐</c->
+            <s->┕┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s->  <t->bool</t->
+            <c->00000000000000000000000000000001</c->  <k->true</k->
+            <c->00000000000000000000000000000000</c->  <k->false</k->
+        </div>
+    </example->
+</moveto-internal->
 
 <h1 id="enums"></h1>
 <moveto-doc->
