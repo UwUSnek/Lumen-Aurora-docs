@@ -35,7 +35,7 @@ const utils = {
 
 
     loadSVG : async (path, strip_size = true) => {
-        const res = await fetch(path);
+        const res = await fetch(`${path}?v=${Date.now()}`);
         const text = await res.text();
         let svg = new DOMParser().parseFromString(text, "image/svg+xml").documentElement;
         if(strip_size) {
