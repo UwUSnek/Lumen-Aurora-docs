@@ -1348,7 +1348,11 @@
 </moveto-examples->
 <moveto-internal->
     <p>
-        Modules are always preprocessed and compiled before being imported.
+        Modules are always preprocessed and partially compiled before being imported.
+    </p>
+    <p>
+        Circular dependencies between modules are allowed, but global variables cannot create dependency loops.
+        This is explained in more detail in <a href="#global-initialization-order">Global initialization order</a>
     </p>
 </moveto-internal->
 
