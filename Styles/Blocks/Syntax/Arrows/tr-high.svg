@@ -4,6 +4,8 @@
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="100px" height="100px" viewBox="0 0 100 100">
     <path vector-effect="non-scaling-stroke" shape-rendering="crisp edges" class="arrow-line" d="
         M 50,0
-        Q 50,35 100,35
+        Q 50,35 85,35
+        M 85,35
+        L 100,35
     "/>
 </svg>
