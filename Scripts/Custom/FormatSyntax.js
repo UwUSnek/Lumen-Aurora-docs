@@ -7,7 +7,6 @@ const format_syntax = {
     // Cache fetched SVG content
     fetch_svg : async function (name) {
         if(!svg_cache[name]) {
-            console.log("loading " + `./Styles/Blocks/Syntax/Arrows/${name}.svg` + " for " + name);
             const svg = await utils.loadSVG(`./Styles/Blocks/Syntax/Arrows/${name}.svg`);
             svg_cache[name] = Array.from(svg.children);
         }
@@ -154,10 +153,5 @@ const format_syntax = {
     start : function() {
         format_syntax.even_widths();
         format_syntax.format_arrows();
-
-        setTimeout(() => {
-            console.log(svg_cache);
-            console.log(svg_cache["bl-low"]);
-        }, 1000);
     }
 }
