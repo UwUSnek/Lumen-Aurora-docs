@@ -86,7 +86,8 @@
 
 
 
-
+- revamp all the boring examples
+  - use more interesting names and usecases istead of just random variables and numbers
 
 
 
@@ -307,7 +308,8 @@ int main() {
     - statements in functions used to initialize globals follow the usual uninitialized value rules - can't use globals declared after it
       - this propagates through the call stack
   - all globals of a module are initialized when the module is first imported within the import tree.
-    - no circular dependencies allowed, so a clear order can always be determined
+    - circular dependencies are allowed, in which case the order within the cycle is not defined
+    - circular dependencies between initializer values are not allowed
   - globals are destroyed in inverse oder when the program ends
 
 

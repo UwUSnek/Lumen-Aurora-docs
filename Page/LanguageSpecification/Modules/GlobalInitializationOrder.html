@@ -2,10 +2,120 @@
 <h1 id="global-initialization-order"></h1>
 <moveto-doc->
     <p>
-        //TODO talk about circular dependencies being allowed but not circular initialization dependencies between global variables
-
-        //TODO loops with more than 2 files? how do we handle that?
-
-        //TODO everything is imported before name resolution takes place
+        The <b>global initialization order</b> defines the order in which <b><a href="#variables">variables</a></b>
+        declared outside of <a href="#routines">routines</a> are <b>initialized</b>.
+        This only affects global variables with an initializer value.
+    </p>
+    <p>
+        Global variables of a module are initialized in the same order in which they are declared.<br>
+        The order in which modules are initialized depends on the import graph of the program:
+        each module is guaranteed to be initialized before any module that depends on it.
+    </p>
+    <p>
+        The initialization order is defined only when there are no circular dependencies in the import graph.<br>
+        Circular module dependencies cause all modules in the cycle to not have a defined initialization order relative to each other,
+        though they are still guaranteed to be initialized before modules that depend on them but are not in the cycle.
+    </p>
+    <p>
+        Circular dependencies between initializer values are forbidden.
     </p>
 </moveto-doc->
+<moveto-examples->
+    <split-example-container->
+        <split-example-container-left->
+            <example->
+                <label->Example 1</label->
+                <div>
+                    <w->import</w-> array;
+                    <w->import</w-> io;
+
+                    <t->void</t-> <f->main</f->() {
+                        <w->for</w->(season_num <w->as</w-> i) {
+                            io.<f->println</f->(seasons[i]);
+                        }
+                    }
+
+                    <t->array</t->&lt;<t->str</t->&gt; <f->get_seasons</f->() {
+                        io.<f->println</f->(<s->"[seasons initialized]"</s->);
+                        <w->return</w-> { <s->"Spring"</s->, <s->"Summer"</s->, <s->"Autumn"</s->, <s->"Winter"</s-> };
+                    }
+
+                    <t->array</t->&lt;<t->str</t->&gt; <f->get_season_num</f->() {
+                        io.<f->println</f->(<s->"[season_num initialized]"</s->);
+                        <w->return</w-> seasons-><f->len</f->();
+                    }
+
+                    <t->array</t->&lt;<t->str</t->&gt; seasons = <f->get_seasons</f->();
+                    <t->uint</t-> season_num = <f->get_season_num</f->();
+                </div>
+            </example->
+        </split-example-container-left->
+        <split-example-container-right->
+            <example->
+                <label->Output</label->
+                <div>
+                    <console-prefix-></console-prefix->
+                    [seasons initialized]
+                    [season_num initialized]
+                    Spring
+                    Summer
+                    Autumn
+                    Winter
+                    <cursor-></cursor->
+                </div>
+            </example->
+        </split-example-container-right->
+    </split-example-container->
+    <split-example-container->
+        <split-example-container-left->
+            <example->
+                <label->Example 2 - test.lmn</label->
+                <div>
+                    <w->import</w-> io;
+
+                    <t->t</t-> <f->set_and_log</f->(<t->t</t->? value, <t->str</t-> name) {
+                        io.<f->println</f->(<s->"initialized \""</s-> + name + <s->"\""</s->);
+                        <w->return</w-> value;
+                    }
+
+                    <c->// int a = b;</c->    <ce->Error, circular dependency of initializer values</ce->
+                    <c->// int b = a;</c->    <ce->Error, circular dependency of initializer values</ce->
+
+                    <c->// int c = d;</c->    <ce->Error, d is not initialized</ce->
+                    <t->int</t-> d = <f->set_and_log</f->(<k->0</k->, <s->"d"</s->);
+
+                    <w->export</w-> b, set_and_log;
+                </div>
+                <label->Example 2 - main.lmn</label->
+                <div>
+                    <w->import</w-> <s->"test.lmn"</s->;
+
+                    <t->int</t-> e = <f->set_and_log</f->(<k->12</k->, <s->"e"</s->);
+                    <t->int</t-> f = <f->set_and_log</f->(test.d + e, <s->"f"</s->);
+
+                    <t->void</t-> <f->main</f->() {
+                        <c->// Empty</c->
+                    }
+                </div>
+            </example->
+        </split-example-container-left->
+        <split-example-container-right->
+            <example->
+                <label->Output</label->
+                <div>
+                    <console-prefix-></console-prefix->
+                    initialized "d"
+                    initialized "e"
+                    initialized "f"
+                    <cursor-></cursor->
+                </div>
+            </example->
+        </split-example-container-right->
+    </split-example-container->
+</moveto-examples->
+<moveto-internal->
+    <p>
+        Global <a href="#variables">variables</a> are initialized by a special <code><f->__init</f-></code> <a href="#functions">function</a> which cannot be called. This is where execution truly begins.
+        After all global <a href="#variables">variables</a> have been initialized, the <a href="#main-function"><code><f->main</f-></code> function</a>  is called.
+    </p>
+</moveto-internal->
