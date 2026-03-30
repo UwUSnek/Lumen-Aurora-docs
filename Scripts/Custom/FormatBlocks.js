@@ -12,12 +12,15 @@ const format_blocks = {
                 let rc = exampleContainer.querySelector('split-example-container-right-');
 
                 // Get contained divs
-                let l = lc.querySelector('div');
-                let r = rc.querySelector('div');
+                let l = lc.querySelector('example-'); // Use example element to allow for multiple example blocks at the left while keeping the correct corrected height on the right
+                let r = rc.querySelector('example-');
+                let ldiv = l.querySelector('div');
+                let rdiv = r.querySelector('div');
+                let label = lc.querySelector('div example- label-'); // Needed to calculate the height of the label to subtract from the total left height
 
                 // Fix heights
-                if(r.offsetHeight < l.offsetHeight) r.style.minHeight = r.style.maxHeight = `${ l.offsetHeight }px`
-                if(l.offsetHeight < r.offsetHeight) l.style.minHeight = l.style.maxHeight = `${ r.offsetHeight }px`
+                if(r.offsetHeight < l.offsetHeight) rdiv.style.minHeight = rdiv.style.maxHeight = `${ l.offsetHeight - label.offsetHeight }px`
+                if(l.offsetHeight < r.offsetHeight) ldiv.style.minHeight = ldiv.style.maxHeight = `${ r.offsetHeight - label.offsetHeight }px`
             }
         }
     },
