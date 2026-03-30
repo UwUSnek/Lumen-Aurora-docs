@@ -2,10 +2,52 @@
 <h1 id="program-structure"></h1>
 <moveto-doc->
     <p>
-        //TODO root scope can be tought of as an unnamed namespace
-        //TODO current module scope can be tought of as an unnamed namespace
-
-        //TODO imported modules reside in the root scope. they are named namespaces with the imported symbols defined using the specified alias
-        //TODO __internal is always automatically imported
+        All source code that makes up a program is contained within the root scope.
+        The root scope can be thought of as an unnamed <a href="#namespaces">namespace</a>.
+        The current module is equivalent to an unnamed <a href="#namespaces">namespace</a> inside the root scope.
+    </p>
+    <p>
+        <a href="#import-directive">Imported</a> modules also reside in the root scope.
+        They are equivalent to named <a href="#namespaces">namespaces</a> containing the imported symbols.
+        The <a href="__internal-module">__internal module</a> is always imported automatically,
+        as it contains the <a href="#primitive-types">primitive types</a> and fundamental functions.
     </p>
 </moveto-doc->
+<moveto-examples->
+    <split-example-container->
+        <split-example-container-left->
+            <example->
+                <label->File contents of the module</label->
+                <div>
+                    <w->import</w-> io;
+
+                    <t->void</t-> <f->main</f-> {
+                        io.<f->print</f->(<s->">:3"</s->);
+                    }
+                </div>
+            </example->
+        </split-example-container-left->
+        <split-example-container-right->
+            <example->
+                <label->Full program structure</label->
+                <div>
+                    <c->// Root scope</c->
+                    <w->namespace</w-> {
+                        <w->namespace</w-> __internal {
+                            <c->// Primitive types and functions...</c->
+                        }
+                        <w->namespace</w-> io {
+                            <t->void</t-> <f->print</f->(){ <c->...</c-> }
+                        }
+                        <c->// Current module</c->
+                        <w->namespace</w-> {
+                            <t->void</t-> <f->main</f-> {
+                                io.<f->print</f->(<s->">:3"</s->);
+                            }
+                        }
+                    }
+                </div>
+            </example->
+        </split-example-container-right->
+    </split-example-container->
+</moveto-examples->

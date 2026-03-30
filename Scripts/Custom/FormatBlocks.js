@@ -2,8 +2,8 @@
 const format_blocks = {
 
     // Even out the height of right and left example tags
-    even_heights : function() {
-        for(const exampleContainer of tab_examples.querySelectorAll('split-example-container-')) {
+    even_heights : function(example_containers) {
+        for(const exampleContainer of example_containers) {
             if(!exampleContainer.hasAttribute("example_container_is_even")) {
                 exampleContainer.setAttribute("example_container_is_even", "1"); //! Mark as being even for future iterations
 
@@ -27,6 +27,7 @@ const format_blocks = {
 
 
     start : function() {
-        format_blocks.even_heights();
+        format_blocks.even_heights(tab_examples.querySelectorAll('split-example-container-'));
+        format_blocks.even_heights(tab_doc.querySelectorAll('split-example-container-'));
     }
 }

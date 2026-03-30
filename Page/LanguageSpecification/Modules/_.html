@@ -1,7 +1,20 @@
 
 <h1 id="modules"></h1>
 <moveto-doc->
-    <p></p>
+    <p>
+        A module is a file containing Lumen or Aurora source code.
+        Modules are used to organize the program into self-contained units.
+    </p>
+    <p>
+        By default, symbols declared in a module are not accessible from the outside.
+        Modules can define which symbols are available to other modules through the <a href="#export-directive">export directive</a>.
+        These symbols can then be accessed using the <a href="#import-directive">import directive</a>.
+    </p>
+    <p>
+        Each module can define a <a href="#main-function"><code><f->main</f-></code> function</a>.
+        This is where execution begins when the program is started, but only if the module was passed to the compiler as the entry point.
+        This is covered in detail in <a href="#compilation">Compilation</a>.
+    </p>
 </moveto-doc->
 
 
