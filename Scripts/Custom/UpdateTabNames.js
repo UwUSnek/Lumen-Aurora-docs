@@ -6,7 +6,7 @@ const update_tab_names = {
         tab_button_doc.querySelector("span").innerHTML = `Documentation`;
 
         // Examples
-        let example_num = tab_examples.querySelectorAll("example- label-").length - tab_examples.querySelectorAll("split-example-container-").length;
+        let example_num = tab_examples.querySelectorAll(":scope > example-, :scope > split-example-container-").length;
         tab_button_examples.style.opacity = example_num < 1 ? "50%" : "100%";
         tab_button_examples.querySelector("span").innerHTML = example_num > 0 ? `Examples - ${ example_num }` : "No examples available";
 
