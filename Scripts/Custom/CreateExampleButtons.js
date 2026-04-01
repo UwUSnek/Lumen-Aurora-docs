@@ -21,13 +21,22 @@ const create_example_buttons = {
                 label.appendChild(button_container);
 
 
-                // Add copy button
-                let copy_button = document.createElement("button-");
-                (async () => {copy_button.appendChild(await utils.loadSVG("./Styles/Blocks/Example/Icons/CopyExampleButton.svg"));})();
-                copy_button.dataset.tooltip = "Copy example block";
-                copy_button.classList.add("tooltip-top");
-                copy_button.addEventListener('click', function(){ ui_example_button_triggers.trigger_copy_example_block(label); });
-                button_container.appendChild(copy_button);
+                // Add copy example block button
+                let copy_block_button = document.createElement("button-");
+                (async () => {copy_block_button.appendChild(await utils.loadSVG("./Styles/Blocks/Example/Icons/CopyExampleBlockButton.svg"));})();
+                copy_block_button.dataset.tooltip = "Copy example block";
+                copy_block_button.classList.add("tooltip-top");
+                copy_block_button.addEventListener('click', function(){ ui_example_button_triggers.trigger_copy_example_block(label); });
+                button_container.appendChild(copy_block_button);
+
+
+                // Add copy example project button
+                let copy_project_button = document.createElement("button-");
+                (async () => {copy_project_button.appendChild(await utils.loadSVG("./Styles/Blocks/Example/Icons/CopyExampleProjectButton.svg"));})();
+                copy_project_button.dataset.tooltip = "Copy example project";
+                copy_project_button.classList.add("tooltip-top");
+                copy_project_button.addEventListener('click', function(){ ui_example_button_triggers.trigger_copy_example_project(label); });
+                button_container.appendChild(copy_project_button);
 
 
                 // Add sandbox button (or "sandbox not available icon")

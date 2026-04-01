@@ -140,12 +140,6 @@ const setup_tabs = {
 
 
 
-    get_local_root : function(elm){
-        if(elm.parentNode.id === "main-center-staging") return elm;
-        else return setup_tabs.get_local_root(elm.parentNode);
-    },
-
-
     get_parent_header : function(elm){
         if(elm !== undefined && elm != null) {
             if(elm.tagName == "H1") return elm;
@@ -163,7 +157,7 @@ const setup_tabs = {
         for(let elm of elms) {
 
             // Find parent header
-            let local_root = setup_tabs.get_local_root(elm);
+            let local_root = elm.closest('#main-center-staging > *');
             let parent_header = setup_tabs.get_parent_header(local_root);
             let id = `index--${ parent_header.id }`;
 

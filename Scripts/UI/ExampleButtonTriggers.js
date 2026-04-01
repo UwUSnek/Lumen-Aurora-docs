@@ -32,8 +32,33 @@ const ui_example_button_triggers = {
     },
 
 
+    trigger_copy_example_project : function(label) {
+
+        // Collect labels
+        let _labels = [];
+        let container = label.closest('split-example-container-');
+        if(container) {
+            for(let _label of container.querySelectorAll('label-')) {
+                _labels.push(_label);
+            }
+        }
+        else {
+            _labels.push(ui_example_button_triggers.retrieve_code(label));
+        }
+
+
+        // Read code, set file names and copy to clipboard
+        let output_text = [];
+        for(let _label of _labels) {
+            output_text.push(`[ ${ _label.textContent.trim() } ]\n\n${ ui_example_button_triggers.retrieve_code(_label) }`);
+        }
+        navigator.clipboard.writeText(output_text.join("\n\n\n\n\n"));
+    },
+
+
     trigger_run_in_sandbox : function(label) {
         let code = ui_example_button_triggers.trigger_copy_example_block(label);
         //FIXME connect with sandbox
     },
 }
+
