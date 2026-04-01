@@ -586,3 +586,44 @@ int main() {
 - Lumen still needs a way to call/define C functions.
   - this is required in order to use external C libraries such as Vulkan
   - might need a magic implementation in __internal
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+- The languages should define vectors and matrices for all primitive types
+  - standard operators are defined in __internal
+  - more compelx operations such as dot, cross, etc are defined in the stanard module math
+  - add a whole section for vectors and matrices. this can be called "tensors"
+  - more generic but slower tensors can be found in the stanrad module "tensor"
