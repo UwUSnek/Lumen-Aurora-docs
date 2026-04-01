@@ -2,13 +2,10 @@
 <h1 id="enum-declarations"></h1>
 <moveto-doc->
     <p>
-        Enums are declared using the <code><w->enum</w-></code> keyword followed by its name and base <a href="#types">type</a>.
-        Unlike most languages, the base type can be any type, including <a href="#structs">structs</a> or other enums.<br>
-    </p>
-    <p>
+        <b>Enums</b> are <b>declared</b> using the <code><w->enum</w-></code> keyword followed by its <b>name</b> and <b>base <a href="#types">type</a></b>.
         Enum elements are declared in the same way as <a href="#variables">variables</a>,
         but the type and the <a href="#const-qualifier">const qualifier</a> are implicit and their initializer values
-        must be <a href="#constant-expressions">constant expressions</a>.
+        must be <a href="#constant-expressions">constant expressions</a>.<br>
     </p>
     <p>
         Elements of <a href="#integral-types">integral</a> enums that are not initialized
@@ -23,18 +20,42 @@
     </syntax->
 </moveto-doc->
 <moveto-examples->
-    <example->
-        <label->Example</label->
-        <div>
-            <w->enum</w-> <t->e</t-> : <t->int</t-> {
-                a, b;              <c->// a = 0, b = 1</c->
-                c = <k->-266250</k->;       <c->// c = -266250</c->
-                d, e = <k->0</k->;          <c->// d = -266249, e = 0</c->
-            }
+    <split-example-container->
+        <split-example-container-left->
+            <example->
+                <label->Example</label->
+                <div>
+                    <w->import</w-> io;
 
-            <t->float</t-> <f->main</f->(){
-                <w->return</w-> e.<k->c</k->; <c->// Implicitly convert e to float</c->
-            }
-        </div>
-    </example->
+                    <w->enum</w-> <t->ErrorCode</t-> : <t->uint</t-> {
+                        Success         = <k->0</k->;
+
+                        <c->// General errors</c->
+                        Unknown         = <k->100</k->;
+                        InvalidInput;  <c->// 101</c->
+                        OutOfMemory;   <c->// 102</c->
+
+                        <c->// IO errors</c->
+                        FileNotFound    = <k->200</k->;
+                        AccessDenied;  <c->// 201</c->
+                        DiskFull;      <c->// 202</c->
+                    }
+
+                    <t->void</t-> <f->main</f->() {
+                        <t->ErrorCode</t-> err = <t->ErrorCode</t->.FileNotFound;
+                        io.<f->print</f->(<s->"Error code: "</s-> + err);
+                    }
+                </div>
+            </example->
+        </split-example-container-left->
+        <split-example-container-right->
+            <example->
+                <label- class="no-sandbox">Output</label->
+                <div>
+                    <console-prefix-></console-prefix->
+                    Error code: 200<cursor-></cursor->
+                </div>
+            </example->
+        </split-example-container-right->
+    </split-example-container->
 </moveto-examples->

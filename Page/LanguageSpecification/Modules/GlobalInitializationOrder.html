@@ -4,16 +4,16 @@
     <p>
         The <b>global initialization order</b> defines the order in which <b><a href="#variables">variables</a></b>
         declared outside of <a href="#routines">routines</a> are <b>initialized</b>.
-        This only affects global variables with an initializer value.
+        This only affects global variables with an initializer value and <a href="#enums">enum elements</a>.
     </p>
     <p>
-        Global variables of a module are initialized in the same order in which they are declared.<br>
-        The order in which modules are initialized depends on the import graph of the program:
+        Global variables and enum elements of a module are initialized in the same order in which they are declared.<br>
+        The order in which modules are initialized depends on the <a href="#import-directive">import</a> graph of the program:
         each module is guaranteed to be initialized before any module that depends on it.
     </p>
     <p>
-        The initialization order is defined only when there are no circular dependencies in the import graph.<br>
-        Circular module dependencies cause all modules in the cycle to not have a defined initialization order relative to each other,
+        The initialization order is only defined when there are no circular dependencies in the import graph.<br>
+        Circular module dependencies cause all modules in the cycle to have no defined initialization order relative to each other,
         though they are still guaranteed to be initialized before modules that depend on them but are not in the cycle.
     </p>
     <p>
@@ -26,27 +26,25 @@
             <example->
                 <label->Example 1</label->
                 <div>
-                    <w->import</w-> array;
                     <w->import</w-> io;
 
+                    <c->// int a = b;</c->          <ce->Error, circular dependency of initializer values</ce->
+                    <c->// int b = a;</c->          <ce->Error, circular dependency of initializer values</ce->
+
+                    <t->uint</t-> a = <k->8</k->;
+                    <c->// uint b = main.e.n;</c->  <ce->Error, main.e.n is not initialized here</ce->
+
                     <t->void</t-> <f->main</f->() {
-                        <w->for</w->(season_num <w->as</w-> i) {
-                            io.<f->println</f->(seasons[i]);
+                        io.<f->println</f->(<s->"The value of a   is: "</s-> + a);
+                        io.<f->println</f->(<s->"The value of e.n is: "</s-> + e.n);
+                        io.<f->println</f->(<s->"The value of b   is: "</s-> + b);
+                        io.<f->println</f->(<s->"main function"</s->);
+                        <w->enum</w-> <t->e</t-> : <t->int</t-> {
+                            n = <k->-6</k->;
                         }
                     }
 
-                    <t->array</t->&lt;<t->str</t->&gt; <f->get_seasons</f->() {
-                        io.<f->println</f->(<s->"[seasons initialized]"</s->);
-                        <w->return</w-> { <s->"Spring"</s->, <s->"Summer"</s->, <s->"Autumn"</s->, <s->"Winter"</s-> };
-                    }
-
-                    <t->array</t->&lt;<t->str</t->&gt; <f->get_season_num</f->() {
-                        io.<f->println</f->(<s->"[season_num initialized]"</s->);
-                        <w->return</w-> seasons-><f->len</f->();
-                    }
-
-                    <t->array</t->&lt;<t->str</t->&gt; seasons = <f->get_seasons</f->();
-                    <t->uint</t-> season_num = <f->get_season_num</f->();
+                    <t->uint</t-> b = <f->main</f->.<t->e</t->.n;  <c->// Ok, main.e.n is initialized here</c->
                 </div>
             </example->
         </split-example-container-left->
@@ -55,12 +53,10 @@
                 <label->Output</label->
                 <div>
                     <console-prefix-></console-prefix->
-                    [seasons initialized]
-                    [season_num initialized]
-                    Spring
-                    Summer
-                    Autumn
-                    Winter
+                    The value of a   is: 8
+                    The value of e.n is: -6
+                    The value of b   is: -6
+                    main function
                     <cursor-></cursor->
                 </div>
             </example->
@@ -69,32 +65,36 @@
     <split-example-container->
         <split-example-container-left->
             <example->
-                <label->Example 2 - test.lmn</label->
+                <label->Example 2 - test_0.lmn</label->
                 <div>
                     <w->import</w-> io;
-
-                    <t->t</t-> <f->set_and_log</f->(<t->t</t->? value, <t->str</t-> name) {
+                    <t->t</t-> <f->log_and_return</f->(<t->t</t->? value, <t->str</t-> name) {
                         io.<f->println</f->(<s->"initialized \""</s-> + name + <s->"\""</s->);
                         <w->return</w-> value;
                     }
-
-                    <c->// int a = b;</c->    <ce->Error, circular dependency of initializer values</ce->
-                    <c->// int b = a;</c->    <ce->Error, circular dependency of initializer values</ce->
-
-                    <c->// int c = d;</c->    <ce->Error, d is not initialized</ce->
-                    <t->int</t-> d = <f->set_and_log</f->(<k->0</k->, <s->"d"</s->);
-
-                    <w->export</w-> b, set_and_log;
+                    <t->int</t-> a = <f->log_and_return</f->(<k->0</k->, <s->"test_0.a"</s->);
+                </div>
+                <label->Example 2 - test_a.lmn</label->
+                <div>
+                    <w->import</w-> <s->"test_0.lmn"</s->;
+                    <t->int</t-> a = test_0.<f->log_and_return</f->(<k->0</k->, <s->"test_a.a"</s->);
+                </div>
+                <label->Example 2 - test_b.lmn</label->
+                <div>
+                    <w->import</w-> <s->"test_0.lmn"</s->;
+                    <t->int</t-> a = test_0.<f->log_and_return</f->(<k->0</k->, <s->"test_b.a"</s->);
                 </div>
                 <label->Example 2 - main.lmn</label->
                 <div>
-                    <w->import</w-> <s->"test.lmn"</s->;
+                    <w->import</w-> <s->"test_b.lmn"</s->;  <c->// test_b is imported before test_a, so it's initialized first</c->
+                    <w->import</w-> <s->"test_a.lmn"</s->;
+                    <w->import</w-> <s->"test_0.lmn"</s->;  <c->// Initialized first as test_a and test_b depend on it</c->
+                    <w->import</w-> io;
 
-                    <t->int</t-> e = <f->set_and_log</f->(<k->12</k->, <s->"e"</s->);
-                    <t->int</t-> f = <f->set_and_log</f->(test.d + e, <s->"f"</s->);
+                    <t->int</t-> b = <f->test_0.log_and_return</f->(<k->12</k->, <s->"b"</s->);
 
                     <t->void</t-> <f->main</f->() {
-                        <c->// Empty</c->
+                        io.<f->println</f->(<s->"main function"</s->);
                     }
                 </div>
             </example->
@@ -104,9 +104,11 @@
                 <label->Output</label->
                 <div>
                     <console-prefix-></console-prefix->
-                    initialized "d"
-                    initialized "e"
-                    initialized "f"
+                    initialized "test_0.a"
+                    initialized "test_b.a"
+                    initialized "test_a.a"
+                    initialized "b"
+                    main function
                     <cursor-></cursor->
                 </div>
             </example->
@@ -115,7 +117,16 @@
 </moveto-examples->
 <moveto-internal->
     <p>
-        Global <a href="#variables">variables</a> are initialized by a special <code><f->__init</f-></code> <a href="#functions">function</a> which cannot be called. This is where execution truly begins.
-        After all global <a href="#variables">variables</a> have been initialized, the <a href="#the-main-function"><code><f->main</f-></code> function</a>  is called.
+        Global <a href="#variables">variables</a> are initialized by a special <code><f->__init</f-></code> <a href="#functions">function</a>
+        which cannot be called directly. This is where execution actually begins.
+        After all global <a href="#variables">variables</a> and <a href="#enums">enum elements</a> have been initialized,
+        the <a href="#the-main-function"><code><f->main</f-></code> function</a> is called.
+    </p>
+    <p>
+        <a href="#const-qualifier"><code><w->const</w-></code></a> variables and enum elements are technically initialized
+        during the compilation phase and often optimized out completely, albeit without changing the observable behaviour of the program.<br>
+        This means that const values are always available to non-const <a href="#expressions">expressions</a>,
+        but for the purposes of initialization, they behave as if initialized during the global initialization stage.
+        This ensures the initialization rules are kept simple and consistent.
     </p>
 </moveto-internal->
