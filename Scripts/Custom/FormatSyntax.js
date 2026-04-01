@@ -119,12 +119,14 @@ const format_syntax = {
                     if(!td.hasAttribute("format_syntax-arrows_2") && td.dataset.arrows?.length) {
                         td.setAttribute("format_syntax-arrows_2", "1");
                         const r = td.getBoundingClientRect();
+
+                        //! Rouding the values removes accumulated floating-point errors that would create gaps between the svg tiles
                         cell_data.push({
                             arrows: td.dataset.arrows.split(/\s+/),
-                            x: r.left - table_rect.left,
-                            y: r.top - table_rect.top,
-                            w: r.width,
-                            h: r.height,
+                            x: Math.round(r.left - table_rect.left),
+                            y: Math.round(r.top - table_rect.top),
+                            w: Math.round(r.width),
+                            h: Math.round(r.height),
                         });
                     }
                 }
