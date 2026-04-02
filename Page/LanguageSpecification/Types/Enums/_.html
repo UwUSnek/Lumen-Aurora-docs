@@ -4,17 +4,18 @@
     <p>
         <b>Enums</b> are types whose allowed values are a <b>named subset</b> of the possible values
         of their <b>base <a href="#types">type</a></b>. The allowed values are called Enum elements.<br>
-        Unlike most languages, the base type can be any type,
-        including <a href="#pointer-types">pointers</a>, <a href="#structs">structs</a> or other enums.<br>
-        <code><t->void</t-></code> cannot be used as base type.
+        Unlike most languages, the base type can be any type, including <a href="#pointer-types">pointers</a>,
+        <a href="#structs">structs</a>, other enums or even <a href="#void-type"><code><t->void</t-></code></a>.
     </p>
     <p>
-        Enum elements are implicitly <a href="#const-qualifier">const</a>.
-        They act like global variables and are part of the <a href="#global-initialization-order">global initialization order</a>.
+        Enum elements work similarly to <a href="#structs">struct</a> values, containing their name, index, and base value as members.
+        They are part of the <a href="#global-initialization-order">global initialization order</a> and
+        their base value is initialized using one of the base type's <a href="#constructor-function">constructors</a>.<br>
+        If the base type defines a <a href="#destructors">destructor</a>, it is called on each element before the process ends.
     </p>
     <p>
-        <a href="#expressions">Expressions</a> of enum type are <a href="#implicit-conversions">implicitly convertible</a>
-        to any type their base type is implicitly convertible to.<br>
+        <a href="#expressions">Expressions</a> of enum type are always 8 bytes in size.
+        They are <a href="#implicit-conversions">implicitly convertible</a> to any type their base type is implicitly convertible to.<br>
         This is explained in detail in <a href="#implicit-conversions">Implicit conversions</a>.
     </p>
 </moveto-doc->
@@ -26,32 +27,24 @@
                 <div>
                     <w->import</w-> io;
 
-                    <w->enum</w-> <t->Seasons</t-> : <t->int</t-> {
-                        Spring;
-                        Summer;
-                        Autumn;
-                        Winter;
+                    <w->enum</w-> <t->TempThreshold</t-> : <t->float</t-> {
+                        AbsoluteZero = <k->-273.15</k->;
+                        Freezing     =    <k->0</k->;
+                        Boiling      =  <k->100</k->;
                     }
 
                     <t->void</t-> <f->main</f->() {
-                        io.<f->println</f->(<s->"The "</s-> + Seasons:len + <s->" seasons are:"</s->);
-                        <w->for</w->(s <w->in</w-> <t->Seasons</t->) {
-                            io.<f->println</f->(<s->"#"</s-> + (s:index <f->+</f-> <k->1</k->) + <s->" "</s-> + s:name);
-                        }
+                        io.<f->println</f->(<s->"Water boils at "</s-> + <t->TempThreshold</t->.Boiling.value + <s->"°C"</s->);
                     }
                 </div>
             </example->
         </split-example-container-left->
         <split-example-container-right->
             <example->
-                <label- class="no-sandbox">Output</label->
+                <label->Output</label->
                 <div>
                     <console-prefix-></console-prefix->
-                    The 4 seasons are:
-                    #1 Spring
-                    #2 Summer
-                    #3 Autumn
-                    #4 Winter
+                    Water boils at 100°C
                     <cursor-></cursor->
                 </div>
             </example->
@@ -60,20 +53,13 @@
 </moveto-examples->
 <moveto-internal->
     <p>
-        Internally, <a href="#structs">struct</a>-based enum elements are no different from global
-        <a href="#const-qualifier"><code><w->const</w-></code></a> <a href="#variables">variables</a>,
-        while their values are equivalent to <a href="#pointer-types">read-only pointers</a> to the data and with special syntax.<br>
-        This means that the size of a struct-based enum type is always 8 bytes, regardless of the size of the base type.
-        Furthermore, creating or destroying enum values doesn't call any <a href="#constructor-function">constructor</a>
-        or <a href="#destructor-function">destructor</a> of the base type.
-    </p>
-    <p>
-        <a href="#primitive-types">Primitive</a>-based enum types are the same size as their base type.
-        Instead of pointers to global variables, they use the base value directly.<br>
-        This doesn't affect <a href="#global-initialization-order">global initialization order</a> or other semantic rules in any way.
+        Enum elements are equivalent to global <code><t->const</t-></code> variables, but enum values simply reference the existing elements.
+        This means that creating or destroying enum values doesn't call any
+        <a href="#constructor-function">constructor</a> or <a href="#destructor-function">destructor</a> of the base type.
+
     </p>
 </moveto-internal->
 
 
 #include "./Page/LanguageSpecification/Types/Enums/EnumDeclarations.html"
-#include "./Page/LanguageSpecification/Types/Enums/StructEnums.html"
+#include "./Page/LanguageSpecification/Types/Enums/VoidEnums.html"

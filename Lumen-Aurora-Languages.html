@@ -114,15 +114,15 @@
                 <indexd->floating-point-types</indexd->
                 <indexd->boolean-type</indexd->
             </index-elms-></index->
-            <index-><indexh->enums</indexh-><index-elms->
-                <indexd->enum-declarations</indexd->
-                <indexd->struct-enums</indexd->
-            </index-elms-></index->
             <index-><indexh->structs</indexh-><index-elms->
                 <indexd->struct-declarations</indexd->
                 <indexd->constructor-function</indexd->
                 <indexd->destructor-function</indexd->
                 <indexd->struct-specialization</indexd->
+            </index-elms-></index->
+            <index-><indexh->enums</indexh-><index-elms->
+                <indexd->enum-declarations</indexd->
+                <indexd->void-enums</indexd->
             </index-elms-></index->
             <index-><indexh->special-types</indexh-><index-elms->
                 <indexd->pointer-types</indexd->
@@ -1855,23 +1855,101 @@
         Unsigned types cannot represent negative numbers, but have a larger maximum value than their signed counterpart.<br>
         Signed types use the Two's Complement to represent negative numbers.
     </p>
-    <example->
-        <div style="border-top-left-radius: var(--code-decoration-r);">
-                                                                     MIN                                                    MAX
-            <t->byte</t->                                                    -128                                                    127
-            <t->ubyte</t->                                                      0                                                    255
-            <t->int</t->                                           -2,147,483,648                                          2,147,483,647
-            <t->uint</t->                                                       0                                          4,294,967,295
-            <t->long</t->                              -9,223,372,036,854,775,808                              9,223,372,036,854,775,807
-            <t->ulong</t->                                                      0                             18,446,744,073,709,551,615
-            <t->cent</t->    -170,141,183,460,469,231,731,687,303,715,884,105,728    170,141,183,460,469,231,731,687,303,715,884,105,727
-            <t->ucent</t->                                                      0    340,282,366,920,938,463,463,374,607,431,768,211,455
-        </div>
-    </example->
+    <div class="table-container"><table class="center">
+        <thead><tr>
+            <th>Type</th>
+            <th>Min</th>
+            <th>Max</th>
+        </tr></thead>
+        <tbody>
+            <tr>
+                <td><code><t->byte</t-></code></td>
+                <td>-128</td>
+                <td>127</td>
+            </tr>
+            <tr>
+                <td><code><t->ubyte</t-></code></td>
+                <td>0</td>
+                <td>255</td>
+            </tr>
+            <tr>
+                <td><code><t->int</t-></code></td>
+                <td>-2,147,483,648</td>
+                <td>2,147,483,647</td>
+            </tr>
+            <tr>
+                <td><code><t->uint</t-></code></td>
+                <td>0</td>
+                <td>4,294,967,295</td>
+            </tr>
+            <tr>
+                <td><code><t->long</t-></code></td>
+                <td>~-9.223 × 10¹⁸</td>
+                <td>~9.223 × 10¹⁸</td>
+            </tr>
+            <tr>
+                <td><code><t->ulong</t-></code></td>
+                <td>0</td>
+                <td>~1.845 × 10¹⁹</td>
+            </tr>
+            <tr>
+                <td><code><t->cent</t-></code></td>
+                <td>~-1.701 × 10³⁸</td>
+                <td>~1.701 × 10³⁸</td>
+            </tr>
+            <tr>
+                <td><code><t->ucent</t-></code></td>
+                <td>0</td>
+                <td>~3.402 × 10³⁸</td>
+            </tr>
+        </tbody>
+    </table></div>
     <p>
         //TODO GL_EXT_shader_explicit_arithmetic_types_int64
     </p>
 </moveto-doc->
+<moveto-examples->
+    <split-example-container->
+        <split-example-container-left->
+            <example->
+                <label->Example</label->
+                <div>
+                    <w->import</w-> io;
+
+                    <t->void</t-> <f->main</f->(){
+                        <t->ulong</t-> i = <k->0</k->;
+                        <w->while</w->(<k->true</k->) {
+                            io.<f->println</f->(<s->"#"</s-> + i);
+                            io.<f->print</f->(<s->"Type something: "</s->);
+                            <t->str</t-> input = io.<f->read</f->&lt;<t->str</t->&gt;();
+                            <t->uint</t-> number = input-><f->len</f->();
+                            io.<f->println</f->(<s->"You typed "</s-> + number + <s->" characters.\n"</s->);
+                            ++i;
+                        }
+                    }
+                </div>
+            </example->
+        </split-example-container-left->
+        <split-example-container-right->
+            <example->
+                <label- class="no-sandbox">Output</label->
+                <div>
+                    <console-prefix-></console-prefix->
+                    #0
+                    Type something: test
+                    You typed 4 characters.
+
+                    #1
+                    Type something: meow >:3
+                    You typed 8 characters.
+
+                    #2
+                    Type something: <cursor-></cursor->
+                </div>
+            </example->
+        </split-example-container-right->
+    </split-example-container->
+</moveto-examples->
 <moveto-internal->
     <example->
         <div style="border-top-left-radius: var(--code-decoration-r);">
@@ -1918,15 +1996,64 @@
         Positive and negative <code><k->inf</k-></code>, <code><k->nan</k-></code> and signed <code><k->0</k-></code> are all supported.
         <code><k->+0</k-></code> and <code><k->-0</k-></code> are considered equal.
     </p>
-    <example->
-        <div style="border-top-left-radius: var(--code-decoration-r);">
-                        MIN                 MAX                   Decimal digits
-            <t->float</t->       ~1.175 × 10⁻³⁸      ~3.403 × 10³⁸          7.22
-            <t->double</t->      ~2.225 × 10⁻³⁰⁸     ~1.798 × 10³⁰⁸        15.95
-            <t->quad</t->        ~3.362 × 10⁻⁴⁹³²    ~1.189 × 10⁴⁹³²       34.02
-        </div>
-    </example->
+    <div class="table-container"><table class="center">
+        <thead><tr>
+            <th>Type</th>
+            <th>Smallest value</th>
+            <th>Largest value</th>
+            <th>Decimal digits</th>
+        </tr></thead>
+        <tbody>
+            <tr>
+                <td><code><t->float</t-></code></td>
+                <td>~±1.175 × 10⁻³⁸</td>
+                <td>~±3.403 × 10³⁸</td>
+                <td>7.22</td>
+            </tr>
+            <tr>
+                <td><code><t->double</t-></code></td>
+                <td>~±2.225 × 10⁻³⁰⁸</td>
+                <td>~±1.798 × 10³⁰⁸</td>
+                <td>15.95</td>
+            </tr>
+            <tr>
+                <td><code><t->quad</t-></code></td>
+                <td>~±3.362 × 10⁻⁴⁹³²</td>
+                <td>~±1.189 × 10⁴⁹³²</td>
+                <td>34.02</td>
+            </tr>
+        </tbody>
+    </table></div>
 </moveto-doc->
+<moveto-examples->
+    <split-example-container->
+        <split-example-container-left->
+            <example->
+                <label->Example</label->
+                <div>
+                    <w->import</w-> io;
+                    <t->double</t-> pi = <k->3.141592</k->;
+
+                    <t->void</t-> <f->main</f->() {
+                        io.<f->println</f->(<s->"The value of π is: "</s-> + pi);
+                        io.<f->println</f->(<s->"The value of τ is: "</s-> + pi * <k->2.0</k->);
+                    }
+                </div>
+            </example->
+        </split-example-container-left->
+        <split-example-container-right->
+            <example->
+                <label- class="no-sandbox">Output</label->
+                <div>
+                    <console-prefix-></console-prefix->
+                    The value of π is: 3.141592
+                    The value of τ is: 6.283185
+                    <cursor-></cursor->
+                </div>
+            </example->
+        </split-example-container-right->
+    </split-example-container->
+</moveto-examples->
 <moveto-internal->
     <example->
         <div style="border-top-left-radius: var(--code-decoration-r);">
@@ -1974,14 +2101,56 @@
 <h1 id="boolean-type"></h1>
 <moveto-doc->
     <p>
-        The <b>Boolean type</b> is used to <b>represent boolean values</b>.<br>
+        The <b>Boolean type</b> is used to <b>represent truth values</b>. They are ideal for storing conditions and flags.<br>
         <code><k->true</k-></code> and <code><k->false</k-></code> are the only values that can be stored in a <code><t->bool</t-></code>.
     </p>
     <p>
         Booleans are 4 bytes in size. They purposely waste 31 bits for performance reasons.<br>
         Smaller types would require additional bitwise operations and expensive conversions between CPU and GPU.
     </p>
+    <p>
+        Unlike other primitive types, <code><t->bool</t-></code> only has one variant.
+    </p>
 </moveto-doc->
+<moveto-examples->
+    <split-example-container->
+        <split-example-container-left->
+            <example->
+                <label->Example</label->
+                <div>
+                    <w->import</w-> io;
+
+                    <t->void</t-> <f->main</f->() {
+                        <w->while</w->(<k->true</k->) {
+                            io.<f->print</f->(<s->"Insert a number: "</s->)
+                            <t->float</t-> n = io.<f->read</f->&lt;<t->float</t->&gt;();
+                            <t->bool</t-> p = n >= <k->0</k->;
+                            io.<f->println</f->(<s->""</s-> + n + <s->" is a "</s-> + (<s->"positive"</s-> <w->if</w-> p <w->else</w-> <s->"negative"</s->) + <s->" number.\n"</s->);
+                        }
+                    }
+                </div>
+            </example->
+        </split-example-container-left->
+        <split-example-container-right->
+            <example->
+                <label- class="no-sandbox">Output</label->
+                <div>
+                    <console-prefix-></console-prefix->
+                    Insert a number: 15.2
+                    15.2 is a positive number.
+
+                    Insert a number: -674839
+                    -674839 is a negative number.
+
+                    Insert a number: -0.0005
+                    -0.0005 is a negative number.
+
+                    Insert a number: <cursor-></cursor->
+                </div>
+            </example->
+        </split-example-container-right->
+    </split-example-container->
+</moveto-examples->
 <moveto-internal->
     <example->
         <div style="border-top-left-radius: var(--code-decoration-r);">
@@ -2000,17 +2169,18 @@
     <p>
         <b>Enums</b> are types whose allowed values are a <b>named subset</b> of the possible values
         of their <b>base <a href="#types">type</a></b>. The allowed values are called Enum elements.<br>
-        Unlike most languages, the base type can be any type,
-        including <a href="#pointer-types">pointers</a>, <a href="#structs">structs</a> or other enums.<br>
-        <code><t->void</t-></code> cannot be used as base type.
+        Unlike most languages, the base type can be any type, including <a href="#pointer-types">pointers</a>,
+        <a href="#structs">structs</a>, other enums or even <a href="#void-type"><code><t->void</t-></code></a>.
     </p>
     <p>
-        Enum elements are implicitly <a href="#const-qualifier">const</a>.
-        They act like global variables and are part of the <a href="#global-initialization-order">global initialization order</a>.
+        Enum elements work similarly to <a href="#structs">struct</a> values, containing their name, index, and base value as members.
+        They are part of the <a href="#global-initialization-order">global initialization order</a> and
+        their base value is initialized using one of the base type's <a href="#constructor-function">constructors</a>.<br>
+        If the base type defines a <a href="#destructors">destructor</a>, it is called on each element before the process ends.
     </p>
     <p>
-        <a href="#expressions">Expressions</a> of enum type are <a href="#implicit-conversions">implicitly convertible</a>
-        to any type their base type is implicitly convertible to.<br>
+        <a href="#expressions">Expressions</a> of enum type are always 8 bytes in size.
+        They are <a href="#implicit-conversions">implicitly convertible</a> to any type their base type is implicitly convertible to.<br>
         This is explained in detail in <a href="#implicit-conversions">Implicit conversions</a>.
     </p>
 </moveto-doc->
@@ -2022,32 +2192,24 @@
                 <div>
                     <w->import</w-> io;
 
-                    <w->enum</w-> <t->Seasons</t-> : <t->int</t-> {
-                        Spring;
-                        Summer;
-                        Autumn;
-                        Winter;
+                    <w->enum</w-> <t->TempThreshold</t-> : <t->float</t-> {
+                        AbsoluteZero = <k->-273.15</k->;
+                        Freezing     =    <k->0</k->;
+                        Boiling      =  <k->100</k->;
                     }
 
                     <t->void</t-> <f->main</f->() {
-                        io.<f->println</f->(<s->"The "</s-> + Seasons:len + <s->" seasons are:"</s->);
-                        <w->for</w->(s <w->in</w-> <t->Seasons</t->) {
-                            io.<f->println</f->(<s->"#"</s-> + (s:index <f->+</f-> <k->1</k->) + <s->" "</s-> + s:name);
-                        }
+                        io.<f->println</f->(<s->"Water boils at "</s-> + <t->TempThreshold</t->.Boiling.value + <s->"°C"</s->);
                     }
                 </div>
             </example->
         </split-example-container-left->
         <split-example-container-right->
             <example->
-                <label- class="no-sandbox">Output</label->
+                <label->Output</label->
                 <div>
                     <console-prefix-></console-prefix->
-                    The 4 seasons are:
-                    #1 Spring
-                    #2 Summer
-                    #3 Autumn
-                    #4 Winter
+                    Water boils at 100°C
                     <cursor-></cursor->
                 </div>
             </example->
@@ -2056,17 +2218,10 @@
 </moveto-examples->
 <moveto-internal->
     <p>
-        Internally, <a href="#structs">struct</a>-based enum elements are no different from global
-        <a href="#const-qualifier"><code><w->const</w-></code></a> <a href="#variables">variables</a>,
-        while their values are equivalent to <a href="#pointer-types">read-only pointers</a> to the data and with special syntax.<br>
-        This means that the size of a struct-based enum type is always 8 bytes, regardless of the size of the base type.
-        Furthermore, creating or destroying enum values doesn't call any <a href="#constructor-function">constructor</a>
-        or <a href="#destructor-function">destructor</a> of the base type.
-    </p>
-    <p>
-        <a href="#primitive-types">Primitive</a>-based enum types are the same size as their base type.
-        Instead of pointers to global variables, they use the base value directly.<br>
-        This doesn't affect <a href="#global-initialization-order">global initialization order</a> or other semantic rules in any way.
+        Enum elements are equivalent to global <code><t->const</t-></code> variables, but enum values simply reference the existing elements.
+        This means that creating or destroying enum values doesn't call any
+        <a href="#constructor-function">constructor</a> or <a href="#destructor-function">destructor</a> of the base type.
+
     </p>
 </moveto-internal->
 
@@ -2077,15 +2232,17 @@
     <p>
         <b>Enums</b> are <b>declared</b> using the <code><w->enum</w-></code> keyword followed by its <b>name</b> and <b>base <a href="#types">type</a></b>.
         Enum elements are declared in the same way as <a href="#variables">variables</a>,
-        but the type and the <a href="#const-qualifier">const qualifier</a> are implicit and their initializer values
-        must be <a href="#constant-expressions">constant expressions</a>.<br>
+        but the type is implicit and their initializer values must be <a href="#constant-expressions">constant expressions</a> of the base type.
     </p>
     <p>
-        Elements of <a href="#integral-types">integral</a> enums that are not initialized
+        Elements of <a href="#integral-types">integral</a> enums with no initializer value
         are given the value of the preceding element + <code><k->1</k-></code>, or <code><k->0</k-></code> if they are the first element.<br>
-        Elements of enums with any other base <a href="#types">type</a> must always be initialized.<br>
+        Elements of <a href="#void-type">void</a> enums cannot be initialized explicitly.<br>
+        Elements of enums of any other base <a href="#types">type</a> must always be initialized.<br>
+    </p>
+    <p>
         Multiple elements can have identical <a href="#values">values</a>, but each <a href="#identifiers">identifier</a> can only be declared once.<br>
-        Empty enums are allowed.
+        Empty enums are not allowed.
     </p>
     <syntax->
         <label- id="copy.syntax--declaration-enum">Declaration syntax</label->
@@ -2096,7 +2253,7 @@
     <split-example-container->
         <split-example-container-left->
             <example->
-                <label->Example</label->
+                <label->Example 1</label->
                 <div>
                     <w->import</w-> io;
 
@@ -2116,7 +2273,7 @@
 
                     <t->void</t-> <f->main</f->() {
                         <t->ErrorCode</t-> err = <t->ErrorCode</t->.FileNotFound;
-                        io.<f->print</f->(<s->"Error code: "</s-> + err);
+                        io.<f->print</f->(<s->"Error code: "</s-> + err.value + " - " + err.name);
                     }
                 </div>
             </example->
@@ -2126,29 +2283,15 @@
                 <label- class="no-sandbox">Output</label->
                 <div>
                     <console-prefix-></console-prefix->
-                    Error code: 200<cursor-></cursor->
+                    Error code: 200 - FileNotFound<cursor-></cursor->
                 </div>
             </example->
         </split-example-container-right->
     </split-example-container->
-</moveto-examples->
-
-<h1 id="struct-enums"></h1>
-<moveto-doc->
-    <p style="margin-bottom: 0;">
-        Enums with a <b>struct</b> as <b>base type</b> behave <b>slightly differently</b> than standard enums.
-    </p>
-    <p>
-        Elements are initialized through one of the constructors of the base type.
-        If a <a href="#destructors">destructor</a> is defined, it is called before the process ends.
-        This follows the <a href="#global-initialization-order">global initialization order</a>.
-    </p>
-</moveto-doc->
-<moveto-examples->
     <split-example-container->
         <split-example-container-left->
             <example->
-                <label->Example 1</label->
+                <label->Example 2</label->
                 <div>
                     <w->import</w-> io;
 
@@ -2186,63 +2329,62 @@
                 <label- class="no-sandbox">Output</label->
                 <div>
                     <console-prefix-></console-prefix->
-                    FullHD: 3840x2160, 8294400 pixels, 16:9
-                    <cursor-></cursor->
-                </div>
-            </example->
-        </split-example-container-right->
-    </split-example-container->
-    <split-example-container->
-        <split-example-container-left->
-            <example->
-                <label->Example 2</label->
-                <div>
-                    <w->struct</w-> <t->Color</t-> {
-                        <t->ubyte</t-> r, g, b;
-                    }
-
-                    <w->enum</w-> <t->Palette</t-> : <t->Color</t-> {
-                        Red   = { <k->255</k->, <k->0</k->,   <k->0</k->   };
-                        Green = { <k->0</k->,   <k->255</k->, <k->0</k->   };
-                        Blue  = { <k->0</k->,   <k->0</k->,   <k->255</k-> };
-                        White = { <k->255</k->, <k->255</k->, <k->255</k-> };
-                        Black = { <k->0</k->,   <k->0</k->,   <k->0</k->   };
-                    }
-
-                    <t->void</t-> <f->main</f->() {
-                        <w->for</w->(c <w->in</w-> Palette:elements) {
-                            io.<f->println</f->(
-                                <s->"Color "</s-> + c:name + <s->": "</s-> +
-                                c.r + <s->", "</s-> + c.g + <s->", "</s-> + c.b
-                            );
-                        }
-                    }
-                </div>
-            </example->
-        </split-example-container-left->
-        <split-example-container-right->
-            <example->
-                <label- class="no-sandbox">Output</label->
-                <div>
-                    <console-prefix-></console-prefix->
-                    Color Red: 255, 0, 0
-                    Color Green: 0, 255, 0
-                    Color Blue: 0, 0, 255
-                    Color White: 255, 255, 255
-                    Color Black: 0, 0, 0
+                    FullHD: 1920x1080, 2073600 pixels, 16:9
                     <cursor-></cursor->
                 </div>
             </example->
         </split-example-container-right->
     </split-example-container->
 </moveto-examples->
-<moveto-internal->
+
+<h1 id="void-enums"></h1>
+<moveto-doc->
     <p>
-        //TODO reflection of enum contains :members (members as an array)
-        //TODO reflection of members contains :name
-        //TODO reflection of members contains :index
+        Enums can use <code><t->void</t-></code> as base type.<br>
+        Elements of void enums don't have a base value and cannot be initialized explicitly.
     </p>
-</moveto-internal->
+</moveto-doc->
+<moveto-examples->
+    <split-example-container->
+        <split-example-container-left->
+            <example->
+                <label->Example</label->
+                <div>
+                    <w->import</w-> io;
+
+                    <w->enum</w-> <t->Season</t-> : <t->void</t-> {
+                        Spring;
+                        Summer;
+                        Autumn;
+                        Winter;
+                    }
+
+                    <t->void</t-> <f->main</f->() {
+                        io.<f->println</f->(<s->"The "</s-> + <t->Season</t->:len + <s->" seasons are:"</s->);
+                        <w->for</w->(s <w->in</w-> <t->Season:values</t->) {
+                            io.<f->println</f->(<s->"#"</s-> + (s.index <f->+</f-> <k->1</k->) + <s->" "</s-> + s.name);
+                        }
+                        <c->// io.println(Season.Autumn.value);</c->  <ce->Error, void enum has no value member</ce->
+                    }
+                </div>
+            </example->
+        </split-example-container-left->
+        <split-example-container-right->
+            <example->
+                <label->Output</label->
+                <div>
+                    <console-prefix-></console-prefix->
+                    The 4 seasons are:
+                    #1 Spring
+                    #2 Summer
+                    #3 Autumn
+                    #4 Winter
+                    <cursor-></cursor->
+                </div>
+            </example->
+        </split-example-container-right->
+    </split-example-container->
+</moveto-examples->
 
 <h1 id="structs"></h1>
 <moveto-doc->
@@ -3734,6 +3876,7 @@
 <h1 id="expressions.misc.conditional-value"></h1>
 <moveto-doc->
     <p>
+        //TODO a if condition else b
         //TODO specify that values are evaluated lazily. only the executed branch is evaluated
     </p>
 </moveto-doc->

@@ -1,0 +1,49 @@
+
+<h1 id="void-enums"></h1>
+<moveto-doc->
+    <p>
+        Enums can use <code><t->void</t-></code> as base type.<br>
+        Elements of void enums don't have a base value and cannot be initialized explicitly.
+    </p>
+</moveto-doc->
+<moveto-examples->
+    <split-example-container->
+        <split-example-container-left->
+            <example->
+                <label->Example</label->
+                <div>
+                    <w->import</w-> io;
+
+                    <w->enum</w-> <t->Season</t-> : <t->void</t-> {
+                        Spring;
+                        Summer;
+                        Autumn;
+                        Winter;
+                    }
+
+                    <t->void</t-> <f->main</f->() {
+                        io.<f->println</f->(<s->"The "</s-> + <t->Season</t->:len + <s->" seasons are:"</s->);
+                        <w->for</w->(s <w->in</w-> <t->Season:values</t->) {
+                            io.<f->println</f->(<s->"#"</s-> + (s.index <f->+</f-> <k->1</k->) + <s->" "</s-> + s.name);
+                        }
+                        <c->// io.println(Season.Autumn.value);</c->  <ce->Error, void enum has no value member</ce->
+                    }
+                </div>
+            </example->
+        </split-example-container-left->
+        <split-example-container-right->
+            <example->
+                <label->Output</label->
+                <div>
+                    <console-prefix-></console-prefix->
+                    The 4 seasons are:
+                    #1 Spring
+                    #2 Summer
+                    #3 Autumn
+                    #4 Winter
+                    <cursor-></cursor->
+                </div>
+            </example->
+        </split-example-container-right->
+    </split-example-container->
+</moveto-examples->
