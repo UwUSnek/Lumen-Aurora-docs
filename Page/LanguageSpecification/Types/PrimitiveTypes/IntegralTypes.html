@@ -11,23 +11,101 @@
         Unsigned types cannot represent negative numbers, but have a larger maximum value than their signed counterpart.<br>
         Signed types use the Two's Complement to represent negative numbers.
     </p>
-    <example->
-        <div style="border-top-left-radius: var(--code-decoration-r);">
-                                                                     MIN                                                    MAX
-            <t->byte</t->                                                    -128                                                    127
-            <t->ubyte</t->                                                      0                                                    255
-            <t->int</t->                                           -2,147,483,648                                          2,147,483,647
-            <t->uint</t->                                                       0                                          4,294,967,295
-            <t->long</t->                              -9,223,372,036,854,775,808                              9,223,372,036,854,775,807
-            <t->ulong</t->                                                      0                             18,446,744,073,709,551,615
-            <t->cent</t->    -170,141,183,460,469,231,731,687,303,715,884,105,728    170,141,183,460,469,231,731,687,303,715,884,105,727
-            <t->ucent</t->                                                      0    340,282,366,920,938,463,463,374,607,431,768,211,455
-        </div>
-    </example->
+    <div class="table-container"><table class="center">
+        <thead><tr>
+            <th>Type</th>
+            <th>Min</th>
+            <th>Max</th>
+        </tr></thead>
+        <tbody>
+            <tr>
+                <td><code><t->byte</t-></code></td>
+                <td>-128</td>
+                <td>127</td>
+            </tr>
+            <tr>
+                <td><code><t->ubyte</t-></code></td>
+                <td>0</td>
+                <td>255</td>
+            </tr>
+            <tr>
+                <td><code><t->int</t-></code></td>
+                <td>-2,147,483,648</td>
+                <td>2,147,483,647</td>
+            </tr>
+            <tr>
+                <td><code><t->uint</t-></code></td>
+                <td>0</td>
+                <td>4,294,967,295</td>
+            </tr>
+            <tr>
+                <td><code><t->long</t-></code></td>
+                <td>~-9.223 × 10¹⁸</td>
+                <td>~9.223 × 10¹⁸</td>
+            </tr>
+            <tr>
+                <td><code><t->ulong</t-></code></td>
+                <td>0</td>
+                <td>~1.845 × 10¹⁹</td>
+            </tr>
+            <tr>
+                <td><code><t->cent</t-></code></td>
+                <td>~-1.701 × 10³⁸</td>
+                <td>~1.701 × 10³⁸</td>
+            </tr>
+            <tr>
+                <td><code><t->ucent</t-></code></td>
+                <td>0</td>
+                <td>~3.402 × 10³⁸</td>
+            </tr>
+        </tbody>
+    </table></div>
     <p>
         //TODO GL_EXT_shader_explicit_arithmetic_types_int64
     </p>
 </moveto-doc->
+<moveto-examples->
+    <split-example-container->
+        <split-example-container-left->
+            <example->
+                <label->Example</label->
+                <div>
+                    <w->import</w-> io;
+
+                    <t->void</t-> <f->main</f->(){
+                        <t->ulong</t-> i = <k->0</k->;
+                        <w->while</w->(<k->true</k->) {
+                            io.<f->println</f->(<s->"#"</s-> + i);
+                            io.<f->print</f->(<s->"Type something: "</s->);
+                            <t->str</t-> input = io.<f->read</f->&lt;<t->str</t->&gt;();
+                            <t->uint</t-> number = input-><f->len</f->();
+                            io.<f->println</f->(<s->"You typed "</s-> + number + <s->" characters.\n"</s->);
+                            ++i;
+                        }
+                    }
+                </div>
+            </example->
+        </split-example-container-left->
+        <split-example-container-right->
+            <example->
+                <label- class="no-sandbox">Output</label->
+                <div>
+                    <console-prefix-></console-prefix->
+                    #0
+                    Type something: test
+                    You typed 4 characters.
+
+                    #1
+                    Type something: meow >:3
+                    You typed 8 characters.
+
+                    #2
+                    Type something: <cursor-></cursor->
+                </div>
+            </example->
+        </split-example-container-right->
+    </split-example-container->
+</moveto-examples->
 <moveto-internal->
     <example->
         <div style="border-top-left-radius: var(--code-decoration-r);">

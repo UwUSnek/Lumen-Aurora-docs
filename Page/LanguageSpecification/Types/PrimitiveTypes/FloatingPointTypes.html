@@ -11,15 +11,64 @@
         Positive and negative <code><k->inf</k-></code>, <code><k->nan</k-></code> and signed <code><k->0</k-></code> are all supported.
         <code><k->+0</k-></code> and <code><k->-0</k-></code> are considered equal.
     </p>
-    <example->
-        <div style="border-top-left-radius: var(--code-decoration-r);">
-                        MIN                 MAX                   Decimal digits
-            <t->float</t->       ~1.175 × 10⁻³⁸      ~3.403 × 10³⁸          7.22
-            <t->double</t->      ~2.225 × 10⁻³⁰⁸     ~1.798 × 10³⁰⁸        15.95
-            <t->quad</t->        ~3.362 × 10⁻⁴⁹³²    ~1.189 × 10⁴⁹³²       34.02
-        </div>
-    </example->
+    <div class="table-container"><table class="center">
+        <thead><tr>
+            <th>Type</th>
+            <th>Smallest value</th>
+            <th>Largest value</th>
+            <th>Decimal digits</th>
+        </tr></thead>
+        <tbody>
+            <tr>
+                <td><code><t->float</t-></code></td>
+                <td>~±1.175 × 10⁻³⁸</td>
+                <td>~±3.403 × 10³⁸</td>
+                <td>7.22</td>
+            </tr>
+            <tr>
+                <td><code><t->double</t-></code></td>
+                <td>~±2.225 × 10⁻³⁰⁸</td>
+                <td>~±1.798 × 10³⁰⁸</td>
+                <td>15.95</td>
+            </tr>
+            <tr>
+                <td><code><t->quad</t-></code></td>
+                <td>~±3.362 × 10⁻⁴⁹³²</td>
+                <td>~±1.189 × 10⁴⁹³²</td>
+                <td>34.02</td>
+            </tr>
+        </tbody>
+    </table></div>
 </moveto-doc->
+<moveto-examples->
+    <split-example-container->
+        <split-example-container-left->
+            <example->
+                <label->Example</label->
+                <div>
+                    <w->import</w-> io;
+                    <t->double</t-> pi = <k->3.141592</k->;
+
+                    <t->void</t-> <f->main</f->() {
+                        io.<f->println</f->(<s->"The value of π is: "</s-> + pi);
+                        io.<f->println</f->(<s->"The value of τ is: "</s-> + pi * <k->2.0</k->);
+                    }
+                </div>
+            </example->
+        </split-example-container-left->
+        <split-example-container-right->
+            <example->
+                <label- class="no-sandbox">Output</label->
+                <div>
+                    <console-prefix-></console-prefix->
+                    The value of π is: 3.141592
+                    The value of τ is: 6.283185
+                    <cursor-></cursor->
+                </div>
+            </example->
+        </split-example-container-right->
+    </split-example-container->
+</moveto-examples->
 <moveto-internal->
     <example->
         <div style="border-top-left-radius: var(--code-decoration-r);">
