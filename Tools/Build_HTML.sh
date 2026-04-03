@@ -31,3 +31,9 @@ cat ./Page/main.html \
 
 # This was written by Ila [https://github.com/UwUSnek].
 # Take it up with her.
+
+
+
+
+# Count lines [Optional]
+python3 ./Tools/LineCounter.py
