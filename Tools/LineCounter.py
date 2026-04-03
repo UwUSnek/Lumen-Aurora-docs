@@ -6,13 +6,16 @@ from pathlib import Path;
 ROOT_DIRS: list[str] = [
     "./Page",
     "./Scripts",
-    "./Styles"
+    "./Styles",
+    "../Lumen-Aurora/src",
 ]
 OUTPUT_FILE = Path("./Tools/LineCounterOutput.txt")
 SKIP_PATHS: list[str] = [
     # Empty
 ]
 EXTENSIONS = {
+    ".cpp":   "C++",
+    ".hpp":   "C++",
     ".html": "HTML",
     ".htm":  "HTML",
     ".css":  "CSS",
@@ -36,7 +39,9 @@ def main():
 
     # For each root directory
     skip_resolved = { Path(p).resolve() for p in SKIP_PATHS }
-    totals: dict[str, int] = { "HTML": 0, "CSS": 0, "JS": 0 }
+    file_types = list(dict.fromkeys(EXTENSIONS.values()))
+    totals: dict[str, int] = {}
+    for t in file_types: totals[t] = 0
     for ROOT_DIR in ROOT_DIRS:
         _dir = Path(ROOT_DIR)
 
@@ -56,7 +61,7 @@ def main():
 
     # Create output string
     lines_out: list[str] = []
-    for kind in ("HTML", "CSS", "JS"):
+    for kind in file_types:
         lines_out.append(f"{ kind }: {totals[kind] :,} lines")
     report = " | ".join(lines_out)
 
