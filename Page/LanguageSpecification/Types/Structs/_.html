@@ -2,21 +2,82 @@
 <h1 id="structs"></h1>
 <moveto-doc->
     <p>
-        //TODO
+        <b>Structs</b> are <b>types</b> composed by multiple <b>members</b> that can have <b>differing type</b>.<br>
+        They are especially useful for complex or non-uniform data that cannot be properly represented using primitive types.
+    </p>
+    <p>
+        Struct values can be copied and passed as a whole, just like values of primitive type, but they maintain their internal layout.
+        Members can be accessed individually using the <code>.</code> keyword.
     </p>
 </moveto-doc->
 <moveto-examples->
-    <example->
-        <label->Example</label->
-        <div>
-            //TODO
-        </div>
-    </example->
+    <split-example-container->
+        <split-example-container-left->
+            <example->
+                <label->Example</label->
+                <div>
+                    <w->import</w-> io;
+                    <w->import</w-> list;
+
+                    <w->struct</w-> <s->User</s-> {
+                        <t->str</t-> name;
+                        <t->ulong</t-> id;
+                        <t->bool</t-> admin;
+                    }
+                    <t->List</t->&lt;<t->User</t->&gt; users = {
+                        { <s->"Snek"</s->,         <k->0000</k->, <k->true</k->  }
+                        { <s->"DangerNoodle"</s->, <k->0001</k->, <k->false</k-> }
+                        { <s->"NopeRope"</s->,     <k->0002</k->, <k->false</k-> }
+                    };
+
+                    <t->void</t-> <f->main</f->() {
+                        <w->for</w->(u <w->in</w-> users) io.<f->println</f->(
+                            u.name +
+                            <s->"\n\tID: "</s-> + u.id +
+                            <s->"\n\tAdmin: "</s-> + u.admin + <s->"\n\n"</s->
+                        );
+
+                        <t->User</t-> firstUser = users[<k->0</k->];
+                        io.<f->println</f->(<s->"The first user is: "</s-> + firstUser.name);
+                    }
+                </div>
+            </example->
+        </split-example-container-left->
+        <split-example-container-right->
+            <example->
+                <label->Output</label->
+                <div>
+                    <console-prefix-></console-prefix->
+                    Snek
+                        ID: 0000
+                        Admin: true
+
+                    DangerNoodle
+                        ID: 0001
+                        Admin: false
+
+                    NopeRope
+                        ID: 0002
+                        Admin: false
+
+                    The first user is: Snek<cursor-></cursor->
+                </div>
+            </example->
+        </split-example-container-right->
+    </split-example-container->
 </moveto-examples->
 <moveto-internal->
-    //TODO talk about alignment and struct size
-
-    //TODO compiler can pack structures if needed, skipping some alignment padding
+    <p>
+        The size of a struct type is typically greater than the sum of sizes of the individual members.
+        This is because of alignment requirements adding unused padding space between members.
+        This doesn't affect the language in any way, but it might change how the data is represented in binary formats.
+    </p>
+    <p>
+        The compiler is allowed to freely reorder struct members or pack them by removing padding space
+        in order to maximize runtime computational speed.<br>
+        The compiler annotations <a href="#annotations.nopacking">:nopacking</a> and <a href="#annotations.noreorder">:noreorder</a>
+        can be used to avoid this.
+    </p>
 </moveto-internal->
 
 

@@ -231,12 +231,9 @@
             <indexd->declarations.namespaces</indexd->
             <indexd->symbol-aliases</indexd->
             <indexd->const-qualifier</indexd->
+            <indexd->reflection</indexd->
+            <indexd->compiler-annotations</indexd->
             <indexd->inline-glsl</indexd->
-        </index-elms-></index->
-
-        <index-separator-2-></index-separator-2->
-
-        <index-><indexh->reflection</indexh-><index-elms->
         </index-elms-></index->
 
         <index-separator-2-></index-separator-2->
@@ -1235,13 +1232,9 @@
     <p>
         //FIXME update this stuff. compile time expressions are no more. replace with constant expressions and :noconst
         //FIXME update this stuff. compile time expressions are no more. replace with constant expressions and :noconst
-        //FIXME update this stuff. compile time expressions are no more. replace with constant expressions and :noconst
-        //FIXME update this stuff. compile time expressions are no more. replace with constant expressions and :noconst
-        //FIXME update this stuff. compile time expressions are no more. replace with constant expressions and :noconst
-        //FIXME update this stuff. compile time expressions are no more. replace with constant expressions and :noconst
-        //FIXME update this stuff. compile time expressions are no more. replace with constant expressions and :noconst
-        //FIXME update this stuff. compile time expressions are no more. replace with constant expressions and :noconst
-        //FIXME update this stuff. compile time expressions are no more. replace with constant expressions and :noconst
+
+        //TODO the concept of "constant expression" has a much broader scope than in most languages.
+        //TODO it includes anything that ... etc etc
     </p>
     <p>
         <b>Compile time expressions</b> are <a href="#expressions">expressions</a> that can be <b>calculated during</b> the <a href="#compilation"><b>compilation</b></a> phase.<br>
@@ -1782,10 +1775,13 @@
 <h1 id="types"></h1>
 <moveto-doc->
     <p>
-        <b>Data types</b> define how <b><a href="#values">values</a></b> are <b>interpreted</b> during runtime and how they can be used within <a href="#expressions">expressions</a>.<br>
+        <b>Data types</b> define how <b><a href="#values">values</a></b> are <b>interpreted</b> and how they can be used within <a href="#expressions">expressions</a>.<br>
     </p>
     <p>
-        Both languages are statically types.<br>
+        Both languages are statically typed.<br>
+        //FIXME
+        //FIXME
+        //FIXME
         Every <a href="#values">value</a> has an associated type, regardless of it being a <a href="#left-and-right-values">right</a> or a <a href="#left-and-right-values">left value</a>.<br>
         The type of each <a href="#values">value</a> must be known at compile time, as there is no <a href="omitted.runtime-type-information">runtime type information</a>.
     </p>
@@ -2230,7 +2226,7 @@
 <h1 id="enum-declarations"></h1>
 <moveto-doc->
     <p>
-        <b>Enums</b> are <b>declared</b> using the <code><w->enum</w-></code> keyword followed by its <b>name</b> and <b>base <a href="#types">type</a></b>.
+        An <b>enum</b> is <b>declared</b> using the <code><w->enum</w-></code> keyword followed by its <b>name</b> and <b>base <a href="#types">type</a></b>.
         Enum elements are declared in the same way as <a href="#variables">variables</a>,
         but the type is implicit and their initializer values must be <a href="#constant-expressions">constant expressions</a> of the base type.
     </p>
@@ -2389,21 +2385,82 @@
 <h1 id="structs"></h1>
 <moveto-doc->
     <p>
-        //TODO
+        <b>Structs</b> are <b>types</b> composed by multiple <b>members</b> that can have <b>differing type</b>.<br>
+        They are especially useful for complex or non-uniform data that cannot be properly represented using primitive types.
+    </p>
+    <p>
+        Struct values can be copied and passed as a whole, just like values of primitive type, but they maintain their internal layout.
+        Members can be accessed individually using the <code>.</code> keyword.
     </p>
 </moveto-doc->
 <moveto-examples->
-    <example->
-        <label->Example</label->
-        <div>
-            //TODO
-        </div>
-    </example->
+    <split-example-container->
+        <split-example-container-left->
+            <example->
+                <label->Example</label->
+                <div>
+                    <w->import</w-> io;
+                    <w->import</w-> list;
+
+                    <w->struct</w-> <s->User</s-> {
+                        <t->str</t-> name;
+                        <t->ulong</t-> id;
+                        <t->bool</t-> admin;
+                    }
+                    <t->List</t->&lt;<t->User</t->&gt; users = {
+                        { <s->"Snek"</s->,         <k->0000</k->, <k->true</k->  }
+                        { <s->"DangerNoodle"</s->, <k->0001</k->, <k->false</k-> }
+                        { <s->"NopeRope"</s->,     <k->0002</k->, <k->false</k-> }
+                    };
+
+                    <t->void</t-> <f->main</f->() {
+                        <w->for</w->(u <w->in</w-> users) io.<f->println</f->(
+                            u.name +
+                            <s->"\n\tID: "</s-> + u.id +
+                            <s->"\n\tAdmin: "</s-> + u.admin + <s->"\n\n"</s->
+                        );
+
+                        <t->User</t-> firstUser = users[<k->0</k->];
+                        io.<f->println</f->(<s->"The first user is: "</s-> + firstUser.name);
+                    }
+                </div>
+            </example->
+        </split-example-container-left->
+        <split-example-container-right->
+            <example->
+                <label->Output</label->
+                <div>
+                    <console-prefix-></console-prefix->
+                    Snek
+                        ID: 0000
+                        Admin: true
+
+                    DangerNoodle
+                        ID: 0001
+                        Admin: false
+
+                    NopeRope
+                        ID: 0002
+                        Admin: false
+
+                    The first user is: Snek<cursor-></cursor->
+                </div>
+            </example->
+        </split-example-container-right->
+    </split-example-container->
 </moveto-examples->
 <moveto-internal->
-    //TODO talk about alignment and struct size
-
-    //TODO compiler can pack structures if needed, skipping some alignment padding
+    <p>
+        The size of a struct type is typically greater than the sum of sizes of the individual members.
+        This is because of alignment requirements adding unused padding space between members.
+        This doesn't affect the language in any way, but it might change how the data is represented in binary formats.
+    </p>
+    <p>
+        The compiler is allowed to freely reorder struct members or pack them by removing padding space
+        in order to maximize runtime computational speed.<br>
+        The compiler annotations <a href="#annotations.nopacking">:nopacking</a> and <a href="#annotations.noreorder">:noreorder</a>
+        can be used to avoid this.
+    </p>
 </moveto-internal->
 
 
@@ -2411,12 +2468,13 @@
 <h1 id="struct-declarations"></h1>
 <moveto-doc->
     <p>
-        <b>Structs</b> are used to <b>create</b> new <b>types</b> composed by 0 or more separate members that can have differing type.<br>
-        The members are declared in the same way as <a href="#variables">variables</a> but cannot have initializer values.
+        A <b>struct</b> is <b>declared</b> using the <code><w->struct</w-></code> keyword followed by its <b>name</b>.
+        Struct members are declared in the same way as <a href="#variables">variables</a>, but they cannot have initializer values.
+        Instead, they must be initialized by constructors. This is explained in <a href="#constructor-function">Constructor function</a>.
     </p>
     <p>
+        Struct members can be of any <a href="#types">type</a>, including other structs.<br>
         Empty structs are allowed.<br>
-        Struct members can be of any <a href="#types">type</a>, including other structs.
     </p>
     <syntax->
         <label- id="copy.syntax--declaration-struct">Declaration syntax</label->
@@ -2430,15 +2488,16 @@
     <example->
         <label->Example</label->
         <div>
-            <w->struct</w-> <t->idk</t-> {
-                <t->uint</t-> a, b;        <c->// Ok</c->
-                <t->double</t->[<k->4</k->] c;      <c->// Ok</c->
+            <w->import</w-> io;
+
+            <w->struct</w-> <t->Enemy</t-> {
+                <t->str</t-> name;
+                <t->float</t-> dps, health, speed;
             }
 
             <t->void</t-> <f->main</f->(){
-                <t->idk</t-> var;
-                var.a = <k->4</k->;              <c->// Ok, var = (4, ?, ?)</c->
-                var.b = <k->var.a</k-> * <k->4</k->;      <c->// Ok, var = (4, 8, ?)</c->
+                <t->Enemy</t-> grass = { <s->"Grass"</s->,    <k->99999</k->, <k->2</k->,         <k->0</k-> };
+                <t->Enemy</t-> light = { <s->"Sunlight"</s->, <k->99999</k->, <k->0</k->, <k->299792458</k-> };
             }
         </div>
     </example->
@@ -3806,7 +3865,53 @@
 <h1 id="expressions.literals.escape-sequences"></h1>
 <moveto-doc->
     <p>
+        //TODO
     </p>
+    <ul>
+        <li>Escape sequences</li>
+        <ul class="summary-list">
+            <li>
+                <span><code><s->\\</s-></code></span>
+                <span>Backslash</span>
+            </li>
+            <li>
+                <span><code><s->\0</s-></code></span>
+                <span>Null character / String terminator / Value 0</span>
+            </li>
+            <li>
+                <span><code><s->\'</s-></code></span>
+                <span>Single quote character</span>
+            </li>
+            <li>
+                <span><code><s->\"</s-></code></span>
+                <span>Double quote character</span>
+            </li>
+            <li>
+                <span><code><s->\n</s-></code></span>
+                <span>Newline character</span>
+            </li>
+            <li>
+                <span><code><s->\r</s-></code></span>
+                <span>Carriage return character</span>
+            </li>
+            <li>
+                <span><code><s->\t</s-></code></span>
+                <span>Tab character</span>
+            </li>
+            <li>
+                <span><code><s->\v</s-></code></span>
+                <span>Vertical tab character</span>
+            </li>
+            <li>
+                <span><code><s->\u----</s-></code></span>
+                <span>Basic Unicode. The 4 hex digits represent the character</span>
+            </li>
+            <li>
+                <span><code><s->\U--------</s-></code></span>
+                <span>Extended Unicode. The 8 hex digits represent the character</span>
+            </li>
+        </ul>
+    </ul>
 </moveto-doc->
 
 <h1 id="expressions.routine-calls"></h1>
@@ -5137,6 +5242,15 @@
     </p>
 </moveto-doc->
 
+<h1 id="compiler-annotations"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+
+
 <h1 id="reflection"></h1>
 <moveto-doc->
     <p>
@@ -5149,8 +5263,12 @@
 <h1 id="syntactic-sugar"></h1>
 <moveto-doc->
     <p>
-        //TODO inline statement stuff $ + yield is syntactic sugar.
-        //TODO DONT ADD IT TO INLINE VALUES. THEY ARE NOT VALUES
+        //TODO automatic enum scoping? mabe? idk if that should be here or in type deduction. prob here since it's more egonomics-oriented
+
+        //TODO simplified template syntax
+
+        //TODO member access through pointer (our equivalent of c's -> but we use . instead)
+        //TODO works for both enums and structs
     </p>
 </moveto-doc->
 
