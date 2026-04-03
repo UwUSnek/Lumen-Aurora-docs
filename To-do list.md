@@ -627,3 +627,9 @@ int main() {
   - more compelx operations such as dot, cross, etc are defined in the stanard module math
   - add a whole section for vectors and matrices. this can be called "tensors"
   - more generic but slower tensors can be found in the stanrad module "tensor"
+
+
+
+
+- add a "reflection data" tab or table in the details tab of each symbol declaration
+  - the "reflectin" section only talks about reflection in a generic way. the list of available stuff is available in each symbol's documentation details

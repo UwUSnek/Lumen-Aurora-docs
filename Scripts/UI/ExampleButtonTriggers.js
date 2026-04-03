@@ -43,7 +43,7 @@ const ui_example_button_triggers = {
             }
         }
         else {
-            _labels.push(ui_example_button_triggers.retrieve_code(label));
+            _labels.push(label);
         }
 
 
