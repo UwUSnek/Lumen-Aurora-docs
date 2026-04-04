@@ -234,8 +234,6 @@
             <indexd->declarations.namespaces</indexd->
             <indexd->symbol-aliases</indexd->
             <indexd->const-qualifier</indexd->
-            <indexd->reflection</indexd->
-            <indexd->compiler-annotations</indexd->
             <indexd->inline-glsl</indexd->
         </index-elms-></index->
 
@@ -266,10 +264,54 @@
 
 
     <index-><indexh->compilation</indexh-><index-elms->
-        <indexd->compilation-phases-and-error-types</indexd->
-        <index-><indexh->runtime-performance</indexh-><index-elms->
-            <indexd->value-precomputation</indexd->
-            <indexd->branching-performance</indexd->
+        <index-><indexh->compiler-functioning</indexh-><index-elms->
+            <indexd->supported-runtime-targets</indexd->
+            <indexd->compiler-dependencies</indexd->
+            <indexd->compilation-stages</indexd->
+        </index-elms-></index->
+        <index-><indexh->optimizations</indexh-><index-elms->
+            <index-><indexh->compilation-speed</indexh-><index-elms->
+                <indexd->incremental-compilation</indexd->
+                <indexd->multithreaded-pipeline</indexd->
+                <indexd->shared-file-caches</indexd->
+            </index-elms-></index->
+            <index-><indexh->runtime-performance</indexh-><index-elms->
+                <indexd->value-precomputation</indexd->
+                <indexd->routine-inlining</indexd->
+                <indexd->loop-unrolling</indexd->
+                <indexd->copy-elision</indexd->
+                <indexd->struct-packing</indexd->
+                <indexd->vectorization</indexd->
+                <indexd->unused-statements</indexd->
+                <indexd->unused-routines</indexd->
+                <indexd->llvm-optimization-passes</indexd->
+            </index-elms-></index->
+        </index-elms-></index->
+        <index-><indexh->command-line-options</indexh-><index-elms->
+            <index-><indexh->misc</indexh-><index-elms->
+                <indexd->runtime-target</indexd->
+            </index-elms-></index->
+            <index-><indexh->input-data</indexh-><index-elms->
+                <indexd->entry-point-module</indexd->
+                <indexd->import-paths</indexd->
+            </index-elms-></index->
+            <index-><indexh->output-data</indexh-><index-elms->
+                <indexd->debug-information</indexd->
+                <indexd->preprocessed-source</indexd->
+                <indexd->intermediate-format</indexd->
+                <indexd->translated-format</indexd->
+                <indexd->executable-file</indexd->
+                <indexd->import-graph</indexd->
+                <indexd->global-data-list</indexd->
+                <indexd->symbol-list</indexd->
+                <indexd->source-code-metadata</indexd->
+            </index-elms-></index->
+            <index-><indexh->console-output</indexh-><index-elms->
+                <indexd->help-message</indexd->
+                <indexd->compiler-version</indexd->
+                <indexd->compilation-status</indexd->
+                <indexd->formatting-codes</indexd->
+            </index-elms-></index->
         </index-elms-></index->
     </index-elms-></index->
 
@@ -5320,33 +5362,332 @@
     </p>
 </moveto-doc->
 
+<h1 id="compilation"></h1>
+<moveto-doc->
+    <p>
 
-                    <h1 id="compilation"></h1>                        
-                    <moveto-doc->
-                        <p></p>
-                    </moveto-doc->
-//TODO write more stuff
-//TODO talk about the incremental compilation
-//TODO talk about the multithreaded compilation
-                    </moveto-doc->
-                    <h1 id="compilation-phases-and-error-types"></h1> 
-                    <moveto-doc->
-                        <p></p>
-                    </moveto-doc->
-                    <h1 id="runtime-performance"></h1>                
-                    <moveto-doc->
-                        <p></p>
-                    </moveto-doc->
-                    <h1 id="branching-performance"></h1>              
-                    <moveto-doc->
-                        <p></p>
-                    </moveto-doc->
-                    <h1 id="value-precomputation"></h1>               
-                    <moveto-doc->
-                        <p></p>
-                    </moveto-doc->
+    </p>
+</moveto-doc->
 
 
+
+
+
+<h1 id="compiler-functioning"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+
+
+
+
+<h1 id="supported-runtime-targets"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+<h1 id="compilation-stages"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+<h1 id="compiler-dependencies"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+<h1 id="optimizations"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+
+
+
+
+<h1 id="compilation-speed"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+
+
+
+
+<h1 id="incremental-compilation"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+<h1 id="multithreaded-pipeline"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+<h1 id="shared-file-caches"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+<h1 id="runtime-performance"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+
+
+
+
+<h1 id="value-precomputation"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+<h1 id="routine-inlining"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+<h1 id="loop-unrolling"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+<h1 id="copy-elision"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+<h1 id="struct-packing"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+<h1 id="vectorization"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+<h1 id="unused-statements"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+<h1 id="unused-routines"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+<h1 id="llvm-optimization-passes"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+<h1 id="command-line-options"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+
+
+
+
+<h1 id="misc"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+
+
+
+
+<h1 id="runtime-target"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+<h1 id="input-data"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+
+
+
+
+<h1 id="entry-point-module"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+<h1 id="import-paths"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+<h1 id="output-data"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+
+
+
+
+<h1 id="debug-information"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+<h1 id="preprocessed-source"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+<h1 id="intermediate-format"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+<h1 id="translated-format"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+<h1 id="executable-file"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+<h1 id="import-graph"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+<h1 id="global-data-list"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+<h1 id="symbol-list"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+<h1 id="source-code-metadata"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+<h1 id="console-output"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+
+
+
+
+<h1 id="help-message"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+<h1 id="compiler-version"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+<h1 id="compilation-status"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+<h1 id="formatting-codes"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
 
 <h1 id="core-module"></h1>
 <moveto-doc->
@@ -9235,10 +9576,6 @@
 
     </p>
 </moveto-doc->
-
-
-
-
 
 
 <h1 id="omitted-features"></h1>
