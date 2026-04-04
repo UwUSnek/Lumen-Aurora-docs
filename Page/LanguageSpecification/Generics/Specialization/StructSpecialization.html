@@ -2,13 +2,12 @@
 <h1 id="struct-specialization"></h1>
 <moveto-doc->
     <p>
-        Struct specialization allows structs to contain different methods and data based on user-defined constraints.<br>
-        This is achieved by declaring the same struct multiple times. Each declaration must be <b>unique</b>.
-        Arguments passed to the constructor don't affect the chosen struct declaration.
+        Struct <b>specialization</b> allows structs to define <b>different bodies</b> based on <a href="#constant-expressions">constant</a> <b>conditions</b>.
+        This is done by specifying a specialization constraint, which contains the condition, and a corresponding body.
     </p>
     <p>
-        Struct declarations whose specialization constraint is not satisfied are discarded.<br>
-        As with routine specialization, if zero or more than one declaration is suitable, a semantic error is generated.
+        Struct declarations whose specialization constraint is not satisfied are discarded.
+        As with <a href="#routine-specialization">routine specialization</a>, if zero or more than one declaration is suitable, a semantic error is generated.
     </p>
 </moveto-doc->
 <moveto-examples->
