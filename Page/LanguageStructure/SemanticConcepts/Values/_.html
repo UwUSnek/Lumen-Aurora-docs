@@ -1,0 +1,21 @@
+
+<h1 id="values"></h1>
+<moveto-doc->
+    <p>
+        <b>"Values"</b> refers to any <b>information</b> stored in a <b><a href="types">typed</a> container</b> during runtime.<br>
+        These include <a href="#variables">Variables</a>, <a href="#routine-parameters">Routine parameters</a>,
+        <a href="#temporary-variables">Temporary variables</a>, data returned by <a href="#variables">Routines</a>,
+        and the result of member access and pointer dereferencing.
+    </p>
+    <p>
+        Each value has a defined lifetime.<br>
+        This usually goes from where they are declared to the end of their enclosing <a href="#scopes">scope</a>,
+        though it can be extended using custom <a href="init-function">init</a> and <a href="copy-function">copy</a> functions.
+    </p>
+</moveto-doc->
+
+
+#include "./Page/LanguageStructure/SemanticConcepts/Values/Initialization.html"
+#include "./Page/LanguageStructure/SemanticConcepts/Values/Copying.html"
+#include "./Page/LanguageStructure/SemanticConcepts/Values/Destruction.html"
+#include "./Page/LanguageStructure/SemanticConcepts/Values/ConstantExpressions.html"

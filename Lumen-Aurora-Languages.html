@@ -77,9 +77,13 @@
                 <indexd->name-shadowing</indexd->
                 <indexd->multiple-declarations</indexd->
             </index-elms-></index->
-            <indexd->undefined-values</indexd->
+            <index-><indexh->values</indexh-><index-elms->
+                <indexd->initialization</indexd->
+                <indexd->copying</indexd->
+                <indexd->destruction</indexd->
+                <indexd->constant-expressions</indexd->
+            </index-elms-></index->
             <indexd->undefined-behaviour</indexd->
-            <indexd->constant-expressions</indexd->
         </index-elms-></index->
     </index-elms-></index->
 
@@ -1077,7 +1081,6 @@
 <h1 id="semantic-concepts"></h1>
 <moveto-doc->
     <p>
-
     </p>
 </moveto-doc->
 
@@ -1259,34 +1262,61 @@
     </example->
 </moveto-examples->
 
-<h1 id="undefined-values"></h1>
+<h1 id="values"></h1>
 <moveto-doc->
     <p>
-        //FIXME undefined values aren't allowed to be read or passed anymore
-        //FIXME this is now blocked by the compiler in compile time. hard error
-
-        <b>Any unknown value</b> of any <a href="#types">type</a> is an <b>undefined value</b>.<br>
-        The language can generate undefined values for a variety of reasons.<br>
-        Such values are usually the result of errors that occurred during the execution of a <a href="#functions">function</a> and don't contain any useful information.<br>
-        Uninitialized <a href="#variables">variables</a> also have undefined value.
+        <b>"Values"</b> refers to any <b>information</b> stored in a <b><a href="types">typed</a> container</b> during runtime.<br>
+        These include <a href="#variables">Variables</a>, <a href="#routine-parameters">Routine parameters</a>,
+        <a href="#temporary-variables">Temporary variables</a>, data returned by <a href="#variables">Routines</a>,
+        and the result of member access and pointer dereferencing.
     </p>
     <p>
-        Generating undefined values during runtime doesn't stop the execution and is not signaled in any way, nor is it detectable.<br>
-        The <a href="#modules">module</a> is responsible for preventing, discarding or documenting undefined values.
+        Each value has a defined lifetime.<br>
+        This usually goes from where they are declared to the end of their enclosing <a href="#scopes">scope</a>,
+        though it can be extended using custom <a href="init-function">init</a> and <a href="copy-function">copy</a> functions.
     </p>
 </moveto-doc->
 
-<h1 id="undefined-behaviour"></h1>
-<moveto-doc->
+
+
+<h1 id="initialization"></h1>
+    <moveto-doc->
     <p>
-        Certain actions cause undefined behaviour.<br>
-        <b>Undefined behaviour</b> means that the <b>code <a href="#compilation">compiles</a> with no errors</b>, but the <b>runtime behaviour is unknown</b> and anything could happen.<br>
-        The software could break, have bugs or work just fine. One cannot know.
-    </p>
-    <p>
-        As with <a href="#undefined-values">undefined values</a>, the <a href="#modules">module</a> is responsible for preventing or documenting undefined behaviours.
     </p>
 </moveto-doc->
+<moveto-examples->
+    <example->
+        <label->Example</label->
+        <div>
+        </div>
+    </example->
+</moveto-examples->
+
+<h1 id="copying"></h1>
+    <moveto-doc->
+    <p>
+    </p>
+</moveto-doc->
+<moveto-examples->
+    <example->
+        <label->Example</label->
+        <div>
+        </div>
+    </example->
+</moveto-examples->
+
+<h1 id="destruction"></h1>
+    <moveto-doc->
+    <p>
+    </p>
+</moveto-doc->
+<moveto-examples->
+    <example->
+        <label->Example</label->
+        <div>
+        </div>
+    </example->
+</moveto-examples->
 
 <h1 id="constant-expressions"></h1>
 <moveto-doc->
@@ -1371,6 +1401,18 @@
         </div>
     </example->
 </moveto-examples->
+
+<h1 id="undefined-behaviour"></h1>
+<moveto-doc->
+    <p>
+        Certain actions cause undefined behaviour.<br>
+        <b>Undefined behaviour</b> means that the <b>code <a href="#compilation">compiles</a> with no errors</b>, but the <b>runtime behaviour is unknown</b> and anything could happen.<br>
+        The software could break, have bugs or work just fine. One cannot know.
+    </p>
+    <p>
+        As with <a href="#undefined-values">undefined values</a>, the <a href="#modules">module</a> is responsible for preventing or documenting undefined behaviours.
+    </p>
+</moveto-doc->
 
 <h1 id="language-specification"></h1>
 <moveto-doc->
