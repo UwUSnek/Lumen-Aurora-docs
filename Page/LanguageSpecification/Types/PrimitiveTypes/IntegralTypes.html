@@ -3,7 +3,7 @@
 <moveto-doc->
     <p>
         <b>Integral types</b> are used to <b>represent integers</b>.<br>
-        They are available in 4 sizes: byte (8 bits), int (32 bits), long (64 bits) and cent (128 bits).
+        They are available in 4 sizes: byte (8 bits), int (32 bits), long (64 bits) and ext (128 bits).
         The programmer is responsible for choosing the size that best fits their use case.
     </p>
     <p>
@@ -49,12 +49,12 @@
                 <td>~1.845 × 10¹⁹</td>
             </tr>
             <tr>
-                <td><code><t->cent</t-></code></td>
+                <td><code><t->ext</t-></code></td>
                 <td>~-1.701 × 10³⁸</td>
                 <td>~1.701 × 10³⁸</td>
             </tr>
             <tr>
-                <td><code><t->ucent</t-></code></td>
+                <td><code><t->uext</t-></code></td>
                 <td>0</td>
                 <td>~3.402 × 10³⁸</td>
             </tr>
@@ -121,19 +121,19 @@
             <c->1                                                               127</c->
             <c->sign                                                           value</c->
             <c->│┌───────────────────────────────────────────────────────────────┴─────────────────────────────────────────────────────────────┐</c->
-            <regex-group->┕</regex-group-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s-> <t->cent</t->  <lumen-only-></lumen-only-> Lumen only
+            <regex-group->┕</regex-group-><s->┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s-> <t->ext</t->  <lumen-only-></lumen-only-> Lumen only
                                                                             <c->128</c->
                                                                            <c->value</c->
             <c->┌────────────────────────────────────────────────────────────────┴─────────────────────────────────────────────────────────────┐</c->
-            <s->┕┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s-> <t->ucent</t->  <lumen-only-></lumen-only-> Lumen only
+            <s->┕┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┷┙</s-> <t->uext</t->  <lumen-only-></lumen-only-> Lumen only
         </div>
     </example->
     <p>
-        128-bit types (<code><t->cent</t-></code> and <code><t->ucent</t-></code>) aren't natively supported in <a href="#lumen">Lumen</a> on most systems.
+        128-bit types (<code><t->ext</t-></code> and <code><t->uext</t-></code>) aren't natively supported in <a href="#lumen">Lumen</a> on most systems.
         Instead, they are simulated using multiple 64-bit values and operations. This makes them slower than their 64-bit counterparts.
     </p>
     <p>
-        128-bit types (<code><t->cent</t-></code> and <code><t->ucent</t-></code>) are not supported by <a href="#aurora">Aurora</a>
+        128-bit types (<code><t->ext</t-></code> and <code><t->uext</t-></code>) are not supported by <a href="#aurora">Aurora</a>
         because most GPUs are simply not able to process them.<br>
         64-bit types (<code><t->long</t-></code> and <code><t->ulong</t-></code>) are often much slower than their 32-bit counterparts in <a href="#aurora">Aurora</a>
         because of missing hardware support. Smaller types should be preferred whenever possible.

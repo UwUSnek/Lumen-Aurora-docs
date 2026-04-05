@@ -28,7 +28,7 @@
     <div class="table-container"><table class="conversion-table">
         <p>
             From <code><t->ubyte</t-></code>, <code><t->byte</t-></code>, <code><t->uint</t-></code>, <code><t->int</t-></code>,
-            <code><t->ulong</t-></code>, <code><t->long</t-></code>, <code><t->ucent</t-></code>, <code><t->cent</t-></code>:
+            <code><t->ulong</t-></code>, <code><t->long</t-></code>, <code><t->uext</t-></code>, <code><t->ext</t-></code>:
         </p>
         <tr>
             <th class="medium">From ↓ To →</th>
@@ -38,8 +38,8 @@
             <th><t->int</t-></th>
             <th><t->ulong</t-></th>
             <th><t->long</t-></th>
-            <th><t->ucent</t-></th>
-            <th><t->cent</t-></th>
+            <th><t->uext</t-></th>
+            <th><t->ext</t-></th>
             <th><t->float</t-></th>
             <th><t->double</t-></th>
             <th><t->quad</t-></th>
@@ -54,7 +54,7 @@
             <td class="center wrap conv-cell-n" rowspan="4">Undefined</td>
             <td class="center wrap conv-cell-m" rowspan="7">Overflows to (-n - <k->1</k->) % (ulong:<k->max</k-> - <k->1</k->)</td>
             <td class="center wrap conv-cell-n" rowspan="2">Undefined</td>
-            <td class="center wrap conv-cell-m" rowspan="7">Overflows to (-n - <k->1</k->) % (ucent:<k->max</k-> - <k->1</k->)</td>
+            <td class="center wrap conv-cell-m" rowspan="7">Overflows to (-n - <k->1</k->) % (uext:<k->max</k-> - <k->1</k->)</td>
             <td class="center wrap conv-cell-y" rowspan="18">Correct result</td>
             <td class="center wrap conv-cell-m" rowspan="5">Asymmetric</td>
             <td class="center wrap conv-cell-m" rowspan="3">Asymmetric</td>
@@ -317,7 +317,7 @@
             <fake-td></fake-td>
         </tr>
         <tr class="even">
-            <th><range-val->&gt; <k->cent:max</k-></range-val-></th>
+            <th><range-val->&gt; <k->ext:max</k-></range-val-></th>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
@@ -368,8 +368,8 @@
             <th><t->int</t-></th>
             <th><t->ulong</t-></th>
             <th><t->long</t-></th>
-            <th><t->ucent</t-></th>
-            <th><t->cent</t-></th>
+            <th><t->uext</t-></th>
+            <th><t->ext</t-></th>
             <th><t->float</t-></th>
             <th><t->double</t-></th>
             <th><t->quad</t-></th>
@@ -422,7 +422,7 @@
             <fake-td></fake-td>
         </tr>
         <tr class="even">
-            <th><range-val->&lt; <k->cent:min</k-></range-val-></th>
+            <th><range-val->&lt; <k->ext:min</k-></range-val-></th>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
@@ -618,7 +618,7 @@
             <fake-td></fake-td>
         </tr>
         <tr class="even">
-            <th><range-val->&gt; <k->cent:max</k-></range-val-></th>
+            <th><range-val->&gt; <k->ext:max</k-></range-val-></th>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
@@ -633,7 +633,7 @@
             <fake-td></fake-td>
         </tr>
         <tr class="even">
-            <th><range-val->&gt; <k->ucent:max</k-></range-val-></th>
+            <th><range-val->&gt; <k->uext:max</k-></range-val-></th>
             <fake-td></fake-td>
             <fake-td></fake-td>
             <fake-td></fake-td>
@@ -736,8 +736,8 @@
             <th><t->int</t-></th>
             <th><t->ulong</t-></th>
             <th><t->long</t-></th>
-            <th><t->ucent</t-></th>
-            <th><t->cent</t-></th>
+            <th><t->uext</t-></th>
+            <th><t->ext</t-></th>
             <th><t->float</t-></th>
             <th><t->double</t-></th>
             <th><t->quad</t-></th>
