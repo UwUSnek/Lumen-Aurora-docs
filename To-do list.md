@@ -144,9 +144,6 @@
 
 
 
-- add constructors - equivalent of copy constructor replaces the default "copy-every-byte" behaviour
-  - can be called or optimized out by the compiler as it sees fit
-
 
 - add function values to documentation
   - rename them to something else. function value should only mean "a value of function type"
@@ -154,54 +151,8 @@
 - add function values as a syntax to initialize elements of buffers separately - function takes the index
 
 
-- add quad floating point type     (natively supported by llvm, no GPU support)
-- add cent and ucent integer types (natively supported by llvm, no GPU support)
 
 
-
-
-
-
-
-
-
-
-
-
-
-void write(rc<file> f, str data) {
-  __internal.write(f.data.handle, data);
-}
-
-
-struct float2 {
-  float x;
-  float y;
-
-  constructor() {
-    x = 0;
-    y = 0;
-  }
-  constructor(float _x, float _y) {
-    x = _x;
-    y = _y;
-  }
-
-  export x, y;
-}
-
-float dot(float2 a, float2 b) {
-  return a.x * b.x + a.y * b.y;
-}
-
-
-
-
-int main() {
-  rc<file> f = { "./test.txt" };
-  f->write("hello");
-  f->write(str{ float2{ 5, 6 }->dot(float2{ 9, -1 }) });
-}
 
 
 
@@ -217,27 +168,111 @@ int main() {
 - language-level assignments
   - the = meta keyword is part of the language. valid anywhere (it's a meta keyword so the = character can still be used in identifiers)
   - operators cannot be called "=" only. == += and others are allowed.
-  - by default, assignments simply copy the value at their right into the value at their left.
-    - deep copy of every byte in the data. pointers are copied by-value, without duplicating the pointed data.
-    - this can be changed using struct constructors.
   - if you want to share a value with other functions, pass its address as a pointer
     - this lets other functions access it but it doesn't extend its lifetime. it will still get destroyed when it runs out of its original scope
 
-- initialization
-  - variables and members can be left uninitialized, but:
-    - constructors must initialize all of them
-    - values can only be passed to routines, dereferenced or have its members accessed through "." if the compiler is certain they are initialized there
-  - so the programmer never has to deal with uninitialized values at runtime. anything is detected during compilation, creating errors
+  - = in the declaration calls the constructor in-place, even when using { ... }
+    - "=" after declaration always calls the copy operator
+    - no "=" means "call the constructor with no parameters", which is equivalent to 0-initialization in primitive types
+  - no variable can be left uninitialized. they must be initialized in their declaration
+    - struct members are also required to be initialized before any constructor runs, either by = or through the no parameters constructor
+    - constructors simply modify the default data before anything else can access it. this allows them to calculate values using the arguments provided to them
+  - "Type{...}" (constructor call with explicit type) creates a temporary value. just {...} calls constructor with the provided arguments, only valid in declarations
+  - T t2 = t1;
+    - this can only be done if T specifies a constructor that takes a T value or the default one is generated
+    - implicit constructor copies every byte but is not present if any explicit constructor exists
+    - t1 is passed as a plain copy, but this is not an issue since the constructor is a special value and is the one handling ref counts and whatever else.
+  - t2 = t1;
+    - this is a copy operator call
+    - default copy operator copies every byte, can be replaced by an explicit copy operator
+    - t1 is passed to it as a plain copy. copy operator handles all the custom logic including refcount.
+  - compiler can elide copies or do whatever it wants in order to optimize, as long as the program's behaviour doesn't change
 
-- constructors and destructors
-  - special functions tied to the struct value's lifetime
-  - a struct can define multiple constructors in order to accept different initializer values
-    - constructors allow specialization and templates. name resolution is identical to normal functions
-    - one of the constructors is called when a new value is created (using a constructor call)
-    - if no constructor is defined, a default one is generated for the struct. this constructor takes one argument for each struct member.
-  - a struct can define a single destructor
-    - the destructor is called when the struct value goes out of scope
-    - there is no default destructor
+
+
+
+  - so the final RC wrapper (the non atomic version) would be:
+
+    template<t> rc {
+      t* data;
+      counter_t* count;
+
+      constructor(rc<t> value) {
+        data = value.data;
+        count = value.count;
+        ++@count;  //@ dereferences pointers
+      }
+
+      template<u...> constructor(u params...) { // template pack + function pack, they expand automatically
+        unsafe{
+          data = __internal.malloc(t:size);           // : is a reflection path
+          __internal.call_constructor(data, params);  // internal call_constructor is magic and can call constructors it in-place
+          count = __internal.malloc(counter_t:size);
+          __internal.call_constructor(count, 1);      // internal call_constructor is magic and can call constructors it in-place
+        }
+      }
+
+      copy(rc<t> value) {
+        ++@value.count; //! Increment source first to avoid freeing the data during self-assignments
+
+        //(might need to allow calling destructors to minimize code duplication)
+        if(--@count == 0) { 
+          unsafe {
+            __internal.call_destructor(data);
+            __internal.free(data);
+            __internal.free(count);
+          }
+        }
+        //(might need to allow calling constructors to minimize code duplication)
+        data = value.data;
+        count = value.count;
+      }
+
+      destructor() {
+        if(--@count == 0) {
+          unsafe {
+            __internal.call_destructor(data);
+            __internal.free(data);
+            __internal.free(count);
+          }
+        }
+      }
+    }
+
+    void main() {
+      rc<file> f = { "./test.txt" };
+      // file gets closed here
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 - constructor calls
   - new values can be created using constructor calls
@@ -297,7 +332,7 @@ int main() {
 
 
 - void pointers
-  - forbidden - replaced by templates
+  - forbidden - replaced by templates //FIXME add to pointers documentation and to omitted features
   - void type can still be used as template parameters
 
 - global stuff to specify
@@ -367,54 +402,6 @@ int main() {
   
 - other standard modules provide wrappers for pipes, semaphore, mutexes
 
-- resource standard module
-
-  template<t, counter_t> truct __internal_rc {
-    t* data;
-    counter_t* count;
-
-    constructor(__internal_rc<t, counter_t>* value) when(counter_t:isAtomic) { // copy constructor takes the address of the data to copy
-      data = value.data; // . can access members through pointers directly
-      count = value.count;
-      count->increment(.Sequential); //.Sequential is automatic enum scoping
-    } when(!counter_t:isAtomic) {
-      data = value.data; // . can access members through pointers directly
-      count = value.count;
-      ++@count;
-    }
-    template<u...> constructor(u params...) { // template pack + function pack, they expand automatically
-      data = unsafe{ __internal.malloc(t:size); } // : is a reflection path
-      unsafe{ __internal.call_constructor(data, params); }; // internal call_constructor is magic and can call constructors it in-place without copying
-      count = unsafe{ __internal.malloc(counter_t:size); };
-      unsafe{ __internal.call_constructor(count, 1); }; // internal call_constructor is magic and can call constructors it in-place without copying
-    }
-    destructor() when(counter_t:isAtomic) {
-      if(count->decrement(.Sequential) == 1) {
-        unsafe{ __internal.call_destructor(data); };
-        unsafe{ __internal.free(data); };
-        unsafe{ __internal.free(count); };
-      }
-    } when(!counter_t:isAtomic) {
-      if(--@count == 0) {
-        unsafe{ __internal.call_destructor(data); };
-        unsafe{ __internal.free(data); };
-        unsafe{ __internal.free(count); };
-      }
-    }
-
-    // you can access and copy the contained data freely, but that will create a copy without arc semantics
-    // this generates an error if the struct type is arc-bound
-    export data;
-  }
-
-  template<t> alias __internal_rc<t, atomic<ulong>> as arc; // atomic refere counted
-  template<t> alias __internal_rc<t,        ulong > as  rc; // non-atomic reference counted
-
-  void main() {
-    arc<file> f = { "./test.txt" };
-    // can access whatever you need using f.data.[...]
-    // file gets closed here
-  }
 
 
 
