@@ -78,13 +78,15 @@
     <p>
         The compiler is allowed to freely reorder struct members or pack them by removing padding space
         in order to maximize runtime computational speed.<br>
-        The compiler annotations <a href="#annotations.nopacking">:nopacking</a> and <a href="#annotations.noreorder">:noreorder</a>
+        The compiler annotations <a href="#:nopacking">:nopacking</a> and <a href="#:noreorder">:noreorder</a>
         can be used to avoid this.
     </p>
 </moveto-internal->
 
 
 #include "./Page/LanguageSpecification/Types/Structs/StructDeclarations.html"
+#include "./Page/LanguageSpecification/Types/Structs/MemberVisibility.html"
 #include "./Page/LanguageSpecification/Types/Structs/InitFunction.html"
 #include "./Page/LanguageSpecification/Types/Structs/CopyFunction.html"
 #include "./Page/LanguageSpecification/Types/Structs/DropFunction.html"
+#include "./Page/LanguageSpecification/Types/Structs/DefaultMemberFunctions.html"

@@ -124,9 +124,11 @@
             </index-elms-></index->
             <index-><indexh->structs</indexh-><index-elms->
                 <indexd->struct-declarations</indexd->
+                <indexd->member-visibility</indexd->
                 <indexd->init-function</indexd->
                 <indexd->copy-function</indexd->
                 <indexd->drop-function</indexd->
+                <indexd->default-member-functions</indexd->
             </index-elms-></index->
             <index-><indexh->enums</indexh-><index-elms->
                 <indexd->enum-declarations</indexd->
@@ -2580,7 +2582,7 @@
     <p>
         The compiler is allowed to freely reorder struct members or pack them by removing padding space
         in order to maximize runtime computational speed.<br>
-        The compiler annotations <a href="#annotations.nopacking">:nopacking</a> and <a href="#annotations.noreorder">:noreorder</a>
+        The compiler annotations <a href="#:nopacking">:nopacking</a> and <a href="#:noreorder">:noreorder</a>
         can be used to avoid this.
     </p>
 </moveto-internal->
@@ -2635,6 +2637,19 @@
             <t->void</t-> <f->main</f->(){
                 <t->A</t-> a = <t->B</t->{}.value;
             }
+        </div>
+    </example->
+</moveto-examples->
+
+<h1 id="member-visibility"></h1>
+<moveto-doc->
+    <p>
+    </p>
+</moveto-doc->
+<moveto-examples->
+    <example->
+        <label->Example</label->
+        <div>
         </div>
     </example->
 </moveto-examples->
@@ -2780,6 +2795,19 @@
             </example->
         </split-example-container-right->
     </split-example-container->
+</moveto-examples->
+
+<h1 id="default-member-functions"></h1>
+<moveto-doc->
+    <p>
+    </p>
+</moveto-doc->
+<moveto-examples->
+    <example->
+        <label->Example</label->
+        <div>
+        </div>
+    </example->
 </moveto-examples->
 
 <h1 id="special-types"></h1>
@@ -10067,7 +10095,7 @@
     <script src="Scripts/Setup/Keybinds.js"></script>
     <script src="Scripts/main.js"></script>
     <script src="Scripts/UI/Slider.js"></script>
-    <script src="Scripts/UI/SmoothLinks.js"></script>
+    <script src="Scripts/UI/Links.js"></script>
     <script src="Scripts/UI/ExampleButtonTriggers.js"></script>
     <script src="Scripts/UI/SyntaxHover.js"></script>
     <script src="Scripts/UI/LoadButtonIcons.js"></script>
