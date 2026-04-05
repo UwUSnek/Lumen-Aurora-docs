@@ -73,6 +73,9 @@
         This doesn't affect the language in any way, but it might change how the data is represented in binary formats.
     </p>
     <p>
+        Empty structs are 1 byte in size.
+    </p>
+    <p>
         The compiler is allowed to freely reorder struct members or pack them by removing padding space
         in order to maximize runtime computational speed.<br>
         The compiler annotations <a href="#annotations.nopacking">:nopacking</a> and <a href="#annotations.noreorder">:noreorder</a>
@@ -82,5 +85,6 @@
 
 
 #include "./Page/LanguageSpecification/Types/Structs/StructDeclarations.html"
-#include "./Page/LanguageSpecification/Types/Structs/ConstructorFunction.html"
-#include "./Page/LanguageSpecification/Types/Structs/DestructorFunction.html"
+#include "./Page/LanguageSpecification/Types/Structs/InitFunction.html"
+#include "./Page/LanguageSpecification/Types/Structs/CopyFunction.html"
+#include "./Page/LanguageSpecification/Types/Structs/DropFunction.html"

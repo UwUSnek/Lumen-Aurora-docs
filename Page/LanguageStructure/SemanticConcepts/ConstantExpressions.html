@@ -18,7 +18,7 @@
             <li>
                 A <a href="#routine">routine</a> is suitable for compile time <a href="#routine-calls">calls</a> if it is not declared with the <a href="#runtime-qualifier"><code><w->runtime</w-></code> qualifier</a>,
                 it doesn't contain <a href="#inline-cpp">inline C++</a> or <a href="#inline-glsl">inline GLSL</a> statements and
-                every <a href="#routine-calls">routine call</a> within its body, including constructors and destructor called implicitly or not, are compile time.
+                every <a href="#routine-calls">routine call</a> within its body, including init and drop functions called implicitly or not, are compile time.
             </li>
             <li>
                 A <a href="#routine-calls">routine call</a> is compile time if the <a href="#routines">routine</a> is suitable for compile time <a href="#routine-calls">calls</a> and

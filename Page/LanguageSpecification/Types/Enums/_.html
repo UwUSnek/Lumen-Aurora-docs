@@ -10,8 +10,8 @@
     <p>
         Enum elements work similarly to <a href="#structs">struct</a> values, containing their name, index, and base value as members.
         They are part of the <a href="#global-initialization-order">global initialization order</a> and
-        their base value is initialized using one of the base type's <a href="#constructor-function">constructors</a>.<br>
-        If the base type defines a <a href="#destructors">destructor</a>, it is called on each element before the process ends.
+        their base value is initialized using one of the base type's <a href="#init-function">init functions</a>.<br>
+        If the base type defines a <a href="#drop-function">drop function</a>, it is called on each element before the process ends.
     </p>
     <p>
         <a href="#expressions">Expressions</a> of enum type are always 8 bytes in size.
@@ -55,7 +55,7 @@
     <p>
         Enum elements are equivalent to global <code><t->const</t-></code> variables, but enum values simply reference the existing elements.
         This means that creating or destroying enum values doesn't call any
-        <a href="#constructor-function">constructor</a> or <a href="#destructor-function">destructor</a> of the base type.
+        <a href="#init-function">init</a> or <a href="#drop-function">drop</a> function of the base type.
 
     </p>
 </moveto-internal->

@@ -2,13 +2,18 @@
 <h1 id="struct-declarations"></h1>
 <moveto-doc->
     <p>
-        A <b>struct</b> is <b>declared</b> using the <code><w->struct</w-></code> keyword followed by its <b>name</b>.
-        Struct members are declared in the same way as <a href="#variables">variables</a>, but they cannot have initializer values.
-        Instead, they must be initialized by constructors. This is explained in <a href="#constructor-function">Constructor function</a>.
+        A <b>struct</b> is <b>declared</b> using the <code><w->struct</w-></code> keyword followed by its <b>name</b>.<br>
+        Empty structs are allowed.
     </p>
     <p>
-        Struct members can be of any <a href="#types">type</a>, including other structs.<br>
-        Empty structs are allowed.<br>
+        Struct members are declared in the same way as <a href="#variables">variables</a>.
+        They are initialized when new values of the struct type are created, before the <a href="#init-function">init function</a>
+        or any other routine can access them.<br>
+        Struct members can be of any <a href="#types">type</a>, including other structs.
+    </p>
+    <p>
+        Struct bodies can be specialized.
+        This is explained in <a href="#struct-specialization">Struct specialization</a>.
     </p>
     <syntax->
         <label- id="copy.syntax--declaration-struct">Declaration syntax</label->
@@ -20,10 +25,8 @@
 </moveto-doc->
 <moveto-examples->
     <example->
-        <label->Example</label->
+        <label->Example 1</label->
         <div>
-            <w->import</w-> io;
-
             <w->struct</w-> <t->Enemy</t-> {
                 <t->str</t-> name;
                 <t->float</t-> dps, health, speed;
@@ -32,6 +35,17 @@
             <t->void</t-> <f->main</f->(){
                 <t->Enemy</t-> grass = { <s->"Grass"</s->,    <k->99999</k->, <k->2</k->,         <k->0</k-> };
                 <t->Enemy</t-> light = { <s->"Sunlight"</s->, <k->99999</k->, <k->0</k->, <k->299792458</k-> };
+            }
+        </div>
+    </example->
+    <example->
+        <label->Example 2</label->
+        <div>
+            <w->struct</w-> <t->A</t-> { }
+            <w->struct</w-> <t->B</t-> { <t->A</t-> value; }
+
+            <t->void</t-> <f->main</f->(){
+                <t->A</t-> a = <t->B</t->{}.value;
             }
         </div>
     </example->

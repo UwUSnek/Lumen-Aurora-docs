@@ -114,18 +114,19 @@
                 <indexd->floating-point-types</indexd->
                 <indexd->boolean-type</indexd->
             </index-elms-></index->
+            <index-><indexh->special-types</indexh-><index-elms->
+                <indexd->pointer-types</indexd->
+                <indexd->void-type</indexd->
+            </index-elms-></index->
             <index-><indexh->structs</indexh-><index-elms->
                 <indexd->struct-declarations</indexd->
-                <indexd->constructor-function</indexd->
-                <indexd->destructor-function</indexd->
+                <indexd->init-function</indexd->
+                <indexd->copy-function</indexd->
+                <indexd->drop-function</indexd->
             </index-elms-></index->
             <index-><indexh->enums</indexh-><index-elms->
                 <indexd->enum-declarations</indexd->
                 <indexd->void-enums</indexd->
-            </index-elms-></index->
-            <index-><indexh->special-types</indexh-><index-elms->
-                <indexd->pointer-types</indexd->
-                <indexd->void-type</indexd->
             </index-elms-></index->
             <index-><indexh->implicit-conversions</indexh-><index-elms->
                 <indexd->implicit-conversions.primitive-types</indexd->
@@ -248,6 +249,7 @@
             <indexd->automatic-enum-scoping</indexd->
             <indexd->abbreviated-template-syntax</indexd->
             <indexd->indirect-member-access</indexd->
+            <indexd->uniform-function-call-syntax</indexd->
             <indexd->string-interpolation</indexd->
         </index-elms-></index->
 
@@ -1305,7 +1307,7 @@
             <li>
                 A <a href="#routine">routine</a> is suitable for compile time <a href="#routine-calls">calls</a> if it is not declared with the <a href="#runtime-qualifier"><code><w->runtime</w-></code> qualifier</a>,
                 it doesn't contain <a href="#inline-cpp">inline C++</a> or <a href="#inline-glsl">inline GLSL</a> statements and
-                every <a href="#routine-calls">routine call</a> within its body, including constructors and destructor called implicitly or not, are compile time.
+                every <a href="#routine-calls">routine call</a> within its body, including init and drop functions called implicitly or not, are compile time.
             </li>
             <li>
                 A <a href="#routine-calls">routine call</a> is compile time if the <a href="#routines">routine</a> is suitable for compile time <a href="#routine-calls">calls</a> and
@@ -2230,8 +2232,8 @@
     <p>
         Enum elements work similarly to <a href="#structs">struct</a> values, containing their name, index, and base value as members.
         They are part of the <a href="#global-initialization-order">global initialization order</a> and
-        their base value is initialized using one of the base type's <a href="#constructor-function">constructors</a>.<br>
-        If the base type defines a <a href="#destructors">destructor</a>, it is called on each element before the process ends.
+        their base value is initialized using one of the base type's <a href="#init-function">init functions</a>.<br>
+        If the base type defines a <a href="#drop-function">drop function</a>, it is called on each element before the process ends.
     </p>
     <p>
         <a href="#expressions">Expressions</a> of enum type are always 8 bytes in size.
@@ -2275,7 +2277,7 @@
     <p>
         Enum elements are equivalent to global <code><t->const</t-></code> variables, but enum values simply reference the existing elements.
         This means that creating or destroying enum values doesn't call any
-        <a href="#constructor-function">constructor</a> or <a href="#destructor-function">destructor</a> of the base type.
+        <a href="#init-function">init</a> or <a href="#drop-function">drop</a> function of the base type.
 
     </p>
 </moveto-internal->
@@ -2355,7 +2357,7 @@
                         <t->uint</t-> pixels;
                         <t->str</t-> ratio;
 
-                        <f->constructor</f->(<t->uint</t-> w, <t->uint</t-> h, str r) {
+                        <f->init</f->(<t->uint</t-> w, <t->uint</t-> h, str r) {
                             width = w;
                             height = h;
                             pixels = w * h;
@@ -2515,6 +2517,9 @@
         This doesn't affect the language in any way, but it might change how the data is represented in binary formats.
     </p>
     <p>
+        Empty structs are 1 byte in size.
+    </p>
+    <p>
         The compiler is allowed to freely reorder struct members or pack them by removing padding space
         in order to maximize runtime computational speed.<br>
         The compiler annotations <a href="#annotations.nopacking">:nopacking</a> and <a href="#annotations.noreorder">:noreorder</a>
@@ -2527,13 +2532,18 @@
 <h1 id="struct-declarations"></h1>
 <moveto-doc->
     <p>
-        A <b>struct</b> is <b>declared</b> using the <code><w->struct</w-></code> keyword followed by its <b>name</b>.
-        Struct members are declared in the same way as <a href="#variables">variables</a>, but they cannot have initializer values.
-        Instead, they must be initialized by constructors. This is explained in <a href="#constructor-function">Constructor function</a>.
+        A <b>struct</b> is <b>declared</b> using the <code><w->struct</w-></code> keyword followed by its <b>name</b>.<br>
+        Empty structs are allowed.
     </p>
     <p>
-        Struct members can be of any <a href="#types">type</a>, including other structs.<br>
-        Empty structs are allowed.<br>
+        Struct members are declared in the same way as <a href="#variables">variables</a>.
+        They are initialized when new values of the struct type are created, before the <a href="#init-function">init function</a>
+        or any other routine can access them.<br>
+        Struct members can be of any <a href="#types">type</a>, including other structs.
+    </p>
+    <p>
+        Struct bodies can be specialized.
+        This is explained in <a href="#struct-specialization">Struct specialization</a>.
     </p>
     <syntax->
         <label- id="copy.syntax--declaration-struct">Declaration syntax</label->
@@ -2545,10 +2555,8 @@
 </moveto-doc->
 <moveto-examples->
     <example->
-        <label->Example</label->
+        <label->Example 1</label->
         <div>
-            <w->import</w-> io;
-
             <w->struct</w-> <t->Enemy</t-> {
                 <t->str</t-> name;
                 <t->float</t-> dps, health, speed;
@@ -2560,25 +2568,41 @@
             }
         </div>
     </example->
+    <example->
+        <label->Example 2</label->
+        <div>
+            <w->struct</w-> <t->A</t-> { }
+            <w->struct</w-> <t->B</t-> { <t->A</t-> value; }
+
+            <t->void</t-> <f->main</f->(){
+                <t->A</t-> a = <t->B</t->{}.value;
+            }
+        </div>
+    </example->
 </moveto-examples->
 
-<h1 id="constructor-function"></h1>
+<h1 id="init-function"></h1>
 <moveto-doc->
     <p>
-        The <b>constructor</b> function is a <b>special</b> struct <b>method</b> that is called each time a value of its parent struct type is created.<br>
-        It has <b>no name</b> and <b>no explicit return type</b> and it's declared using the <code><w->constructor</w-></code> meta keyword. Constructor calls always return an l-value of type their parent struct.<br>
-        Differently from other struct methods, the constructor can modify members when called on constant values.
+        The <b>init</b> <a href="#functions">function</a> is a <b>special function</b> used to <b>create values</b> of struct type.<br>
+        It has <b>no name</b> and <b>no explicit return type</b> and it's declared directly inside of the struct's body
+        using the <code><w->init</w-></code> meta keyword.<br>
+        Only one init function is ever called for each instance of a struct.<br>
+        Init functions cannot be called after the value has been created.
     </p>
     <p>
-        Each struct can only have one constructor, but it can be specialized.<br>
-        Template constructors are allowed, although it is not possible to reference a specific template through the <elm-><code>&lt;</code><code>&gt;</code></elm->
-        meta keyword while creating a new value, meaning that the declaration is chosen solely based on the passed arguments.<br>
-        Constructors cannot be called after the value has been created, but each constructor declaration can call other declarations in the same struct.
+        By default, each struct contains one implicit init function that takes an argument for each member.
+        Members are initialized with their corresponding argument in order of declaration.<br>
+        The implicit init function is not present in structs that define at least one explicit init function.
     </p>
     <p>
-        By default, each struct contains one implicit constructor that takes a reference parameter for each member in the same order in which they were declared and initializes them by copying the value from their respective parameter.<br>
-        This constructor is not present in structs declared using the <code><w->nodefault</w-></code> meta keyword.<br>
-        Constructors are allowed to take no arguments.
+        Explicit init functions must initialize all members of the struct.<br>
+        Init functions are allowed to take no arguments.<br>
+        There is no limit to the number of init functions a struct can define.
+    </p>
+    <p>
+        Template init functions and specialization are allowed, though the right instantiation is chosen solely based on the passed arguments,
+        as the syntax doesn't allow for specifying template arguments during init calls.<br>
     </p>
 </moveto-doc->
 <moveto-examples->
@@ -2593,13 +2617,13 @@
             <w->struct</w-> <t->uint3</t-> <w->nodefault</w-> {
                 <t->uint</t-> x, y, z;
 
-                <w->constructor</w->(<t->uint2</t-> <p->a</p->, <t->uint</t-> <p->b</p->) {
+                <w->init</w->(<t->uint2</t-> <p->a</p->, <t->uint</t-> <p->b</p->) {
                     x <f->=</f-> a.x;
                     y <f->=</f-> a.y;
                     z <f->=</f-> b;
                 }
 
-                <w->constructor</w->(<t->uint</t-> <p->a</p->, <t->uint2</t-> <p->b</p->) {
+                <w->init</w->(<t->uint</t-> <p->a</p->, <t->uint2</t-> <p->b</p->) {
                     x <f->=</f-> a;
                     y <f->=</f-> b.x;
                     z <f->=</f-> b.y;
@@ -2608,25 +2632,51 @@
 
 
             <t->void</t-> <f->main</f->(){
-                <t->uint2</t-> a = { <k->1</k->, <k->2</k-> };     <c->// Default constructor</c->
-                <t->uint3</t-> b = { <k->a</k->, <k->5</k-> };     <c->// User-defined constructor</c->
-                <t->uint3</t-> c = { <k->5</k->, <k->a</k-> };     <c->// User-defined constructor</c->
-                <c->//uint3 d = (1, 2, 3);</c->  <ce->// Error, no suitable constructor declaration</ce->
+                <t->uint2</t-> a = { <k->1</k->, <k->2</k-> };     <c->// Default init</c->
+                <t->uint3</t-> b = { <k->a</k->, <k->5</k-> };     <c->// User-defined init</c->
+                <t->uint3</t-> c = { <k->5</k->, <k->a</k-> };     <c->// User-defined init</c->
+                <c->//uint3 d = (1, 2, 3);</c->  <ce->// Error, no suitable init declaration</ce->
             }
         </div>
     </example->
 </moveto-examples->
 
-<h1 id="destructor-function"></h1>
+<h1 id="copy-function"></h1>
 <moveto-doc->
     <p>
-        The <b>destructor</b> function is a <b>special</b> struct <b>method</b> that is called each time a value of its parent struct type is destroyed.<br>
-        It has <b>no name</b> and <b>no return value</b> and it's declared using the <code><w->destructor</w-></code> meta keyword.<br>
+    </p>
+</moveto-doc->
+<moveto-examples->
+    <split-example-container->
+        <split-example-container-left->
+            <example->
+                <label->Example</label->
+                <div>
+                </div>
+            </example->
+        </split-example-container-left->
+        <split-example-container-right->
+            <example->
+                <label->Output</label->
+                <div>
+                    <console-prefix-></console-prefix->
+                    <cursor-></cursor->
+                </div>
+            </example->
+        </split-example-container-right->
+    </split-example-container->
+</moveto-examples->
+
+<h1 id="drop-function"></h1>
+<moveto-doc->
+    <p>
+        The <b>drop</b> function is a <b>special</b> struct <b>method</b> that is called each time a value of its parent struct type is destroyed.<br>
+        It has <b>no name</b> and <b>no return value</b> and it's declared using the <code><w->drop</w-></code> meta keyword.<br>
     </p>
     <p>
-        Each struct can only have one destructor. It cannot be specialized and cannot take any argument, nor can it be called explicitly.<br>
-        Template destructors are not allowed.<br>
-        There is no default destructor.
+        Each struct can only have one drop function. It cannot be specialized and cannot take any argument, nor can it be called explicitly.<br>
+        Templates and specialization are not allowed.<br>
+        There is no default drop function.
     </p>
 </moveto-doc->
 <moveto-examples->
@@ -2642,12 +2692,12 @@
                         <t->float</t-> n;
                         <t->int</t-> i;
 
-                        <w->constructor</w->(<t->float</t-> <p->n</p->){
+                        <w->init</w->(<t->float</t-> <p->n</p->){
                             i <f->=</f-> last<f->++</f->;
                             this.n <f->=</f-> n;
                         }
 
-                        <w->destructor</w->(){
+                        <w->init</w->(){
                             io.<f->print</f->(<s->"Destroyed instance n."</s-> <f->+</f-> <t->str</t->(i) <f->+</f-> <s->"\n"</s->);
                         }
                     }
@@ -3746,7 +3796,7 @@
     </example->
     <p>
         There are no literal suffixes and no <code><t->float</t-></code>, <code><t->uint</t-></code> or <code><t->int</t-></code> literals.<br>
-        To create inline values of specific types, <a href="#constructors">Constructors</a> are used.
+        <a href="#constructors">Init</a> calls can be used to create inline values of specific type.
     </p>
 </moveto-examples->
 
@@ -4010,6 +4060,10 @@
         Each routine can <a href="#return-statement">return</a> a single value when <a href="#routine-calls">called</a>.<br>
         The <a href="#types">type</a> of the <a href="#return-statement">returned</a> value is defined by the <a href="#types">type</a> of the routine.<br>
         Routines that don't return a value have to be declared using the <code><t->void</t-></code> type.
+    </p>
+    <p>
+        Routine bodies can be specialized.
+        This is explained in <a href="#routine-specialization">Routine specialization</a>.
     </p>
 </moveto-doc->
 
@@ -4419,12 +4473,12 @@
                 <div>
                     <w->template</w->&lt;<w->type</w-> <t->t</t->&gt; <w->struct</w-> <t->s</t-> <w->when</w->(<t->t</t->:id <f->!=</f-> <t->void</t->:id) {
                         <t->t</t-> n;
-                        <w->constructor</w->() {
+                        <w->init</w->() {
                             io.<f->print</f->(<s->"Not void\n"</s->);
                         }
                     }
                     <w->template</w->&lt;<w->type</w-> <t->t</t->&gt; <w->struct</w-> <t->s</t-> <w->when</w->(<t->t</t->:id <f->==</f-> <t->void</t->:id) {
-                        <w->constructor</w->() {
+                        <w->init</w->() {
                             io.<f->print</f->(<s->"Void\n"</s->);
                         }
                     }
@@ -5199,10 +5253,6 @@
 
 
 
-//TODO format string
-
-
-
 
 
 
@@ -5338,6 +5388,13 @@
     <p>
         //TODO member access through pointer (our equivalent of c's -> but we use . instead)
         //TODO works for both enums and structs
+    </p>
+</moveto-doc->
+
+<h1 id="uniform-function-call-syntax"></h1>
+<moveto-doc->
+    <p>
+        //TODO n->f();
     </p>
 </moveto-doc->
 

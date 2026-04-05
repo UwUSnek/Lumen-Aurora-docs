@@ -1,0 +1,60 @@
+
+<h1 id="init-function"></h1>
+<moveto-doc->
+    <p>
+        The <b>init</b> <a href="#functions">function</a> is a <b>special function</b> used to <b>create values</b> of struct type.<br>
+        It has <b>no name</b> and <b>no explicit return type</b> and it's declared directly inside of the struct's body
+        using the <code><w->init</w-></code> meta keyword.<br>
+        Only one init function is ever called for each instance of a struct.<br>
+        Init functions cannot be called after the value has been created.
+    </p>
+    <p>
+        By default, each struct contains one implicit init function that takes an argument for each member.
+        Members are initialized with their corresponding argument in order of declaration.<br>
+        The implicit init function is not present in structs that define at least one explicit init function.
+    </p>
+    <p>
+        Explicit init functions must initialize all members of the struct.<br>
+        Init functions are allowed to take no arguments.<br>
+        There is no limit to the number of init functions a struct can define.
+    </p>
+    <p>
+        Template init functions and specialization are allowed, though the right instantiation is chosen solely based on the passed arguments,
+        as the syntax doesn't allow for specifying template arguments during init calls.<br>
+    </p>
+</moveto-doc->
+<moveto-examples->
+    <example->
+        <label->Example</label->
+        <div>
+            <w->struct</w-> <t->uint2</t-> {
+                <t->uint</t-> x, y;
+            }
+
+
+            <w->struct</w-> <t->uint3</t-> <w->nodefault</w-> {
+                <t->uint</t-> x, y, z;
+
+                <w->init</w->(<t->uint2</t-> <p->a</p->, <t->uint</t-> <p->b</p->) {
+                    x <f->=</f-> a.x;
+                    y <f->=</f-> a.y;
+                    z <f->=</f-> b;
+                }
+
+                <w->init</w->(<t->uint</t-> <p->a</p->, <t->uint2</t-> <p->b</p->) {
+                    x <f->=</f-> a;
+                    y <f->=</f-> b.x;
+                    z <f->=</f-> b.y;
+                }
+            }
+
+
+            <t->void</t-> <f->main</f->(){
+                <t->uint2</t-> a = { <k->1</k->, <k->2</k-> };     <c->// Default init</c->
+                <t->uint3</t-> b = { <k->a</k->, <k->5</k-> };     <c->// User-defined init</c->
+                <t->uint3</t-> c = { <k->5</k->, <k->a</k-> };     <c->// User-defined init</c->
+                <c->//uint3 d = (1, 2, 3);</c->  <ce->// Error, no suitable init declaration</ce->
+            }
+        </div>
+    </example->
+</moveto-examples->

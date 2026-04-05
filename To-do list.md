@@ -171,17 +171,17 @@
   - if you want to share a value with other functions, pass its address as a pointer
     - this lets other functions access it but it doesn't extend its lifetime. it will still get destroyed when it runs out of its original scope
 
-  - = in the declaration calls the constructor in-place, even when using { ... }
+  - = in the declaration calls the init in-place, even when using { ... }
     - "=" after declaration always calls the copy operator
-    - no "=" means "call the constructor with no parameters", which is equivalent to 0-initialization in primitive types
+    - no "=" means "call the init with no parameters", which is equivalent to 0-initialization in primitive types
   - no variable can be left uninitialized. they must be initialized in their declaration
-    - struct members are also required to be initialized before any constructor runs, either by = or through the no parameters constructor
-    - constructors simply modify the default data before anything else can access it. this allows them to calculate values using the arguments provided to them
-  - "Type{...}" (constructor call with explicit type) creates a temporary value. just {...} calls constructor with the provided arguments, only valid in declarations
+    - struct members are also required to be initialized before any init runs, either by = or through the no parameters init
+    - inits simply modify the default data before anything else can access it. this allows them to calculate values using the arguments provided to them
+  - "Type{...}" (init call with explicit type) creates a temporary value. just {...} calls init with the provided arguments, only valid in declarations
   - T t2 = t1;
-    - this can only be done if T specifies a constructor that takes a T value or the default one is generated
-    - implicit constructor copies every byte but is not present if any explicit constructor exists
-    - t1 is passed as a plain copy, but this is not an issue since the constructor is a special value and is the one handling ref counts and whatever else.
+    - this can only be done if T specifies a init that takes a T value or the default one is generated
+    - implicit init copies every byte but is not present if any explicit init exists
+    - t1 is passed as a plain copy, but this is not an issue since the init is a special value and is the one handling ref counts and whatever else.
   - t2 = t1;
     - this is a copy operator call
     - default copy operator copies every byte, can be replaced by an explicit copy operator
@@ -197,41 +197,41 @@
       t* data;
       counter_t* count;
 
-      constructor(rc<t> value) {
+      init(rc<t> value) {
         data = value.data;
         count = value.count;
         ++@count;  //@ dereferences pointers
       }
 
-      template<u...> constructor(u params...) { // template pack + function pack, they expand automatically
+      template<u...> init(u params...) { // template pack + function pack, they expand automatically
         unsafe{
           data = __internal.malloc(t:size);           // : is a reflection path
-          __internal.call_constructor(data, params);  // internal call_constructor is magic and can call constructors it in-place
+          __internal.call_init(data, params);  // internal call_init is magic and can call inits it in-place
           count = __internal.malloc(counter_t:size);
-          __internal.call_constructor(count, 1);      // internal call_constructor is magic and can call constructors it in-place
+          __internal.call_init(count, 1);      // internal call_init is magic and can call inits it in-place
         }
       }
 
       copy(rc<t> value) {
         ++@value.count; //! Increment source first to avoid freeing the data during self-assignments
 
-        //(might need to allow calling destructors to minimize code duplication)
+        //(might need to allow calling drop to minimize code duplication)
         if(--@count == 0) { 
           unsafe {
-            __internal.call_destructor(data);
+            __internal.call_drop(data);
             __internal.free(data);
             __internal.free(count);
           }
         }
-        //(might need to allow calling constructors to minimize code duplication)
+        //(might need to allow calling inits to minimize code duplication)
         data = value.data;
         count = value.count;
       }
 
-      destructor() {
+      drop() {
         if(--@count == 0) {
           unsafe {
-            __internal.call_destructor(data);
+            __internal.call_drop(data);
             __internal.free(data);
             __internal.free(count);
           }
@@ -274,15 +274,15 @@
 
 
 
-- constructor calls
-  - new values can be created using constructor calls
-    - type{<constructor parameters>};
+- init calls
+  - new values can be created using init calls
+    - type{<init parameters>};
     - `int n = int{ 7 };`
-  - primitive types and structs that don't specify a constructor get a default constructor that takes a value for each member.
+  - primitive types and structs that don't specify a init get a default init that takes a value for each member.
   - the type can be omitted in contexts where a specific type is required.
     - `struct s { int n; }`
     - `void f(s value){}`
-    - `f({ s{ 5 } });  // ok, explicit constructor call`
+    - `f({ s{ 5 } });  // ok, explicit init call`
     - `f({ 5 });       // ok, type is omitted`
 
 - read-only pointers

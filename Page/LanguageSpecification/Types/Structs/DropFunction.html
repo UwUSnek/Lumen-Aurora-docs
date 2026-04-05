@@ -1,14 +1,14 @@
 
-<h1 id="destructor-function"></h1>
+<h1 id="drop-function"></h1>
 <moveto-doc->
     <p>
-        The <b>destructor</b> function is a <b>special</b> struct <b>method</b> that is called each time a value of its parent struct type is destroyed.<br>
-        It has <b>no name</b> and <b>no return value</b> and it's declared using the <code><w->destructor</w-></code> meta keyword.<br>
+        The <b>drop</b> function is a <b>special</b> struct <b>method</b> that is called each time a value of its parent struct type is destroyed.<br>
+        It has <b>no name</b> and <b>no return value</b> and it's declared using the <code><w->drop</w-></code> meta keyword.<br>
     </p>
     <p>
-        Each struct can only have one destructor. It cannot be specialized and cannot take any argument, nor can it be called explicitly.<br>
-        Template destructors are not allowed.<br>
-        There is no default destructor.
+        Each struct can only have one drop function. It cannot be specialized and cannot take any argument, nor can it be called explicitly.<br>
+        Templates and specialization are not allowed.<br>
+        There is no default drop function.
     </p>
 </moveto-doc->
 <moveto-examples->
@@ -24,12 +24,12 @@
                         <t->float</t-> n;
                         <t->int</t-> i;
 
-                        <w->constructor</w->(<t->float</t-> <p->n</p->){
+                        <w->init</w->(<t->float</t-> <p->n</p->){
                             i <f->=</f-> last<f->++</f->;
                             this.n <f->=</f-> n;
                         }
 
-                        <w->destructor</w->(){
+                        <w->init</w->(){
                             io.<f->print</f->(<s->"Destroyed instance n."</s-> <f->+</f-> <t->str</t->(i) <f->+</f-> <s->"\n"</s->);
                         }
                     }
