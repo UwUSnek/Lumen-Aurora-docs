@@ -6,17 +6,17 @@
         other <a href="#modules">modules</a></b> are allowed to <b>use</b> when importing from it.<br>
     </p>
     <p>
-        The Export directive can also be used to define which members of a struct type can be accessed from outside the struct.
-        This is explained in detail in <a href="#structs">Structs</a>.
+        The Export directive can also be used to define which members of a <a href="#structs">struct</a> type can be accessed from outside the struct.
+        This is explained in detail in <a href="#member-visibility">Member visibility</a>.
     </p>
     <p>
         Exporting a <a href="#namespaces">namespace</a> also exports any exportable symbol it contains.<br>
-        Any additional <a href="#name-resolution">symbol</a> an exported <a href="#name-resolution">symbol</a> depends on is automatically exported
+        Any additional symbol an exported symbol depends on is automatically exported
         but hidden from the other <a href="#modules">modules</a>.
     </p>
     <p>
-        Not specifying any symbol will export all the <a href="#name-resolution">symbols</a> in the <a href="#modules">module</a>.<br>
-        This doesn't allow renaming.
+        Not specifying any symbol makes the directive export all the symbol in the module or struct</a>.
+        This doesn't allow renaming.<br>
     </p>
     <syntax->
         <label- id="copy.syntax--misc-export-directive">Export syntax</label->

@@ -189,8 +189,6 @@
   - compiler can elide copies or do whatever it wants in order to optimize, as long as the program's behaviour doesn't change
 
 
-
-
   - so the final RC wrapper (the non atomic version) would be:
 
     template<t> rc {
@@ -249,6 +247,15 @@
 
 
 
+
+
+
+
+
+  - {} syntax can prob be replaced with ()
+    - Type() like in C++
+    - Type name can be omitted in contexts where the type is known, such as initializer values
+    - This makes the syntax more readable for people used to traditional constructors. {} is mostly used for scopes.
 
 
 

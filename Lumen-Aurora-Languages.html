@@ -1775,17 +1775,17 @@
         other <a href="#modules">modules</a></b> are allowed to <b>use</b> when importing from it.<br>
     </p>
     <p>
-        The Export directive can also be used to define which members of a struct type can be accessed from outside the struct.
-        This is explained in detail in <a href="#structs">Structs</a>.
+        The Export directive can also be used to define which members of a <a href="#structs">struct</a> type can be accessed from outside the struct.
+        This is explained in detail in <a href="#member-visibility">Member visibility</a>.
     </p>
     <p>
         Exporting a <a href="#namespaces">namespace</a> also exports any exportable symbol it contains.<br>
-        Any additional <a href="#name-resolution">symbol</a> an exported <a href="#name-resolution">symbol</a> depends on is automatically exported
+        Any additional symbol an exported symbol depends on is automatically exported
         but hidden from the other <a href="#modules">modules</a>.
     </p>
     <p>
-        Not specifying any symbol will export all the <a href="#name-resolution">symbols</a> in the <a href="#modules">module</a>.<br>
-        This doesn't allow renaming.
+        Not specifying any symbol makes the directive export all the symbol in the module or struct</a>.
+        This doesn't allow renaming.<br>
     </p>
     <syntax->
         <label- id="copy.syntax--misc-export-directive">Export syntax</label->
@@ -2644,14 +2644,64 @@
 <h1 id="member-visibility"></h1>
 <moveto-doc->
     <p>
+        By default, all members of a struct are not visible from outside their <a href="#modules">module</a>, meaning that
+        <a href="routines">routines</a> cannot freely read or modify the value of individual members.
+        This can be changed by using an <a href="export-directive">Export directive</a> inside of the struct's body.
+    </p>
+    <p>
+        Export directives allow a struct to define which members are accessible from the outside.
+        Renaming members is allowed, though this only affects external references.
+        The <a href="init-function">init</a>, <a href="copy-function">copy</a>, and <a href="drop-function">drop</a>
+        functions need to use the members' original name or aliases.
+    </p>
+    <p>
+        Routines declared in the same module as the struct type can freely access all of its members,
+        either through their original name and aliases or using the ones created by the export directive.
     </p>
 </moveto-doc->
 <moveto-examples->
-    <example->
-        <label->Example</label->
-        <div>
-        </div>
-    </example->
+    <split-example-container->
+        <split-example-container-left->
+            <example->
+                <label->Example - Cat.lmn</label->
+                <div>
+                    <w->struct</w-> <t->Cat</t-> {
+                        <t->str</t-> name;
+                        <t->str</t-> breed;
+                        <t->str</t-> color;
+                        <w->export</w-> name;
+                    }
+
+                    <t->void</t-> <f->toString</f->(<t->Cat</t-> cat) {
+                        <c->// Same module, toString can access all members</c->
+                        <w->return</w-> cat.name + <s->" is a "</s-> + cat.color + <s->" "</s-> + cat.breed;
+                    }
+                </div>
+                <label->Example - main.lmn</label->
+                <div>
+                    <w->import</w-> io;
+                    <w->include</w-> <s->"Cat.lmn"</s->;
+
+                    <t->void</t-> <f->main</f->() {
+                        <t->Cat</t-> c = { <s->"Molecule"</s->, <s->"British Shorthair"</s->, <s->"grey"</s-> };
+                        io.<f->println</f->(<f->toString</f->(c));
+                        <t->str</t-> name = c.name;       <c->// Ok, name is exported</c->
+                        <c->// str color = c.color;</c->   <ce->Error, color is not exported</ce->
+                    }
+                </div>
+            </example->
+        </split-example-container-left->
+        <split-example-container-right->
+            <example->
+                <label->Output</label->
+                <div>
+                    <console-prefix-></console-prefix->
+                    Molecule is a grey British Shorthair
+                    <cursor-></cursor->
+                </div>
+            </example->
+        </split-example-container-right->
+    </split-example-container->
 </moveto-examples->
 
 <h1 id="init-function"></h1>
@@ -4157,7 +4207,9 @@
 <h1 id="parameters"></h1>
 <moveto-doc->
     <p>
-
+        //TODO specify that there is no "pass-by-reference" like in C++ or other languages
+        //TODO everything is passed by value but structs can change the default copy behaviour, link to copy function
+        //TODO sharing is done through standard module wrappers like arc/rc or using raw pointers
     </p>
 </moveto-doc->
 
