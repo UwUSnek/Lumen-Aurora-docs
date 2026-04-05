@@ -418,7 +418,7 @@
   - available annotations for routines (functions and operators):
     - `:noconst` cannot be used to calculate constant expressions (compile-time values usable in language syntax; think of `break n;`), but doesn't necessarily perform runtime-only operations
       - can never be ignored
-    - `:runtime` the routine is considered to perform runtime-only operations even if the compiler can't detect any (impliest `:noconst`)
+    - `:runtime` the routine is considered to perform runtime-only operations even if the compiler can't detect any (implies `:noconst`)
       - effectively disables compile time optimizations
       - can never be ignored
     - `:unsafe` marks a routine as unsafe. unsafe routines can only be called within unsafe{} blocks.
