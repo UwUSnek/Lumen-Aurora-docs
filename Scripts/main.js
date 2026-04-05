@@ -32,7 +32,7 @@ function init(){
 
     utils.exec_and_log(setup_fix.init, "setup_fix");
 
-    utils.exec_and_log(ui_smooth_links.init, "ui_smooth_links");
+    utils.exec_and_log(ui_links.init, "ui_links");
     utils.exec_and_log(setup_tabs.init, "setup_tabs");
     utils.exec_and_log(load_button_icons.init, "load_button_icons");
 
