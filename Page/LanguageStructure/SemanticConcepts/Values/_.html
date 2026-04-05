@@ -2,15 +2,13 @@
 <h1 id="values"></h1>
 <moveto-doc->
     <p>
-        <b>"Values"</b> refers to any <b>information</b> stored in a <b><a href="types">typed</a> container</b> during runtime.<br>
-        These include <a href="#variables">Variables</a>, <a href="#routine-parameters">Routine parameters</a>,
-        <a href="#temporary-variables">Temporary variables</a>, data returned by <a href="#variables">Routines</a>,
-        and the result of member access and pointer dereferencing.
+        <b>"Value"</b> refers to any <b>information</b> stored in a <b><a href="types">typed</a> container</b> during runtime.<br>
+        These include <a href="#variables">Variables</a>, <a href="#routine-parameters">Routine parameters</a>, <a href="#enums">Enum elements</a>,
+        <a href="#temporary-variables">Temporary variables</a>, and the result of member access and pointer dereferencing on non-temporary values.
     </p>
     <p>
-        Each value has a defined lifetime.<br>
-        This usually goes from where they are declared to the end of their enclosing <a href="#scopes">scope</a>,
-        though it can be extended using custom <a href="init-function">init</a> and <a href="copy-function">copy</a> functions.
+        Each value has a defined lifetime that starts when it's created and ends
+        when execution reaches the end of its enclosing <a href="#scopes">scope</a>.
     </p>
 </moveto-doc->
 

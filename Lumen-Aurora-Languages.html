@@ -260,6 +260,16 @@
         <index-separator-2-></index-separator-2->
 
         <index-><indexh->compiler-annotations</indexh-><index-elms->
+            <index-><indexh->struct-annotations</indexh-><index-elms->
+                <indexd->:nopacking</indexd->
+                <indexd->:noreorder</indexd->
+                <indexd->:nocopy</indexd->
+            </index-elms-></index->
+            <index-><indexh->routine-annotations</indexh-><index-elms->
+                <indexd->:noconst</indexd->
+                <indexd->:runtime</indexd->
+                <indexd->:unsafe</indexd->
+            </index-elms-></index->
         </index-elms-></index->
     </index-elms-></index->
 
@@ -1265,15 +1275,13 @@
 <h1 id="values"></h1>
 <moveto-doc->
     <p>
-        <b>"Values"</b> refers to any <b>information</b> stored in a <b><a href="types">typed</a> container</b> during runtime.<br>
-        These include <a href="#variables">Variables</a>, <a href="#routine-parameters">Routine parameters</a>,
-        <a href="#temporary-variables">Temporary variables</a>, data returned by <a href="#variables">Routines</a>,
-        and the result of member access and pointer dereferencing.
+        <b>"Value"</b> refers to any <b>information</b> stored in a <b><a href="types">typed</a> container</b> during runtime.<br>
+        These include <a href="#variables">Variables</a>, <a href="#routine-parameters">Routine parameters</a>, <a href="#enums">Enum elements</a>,
+        <a href="#temporary-variables">Temporary variables</a>, and the result of member access and pointer dereferencing on non-temporary values.
     </p>
     <p>
-        Each value has a defined lifetime.<br>
-        This usually goes from where they are declared to the end of their enclosing <a href="#scopes">scope</a>,
-        though it can be extended using custom <a href="init-function">init</a> and <a href="copy-function">copy</a> functions.
+        Each value has a defined lifetime that starts when it's created and ends
+        when execution reaches the end of its enclosing <a href="#scopes">scope</a>.
     </p>
 </moveto-doc->
 
@@ -1282,125 +1290,133 @@
 <h1 id="initialization"></h1>
     <moveto-doc->
     <p>
+        The process of populating a typed container with data for the first time is called initialization.
+        All containers must be initialized inside of their declaration.
+        This ensures uninitialized data is never accessible.
     </p>
+    <ul>
+        The way containers are initialized is defined by their type:
+        <ul>
+            <li>
+                Struct types:<br>
+                All members are initialized in order of declaration using their initializer value,
+                then one of its constructors is called based on the provided arguments.<br>
+                If no arguments are provided, the constructors that takes 0 arguments is called.
+            </li>
+            <li>
+                Primitive types and pointer types:<br>
+                The value is copied from the provided initializer value.<br>
+                If no initializer value is provided, all of their bytes are initialized to <code><k->0</k-></code>.
+            </li>
+            <li>
+                Enum types:<br>
+                The value is copied from the provided initializer value.<br>
+                Not providing initializer values is forbidden.
+            </li>
+        </ul>
+    </ul>
 </moveto-doc->
-<moveto-examples->
-    <example->
-        <label->Example</label->
-        <div>
-        </div>
-    </example->
-</moveto-examples->
 
 <h1 id="copying"></h1>
     <moveto-doc->
     <p>
+        <b>Data</b> can be <b>copied</b> from and to containers for a variety of reasons.
+        This is usually done when <b>passing parameters</b> to routines or <b>assigning values</b> to existing containers.
+    </p>
+    <p>
+        By default, copying a value involves copying each byte of its binary representation from the source value to the destination container.
+        This is a shallow copy and doesn't duplicate the data referenced by pointer values.<br>
+        <a href="structs">Struct types</a> can declare <a href="#copy-function">copy</a> functions to define custom copying logic.
     </p>
 </moveto-doc->
-<moveto-examples->
-    <example->
-        <label->Example</label->
-        <div>
-        </div>
-    </example->
-</moveto-examples->
 
 <h1 id="destruction"></h1>
     <moveto-doc->
     <p>
+        The process of cleaning up the data stored in a typed container is called destruction.<br>
+        This is done when the container reaches the end of its lifetime.
+    </p>
+    <p>
+        By default, this doesn't involve any operation other than freeing memory, which is done automatically by the compiler.<br>
+        <a href="#structs">Struct</a> types can declare <a href="#drop-function">drop</a> functions to define custom deinitialization logic.<br>
+        Drop functions of struct members are called after the parent struct's drop function.
     </p>
 </moveto-doc->
-<moveto-examples->
-    <example->
-        <label->Example</label->
-        <div>
-        </div>
-    </example->
-</moveto-examples->
 
 <h1 id="constant-expressions"></h1>
 <moveto-doc->
     <p>
-        //FIXME update this stuff. compile time expressions are no more. replace with constant expressions and :noconst
-        //FIXME update this stuff. compile time expressions are no more. replace with constant expressions and :noconst
-
-        //TODO the concept of "constant expression" has a much broader scope than in most languages.
-        //TODO it includes anything that ... etc etc
+        <b>Constant expressions</b> are <a href="#expressions">expressions</a> that can be <b>computed</b> during the <b>compilation phase</b>.<br>
+        They can be used within compile-time contexts such as specialization constraints and
+        as initializer values of <code><a href="#const-qualifiier">const</a></code> declarations.
     </p>
     <p>
-        <b>Compile time expressions</b> are <a href="#expressions">expressions</a> that can be <b>calculated during</b> the <a href="#compilation"><b>compilation</b></a> phase.<br>
-        These <a href="#expressions">expressions</a> are required in certain syntaxes, such as <a href="#operators">operator</a> declarations, <a href="#enums">enum</a> elements, <a href="#template">template</a> <a href="#name-resolution">paths</a> and <a href="#specialization-constraints">specialization constraints</a>.<br>
+        The concept of a "constant expression" has a much broader scope than in most languages,
+        but it follows very strict rules and doesn't include everything that could theoretically be computed during the compilation phase.<br>
+        This is to simplify semantics and minimize the amount of rules and exceptions one has to take into account when using them.
     </p>
     <ul>
-        <li>Whether an <a href="#expressions">expression</a> can be compile time or not is determined in the following way:</li>
+        Whether an expression is constant is determined in the following way:
         <ul>
             <li>
-                A <a href="#routine">routine</a> is suitable for compile time <a href="#routine-calls">calls</a> if it is not declared with the <a href="#runtime-qualifier"><code><w->runtime</w-></code> qualifier</a>,
-                it doesn't contain <a href="#inline-cpp">inline C++</a> or <a href="#inline-glsl">inline GLSL</a> statements and
-                every <a href="#routine-calls">routine call</a> within its body, including init and drop functions called implicitly or not, are compile time.
+                A <a href="#routine">routine</a> is suitable for constant expression <a href="#routine-calls">calls</a> if it is not declared
+                with the <code><a href=":noconst">:noconst</a></code> annotation and all expressions within its signature and body,
+                including implicit <a href="#init-function">init</a>, <a href="#copy-function">copy</a> and <a href="#drop-function">drop</a> calls,
+                are constant.
             </li>
             <li>
-                A <a href="#routine-calls">routine call</a> is compile time if the <a href="#routines">routine</a> is suitable for compile time <a href="#routine-calls">calls</a> and
-                all of its <a href="#routine-parameters">arguments</a> are compile time expressions.
+                A routine call is constant if the <a href="#routines">routine</a> is suitable for constant expression calls and
+                all of its <a href="#routine-parameters">arguments</a> are constant expressions.
             </li>
             <li>
-                A <a href="#variables">variable</a> or <a href="#temporary-variables">temporary variable</a> is compile time if its initializer expression is compile time,
-                all the <a href="#routine-calls">routine calls</a> in which it is used as <a href="#routine-calls">argument</a> to a <a href="#references">reference</a> <a href="#routine-parameters">parameter</a> refer to routines that are suitable for compile time calls and
-                all the additional <a href="#routine-parameters">arguments</a> of such <a href="#routine-calls">calls</a> are compile time expressions.
+                A <a href="conditional-value">conditional value</a> is constant if its condition and the selected value are both constant expressions.
             </li>
             <li>
-                <a href="#literals">Literals</a>, <a href="#enums">enum</a> elements, <a href="#templates">template</a> parameters and <a href="#try-expression"><code><w->try</w-></code> expressions</a> are always compile time.
+                A <a href="#variables">variable</a>, <a href="#temporary-variables">temporary variable</a> or <a href="parameters">routine parameter</a>
+                is constant if declared with the <a href="const-qualifier">const qualifier</a>.
+            </li>
+            <li>
+                <a href="#literals">Literals</a>, <a href="#enums">enum</a> elements, <a href="reflection">reflection data</a>, <a href="function-values">function values</a>,
+                and the result of <a href="#try-expression"><code><w->try</w-></code> expressions</a> are always constant.
             </li>
         </ul>
     </ul>
-    <p>
-        For consistency reasons, cases in which a <a href="#routine">routine</a> is runtime but it doesn't actually need to run during runtime,
-        either by containing empty <a href="#inline-cpp">inline C++</a> or <a href="#inline-glsl">inline GLSL</a> statements or
-        by containing runtime <a href="#routine-calls">routine calls</a> that are empty or have the aforementioned properties,
-        are not considered suitable for compile time <a href="#routine-calls">calls</a>, even though it would be possible to determine their <a href="#return-statement">return value</a> and operations on reference <a href="#routine-parameters">parameters</a> during the <a href="#compilation">compilation</a> process.
-    </p>
-    <br><br><br>
-    <p>
-        Notice that compile time expressions are not required to run during compile time, and they don't affect <a href="#value-precomputation">optimizations</a> in any way.<br>
-        Compile time expressions are exclusively used to determine which <a href="#expressions">expressions</a> can be used in contexts where a compile time value is required.
-    </p>
-    <p>
-        Any routine declared in <a href="#standard-modules">standard modules</a> that could change the observable behaviour of the program if executed during compile time is properly marked as <a href="#runtime-qualifier"><code><w->runtime</w-></code></a>,
-        therefore is not possible to accidentally modify the program behaviour by inadvertently executing <a href="#routines">routines</a> that are not supposed to be executed during the <a href="#compilation">compilation</a> process.
-    </p>
-    <p>
-        //TODO template<t = ulong> t random(t from, t to)
-        //TODO template<t = ulong> t random(t to) //from 0
-    </p>
 </moveto-doc->
 <moveto-examples->
     <example->
         <label->Example</label->
         <div>
-            <w->from</w-> <s->&lt;random&gt;</s-> <w->include</w-> rand;
+            <w->import</w-> io;
 
-            <w->enum</w-> q : <t->bool</t-> {
-                to_be     = <k->0</k->,
-                not_to_be = <k->1</k->
-            }
-
-            <c->// Suitable for compile time calls</c->
-            <t->bool</t-> <f->add_1</f->(<t->ulong</t-> <p->n</p->) {
+            <c->// Suitable for constant calls</c->
+            <t->ulong</t-> <f->increment</f->(<t->ulong</t-> <p->n</p->) {
                 <w->return</w-> n <f->+</f-> <k->1</k->;
             }
 
+            <c->// Not suitable for constant calls</c->
+            <t->ulong</t-> <f->incrementAndLog</f->(<t->ulong</t-> <p->n</p->) {
+                io.<f->println</f->(<s->"Incrementing value"</s->);
+                <w->return</w-> <f->increment</f->(n);
+            }
 
-            <t->bool</t-> <f->f</f->(<t->ulong</t-> <p->n</p->) {
-                <t->ulong</t-> a = <k->True</k->;
-
-                <c->// return q:elms[n];</c->           <ce->// Error, "n" is not a compile time expression</ce->
-                <c->// return q[add_1(n)];</c->   <ce->// Error, the routine call is not compile time</ce->
-                <c->// return q[rand(2)];</c->    <ce->// Error, the routine "random.rand" is not suitable for compile time calls</ce->
-                <w->return</w-> q<f->[</f->n<f->]</f->;             <c->// Ok</c->
+            <t->void</t-> <f->main</f->() {
+                <w->const</w-> <t->int</t-> n = <f->increment</f->(<k->5</k->);           <c->// Ok, increment call is constant. can be used as initializer</c->
+                <c->// const int n = incrementAndLog(5);</c->  <ce->Error, incrementAndLog is not suitable for constant calls as it depends on io.println which is :noconst</ce->
             }
         </div>
     </example->
 </moveto-examples->
+<moveto-internal->
+    <p>
+        Constant expressions are not required to run during the compilation phase,
+        and they don't affect <a href="#optimizations">optimizations</a> in any way.
+        Their purpose is solely to be able to be used in contexts where a constant value is required.
+    </p>
+    <p>
+        Any routine declared in <a href="#standard-modules">standard modules</a> that depends on runtime data
+        is properly marked as <a href="#:runtime"><code>:runtime</code></a>.
+    </p>
+</moveto-internal->
 
 <h1 id="undefined-behaviour"></h1>
 <moveto-doc->
@@ -1861,7 +1877,7 @@
 <h1 id="try-directive"></h1>
 <moveto-doc->
     <p>
-
+        //TODO specify that the try directive and try-expressions have nothing to do with C++/Java/C#'s try-catch exception system
     </p>
 </moveto-doc->
 
@@ -5242,6 +5258,19 @@
 <h1 id="const-qualifier"></h1>
 <moveto-doc->
     <p>
+        //TODO const can be used for variables and routine parameters (not struct member declarations)
+        //TODO enum elements are implicitly const
+
+        //TODO specify that parameters can be declared const.
+        //TODO const parameters can only be passed const expressions as arguments
+        //TODO const is not available if the container's type is declared as or inherits :noconst
+
+        //TODO specify that const declared stuff cannot be assigned another value after their declaration
+    </p>
+    <p>
+        //FIXME all of this is outdated
+        //FIXME all of this is outdated
+        //FIXME all of this is outdated
         When used between the base type and the <code>*</code> meta keyword of a pointer type, the <b><code><t->const</t-></code> qualifier</b> indicates that the type is a <b>const pointer</b>.<br>
         Data accessed by dereferencing a <code><t->const</t-></code> pointer value cannot be modified.<br>
         Non-<code><t->const</t-></code> pointers are implicitly convertible to their respective <code><t->const</t-></code> pointer type. This is explained in <a href="implicit-conversions">Implicit coversions</a>.
@@ -5249,11 +5278,6 @@
     <p>
         <b><code><w->const</w-></code></b> can also be used before the name of a <b>variable</b> or <b>routine parameter</b> to <b>prevent them from being modified</b> after their declaration, although this doesn't turn the type of the symbol into a const type.<br>
         The address of <code><w->const</w-></code> variables or <code><w->const</w-></code> routine parameters is always returned as a <code><t->const</t-></code> pointer.
-    </p>
-    <p>
-        //TODO explain that programmers are expected to not change critical values without knowing what they are doing (there are no const types).
-
-        //TODO Maybe move the const qualifier under "misc" as it's not part of the types nor does it affect them in any way
     </p>
 </moveto-doc->
 <moveto-examples->
@@ -5448,6 +5472,73 @@
 </moveto-doc->
 
 <h1 id="compiler-annotations"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+
+
+
+<h1 id="struct-annotations"></h1>
+<moveto-doc->
+    <p>
+        This section details compiler annotations available for struct declarations.
+    </p>
+</moveto-doc->
+
+
+
+
+<h1 id=":nopacking"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+<h1 id=":noreorder"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+<h1 id=":nocopy"></h1>
+<moveto-doc->
+    <p>
+
+    </p>
+</moveto-doc->
+
+<h1 id="routine-annotations"></h1>
+<moveto-doc->
+    <p>
+        This section details compiler annotations available for routine declarations.
+    </p>
+</moveto-doc->
+
+
+
+
+<h1 id=":noconst"></h1>
+<moveto-doc->
+    <p>
+        //TODO - implied by :runtime
+        //TODO - doesn't affect optimizations - can still be optimized out if the compiler thinks this doesn't need to run in runtime
+    </p>
+</moveto-doc->
+
+<h1 id=":runtime"></h1>
+<moveto-doc->
+    <p>
+        //TODO - implies :noconst
+        //TODO - affects optimizations
+    </p>
+</moveto-doc->
+
+<h1 id=":unsafe"></h1>
 <moveto-doc->
     <p>
 

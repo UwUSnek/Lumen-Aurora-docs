@@ -2,12 +2,29 @@
 <h1 id="initialization"></h1>
     <moveto-doc->
     <p>
+        The process of populating a typed container with data for the first time is called initialization.
+        All containers must be initialized inside of their declaration.
+        This ensures uninitialized data is never accessible.
     </p>
+    <ul>
+        The way containers are initialized is defined by their type:
+        <ul>
+            <li>
+                Struct types:<br>
+                All members are initialized in order of declaration using their initializer value,
+                then one of its constructors is called based on the provided arguments.<br>
+                If no arguments are provided, the constructors that takes 0 arguments is called.
+            </li>
+            <li>
+                Primitive types and pointer types:<br>
+                The value is copied from the provided initializer value.<br>
+                If no initializer value is provided, all of their bytes are initialized to <code><k->0</k-></code>.
+            </li>
+            <li>
+                Enum types:<br>
+                The value is copied from the provided initializer value.<br>
+                Not providing initializer values is forbidden.
+            </li>
+        </ul>
+    </ul>
 </moveto-doc->
-<moveto-examples->
-    <example->
-        <label->Example</label->
-        <div>
-        </div>
-    </example->
-</moveto-examples->

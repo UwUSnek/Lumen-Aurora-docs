@@ -2,12 +2,12 @@
 <h1 id="copying"></h1>
     <moveto-doc->
     <p>
+        <b>Data</b> can be <b>copied</b> from and to containers for a variety of reasons.
+        This is usually done when <b>passing parameters</b> to routines or <b>assigning values</b> to existing containers.
+    </p>
+    <p>
+        By default, copying a value involves copying each byte of its binary representation from the source value to the destination container.
+        This is a shallow copy and doesn't duplicate the data referenced by pointer values.<br>
+        <a href="structs">Struct types</a> can declare <a href="#copy-function">copy</a> functions to define custom copying logic.
     </p>
 </moveto-doc->
-<moveto-examples->
-    <example->
-        <label->Example</label->
-        <div>
-        </div>
-    </example->
-</moveto-examples->

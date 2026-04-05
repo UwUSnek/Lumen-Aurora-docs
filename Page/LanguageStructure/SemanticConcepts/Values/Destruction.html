@@ -2,12 +2,12 @@
 <h1 id="destruction"></h1>
     <moveto-doc->
     <p>
+        The process of cleaning up the data stored in a typed container is called destruction.<br>
+        This is done when the container reaches the end of its lifetime.
+    </p>
+    <p>
+        By default, this doesn't involve any operation other than freeing memory, which is done automatically by the compiler.<br>
+        <a href="#structs">Struct</a> types can declare <a href="#drop-function">drop</a> functions to define custom deinitialization logic.<br>
+        Drop functions of struct members are called after the parent struct's drop function.
     </p>
 </moveto-doc->
-<moveto-examples->
-    <example->
-        <label->Example</label->
-        <div>
-        </div>
-    </example->
-</moveto-examples->
