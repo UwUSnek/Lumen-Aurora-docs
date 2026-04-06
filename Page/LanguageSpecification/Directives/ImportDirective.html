@@ -7,18 +7,25 @@
         Only <a href="#export-directive">exported</a> <a href="#name-resolution">symbols</a> can be imported.<br>
     </p>
     <p>
-        The Import directive has two forms: <code><w->import</w-></code>, which imports all exported symbols from a module,
-        and <code><w->from</w-></code> <code><w->import</w-></code>, which imports only the specified symbols.<br>
         Both the module and the imported symbols can be aliased using the <code><w->as</w-></code> keyword.
+        Anything the imported symbols depend on is not accessible unless explicitly imported.<br>
     </p>
+    <ul>
+        The Import directive has four forms:
+        <ul>
+            <li><code><w->import</w-></code>: imports all exported symbols from a module</li>
+            <li><code><w->from</w-></code> <code><w->import</w-></code>: imports only the specified symbols</li>
+            <li><code><w->include</w-></code>: imports all exported symbols from a module without wrapping them in a namespace</li>
+            <li><code><w->from</w-></code> <code><w->include</w-></code>: imports only the specified symbols without wrapping them in a namespace</li>
+        </ul>
+    </ul>
     <p>
-        When an Import directive is used, it creates a new namespace in the <a href="#root-scope">root scope</a>
-        containing the imported <a href="#name-resolution">symbols</a>.<br>
-        Anything these <a href="#name-resolution">symbols</a> depend on is not accessible unless explicitly imported.<br>
-    </p>
-    <p>
-        The new <a href="#namespaces">namespace</a> is named after the name of its file without extensions, or, if specified, the identifier used in the import directive.<br>
-        An explicit identifier is required when the file name is not a valid identifier.
+        When either of the <code><w->import</w-></code> forms is used, it creates a new namespace in the <a href="#root-scope">root scope</a>
+        containing the imported symbols.<br>
+        The new <a href="#namespaces">namespace</a> is named after the name of its file without extensions, or, if specified,
+        the identifier used in the import directive.<br>
+        An explicit identifier is required when the file name is not a valid identifier.<br>
+        Aliasing the module while using <code><w->include</w-></code> is allowed and has no effect.
     </p>
     <syntax->
         <label- id="copy.syntax--misc-import-directive">Import syntax</label->
@@ -33,14 +40,15 @@
                 <label->Example 1 - test.lmn</label->
                 <div>
                     <t->str</t-> message = <s->"Hello :3"</s->;
+                    <w->export</w->;
                 </div>
                 <label->Example 1 - main.lmn</label->
                 <div>
-                    <w->import</w-> <s->"./test.lmn"</s->;
+                    <w->include</w-> <s->"./test.lmn"</s->;
                     <w->import</w-> io;
 
                     <t->void</t-> <f->main</f->(){
-                        io.<f->print</f->(test.<k->message</k->);
+                        io.<f->print</f->(<k->message</k->);
                     }
                 </div>
             </example->
@@ -98,6 +106,12 @@
 <moveto-internal->
     <p>
         Modules are always preprocessed and partially compiled before being imported.
+    </p>
+    <p>
+        Using an import directive flags the imported module as a dependency of the current module.
+        This has the side effect of always initializing its global variables,
+        even when no symbol can be imported or none of the imported symbols are used.<br>
+        The compiler will optimize out any unneeded global variable, but only importing the modules one actually needs is to be preferred.
     </p>
     <p>
         Circular dependencies between modules are allowed, but global variables cannot create dependency loops.
